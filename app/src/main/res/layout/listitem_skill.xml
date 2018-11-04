@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- First Row -->
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/skill_name"
+            style="@style/list_item_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/skill_roll_button"
+            style="@style/button_die_roll"
+            android:layout_weight="1"
+            android:focusable="false" />
+    </TableRow>
+
+    <!-- Second Row -->
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/skill_attribute_modifier"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/skill_rank"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/skill_modifier"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:gravity="right" />
+    </TableRow>
+
+</TableLayout>

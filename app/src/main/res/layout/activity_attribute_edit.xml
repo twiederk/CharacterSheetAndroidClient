@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout style="@style/centered" >
+
+        <!-- STRENGTH (STR) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/attribute_str" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/attribute_str"
+                style="@style/edit" />
+
+            <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
+                android:id="@+id/modifier_str"
+                style="@style/tableCell_number_attribute_modifier" />
+        </TableRow>
+
+        <!-- DEXTERITY (DEX) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/attribute_dex" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/attribute_dex"
+                style="@style/edit" />
+
+            <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
+                android:id="@+id/modifier_dex"
+                style="@style/tableCell_number_attribute_modifier" />
+        </TableRow>
+
+        <!-- CONSTITUTION (CON) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/attribute_con" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/attribute_con"
+                style="@style/edit" />
+
+            <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
+                android:id="@+id/modifier_con"
+                style="@style/tableCell_number_attribute_modifier" />
+        </TableRow>
+
+        <!-- INTELLIGENCE (INT) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/attribute_int" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/attribute_int"
+                style="@style/edit" />
+
+            <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
+                android:id="@+id/modifier_int"
+                style="@style/tableCell_number_attribute_modifier" />
+        </TableRow>
+
+        <!-- WISDOM (WIS) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/attribute_wis" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/attribute_wis"
+                style="@style/edit" />
+
+            <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
+                android:id="@+id/modifier_wis"
+                style="@style/tableCell_number_attribute_modifier" />
+        </TableRow>
+
+        <!-- CHARISMA (CHA) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/attribute_cha" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/attribute_cha"
+                style="@style/edit" />
+
+            <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
+                android:id="@+id/modifier_cha"
+                style="@style/tableCell_number_attribute_modifier" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

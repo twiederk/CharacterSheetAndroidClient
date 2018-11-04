@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/equipment_list_load"
+            style="@style/tableCell_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dp" />
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/translucent_black" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ListView
+                android:id="@+id/weapon_list"
+                style="@style/transparentListView" />
+
+            <ListView
+                android:id="@+id/armor_list"
+                style="@style/transparentListView" />
+
+            <ListView
+                android:id="@+id/good_list"
+                style="@style/transparentListView" />
+        </FrameLayout>
+    </LinearLayout>
+
+</TabHost>

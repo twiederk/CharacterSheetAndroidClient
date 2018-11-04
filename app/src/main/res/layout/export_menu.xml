@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="5dip" >
+
+        <!-- Export Character -->
+
+        <Button
+            android:id="@+id/export_menu_character_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/export_menu_character_button" />
+
+        <!-- Export Equipment -->
+
+        <Button
+            android:id="@+id/export_menu_equipment_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/export_menu_equipment_button" />
+    </LinearLayout>
+
+</ScrollView>

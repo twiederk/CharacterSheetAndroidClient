@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout style="@style/centered" >
+
+        <!-- NAME -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_name_label" />
+
+            <EditText
+                android:id="@+id/appearance_name"
+                style="@style/edit"
+                android:inputType="textCapWords" />
+        </TableRow>
+
+        <!-- PLAYER -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_player_label" />
+
+            <EditText
+                android:id="@+id/appearance_player"
+                style="@style/edit"
+                android:inputType="textCapWords" />
+        </TableRow>
+
+        <!-- RACE -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_race_label" />
+
+            <Spinner
+                android:id="@+id/appearance_race"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- SEX -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_sex_label" />
+
+            <Spinner
+                android:id="@+id/appearance_sex"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- CLASS LEVEL -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_class_level_label" />
+
+            <Button
+                android:id="@+id/appearance_class_level"
+                style="@style/base"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/appearance_class_level_button" />
+        </TableRow>
+
+        <!-- ALIGNMENT -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_alignment_label" />
+
+            <Spinner
+                android:id="@+id/appearance_alignment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- XP TABLE -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_xptable_label" />
+
+            <Spinner
+                android:id="@+id/appearance_xptable"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- EXPERIENCE POINTS -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_experience_label" />
+
+            <EditText
+                android:id="@+id/appearance_experience"
+                style="@style/edit"
+                android:gravity="right"
+                android:inputType="number" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout style="@style/centered" >
+
+        <!-- CATEGORY -->
+
+<TextView
+            style="@style/tableCell_string"
+            android:text="@string/feat_edit_category_label" />
+
+        <EditText
+            android:id="@+id/feat_edit_category"
+            style="@style/edit"
+            android:layout_width="fill_parent"
+            android:inputType="textCapWords" />
+    </TableLayout>
+
+</ScrollView>

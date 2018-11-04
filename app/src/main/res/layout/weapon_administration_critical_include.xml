@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TableRow>
+
+        <EditText
+            android:id="@+id/weapon_administration_critical_hit"
+            style="@style/base"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:inputType="number"
+            android:width="80dp" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weapon_administration_critical_separator" />
+
+        <EditText
+            android:id="@+id/weapon_administration_critical_multiplier"
+            style="@style/base"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:inputType="numberSigned"
+            android:width="80dp" />
+    </TableRow>
+
+</TableLayout>

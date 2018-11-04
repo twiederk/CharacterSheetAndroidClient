@@ -1,0 +1,175 @@
+package com.android.ash.charactersheet.gui.widget.numberview;
+
+import android.content.Context;
+import android.text.InputType;
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+/**
+ * This view offers the possiblity to increase and decrease number values. An minus and plus button is displayed to
+ * decrease and increase the number. The number is displayed inbetween the buttons. The buttons are of size 48.
+ */
+public abstract class NumberView extends LinearLayout {
+
+    static final int EDITTEXT_SIZE = 48;
+    static final int TEXT_SIZE = 15;
+
+    private static final int BUTTON_SIZE = 48;
+
+    final float scale;
+
+    NumberViewController controller;
+    TextView numberTextView;
+    EditText numberEditText;
+
+    boolean editable;
+
+    /**
+     * Instanciates NumberView contained in a layout file.
+     * 
+     * @param context
+     *            The context of the activity.
+     * @param attributeSet
+     *            The attributes of the layout file.
+     */
+    public NumberView(final Context context, final AttributeSet attributeSet) {
+        super(context, attributeSet);
+        scale = getResources().getDisplayMetrics().density;
+        this.setOrientation(HORIZONTAL);
+        initView(context, attributeSet, createLayoutParams());
+    }
+
+    abstract void initView(Context context, AttributeSet attributeSet, LayoutParams layoutParams);
+
+    abstract View createIncreaseTextView(Context context, AttributeSet attributeSet);
+
+    abstract View createDecreaseTextView(Context context, AttributeSet attributeSet);
+
+    private LayoutParams createLayoutParams() {
+        final LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(8, 0, 8, 0);
+        return layoutParams;
+    }
+
+    Button createButton(final Context context, final String text, final AttributeSet attributeSet) {
+        final Button button = new Button(context, attributeSet);
+        button.setText(text);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
+        button.setWidth((int) (BUTTON_SIZE * scale));
+        button.setHeight((int) (BUTTON_SIZE * scale));
+        button.setGravity(Gravity.CENTER);
+
+        return button;
+    }
+
+    View createNumberTextView(final Context context, final AttributeSet attributeSet) {
+        numberTextView = new TextView(context, attributeSet);
+        numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
+        return numberTextView;
+    }
+
+    View createNumberEditText(final Context context, final AttributeSet attributeSet) {
+        numberEditText = new EditText(context, attributeSet);
+        numberEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
+        numberEditText.setVisibility(View.GONE);
+        numberEditText.setMinWidth((int) (EDITTEXT_SIZE * scale));
+        numberEditText.setGravity(Gravity.RIGHT);
+        numberEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        numberEditText.setOnKeyListener(new OnKeyListener() {
+
+            @Override
+            public boolean onKey(final View view, final int keyCode, final KeyEvent event) {
+                if (controller != null) {
+                    controller.setNumber(getNumber(numberEditText));
+                }
+                return false;
+            }
+        });
+        return numberEditText;
+    }
+
+    /**
+     * Returns controller. Null if no controller is set.
+     * 
+     * @return Controller. Null if no controller is set.
+     */
+    public NumberViewController getController() {
+        return controller;
+    }
+
+    /**
+     * Sets the controller of the NumberView. Displaying its number immediately.
+     * 
+     * @param controller
+     *            The controller of the NumberView.
+     */
+    public void setController(final NumberViewController controller) {
+        this.controller = controller;
+        setNumber(getNumber());
+    }
+
+    void setNumber(final String number) {
+        numberTextView.setText(number);
+        numberEditText.setText(number);
+    }
+
+    String getNumber() {
+        if (controller != null) {
+            final Number number = controller.getNumber();
+            if (number instanceof Integer) {
+                final Integer integerNumber = (Integer) number;
+                return integerNumber.toString();
+            } else if (number instanceof Float) {
+                final Float floatNumber = (Float) number;
+                return floatNumber.toString();
+            }
+            throw new IllegalStateException("Not supported number: " + number.getClass());
+        }
+        return "";
+    }
+
+    /**
+     * Set to true to display an EditText instead of an TextView. The EditText allows to edit the number value directly.
+     * 
+     * @param editable
+     *            True to edit number value directly.
+     */
+    public void setEditable(final boolean editable) {
+        if (editable) {
+            numberTextView.setVisibility(View.GONE);
+            numberEditText.setVisibility(View.VISIBLE);
+        } else {
+            numberTextView.setVisibility(View.VISIBLE);
+            numberEditText.setVisibility(View.GONE);
+        }
+        this.editable = editable;
+    }
+
+    /**
+     * Returns true, if number value is editable directly.
+     * 
+     * @return True, if number value is editable directly.
+     */
+    public boolean isEditable() {
+        return editable;
+    }
+
+    Number getNumber(final TextView textView) {
+        final String text = textView.getText().toString();
+        if ("".equals(text)) {
+            return 0;
+        }
+        final Float number = Float.valueOf(text);
+        return number;
+    }
+
+}

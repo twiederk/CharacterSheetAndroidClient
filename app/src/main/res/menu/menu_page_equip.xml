@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_page_equip_magic_item"
+        android:actionViewClass="android.widget.CheckBox"
+        android:showAsAction="always"
+        android:title="@string/equipment_list_show_magic"/>
+    <item
+        android:id="@+id/menu_page_equip_edit_weapons"
+        android:icon="@drawable/icon_sword"
+        android:showAsAction="ifRoom"
+        android:title="@string/equipment_list_menu_edit_weapons"/>
+    <item
+        android:id="@+id/menu_page_equip_edit_armor"
+        android:icon="@drawable/icon_shield"
+        android:showAsAction="ifRoom"
+        android:title="@string/equipment_list_menu_edit_armor"/>
+    <item
+        android:id="@+id/menu_page_equip_edit_goods"
+        android:icon="@drawable/icon_backpack"
+        android:showAsAction="ifRoom"
+        android:title="@string/equipment_list_menu_edit_goods"/>
+
+</menu>

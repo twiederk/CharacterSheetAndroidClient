@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/table" >
+
+    <TextView
+        style="@style/heading"
+        android:text="@string/appearance_title" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- PLAYER -->
+
+        <TableRow style="@style/tableRow_odd" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_player_label" />
+
+            <TextView
+                android:id="@+id/appearance_player"
+                style="@style/tableCell_string" />
+        </TableRow>
+
+        <!-- RACE -->
+
+        <TableRow style="@style/tableRow_even" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_race_label" />
+
+            <TextView
+                android:id="@+id/appearance_race"
+                style="@style/tableCell_string" />
+        </TableRow>
+
+        <!-- SEX -->
+
+        <TableRow style="@style/tableRow_odd" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_sex_label" />
+
+            <TextView
+                android:id="@+id/appearance_sex"
+                style="@style/tableCell_string" />
+        </TableRow>
+
+        <!-- CLASS -->
+
+        <TableRow style="@style/tableRow_even" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_class_level_label" />
+
+            <TextView
+                android:id="@+id/appearance_class_level"
+                style="@style/tableCell_string"
+                android:singleLine="false" />
+        </TableRow>
+
+        <!-- ALIGNMENT -->
+
+        <TableRow style="@style/tableRow_odd" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/appearance_alignment_label" />
+
+            <TextView
+                android:id="@+id/appearance_alignment"
+                style="@style/tableCell_string" />
+        </TableRow>
+
+        <!-- EXPERIENCE POINTS -->
+
+        <TableRow style="@style/tableRow_even" >
+
+            <TextView
+                android:id="@+id/appearance_experience_label"
+                style="@style/tableCell_string"
+                android:text="@string/appearance_experience_label" />
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <ProgressBar
+                    android:id="@+id/appearance_experience_progress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:progressDrawable="@android:drawable/progress_horizontal" />
+
+                <TextView
+                    android:id="@+id/appearance_experience"
+                    style="@style/tableCell_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" />
+            </FrameLayout>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

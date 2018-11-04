@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weaponattack_name" />
+
+                <EditText
+                    android:id="@+id/weaponattack_name"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:inputType="textCapWords" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weaponattack_weapon" />
+
+                <TextView
+                    android:id="@+id/weaponattack_weapon"
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dip" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weaponattack_attackwield" />
+
+                <Spinner
+                    android:id="@+id/weaponattack_attackwield"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weaponattack_attack_bonus_modifier" />
+
+                <EditText
+                    android:id="@+id/weaponattack_attack_bonus_modifier"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:inputType="numberSigned" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weaponattack_damage_bonus_modifier" />
+
+                <EditText
+                    android:id="@+id/weaponattack_damage_bonus_modifier"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:inputType="numberSigned" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/weaponattack_ammunition_tablerow"
+                android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weaponattack_ammo" />
+
+                <EditText
+                    android:id="@+id/weaponattack_ammo"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:inputType="number" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weaponattack_desc" />
+
+        <EditText
+            android:id="@+id/weaponattack_desc"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+    </LinearLayout>
+
+</ScrollView>

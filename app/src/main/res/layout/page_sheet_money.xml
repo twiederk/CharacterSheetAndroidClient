@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/table"
+    android:layout_below="@id/appearance_include" >
+
+    <TextView
+        style="@style/heading"
+        android:text="@string/money_title" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- MONEY -->
+
+        <TableRow style="@style/tableRow_odd" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/money_gold_label" />
+
+            <TextView
+                android:id="@+id/money_gold"
+                style="@style/tableCell_number"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

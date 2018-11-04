@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/skill_roll_button"
+        style="@style/button_die_roll"
+        android:layout_width="96dp"
+        android:layout_height="fill_parent"
+        android:layout_margin="4dp"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/skill_name"
+        style="@style/list_item_heading"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:gravity="left|center_vertical"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/skill_attribute_modifier"
+        style="@style/list_item_text"
+        android:layout_width="96dp"
+        android:layout_height="fill_parent"
+        android:focusable="false"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/skill_rank"
+        style="@style/list_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:focusable="false"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/skill_modifier"
+        style="@style/list_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:focusable="false"
+        android:gravity="center"
+        android:padding="8dp" />
+
+</LinearLayout>

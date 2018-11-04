@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TextView
+        android:id="@+id/skill_description"
+        style="@style/base"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/translucent_black"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:textColor="@android:color/white" />
+
+</ScrollView>

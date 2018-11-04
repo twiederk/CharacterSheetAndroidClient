@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include layout="@layout/feat_administration_name_include" />
+
+        <include layout="@layout/feat_administration_desc_include" />
+
+        <include layout="@layout/feat_administration_checkboxes_inlcude" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/background"
+        style="@style/character_sheet_char_image"
+        android:contentDescription="@string/activity_base_character_sheet_image_hint" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/note_date"
+                style="@style/base"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/translucent_black"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/note_text"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"
+                android:background="@color/translucent_black"
+                android:gravity="top|left"
+                android:inputType="textCapSentences|textMultiLine"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

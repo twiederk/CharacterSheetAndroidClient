@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1" >
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_component_verbal"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_component_verbal" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_component_somatic"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_component_somatic" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_component_material"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_component_material" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_component_focus"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_component_focus" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_component_divinefocus"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_component_divinefocus" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_component_xpcost"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_component_xpcost" />
+    </TableRow>
+</TableLayout>

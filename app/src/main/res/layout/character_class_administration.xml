@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1" >
+
+        <!-- NAME -->
+
+        <TableRow android:layout_width="fill_parent" >
+
+            <TextView
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/character_class_administration_name_label" />
+
+            <EditText
+                android:id="@+id/character_class_administration_name"
+                style="@style/base"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:inputType="textCapWords" />
+        </TableRow>
+
+        <!-- ALIGNMENTS -->
+
+        <TableRow android:layout_width="fill_parent" >
+
+            <TextView
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/character_class_administration_alignments_label" />
+
+            <TextView
+                android:id="@+id/character_class_administration_alignments"
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end" />
+        </TableRow>
+
+        <!-- HIT DIE -->
+
+        <TableRow android:layout_width="fill_parent" >
+
+            <TextView
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/character_class_administration_hitdie_label" />
+
+            <Spinner
+                android:id="@+id/character_class_administration_hitdie"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- BASE ATTACK BONUS -->
+
+        <TableRow android:layout_width="fill_parent" >
+
+            <TextView
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/character_class_administration_baseattackbonus_label" />
+
+            <Spinner
+                android:id="@+id/character_class_administration_baseattackbonus"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- SAVE -->
+
+        <TableRow android:layout_width="fill_parent" >
+
+            <TextView
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/character_class_administration_save_label" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <CheckBox
+                    android:id="@+id/character_class_administration_save_fortitide"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_fortitude" />
+
+                <CheckBox
+                    android:id="@+id/character_class_administration_save_reflex"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_reflex" />
+
+                <CheckBox
+                    android:id="@+id/character_class_administration_save_will"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_will" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- CLASS ABILITIES -->
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/character_class_administration_abilities"
+                style="@style/base"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2" />
+        </TableRow>
+
+        <!-- SKILL POINTS -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/base"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/character_class_administration_skillpoints_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView android:id="@+id/character_class_administration_skillpoints" />
+        </TableRow>
+
+        <!-- SKILLS -->
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/character_class_administration_skills"
+                style="@style/base"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="2" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

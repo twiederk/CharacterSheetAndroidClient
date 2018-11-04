@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout style="@style/centered" >
+
+        <!-- HEADING -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_name" />
+
+            <TextView
+                style="@style/tableCell_string_heading"
+                android:text="@string/save_base_save" />
+
+            <TextView
+                style="@style/tableCell_string_heading"
+                android:text="@string/save_attribute_modifier" />
+
+            <TextView
+                style="@style/tableCell_string_heading"
+                android:text="@string/save_modifier" />
+        </TableRow>
+
+        <!-- FORTITUDE -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_fortitude_label" />
+
+            <TextView
+                android:id="@+id/save_fortitude_base"
+                style="@style/tableCell_number" />
+
+            <TextView
+                android:id="@+id/save_fortitude_attribute"
+                style="@style/tableCell_number" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/save_fortitude_modifier"
+                style="@style/edit" />
+        </TableRow>
+
+        <!-- REFLEX -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_reflex_label" />
+
+            <TextView
+                android:id="@+id/save_reflex_base"
+                style="@style/tableCell_number" />
+
+            <TextView
+                android:id="@+id/save_reflex_attribute"
+                style="@style/tableCell_number" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/save_reflex_modifier"
+                style="@style/edit" />
+        </TableRow>
+
+        <!-- WILL -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_will_label" />
+
+            <TextView
+                android:id="@+id/save_will_base"
+                style="@style/tableCell_number" />
+
+            <TextView
+                android:id="@+id/save_will_attribute"
+                style="@style/tableCell_number" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/save_will_modifier"
+                style="@style/edit" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

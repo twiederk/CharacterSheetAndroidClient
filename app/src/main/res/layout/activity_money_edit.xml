@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout style="@style/centered" >
+
+        <!-- PLATINUM -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/money_platinum_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_platinum" />
+        </TableRow>
+
+        <!-- GOLD -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/money_gold_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_gold" />
+        </TableRow>
+
+        <!-- SILVER -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/money_silver_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_silver" />
+        </TableRow>
+
+        <!-- COPPER -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/money_copper_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_copper" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

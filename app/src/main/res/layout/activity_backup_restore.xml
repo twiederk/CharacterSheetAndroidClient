@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- Backup to Cloud -->
+
+    <Button
+        android:id="@+id/backup_restore_backup_to_cloud_button"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/backup_restore_backup_to_cloud" />
+
+    <View style="@style/horizontal_line" />
+
+    <!-- Backup to File -->
+
+    <TextView
+        android:id="@+id/backup_restore_backup_directory"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <CheckBox
+        android:id="@+id/backup_restore_backup_dndv35"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <CheckBox
+        android:id="@+id/backup_restore_backup_pathfinder"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <Button
+        android:id="@+id/backup_restore_backup_to_file_button"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/backup_restore_backup_to_file" />
+
+    <View style="@style/horizontal_line" />
+
+    <!-- Restore from File -->
+
+    <TextView
+        android:id="@+id/backup_restore_restore_directory"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <TextView
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/backup_restore_restore_from_file" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+</LinearLayout>

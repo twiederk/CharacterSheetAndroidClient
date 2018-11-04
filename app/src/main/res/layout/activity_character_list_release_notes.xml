@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/releaseNotes"
+    android:background="@drawable/release_notes"
+    android:orientation="vertical" >
+
+    <!-- HEADING -->
+
+    <TextView
+        style="@style/list_item_heading"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/release_notes_heading" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:scrollbars="vertical" >
+
+        <!-- RELEASE NOTES -->
+
+        <TextView
+            android:id="@+id/list_of_release_notes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <!-- OK BUTTON -->
+
+    <Button
+        android:id="@+id/button_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_ok" />
+
+</LinearLayout>

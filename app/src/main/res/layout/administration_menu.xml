@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="5dip" >
+
+        <!-- Race Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_race_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_race_button" />
+
+        <!-- Character Class Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_character_class_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_character_class_button" />
+
+        <!-- Class Ability Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_ability_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_ability_button" />
+
+        <!-- Skill Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_skill_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_skill_button" />
+
+        <!-- Feat Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_feat_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_feat_button" />
+
+        <!-- Weapon Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_weapon_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_weapon_button" />
+
+        <!-- Armor Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_armor_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_armor_button" />
+
+        <!-- Good Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_good_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_good_button" />
+
+        <!-- Spelllist Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_spelllist_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_spelllist_button" />
+
+        <!-- Spell Administration -->
+
+        <Button
+            android:id="@+id/administration_menu_spell_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/administration_menu_spell_button" />
+    </LinearLayout>
+
+</ScrollView>

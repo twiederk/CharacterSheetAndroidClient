@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/feat_list_number_of_feats"
+            style="@style/tableCell_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp" />
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/translucent_black" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ListView
+                android:id="@+id/feat_list_general"
+                style="@style/transparentListView" />
+
+            <ListView
+                android:id="@+id/feat_list_item_creation"
+                style="@style/transparentListView" />
+
+            <ListView
+                android:id="@+id/feat_list_metamagic"
+                style="@style/transparentListView" />
+
+            <ListView
+                android:id="@+id/feat_list_teamwork"
+                style="@style/transparentListView" />
+        </FrameLayout>
+    </LinearLayout>
+
+</TabHost>

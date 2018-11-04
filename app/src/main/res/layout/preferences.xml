@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/base"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/preferences_background_label" />
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/preferences_background_image"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preferences_background_image" />
+
+        <RadioButton
+            android:id="@+id/preferences_background_color"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preferences_background_color" />
+
+        <Spinner
+            android:id="@+id/preferences_background_colors"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp" />
+    </RadioGroup>
+
+    <View style="@style/horizontal_line" />
+
+    <TextView
+        style="@style/base"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/preferences_game_system_label" />
+
+    <Spinner
+        android:id="@+id/preferences_game_systems"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <View style="@style/horizontal_line" />
+
+</LinearLayout>

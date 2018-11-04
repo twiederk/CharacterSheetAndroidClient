@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/translucent_black"
+    android:scrollbars="none" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <include
+                android:id="@+id/appearance_include"
+                layout="@layout/page_sheet_appearance" />
+
+            <include
+                android:id="@+id/money_include"
+                layout="@layout/page_sheet_money" />
+
+            <include
+                android:id="@+id/attribute_include"
+                layout="@layout/page_sheet_attribute" />
+
+            <include
+                android:id="@+id/combat_include"
+                layout="@layout/page_sheet_combat" />
+
+            <include
+                android:id="@+id/saving_throw_include"
+                layout="@layout/page_sheet_save" />
+        </RelativeLayout>
+
+        <com.android.ash.charactersheet.gui.widget.dierollview.DieRollView
+            android:id="@+id/die_roll_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+    </FrameLayout>
+
+</ScrollView>

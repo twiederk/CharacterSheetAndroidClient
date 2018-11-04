@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TableRow style="@style/tableRow_odd" >
+
+        <TextView
+            android:id="@+id/max_ranks"
+            style="@style/tableCell_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow style="@style/tableRow_even" >
+
+        <TextView
+            android:id="@+id/skill_points"
+            style="@style/tableCell_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+</TableLayout>

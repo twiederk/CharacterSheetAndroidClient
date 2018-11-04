@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spell_administration_name" />
+
+                <EditText
+                    android:id="@+id/spell_administration_name"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spell_administration_school" />
+
+                <Spinner
+                    android:id="@+id/spell_administration_school"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spell_administration_subschool" />
+
+                <Spinner
+                    android:id="@+id/spell_administration_subschool"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_descriptor" />
+
+        <include layout="@layout/spell_administration_descriptor" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_component" />
+
+        <include layout="@layout/spell_administration_component" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spell_administration_castingtime" />
+
+                <Spinner
+                    android:id="@+id/spell_administration_castingtime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spell_administration_range" />
+
+                <Spinner
+                    android:id="@+id/spell_administration_range"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spell_administration_spellresistance" />
+
+                <Spinner
+                    android:id="@+id/spell_administration_spellresistance"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_effect" />
+
+        <EditText
+            android:id="@+id/spell_administration_effect"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_duration" />
+
+        <EditText
+            android:id="@+id/spell_administration_duration"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_savingthrow" />
+
+        <EditText
+            android:id="@+id/spell_administration_savingthrow"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_materialcomponent" />
+
+        <EditText
+            android:id="@+id/spell_administration_materialcomponent"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_focus" />
+
+        <EditText
+            android:id="@+id/spell_administration_focus"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_shortdescription" />
+
+        <EditText
+            android:id="@+id/spell_administration_shortdescription"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_administration_description" />
+
+        <EditText
+            android:id="@+id/spell_administration_description"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+    </LinearLayout>
+
+</ScrollView>

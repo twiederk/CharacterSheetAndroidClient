@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="0,1" >
+
+    <TableRow>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/class_administration_ability_edit_label_name" />
+
+        <TextView
+            android:id="@+id/class_administration_ability_edit_name"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/class_administration_ability_edit_label_level" />
+
+        <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+            android:id="@+id/class_administration_ability_edit_level"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+    </TableRow>
+
+</TableLayout>

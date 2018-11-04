@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_name" />
+
+                <EditText
+                    android:id="@+id/ability_administration_name"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:inputType="textCapWords" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_type" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_type"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/ability_administration_tablerow_spelllist"
+                android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_spelllist" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_spelllist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_attribute" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_attribute"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_castingtype" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_castingtype"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_spellsource" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_spellsource"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_school" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_school"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_known_spells_table" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_known_spells_table"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/ability_administration_edit_spells_per_day_table" />
+
+                <Spinner
+                    android:id="@+id/ability_administration_spells_per_day_table"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/ability_administration_edit_desc" />
+
+        <EditText
+            android:id="@+id/ability_administration_desc"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:inputType="textCapSentences|textMultiLine" />
+    </LinearLayout>
+
+</ScrollView>

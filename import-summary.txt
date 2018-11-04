@@ -1,0 +1,79 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Risky Project Location:
+-----------------------
+The tools *should* handle project locations in any directory. However,
+due to bugs, placing projects in directories containing spaces in the
+path, or characters like ", ' and &, have had issues. We're working to
+eliminate these bugs, but to save yourself headaches you may want to
+move your project to a location where this is not a problem.
+C:\Users\Torsten Wiederkehr\StudioProjects\CharacterSheetAndroidClient
+                -                                                     
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .pmd
+* build.properties
+* build.xml
+* lib\
+* lib\android-support-v4.jar
+* lib\framework-1.30.0-tests.jar
+* lib\framework-1.30.0.jar
+* lib\memorydb.jar
+* pmd.xml
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+* Test\res\ => app\src\androidTest\res\
+* Test\src\ => app\src\androidTest\java\
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\ => app\src\main\java\
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.gitignore => app\src\main\resources\.gitignore
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\.name => app\src\main\resources\.idea\.name
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\compiler.xml => app\src\main\resources\.idea\compiler.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\dictionaries\twiederk.xml => app\src\main\resources\.idea\dictionaries\twiederk.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\encodings.xml => app\src\main\resources\.idea\encodings.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\inspectionProfiles\Project_Default.xml => app\src\main\resources\.idea\inspectionProfiles\Project_Default.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\misc.xml => app\src\main\resources\.idea\misc.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\uiDesigner.xml => app\src\main\resources\.idea\uiDesigner.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\vcs.xml => app\src\main\resources\.idea\vcs.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\.idea\workspace.xml => app\src\main\resources\.idea\workspace.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\d20cs.txt => app\src\main\resources\d20cs.txt
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\pom.xml => app\src\main\resources\pom.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\main\java\com\d20charactersheet\framework\boc\service\exportimport\d20cs_characters.dtd => app\src\main\resources\src\main\java\com\d20charactersheet\framework\boc\service\exportimport\d20cs_characters.dtd
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\main\java\com\d20charactersheet\framework\boc\service\exportimport\d20cs_equipment.dtd => app\src\main\resources\src\main\java\com\d20charactersheet\framework\boc\service\exportimport\d20cs_equipment.dtd
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\main\java\com\d20charactersheet\framework\boc\service\exportimport\v2\d20cs_characters.dtd => app\src\main\resources\src\main\java\com\d20charactersheet\framework\boc\service\exportimport\v2\d20cs_characters.dtd
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_characters_v1_unit_test.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_characters_v1_unit_test.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_characters_v1_unit_test_Diba.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_characters_v1_unit_test_Diba.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_characters_v1_unit_test_Home.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_characters_v1_unit_test_Home.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_characters_v2_unit_test.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_characters_v2_unit_test.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_characters_v2_unit_test_Diba.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_characters_v2_unit_test_Diba.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_characters_v2_unit_test_Home.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_characters_v2_unit_test_Home.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_equipment_v1_unit_test.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_equipment_v1_unit_test.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_equipment_v1_unit_test_Diba.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_equipment_v1_unit_test_Diba.xml
+* E:\projects\DnDFramework\Technik\workspace\d20Framework\src\test\resources\exportimport\d20cs_equipment_v1_unit_test_Home.xml => app\src\main\resources\src\test\resources\exportimport\d20cs_equipment_v1_unit_test_Home.xml
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

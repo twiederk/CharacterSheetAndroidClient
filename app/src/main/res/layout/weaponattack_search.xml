@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/background"
+        style="@style/character_sheet_char_image"
+        android:contentDescription="@string/activity_base_character_sheet_image_hint" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/weaponattack_search_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+        <ListView
+            android:id="@+id/weaponattack_search_list"
+            style="@style/transparentListView" />
+    </LinearLayout>
+
+</FrameLayout>

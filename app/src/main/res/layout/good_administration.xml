@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_administration_name" />
+
+                <EditText
+                    android:id="@+id/item_administration_name"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:inputType="textCapWords" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_administration_type" />
+
+                <Spinner
+                    android:id="@+id/item_administration_type"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_administration_cost" />
+
+                <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView android:id="@+id/item_administration_cost" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_administration_weight" />
+
+                <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView android:id="@+id/item_administration_weight" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_administration_quality_type" />
+
+                <Spinner
+                    android:id="@+id/item_administration_quality_type"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_administration_desc" />
+
+        <EditText
+            android:id="@+id/item_administration_desc"
+            style="@style/base"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:inputType="textCapSentences|textMultiLine" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/paperscroll"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:id="@+id/slide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/spell_school"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_components"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_casting_time"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_range"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_effect"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_duraction"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_saving_throw"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_spell_resistance"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_description"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_mat_component"
+            style="@style/spell" />
+
+        <TextView
+            android:id="@+id/spell_focus"
+            style="@style/spell" />
+    </LinearLayout>
+
+</ScrollView>

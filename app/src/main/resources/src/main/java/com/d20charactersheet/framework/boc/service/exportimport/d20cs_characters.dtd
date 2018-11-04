@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!ELEMENT characters (character+)>
+    <!ATTLIST characters version CDATA #FIXED "1">
+    <!ATTLIST characters gamesystem CDATA #REQUIRED>
+
+    <!ELEMENT character (appearance,attributes,combat,saves,money,notes,attacks,skills,feats,spells,equipment)>
+
+    <!-- Appearance -->
+    <!ELEMENT appearance (name,player,race,sex,classlevels,alignment,xppoints,xptableid)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT player (#PCDATA)>
+    <!ELEMENT race (#PCDATA)>
+    <!ELEMENT sex (#PCDATA)>
+    <!ELEMENT classlevels (classlevel)>
+    <!ELEMENT classlevel (class,level,classabilities)>
+    <!ELEMENT class (#PCDATA)>
+    <!ELEMENT level (#PCDATA)>
+    <!ELEMENT classabilities (classability*)>
+    <!ELEMENT classability (#PCDATA)>
+    <!ATTLIST classability name CDATA #REQUIRED>
+    <!ATTLIST classability owned CDATA #REQUIRED>
+    <!ELEMENT alignment (#PCDATA)>
+    <!ELEMENT xppoints (#PCDATA)>
+    <!ELEMENT xptableid (#PCDATA)>
+
+    <!-- Attributes -->
+    <!ELEMENT attributes (attribute+)>
+    <!ELEMENT attribute (#PCDATA)>
+    <!ATTLIST attribute name CDATA #REQUIRED>
+    <!ATTLIST attribute value CDATA #REQUIRED>
+
+    <!-- Combat -->
+    <!ELEMENT combat (hitpoints,maxhitpoints,armormod,initiativemod,cmbmod,cmdmod)>
+    <!ELEMENT hitpoints (#PCDATA)>
+    <!ELEMENT maxhitpoints (#PCDATA)>
+    <!ELEMENT armormod (#PCDATA)>
+    <!ELEMENT initiativemod (#PCDATA)>
+    <!ELEMENT cmbmod (#PCDATA)>
+    <!ELEMENT cmdmod (#PCDATA)>
+
+    <!-- Saves -->
+    <!ELEMENT saves (fortifymod,reflexmod,willmod)>
+    <!ELEMENT fortifymod (#PCDATA)>
+    <!ELEMENT reflexmod (#PCDATA)>
+    <!ELEMENT willmod (#PCDATA)>
+
+    <!-- Money -->
+    <!ELEMENT money (platinum,gold,silver,copper)>
+    <!ELEMENT platinum (#PCDATA)>
+    <!ELEMENT gold (#PCDATA)>
+    <!ELEMENT silver (#PCDATA)>
+    <!ELEMENT copper (#PCDATA)>
+
+    <!-- Notes -->
+    <!ELEMENT notes (note*)>
+    <!ELEMENT note (date,text)>
+    <!ELEMENT date (#PCDATA)>
+    <!ELEMENT text (#PCDATA)>
+
+    <!-- Attacks -->
+    <!ELEMENT attacks (attack*)>
+    <!ELEMENT attack (name,description,attackwield,attackweapon,attackbonusmod,damagebonusmod)>
+    <!ELEMENT description (#PCDATA)>
+    <!ELEMENT attackwield (#PCDATA)>
+    <!ELEMENT attackweapon (#PCDATA)>
+    <!ELEMENT attackbonusmod (#PCDATA)>
+    <!ELEMENT damagebonusmod (#PCDATA)>
+
+    <!-- Skills -->
+    <!ELEMENT skills (skill*)>
+    <!ELEMENT skill (name,rank,skillmod)>
+    <!ELEMENT rank (#PCDATA)>
+    <!ELEMENT skillmod (#PCDATA)>
+
+    <!-- Feats -->
+    <!ELEMENT feats (feat*)>
+    <!ELEMENT feat (name,category)>
+    <!ELEMENT category (#PCDATA)>
+
+    <!-- Spells -->
+    <!ELEMENT spells (spell*)>
+    <!ELEMENT spell (name)>
+
+    <!-- Equipment -->
+    <!ELEMENT equipment (weapons,armors,goods)>
+    <!ELEMENT weapons (weapon*)>
+    <!ELEMENT weapon (name,number)>
+    <!ELEMENT armors (armor*)>
+    <!ELEMENT armor (name,number)>
+    <!ELEMENT goods (good*)>
+    <!ELEMENT good (name,number)>
+    <!ELEMENT number (#PCDATA)>

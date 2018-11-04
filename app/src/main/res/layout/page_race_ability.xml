@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/race_ability_header" />
+
+    <ListView
+        android:id="@+id/race_ability_list_view"
+        style="@style/transparentListView" />
+
+</LinearLayout>

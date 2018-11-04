@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1" >
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_acid"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_acid" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_air"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_air" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_chaotic"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_chaotic" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_cold"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_cold" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_darkness"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_darkness" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_death"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_death" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_earth"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_earth" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_electricity"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_electricity" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_evil"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_evil" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_fear"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_fear" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_fire"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_fire" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_force"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_force" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_good"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_good" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_languagedependent"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_languagedependent" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_lawful"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_lawful" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_light"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_light" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_mindaffecting"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_mindaffecting" />
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_sonic"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/spell_administration_descriptor_sonic" />
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent" >
+
+        <CheckBox
+            android:id="@+id/spell_administration_descriptor_water"
+            style="@style/base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_span="2"
+            android:text="@string/spell_administration_descriptor_water" />
+    </TableRow>
+
+</TableLayout>

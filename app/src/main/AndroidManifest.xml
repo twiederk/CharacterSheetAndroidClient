@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.ash.charactersheet"
+    android:installLocation="auto"
+    android:versionCode="43"
+    android:versionName="2.11.3" >
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <meta-data
+        android:name="com.google.android.backup.api_key"
+        android:value="AEdPqrEAAAAIG4pylN9CBpRjQFvpm7LBRjtB1lI_kEFI5Hu9-Q" />
+
+    <application
+        android:name=".CharacterSheetApplication"
+        android:allowBackup="true"
+        android:backupAgent=".backuprestore.CloudBackupAgent"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo" >
+
+        <!-- CharacterListActivity -->
+        <activity
+            android:name=".gui.main.CharacterListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- CharacterSheetActivity -->
+        <activity
+            android:name=".gui.sheet.CharacterSheetActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AppearanceEditActivity -->
+        <activity
+            android:name=".gui.sheet.appearance.AppearanceEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- AttributesEditActivity -->
+        <activity
+            android:name=".gui.sheet.attribute.AttributesEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- CombatEditActivity -->
+        <activity
+            android:name=".gui.sheet.combat.CombatEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- SaveEditActivity -->
+        <activity
+            android:name=".gui.sheet.save.SaveEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- AboutActivity -->
+        <activity
+            android:name=".gui.main.AboutActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- CharacterCreateActivity -->
+        <activity
+            android:name=".gui.main.CharacterCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- ClassLevelEditActivity -->
+        <activity
+            android:name=".gui.sheet.clazz.ClassLevelEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- ClassLevelCreateActivity -->
+        <activity
+            android:name=".gui.sheet.clazz.ClassLevelCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- SkillEditActivity -->
+        <activity
+            android:name=".gui.sheet.skill.SkillEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- FeatEditActivity -->
+        <activity
+            android:name=".gui.sheet.feat.FeatEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- MoneyEditActivity -->
+        <activity
+            android:name=".gui.sheet.money.MoneyEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- SkillAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.skill.SkillAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SkillAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.skill.SkillAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SkillAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.skill.SkillAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- FeatAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.feat.FeatAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- FeatAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.feat.FeatAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- FeatAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.feat.FeatAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AdministrationMenuActivity -->
+        <activity
+            android:name=".gui.admin.AdministrationMenuActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- CharacterClassAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.clazz.CharacterClassAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- CharacterClassAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.clazz.CharacterClassAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- CharacterClassAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.clazz.CharacterClassAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- CharacterClassAlignmentActivity -->
+        <activity
+            android:name=".gui.admin.clazz.alignment.CharacterClassAlignmentActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- ClassAdministrationAbilityListActivity -->
+        <activity
+            android:name=".gui.admin.clazz.ability.ClassAdministrationAbilityListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- CharacterClassSkillActivity -->
+        <activity
+            android:name=".gui.admin.clazz.skill.CharacterClassSkillActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- GoodsEditActivity -->
+        <activity
+            android:name=".gui.sheet.item.GoodEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- WeaponEditActivity -->
+        <activity
+            android:name=".gui.sheet.item.WeaponEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ArmorEditActivity -->
+        <activity
+            android:name=".gui.sheet.item.ArmorEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- WeaponAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.item.weapon.WeaponAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- WeaponAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.item.weapon.WeaponAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- WeaponAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.item.weapon.WeaponAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ArmorAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.item.armor.ArmorAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ArmorAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.item.armor.ArmorAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ArmorAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.item.armor.ArmorAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- GoodAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.item.good.GoodAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- GoodAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.item.good.GoodAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- GoodAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.item.good.GoodAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AbilityAbilityAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.ability.AbilityAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AbilityAbilityAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.ability.AbilityAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AbilityAbilityAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.ability.AbilityAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AbilityAbilityAdministrationEditExtraFeatsActivity -->
+        <activity
+            android:name=".gui.admin.ability.AbilityAdministrationEditExtraFeatsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AbilityAbilityAdministrationEditExtraSkillPointsActivity -->
+        <activity
+            android:name=".gui.admin.ability.AbilityAdministrationEditExtraSkillPointsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- AbilityAbilityAdministrationEditSpelllistActivity -->
+        <activity
+            android:name=".gui.admin.ability.AbilityAdministrationEditSpelllistActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- RaceAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.race.RaceAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- RaceAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.race.RaceAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- RaceAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.race.RaceAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- RaceAdministrationAbilityListActivity -->
+        <activity
+            android:name=".gui.admin.race.ability.RaceAdministrationAbilityListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- NoteCreateActivity -->
+        <activity
+            android:name=".gui.sheet.note.NoteCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- NoteEditActivity -->
+        <activity
+            android:name=".gui.sheet.note.NoteEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SkillDescriptionActivity -->
+        <activity
+            android:name=".gui.sheet.skill.SkillDescriptionActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- PreferencesActivity -->
+        <activity
+            android:name=".gui.main.PreferencesActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SearchAbilityActivity -->
+        <activity
+            android:name="com.android.ash.charactersheet.gui.admin.util.AbilitySearchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ClassAdministrationAbilityEditActivity -->
+        <activity
+            android:name=".gui.admin.clazz.ability.ClassAdministrationAbilityEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpellActivity -->
+        <activity
+            android:name="com.android.ash.charactersheet.gui.sheet.knownspell.SpellActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- OpenGamingLicenceActivity -->
+        <activity
+            android:name=".gui.main.OpenGamingLicenceActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- WeaponAttackSearchActivity -->
+        <activity
+            android:name=".gui.sheet.attack.WeaponAttackSearchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- WeaponAttackCreateActivity -->
+        <activity
+            android:name=".gui.sheet.attack.WeaponAttackCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- WeaponAttackEditActivity -->
+        <activity
+            android:name=".gui.sheet.attack.WeaponAttackEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+
+        <!-- BackupRestoreActivity -->
+        <activity
+            android:name=".gui.main.BackupRestoreActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ExportMenuActivity -->
+        <activity
+            android:name=".gui.main.exportimport.ExportMenuActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ExportCharacterActivity -->
+        <activity
+            android:name=".gui.main.exportimport.ExportCharacterActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ExportEquipmentActivity -->
+        <activity
+            android:name=".gui.main.exportimport.ExportEquipmentActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- ImportActivity -->
+        <activity
+            android:name=".gui.main.exportimport.ImportActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpelllistAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.spelllist.SpelllistAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpellAdministrationListActivity -->
+        <activity
+            android:name=".gui.admin.spell.SpellAdministrationListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpellAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.spell.SpellAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpellAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.spell.SpellAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpelllistAdministrationCreateActivity -->
+        <activity
+            android:name=".gui.admin.spelllist.SpelllistAdministrationCreateActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpelllistAdministrationEditActivity -->
+        <activity
+            android:name=".gui.admin.spelllist.SpelllistAdministrationEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpellSearchActivity -->
+        <activity
+            android:name=".gui.admin.spelllist.SpellSearchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- SpellSlotActivity -->
+        <activity
+            android:name=".gui.sheet.spellslot.SpellSlotActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+    </application>
+
+</manifest>

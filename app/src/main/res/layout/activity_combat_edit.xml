@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <TableLayout style="@style/centered" >
+
+        <!-- HIP POINTS (HP) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/combat_hitpoints_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
+                android:id="@+id/combat_hitpoints"
+                style="@style/edit" />
+        </TableRow>
+
+        <!-- MAX HIT POINTS -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/combat_max_hitpoints_label" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
+                android:id="@+id/combat_max_hitpoints"
+                style="@style/edit" />
+        </TableRow>
+
+        <!-- ARMOR CLASS (AC) -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/combat_armorclass_label" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/combat_armorclass_formular"
+                    style="@style/tableCell_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" />
+
+                <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                    android:id="@+id/combat_armorclass"
+                    style="@style/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- INITIATIVE MODIFIER -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/combat_initiative_label" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/combat_initative_formular"
+                    style="@style/tableCell_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" />
+
+                <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                    android:id="@+id/combat_initiative"
+                    style="@style/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- CMB MODIFIER -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/combat_cmb_label" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/combat_cmb_formular"
+                    style="@style/tableCell_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" />
+
+                <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                    android:id="@+id/combat_cmb"
+                    style="@style/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- CMD MODIFIER -->
+
+        <TableRow>
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/combat_cmd_label" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/combat_cmd_formular"
+                    style="@style/tableCell_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" />
+
+                <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                    android:id="@+id/combat_cmd"
+                    style="@style/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spelllevel_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1" >
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/spelllevel_title"
+                style="@style/list_item_spelllist_level" />
+
+            <TextView
+                android:id="@+id/spelllevel_number_of_known_spells"
+                style="@style/list_item_spelllist_number" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/spell_known_spell"
+            style="@style/list_item_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/checkbox_off_background"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/spell_name"
+            style="@style/list_item_spelllist_spell_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/spell_short_description"
+        style="@style/list_item_spelllist_spell_short_description" />
+
+    <View
+        android:id="@+id/spell_divider"
+        style="@style/horizontal_line" />
+
+</LinearLayout>

@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">d20 Character Sheet</string>
+    <string name="app_version_code">43</string>
+    <string name="app_version_name">2.11.3</string>
+    <string name="attribute_title">Abilities</string>
+    <string name="attribute_str">STR</string>
+    <string name="attribute_dex">DEX</string>
+    <string name="attribute_con">CON</string>
+    <string name="attribute_int">INT</string>
+    <string name="attribute_wis">WIS</string>
+    <string name="attribute_cha">CHA</string>
+    <string name="attribute_strength">Strength</string>
+    <string name="attribute_dexterity">Dexterity</string>
+    <string name="attribute_constitution">Constitution</string>
+    <string name="attribute_intelligence">Intelligence</string>
+    <string name="attribute_wisdom">Wisdom</string>
+    <string name="attribute_charisma">Charisma</string>
+    <string name="appearance_title">Appearance</string>
+    <string name="appearance_name_label">Name:</string>
+    <string name="appearance_player_label">Player:</string>
+    <string name="appearance_race_label">Race:</string>
+    <string name="appearance_sex_label">Sex:</string>
+    <string name="appearance_class_level_label">Class:</string>
+    <string name="appearance_class_level_button">Edit Class</string>
+    <string name="appearance_alignment_label">Align:</string>
+    <string name="appearance_xptable_label">XP Table:</string>
+    <string name="appearance_experience_label">Exp:</string>
+    <string name="save_title">Saves</string>
+    <string name="save_fortitude_label">Fortitude:</string>
+    <string name="save_reflex_label">Reflex:</string>
+    <string name="save_will_label">Will:</string>
+    <string name="save_name">Name</string>
+    <string name="save_base_save">Base</string>
+    <string name="save_attribute_modifier">Attribute</string>
+    <string name="save_modifier">Misc</string>
+    <string name="class_level_edit_new">New Class</string>
+    <string name="class_level_edit_title">Edit Class Level</string>
+    <string name="class_level_edit_delete">Delete</string>
+    <string name="class_level_create_title">Select Class</string>
+
+    <!-- CharacterSheetActivity -->
+    <string name="activity_base_character_sheet_image_hint">Image of character</string>
+
+    <!-- SheetPageFragment -->
+    <string name="page_sheet_title">Sheet</string>
+    <string name="page_sheet_menu_add_image">Add Image</string>
+    <string name="page_sheet_menu_add_thumbnail">Add Thumbnail</string>
+    <string name="page_sheet_message_add_thumbnail_failed">Error occurred while processing thumbnail</string>
+    <string name="page_sheet_message_add_image_failed">Error occurred while processing image</string>
+    <string name="page_sheet_die_roll_title">Roll</string>
+    <string name="page_sheet_roll_initative_title">Initative</string>
+    <string name="page_sheet_roll_bab_title">BAB</string>
+    <string name="page_sheet_roll_cmb_title">CMB/Grapple</string>
+    <string name="page_sheet_roll_cmd_title">CMD</string>
+
+    <!-- CharacterListActivity -->
+    <string name="character_list_title">Character List</string>
+    <string name="character_list_delete">Delete</string>
+    <string name="character_list_menu_new_character">Create Character</string>
+    <string name="character_list_menu_about">Manual</string>
+    <string name="character_list_menu_switch_game_system">Switch Game System</string>
+    <string name="character_list_menu_administration">Administration</string>
+    <string name="character_list_menu_preferences">Preferences</string>
+    <string name="character_list_menu_export">Export</string>
+    <string name="character_list_menu_import">Import</string>
+    <string name="character_list_menu_backup_restore">Backup &amp; Restore</string>
+    <string name="character_list_wait_load_gamesystem">Load Gamesystem</string>
+    <string name="character_list_wait_load_dndv35">Load DnD v.3.5</string>
+    <string name="character_list_wait_load_pathfinder">Load Pathfinder</string>
+    <string name="character_list_wait_create_dndv35_database">Create DnD v.3.5 Database</string>
+    <string name="character_list_wait_create_pathfinder_database">Create Pathfinder Database</string>
+    <string name="character_list_image_hint">Thumbnail of character</string>
+
+    <!-- CombatEditActivity -->
+    <string name="combat_title">Combat</string>
+    <string name="combat_hitpoints_label">HP:</string>
+    <string name="combat_max_hitpoints_label">max. HP:</string>
+    <string name="combat_armorclass_label">AC:</string>
+    <string name="combat_speed_label">Speed:</string>
+    <string name="combat_initiative_abbreviation_label">INI:</string>
+    <string name="combat_baseattackbonus_label">BAB:</string>
+    <string name="combat_cmb_label">CMB/Grapple:</string>
+    <string name="combat_cmd_label">CMD:</string>
+    <string name="combat_initiative_label">Initiative:</string>
+    <string name="create_title">Create Character</string>
+    <string name="create_name_label">Name</string>
+    <string name="create_player_label">Player</string>
+    <string name="create_race_label">Race</string>
+    <string name="create_sex_label">Sex</string>
+    <string name="create_alignment_label">Align</string>
+    <string name="create_class_label">Class</string>
+    <string name="create_button_label">Create</string>
+
+    <!-- SkillPageFragment -->
+    <string name="page_skill_title">Skills</string>
+    <string name="skill_list_max_ranks">Max Ranks</string>
+    <string name="skill_list_skill_points">Skill points</string>
+    <string name="skill_list_skill_points_of">of</string>
+    <string name="skill_list_tab_title_all">All</string>
+    <string name="skill_list_tab_title_fav">Favorites</string>
+    <string name="skill_list_tab_title_trained">Trained</string>
+    <string name="skill_list_add_to_favorites">Add to favorites</string>
+    <string name="skill_list_remove_from_favorites">Remove from favorites</string>
+    <string name="skill_list_rank">Rank</string>
+    <string name="skill_list_mod">Misc Mod</string>
+    <string name="skill_list_menu_edit_skills">Edit skills</string>
+
+    <!-- SkillEditActivity -->
+    <string name="skill_edit_rank">Rank</string>
+    <string name="skill_edit_modifier">Misc Modifier</string>
+
+    <!-- FeatPageFragment -->
+    <string name="page_feat_title">Feats</string>
+    <string name="feat_list_show_all_feats">Show all feats</string>
+    <string name="feat_list_preposition">of</string>
+    <string name="feat_list_feats">feats</string>
+    <string name="feat_list_add_feat">Add to character</string>
+    <string name="feat_list_remove_feat">Remove from character</string>
+    <string name="feat_list_edit_feat">Edit category</string>
+    <string name="feat_list_fighter_bonus">Fighter Bonus Feat</string>
+    <string name="feat_list_multiple">Multiple times, do not stack</string>
+    <string name="feat_list_stack">Multiple times, do stack</string>
+    <string name="feat_list_benefit"><b><u>Benefit:</u></b></string>
+    <string name="feat_list_prerequisit"><b><u>Prerequisit:</u></b></string>
+
+    <!-- FeatEditActivity -->
+    <string name="feat_edit_category_label">Category:</string>
+
+    <!-- MoneyEditActivity -->
+    <string name="money_title">Money</string>
+    <string name="money_platinum_label">Platinum:</string>
+    <string name="money_gold_label">Gold:</string>
+    <string name="money_silver_label">Silver:</string>
+    <string name="money_copper_label">Copper:</string>
+
+    <!-- WeaponAttackPageFragment -->
+    <string name="page_attack_title">Attacks</string>
+    <string name="weaponattack_list_attack_roll">Attack Roll</string>
+    <string name="weaponattack_list_critical_subtitle">Critical Confirmation Roll:</string>
+    <string name="weaponattack_list_fumble_subtitle">You fumbled!!!</string>
+    <string name="weaponattack_list_damage_roll">Damage Roll</string>
+    <string name="weaponattack_list_critical_roll">Critical Roll</string>
+    <string name="weaponattack_list_create">Create Attack</string>
+    <string name="weaponattack_list_delete">Delete Attack</string>
+
+    <!-- WeaponAttackActivity -->
+    <string name="weaponattack_name">Name</string>
+    <string name="weaponattack_weapon">Weapon</string>
+    <string name="weaponattack_attackwield">Wield</string>
+    <string name="weaponattack_attack_bonus_modifier">Misc Attack Bonus</string>
+    <string name="weaponattack_damage_bonus_modifier">Misc Damage Bonus</string>
+    <string name="weaponattack_ammo">Ammunition</string>
+    <string name="weaponattack_desc">Description</string>
+
+    <!-- WeaponAttackCreateActivity -->
+    <string name="weaponattack_create_title">Create Attack</string>
+
+    <!-- WeaponAttackEditActivity -->
+    <string name="weaponattack_edit_title">Edit Attack</string>
+
+    <!-- AdministrationListActivity -->
+    <string name="administration_list_menu_create">Create</string>
+
+    <!-- SkillAdministrationListActivity -->
+    <string name="skill_administration_list_title">Skill Administration</string>
+    <string name="skill_administration_list_context_menu_delete_skill">Delete Skill</string>
+
+    <!-- SkillAdministrationActivity -->
+    <string name="skill_administration_name_label">Name</string>
+    <string name="skill_administration_description_label">Description</string>
+    <string name="skill_administration_untrained_label">Untrained</string>
+    <string name="skill_administration_attribute_label">Attribute</string>
+
+    <!-- SkillAdministrationCreateActivity -->
+    <string name="skill_administration_create_title">Create Skill</string>
+
+    <!-- SkillAdministrationEditActivity -->
+    <string name="skill_administration_edit_title">Edit Skill</string>
+
+    <!-- FeatAdministrationListActivity -->
+    <string name="feat_administration_list_title">Feat Administration</string>
+    <string name="feat_administration_list_context_menu_delete_feat">Delete Feat</string>
+
+    <!-- FeatAdministrationActivity -->
+    <string name="feat_administration_name_label">Name</string>
+    <string name="feat_administration_type">Type</string>
+    <string name="feat_administration_benefit_label">Benefit</string>
+    <string name="feat_administration_prerequisit_label">Prerequisit</string>
+    <string name="feat_administration_spellslot_label">Additional spell levels</string>
+    <string name="feat_administration_fighter_bonus">Fighter Bonus Feat</string>
+    <string name="feat_administration_multiple">Multiple times, do not stack</string>
+    <string name="feat_administration_stack">Multiple times, do stack</string>
+
+    <!-- FeatAdministrationCreateActivity -->
+    <string name="feat_administration_create_title">Create Feat</string>
+
+    <!-- FeatAdministrationEditActivity -->
+    <string name="feat_administration_edit_title">Edit Feat</string>
+
+    <!-- AdministrationMenuActivity -->
+    <string name="administration_menu_title">Administration</string>
+    <string name="administration_menu_race_button">Races</string>
+    <string name="administration_menu_character_class_button">Character Classes</string>
+    <string name="administration_menu_ability_button">Abilities</string>
+    <string name="administration_menu_skill_button">Skills</string>
+    <string name="administration_menu_feat_button">Feats</string>
+    <string name="administration_menu_weapon_button">Weapons</string>
+    <string name="administration_menu_armor_button">Armor</string>
+    <string name="administration_menu_good_button">Goods</string>
+    <string name="administration_menu_spelllist_button">Spell Lists</string>
+    <string name="administration_menu_spell_button">Spells</string>
+
+    <!-- CharacterClassAdministrationListActivity -->
+    <string name="character_class_administration_list_title">Character Class Administration</string>
+
+    <!-- CharacterClassAdministrationActivity -->
+    <string name="character_class_administration_name_label">Name</string>
+    <string name="character_class_administration_alignments_label">Alignments</string>
+    <string name="character_class_administration_hitdie_label">Hit Die</string>
+    <string name="character_class_administration_baseattackbonus_label">Base Attack Bonus</string>
+    <string name="character_class_administration_save_label">High Saves</string>
+    <string name="character_class_administration_abilities_label">Abilities</string>
+    <string name="character_class_administration_skillpoints_label">Skill Points/Level</string>
+    <string name="character_class_administration_skills_label">Class Skills</string>
+
+    <!-- CharacterClassAdministrationCreateActivity -->
+    <string name="character_class_administration_create_title">Create Character Class</string>
+
+    <!-- CharacterClassAdministrationEditActivity -->
+    <string name="character_class_administration_edit_title">Edit Character Class</string>
+
+    <!-- ClassAdministrationAbilityListActivity -->
+    <string name="class_administration_ability_list_title">Class Abilities</string>
+    <string name="class_administration_ability_list_context_menu_remove_class_ability">Remove ability</string>
+
+    <!-- ClassAdministrationAbilityEditActivity -->
+    <string name="class_administration_ability_edit_title">Edit Class Ability</string>
+    <string name="class_administration_ability_edit_label_name">Name</string>
+    <string name="class_administration_ability_edit_label_level">Level</string>
+
+    <!-- EquipmentListActivity -->
+    <string name="page_equip_title">Equip</string>
+    <string name="tab_label_weapon">Weapons</string>
+    <string name="tab_label_armor">Armor</string>
+    <string name="tab_label_good">Goods</string>
+    <string name="equipment_list_load">Load</string>
+    <string name="equipment_list_show_magic">Magic Item</string>
+    <string name="equipment_list_menu_edit_weapons">Add/Remove Weapons</string>
+    <string name="equipment_list_menu_edit_armor">Add/Remove Armor</string>
+    <string name="equipment_list_menu_edit_goods">Add/Remove Goods</string>
+    <string name="equipment_list_armor_bonus">AC:</string>
+
+    <!-- ItemEditActivity -->
+    <string name="item_edit_magic_label">Magic Item</string>
+
+    <!-- ItemAdministrationActivity -->
+    <string name="item_administration_name">Name</string>
+    <string name="item_administration_type">Type</string>
+    <string name="item_administration_weight">Weight</string>
+    <string name="item_administration_cost">Cost</string>
+    <string name="item_administration_quality_type">Quality</string>
+    <string name="item_administration_desc">Description</string>
+
+    <!-- ItemAdministrationListActivity -->
+    <string name="item_administration_list_magic">Magic Item</string>
+
+    <!-- WeaponAdministrationListActivity -->
+    <string name="weapon_administration_list_title">Weapon Administration</string>
+
+    <!-- WeaponAdministrationActivity -->
+    <string name="weapon_administration_enhancement_bonus">Enh. Bonus</string>
+    <string name="weapon_administration_damage">Damage</string>
+    <string name="weapon_administration_critical">Critical</string>
+    <string name="weapon_administration_critical_separator">/x</string>
+    <string name="weapon_administration_combat_type">Combat</string>
+    <string name="weapon_administration_weapon_encumbrance">Encumbrance</string>
+    <string name="weapon_administration_weapon_category">Category</string>
+    <string name="weapon_administration_weapon_family">Family</string>
+    <string name="weapon_administration_range_increment">Range</string>
+
+    <!-- WeaponAdministrationCreateActivity -->
+    <string name="weapon_administration_create_title">Create Weapon</string>
+
+    <!-- WeaponAdministrationEditActivity -->
+    <string name="weapon_administration_edit_title">Edit Weapon</string>
+
+    <!-- ArmorAdministrationListActivity -->
+    <string name="armor_administration_list_title">Armor Administration</string>
+
+    <!-- ArmorAdministrationActivity -->
+    <string name="armor_administration_bonus">Bonus</string>
+    <string name="armor_administration_penalty">Penalty</string>
+
+    <!-- ArmorAdministrationCreateActivity -->
+    <string name="armor_administration_create_title">Create Armor</string>
+
+    <!-- ArmorAdministrationEditActivity -->
+    <string name="armor_administration_edit_title">Edit Armor</string>
+
+    <!-- GoodAdministrationListActivity -->
+    <string name="good_administration_list_title">Good Administration</string>
+
+    <!-- GoodAdministrationCreateActivity -->
+    <string name="good_administration_create_title">Create Good</string>
+
+    <!-- GoodAdministrationEditActivity -->
+    <string name="good_administration_edit_title">Edit Good</string>
+
+    <!-- AbilityAdministrationListActivity -->
+    <string name="ability_administration_list_title">Ability Administration</string>
+
+    <!-- AbilityAdministrationCreateActivity -->
+    <string name="ability_administration_create_title">Create Ability</string>
+    <string name="ability_administration_create_class">Class</string>
+    <string name="ability_administration_create_explanation">Explanation</string>
+    <string name="ability_administration_create_class_description">Create an ability with description only.</string>
+    <string name="ability_administration_create_class_extrafeats">Create an ability to add extra feat points.</string>
+    <string name="ability_administration_create_class_extraskillpoints">Create an ability to add extra skill points.</string>
+    <string name="ability_administration_create_class_splelllist">Create an ability to assign a spell list to it.</string>
+
+    <!-- AbilityAdministrationEditActivity -->
+    <string name="ability_administration_edit_title_description">Edit Description Ability</string>
+    <string name="ability_administration_edit_title_extrafeats">Edit Extra Feats Ability</string>
+    <string name="ability_administration_edit_title_extraskillpoints">Edit Extra Skill Points Ability</string>
+    <string name="ability_administration_edit_title_spelllist">Edit Spell List Ability</string>
+    <string name="ability_administration_edit_name">Name</string>
+    <string name="ability_administration_edit_type">Type</string>
+    <string name="ability_administration_edit_desc">Description</string>
+    <string name="ability_administration_edit_extrafeats">Extra Feats</string>
+    <string name="ability_administration_edit_extraskillpoints">Skill Points</string>
+    <string name="ability_administration_edit_spelllist">Spell List</string>
+    <string name="ability_administration_edit_attribute">Attribute</string>
+    <string name="ability_administration_edit_castingtype">Casting Type</string>
+    <string name="ability_administration_edit_spellsource">Spell Source</string>
+    <string name="ability_administration_edit_school">School</string>
+    <string name="ability_administration_edit_known_spells_table">Known Spells</string>
+    <string name="ability_administration_edit_spells_per_day_table">Spells Per Day</string>
+    <string name="ability_administration_edit_any_school">Any school</string>
+
+    <!-- RaceAdministrationListActivity -->
+    <string name="race_administration_list_title">Race Administration</string>
+
+    <!-- RaceAdministrationActivity -->
+    <string name="race_administration_name">Name</string>
+    <string name="race_administration_size">Size</string>
+    <string name="race_administration_speed">Speed</string>
+    <string name="race_administration_class">Class</string>
+    <string name="race_administration_abilities">Abilities</string>
+
+    <!-- RaceAdministrationCreateActivity -->
+    <string name="race_administration_create_title">Create Race</string>
+
+    <!-- RaceAdministrationEditActivity -->
+    <string name="race_administration_edit_title">Edit Race</string>
+
+    <!-- RaceAdministrationAbilityListActivity -->
+    <string name="race_administration_ability_list_title">Race Abilities</string>
+    <string name="race_administration_ability_list_context_menu_remove_ability">Remove ability</string>
+
+    <!-- RaceAbilityPageFragment -->
+    <string name="page_race_ability_title">Race Abilities</string>
+    <string name="race_ability_list_name">Name</string>
+    <string name="race_ability_list_favorite_character_class">Class</string>
+    <string name="race_ability_list_size">Size</string>
+    <string name="race_ability_list_reach">Reach</string>
+    <string name="race_ability_list_space">Space</string>
+    <string name="race_ability_list_speed">Speed</string>
+    <string name="race_ability_any_character_class">Any</string>
+
+    <!-- NotePageFragment -->
+    <string name="page_note_title">Notes</string>
+    <string name="note_list_menu_create_note">Create Note</string>
+    <string name="note_list_context_menu_delete_note">Delete Note</string>
+
+    <!-- ClassAbilityPageFragment -->
+    <string name="page_class_ability_title">Class Abilities</string>
+    <string name="character_class_ability_list_show_all_abilities">Show all abilities</string>
+    <string name="character_class_ability_class">Class</string>
+    <string name="character_class_ability_level">Level</string>
+
+    <!-- AboutActivit -->
+    <string name="about_title">Manual</string>
+    <string name="about_manual">Manual: http://www.d20CharacterSheet.com/manual.html</string>
+    <string name="about_homepage">Homepage: http://www.d20CharacterSheet.com</string>
+    <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
+    <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5</string>
+    <string name="about_ogl">Open Gaming Licence</string>
+    <string name="about_copyright">Copyright &#169; 2009&#8211;2015 Torsten Wiederkehr\nAll rights reserved</string>
+    <string name="about_image_hint">Icon of application</string>
+
+    <!-- OpenGamingLicenceActivity -->
+    <string name="ogl_title">Open Gaming Licence</string>
+    <string name="ogl_licence"><b>Open Game License Version 1.0a</b>\nThe following text is the property of Wizards of the Coast, Inc. and is Copyright 2000 Wizards of the Coast, Inc (\"Wizards\"). All Rights Reserved.\n\n<b>1. Definitions</b>:\n\n(a) \"Contributors\" means the copyright and/or trademark owners who have contributed Open Game Content;\n\n(b) \"Derivative Material\" means copyrighted material including derivative works and translations (including into other computer languages), potation, modification, correction, addition, extension, upgrade, improvement, compilation, abridgment or other form in which an existing work may be recast, transformed or adapted;\n\n( c ) \"Distribute\" means to reproduce, license, rent, lease, sell, broadcast, publicly display, transmit or otherwise distribute;\n\n(d) \"Open Game Content\" means the game mechanic and includes the methods, procedures, processes and routines to the extent such content does not embody the Product Identity and is an enhancement over the prior art and any additional content clearly identified as Open Game Content by the Contributor, and means any work covered by this License, including translations and derivative works under copyright law, but specifically excludes Product Identity.\n\n(e) \"Product Identity\" means product and product line names, logos and identifying marks including trade dress; artifacts, creatures, characters, stories, storylines, plots, thematic elements, dialogue, incidents, language, artwork, symbols, designs, depictions, likenesses, formats, poses, concepts, themes and graphic, photographic and other visual or audio representations; names and descriptions of characters, spells, enchantments, personalities, teams, personas, likenesses and special abilities; places, locations, environments, creatures, equipment, magical or supernatural abilities or effects, logos, symbols, or graphic designs; and any other trademark or registered trademark clearly identified as Product identity by the owner of the Product Identity, and which specifically excludes the Open Game Content;\n\n(f) \"Trademark\" means the logos, names, mark, sign, motto, designs that are used by a Contributor to identify itself or its products or the associated products contributed to the Open Game License by the Contributor\n\n(g) \"Use\", \"Used\" or \"Using\" means to use, Distribute, copy, edit, format, modify, translate and otherwise create Derivative Material of Open Game Content.\n\n(h) \"You\" or \"Your\" means the licensee in terms of this agreement.\n\n<b>2. The License</b>: This License applies to any Open Game Content that contains a notice indicating that the Open Game Content may only be Used under and in terms of this License. You must affix such a notice to any Open Game Content that you Use. No terms may be added to or subtracted from this License except as described by the License itself. No other terms or conditions may be applied to any Open Game Content distributed using this License.\n\n<b>3. Offer and Acceptance</b>: By Using the Open Game Content You indicate Your acceptance of the terms of this License.\n\n<b>4. Grant and Consideration</b>: In consideration for agreeing to use this License, the Contributors grant You a perpetual, worldwide, royaltyfree, non-exclusive license with the exact terms of this License to Use, the Open Game Content.\n\n<b>5. Representation of Authority to Contribute</b>: If You are contributing original material as Open Game Content, You represent that Your Contributions are Your original creation and/or You have sufficient rights to grant the rights conveyed by this License.\n\n<b>6. Notice of License Copyright</b>: You must update the COPYRIGHT NOTICE portion of this License to include the exact text of the COPYRIGHT NOTICE of any Open Game Content You are copying, modifying or distributing, and You must add the title, the copyright date, and the copyright holder’s name to the COPYRIGHT NOTICE of any original Open Game Content you Distribute.\n\n<b>7. Use of Product Identity</b>: You agree not to Use any Product Identity, including as an indication as to compatibility, except as expressly licensed in another, independent Agreement with the owner of each element of that Product Identity. You agree not to indicate compatibility or co-adaptability with any Trademark or Registered Trademark in conjunction with a work containing Open Game Content except as expressly licensed in another, independent Agreement with the owner of such Trademark or Registered Trademark. The use of any Product Identity in Open Game Content does not constitute a challenge to the ownership of that Product Identity. The owner of any Product Identity used in Open Game Content shall retain all rights, title and interest in and to that Product Identity.\n\n<b>8. Identification</b>: If you distribute Open Game Content You must clearly indicate which portions of the work that you are distributing are Open Game Content.\n\n<b>9. Updating the License</b>: Wizards or its designated Agents may publish updated versions of this License. You may use any authorized version of this License to copy, modify and distribute any Open Game Content originally distributed under any version of this License.\n\n<b>10. Copy of this License</b>: You MUST include a copy of this License with every copy of the Open Game Content You distribute.\n\n<b>11. Use of Contributor Credits</b>: You may not market or advertise the Open Game Content using the name of any Contributor unless You have written permission from the Contributor to do so.\n\n<b>12. Inability to Comply</b>: If it is impossible for You to comply with any of the terms of this License with respect to some or all of the Open Game Content due to statute, judicial order, or governmental regulation then You may not Use any Open Game Material so affected.\n\n<b>13. Termination</b>: This License will terminate automatically if You fail to comply with all terms herein and fail to cure such breach within 30 days of becoming aware of the breach. All sublicenses shall survive the termination of this License.\n\n<b>14. Reformation</b>: If any provision of this License is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable.\n\n<b>15. COPYRIGHT NOTICE</b>\n- Open Game License v 1.0 Copyright 2000, Wizards of the Coast, Inc.\n\n- System Reference Document. Copyright 2000, Wizards of the Coast, Inc.; Authors Jonathan Tweet, Monte Cook, Skip Williams, based on material by E. Gary Gygax and Dave Arneson.\n\n- Pathfinder RPG Reference Document. Copyright 2011, Paizo Publishing, LLC; Author: Paizo Publishing, LLC.\n\n- Pathfinder RPG Core Rulebook. Copyright 2009, Paizo Publishing, LLC; Author: Jason Bulmahn, based on material by Jonathan Tweet, Monte Cook, and Skip Williams.\n\n- Paizo Spells Database. Copyright 2011 Mike Chopswil, www.d20pfsrd\n\n- Pathfinder Roleplaying Game Advanced Player\'s Guide. Copyright 2010, Paizo Publishing, LLC; Author: Jason Bulmahnn\n\n\n</string>
+
+    <!-- AbilitySearchActivity -->
+    <string name="ability_search_title">Search Ability</string>
+
+    <!-- SpellSearchActivity -->
+    <string name="spell_search_title">Search Spell</string>
+
+    <!-- PreferencesActivity -->
+    <string name="preferences_title">Preferences</string>
+    <string name="preferences_background_label">Background</string>
+    <string name="preferences_background_color">Background color</string>
+    <string name="preferences_background_image">Character image</string>
+
+    <!-- BackupRestoreActivity -->
+    <string name="backup_restore_title">Backup &amp; Restore</string>
+    <string name="backup_restore_backup_to_cloud">Backup to Cloud</string>
+    <string name="backup_restore_backup_directory">Backup Directory:</string>
+    <string name="backup_restore_restore_directory">Restore Directory:</string>
+    <string name="backup_restore_backup_to_file">Backup to File</string>
+    <string name="backup_restore_message_select_checkbox">Please select a game system to backup.</string>
+    <string name="backup_restore_message_backup_failure">Backup failed</string>
+    <string name="backup_restore_message_backup_succeed">Backup succeeded</string>
+    <string name="backup_restore_restore_from_file">Touch file to restore</string>
+    <string name="backup_restore_message_restore_failure">Restore failed</string>
+    <string name="backup_restore_message_backup_to_cloud">Performing Backup to Cloud</string>
+    <string name="backup_restore_dialog_restore_button">Restore</string>
+    <string name="backup_restore_dialog_cancel_button">Cancel</string>
+    <string name="backup_restore_dialog_title">Restore from File</string>
+
+    <string-array name="background_color_array">
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Cyan</item>
+        <item>Darkgray</item>
+        <item>Gray</item>
+        <item>Green</item>
+        <item>Lightgray</item>
+        <item>Magenta</item>
+        <item>Red</item>
+        <item>White</item>
+        <item>Yellow</item>
+    </string-array>
+
+    <string name="preferences_game_system_label">Game System</string>
+
+    <string-array name="game_system_array">
+        <item>DnD v.3.5</item>
+        <item>Pathfinder</item>
+    </string-array>
+
+    <!-- KnownSpellPageFragment -->
+    <string name="page_known_spell_title">Known Spells</string>
+    <string name="page_known_spell_menu_show_all">Show All</string>
+    <string name="page_known_spell_all">All</string>
+    <string name="page_known_spell_none">None</string>
+
+    <!-- SpellActivity -->
+    <string name="spell_school">School</string>
+    <string name="spell_component">Components</string>
+    <string name="spell_casting_time">Casting Time</string>
+    <string name="spell_effect">Effect</string>
+    <string name="spell_duraction">Duration</string>
+    <string name="spell_saving_throw">Saving Throw</string>
+    <string name="spell_spell_resistance">Spell Resistance</string>
+    <string name="spell_description">Description</string>
+    <string name="spell_mat_component">Material Component</string>
+    <string name="spell_focus">Focus</string>
+
+    <!-- SpellSlotPageFragment -->
+    <string name="page_spell_slot_title">Spell Slots</string>
+    <string name="page_spell_slot_show_description">Show Description</string>
+    <string name="page_spell_slot_menu_rest">Rest</string>
+    <string name="page_spell_slot_toast_resting">Resting&#8230;</string>
+
+    <!-- SpellSlotActivity -->
+    <string name="spellslot_message_error_to_many_metamagicfeats">You selected to many metamagic feats</string>
+
+    <!-- ExportMenuActivity -->
+    <string name="export_menu_title">Export</string>
+    <string name="export_menu_character_button">Export Characters</string>
+    <string name="export_menu_equipment_button">Export Equipment</string>
+
+    <!-- AbstraceExportActivity -->
+    <string name="export_export_directory">Export Directory:</string>
+    <string name="export_export_button">Export</string>
+    <string name="export_message_export_succeed">Export succeeded</string>
+    <string name="export_message_export_failed">Export failed</string>
+
+    <!-- ExportCharacterActivity -->
+    <string name="export_character_title">Export Characters</string>
+    <string name="export_character_message_select_character">Please select a character to export.</string>
+
+    <!-- ExportEquipmentActivity -->
+    <string name="export_equipment_title">Export Equipment</string>
+    <string name="export_equipment_message_select_equipment">Please select a weapon, armor or good to export.</string>
+
+    <!-- ImportActivity -->
+    <string name="import_title">Import Characters</string>
+    <string name="import_import_directory">Import Directory:</string>
+    <string name="import_import_from_file">Touch file to import</string>
+    <string name="import_dialog_title">Import from file</string>
+    <string name="import_dialog_import_button">Import</string>
+    <string name="import_dialog_cancel_button">Cancel</string>
+    <string name="import_dialog_message">Import from file</string>
+    <string name="import_message_import_failure">Failed to import characters</string>
+    <string name="importmessage_import_success">successfully imported.</string>
+    <string name="importmessage_import_failure">failed to import.</string>
+
+    <!-- SpelllistAdministrationListActivity -->
+    <string name="spelllist_administration_list_title">Spell List Administration</string>
+
+    <!-- SpellistAdministrationActivity -->
+    <string name="spelllist_administration_name">Name</string>
+    <string name="spelllist_administration_short_name">Short Name</string>
+    <string name="spelllist_administration_domain">Domain</string>
+    <string name="spelllist_administration_min_level">Min. Level</string>
+    <string name="spelllist_administration_max_level">Max. Level</string>
+    <string name="spelllist_administration_add_spell">Add Spell</string>
+    <string name="spelllist_administration_remove_spell">Remove Spell</string>
+
+    <!-- SpelllistAdministrationCreateActivity -->
+    <string name="spelllist_administration_create_title">Create Spell List</string>
+
+    <!-- SpelllistAdministrationCreateActivity -->
+    <string name="spelllist_administration_edit_title">Edit Spell List</string>
+
+    <!-- SpellAdministrationActivity -->
+    <string name="spell_administration_name">Name</string>
+    <string name="spell_administration_school">School</string>
+    <string name="spell_administration_subschool">Subschool</string>
+    <string name="spell_administration_descriptor">Descriptor</string>
+    <string name="spell_administration_descriptor_acid">Acid</string>
+    <string name="spell_administration_descriptor_air">Air</string>
+    <string name="spell_administration_descriptor_chaotic">Chaotic</string>
+    <string name="spell_administration_descriptor_cold">Cold</string>
+    <string name="spell_administration_descriptor_darkness">Darkness</string>
+    <string name="spell_administration_descriptor_death">Death</string>
+    <string name="spell_administration_descriptor_earth">Earth</string>
+    <string name="spell_administration_descriptor_electricity">Electricity</string>
+    <string name="spell_administration_descriptor_evil">Evil</string>
+    <string name="spell_administration_descriptor_fear">Fear</string>
+    <string name="spell_administration_descriptor_fire">Fire</string>
+    <string name="spell_administration_descriptor_force">Force</string>
+    <string name="spell_administration_descriptor_good">Good</string>
+    <string name="spell_administration_descriptor_languagedependent">Language-Dependent</string>
+    <string name="spell_administration_descriptor_lawful">Lawful</string>
+    <string name="spell_administration_descriptor_light">Light</string>
+    <string name="spell_administration_descriptor_mindaffecting">Mind-Affecting</string>
+    <string name="spell_administration_descriptor_sonic">Sonic</string>
+    <string name="spell_administration_descriptor_water">Water</string>
+    <string name="spell_administration_component">Component</string>
+    <string name="spell_administration_component_verbal">Verbal</string>
+    <string name="spell_administration_component_somatic">Somatic</string>
+    <string name="spell_administration_component_material">Material</string>
+    <string name="spell_administration_component_focus">Focus</string>
+    <string name="spell_administration_component_divinefocus">Divine Focus</string>
+    <string name="spell_administration_component_xpcost">XP Cost</string>
+    <string name="spell_administration_castingtime">Casting Time</string>
+    <string name="spell_administration_range">Range</string>
+    <string name="spell_administration_effect">Effect</string>
+    <string name="spell_administration_duration">Duration</string>
+    <string name="spell_administration_savingthrow">Saving Throw</string>
+    <string name="spell_administration_spellresistance">Spell Resist.</string>
+    <string name="spell_administration_materialcomponent">Material Comp.</string>
+    <string name="spell_administration_focus">Focus</string>
+    <string name="spell_administration_shortdescription">Short Desc.</string>
+    <string name="spell_administration_description">Description</string>
+
+    <!-- SpellAdministrationListActivity -->
+    <string name="spell_administration_list_title">Spell Administration</string>
+
+    <!-- SpellAdministrationCreateActivity -->
+    <string name="spell_administration_create_title">Create Spell</string>
+
+    <!-- SpellAdministrationEditActivity -->
+    <string name="spell_administration_edit_title">Edit Spell</string>
+
+    <!-- SpellAdministrationEditActivity -->
+    <string name="spellslot_title">Spell Slot</string>
+    <string name="spellslot_abilities">Abilities</string>
+    <string name="spellslot_spell">Spell</string>
+
+    <!-- COMMON -->
+    <string name="button_ok">OK</string>
+    <string name="error_dialog_title">Error</string>
+    <string name="info_dialog_title">Information</string>
+    <string name="unit_weight">Pound</string>
+    <string name="unit_weight_abbreviation">lb.</string>
+    <string name="unit_distance_short">Feet</string>
+    <string name="toast_saving">Saving</string>
+    <string name="masterwork">, masterwork</string>
+    <string name="backup_date_pattern">yyyyMMdd_kkmm</string>
+
+    <!-- CURRENCY -->
+    <string name="currency_gold_abbreviation">gp</string>
+
+    <!-- DATE AND TIME -->
+    <string name="date_and_time_format">MM/dd/yyyy HH:mm</string>
+
+    <!-- SEX -->
+    <string name="sex_male">Male</string>
+    <string name="sex_female">Female</string>
+
+    <!-- ALIGNMENTS -->
+    <string name="align_lawful_good">Lawful Good</string>
+    <string name="align_neutral_good">Neutral Good</string>
+    <string name="align_chaotic_good">Chaotic Good</string>
+    <string name="align_lawful_neutral">Lawful Neutral</string>
+    <string name="align_neutral">Neutral</string>
+    <string name="align_chaotic_neutal">Chaotic Neutral</string>
+    <string name="align_lawful_evil">Lawful Evil</string>
+    <string name="align_neutral_evil">Neutral Evil</string>
+    <string name="align_chaotic_evil">Chaotic Evil</string>
+
+    <!-- DICE -->
+    <string name="die_d2">D2</string>
+    <string name="die_d3">D3</string>
+    <string name="die_d4">D4</string>
+    <string name="die_d6">D6</string>
+    <string name="die_d8">D8</string>
+    <string name="die_d10">D10</string>
+    <string name="die_d12">D12</string>
+    <string name="die_d20">D20</string>
+    <string name="die_d100">D100</string>
+
+    <!-- BASE ATTACK BONUS -->
+    <string name="baseattackbonus_poor">Poor</string>
+    <string name="baseattackbonus_average">Average</string>
+    <string name="baseattackbonus_good">Good</string>
+
+    <!-- SAVES -->
+    <string name="save_fortitude">Fortitude</string>
+    <string name="save_reflex">Reflex</string>
+    <string name="save_will">Will</string>
+
+    <!-- RULE ERRORS -->
+    <string name="attribute_value_not_in_range">Attribute value must be between 1 and 99.</string>
+    <string name="experience_not_in_range">Experience points does not match character level.</string>
+    <string name="zero_or_negative_class_level">Zero or negative class level not allowed.</string>
+    <string name="negative_experience_points">Negative experience points not allowed.</string>
+    <string name="none_class">One class is required.</string>
+    <string name="negative_skill_rank">Negative ranks are not allowed.</string>
+    <string name="max_skill_rank_exceeded">Max skill rank exceeded.</string>
+    <string name="invalid_critical_hit_value">Critical hit value must be between 0 and 20.</string>
+
+    <!-- FEAT TYPES -->
+    <string name="feat_type_general">General</string>
+    <string name="feat_type_item_creation">Item Creation</string>
+    <string name="feat_type_metamagic">Metamagic</string>
+    <string name="feat_type_teamwork">Teamwork</string>
+
+    <!-- WEAPON TYPES -->
+    <string name="weapon_type_simple">Simple Weapon</string>
+    <string name="weapon_type_martial">Martial Weapon</string>
+    <string name="weapon_type_exotic">Exotic Weapon</string>
+    <string name="weapon_type_ammo">Ammunition</string>
+
+    <!-- ARMOR TYPES -->
+    <string name="armor_type_light">Light Armor</string>
+    <string name="armor_type_medium">Medium Armor</string>
+    <string name="armor_type_heavy">Heavy Armor</string>
+    <string name="armor_type_shield">Shield</string>
+
+    <!-- GOOD TYPES -->
+    <string name="good_type_adventuring_gear">Adventuring Gear</string>
+    <string name="good_type_special_substance">Special Substance</string>
+    <string name="good_type_special_item">Special Item</string>
+    <string name="good_type_tool_kit">Tool Kit</string>
+    <string name="good_type_skill_kit">Skill Kit</string>
+    <string name="good_type_clothing">Clothing</string>
+    <string name="good_type_mount">Mount</string>
+    <string name="good_type_mount_gear">Mount Gear</string>
+    <string name="good_type_entertainment">Entertainment</string>
+
+    <!-- SIZE -->
+    <string name="size_fine">Fine</string>
+    <string name="size_diminutive">Diminutive</string>
+    <string name="size_tiny">Tiny</string>
+    <string name="size_small">Small</string>
+    <string name="size_medium">Medium</string>
+    <string name="size_large_tall">Large (tall)</string>
+    <string name="size_large_long">Large (long)</string>
+    <string name="size_huge_tall">Huge (tall)</string>
+    <string name="size_huge_long">Huge (long)</string>
+    <string name="size_gargantuan_tall">Gargantuan (tall)</string>
+    <string name="size_gargantuan_long">Gargantuan (long)</string>
+    <string name="size_colossal_tall">Colossal (tall)</string>
+    <string name="size_colossal_long">Colossal (long)</string>
+
+    <!-- ABILITY TYPES -->
+    <string name="ability_type_natural">Natural Ability</string>
+    <string name="ability_type_extraordinary">Extraordinary Ability</string>
+    <string name="ability_type_spell_like">Spell-Like Ability</string>
+    <string name="ability_type_supernatural">Supernatural Ability</string>
+
+    <!-- ABILITY CLASSES -->
+    <string name="ability_class_description">Description ability</string>
+    <string name="ability_class_extrafeats">Extra feats ability</string>
+    <string name="ability_class_extraskillpoints">Extra skill points ability</string>
+    <string name="ability_class_spelllist">Spell list ability</string>
+
+    <!-- QUALITY TYPES -->
+    <string name="quality_type_normal">Normal</string>
+    <string name="quality_type_masterwork">Masterwork</string>
+    <string name="quality_type_magic">Magical</string>
+
+    <!-- SPELL COMPONENTS -->
+    <string name="spell_component_verbal">V</string>
+    <string name="spell_component_somatic">S</string>
+    <string name="spell_component_material">M</string>
+    <string name="spell_component_focus">F</string>
+    <string name="spell_component_divine_focus">DF</string>
+    <string name="spell_component_xp_cost">XP</string>
+
+    <!-- SPELL SCHOOLS -->
+    <string name="spell_school_abjuration">Abjuration</string>
+    <string name="spell_school_conjuration">Conjuration</string>
+    <string name="spell_school_divination">Divination</string>
+    <string name="spell_school_enchantment">Enchantment</string>
+    <string name="spell_school_evocation">Evocation</string>
+    <string name="spell_school_illusion">Illusion</string>
+    <string name="spell_school_necormancy">Necromancy</string>
+    <string name="spell_school_transmuation">Transmutation</string>
+    <string name="spell_school_universal">Universal</string>
+
+    <!-- SPELL SCHOOLS -->
+    <string name="spell_school_abj">abj</string>
+    <string name="spell_school_con">con</string>
+    <string name="spell_school_div">div</string>
+    <string name="spell_school_enc">enc</string>
+    <string name="spell_school_evo">evo</string>
+    <string name="spell_school_ill">ill</string>
+    <string name="spell_school_nec">nec</string>
+    <string name="spell_school_tra">tra</string>
+    <string name="spell_school_uni">uni</string>
+
+    <!-- SPELL SUBSCHOOLS -->
+    <string name="spell_subschool_calling">Calling</string>
+    <string name="spell_subschool_charm">Charm</string>
+    <string name="spell_subschool_compulsion">Compulsion</string>
+    <string name="spell_subschool_creation">Creation</string>
+    <string name="spell_subschool_figment">Figment</string>
+    <string name="spell_subschool_glamer">Glamer</string>
+    <string name="spell_subschool_healing">Healing</string>
+    <string name="spell_subschool_none">None</string>
+    <string name="spell_subschool_pattern">Pattern</string>
+    <string name="spell_subschool_phantasm">Phantasm</string>
+    <string name="spell_subschool_polymorph">Polymorph</string>
+    <string name="spell_subschool_scrying">Scrying</string>
+    <string name="spell_subschool_shadow">Shadow</string>
+    <string name="spell_subschool_summoning">Summoning</string>
+    <string name="spell_subschool_teleportation">Teleportation</string>
+
+    <!-- SPELL DESCRIPTORS -->
+    <string name="spell_descriptor_acid">Acid</string>
+    <string name="spell_descriptor_air">Air</string>
+    <string name="spell_descriptor_chaotic">Chaotic</string>
+    <string name="spell_descriptor_cold">Cold</string>
+    <string name="spell_descriptor_darkness">Darkness</string>
+    <string name="spell_descriptor_death">Death</string>
+    <string name="spell_descriptor_earth">Earth</string>
+    <string name="spell_descriptor_electricity">Electricity</string>
+    <string name="spell_descriptor_evil">Evil</string>
+    <string name="spell_descriptor_fear">Fear</string>
+    <string name="spell_descriptor_fire">Fire</string>
+    <string name="spell_descriptor_force">Force</string>
+    <string name="spell_descriptor_good">Good</string>
+    <string name="spell_descriptor_languagedependent">Language-Dependent</string>
+    <string name="spell_descriptor_lawful">Lawful</string>
+    <string name="spell_descriptor_light">Light</string>
+    <string name="spell_descriptor_mindaffecting">Mind-Affecting</string>
+    <string name="spell_descriptor_none">None</string>
+    <string name="spell_descriptor_sonic">Sonic</string>
+    <string name="spell_descriptor_water">Water</string>
+
+    <!-- SPELL CASTING TIME -->
+    <string name="spell_castingtime_none">None</string>
+    <string name="spell_castingtime_onestandardaction">1 standard action</string>
+    <string name="spell_castingtime_onefreeaction">1 free action</string>
+    <string name="spell_castingtime_oneround">1 round</string>
+    <string name="spell_castingtime_oneminute">1 minute</string>
+    <string name="spell_castingtime_tenminutes">10 minutes</string>
+    <string name="spell_castingtime_onehour">1 hour</string>
+    <string name="spell_castingtime_oneimmediateaction">1 immediate action</string>
+    <string name="spell_castingtime_oneswiftaction">1 swift action</string>
+    <string name="spell_castingtime_specific">specific</string>
+
+    <!-- SPELL RANGE -->
+    <string name="spell_range_personal">Personal</string>
+    <string name="spell_range_touch">Touch</string>
+    <string name="spell_range_close">Close (25 ft. + 5 ft./2 levels)</string>
+    <string name="spell_range_medium">Medium (100 ft. + 10 ft./level)</string>
+    <string name="spell_range_long">Long (400 ft. + 40 ft./level)</string>
+    <string name="spell_range_specific">Specific</string>
+
+    <!-- SPELL RESISTANCE -->
+    <string name="spell_spellresistance_no">No</string>
+    <string name="spell_spellresistance_yes">Yes</string>
+    <string name="spell_spellresistance_yesharmless">Yes (harmless)</string>
+    <string name="spell_spellresistance_yesobject">Yes (object)</string>
+    <string name="spell_spellresistance_yesharmlessobject">Yes (harmless, object)</string>
+    <string name="spell_spellresistance_specific">Specific</string>
+    <string name="spell_spellresistance_none">None</string>
+
+    <!-- ATTACK WIELDS -->
+    <string name="attackwield_off_hand">Off-Hand</string>
+    <string name="attackwield_primary_hand">Primary-Hand</string>
+    <string name="attackwield_primary_hand_light_off_hand">Primary-Hand with light weapon in Off-Hand</string>
+    <string name="attackwield_one_hand">One-Handed</string>
+    <string name="attackwield_two_handed">Two-Handed</string>
+
+    <!-- COMBAT TYPES -->
+    <string name="combat_type_melee_weapon">Melee Weapon</string>
+    <string name="combat_type_ranged_weapon">Ranged Weapon</string>
+
+    <!-- WEAPON CATEGORIES -->
+    <string name="weapon_category_normal_weapon">Normal Weapon</string>
+    <string name="weapon_category_reach_weapon">Reach Weapon</string>
+    <string name="weapon_category_double_weapon">Double Weapon</string>
+    <string name="weapon_category_thrown_weapon">Thrown Weapon</string>
+    <string name="weapon_category_projectile_weapon">Projectile Weapon</string>
+    <string name="weapon_category_ammunition">Ammunition</string>
+
+    <!-- WEAPON ENCUMBRANCES -->
+    <string name="weapon_encumbrance_light_handed">Light Handed</string>
+    <string name="weapon_encumbrance_one_handed">One-Handed</string>
+    <string name="weapon_encumbrance_two_handed">Two-Handed</string>
+
+    <!-- CASTING TYPES -->
+    <string name="casting_type_sponanteous">Spontaneous</string>
+    <string name="casting_type_prepared">Prepared</string>
+
+    <!-- SPELL SOURCES -->
+    <string name="spell_source_divine">Divine</string>
+    <string name="spell_source_arcane">Arcane</string>
+
+    <!-- Release Notes -->
+    <string name="release_notes_heading">Release Notes</string>
+    <string name="release_notes_1_1_0">Release 1.1.0\n- Skills added\n\n</string>
+    <string name="release_notes_1_2_0">Release 1.2.0\n- Saves added\n\n</string>
+    <string name="release_notes_1_3_0">Release 1.3.0\n- Feats added\n\n</string>
+    <string name="release_notes_1_4_0">Release 1.4.0\n- Money added\n\n</string>
+    <string name="release_notes_1_5_0">Release 1.5.0\n- Skill administration added\n\n</string>
+    <string name="release_notes_1_6_0">Release 1.6.0\n- Feat administration added\n\n</string>
+    <string name="release_notes_1_7_0">Release 1.7.0\n- Prestige Classes added\n- Bug Fix. AC, Ini and BAB was not display for high level characters\n- Import/Export skills and delete all skills deactivated\n\n</string>
+    <string name="release_notes_1_8_0">Release 1.8.0\n- Character class administration added\n- Capitalize of first letters added\n- Performance of skill saving improved\n\n</string>
+    <string name="release_notes_1_9_0">Release 1.9.0\n- Equipment list with weapons, armor and goods added\n- Calculation of load added\n\n</string>
+    <string name="release_notes_1_10_0">Release 1.10.0\n- Magic weapons and armor added\n- Data on orientation change retained\n\n</string>
+    <string name="release_notes_1_11_0">Release 1.11.0\n- Weapon creation and edition added\n- FAQs and history added to homepage (see http://www.d20CharacterSheet.com)\n\n</string>
+    <string name="release_notes_1_11_1">Release 1.11.1\n- Bug Fix. Fixed bug occurred by expanding detail data of armor and goods\n\n</string>
+    <string name="release_notes_1_12_0">Release 1.12.0\n- Armor creation and edition added\n\n</string>
+    <string name="release_notes_1_12_1">Release 1.12.1\n- Bug Fix. Fixed bug occurred by adding images with Android 2.x\n\n</string>
+    <string name="release_notes_1_13_0">Release 1.13.0\n- Good creation and edition added\n\n</string>
+    <string name="release_notes_1_14_0">Release 1.14.0\n- Subraces added\n- Racial abilities added\n- Support large screens (Samsung Galagxy Tab)\n- Knowledge (locale) set as class skill for Rogue\n- Spelling fixed in German version\n- Wait anmimation while creating database and loading gamesystem added\n\n</string>
+    <string name="release_notes_1_15_0">Release 1.15.0\n- Custom races added\n- Custom abilities added\n- Counting feats added\n- Quick add and subtract of money, hit points and experience points added\n- Names of abilities extended\n\n</string>
+    <string name="release_notes_1_16_0">Release 1.16.0\n- Note section added\n- Support app installation on external storage media (sd-card)\n- Entering of max HP improved\n- Fixed typing error in racial abilities\n\n</string>
+    <string name="release_notes_1_17_0">Release 1.17.0\n- Items support masterwork\n- Last activity stays active if app is put in background\n\n</string>
+    <string name="release_notes_1_18_0">Release 1.18.0\n- Character class abilities added\n- Bug Fix. Fixed bug occurred by displaying character sheet with Android 3.0\n\n</string>
+    <string name="release_notes_1_19_0">Release 1.19.0\n- Class Abilities administration added\n- Reference description of skills added\n- Grapple score added\n\n</string>
+    <string name="release_notes_1_19_1">Release 1.19.1\n- Bug Fix. Fixed bug occurred by adding images on Motorola devices\n\n</string>
+    <string name="release_notes_1_20_0">Release 1.20.0\n- Choice between background image and color added\n- Administration of abilities simplified\n\n</string>
+    <string name="release_notes_1_21_0">Release 1.21.0\n- Spells added\n- Background image of different sizes supported\n\n</string>
+    <string name="release_notes_2_0_0">Release 2.0.0\n- Pathfinder support added\n- Bug Fix. Fixed missing money tab on tablets\n- Performance of masks to add and edit classes of character improved\n- German version removed\n\n</string>
+    <string name="release_notes_2_0_1">Release 2.0.1\n- Bug Fix. Fixed calculation of skills for Pathfinder\n\n</string>
+    <string name="release_notes_2_1_0">Release 2.1.0\n- Markable abilities\n- Pathfinder: Support ability Skilled in calculation of available skill points\n- Bug Fix. Fixed bug occurring by adding images with Android 3.x\n- Bug Fix. Fixed bug occurring by deleting a character. The equipment and notes of the deleted character remained in the database.\n\n</string>
+    <string name="release_notes_2_2_0">Release 2.2.0\n- Added attack and damage rolls\n- Moved abilities right to appearance\n- DnDv35: Added description to weapons and armor\n\n</string>
+    <string name="release_notes_2_2_1">Release 2.2.1\n- Bug Fix. Fixed bug occurred loading customized weapons\n\n</string>
+    <string name="release_notes_2_3_0">Release 2.3.0\n- Markable spells added\n- Support of different XP Tables added\n- Added CMB and CMD\n- Display XP in red if they doesn\'t match character level\n- Display checkboxes of selected abilities and spells only if "Show All" is checked\n- Bug Fix: Display masterwork in list of weapons when creating an attack\n- Bug Fix: Display spell lists only of owned abilities\n- Bug Fix: Weapon Focus checked weapon name instead of weapon family\n- Bug Fix: Fix weight of Pathfinder "Rations, trail (per day)" from 11 to 1\n\n</string>
+    <string name="release_notes_2_4_0">Release 2.4.0\n- Optimization for tablets\n- DnDv35: Description of goods added\n\n</string>
+    <string name="release_notes_2_5_0">Release 2.5.0\n- Pathfinder: Advanced Player\'s Guide\n\n</string>
+    <string name="release_notes_2_6_0">Release 2.6.0\n- Added misc modifier for attack and damage rolls\n- Support Backup &amp; Restore for Android\n- Save data if dialog is closed by touching outside of it\n- Bugfix: Amazon Kindle: Images couldn\'t be added\n- Bugfix: Platinum coins weren\'t saved\n- Bugfix: Pathfinder: Wizard and Sorcerer couldn\'t be edited in class administration\n- Bugfix: Thumbnails weren\'t scaled correctly in character list\n\n</string>
+    <string name="release_notes_2_6_1">Release 2.6.1\n- Bug Fix. Fixed bug displaying notes in one line only\n\n</string>
+    <string name="release_notes_2_7_0">Release 2.7.0\n- Added Backup &amp; Restore to/from File (SD Card)\n- Bug Fix: Fixed display of misc modifier buttons in edit skill mask on phones\n- Bug Fix: Fixed removing an item while adding a new one to the equipment list\n- Bug Fix: Allow negative values for misc attack and damage modifier\n- Pathfinder: Bug Fix: Fixed base attack bonus of Rogue from good to average\n\n</string>
+    <string name="release_notes_2_8_0">Release 2.8.0\n- Added export and import of characters\n- Display skills in one line on 7 inch devices\n- Bug Fix: App crashed by assigning spell ability to a class or race in administration\n- Bug Fix: Display bonuses with two digits on buttons correctly\n\n</string>
+    <string name="release_notes_2_9_0">Release 2.9.0\n- Added export and import of weapons, armor and goods. I would like to offer new equipment to import via download from the homepage (www.d20charactersheet.com). If you have items you want to share with other users of the app. It would be great if you send me your exported items and I will place them on the homepage for download. Please contact me via torsten.wiederkehr@gmail.com\n- Reduced memory requirements to improve stability, while app is running in background\n\n</string>
+    <string name="release_notes_2_10_0">Release 2.10.0\n- Added creation of spells.\n- Added creation of spell lists and assign spells to them.\n- Added creation of spell ablities to assign spell lists to them. By assigning spell abilities to a race or class you can assign your own spell lists with your own spells to your character.\n- Added search to all administration menus.\n- Bug fix: Fixed calculation of CMD.\n- Bug fix: Fixed import of masterwork items.\n- Bug fix: Fixed adding skills to classes in skill administration.\n\n</string>
+    <string name="release_notes_2_11_0">Release 2.11.0\n- Added spell preparation. The tab Spells is replaced by two new tabs. The tab Known Spells allows to select the spells the character knows from a spell list and displays how many spells the character is allowed to known per spell level. The tab Spell Slots shows the spell slots of the character. Each spell slot can be touched to select a spell. A spell slot displays the name, DC, ability and school of the spell. Spell slots are in the color of the school to easily identify counter spells. After a spell is cast, the color changes to grey and the spell name is striked through. Metamagic feats are supported.\n- Added search field to add/remove equipment mask.\n- Added Immediate and Swift action" to casting time.\n- Bug Fix. Fixed bug when adding extra points received by an extra feat ability of a class.\n\n</string>
+    <string name="release_notes_2_11_1">Release 2.11.1\nBug fix: Fixed missing spells slots of max spell level of spell list\nBug fix: Fixed spell slots lower then min level of spell list\nBug fix: Fixed modifying spell list abilities created before version 2.11.0\nBug fix: Fixed saving of skills, including negative modifiers\n\n</string>
+    <string name="release_notes_2_11_2">Release 2.11.2\nBug fix: Fixed missing icon in action bar to export equipment\nBug fix: Fixed missing result of die roll on high density devices\nBug fix: Fixed unreadable labels on buttons on high density devices\n\n</string>
+    <string name="release_notes_2_11_3">Release 2.11.3\nBug fix: Fixed missing result of die roll, if many dice were rolled\nBug fix: Fixes width of edit field, if number had many digits\nBug fix: Fixed crash, if number of damage dice was zero\nBug fix: Fixed position of saves for character with long class name\n\n</string>
+    <string name="release_notes_not_found">No Release Notes found\n\n</string>
+
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/table"
+    android:layout_below="@id/attribute_include"
+    android:layout_toRightOf="@id/combat_include" >
+
+    <TextView
+        style="@style/heading"
+        android:text="@string/save_title" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- FORTITUDE -->
+
+        <TableRow style="@style/tableRow_odd" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_fortitude_label" />
+
+            <Button
+                android:id="@+id/save_fortitude"
+                style="@style/button_die_roll" />
+        </TableRow>
+
+        <!-- REFLEX -->
+
+        <TableRow style="@style/tableRow_even" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_reflex_label" />
+
+            <Button
+                android:id="@+id/save_reflex"
+                style="@style/button_die_roll" />
+        </TableRow>
+
+        <!-- WILL -->
+
+        <TableRow style="@style/tableRow_odd" >
+
+            <TextView
+                style="@style/tableCell_string"
+                android:text="@string/save_will_label" />
+
+            <Button
+                android:id="@+id/save_will"
+                style="@style/button_die_roll" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

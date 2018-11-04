@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1" >
+
+    <!-- First Row -->
+
+    <TableRow android:id="@+id/first_row" >
+
+        <TextView
+            android:id="@+id/good_number"
+            style="@style/list_item_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:paddingRight="8dp"
+            android:width="48dip" />
+
+        <TextView
+            android:id="@+id/good_name"
+            style="@style/list_item_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_span="3" />
+    </TableRow>
+
+    <!-- Second Row -->
+
+    <TableRow android:id="@+id/second_row" >
+
+        <TextView
+            android:id="@+id/good_type"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_span="2" />
+
+        <TextView
+            android:id="@+id/good_cost"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="right" />
+
+        <TextView
+            android:id="@+id/good_weight"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:width="64dp" />
+    </TableRow>
+
+    <!-- Third Row -->
+
+    <TableRow android:id="@+id/third_row" >
+
+        <TextView
+            android:id="@+id/item_desc"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_span="5" />
+    </TableRow>
+
+</TableLayout>

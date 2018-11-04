@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="translucent_black">#80000000</color>
+    <color name="blue">#ff0000ff</color>
+    <color name="dark_gary">#ff444444</color>
+    <color name="light_gray">#ffcccccc</color>
+    <color name="magic">#44ffffff</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Table -->
+    <color name="even">#AA444444</color>
+    <color name="odd">#AA999999</color>
+
+    <!-- Known Spell -->
+    <color name="parchment">#f7dbb5</color>
+
+    <!-- Spell Slot -->
+    <color name="abjuration">#ea91bd</color>
+    <color name="conjuration">#f8a792</color>
+    <color name="divination">#fecd7e</color>
+    <color name="enchantment">#b5ae66</color>
+    <color name="evocation">#b6d884</color>
+    <color name="illusion">#77ccc9</color>
+    <color name="necormancy">#71abdd</color>
+    <color name="transmuation">#9977b4</color>
+    <color name="universal">#b0b7b1</color>
+    <color name="cast_spell">#839098</color>
+    <color name="empty_spell">#000000</color>
+
+</resources>

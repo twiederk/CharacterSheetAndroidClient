@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    api 'com.d20charactersheet:framework:1.30.0'
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId "com.android.ash.charactersheet"
+        minSdkVersion 18
+        targetSdkVersion 26
+
+        testApplicationId "com.android.ash.charactersheet.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}

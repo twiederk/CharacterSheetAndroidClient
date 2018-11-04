@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="base" parent="android:Theme.Holo">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="list_item_heading" parent="base">
+        <item name="android:textSize">23sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="list_item_text" parent="base">
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
+    <style name="list_item_spelllist_name" parent="list_item_spelllist">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="list_item_spelllist_level" parent="list_item_spelllist">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="list_item_spelllist_spell_name" parent="list_item_spelllist">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="list_item_spelllist_spell_short_description" parent="list_item_spelllist">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark_gary</item>
+    </style>
+
+</resources>

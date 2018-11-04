@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1" >
+
+    <!-- First Row -->
+
+    <TableRow android:id="@+id/first_row" >
+
+        <TextView
+            android:id="@+id/note_date"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingRight="3dip" />
+    </TableRow>
+
+    <!-- Second Row -->
+
+    <TableRow android:id="@+id/second_row" >
+
+        <TextView
+            android:id="@+id/note_text"
+            style="@style/list_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:ellipsize="end"
+            android:singleLine="true" />
+    </TableRow>
+
+</TableLayout>

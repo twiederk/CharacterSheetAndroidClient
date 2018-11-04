@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="0,1,2,3" >
+
+    <!-- First Row -->
+
+    <TableRow android:id="@+id/first_row" >
+
+        <TextView
+            android:id="@+id/weaponattack_name"
+            style="@style/weaponattack"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_span="3"
+            android:focusable="false"
+            android:textColor="@android:color/white" />
+
+        <com.android.ash.charactersheet.gui.widget.attackbonusview.AttackBonusView
+            android:id="@+id/weaponattack_attackbonus"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:focusable="false" />
+    </TableRow>
+
+    <!-- Second Row -->
+
+    <TableRow android:id="@+id/second_row" >
+
+        <Button
+            android:id="@+id/weaponattack_damage"
+            style="@style/weaponattack"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/weaponattack_critical"
+            style="@style/weaponattack"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/weaponattack_range_increment"
+            style="@style/weaponattack"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:textColor="@android:color/white" />
+
+        <com.android.ash.charactersheet.gui.widget.ammunitionview.AmmunitionView
+            android:id="@+id/weaponattack_ammunition"
+            style="@style/weaponattack"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:focusable="false" />
+    </TableRow>
+
+    <!-- Thrid Row -->
+
+    <TableRow android:id="@+id/third_row" >
+
+        <TextView
+            android:id="@+id/weaponattack_description"
+            style="@style/list_item_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_span="4"
+            android:focusable="false" />
+    </TableRow>
+
+</TableLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!ELEMENT equipment (weapons,armors,goods)>
+    <!ATTLIST equipment version CDATA #FIXED "1">
+    <!ATTLIST equipment gamesystem CDATA #REQUIRED>
+
+    <!ELEMENT weapons (weapon*)>
+    <!ELEMENT armors (armor*)>
+    <!ELEMENT goods (good*)>
+
+    <!-- weapon -->
+    <!ELEMENT weapon (name,cost,weight,quality,description,type,damage,critical,combat,encumbrance,category,enhancement,family,rangeincrement)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT cost (#PCDATA)>
+    <!ELEMENT weight (#PCDATA)>
+    <!ELEMENT quality (#PCDATA)>
+    <!ELEMENT description (#PCDATA)>
+    <!ELEMENT type (#PCDATA)>
+    <!ELEMENT damage (#PCDATA)>
+    <!ATTLIST damage numberofdice CDATA #REQUIRED>
+    <!ATTLIST damage die CDATA #REQUIRED>
+    <!ELEMENT critical (#PCDATA)>
+    <!ATTLIST critical hit CDATA #REQUIRED>
+    <!ATTLIST critical multiplier CDATA #REQUIRED>
+    <!ELEMENT combat (#PCDATA)>
+    <!ELEMENT encumbrance (#PCDATA)>
+    <!ELEMENT category (#PCDATA)>
+    <!ELEMENT enhancement (#PCDATA)>
+    <!ELEMENT family (#PCDATA)>
+    <!ELEMENT rangeincrement (#PCDATA)>
+
+    <!-- armor -->
+    <!ELEMENT armor (name,cost,weight,quality,description,type,bonus,penalty)>
+    <!ELEMENT bonus (#PCDATA)>
+    <!ELEMENT penalty (#PCDATA)>
+
+    <!-- good -->
+    <!ELEMENT good (name,cost,weight,quality,description,type)>

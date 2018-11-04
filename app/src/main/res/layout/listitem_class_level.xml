@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp" >
+
+    <TextView
+        android:id="@+id/class_name"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:gravity="center" />
+
+    <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+        android:id="@+id/class_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/class_level_delete"
+        style="@style/base"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:text="@string/class_level_edit_delete" />
+
+</LinearLayout>

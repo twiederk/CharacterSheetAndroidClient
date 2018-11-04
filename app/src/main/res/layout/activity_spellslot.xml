@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp" >
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spellslot_abilities" />
+
+                <TextView
+                    android:id="@+id/spellslot_abilities"
+                    style="@style/base"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent" >
+
+                <TextView
+                    style="@style/base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spellslot_spell" />
+
+                <Spinner
+                    android:id="@+id/spellslot_spell"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/spellslot_feat_table"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="8dp"
+            android:stretchColumns="0" />
+    </LinearLayout>
+
+</ScrollView>
