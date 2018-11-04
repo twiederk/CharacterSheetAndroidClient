@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     api 'com.d20charactersheet:framework:1.30.0'
+    implementation 'com.android.support:support-v4:28.0.0'
 }
 
 android {
