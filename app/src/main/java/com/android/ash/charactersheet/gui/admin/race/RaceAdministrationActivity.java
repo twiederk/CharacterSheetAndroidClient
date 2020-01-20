@@ -1,18 +1,8 @@
 package com.android.ash.charactersheet.gui.admin.race;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
@@ -30,6 +20,16 @@ import com.d20charactersheet.framework.boc.service.RaceService;
 import com.d20charactersheet.framework.boc.util.AbilityComparator;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * Fills and stores the form of a race. Derive from this class to use the form for create or update.
  */
@@ -37,19 +37,20 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
 
     private static final int REQUEST_CODE_ABILITIES = 1;
 
-    protected GameSystem gameSystem;
-    protected RaceService raceService;
+    GameSystem gameSystem;
+    RaceService raceService;
 
     private List<Ability> abilities;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         raceService = gameSystem.getRaceService();
         super.onCreate(savedInstanceState, R.layout.race_administration);
 
-        abilities = new ArrayList<Ability>(form.getAbilities());
+        abilities = new ArrayList<>(form.getAbilities());
 
         createViews();
     }
@@ -67,9 +68,7 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
     }
 
     private SpinnerAdapter getSizeAdapter() {
-        final ArrayAdapter<Size> sizeArrayAdapter = new SizeArrayAdapter(this, displayService, Arrays.asList(Size
-                .values()));
-        return sizeArrayAdapter;
+        return new SizeArrayAdapter(this, displayService, Arrays.asList(Size.values()));
     }
 
     private void setFavoriteCharacterClassSpinner() {
@@ -86,9 +85,7 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
     }
 
     private SpinnerAdapter getCharacterClassAdapter(final List<CharacterClass> characterClasses) {
-        final ArrayAdapter<CharacterClass> characterClassArrayAdapter = new SpinnerArrayAdapter<CharacterClass>(this,
-                displayService, characterClasses);
-        return characterClassArrayAdapter;
+        return new SpinnerArrayAdapter<>(this, displayService, characterClasses);
     }
 
     private int getCharacterClassIndex(final List<CharacterClass> characterClasses) {
@@ -117,7 +114,7 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
         final StringBuilder builder = new StringBuilder();
         builder.append(getResources().getString(R.string.race_administration_abilities));
         builder.append(":\n");
-        for (final Iterator<Ability> iterator = abilities.iterator(); iterator.hasNext();) {
+        for (final Iterator<Ability> iterator = abilities.iterator(); iterator.hasNext(); ) {
             final Ability ability = iterator.next();
             builder.append(ability.getName());
             if (iterator.hasNext()) {
@@ -128,7 +125,7 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
     }
 
     private List<Integer> getAbilityIds() {
-        final List<Integer> abilityIds = new ArrayList<Integer>(abilities.size());
+        final List<Integer> abilityIds = new ArrayList<>(abilities.size());
         for (final Ability ability : abilities) {
             abilityIds.add(ability.getId());
         }
@@ -148,24 +145,20 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
 
         // see which child activity is calling us back.
-        switch (requestCode) {
-
-        case REQUEST_CODE_ABILITIES:
+        if (requestCode == REQUEST_CODE_ABILITIES) {
             if (resultCode != RESULT_CANCELED) {
                 abilities = getAbilitiesFromIntend(resultIntent);
 
             }
-            break;
-
-        default:
+        } else {
             throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
     }
 
     private List<Ability> getAbilitiesFromIntend(final Intent resultIntent) {
         final Bundle bundle = resultIntent.getExtras();
-        final List<Integer> abilityIds = (List<Integer>) bundle.get(INTENT_EXTRA_DATA_OBJECT);
-        final List<Ability> abilities = new ArrayList<Ability>(abilityIds.size());
+        final List<Integer> abilityIds = (List<Integer>) Objects.requireNonNull(bundle).get(INTENT_EXTRA_DATA_OBJECT);
+        final List<Ability> abilities = new ArrayList<>(Objects.requireNonNull(abilityIds).size());
         for (final Integer abilityId : abilityIds) {
             final Ability ability = gameSystem.getAbilityService().getAbilityById(abilityId,
                     gameSystem.getAllAbilities());

@@ -56,13 +56,13 @@ public class PreferencesActivity extends LogActivity {
 
     private void setRadioButton(final int radioButtonId, final boolean showImageAsBackground,
             final OnClickListener onClickListener) {
-        final RadioButton radioButton = (RadioButton) findViewById(radioButtonId);
+        final RadioButton radioButton = findViewById(radioButtonId);
         radioButton.setChecked(showImageAsBackground);
         radioButton.setOnClickListener(onClickListener);
     }
 
     private void setColorSpinner() {
-        final Spinner colorSpinner = (Spinner) findViewById(R.id.preferences_background_colors);
+        final Spinner colorSpinner = findViewById(R.id.preferences_background_colors);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.background_color_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,7 +94,7 @@ public class PreferencesActivity extends LogActivity {
     }
 
     private void setGameSystemSpinner() {
-        final Spinner gameSystemSpinner = (Spinner) findViewById(R.id.preferences_game_systems);
+        final Spinner gameSystemSpinner = findViewById(R.id.preferences_game_systems);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.game_system_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -117,16 +117,16 @@ public class PreferencesActivity extends LogActivity {
     }
 
     private void save() {
-        final RadioButton imageRadiobutton = (RadioButton) findViewById(R.id.preferences_background_image);
+        final RadioButton imageRadiobutton = findViewById(R.id.preferences_background_image);
         final boolean showImageAsBackground = imageRadiobutton.isChecked();
         preferenceService.setBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND, showImageAsBackground);
 
-        final Spinner colorSpinner = (Spinner) findViewById(R.id.preferences_background_colors);
+        final Spinner colorSpinner = findViewById(R.id.preferences_background_colors);
         int position = colorSpinner.getSelectedItemPosition();
         final int color = colors[position];
         preferenceService.setInt(PreferenceService.BACKGROUND_COLOR, color);
 
-        final Spinner gameSystemSpinner = (Spinner) findViewById(R.id.preferences_game_systems);
+        final Spinner gameSystemSpinner = findViewById(R.id.preferences_game_systems);
         position = gameSystemSpinner.getSelectedItemPosition();
         preferenceService.setInt(PreferenceService.GAME_SYSTEM_TYPE, position);
     }

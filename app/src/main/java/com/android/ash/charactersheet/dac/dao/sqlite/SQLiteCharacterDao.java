@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -50,6 +44,12 @@ import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.model.XpTable;
 import com.d20charactersheet.framework.dac.dao.CharacterDao;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Data access object to access data of a SQLite 3 database.
@@ -105,7 +105,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     @Override
     public List<Character> getAllCharacters(final List<CharacterClass> allCharacterClasses, final List<Race> allRaces,
             final List<XpTable> allXpTables) {
-        final List<Character> characters = new ArrayList<Character>();
+        final List<Character> characters = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_CHARACTERS, new String[0]);
@@ -124,7 +124,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     }
 
     private List<ClassLevel> getClassLevels(final Character character, final List<CharacterClass> allCharacterClasses) {
-        final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+        final List<ClassLevel> classLevels = new LinkedList<>();
         Cursor cursor = null;
         final String[] characterId = new String[] { Integer.toString(character.getId()) };
         try {
@@ -314,7 +314,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     @Override
     public List<CharacterFeat> getCharacterFeats(final Character character, final List<Feat> allFeats) {
-        final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>();
+        final List<CharacterFeat> characterFeats = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(character.getId()) };
@@ -362,7 +362,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     @Override
     public List<CharacterSkill> getCharacterSkills(final Character character, final List<Skill> allSkills) {
-        final List<CharacterSkill> characterSkills = new ArrayList<CharacterSkill>();
+        final List<CharacterSkill> characterSkills = new ArrayList<>();
         Cursor cursor = null;
         final RowMapper characterSkillRowMapper = new CharacterSkillRowMapper(allSkills);
         try {
@@ -439,7 +439,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     @Override
     public List<Note> getNotes(final Character character) {
-        final List<Note> notes = new ArrayList<Note>();
+        final List<Note> notes = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(character.getId()) };
@@ -543,7 +543,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     @Override
     public List<CharacterAbility> getCharacterAbilities(final Character character, final CharacterClass characterClass) {
-        final List<CharacterAbility> characterAbilities = new ArrayList<CharacterAbility>();
+        final List<CharacterAbility> characterAbilities = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(character.getId()),
@@ -699,7 +699,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     @Override
     public List<WeaponAttack> getWeaponAttacks(final Character character, final List<Weapon> allWeapons) {
-        final List<WeaponAttack> weaponAttacks = new ArrayList<WeaponAttack>();
+        final List<WeaponAttack> weaponAttacks = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] characterId = new String[] { Integer.toString(character.getId()) };
@@ -821,7 +821,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     @Override
     public List<KnownSpell> getKnownSpells(final Character character, final List<Spelllist> allSpelllists,
             final List<Spell> allSpells) {
-        final List<KnownSpell> knownSpells = new ArrayList<KnownSpell>();
+        final List<KnownSpell> knownSpells = new ArrayList<>();
         Cursor cursor = null;
         try {
             final RowMapper knownSpellRowMapper = new KnownSpellRowMapper(allSpelllists, allSpells);
@@ -849,7 +849,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         final List<SpelllistAbility> spelllistAbilities = getSpelllistAbilities(allAbilities);
         final List<Feat> metaMagicFeats = getMetamagicFeats(allFeats);
 
-        final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+        final List<SpellSlot> spellSlots = new ArrayList<>();
         Cursor cursor = null;
         try {
             final RowMapper spellSlotRowMapper = new SpellSlotRowMapper(allSpells);
@@ -871,7 +871,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     }
 
     private List<SpelllistAbility> getSpelllistAbilities(final List<Ability> allAbilities) {
-        final List<SpelllistAbility> spelllistAbilities = new LinkedList<SpelllistAbility>();
+        final List<SpelllistAbility> spelllistAbilities = new LinkedList<>();
         for (final Ability ability : allAbilities) {
             if (ability instanceof SpelllistAbility) {
                 final SpelllistAbility spelllistAbility = (SpelllistAbility) ability;
@@ -882,7 +882,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     }
 
     private List<Feat> getMetamagicFeats(final List<Feat> allFeats) {
-        final List<Feat> metamagicFeats = new LinkedList<Feat>();
+        final List<Feat> metamagicFeats = new LinkedList<>();
         for (final Feat feat : allFeats) {
             if (FeatType.METAMAGIC.equals(feat.getFeatType())) {
                 metamagicFeats.add(feat);
@@ -893,7 +893,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     private List<SpelllistAbility> getSpelllistAbilities(final SpellSlot spellSlot,
             final List<SpelllistAbility> allSpelllistAbilities) {
-        final List<SpelllistAbility> spelllistAbilities = new LinkedList<SpelllistAbility>();
+        final List<SpelllistAbility> spelllistAbilities = new LinkedList<>();
         Cursor cursor = null;
         try {
             final String[] spellSlotId = new String[] { Integer.toString(spellSlot.getId()) };
@@ -921,7 +921,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     }
 
     private List<Feat> getMetaMagicFeats(final SpellSlot spellSlot, final List<Feat> allMetamagicFeats) {
-        final List<Feat> metamagicFeats = new LinkedList<Feat>();
+        final List<Feat> metamagicFeats = new LinkedList<>();
         Cursor cursor = null;
         try {
             final String[] spellSlotId = new String[] { Integer.toString(spellSlot.getId()) };
@@ -1082,7 +1082,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
 
     @Override
     public void updateCharacterSkill(final Character character, final CharacterSkill characterSkill) {
-        final ContentValues contentValues = getCharacterSkillContentValues(character, characterSkill);
+        final ContentValues contentValues = getCharacterSkillContentValues(characterSkill);
 
         final String[] bindVariables = new String[] { Integer.toString(character.getId()),
                 Integer.toString(characterSkill.getSkill().getId()) };
@@ -1100,7 +1100,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         }
     }
 
-    private ContentValues getCharacterSkillContentValues(final Character character, final CharacterSkill characterSkill) {
+    private ContentValues getCharacterSkillContentValues(final CharacterSkill characterSkill) {
         final FavoriteCharacterSkill favCharacterSkill = (FavoriteCharacterSkill) characterSkill;
         final ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_RANK, favCharacterSkill.getRank());

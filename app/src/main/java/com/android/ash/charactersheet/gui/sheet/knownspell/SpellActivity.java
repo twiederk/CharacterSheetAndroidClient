@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -15,6 +14,10 @@ import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.SpelllistService;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays detail information of a spell.
@@ -40,7 +43,7 @@ public class SpellActivity extends SlideActivity {
 
     private Spell getSpellFromIntent() {
         final Bundle extras = getIntent().getExtras();
-        final int spellId = extras.getInt(INTENT_EXTRA_DATA_OBJECT);
+        final int spellId = Objects.requireNonNull(extras).getInt(INTENT_EXTRA_DATA_OBJECT);
         final SpelllistService spelllistService = gameSystem.getSpelllistService();
         Spell spell = spelllistService.findSpellById(spellId, gameSystem.getAllSpells());
         spell = spelllistService.getSpellDescription(spell);
@@ -67,7 +70,7 @@ public class SpellActivity extends SlideActivity {
     }
 
     private void setText(final int viewResourceId, final CharSequence text) {
-        final TextView textView = (TextView) findViewById(viewResourceId);
+        final TextView textView = findViewById(viewResourceId);
         textView.setText(text);
     }
 
@@ -78,7 +81,6 @@ public class SpellActivity extends SlideActivity {
         if (text != null) {
             output.append(text);
         }
-        final Spanned htmlText = Html.fromHtml(output.toString(), null, new TableTagHander());
-        return htmlText;
+        return Html.fromHtml(output.toString(), null, new TableTagHander());
     }
 }

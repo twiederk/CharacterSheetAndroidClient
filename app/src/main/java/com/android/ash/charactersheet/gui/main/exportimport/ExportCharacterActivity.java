@@ -1,10 +1,8 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
-
-import java.io.File;
-import java.util.List;
-
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,11 +12,18 @@ import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.ExportImportService;
 
+import java.io.File;
+import java.util.List;
+
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
+
 /**
  * Allows to export characters to xml. Displays the export directory. The the list of all characters with checkboxes to
  * select them. The export button starts the export of all selected characters.
  */
 public class ExportCharacterActivity extends AbstractExportActivity {
+
+    private static final int PERMISSION_EXTERNAL_STORAGE = 100;
 
     @Override
     int getLayoutId() {
@@ -34,7 +39,7 @@ public class ExportCharacterActivity extends AbstractExportActivity {
     void createExportView() {
         final List<Character> characters = gameSystem.getAllCharacters();
         final ExportCharacterAdapter adapter = new ExportCharacterAdapter(this, gameSystem.getDisplayService(),
-                R.layout.listitem_export, new ListModel<Character>(characters));
+                R.layout.listitem_export, new ListModel<>(characters));
 
         final ListView listView = getListView();
         listView.setAdapter(adapter);
@@ -42,8 +47,7 @@ public class ExportCharacterActivity extends AbstractExportActivity {
     }
 
     private ListView getListView() {
-        final ListView listView = (ListView) findViewById(android.R.id.list);
-        return listView;
+        return findViewById(android.R.id.list);
     }
 
     @Override
@@ -61,6 +65,18 @@ public class ExportCharacterActivity extends AbstractExportActivity {
         }
 
         // export
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
+        } else {
+            exportCharacters();
+        }
+    }
+
+    private void exportCharacters() {
+        final ExportCharacterAdapter adapter = (ExportCharacterAdapter) getListView().getAdapter();
+        final List<Character> characters = adapter.getSelectedCharacters();
+
         final File exportFile = getExportFile(EXPORT_CHARACTER_FILE_PREFIX);
         final ExportImportService exportImportService = gameSystem.getExportImportService();
         try {
@@ -69,6 +85,15 @@ public class ExportCharacterActivity extends AbstractExportActivity {
         } catch (final Exception exception) {
             Logger.error("Can't export characters", exception);
             displayMessage(R.string.export_message_export_failed, exception.getMessage());
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                exportCharacters();
+            }
         }
     }
 

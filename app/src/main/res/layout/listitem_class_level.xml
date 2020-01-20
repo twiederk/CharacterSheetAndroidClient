@@ -22,7 +22,7 @@
         style="@style/base"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:gravity="center"
         android:text="@string/class_level_edit_delete" />
 

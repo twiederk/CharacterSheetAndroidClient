@@ -1,13 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
@@ -19,6 +14,10 @@ import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.model.WeaponCategory;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+
 /**
  * Displays a WeaponAttack to be created or edited.
  */
@@ -29,6 +28,7 @@ public abstract class WeaponAttackActivity extends FormularActivity<WeaponAttack
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         character = application.getCharacter();
@@ -49,7 +49,7 @@ public abstract class WeaponAttackActivity extends FormularActivity<WeaponAttack
 
     private void setAttackWield() {
         final EnumSet<AttackWield> attackWieldSet = gameSystem.getRuleService().getAttackWields(form.getWeapon());
-        final List<AttackWield> attackWields = new ArrayList<AttackWield>(attackWieldSet);
+        final List<AttackWield> attackWields = new ArrayList<>(attackWieldSet);
         final SpinnerAdapter adapter = getAttackWieldAdapter(attackWields);
         final int position = getAttackWieldPosition(attackWields);
         setSpinner(R.id.weaponattack_attackwield, adapter, position);
@@ -66,8 +66,7 @@ public abstract class WeaponAttackActivity extends FormularActivity<WeaponAttack
     }
 
     private SpinnerAdapter getAttackWieldAdapter(final List<AttackWield> attackWields) {
-        final ArrayAdapter<AttackWield> attackWieldAdapter = new AttackWieldAdapter(this, displayService, attackWields);
-        return attackWieldAdapter;
+        return new AttackWieldAdapter(this, displayService, attackWields);
     }
 
     private int getAttackWieldPosition(final List<AttackWield> attackWields) {

@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.content.Context;
 import android.widget.Spinner;
 
@@ -10,10 +7,13 @@ import com.android.ash.charactersheet.gui.widget.SpinnerArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Displays spells for a spell slot to select.
  */
-public class SpellSelectionAdapter extends SpinnerArrayAdapter<Spell> implements Observer {
+class SpellSelectionAdapter extends SpinnerArrayAdapter<Spell> implements Observer {
 
     private final SpellSlotActivityModel spellSlotActivityModel;
     private final Spinner spinner;

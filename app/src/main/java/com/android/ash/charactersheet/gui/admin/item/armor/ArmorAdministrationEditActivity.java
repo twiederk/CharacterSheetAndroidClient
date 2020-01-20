@@ -1,10 +1,12 @@
 package com.android.ash.charactersheet.gui.admin.item.armor;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Item;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays detail data of armor and allows to edit it.
@@ -13,9 +15,8 @@ public class ArmorAdministrationEditActivity extends ArmorAdministrationActivity
 
     @Override
     protected Item createForm() {
-        final int armorId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final Armor armor = (Armor) itemService.getItemById(armorId, gameSystem.getAllArmor());
-        return armor;
+        final int armorId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return itemService.getItemById(armorId, gameSystem.getAllArmor());
     }
 
     @Override

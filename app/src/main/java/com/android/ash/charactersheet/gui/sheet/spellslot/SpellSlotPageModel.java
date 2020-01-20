@@ -14,7 +14,7 @@ public class SpellSlotPageModel {
      * Instanciate SpellSlotPageModel with empty list of SpellSlotModels.
      */
     public SpellSlotPageModel() {
-        this.spellSlotModels = new LinkedList<SpellSlotModel>();
+        this.spellSlotModels = new LinkedList<>();
     }
 
     /**

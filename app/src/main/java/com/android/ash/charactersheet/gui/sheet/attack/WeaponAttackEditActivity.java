@@ -1,9 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays a weapon attack and updates it.
@@ -17,14 +19,12 @@ public class WeaponAttackEditActivity extends WeaponAttackActivity {
 
     @Override
     protected WeaponAttack createForm() {
-        final WeaponAttack weaponAttack = getWeaponAttackFromIntent();
-        return weaponAttack;
+        return getWeaponAttackFromIntent();
     }
 
     private WeaponAttack getWeaponAttackFromIntent() {
-        final int weaponAttackId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final WeaponAttack weaponAttack = getWeaponAttackById(weaponAttackId);
-        return weaponAttack;
+        final int weaponAttackId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return getWeaponAttackById(weaponAttackId);
     }
 
     private WeaponAttack getWeaponAttackById(final int weaponAttackId) {

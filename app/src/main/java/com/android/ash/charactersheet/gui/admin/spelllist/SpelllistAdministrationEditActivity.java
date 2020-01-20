@@ -1,9 +1,11 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Spelllist;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Allows to edit existing spell list.
@@ -17,10 +19,9 @@ public class SpelllistAdministrationEditActivity extends SpelllistAdministration
 
     @Override
     protected Spelllist createForm() {
-        final int spelllistId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final Spelllist spelllist = gameSystem.getSpelllistService().findSpelllistById(spelllistId,
+        final int spelllistId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return gameSystem.getSpelllistService().findSpelllistById(spelllistId,
                 gameSystem.getAllSpelllists());
-        return spelllist;
     }
 
 }

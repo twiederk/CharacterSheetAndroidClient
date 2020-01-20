@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet.classability;
 
+import android.support.annotation.NonNull;
+
 import com.d20charactersheet.framework.boc.model.AbilityType;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 
@@ -97,6 +99,7 @@ public class CharacterAbilityListItem {
         return characterAbility;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return characterAbility.toString();

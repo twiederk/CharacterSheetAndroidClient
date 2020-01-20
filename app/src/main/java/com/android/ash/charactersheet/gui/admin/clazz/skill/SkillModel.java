@@ -1,11 +1,13 @@
 package com.android.ash.charactersheet.gui.admin.clazz.skill;
 
+import android.support.annotation.NonNull;
+
 import com.d20charactersheet.framework.boc.model.Skill;
 
 /**
  * The skill model stores if a skill is a class skill or not.
  */
-public class SkillModel {
+class SkillModel {
 
     private final Skill skill;
     private boolean classSkill;
@@ -51,6 +53,7 @@ public class SkillModel {
         this.classSkill = classSkill;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return skill.getName() + ": " + classSkill;

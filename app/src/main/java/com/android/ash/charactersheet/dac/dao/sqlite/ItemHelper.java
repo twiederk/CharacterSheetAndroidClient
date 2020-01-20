@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,13 +11,16 @@ import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper to retrieve all items of a specific implemention (weapon, armor, good) from the database. Retrieves all items
  * of a character of a specific item type.
  */
-public class ItemHelper extends BaseSQLiteDao {
+class ItemHelper extends BaseSQLiteDao {
 
-    SQLiteItemDaoHelper helper;
+    final SQLiteItemDaoHelper helper;
 
     /**
      * Creates ItemHelper with given database and helper.
@@ -30,7 +30,7 @@ public class ItemHelper extends BaseSQLiteDao {
      * @param helper
      *            The helper to handle basic item tasks.
      */
-    public ItemHelper(final SQLiteDatabase db, final SQLiteItemDaoHelper helper) {
+    ItemHelper(final SQLiteDatabase db, final SQLiteItemDaoHelper helper) {
         super(db);
         this.helper = helper;
     }
@@ -44,8 +44,8 @@ public class ItemHelper extends BaseSQLiteDao {
      *            Rowmapper to map row data to sub type of item.
      * @return All items of a sub type of item.
      */
-    public List<Item> getAllItems(final String sql, final RowMapper rowMapper) {
-        final List<Item> allItems = new ArrayList<Item>();
+    List<Item> getAllItems(final String sql, final RowMapper rowMapper) {
+        final List<Item> allItems = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(sql, new String[0]);
@@ -72,9 +72,9 @@ public class ItemHelper extends BaseSQLiteDao {
      *            All items available in the game system.
      * @return All items of a character grouped together.
      */
-    public List<ItemGroup> getItemGroups(final String sql, final Character character,
-            final List<? extends Item> allItems) {
-        final List<ItemGroup> itemGroups = new ArrayList<ItemGroup>();
+    List<ItemGroup> getItemGroups(final String sql, final Character character,
+                                  final List<? extends Item> allItems) {
+        final List<ItemGroup> itemGroups = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(character.getId()) };

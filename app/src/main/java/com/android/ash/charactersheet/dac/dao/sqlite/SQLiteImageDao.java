@@ -62,8 +62,7 @@ public class SQLiteImageDao extends BaseSQLiteDao implements ImageDao {
         synchronized (DBHelper.DB_LOCK) {
             rowId = db.insertOrThrow(TABLE_IMAGE, null, values);
         }
-        final int imageId = getId(SQL_GET_ID, rowId);
-        return imageId;
+        return getId(SQL_GET_ID, rowId);
     }
 
     /**

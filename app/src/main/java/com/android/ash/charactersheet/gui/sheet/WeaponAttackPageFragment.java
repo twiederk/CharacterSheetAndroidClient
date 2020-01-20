@@ -47,13 +47,11 @@ public class WeaponAttackPageFragment extends PageFragment {
     }
 
     private DieRollView getDieRollView() {
-        final DieRollView dieRollView = (DieRollView) view.findViewById(R.id.attack_list_die_roll);
-        return dieRollView;
+        return view.findViewById(R.id.attack_list_die_roll);
     }
 
     private ListView getListView() {
-        final ListView listView = (ListView) view.findViewById(R.id.attack_list);
-        return listView;
+        return view.findViewById(R.id.attack_list);
     }
 
     @Override
@@ -82,12 +80,9 @@ public class WeaponAttackPageFragment extends PageFragment {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_page_weapon_attack_create:
+        if (item.getItemId() == R.id.menu_page_weapon_attack_create) {
             createWeaponAttack();
-            break;
-
-        default:
+        } else {
             return super.onOptionsItemSelected(item);
         }
         return true;
@@ -109,14 +104,11 @@ public class WeaponAttackPageFragment extends PageFragment {
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-        case CONTEXT_MENU_DELETE_WEAPONATTACK:
+        if (item.getItemId() == CONTEXT_MENU_DELETE_WEAPONATTACK) {
             deleteWeaponAttack(item);
             return true;
-
-        default:
-            return super.onContextItemSelected(item);
         }
+        return super.onContextItemSelected(item);
     }
 
     private void deleteWeaponAttack(final MenuItem item) {

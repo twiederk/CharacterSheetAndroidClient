@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.main;
 
-import java.io.File;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +35,9 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.CharacterComparator;
 
+import java.io.File;
+import java.util.List;
+
 /**
  * The list of characters available. Each character is listed with an image, its name, race, class and level.
  */
@@ -51,15 +51,15 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
     private List<Character> characters;
     private CharacterArrayAdapter adapter;
 
-    protected CharacterSheetApplication application;
+    private CharacterSheetApplication application;
 
-    protected GameSystemType gameSystemType = GameSystemType.DNDV35;
+    private GameSystemType gameSystemType = GameSystemType.DNDV35;
 
-    protected DBHelper dndDbHelper;
-    protected DBHelper pathfinderDbHelper;
+    private DBHelper dndDbHelper;
+    private DBHelper pathfinderDbHelper;
 
-    protected GameSystem gameSystem;
-    protected PreferenceService preferenceService;
+    private GameSystem gameSystem;
+    private PreferenceService preferenceService;
 
     private boolean showedReleaseNotes;
 
@@ -172,6 +172,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
         }
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean switchGameSystem() {
         DBHelper dbHelper;
         if (gameSystemType.equals(GameSystemType.DNDV35)) {
@@ -185,6 +186,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
         return true;
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean callActivity(final Class<? extends Activity> activityClass) {
         final Intent intent = new Intent(this, activityClass);
         startActivity(intent);
@@ -192,7 +194,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
     }
 
     /**
-     * Creates a context menu displaing a delete option of the selected character.
+     * Creates a context menu displaying a delete option of the selected character.
      * 
      * @see android.app.Activity#onCreateContextMenu(android.view.ContextMenu, android.view.View,
      *      android.view.ContextMenu.ContextMenuInfo)
@@ -207,8 +209,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
     }
 
     private ListView getListView() {
-        final ListView listView = (ListView) findViewById(android.R.id.list);
-        return listView;
+        return findViewById(android.R.id.list);
     }
 
     /**
@@ -218,20 +219,16 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
      */
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-        case CONTEXT_MENU_DELETE_CHARACTER:
+        if (item.getItemId() == CONTEXT_MENU_DELETE_CHARACTER) {
             deleteCharacter(getCharacter(item));
             return true;
-
-        default:
-            return super.onContextItemSelected(item);
         }
+        return super.onContextItemSelected(item);
     }
 
     private Character getCharacter(final MenuItem item) {
         final AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-        final Character character = (Character) getListView().getAdapter().getItem(menuInfo.position);
-        return character;
+        return (Character) getListView().getAdapter().getItem(menuInfo.position);
     }
 
     private void deleteCharacter(final Character character) {
@@ -261,7 +258,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
         final View releaseNotesView = findViewById(R.id.character_list_release_notes);
         releaseNotesView.setVisibility(View.VISIBLE);
 
-        final TextView releaseNotesTextView = (TextView) findViewById(R.id.list_of_release_notes);
+        final TextView releaseNotesTextView = findViewById(R.id.list_of_release_notes);
         releaseNotesTextView.setText(getReleaseNotes());
     }
 
@@ -352,7 +349,9 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
             releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_2));
         case 42:
             releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_3));
-            break;
+        case 43:
+            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_4));
+        break;
 
         default:
             releaseNotes.insert(0, getResources().getString(R.string.release_notes_not_found));
@@ -374,11 +373,9 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
     }
 
     private String createTitle() {
-        final StringBuilder title = new StringBuilder();
-        title.append(getResources().getString(R.string.character_list_title));
-        title.append(" - ");
-        title.append(gameSystem.getRuleService().getName());
-        return title.toString();
+        return getResources().getString(R.string.character_list_title) +
+                " - " +
+                gameSystem.getRuleService().getName();
     }
 
     private void setReleaseNotes() {
@@ -389,7 +386,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
     }
 
     private void setOkButton() {
-        final Button okButton = (Button) findViewById(R.id.button_ok);
+        final Button okButton = findViewById(R.id.button_ok);
         okButton.setOnClickListener(new OnClickListener() {
 
             @Override

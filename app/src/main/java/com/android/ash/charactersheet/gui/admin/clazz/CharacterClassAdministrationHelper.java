@@ -1,12 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-
 import android.app.Activity;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -29,11 +22,18 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.util.ClassAbilityLevelNameComparator;
 import com.d20charactersheet.framework.boc.util.SkillComparator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Helper to the CharacterClassAdministrationActivity. Helps to create the views, sets and retrieves the models of the
  * views.
  */
-public class CharacterClassAdministrationHelper {
+class CharacterClassAdministrationHelper {
 
     private final Activity activity;
     private final CharacterClass characterClass;
@@ -79,7 +79,7 @@ public class CharacterClassAdministrationHelper {
     }
 
     private void createName() {
-        final TextView nameTextView = (TextView) activity.findViewById(R.id.character_class_administration_name);
+        final TextView nameTextView = activity.findViewById(R.id.character_class_administration_name);
         nameTextView.setText(characterClass.getName());
     }
 
@@ -89,8 +89,8 @@ public class CharacterClassAdministrationHelper {
 
     private void createHitDieSpinner() {
         final ArrayAdapter<Die> hitDieArrayAdapter = new HitDieArrayAdapter(activity, displayService,
-                new ArrayList<Die>(Die.HIT_DICE));
-        final Spinner hitDieSpinner = (Spinner) activity.findViewById(R.id.character_class_administration_hitdie);
+                new ArrayList<>(Die.HIT_DICE));
+        final Spinner hitDieSpinner = activity.findViewById(R.id.character_class_administration_hitdie);
         hitDieSpinner.setAdapter(hitDieArrayAdapter);
         hitDieSpinner.setSelection(characterClass.getHitDie().ordinal() - 2);
     }
@@ -98,7 +98,7 @@ public class CharacterClassAdministrationHelper {
     private void createBaseAttackBonusSpinner() {
         final ArrayAdapter<BaseAttackBonus> baseAttackBonusArrayAdapter = new BaseAttackBonusArrayAdapter(activity,
                 displayService, Arrays.asList(BaseAttackBonus.values()));
-        setSpinner(R.id.character_class_administration_baseattackbonus, baseAttackBonusArrayAdapter, characterClass
+        setSpinner(baseAttackBonusArrayAdapter, characterClass
                 .getBaseAttackBonus().ordinal());
     }
 
@@ -111,28 +111,28 @@ public class CharacterClassAdministrationHelper {
     }
 
     private void createClassAbilities() {
-        classAbilities = new ArrayList<ClassAbility>(characterClass.getClassAbilities());
+        classAbilities = new ArrayList<>(characterClass.getClassAbilities());
     }
 
     private void createSkillPointsPerLevel() {
-        final StepNumberView numberView = (StepNumberView) activity
+        final StepNumberView numberView = activity
                 .findViewById(R.id.character_class_administration_skillpoints);
         skillPointsController = new ZeroAndPositiveNumberViewController(characterClass.getSkillPointsPerLevel());
         numberView.setController(skillPointsController);
     }
 
     private void createSkills() {
-        skills = new ArrayList<Skill>(characterClass.getSkills());
+        skills = new ArrayList<>(characterClass.getSkills());
     }
 
-    private void setSpinner(final int spinnerResourceId, final SpinnerAdapter adapter, final int position) {
-        final Spinner attributeSpinner = (Spinner) activity.findViewById(spinnerResourceId);
+    private void setSpinner(final SpinnerAdapter adapter, final int position) {
+        final Spinner attributeSpinner = activity.findViewById(R.id.character_class_administration_baseattackbonus);
         attributeSpinner.setAdapter(adapter);
         attributeSpinner.setSelection(position);
     }
 
     private void setCheckBox(final boolean checked, final int checkBoxResourceId) {
-        final CheckBox checkBox = (CheckBox) activity.findViewById(checkBoxResourceId);
+        final CheckBox checkBox = activity.findViewById(checkBoxResourceId);
         checkBox.setChecked(checked);
     }
 

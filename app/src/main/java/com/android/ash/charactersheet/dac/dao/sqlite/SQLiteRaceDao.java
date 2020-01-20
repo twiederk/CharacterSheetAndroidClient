@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -15,6 +12,9 @@ import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.dac.dao.RaceDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides access to the tables storing the races in a SQLite database.
@@ -43,7 +43,7 @@ public class SQLiteRaceDao extends BaseSQLiteDao implements RaceDao {
     }
 
     private List<Race> selectAllRaces(final List<CharacterClass> allCharacterClasses) {
-        final List<Race> allRaces = new ArrayList<Race>();
+        final List<Race> allRaces = new ArrayList<>();
         Cursor cursor = null;
         final RowMapper raceRowMapper = new RaceRowMapper(allCharacterClasses);
         try {
@@ -77,7 +77,7 @@ public class SQLiteRaceDao extends BaseSQLiteDao implements RaceDao {
     }
 
     private List<Ability> getAbilities(final Cursor cursor, final List<Ability> allAbilities) {
-        final List<Ability> abilities = new ArrayList<Ability>();
+        final List<Ability> abilities = new ArrayList<>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             final Ability ability = getAbility(cursor.getInt(0), allAbilities);
             abilities.add(ability);

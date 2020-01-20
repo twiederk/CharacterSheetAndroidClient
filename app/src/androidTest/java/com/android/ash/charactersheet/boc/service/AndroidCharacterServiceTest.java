@@ -1,22 +1,23 @@
 package com.android.ash.charactersheet.boc.service;
 
 import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.AndroidObjectMother;
 import com.d20charactersheet.framework.boc.service.BaseCharacterServiceTest;
 
+import org.junit.Before;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
 public class AndroidCharacterServiceTest extends BaseCharacterServiceTest {
 
-    private final Context context;
 
-    public AndroidCharacterServiceTest(final Context context) {
-        super();
-        this.context = context;
-    }
+    @Before
+    public void setUp() {
+        final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
         final AndroidObjectMother objectMother = new AndroidObjectMother(context);
         gameSystem = objectMother.getGameSystem();
 

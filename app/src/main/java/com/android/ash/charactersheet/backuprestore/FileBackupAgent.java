@@ -1,17 +1,5 @@
 package com.android.ash.charactersheet.backuprestore;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.Context;
 import android.os.Environment;
 
@@ -21,21 +9,33 @@ import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * Backups a database file to the download directory. Restores a database file from the download directory. The filename
  * is build by the name of the database, the version name of the app and the current date and time.
  */
 public class FileBackupAgent {
 
-    static final String SEPARATER = "_";
+    static final String SEPARATOR = "_";
 
     private final Context context;
 
     /**
      * Creates FileBackupAgent with the given context.
-     * 
-     * @param context
-     *            The context of the app.
+     *
+     * @param context The context of the app.
      */
     public FileBackupAgent(final Context context) {
         this.context = context;
@@ -45,12 +45,10 @@ public class FileBackupAgent {
      * Backup of the database of the given game system to the download directory. Checks if the sd card is accessable.
      * Checks the download directory. Checks if enough free space is available. The filename is build by the name of the
      * database, the version name of the app and the current date and time.
-     * 
-     * @param gameSystemType
-     *            The game system to backup the database.
+     *
+     * @param gameSystemType The game system to backup the database.
      * @return The backup file.
-     * @throws IOException
-     *             Thrown if sd card is not accessible, not enough free space or other I/O operation failed.
+     * @throws IOException Thrown if sd card is not accessible, not enough free space or other I/O operation failed.
      */
     public File backup(final GameSystemType gameSystemType) throws IOException {
         if (!isExternalStorageWritable()) {
@@ -90,16 +88,13 @@ public class FileBackupAgent {
     }
 
     /**
-     * Returns true, if the sd card is accessable.
-     * 
-     * @return True, if the sd card is accessable.
+     * Returns true, if the sd card is accessible.
+     *
+     * @return True, if the sd card is accessible.
      */
-    public boolean isExternalStorageWritable() {
+    private boolean isExternalStorageWritable() {
         final String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
 
     private boolean isFreeSpaceAvailable(final File srcFile) {
@@ -108,10 +103,7 @@ public class FileBackupAgent {
         Logger.debug("requiredSpace: " + requiredSpace);
         Logger.debug("freeSpace: " + freeSpace);
 
-        if (freeSpace < requiredSpace) {
-            return false;
-        }
-        return true;
+        return freeSpace >= requiredSpace;
     }
 
     String getBackupName(final String databaseName) {
@@ -119,28 +111,26 @@ public class FileBackupAgent {
         final String pattern = context.getResources().getString(R.string.backup_date_pattern);
         final String date = new SimpleDateFormat(pattern, Locale.US).format(new Date());
 
-        final StringBuffer backupName = new StringBuffer();
-        backupName.append(databaseName);
-        backupName.append(SEPARATER);
-        backupName.append(versionName);
-        backupName.append(SEPARATER);
-        backupName.append(date);
-        return backupName.toString();
+        return databaseName + SEPARATOR + versionName + SEPARATOR + date;
     }
 
     /**
-     * Returns all files in the download directory belonging to a game sytem.
-     * 
-     * @return All files in the download directory belonging to a game sytem.
+     * Returns all files in the download directory belonging to a game system.
+     *
+     * @return All files in the download directory belonging to a game system.
      */
     public List<File> getBackupFiles() {
-        return Arrays.asList(DirectoryAndFileHelper.getBackupDirectory().listFiles(new BackupFilenameFilter()));
+        File[] files = DirectoryAndFileHelper.getBackupDirectory().listFiles(new BackupFilenameFilter());
+        if (files == null) {
+            return Collections.emptyList();
+        }
+        return Arrays.asList(files);
     }
 
     /**
      * Filters backup files. The name of the backup file must start with the database name of a game system.
      */
-    public static class BackupFilenameFilter implements FilenameFilter {
+    static class BackupFilenameFilter implements FilenameFilter {
 
         @Override
         public boolean accept(final File dir, final String name) {
@@ -155,18 +145,14 @@ public class FileBackupAgent {
 
     /**
      * Restores a backup file.
-     * 
-     * @param gameSystemType
-     *            The game system to restore the file of.
-     * @param restoreFile
-     *            The file to restore.
-     * @throws IOException
-     *             Thrown if the restore failed by an I/O operation.
+     *
+     * @param gameSystemType The game system to restore the file of.
+     * @param restoreFile    The file to restore.
+     * @throws IOException Thrown if the restore failed by an I/O operation.
      */
     public void restore(final GameSystemType gameSystemType, final File restoreFile) throws IOException {
-        final File srcFile = restoreFile;
         final File destFile = context.getDatabasePath(gameSystemType.getDatabaseName());
-        copyFile(srcFile, destFile);
+        copyFile(restoreFile, destFile);
     }
 
 }

@@ -62,7 +62,7 @@ import com.d20charactersheet.framework.dac.dao.XpDao;
 /**
  * Create/Upgrade database and load game system in an asynchronous task, while displaying a wait animation.
  */
-public abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
+abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
 
     final Activity activity;
     final Resources resources;
@@ -80,8 +80,8 @@ public abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskRe
      * @param gameSystemType
      *            The game system to create.
      */
-    public AbstractAsyncTask(final Activity activity, final GameSystemLoadable gameSystemLoadable,
-            final GameSystemType gameSystemType) {
+    AbstractAsyncTask(final Activity activity, final GameSystemLoadable gameSystemLoadable,
+                      final GameSystemType gameSystemType) {
         super();
         this.activity = activity;
         this.gameSystemLoadable = gameSystemLoadable;
@@ -92,7 +92,7 @@ public abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskRe
     @Override
     protected void onPreExecute() {
         activity.setContentView(R.layout.waitanimation);
-        waitAnimation = (WaitAnimation) activity.findViewById(R.id.wait_animation);
+        waitAnimation = activity.findViewById(R.id.wait_animation);
     }
 
     @Override
@@ -199,6 +199,6 @@ public abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskRe
         /**
          * Called if the game system is loaded.
          */
-        public void onGameSystemLoaded();
+        void onGameSystemLoaded();
     }
 }

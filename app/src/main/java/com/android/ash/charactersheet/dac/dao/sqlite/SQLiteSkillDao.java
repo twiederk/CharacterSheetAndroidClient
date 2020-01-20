@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -13,6 +10,9 @@ import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SkillRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.dac.dao.SkillDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of data interface SkillDao using SQLite3 database.
@@ -41,7 +41,7 @@ public class SQLiteSkillDao extends BaseSQLiteDao implements SkillDao {
      */
     @Override
     public List<Skill> getAllSkills() {
-        final List<Skill> skills = new ArrayList<Skill>();
+        final List<Skill> skills = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_SKILLS, new String[0]);

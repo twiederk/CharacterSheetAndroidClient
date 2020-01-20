@@ -42,18 +42,6 @@ public class Logger {
     }
 
     /**
-     * Logs message and exception with info level.
-     * 
-     * @param message
-     *            The message to log.
-     * @param exception
-     *            The exception to log.
-     */
-    public static void info(final String message, final Exception exception) {
-        Log.i(LOG_TAG, message, exception);
-    }
-
-    /**
      * Logs a message with warn level.
      * 
      * @param message

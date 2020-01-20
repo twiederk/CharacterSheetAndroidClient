@@ -1,8 +1,8 @@
 package com.android.ash.charactersheet.gui.widget.attackbonusview;
 
-import java.util.List;
-
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
+
+import java.util.List;
 
 /**
  * Default implementation of AttackBonusViewContoller.
@@ -13,8 +13,8 @@ public class DefaultAttackBonusViewController implements AttackBonusViewControll
 
     /**
      * Default implementation uses attack bonuses of weaopon attack.
-     * 
-     * @param weaponAttack
+     *
+     * @param weaponAttack The weapon attack
      */
     public DefaultAttackBonusViewController(final WeaponAttack weaponAttack) {
         this.weaponAttack = weaponAttack;

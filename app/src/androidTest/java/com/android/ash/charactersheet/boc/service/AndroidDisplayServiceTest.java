@@ -1,9 +1,8 @@
 package com.android.ash.charactersheet.boc.service;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import android.test.AndroidTestCase;
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -21,16 +20,27 @@ import com.d20charactersheet.framework.boc.model.SubSchool;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 
-public class AndroidDisplayServiceTest extends AndroidTestCase {
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+@RunWith(AndroidJUnit4.class)
+public class AndroidDisplayServiceTest {
 
     private DisplayService displayService;
     private CharacterClass wizard;
     private CharacterClass bard;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        displayService = new AndroidDisplayServiceImpl(getContext().getResources());
+    @Before
+    public void setUp() {
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        displayService = new AndroidDisplayServiceImpl(context.getResources());
         bard = createCharacterClass(1, "Bard");
         wizard = createCharacterClass(10, "Wizard");
     }
@@ -43,10 +53,11 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         return characterClass;
     }
 
-    public void testGetDisplayClassLevelsWithSingleClass() throws Exception {
+    @Test
+    public void testGetDisplayClassLevelsWithSingleClass() {
 
         // Wizard (4)
-        final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+        final List<ClassLevel> classLevels = new LinkedList<>();
         classLevels.add(new ClassLevel(wizard, 4));
 
         // test
@@ -54,7 +65,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("Wizard (4)", displayClassLevels);
     }
 
-    public void testGetDisplayClassLevel() throws Exception {
+    @Test
+    public void testGetDisplayClassLevel() {
 
         // Wizard (4)
         String displayClassLevel = displayService.getDisplayClassLevel(new ClassLevel(wizard, 4));
@@ -65,10 +77,11 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("Bard (2)", displayClassLevel);
     }
 
-    public void testGetDisplayClassLevelsWithMultipleClass() throws Exception {
+    @Test
+    public void testGetDisplayClassLevelsWithMultipleClass() {
 
         // Wizard (4), Bard (2)
-        final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+        final List<ClassLevel> classLevels = new LinkedList<>();
         classLevels.add(new ClassLevel(wizard, 4));
         classLevels.add(new ClassLevel(bard, 2));
 
@@ -77,7 +90,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("Wizard (4), Bard (2)", displayClassLevels);
     }
 
-    public void testGetModifier() throws Exception {
+    @Test
+    public void testGetModifier() {
         String modifier = displayService.getDisplayModifier(-3);
         assertEquals("-3", modifier);
 
@@ -88,7 +102,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("+2", modifier);
     }
 
-    public void testGetDisplayBaseAttackBonus() throws Exception {
+    @Test
+    public void testGetDisplayBaseAttackBonus() {
 
         String displayBaseAttackBonus = displayService.getDisplayBaseAttackBonus(0);
         assertEquals("+0", displayBaseAttackBonus);
@@ -106,14 +121,16 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("+11/+6/+1", displayBaseAttackBonus);
     }
 
-    public void testGetDisplaySex() throws Exception {
+    @Test
+    public void testGetDisplaySex() {
         String sex = displayService.getDisplaySex(Sex.MALE);
         assertEquals("Male", sex);
         sex = displayService.getDisplaySex(Sex.FEMALE);
         assertEquals("Female", sex);
     }
 
-    public void testGetDisplayAlignment() throws Exception {
+    @Test
+    public void testGetDisplayAlignment() {
         String alignment = displayService.getDisplayAlignment(Alignment.LAWFUL_GOOD);
         assertEquals("Lawful Good", alignment);
 
@@ -124,7 +141,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("Chaotic Evil", alignment);
     }
 
-    public void testGetDisplayArmorClassFormular() throws Exception {
+    @Test
+    public void testGetDisplayArmorClassFormular() {
         String formular = displayService.getDisplayArmourClassFormular(-2);
         assertEquals("10 + (-2) + ", formular);
 
@@ -135,12 +153,14 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("10 + (+5) + ", formular);
     }
 
-    public void testGetErrorMessage() throws Exception {
+    @Test
+    public void testGetErrorMessage() {
         final String errorMessage = displayService.getErrorMessage(RuleError.ATTRIBUTE_VALUE_NOT_IN_RANGE);
         assertEquals("Attribute value must be between 1 and 99.", errorMessage);
     }
 
-    public void testGetDisplayInitiativeFormular() throws Exception {
+    @Test
+    public void testGetDisplayInitiativeFormular() {
         String formular = displayService.getDisplaySimpleFormular(-2);
         assertEquals("-2 + ", formular);
 
@@ -151,7 +171,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("+5 + ", formular);
     }
 
-    public void testGetDisplayWeight() throws Exception {
+    @Test
+    public void testGetDisplayWeight() {
         String displayWeight = displayService.getDisplayWeight(8.0f);
         assertNotNull(displayWeight);
         assertEquals("8 lb.", displayWeight);
@@ -161,7 +182,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("6.5 lb.", displayWeight);
     }
 
-    public void testGetDisplayCost() throws Exception {
+    @Test
+    public void testGetDisplayCost() {
         String displayCost = displayService.getDisplayCost(10f);
         assertNotNull(displayCost);
         assertEquals("10 gp", displayCost);
@@ -179,7 +201,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("0.01 gp", displayCost);
     }
 
-    public void testGetDisplayDamage() throws Exception {
+    @Test
+    public void testGetDisplayDamage() {
         String displayDamage = displayService.getDisplayDamage(createWeapon(new Damage(1, Die.D8), 2));
         assertEquals("1D8+2", displayDamage);
 
@@ -203,7 +226,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         return weapon;
     }
 
-    public void testGetDisplayItem() throws Exception {
+    @Test
+    public void testGetDisplayItem() {
         final Weapon weapon = new Weapon();
         weapon.setName("Dagger");
         String displayWeapon = displayService.getDisplayItem(weapon);
@@ -219,7 +243,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
 
     }
 
-    public void testGetDisplaySpellComponents() throws Exception {
+    @Test
+    public void testGetDisplaySpellComponents() {
 
         Spell spell = new Spell();
         spell.setVerbal(true);
@@ -242,7 +267,8 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         assertEquals("M", components);
     }
 
-    public void testGetDisplaySpellSchool() throws Exception {
+    @Test
+    public void testGetDisplaySpellSchool() {
         final Spell spell = new Spell();
         assertNotNull(displayService.getDisplaySpellSchool(spell));
 
@@ -252,15 +278,15 @@ public class AndroidDisplayServiceTest extends AndroidTestCase {
         spell.setSubSchool(SubSchool.CREATION);
         assertEquals("Conjuration (Creation)", displayService.getDisplaySpellSchool(spell));
 
-        spell.setDescriptors(new Descriptor[] { Descriptor.ACID });
+        spell.setDescriptors(new Descriptor[]{Descriptor.ACID});
         assertEquals("Conjuration (Creation) [Acid]", displayService.getDisplaySpellSchool(spell));
 
-        spell.setDescriptors(new Descriptor[] { Descriptor.ACID, Descriptor.AIR });
+        spell.setDescriptors(new Descriptor[]{Descriptor.ACID, Descriptor.AIR});
         assertEquals("Conjuration (Creation) [Acid, Air]", displayService.getDisplaySpellSchool(spell));
 
         spell.setSchool(School.ENCHANTMENT);
         spell.setSubSchool(SubSchool.COMPULSION);
-        spell.setDescriptors(new Descriptor[] { Descriptor.MIND_AFFECTING });
+        spell.setDescriptors(new Descriptor[]{Descriptor.MIND_AFFECTING});
         assertEquals("Enchantment (Compulsion) [Mind-Affecting]", displayService.getDisplaySpellSchool(spell));
     }
 

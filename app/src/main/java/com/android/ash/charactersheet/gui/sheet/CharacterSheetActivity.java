@@ -19,6 +19,8 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.Objects;
+
 /**
  * The character sheet of the character. Displays the stats, abilities and combat values of the character. The
  * background shows the image of the character.
@@ -29,7 +31,6 @@ public class CharacterSheetActivity extends FragmentActivity implements ActionBa
     private PreferenceService preferenceService;
     private Character character;
 
-    private PageAdapter pageAdapter;
     private ViewPager viewPager;
 
     @Override
@@ -48,12 +49,12 @@ public class CharacterSheetActivity extends FragmentActivity implements ActionBa
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        Objects.requireNonNull(actionBar).setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        pageAdapter = new PageAdapter(getSupportFragmentManager(), getResources());
+        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), getResources());
 
         // Set up the ViewPager with the page adapter.
-        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(pageAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -68,7 +69,7 @@ public class CharacterSheetActivity extends FragmentActivity implements ActionBa
 
     }
 
-    protected void setBackground() {
+    void setBackground() {
         final boolean showImageAsBackground = preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND);
         if (showImageAsBackground) {
             final AndroidImageService imageService = (AndroidImageService) gameSystem.getImageService();
@@ -86,7 +87,7 @@ public class CharacterSheetActivity extends FragmentActivity implements ActionBa
     }
 
     private void configImageView(final int color, final Bitmap bitmap, final int minWidth, final int minHeight) {
-        final ImageView imageView = (ImageView) findViewById(R.id.background);
+        final ImageView imageView = findViewById(R.id.background);
         imageView.setBackgroundColor(color);
         imageView.setMinimumWidth(minWidth);
         imageView.setMinimumHeight(minHeight);

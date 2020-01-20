@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.R;
@@ -22,6 +16,12 @@ import com.d20charactersheet.framework.boc.model.SpellsPerDayTable;
 import com.d20charactersheet.framework.boc.util.KnownSpellsTableComparator;
 import com.d20charactersheet.framework.boc.util.SpelllistComparator;
 import com.d20charactersheet.framework.boc.util.SpellsPerDayTableComparator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Administration of SpelllistAbilities with drop down list of spell lists.
@@ -53,7 +53,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
     private void setSpelllist() {
         final List<Spelllist> allSpelllists = gameSystem.getAllSpelllists();
         Collections.sort(allSpelllists, new SpelllistComparator());
-        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<Spelllist>(this, displayService, allSpelllists);
+        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService, allSpelllists);
         final int position = getSpelllistPosition(allSpelllists);
         setSpinner(R.id.ability_administration_spelllist, adapter, position);
     }
@@ -123,14 +123,14 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
     private void setSchool() {
         final List<String> allSchoolNames = getAllSchoolNames();
         Collections.sort(allSchoolNames);
-        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<String>(this, displayService, allSchoolNames);
+        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService, allSchoolNames);
         final int position = getSchoolPosition(allSchoolNames);
         setSpinner(R.id.ability_administration_school, adapter, position);
     }
 
     private List<String> getAllSchoolNames() {
         final School[] allSchools = School.values();
-        final List<String> schoolNames = new ArrayList<String>(allSchools.length + 1);
+        final List<String> schoolNames = new ArrayList<>(allSchools.length + 1);
         for (final School school : allSchools) {
             schoolNames.add(displayService.getDisplaySchool(school));
         }
@@ -162,7 +162,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
     private void setKnownSpellsTable() {
         final List<KnownSpellsTable> allKnownSpellsTables = gameSystem.getAllKnownSpellsTables();
         Collections.sort(allKnownSpellsTables, new KnownSpellsTableComparator());
-        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<KnownSpellsTable>(this, displayService,
+        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 allKnownSpellsTables);
         final int position = getKnownSpellsTablePosition(allKnownSpellsTables);
         setSpinner(R.id.ability_administration_known_spells_table, adapter, position);
@@ -182,7 +182,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
     private void setSpellsPerDayTable() {
         final List<SpellsPerDayTable> allSpellsPerDayTables = gameSystem.getAllSpellsPerDayTables();
         Collections.sort(allSpellsPerDayTables, new SpellsPerDayTableComparator());
-        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<SpellsPerDayTable>(this, displayService,
+        final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 allSpellsPerDayTables);
         final int position = getSpellsPerDayPosition(allSpellsPerDayTables);
         setSpinner(R.id.ability_administration_spells_per_day_table, adapter, position);

@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.util;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.CheckBox;
@@ -17,6 +11,8 @@ import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberView;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberViewController;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
 
 /**
  * Base class to build forms for a specific object.
@@ -34,9 +30,9 @@ public abstract class FormularActivity<T> extends LogActivity {
     /**
      * Creates a from with the given layout and title, including cancel and ok button. Providing access to form object
      * and display service.
-     * 
-     * @param savedInstanceState
-     * @param layoutResourceId
+     *
+     * @param savedInstanceState The saved instance state
+     * @param layoutResourceId The resource id of the layout
      */
     protected void onCreate(final Bundle savedInstanceState, final int layoutResourceId) {
         super.onCreate(savedInstanceState);
@@ -77,41 +73,33 @@ public abstract class FormularActivity<T> extends LogActivity {
     }
 
     protected void setText(final String text, final int textViewResourceId) {
-        final TextView textView = (TextView) findViewById(textViewResourceId);
-        textView.setText(text);
-    }
-
-    protected void setText(final Date date, final String format, final int textViewResourceId) {
-        final DateFormat dateFormat = new SimpleDateFormat(format, Locale.getDefault());
-        final String text = dateFormat.format(date);
-        final TextView textView = (TextView) findViewById(textViewResourceId);
+        final TextView textView = findViewById(textViewResourceId);
         textView.setText(text);
     }
 
     protected void setSpinner(final int spinnerResourceId, final SpinnerAdapter adapter, final int position) {
-        final Spinner spinner = (Spinner) findViewById(spinnerResourceId);
+        final Spinner spinner = findViewById(spinnerResourceId);
         spinner.setAdapter(adapter);
         spinner.setSelection(position);
     }
 
     protected void setCheckBox(final boolean checked, final int checkBoxResourceId) {
-        final CheckBox checkBox = (CheckBox) findViewById(checkBoxResourceId);
+        final CheckBox checkBox = findViewById(checkBoxResourceId);
         checkBox.setChecked(checked);
     }
 
     protected String getTextOfTextView(final int textViewResourceId) {
-        final TextView textView = (TextView) findViewById(textViewResourceId);
+        final TextView textView = findViewById(textViewResourceId);
         return textView.getText().toString();
     }
 
     protected Object getSelectedItemOfSpinner(final int spinnerResourceId) {
-        final Spinner spinner = (Spinner) findViewById(spinnerResourceId);
-        final Object selectedItem = spinner.getSelectedItem();
-        return selectedItem;
+        final Spinner spinner = findViewById(spinnerResourceId);
+        return spinner.getSelectedItem();
     }
 
     protected boolean isChecked(final int checkBoxResourceId) {
-        final CheckBox checkBox = (CheckBox) findViewById(checkBoxResourceId);
+        final CheckBox checkBox = findViewById(checkBoxResourceId);
         return checkBox.isChecked();
     }
 
@@ -135,12 +123,12 @@ public abstract class FormularActivity<T> extends LogActivity {
     }
 
     protected void setNumberViewController(final NumberViewController controller, final int numberViewResourceId) {
-        final NumberView numberView = (NumberView) findViewById(numberViewResourceId);
+        final NumberView numberView = findViewById(numberViewResourceId);
         numberView.setController(controller);
     }
 
     protected int getIntegerOfNumberView(final int numberViewResourceId) {
-        final NumberView numberView = (NumberView) findViewById(numberViewResourceId);
+        final NumberView numberView = findViewById(numberViewResourceId);
         return numberView.getController().getNumber().intValue();
     }
 

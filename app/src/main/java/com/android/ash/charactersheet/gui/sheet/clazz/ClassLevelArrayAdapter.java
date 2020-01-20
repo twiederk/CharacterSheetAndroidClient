@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.clazz;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +12,8 @@ import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
 
 /**
  * Adapter to display class levels in a list view. Displays the class, the level with a NumberView and a buttoon to
@@ -43,9 +43,9 @@ public class ClassLevelArrayAdapter extends DisplayArrayAdapter<ClassLevel> {
 
     @Override
     protected void fillView(final View view, final ClassLevel classLevel) {
-        final TextView classTextView = (TextView) view.findViewById(R.id.class_name);
-        final StepNumberView classLevelNumberView = (StepNumberView) view.findViewById(R.id.class_level);
-        final Button deleteButton = (Button) view.findViewById(R.id.class_level_delete);
+        final TextView classTextView = view.findViewById(R.id.class_name);
+        final StepNumberView classLevelNumberView = view.findViewById(R.id.class_level);
+        final Button deleteButton = view.findViewById(R.id.class_level_delete);
 
         final CharacterClass characterClass = classLevel.getCharacterClass();
         classTextView.setText(characterClass.getName());

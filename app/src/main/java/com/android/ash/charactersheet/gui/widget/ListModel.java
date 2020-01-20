@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.widget;
 
+import android.widget.Filter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import android.widget.Filter;
 
 /**
  * Filterable model of a list view.
@@ -23,7 +23,7 @@ public class ListModel<T> extends Observable {
     /**
      * Create ListModel instance with empty list and no filter.
      */
-    public ListModel() {
+    protected ListModel() {
         this(new ArrayList<T>(), null);
     }
 
@@ -45,12 +45,12 @@ public class ListModel<T> extends Observable {
      * @param listFilter
      *            The filter of the items.
      */
-    public ListModel(final List<T> items, final ListFilter<T> listFilter) {
+    private ListModel(final List<T> items, final ListFilter<T> listFilter) {
         super();
         this.items = items;
-        this.filteredItems = new ArrayList<T>(items);
+        this.filteredItems = new ArrayList<>(items);
         if (listFilter == null) {
-            this.listFilter = new StringListFilter<T>(this);
+            this.listFilter = new StringListFilter<>(this);
         } else {
             this.listFilter = listFilter;
         }
@@ -76,9 +76,9 @@ public class ListModel<T> extends Observable {
      * @param items
      *            The items of the model.
      */
-    public void setItems(final List<T> items) {
+    protected void setItems(final List<T> items) {
         this.items = items;
-        this.filteredItems = new ArrayList<T>(items);
+        this.filteredItems = new ArrayList<>(items);
         fireEvent();
     }
 
@@ -139,7 +139,7 @@ public class ListModel<T> extends Observable {
      * @param listFilter
      *            The filter to set.
      */
-    public void setFilter(final ListFilter<T> listFilter) {
+    protected void setFilter(final ListFilter<T> listFilter) {
         this.listFilter = listFilter;
     }
 

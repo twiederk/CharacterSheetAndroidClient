@@ -27,7 +27,9 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:paddingTop="8dp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:labelFor="@+id/note_text"
+                android:contentDescription="@string/note_content_description" />
 
             <EditText
                 android:id="@+id/note_text"
@@ -35,12 +37,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1.0"
                 android:background="@color/translucent_black"
-                android:gravity="top|left"
+                android:gravity="top|start"
                 android:inputType="textCapSentences|textMultiLine"
                 android:paddingBottom="8dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:importantForAutofill="no" />
         </LinearLayout>
     </ScrollView>
 

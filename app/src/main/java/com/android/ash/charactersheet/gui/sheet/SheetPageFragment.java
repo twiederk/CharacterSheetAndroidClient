@@ -1,13 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Iterator;
-
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,18 +37,22 @@ import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.service.XpService;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Objects;
+
 /**
  * A dummy fragment representing a section of the app, but that simply displays dummy text.
  */
 public class SheetPageFragment extends PageFragment {
 
     private static final int RESULT_CODE_ADD_IMAGE = 100;
-    private static final int RESULT_CODE_CROP_IMAGE = 200;
     private static final int RESULT_CODE_ADD_THUMBNAIL = 300;
-    private static final int RESULT_CODE_CROP_THUMBNAIL = 400;
     private static final String COLON = ": ";
-
-    private ImageHandler imageHandler;
 
     @Override
     protected int getLayoutId() {
@@ -59,8 +61,6 @@ public class SheetPageFragment extends PageFragment {
 
     @Override
     protected void doCreateView() {
-        imageHandler = new ImageHandler(getActivity());
-
         setOnClickListener();
     }
 
@@ -97,7 +97,7 @@ public class SheetPageFragment extends PageFragment {
     }
 
     private void setAttributeOnClickListener(final int resourceId, final Attribute attribute) {
-        final Button button = (Button) view.findViewById(resourceId);
+        final Button button = view.findViewById(resourceId);
         button.setOnClickListener(new AttributeRollOnClickListener(character, attribute, displayService, ruleService,
                 getDieRollView()));
     }
@@ -113,7 +113,7 @@ public class SheetPageFragment extends PageFragment {
     }
 
     private void setSaveOnClickListener(final int resourceId, final Save save) {
-        final Button button = (Button) view.findViewById(resourceId);
+        final Button button = view.findViewById(resourceId);
         button.setOnClickListener(new SaveRollOnClickListener(character, save, displayService, ruleService,
                 getDieRollView()));
     }
@@ -122,64 +122,68 @@ public class SheetPageFragment extends PageFragment {
         final View combatView = view.findViewById(R.id.combat_include);
         combatView.setOnClickListener(new IntentOnClickListener(new Intent(getActivity(), CombatEditActivity.class)));
 
-        final Button initativeButton = (Button) view.findViewById(R.id.combat_initiative);
-        initativeButton.setOnClickListener(new InitativeRollOnClickListener(character, displayService, ruleService,
+        final Button initiativeButton = view.findViewById(R.id.combat_initiative);
+        initiativeButton.setOnClickListener(new InitativeRollOnClickListener(character, displayService, ruleService,
                 getDieRollView()));
 
-        final Button baseAttackBonusButton = (Button) view.findViewById(R.id.combat_baseattackbonus);
+        final Button baseAttackBonusButton = view.findViewById(R.id.combat_baseattackbonus);
         baseAttackBonusButton.setOnClickListener(new BaseAttackBonusRollOnClickListener(character, displayService,
                 ruleService, getDieRollView()));
 
-        final Button cmbButton = (Button) view.findViewById(R.id.combat_cmb);
+        final Button cmbButton = view.findViewById(R.id.combat_cmb);
         cmbButton.setOnClickListener(new CombatManeuverBonusRollOnClickListener(character, displayService, ruleService,
                 getDieRollView()));
 
-        final Button cmdButton = (Button) view.findViewById(R.id.combat_cmd);
+        final Button cmdButton = view.findViewById(R.id.combat_cmd);
         cmdButton.setOnClickListener(new CombatManeuverDefenceRollOnClickListener(character, displayService,
                 ruleService, getDieRollView()));
 
     }
 
     private DieRollView getDieRollView() {
-        final DieRollView dieRollView = (DieRollView) view.findViewById(R.id.die_roll_view);
-        return dieRollView;
+        return view.findViewById(R.id.die_roll_view);
     }
 
     private void setAppearance() {
         // player
-        final TextView playerTextView = (TextView) view.findViewById(R.id.appearance_player);
+        final TextView playerTextView = view.findViewById(R.id.appearance_player);
         playerTextView.setText(character.getPlayer());
 
         // race
-        final TextView raceTextView = (TextView) view.findViewById(R.id.appearance_race);
+        final TextView raceTextView = view.findViewById(R.id.appearance_race);
         final String race = character.getRace().getName();
         raceTextView.setText(race);
 
         // sex
-        final TextView sexTextView = (TextView) view.findViewById(R.id.appearance_sex);
+        final TextView sexTextView = view.findViewById(R.id.appearance_sex);
         final String sex = displayService.getDisplaySex(character.getSex());
         sexTextView.setText(sex);
 
         // class + level
-        final TextView classLevelTextView = (TextView) view.findViewById(R.id.appearance_class_level);
+        final TextView classLevelTextView = view.findViewById(R.id.appearance_class_level);
         classLevelTextView.setText(getClassLevelText());
 
         // alignment
-        final TextView alignmentTextView = (TextView) view.findViewById(R.id.appearance_alignment);
+        final TextView alignmentTextView = view.findViewById(R.id.appearance_alignment);
         final String alignment = displayService.getDisplayAlignment(character.getAlignment());
         alignmentTextView.setText(alignment);
 
         // experience + next level at
-        final TextView experienceTextView = (TextView) view.findViewById(R.id.appearance_experience);
-        experienceTextView.setText(character.getExperiencePoints() + " / "
-                + xpService.getNextLevelAt(character.getXpTable(), character.getCharacterLevel()));
+        final TextView experienceTextView = view.findViewById(R.id.appearance_experience);
+        experienceTextView.setText(buildExperiencePointsText());
         checkExperiencePoints();
         setExperienceProgressBar();
     }
 
+    @NonNull
+    private String buildExperiencePointsText() {
+        return character.getExperiencePoints() + " / "
+                + xpService.getNextLevelAt(character.getXpTable(), character.getCharacterLevel());
+    }
+
     private String getClassLevelText() {
         final StringBuilder classLevelText = new StringBuilder();
-        for (final Iterator<ClassLevel> iterator = character.getClassLevels().iterator(); iterator.hasNext();) {
+        for (final Iterator<ClassLevel> iterator = character.getClassLevels().iterator(); iterator.hasNext(); ) {
             final ClassLevel classLevel = iterator.next();
             classLevelText.append(displayService.getDisplayClassLevel(classLevel));
             if (iterator.hasNext()) {
@@ -195,14 +199,14 @@ public class SheetPageFragment extends PageFragment {
         if (!xpService.isValidExperiencePointsToCharacterLevel(character.getExperiencePoints(), character)) {
             color = Color.RED;
         }
-        final TextView experienceLabelTextView = (TextView) view.findViewById(R.id.appearance_experience_label);
-        final ProgressBar experienceProgressBar = (ProgressBar) view.findViewById(R.id.appearance_experience_progress);
+        final TextView experienceLabelTextView = view.findViewById(R.id.appearance_experience_label);
+        final ProgressBar experienceProgressBar = view.findViewById(R.id.appearance_experience_progress);
         experienceLabelTextView.setBackgroundColor(color);
         experienceProgressBar.setBackgroundColor(color);
     }
 
     private void setExperienceProgressBar() {
-        final ProgressBar experienceProgressBar = (ProgressBar) view.findViewById(R.id.appearance_experience_progress);
+        final ProgressBar experienceProgressBar = view.findViewById(R.id.appearance_experience_progress);
         final int nextLevelAt = xpService.getNextLevelAt(character.getXpTable(), character.getCharacterLevel());
         final int lastLevelAt = xpService.getNextLevelAt(character.getXpTable(), character.getCharacterLevel() - 1);
         experienceProgressBar.setMax(nextLevelAt - lastLevelAt);
@@ -232,72 +236,77 @@ public class SheetPageFragment extends PageFragment {
 
     private void displayAttribute(final int attributeValue, final int idAttributeValue, final int idAttributeMod) {
         // attribute
-        final TextView abilitiyTextView = (TextView) view.findViewById(idAttributeValue);
-        abilitiyTextView.setText(Integer.toString(attributeValue));
+        final TextView abilityTextView = view.findViewById(idAttributeValue);
+        abilityTextView.setText(String.format(Locale.US, "%d", attributeValue));
 
         // modifier
         final String modifier = displayService.getDisplayModifier(ruleService.getModifier(attributeValue));
-        final TextView modifierTextView = (TextView) view.findViewById(idAttributeMod);
+        final TextView modifierTextView = view.findViewById(idAttributeMod);
         modifierTextView.setText(modifier);
     }
 
     private void setCombat() {
         // hit points
-        final TextView hitPointsTextView = (TextView) view.findViewById(R.id.combat_hitpoints);
-        hitPointsTextView.setText(character.getHitPoints() + " (" + character.getMaxHitPoints() + ")");
+        final TextView hitPointsTextView = view.findViewById(R.id.combat_hitpoints);
+        hitPointsTextView.setText(buildHitPointsText());
         setHitPointsProgressBar();
 
         // armor class
-        final TextView armorClassTextView = (TextView) view.findViewById(R.id.combat_armorclass);
-        armorClassTextView.setText(Integer.toString(ruleService.getArmorClass(character)));
+        final TextView armorClassTextView = view.findViewById(R.id.combat_armorclass);
+        armorClassTextView.setText(String.format(Locale.US, "%d", ruleService.getArmorClass(character)));
 
         // speed
-        final TextView speedTextView = (TextView) view.findViewById(R.id.combat_speed);
-        speedTextView.setText(Integer.toString(ruleService.getSpeed(character)));
+        final TextView speedTextView = view.findViewById(R.id.combat_speed);
+        speedTextView.setText(String.format(Locale.US, "%d", ruleService.getSpeed(character)));
 
         // initiative
-        final TextView initiativeTextView = (TextView) view.findViewById(R.id.combat_initiative);
+        final TextView initiativeTextView = view.findViewById(R.id.combat_initiative);
         initiativeTextView.setText(displayService.getDisplayModifier(ruleService.getInitative(character)));
 
         // base attack bonus
-        final TextView baseAttackBonusTextView = (TextView) view.findViewById(R.id.combat_baseattackbonus);
+        final TextView baseAttackBonusTextView = view.findViewById(R.id.combat_baseattackbonus);
         baseAttackBonusTextView.setText(displayService.getDisplayModifier(ruleService.getBaseAttackBonus(character)));
 
         // cmb
-        final TextView cmbTextView = (TextView) view.findViewById(R.id.combat_cmb);
+        final TextView cmbTextView = view.findViewById(R.id.combat_cmb);
         cmbTextView.setText(displayService.getDisplayModifier(ruleService.getCombatManeuverBonus(character)));
 
         // cmd
-        final TextView cmdTextView = (TextView) view.findViewById(R.id.combat_cmd);
+        final TextView cmdTextView = view.findViewById(R.id.combat_cmd);
         cmdTextView.setText(displayService.getDisplayModifier(ruleService.getCombatManeuverDefence(character)));
 
     }
 
+    @NonNull
+    private String buildHitPointsText() {
+        return character.getHitPoints() + " (" + character.getMaxHitPoints() + ")";
+    }
+
     private void setHitPointsProgressBar() {
-        final ProgressBar hitPointsProgressBar = (ProgressBar) view.findViewById(R.id.combat_hitpoints_progress);
+        final ProgressBar hitPointsProgressBar = view.findViewById(R.id.combat_hitpoints_progress);
         hitPointsProgressBar.setMax(character.getMaxHitPoints());
         hitPointsProgressBar.setProgress(character.getHitPoints());
     }
 
     private void setSave() {
         // fortitude
-        final TextView fortitudeTextView = (TextView) view.findViewById(R.id.save_fortitude);
+        final TextView fortitudeTextView = view.findViewById(R.id.save_fortitude);
         int savingThrow = ruleService.getSave(character, Save.FORTITUDE);
         fortitudeTextView.setText(displayService.getDisplayModifier(savingThrow));
 
         // reflex
-        final TextView reflexTextView = (TextView) view.findViewById(R.id.save_reflex);
+        final TextView reflexTextView = view.findViewById(R.id.save_reflex);
         savingThrow = ruleService.getSave(character, Save.REFLEX);
         reflexTextView.setText(displayService.getDisplayModifier(savingThrow));
 
         // will
-        final TextView willTextView = (TextView) view.findViewById(R.id.save_will);
+        final TextView willTextView = view.findViewById(R.id.save_will);
         savingThrow = ruleService.getSave(character, Save.WILL);
         willTextView.setText(displayService.getDisplayModifier(savingThrow));
     }
 
     private void setMoney() {
-        final TextView goldTextView = (TextView) view.findViewById(R.id.money_gold);
+        final TextView goldTextView = view.findViewById(R.id.money_gold);
         goldTextView.setText(getGold());
     }
 
@@ -321,16 +330,16 @@ public class SheetPageFragment extends PageFragment {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.menu_page_sheet_add_image:
-            jumpToImageGallery(RESULT_CODE_ADD_IMAGE);
-            break;
+            case R.id.menu_page_sheet_add_image:
+                jumpToImageGallery(RESULT_CODE_ADD_IMAGE);
+                break;
 
-        case R.id.menu_page_sheet_add_thumbnail:
-            jumpToImageGallery(RESULT_CODE_ADD_THUMBNAIL);
-            break;
+            case R.id.menu_page_sheet_add_thumbnail:
+                jumpToImageGallery(RESULT_CODE_ADD_THUMBNAIL);
+                break;
 
-        default:
-            throw new IllegalStateException("Selected menu item is unknown (" + item.getItemId() + ")");
+            default:
+                throw new IllegalStateException("Selected menu item is unknown (" + item.getItemId() + ")");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -341,62 +350,29 @@ public class SheetPageFragment extends PageFragment {
         startActivityForResult(intent, resultCode);
     }
 
-    private void jumpToCropImage(final Intent intent, final int resultCode) {
-        startActivityForResult(intent, resultCode);
-    }
-
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
         switch (requestCode) {
-        case RESULT_CODE_ADD_IMAGE:
-            if (resultCode != Activity.RESULT_CANCELED) {
-                final Uri selectedImage = resultIntent.getData();
-                final Intent intent = imageHandler.configureCropImage(selectedImage);
-                try {
-                    jumpToCropImage(intent, RESULT_CODE_CROP_IMAGE);
-                } catch (final Exception exception) {
-                    Logger.warn("Failed to crop image", exception);
-                    final String filename = imageHandler.getFilename(resultIntent);
-                    addImage(filename);
+            case RESULT_CODE_ADD_IMAGE:
+                if (resultCode != Activity.RESULT_CANCELED) {
+                    final Uri selectedImage = resultIntent.getData();
+                    addImage(selectedImage);
                     preferenceService.setBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND, true);
                     setActivityBackground();
                 }
-            }
-            break;
+                break;
 
-        case RESULT_CODE_CROP_IMAGE:
-            if (resultCode != Activity.RESULT_CANCELED) {
-                final String filename = imageHandler.getFilename(resultIntent);
-                addImage(filename);
-                preferenceService.setBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND, true);
-                setActivityBackground();
-            }
-            break;
-
-        case RESULT_CODE_ADD_THUMBNAIL:
-            if (resultCode != Activity.RESULT_CANCELED) {
-                final Uri selectedThumbnail = resultIntent.getData();
-                final Intent intent = imageHandler.configureCropThumbnail(selectedThumbnail);
-                try {
-                    jumpToCropImage(intent, RESULT_CODE_CROP_THUMBNAIL);
-                } catch (final Exception exception) {
-                    Logger.warn("Failed to crop image", exception);
-                    final String filename = imageHandler.getFilename(resultIntent);
-                    addThumbnail(filename);
+            case RESULT_CODE_ADD_THUMBNAIL:
+                if (resultCode != Activity.RESULT_CANCELED) {
+                    final Uri selectedThumbnail = resultIntent.getData();
+                    addThumbnail(selectedThumbnail);
                 }
-            }
-            break;
+                break;
 
-        case RESULT_CODE_CROP_THUMBNAIL:
-            if (resultCode != Activity.RESULT_CANCELED) {
-                final String filename = imageHandler.getFilename(resultIntent);
-                addThumbnail(filename);
-            }
-            break;
-
-        default:
-            throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
+            default:
+                throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
+
     }
 
     private void setActivityBackground() {
@@ -407,46 +383,47 @@ public class SheetPageFragment extends PageFragment {
 
     }
 
-    private void addImage(final String filename) {
-        Logger.debug("filename: " + filename);
+    private void addImage(final Uri uri) {
+        Logger.debug("uri: " + uri);
         try {
             final int oldImageId = character.getImageId();
-            final int newImageId = imageService.createImage(filename);
+            InputStream inputStream = getInputStream(uri);
+            final int newImageId = imageService.createImage(inputStream);
             character.setImageId(newImageId);
             characterService.updateCharacter(character);
             imageService.deleteImage(oldImageId);
         } catch (final Exception exception) {
             Logger.error("Failed to add image", exception);
-            final StringBuilder message = new StringBuilder();
-            message.append(getString(R.string.page_sheet_message_add_image_failed));
-            message.append(COLON);
-            message.append(exception.getMessage());
-            Toast.makeText(getActivity(), message.toString(), Toast.LENGTH_LONG).show();
+            String message = getString(R.string.page_sheet_message_add_image_failed) + COLON + exception.getMessage();
+            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
         }
     }
 
-    private void addThumbnail(final String filename) {
-        Logger.debug("filename: " + filename);
+    private InputStream getInputStream(Uri uri) throws FileNotFoundException {
+        ContentResolver contentResolver = Objects.requireNonNull(getActivity()).getContentResolver();
+        return contentResolver.openInputStream(uri);
+    }
+
+    private void addThumbnail(final Uri uri) {
+        Logger.debug("uri: " + uri);
         try {
             final int oldImageId = character.getThumbImageId();
-            final int newImageId = imageService.createImage(filename);
+            InputStream inputStream = getInputStream(uri);
+            final int newImageId = imageService.createImage(inputStream);
             character.setThumbImageId(newImageId);
             characterService.updateCharacter(character);
             imageService.deleteImage(oldImageId);
         } catch (final Exception exception) {
             Logger.error("Failed to add thumbnail", exception);
-            final StringBuilder message = new StringBuilder();
-            message.append(getString(R.string.page_sheet_message_add_thumbnail_failed));
-            message.append(COLON);
-            message.append(exception.getMessage());
-            Toast.makeText(getActivity(), message.toString(), Toast.LENGTH_LONG).show();
+            String message = getString(R.string.page_sheet_message_add_thumbnail_failed) + COLON + exception.getMessage();
+            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(character.getName());
+        Objects.requireNonNull(getActivity()).setTitle(character.getName());
         setActivityBackground();
         setAppearance();
         setAttribute();

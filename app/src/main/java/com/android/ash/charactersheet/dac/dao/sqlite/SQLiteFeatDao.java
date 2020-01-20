@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -13,6 +10,9 @@ import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.dac.dao.FeatDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implemenation of FeatDao to access data in a SQLite database on an Android device.
@@ -41,7 +41,7 @@ public class SQLiteFeatDao extends BaseSQLiteDao implements FeatDao {
      */
     @Override
     public List<Feat> getAllFeats() {
-        final List<Feat> feats = new ArrayList<Feat>();
+        final List<Feat> feats = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_FEATS, new String[0]);

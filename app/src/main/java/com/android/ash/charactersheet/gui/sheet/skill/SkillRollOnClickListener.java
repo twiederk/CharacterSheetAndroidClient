@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 /**
  * OnClick Listener executing skill roll on click and displaying result.
  */
-public class SkillRollOnClickListener implements OnClickListener {
+class SkillRollOnClickListener implements OnClickListener {
 
     private final Character character;
     private final CharacterSkill characterSkill;

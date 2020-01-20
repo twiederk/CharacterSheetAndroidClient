@@ -1,11 +1,14 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Activity to edit an character class using the CharacterClassAdministrationActivity as base.
@@ -16,9 +19,8 @@ public class CharacterClassAdministrationEditActivity extends CharacterClassAdmi
     protected CharacterClass createForm() {
         final Intent intent = getIntent();
         final Bundle extras = intent.getExtras();
-        final int classId = extras.getInt(INTENT_EXTRA_DATA_OBJECT);
-        final CharacterClass characterClass = getClassById(classId);
-        return characterClass;
+        final int classId = Objects.requireNonNull(extras).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return getClassById(classId);
     }
 
     private CharacterClass getClassById(final int classId) {

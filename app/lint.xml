@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconDuplicates">
+        <ignore path="src/main/res/drawable-mdpi/d2_blue_01.png" />
+        <ignore path="src/main/res/drawable-mdpi/d2_blue_02.png" />
+        <ignore path="src/main/res/drawable-mdpi/d3_blue_01.png" />
+        <ignore path="src/main/res/drawable-mdpi/d3_blue_01.png" />
+        <ignore path="src/main/res/drawable-mdpi/d3_blue_01.png" />
+        <ignore path="src/main/res/drawable-mdpi/d3_blue_02.png" />
+        <ignore path="src/main/res/drawable-mdpi/d3_blue_03.png" />
+        <ignore path="src/main/res/drawable-mdpi/d6_blue_01.png" />
+        <ignore path="src/main/res/drawable-mdpi/d6_blue_02.png" />
+        <ignore path="src/main/res/drawable-mdpi/d6_blue_03.png" />
+    </issue>
+</lint>

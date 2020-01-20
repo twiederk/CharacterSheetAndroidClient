@@ -1,9 +1,11 @@
 package com.android.ash.charactersheet.gui.admin.item.weapon;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Weapon;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Derived from the WeaponAdministrationActivity it allows to update a weapon.
@@ -12,9 +14,8 @@ public class WeaponAdministrationEditActivity extends WeaponAdministrationActivi
 
     @Override
     protected Weapon createForm() {
-        final int weaponId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final Weapon weapon = (Weapon) itemService.getItemById(weaponId, gameSystem.getAllWeapons());
-        return weapon;
+        final int weaponId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return (Weapon) itemService.getItemById(weaponId, gameSystem.getAllWeapons());
     }
 
     @Override

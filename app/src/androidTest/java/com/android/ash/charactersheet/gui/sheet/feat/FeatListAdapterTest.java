@@ -1,10 +1,9 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
-import android.test.AndroidTestCase;
+import android.os.Looper;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Character;
@@ -14,22 +13,36 @@ import com.d20charactersheet.framework.boc.model.FeatType;
 import com.d20charactersheet.framework.dac.dao.FeatDao;
 import com.d20charactersheet.framework.dac.dao.dummy.DummyFeatDao;
 
-public class FeatListAdapterTest extends AndroidTestCase {
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35FeatStorage.FEAT;
+import static org.junit.Assert.assertEquals;
+
+@RunWith(AndroidJUnit4.class)
+public class FeatListAdapterTest {
 
     private FeatModel featModel;
-    private Character character;
     private List<Feat> feats;
-    private Context context;
     private FeatListAdapter generalFeatListAdapter;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeClass
+    static public void beforeClass() {
+        Looper.prepare();
+    }
+
+    @Before
+    public void setUp() {
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         final FeatDao featDao = new DummyFeatDao(FEAT);
         feats = featDao.getAllFeats();
-        character = createCharacter();
+        Character character = createCharacter();
         featModel = new FeatModel(feats, character.getCharacterFeats());
-        context = getContext();
         generalFeatListAdapter = new FeatListAdapter(context, R.layout.listitem_feat, featModel, FeatType.GENERAL);
 
     }
@@ -41,32 +54,35 @@ public class FeatListAdapterTest extends AndroidTestCase {
     }
 
     private List<CharacterFeat> createCharacterFeats() {
-        final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>();
-        characterFeats.add(new CharacterFeat(getFeat("Augment Summoning")));
+        final List<CharacterFeat> characterFeats = new ArrayList<>();
+        characterFeats.add(new CharacterFeat(getFeat()));
         return characterFeats;
     }
 
-    private Feat getFeat(final String name) {
+    private Feat getFeat() {
         for (final Feat feat : feats) {
-            if (feat.getName().equals(name)) {
+            if (feat.getName().equals("Augment Summoning")) {
                 return feat;
             }
         }
-        throw new IllegalArgumentException("Can't find feat with name: " + name);
+        throw new IllegalArgumentException("Can't find feat with name: " + "Augment Summoning");
     }
 
-    public void testGetAllGeneralFeats() throws Exception {
+    @Test
+    public void testGetAllGeneralFeats() {
         featModel.setShowAllFeats(true);
         final int numberOfFeats = generalFeatListAdapter.getCount();
         assertEquals(92, numberOfFeats);
     }
 
-    public void testGetCharacterGeneralFeats() throws Exception {
+    @Test
+    public void testGetCharacterGeneralFeats() {
         featModel.setShowAllFeats(false);
         final int numberOfFeats = generalFeatListAdapter.getCount();
         assertEquals(1, numberOfFeats);
     }
 
+    @Test
     public void testGetFighterBonusAndKind() {
         final Feat feat = new Feat();
         final FeatListItem featItem = new FeatItem(feat);

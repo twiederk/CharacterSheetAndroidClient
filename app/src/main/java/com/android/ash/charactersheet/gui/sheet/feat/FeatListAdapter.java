@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -17,6 +13,10 @@ import android.widget.TextView;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.FeatType;
+
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Adapter between the ListView of the feats and the feats model. It observes the feat model. The feat list is
@@ -102,27 +102,27 @@ public class FeatListAdapter extends BaseAdapter implements Observer, Filterable
     }
 
     private void fillView(final View view, final FeatListItem featItem) {
-        final TextView nameTextView = (TextView) view.findViewById(R.id.feat_name);
+        final TextView nameTextView = view.findViewById(R.id.feat_name);
         nameTextView.setText(featItem.getName());
 
-        final TextView benefitTextView = (TextView) view.findViewById(R.id.feat_benefit);
+        final TextView benefitTextView = view.findViewById(R.id.feat_benefit);
         benefitTextView.setText(featItem.getBenefit());
-        final TextView headingBenefitTextView = (TextView) view.findViewById(R.id.feat_benefit_heading);
+        final TextView headingBenefitTextView = view.findViewById(R.id.feat_benefit_heading);
         setVisibiliy(headingBenefitTextView, benefitTextView, featItem.isExpanded());
 
-        final TextView prerequisitTextView = (TextView) view.findViewById(R.id.feat_prerequisit);
+        final TextView prerequisitTextView = view.findViewById(R.id.feat_prerequisit);
         prerequisitTextView.setText(featItem.getPrerequisit());
-        final TextView headingPrerequisitTextView = (TextView) view.findViewById(R.id.feat_prerequisit_heading);
+        final TextView headingPrerequisitTextView = view.findViewById(R.id.feat_prerequisit_heading);
         setVisibiliy(headingPrerequisitTextView, prerequisitTextView, featItem.isExpanded());
 
-        final TextView fighterBonusAndKindTextView = (TextView) view.findViewById(R.id.feat_fighter_bonus_and_kind);
+        final TextView fighterBonusAndKindTextView = view.findViewById(R.id.feat_fighter_bonus_and_kind);
         fighterBonusAndKindTextView.setText(getFighterBonusAndKind(featItem));
         setVisibiliy(null, fighterBonusAndKindTextView, featItem.isExpanded());
     }
 
     private void setVisibiliy(final TextView headingTextView, final TextView contentTextView, final boolean expanded) {
         int visibility = View.GONE;
-        if (expanded && !"".equals(contentTextView.getText())) {
+        if (expanded && !"".equals(contentTextView.getText().toString())) {
             visibility = View.VISIBLE;
         }
         if (headingTextView != null) {

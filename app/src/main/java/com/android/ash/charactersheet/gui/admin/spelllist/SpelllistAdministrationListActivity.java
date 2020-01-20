@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 
@@ -12,6 +8,10 @@ import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.util.SpelllistComparator;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all spell lists and allows to create a new one or edit an existing one.
@@ -26,7 +26,7 @@ public class SpelllistAdministrationListActivity extends AdministrationListActiv
     @Override
     protected ArrayAdapter<Spelllist> getAdapter() {
         final List<Spelllist> allSpelllists = gameSystem.getAllSpelllists();
-        final ArrayAdapter<Spelllist> adapter = new NameDisplayArrayAdapter<Spelllist>(this, displayService,
+        final ArrayAdapter<Spelllist> adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 allSpelllists);
         adapter.sort(new SpelllistComparator());
         return adapter;

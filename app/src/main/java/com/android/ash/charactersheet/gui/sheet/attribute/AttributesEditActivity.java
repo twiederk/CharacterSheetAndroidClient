@@ -71,19 +71,19 @@ public class AttributesEditActivity extends EditActivity {
     }
 
     private void getViews() {
-        strengthNumberView = (StepNumberView) findViewById(R.id.attribute_str);
-        dexterityNumberView = (StepNumberView) findViewById(R.id.attribute_dex);
-        constitutionNumberView = (StepNumberView) findViewById(R.id.attribute_con);
-        intelligenceNumberView = (StepNumberView) findViewById(R.id.attribute_int);
-        wisdomNumberView = (StepNumberView) findViewById(R.id.attribute_wis);
-        charismaNumberView = (StepNumberView) findViewById(R.id.attribute_cha);
+        strengthNumberView = findViewById(R.id.attribute_str);
+        dexterityNumberView = findViewById(R.id.attribute_dex);
+        constitutionNumberView = findViewById(R.id.attribute_con);
+        intelligenceNumberView = findViewById(R.id.attribute_int);
+        wisdomNumberView = findViewById(R.id.attribute_wis);
+        charismaNumberView = findViewById(R.id.attribute_cha);
 
-        strengthTextView = (ObserverTextView) findViewById(R.id.modifier_str);
-        dexterityTextView = (ObserverTextView) findViewById(R.id.modifier_dex);
-        constitutionTextView = (ObserverTextView) findViewById(R.id.modifier_con);
-        intelligenceTextView = (ObserverTextView) findViewById(R.id.modifier_int);
-        wisdomTextView = (ObserverTextView) findViewById(R.id.modifier_wis);
-        charismaTextView = (ObserverTextView) findViewById(R.id.modifier_cha);
+        strengthTextView = findViewById(R.id.modifier_str);
+        dexterityTextView = findViewById(R.id.modifier_dex);
+        constitutionTextView = findViewById(R.id.modifier_con);
+        intelligenceTextView = findViewById(R.id.modifier_int);
+        wisdomTextView = findViewById(R.id.modifier_wis);
+        charismaTextView = findViewById(R.id.modifier_cha);
     }
 
     @Override

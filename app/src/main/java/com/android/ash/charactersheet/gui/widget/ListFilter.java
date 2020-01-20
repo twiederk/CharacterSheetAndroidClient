@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.widget;
 
-import java.util.List;
-
 import android.widget.Filter;
 
 import com.android.ash.charactersheet.gui.util.Logger;
+
+import java.util.List;
 
 /**
  * Filters a list of items.
@@ -14,7 +14,7 @@ import com.android.ash.charactersheet.gui.util.Logger;
  */
 public abstract class ListFilter<T> extends Filter {
 
-    protected ListModel<T> model;
+    protected final ListModel<T> model;
 
     /**
      * Creates filter with given model.
@@ -22,7 +22,7 @@ public abstract class ListFilter<T> extends Filter {
      * @param model
      *            The model to filter.
      */
-    public ListFilter(final ListModel<T> model) {
+    ListFilter(final ListModel<T> model) {
         super();
         this.model = model;
     }

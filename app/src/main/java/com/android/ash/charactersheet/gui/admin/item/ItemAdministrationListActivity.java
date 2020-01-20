@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.item;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +14,10 @@ import com.android.ash.charactersheet.gui.util.MagicOnClickListener;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.util.ItemComparator;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Base Activity to display list of items in administration. Allows to call create and edit activity of the item and to
  * filter items by name and magic. Derive from this class for specific item implementations like weapon, armor and good.
@@ -25,7 +25,6 @@ import com.d20charactersheet.framework.boc.util.ItemComparator;
 public abstract class ItemAdministrationListActivity extends AdministrationListActivity<Item> {
 
     private ItemFilter equipmentFilter;
-    private CheckBox magicItemCheckBox;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -40,11 +39,10 @@ public abstract class ItemAdministrationListActivity extends AdministrationListA
 
     @Override
     protected ArrayAdapter<Item> getAdapter() {
-        final List<Item> items = new ArrayList<Item>(getAllItems());
+        final List<Item> items = new ArrayList<>(getAllItems());
         Collections.sort(items, new ItemComparator());
-        final ArrayAdapter<Item> adapter = new ItemAdministrationAdapter(this, displayService, R.layout.listitem_name,
+        return new ItemAdministrationAdapter(this, displayService, R.layout.listitem_name,
                 equipmentFilter, items);
-        return adapter;
     }
 
     @Override
@@ -65,7 +63,7 @@ public abstract class ItemAdministrationListActivity extends AdministrationListA
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_item_administration, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_activity_item_administration_magic_item);
-        magicItemCheckBox = (CheckBox) menuItem.getActionView();
+        CheckBox magicItemCheckBox = (CheckBox) menuItem.getActionView();
         magicItemCheckBox.setText(getString(R.string.item_administration_list_magic));
         magicItemCheckBox.setChecked(equipmentFilter.isMagic());
         magicItemCheckBox.setOnClickListener(new MagicOnClickListener(equipmentFilter));

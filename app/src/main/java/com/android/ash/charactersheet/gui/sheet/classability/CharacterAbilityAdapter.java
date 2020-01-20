@@ -64,7 +64,7 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
 
         setOwnedCheckBox(view, characterAbilityListItem);
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.ability_name);
+        final TextView nameTextView = view.findViewById(R.id.ability_name);
         nameTextView.setText(characterAbilityListItem.getAbilityName());
 
         if (expandableListItem.isExpanded()) {
@@ -76,7 +76,7 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
     }
 
     private void setOwnedCheckBox(final View view, final CharacterAbilityListItem characterAbilityListItem) {
-        final CheckBox ownedCheckBox = (CheckBox) view.findViewById(R.id.ability_owned);
+        final CheckBox ownedCheckBox = view.findViewById(R.id.ability_owned);
 
         if (characterAbilityModel.isShowAll()) {
             ownedCheckBox.setVisibility(View.VISIBLE);
@@ -96,9 +96,9 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
     }
 
     private void setVisiblity(final View view, final int visibility) {
-        final TableRow secondRow = (TableRow) view.findViewById(R.id.second_row);
-        final TableRow thirdRow = (TableRow) view.findViewById(R.id.third_row);
-        final TableRow forthRow = (TableRow) view.findViewById(R.id.forth_row);
+        final TableRow secondRow = view.findViewById(R.id.second_row);
+        final TableRow thirdRow = view.findViewById(R.id.third_row);
+        final TableRow forthRow = view.findViewById(R.id.forth_row);
 
         secondRow.setVisibility(visibility);
         thirdRow.setVisibility(visibility);
@@ -106,20 +106,20 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
     }
 
     private void setText(final View view, final CharacterAbilityListItem classAbilityListItem) {
-        final TextView typeTextView = (TextView) view.findViewById(R.id.ability_type);
+        final TextView typeTextView = view.findViewById(R.id.ability_type);
         typeTextView.setText(displayService.getDisplayAbilityType(classAbilityListItem.getAbilityType()));
 
-        final TextView characterClassTextView = (TextView) view.findViewById(R.id.ability_character_class);
+        final TextView characterClassTextView = view.findViewById(R.id.ability_character_class);
         final String characterClassText = resources.getString(R.string.character_class_ability_class) + ": "
                 + classAbilityListItem.getCharacterClassName();
         characterClassTextView.setText(characterClassText);
 
-        final TextView levelTextView = (TextView) view.findViewById(R.id.ability_level);
+        final TextView levelTextView = view.findViewById(R.id.ability_level);
         final String levelText = resources.getString(R.string.character_class_ability_level) + ": "
-                + Integer.toString(classAbilityListItem.getLevel());
+                + classAbilityListItem.getLevel();
         levelTextView.setText(levelText);
 
-        final TextView descriptionTextView = (TextView) view.findViewById(R.id.ability_description);
+        final TextView descriptionTextView = view.findViewById(R.id.ability_description);
         final Spanned htmlDescription = Html.fromHtml(classAbilityListItem.getAbilityDescription(), null,
                 tableTagHandler);
         descriptionTextView.setText(htmlDescription);

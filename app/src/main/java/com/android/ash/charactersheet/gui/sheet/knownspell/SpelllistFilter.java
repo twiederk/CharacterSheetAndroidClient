@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.android.ash.charactersheet.gui.widget.StringListFilter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The SpelllistFilter filters a spell list by spells marked by the character and entered letters.
@@ -36,7 +36,7 @@ public class SpelllistFilter extends StringListFilter<Object> {
     }
 
     private List<Object> filterByKnownSpells(final List<Object> items) {
-        final List<Object> filteredItems = new ArrayList<Object>();
+        final List<Object> filteredItems = new ArrayList<>();
         for (final Object item : items) {
             if (item instanceof LevelItem) {
                 filteredItems.add(item);

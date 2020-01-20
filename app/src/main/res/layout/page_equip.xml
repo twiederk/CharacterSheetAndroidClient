@@ -14,7 +14,7 @@
             style="@style/tableCell_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="end"
             android:padding="3dp" />
 
         <TabWidget

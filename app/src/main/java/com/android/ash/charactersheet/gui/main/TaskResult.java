@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.main;
 
+import android.support.annotation.NonNull;
+
 /**
  * Contains information about execution of task. If the task was executes successful only successful is set to true and
  * exception is null. If the task failed successful is false and the exception is set.
@@ -20,36 +22,9 @@ public class TaskResult {
     }
 
     /**
-     * Returns task execution result.
-     * 
-     * @return Task execution result.
-     */
-    public boolean isSuccessful() {
-        return successful;
-    }
-
-    /**
-     * Set the exception which occured while task execution.
-     * 
-     * @param exception
-     *            Exception of task execution.
-     */
-    public void setException(final Exception exception) {
-        this.exception = exception;
-    }
-
-    /**
-     * Returns task execution exception.
-     * 
-     * @return Task execution exception.
-     */
-    public Exception getException() {
-        return exception;
-    }
-
-    /**
      * @see java.lang.Object#toString()
      */
+    @NonNull
     @Override
     public String toString() {
         return "ImportResult: [" + successful + "," + exception + "]";

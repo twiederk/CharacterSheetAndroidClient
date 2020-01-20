@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 
@@ -12,6 +8,10 @@ import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Administration of character classes. Displays all character class. Single touch opens character class for edit. The
@@ -27,7 +27,7 @@ public class CharacterClassAdministrationListActivity extends AdministrationList
     @Override
     protected ArrayAdapter<CharacterClass> getAdapter() {
         final List<CharacterClass> characterClasses = gameSystem.getAllCharacterClasses();
-        final ArrayAdapter<CharacterClass> adapter = new NameDisplayArrayAdapter<CharacterClass>(this, displayService,
+        final ArrayAdapter<CharacterClass> adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 characterClasses);
         adapter.sort(new CharacterClassComparator());
         return adapter;

@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.main;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +29,10 @@ import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ImageService;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Activity to create a new character.
@@ -69,10 +69,10 @@ public class CharacterCreateActivity extends LogActivity {
     }
 
     private void getViews() {
-        raceSpinner = (Spinner) findViewById(R.id.create_race);
-        sexSpinner = (Spinner) findViewById(R.id.create_sex);
-        alignmentSpinner = (Spinner) findViewById(R.id.create_alignment);
-        classSpinner = (Spinner) findViewById(R.id.create_class);
+        raceSpinner = findViewById(R.id.create_race);
+        sexSpinner = findViewById(R.id.create_sex);
+        alignmentSpinner = findViewById(R.id.create_alignment);
+        classSpinner = findViewById(R.id.create_class);
     }
 
     private void setOnClickListener() {
@@ -80,7 +80,7 @@ public class CharacterCreateActivity extends LogActivity {
     }
 
     private void setCreateButtonOnClickListener() {
-        final Button okButton = (Button) findViewById(R.id.create_button);
+        final Button okButton = findViewById(R.id.create_button);
         okButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -126,7 +126,7 @@ public class CharacterCreateActivity extends LogActivity {
     }
 
     private List<ClassLevel> getClassLevels() {
-        final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+        final List<ClassLevel> classLevels = new ArrayList<>();
         final CharacterClass clazz = (CharacterClass) classSpinner.getSelectedItem();
         final ClassLevel classLevel = new ClassLevel(clazz, 1);
         classLevels.add(classLevel);
@@ -134,7 +134,7 @@ public class CharacterCreateActivity extends LogActivity {
     }
 
     private String getEditText(final int resourceId) {
-        final EditText editText = (EditText) findViewById(resourceId);
+        final EditText editText = findViewById(resourceId);
         return editText.getText().toString();
     }
 
@@ -157,16 +157,16 @@ public class CharacterCreateActivity extends LogActivity {
     }
 
     private void setAlignment() {
-        final ArrayAdapter<Alignment> alginmentArrayAdapter = new AlignmentArrayAdapter(this,
+        final ArrayAdapter<Alignment> alignmentArrayAdapter = new AlignmentArrayAdapter(this,
                 gameSystem.getDisplayService(), Alignment.values());
-        alignmentSpinner.setAdapter(alginmentArrayAdapter);
+        alignmentSpinner.setAdapter(alignmentArrayAdapter);
     }
 
     private void setClazz() {
         final List<CharacterClass> allCharacterClasses = gameSystem.getAllCharacterClasses();
         Collections.sort(allCharacterClasses, new CharacterClassComparator());
         final ArrayAdapter<CharacterClass> classArrayAdapter = new CharacterClassArrayAdapter(this,
-                gameSystem.getDisplayService(), new ArrayList<CharacterClass>(allCharacterClasses));
+                gameSystem.getDisplayService(), new ArrayList<>(allCharacterClasses));
         classSpinner.setAdapter(classArrayAdapter);
     }
 

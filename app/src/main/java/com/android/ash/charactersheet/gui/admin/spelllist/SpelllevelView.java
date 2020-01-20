@@ -6,10 +6,10 @@ import com.d20charactersheet.framework.boc.model.Spelllist;
 /**
  * Represents as spell assignment in the spell list administration.
  */
-public class SpelllevelView {
+class SpelllevelView {
 
-    private Spelllist spelllist;
-    private Spell spell;
+    private final Spelllist spelllist;
+    private final Spell spell;
     private int level;
 
     /**
@@ -38,32 +38,12 @@ public class SpelllevelView {
     }
 
     /**
-     * Sets the spell list.
-     * 
-     * @param spelllevel
-     *            The spell list.
-     */
-    public void setSpelllist(final Spelllist spelllevel) {
-        this.spelllist = spelllevel;
-    }
-
-    /**
      * Returns the spell.
      * 
      * @return The spell.
      */
     public Spell getSpell() {
         return spell;
-    }
-
-    /**
-     * Sets the spell.
-     * 
-     * @param spell
-     *            The spell.
-     */
-    public void setSpell(final Spell spell) {
-        this.spell = spell;
     }
 
     /**
@@ -106,13 +86,8 @@ public class SpelllevelView {
         }
         final SpelllevelView other = (SpelllevelView) obj;
         if (spell == null) {
-            if (other.spell != null) {
-                return false;
-            }
-        } else if (!spell.equals(other.spell)) {
-            return false;
-        }
-        return true;
+            return other.spell == null;
+        } else return spell.equals(other.spell);
     }
 
 }

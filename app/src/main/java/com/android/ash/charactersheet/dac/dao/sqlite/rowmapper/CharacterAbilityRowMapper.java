@@ -1,12 +1,12 @@
 package com.android.ash.charactersheet.dac.dao.sqlite.rowmapper;
 
-import java.util.List;
-
 import android.database.Cursor;
 import android.database.SQLException;
 
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.ClassAbility;
+
+import java.util.List;
 
 /**
  * Maps data row to new CharacterAbility instance.
@@ -17,8 +17,8 @@ public class CharacterAbilityRowMapper extends BaseRowMapper {
 
     /**
      * Creates CharacterAbilityRowMapper with list of all available class abilities.
-     * 
-     * @param classAbilities
+     *
+     * @param classAbilities List of all available class abilities
      */
     public CharacterAbilityRowMapper(final List<ClassAbility> classAbilities) {
         super();

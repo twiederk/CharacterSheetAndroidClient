@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.ability;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 
@@ -12,6 +11,8 @@ import com.d20charactersheet.framework.boc.model.ExtraFeatsAbility;
 import com.d20charactersheet.framework.boc.model.ExtraSkillPointsAbility;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import com.d20charactersheet.framework.boc.util.AbilityComparator;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Lists all abilities alphabetically and allow to create and edit them.
@@ -25,7 +26,7 @@ public class AbilityAdministrationListActivity extends AdministrationListActivit
 
     @Override
     protected ArrayAdapter<Ability> getAdapter() {
-        final ArrayAdapter<Ability> adapter = new NameDisplayArrayAdapter<Ability>(this, displayService,
+        final ArrayAdapter<Ability> adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 gameSystem.getAllAbilities());
         adapter.sort(new AbilityComparator());
         return adapter;

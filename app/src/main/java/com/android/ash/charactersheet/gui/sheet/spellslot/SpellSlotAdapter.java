@@ -1,11 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import java.util.Iterator;
-import java.util.List;
-
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +15,9 @@ import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.RuleService;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Displays the spell slots of a spell list for a character. Each spell slot is displayed with the spell name, the spell
@@ -78,7 +78,7 @@ public class SpellSlotAdapter extends ListAdapter<Object> {
         final View spellLevelTitleView = view.findViewById(R.id.spelllevel_title);
 
         final View tableView = view.findViewById(android.R.id.background);
-        final TextView spellNameView = (TextView) view.findViewById(R.id.spell_name);
+        final TextView spellNameView = view.findViewById(R.id.spell_name);
         final View difficultyClassView = view.findViewById(R.id.difficulty_class);
         final View spellSchoolView = view.findViewById(R.id.spell_school);
         final View spelllistAbilityView = view.findViewById(R.id.spelllist_ability);
@@ -135,40 +135,40 @@ public class SpellSlotAdapter extends ListAdapter<Object> {
     }
 
     private int getColor(final View view, final SpellSlot spellSlot) {
-        final Resources resources = view.getContext().getResources();
+        final Context context = view.getContext();
         final Spell spell = spellSlot.getSpell();
         if (spellSlot.isCast()) {
-            return resources.getColor(R.color.cast_spell);
+            return ContextCompat.getColor(context, R.color.cast_spell);
         }
         if (SpellSlot.EMPTY_SPELL.equals(spell)) {
-            return resources.getColor(R.color.empty_spell);
+            return ContextCompat.getColor(context, R.color.empty_spell);
         }
         switch (spell.getSchool()) {
         case ABJURATION:
-            return resources.getColor(R.color.abjuration);
+            return ContextCompat.getColor(context, R.color.abjuration);
         case CONJURATION:
-            return resources.getColor(R.color.conjuration);
+            return ContextCompat.getColor(context, R.color.conjuration);
         case DIVINATION:
-            return resources.getColor(R.color.divination);
+            return ContextCompat.getColor(context, R.color.divination);
         case ENCHANTMENT:
-            return resources.getColor(R.color.enchantment);
+            return ContextCompat.getColor(context, R.color.enchantment);
         case EVOCATION:
-            return resources.getColor(R.color.evocation);
+            return ContextCompat.getColor(context, R.color.evocation);
         case ILLUSION:
-            return resources.getColor(R.color.illusion);
+            return ContextCompat.getColor(context, R.color.illusion);
         case NECROMANCY:
-            return resources.getColor(R.color.necormancy);
+            return ContextCompat.getColor(context, R.color.necormancy);
         case TRANSMUTATION:
-            return resources.getColor(R.color.transmuation);
+            return ContextCompat.getColor(context, R.color.transmuation);
         case UNIVERSAL:
-            return resources.getColor(R.color.universal);
+            return ContextCompat.getColor(context, R.color.universal);
         default:
-            return resources.getColor(R.color.cast_spell);
+            return ContextCompat.getColor(context, R.color.cast_spell);
         }
     }
 
     private void fillLevelView(final View view, final LevelView levelView) {
-        final TextView titleTextView = (TextView) view.findViewById(R.id.spelllevel_title);
+        final TextView titleTextView = view.findViewById(R.id.spelllevel_title);
         final String text = displayService.getDisplaySpellSlotLevel(levelView.getLevel());
         titleTextView.setText(text);
     }
@@ -179,19 +179,19 @@ public class SpellSlotAdapter extends ListAdapter<Object> {
         final List<SpelllistAbility> spelllistAbilities = spellSlot.getSpelllistAbilities();
         final List<Feat> metamagicFeats = spellSlot.getMetamagicFeats();
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.spell_name);
+        final TextView nameTextView = view.findViewById(R.id.spell_name);
         nameTextView.setText(spell.getName());
 
-        final TextView difficultyClassView = (TextView) view.findViewById(R.id.difficulty_class);
+        final TextView difficultyClassView = view.findViewById(R.id.difficulty_class);
         difficultyClassView.setText(getDifficultyClassText(spellSlot));
 
-        final TextView spellSchoolView = (TextView) view.findViewById(R.id.spell_school);
+        final TextView spellSchoolView = view.findViewById(R.id.spell_school);
         spellSchoolView.setText(getSchoolText(spell));
 
-        final TextView spelllistAbilityView = (TextView) view.findViewById(R.id.spelllist_ability);
+        final TextView spelllistAbilityView = view.findViewById(R.id.spelllist_ability);
         spelllistAbilityView.setText(getSpelllistAblilityText(spelllistAbilities));
 
-        final TextView metamagicFeatView = (TextView) view.findViewById(R.id.metamagic_feat);
+        final TextView metamagicFeatView = view.findViewById(R.id.metamagic_feat);
         metamagicFeatView.setText(getMetamagicFeatText(metamagicFeats));
 
     }

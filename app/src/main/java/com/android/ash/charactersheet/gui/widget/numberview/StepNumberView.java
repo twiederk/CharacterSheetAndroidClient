@@ -31,8 +31,7 @@ public class StepNumberView extends NumberView {
         addView(createIncreaseTextView(context, attributeSet), layoutParams);
     }
 
-    @Override
-    View createIncreaseTextView(final Context context, final AttributeSet attributeSet) {
+    private View createIncreaseTextView(final Context context, final AttributeSet attributeSet) {
         final Button increaseButton = createButton(context, "+", attributeSet);
         increaseButton.setOnClickListener(new OnClickListener() {
 
@@ -48,8 +47,7 @@ public class StepNumberView extends NumberView {
         return increaseButton;
     }
 
-    @Override
-    View createDecreaseTextView(final Context context, final AttributeSet attributeSet) {
+    private View createDecreaseTextView(final Context context, final AttributeSet attributeSet) {
         final Button decreaseButton = createButton(context, "-", attributeSet);
         decreaseButton.setOnClickListener(new OnClickListener() {
 
@@ -82,7 +80,6 @@ public class StepNumberView extends NumberView {
      * @param editable
      *            True to edit number value directly.
      */
-    @Override
     public void setEditable(final boolean editable) {
         if (editable) {
             numberTextView.setVisibility(View.GONE);
@@ -91,16 +88,6 @@ public class StepNumberView extends NumberView {
             numberTextView.setVisibility(View.VISIBLE);
             numberEditText.setVisibility(View.GONE);
         }
-        this.editable = editable;
     }
 
-    /**
-     * Returns true, if number value is editable directly.
-     * 
-     * @return True, if number value is editable directly.
-     */
-    @Override
-    public boolean isEditable() {
-        return editable;
-    }
 }

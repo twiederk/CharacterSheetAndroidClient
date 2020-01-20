@@ -17,7 +17,7 @@ public class AndroidPreferenceDao implements PreferenceDao {
     private final SharedPreferences.Editor editor;
 
     /**
-     * Instanciates AndroidPreferenceDao.
+     * Instantiates AndroidPreferenceDao.
      * 
      * @param context
      *            The application context.
@@ -29,14 +29,12 @@ public class AndroidPreferenceDao implements PreferenceDao {
 
     @Override
     public boolean getBoolean(final String key, final boolean defaultValue) {
-        final boolean preference = preferences.getBoolean(key, defaultValue);
-        return preference;
+        return preferences.getBoolean(key, defaultValue);
     }
 
     @Override
     public int getInt(final String key, final int defaultValue) {
-        final int preference = preferences.getInt(key, defaultValue);
-        return preference;
+        return preferences.getInt(key, defaultValue);
     }
 
     @Override

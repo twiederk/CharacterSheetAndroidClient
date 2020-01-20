@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.skill;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -14,6 +13,8 @@ import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.util.SkillComparator;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * The skill administration. Display all skills in a list. The option menu offers the options to create a skill, export,
@@ -44,23 +45,19 @@ public class SkillAdministrationListActivity extends AdministrationListActivity<
     @Override
     public boolean onContextItemSelected(final MenuItem menuItem) {
 
-        switch (menuItem.getItemId()) {
-
-        case CONTEXT_MENU_SKILL_DELETE:
+        if (menuItem.getItemId() == CONTEXT_MENU_SKILL_DELETE) {
             final Skill skill = getSkill(menuItem);
             return deleteSkill(skill);
-
-        default:
-            return super.onContextItemSelected(menuItem);
         }
+        return super.onContextItemSelected(menuItem);
     }
 
     private Skill getSkill(final MenuItem menuItem) {
         final AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) menuItem.getMenuInfo();
-        final Skill skill = (Skill) getListView().getAdapter().getItem(menuInfo.position);
-        return skill;
+        return (Skill) getListView().getAdapter().getItem(menuInfo.position);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean deleteSkill(final Skill skill) {
         gameSystem.deleteSkill(skill);
         final ArrayAdapter<Skill> adapter = (ArrayAdapter<Skill>) getListView().getAdapter();
@@ -76,7 +73,7 @@ public class SkillAdministrationListActivity extends AdministrationListActivity<
 
     @Override
     protected ArrayAdapter<Skill> getAdapter() {
-        final ArrayAdapter<Skill> adapter = new NameDisplayArrayAdapter<Skill>(this, displayService,
+        final ArrayAdapter<Skill> adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 gameSystem.getAllSkills());
         adapter.sort(new SkillComparator());
         return adapter;

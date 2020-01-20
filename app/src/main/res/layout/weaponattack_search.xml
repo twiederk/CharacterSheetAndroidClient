@@ -17,7 +17,9 @@
             android:id="@+id/weaponattack_search_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:hint="@string/weaponattack_search_hint" />
 
         <ListView
             android:id="@+id/weaponattack_search_list"

@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.spell;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
@@ -22,6 +16,12 @@ import com.d20charactersheet.framework.boc.model.SpellResistance;
 import com.d20charactersheet.framework.boc.model.SubSchool;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Mask to administer spells.
  */
@@ -31,6 +31,7 @@ public abstract class SpellAdministrationActivity extends FormularActivity<Spell
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
 
@@ -258,7 +259,7 @@ public abstract class SpellAdministrationActivity extends FormularActivity<Spell
     }
 
     private Descriptor[] getSelectedDescriptors() {
-        final List<Descriptor> descriptorList = new LinkedList<Descriptor>();
+        final List<Descriptor> descriptorList = new LinkedList<>();
         for (final Descriptor descriptor : Descriptor.values()) {
             if (isChecked(descriptor)) {
                 descriptorList.add(descriptor);

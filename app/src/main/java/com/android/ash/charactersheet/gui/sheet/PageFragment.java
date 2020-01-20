@@ -1,6 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,27 +21,29 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.RuleService;
 import com.d20charactersheet.framework.boc.service.XpService;
 
+import java.util.Objects;
+
 /**
  * Base class for fragments which are part of the character sheet.
  */
 public abstract class PageFragment extends LogFragment {
 
-    protected GameSystem gameSystem;
-    protected CharacterService characterService;
-    protected RuleService ruleService;
-    protected AndroidImageService imageService;
-    protected DisplayService displayService;
-    protected PreferenceService preferenceService;
-    protected XpService xpService;
-    protected FeatService featService;
-    protected Character character;
+    GameSystem gameSystem;
+    CharacterService characterService;
+    RuleService ruleService;
+    AndroidImageService imageService;
+    DisplayService displayService;
+    PreferenceService preferenceService;
+    XpService xpService;
+    FeatService featService;
+    Character character;
 
-    protected View view;
+    View view;
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        final CharacterSheetApplication application = (CharacterSheetApplication) getActivity().getApplication();
+        final CharacterSheetApplication application = (CharacterSheetApplication) Objects.requireNonNull(getActivity()).getApplication();
         gameSystem = application.getGameSystem();
         characterService = gameSystem.getCharacterService();
         ruleService = gameSystem.getRuleService();
@@ -67,11 +71,11 @@ public abstract class PageFragment extends LogFragment {
      * @param iconId
      *            The resource id of the icon of the tab.
      */
-    public void addTab(final int labelId, final int layoutId, final int iconId) {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
-        final String label = (String) getActivity().getResources().getText(labelId);
+    void addTab(final int labelId, final int layoutId, final int iconId) {
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
+        final String label = (String) Objects.requireNonNull(getActivity()).getResources().getText(labelId);
         final TabSpec tabSpec = tabHost.newTabSpec(label);
-        tabSpec.setIndicator(label, getActivity().getResources().getDrawable(iconId));
+        tabSpec.setIndicator(label, ContextCompat.getDrawable(getActivity(), iconId));
         tabSpec.setContent(layoutId);
         tabHost.addTab(tabSpec);
     }

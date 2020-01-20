@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -50,15 +52,6 @@ public class LevelItem {
     }
 
     /**
-     * Returns spells of spell level.
-     * 
-     * @return Spells of spell level.
-     */
-    public List<SpellItem> getSpellItems() {
-        return spellItems;
-    }
-
-    /**
      * Sets spells of spell level.
      * 
      * @param spellItems
@@ -82,6 +75,7 @@ public class LevelItem {
         return false;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return Integer.toString(level);

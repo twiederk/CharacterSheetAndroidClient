@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.boc.model;
 
+import android.support.annotation.NonNull;
+
 import com.android.ash.charactersheet.R;
 
 /**
@@ -16,15 +18,15 @@ public enum GameSystemType {
 
     private static final int NO_UPDATE_SCRIPT = 0;
 
-    private int id;
-    private String name;
-    private String databaseName;
-    private int[] createScripts;
-    private int[][] updateScripts;
-    private int[] images;
+    private final int id;
+    private final String name;
+    private final String databaseName;
+    private final int[] createScripts;
+    private final int[][] updateScripts;
+    private final int[] images;
 
-    private GameSystemType(final int id, final String name, final String databaseName, final int[] createScripts,
-            final int[][] updateScripts, final int[] images) {
+    GameSystemType(final int id, final String name, final String databaseName, final int[] createScripts,
+                   final int[][] updateScripts, final int[] images) {
         this.id = id;
         this.name = name;
         this.databaseName = databaseName;
@@ -88,6 +90,7 @@ public enum GameSystemType {
         return images;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return name;
@@ -95,13 +98,13 @@ public enum GameSystemType {
 
     private interface DnDv35 {
 
-        public static int ID = 1;
+        int ID = 1;
 
-        public static String NAME = "Dungeons & Dragons v.3.5";
+        String NAME = "Dungeons & Dragons v.3.5";
 
-        public static String DATABASE_NAME = "dndv35_db";
+        String DATABASE_NAME = "dndv35_db";
 
-        public static final int[] CREATE_SCRIPTS = { //
+        int[] CREATE_SCRIPTS = { //
         // scripts
                 R.raw.create_database, //
                 R.raw.dndv35_phb_data, //
@@ -109,7 +112,7 @@ public enum GameSystemType {
                 R.raw.dndv35_phb_character, //
         };
 
-        public static final int[][] UPDATE_SCRIPTS = { //
+        int[][] UPDATE_SCRIPTS = { //
         //
                 { R.raw.dndv35_upgrade_01_to_02, }, //
                 { R.raw.dndv35_upgrade_02_to_03, }, //
@@ -153,9 +156,10 @@ public enum GameSystemType {
                 { R.raw.dndv35_upgrade_40_to_41, }, //
                 { R.raw.dndv35_upgrade_41_to_42, }, //
                 { R.raw.dndv35_upgrade_42_to_43, }, //
+                {R.raw.dndv35_upgrade_43_to_44,}, //
         };
 
-        public static final int[] IMAGES = { //
+        int[] IMAGES = { //
         // image resource id, face resource id
                 R.drawable.char_default, R.drawable.char_default_face, // Default
                 R.drawable.char_belvador, R.drawable.char_belvador_face, // Belvador
@@ -164,13 +168,13 @@ public enum GameSystemType {
 
     private interface Pathfinder {
 
-        public static int ID = 2;
+        int ID = 2;
 
-        public static String NAME = "Pathfinder";
+        String NAME = "Pathfinder";
 
-        public static String DATABASE_NAME = "pathfinder_db";
+        String DATABASE_NAME = "pathfinder_db";
 
-        public static final int[] CREATE_SCRIPTS = { //
+        int[] CREATE_SCRIPTS = { //
         // create scripts
                 R.raw.create_database, //
                 R.raw.pathfinder_crb_data, //
@@ -180,13 +184,13 @@ public enum GameSystemType {
                 R.raw.pathfinder_apg_spell, //
         };
 
-        public static final int[] IMAGES = { //
+        int[] IMAGES = { //
         // image resource id, face resource id
                 R.drawable.char_default, R.drawable.char_default_face, // Default
                 R.drawable.char_belvador, R.drawable.char_belvador_face // Belvador
         };
 
-        public static final int[][] UPDATE_SCRIPTS = {//
+        int[][] UPDATE_SCRIPTS = {//
                 // update scripts
                 { NO_UPDATE_SCRIPT }, //
                 { NO_UPDATE_SCRIPT }, //
@@ -231,6 +235,7 @@ public enum GameSystemType {
                 { R.raw.pathfinder_upgrade_40_to_41, },//
                 { R.raw.pathfinder_upgrade_41_to_42, },//
                 { R.raw.pathfinder_upgrade_42_to_43, },//
+                {R.raw.pathfinder_upgrade_43_to_44,},//
         };
 
     }

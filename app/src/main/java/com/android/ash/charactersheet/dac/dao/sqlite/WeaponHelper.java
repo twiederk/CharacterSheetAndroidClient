@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -19,10 +16,13 @@ import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper class of the ItemDao. Handles all database activities concerning weapons. Its like a WeaponDao.
  */
-public class WeaponHelper extends ItemHelper {
+class WeaponHelper extends ItemHelper {
 
     private static final String SQL_GET_ALL_WEAPONS = SELECT
             + "id, name, description, cost, weight, number_of_dice, die_id, "
@@ -63,7 +63,7 @@ public class WeaponHelper extends ItemHelper {
      */
     public List<Weapon> getAllWeapons(final List<WeaponFamily> allWeaponFamilies) {
         final List<Item> allItems = getAllItems(SQL_GET_ALL_WEAPONS, new WeaponRowMapper(allWeaponFamilies));
-        final List<Weapon> allWeapons = new ArrayList<Weapon>();
+        final List<Weapon> allWeapons = new ArrayList<>();
         for (final Item item : allItems) {
             allWeapons.add((Weapon) item);
         }
@@ -185,7 +185,7 @@ public class WeaponHelper extends ItemHelper {
      * @return All weapon families.
      */
     public List<WeaponFamily> getAllWeaponFamilies() {
-        final List<WeaponFamily> allWeaponFamilies = new ArrayList<WeaponFamily>();
+        final List<WeaponFamily> allWeaponFamilies = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_WEAPON_FAMILIES, new String[0]);

@@ -1,9 +1,11 @@
 package com.android.ash.charactersheet.gui.admin.skill;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Skill;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Allows to edit an existing skill.
@@ -12,9 +14,8 @@ public class SkillAdministrationEditActivity extends SkillAdministrationActivity
 
     @Override
     protected Skill createForm() {
-        final int skillId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final Skill skill = gameSystem.getSkillService().getSkillById(skillId, gameSystem.getAllSkills());
-        return skill;
+        final int skillId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return gameSystem.getSkillService().getSkillById(skillId, gameSystem.getAllSkills());
     }
 
     @Override

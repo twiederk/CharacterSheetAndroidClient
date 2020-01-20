@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -44,7 +45,7 @@ public class DieRollView extends RelativeLayout {
 
     private DieRollViewController controller;
 
-    float scale;
+    private float scale;
 
     /**
      * Instanciates DieRollView from XML layout.
@@ -62,7 +63,7 @@ public class DieRollView extends RelativeLayout {
     }
 
     private void createLayout(final Context context, final AttributeSet attributeSet) {
-        setBackgroundDrawable(context.getResources().getDrawable(R.drawable.dicebox));
+        setBackground(ContextCompat.getDrawable(context, R.drawable.dicebox));
 
         titleTextView = new TextView(context, attributeSet);
         titleTextView.setId(ID_TITLE);
@@ -153,8 +154,7 @@ public class DieRollView extends RelativeLayout {
         final int colorIndex = getDieImages(controller.getColor());
         final int rollIndex = rollValue - 1;
         final int dieImage = DieImage.IMAGES[dieIndex][colorIndex][rollIndex];
-        final Bitmap bitmap = BitmapFactory.decodeResource(getResources(), dieImage);
-        return bitmap;
+        return BitmapFactory.decodeResource(getResources(), dieImage);
     }
 
     private int getDieImages(final int color) {
@@ -212,16 +212,10 @@ public class DieRollView extends RelativeLayout {
     }
 
     private String getCalculationText() {
-        final StringBuilder text = new StringBuilder();
-        text.append(PLUS_SIGN);
-        text.append(Integer.toString(controller.getDieRoll().getBonus()));
-        text.append(EQUAL_SIGN);
-        text.append(Integer.toString(controller.getDieRoll().getResult()));
-        return text.toString();
-    }
-
-    float getScale() {
-        return scale;
+        return PLUS_SIGN +
+                controller.getDieRoll().getBonus() +
+                EQUAL_SIGN +
+                controller.getDieRoll().getResult();
     }
 
     void setScale(final float scale) {

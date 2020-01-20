@@ -24,7 +24,7 @@ public class AbilityAdministrationEditExtraFeatsActivity extends AbilityAdminist
     protected void fillViews() {
         super.fillViews();
         final ExtraFeatsAbility extraFeatsAbility = (ExtraFeatsAbility) form;
-        final NumberView numberView = (NumberView) findViewById(R.id.ability_administration_extrafeats);
+        final NumberView numberView = findViewById(R.id.ability_administration_extrafeats);
         numberView.setController(new PositiveNumberViewController(extraFeatsAbility.getNumberOfFeats()));
     }
 
@@ -32,7 +32,7 @@ public class AbilityAdministrationEditExtraFeatsActivity extends AbilityAdminist
     protected void fillForm() {
         super.fillForm();
         final ExtraFeatsAbility extraFeatsAbility = (ExtraFeatsAbility) form;
-        final NumberView numberView = (NumberView) findViewById(R.id.ability_administration_extrafeats);
+        final NumberView numberView = findViewById(R.id.ability_administration_extrafeats);
         final int numberOfFeats = numberView.getController().getNumber().intValue();
         extraFeatsAbility.setNumberOfFeats(numberOfFeats);
     }

@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,10 +10,13 @@ import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper class of the ItemDao. Handles all database activities concerning goods. Its like an GoodDao.
  */
-public class GoodHelper extends ItemHelper {
+class GoodHelper extends ItemHelper {
 
     private static final String SQL_GET_ALL_GOODS = SELECT
             + "id, name, description, cost, weight, good_type_id, quality_type_id FROM " + TABLE_GOOD;
@@ -49,7 +49,7 @@ public class GoodHelper extends ItemHelper {
      */
     public List<Good> getAllGoods() {
         final List<Item> allItems = getAllItems(SQL_GET_ALL_GOODS, goodRowMapper);
-        final List<Good> allGoods = new ArrayList<Good>();
+        final List<Good> allGoods = new ArrayList<>();
         for (final Item item : allItems) {
             allGoods.add((Good) item);
         }

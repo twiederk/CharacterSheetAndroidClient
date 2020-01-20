@@ -1,10 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.clazz.ability;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -30,6 +25,12 @@ import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.service.AbilityService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.ClassAbilityComparator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all skills with a checkbox to select them as class skills.
@@ -62,7 +63,7 @@ public class ClassAdministrationAbilityListActivity extends LogActivity implemen
     private void setAbilities() {
         classAbilities = getClassAbilitiesFromIntent();
 
-        adapter = new NameDisplayArrayAdapter<ClassAbility>(this, gameSystem.getDisplayService(), classAbilities);
+        adapter = new NameDisplayArrayAdapter<>(this, gameSystem.getDisplayService(), classAbilities);
         final ListView classAbilityListView = getListView();
         classAbilityListView.setOnCreateContextMenuListener(this);
         classAbilityListView.setOnItemClickListener(this);
@@ -72,8 +73,8 @@ public class ClassAdministrationAbilityListActivity extends LogActivity implemen
     private List<ClassAbility> getClassAbilitiesFromIntent() {
         final Intent intent = getIntent();
         final Bundle extras = intent.getExtras();
-        final int[] classAbilitiesData = extras.getIntArray(INTENT_EXTRA_DATA_OBJECT);
-        final List<ClassAbility> classAbilitiesFromIntent = new ArrayList<ClassAbility>(classAbilitiesData.length / 2);
+        final int[] classAbilitiesData = Objects.requireNonNull(extras).getIntArray(INTENT_EXTRA_DATA_OBJECT);
+        final List<ClassAbility> classAbilitiesFromIntent = new ArrayList<>(Objects.requireNonNull(classAbilitiesData).length / 2);
         final AbilityService abilityService = gameSystem.getAbilityService();
         final List<Ability> allAbilities = gameSystem.getAllAbilities();
         for (int i = 0; i < classAbilitiesData.length; i = i + 2) {
@@ -124,16 +125,13 @@ public class ClassAdministrationAbilityListActivity extends LogActivity implemen
     @Override
     public boolean onContextItemSelected(final MenuItem menuItem) {
 
-        switch (menuItem.getItemId()) {
-
-        case CONTEXT_MENU_CLASS_ABILITY_REMOVE:
+        if (menuItem.getItemId() == CONTEXT_MENU_CLASS_ABILITY_REMOVE) {
             return removeClassAbility();
-
-        default:
-            return super.onContextItemSelected(menuItem);
         }
+        return super.onContextItemSelected(menuItem);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean removeClassAbility() {
         Logger.debug("selectedClassAbility: " + selectedClassAbility);
         adapter.remove(selectedClassAbility);
@@ -148,12 +146,9 @@ public class ClassAdministrationAbilityListActivity extends LogActivity implemen
 
     @Override
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_admin_create:
+        if (item.getItemId() == R.id.menu_admin_create) {
             searchAbility();
-            break;
-
-        default:
+        } else {
             return super.onMenuItemSelected(featureId, item);
         }
         return true;
@@ -173,7 +168,7 @@ public class ClassAdministrationAbilityListActivity extends LogActivity implemen
         case REQUEST_CODE_SEARCH_ABILITY:
             if (resultCode != RESULT_CANCELED) {
                 final Bundle extras = resultIntent.getExtras();
-                final int abilityId = extras.getInt(INTENT_EXTRA_DATA_OBJECT);
+                final int abilityId = Objects.requireNonNull(extras).getInt(INTENT_EXTRA_DATA_OBJECT);
                 final Ability ability = gameSystem.getAbilityService().getAbilityById(abilityId,
                         gameSystem.getAllAbilities());
                 final ClassAbility classAbility = new ClassAbility(ability);
@@ -186,8 +181,8 @@ public class ClassAdministrationAbilityListActivity extends LogActivity implemen
         case REQUEST_CODE_EDIT_CLASS_ABILITY:
             if (resultCode != RESULT_CANCELED) {
                 final Bundle extras = resultIntent.getExtras();
-                final int[] classAbilityData = extras.getIntArray(INTENT_EXTRA_DATA_OBJECT);
-                final int abilityId = classAbilityData[0];
+                final int[] classAbilityData = Objects.requireNonNull(extras).getIntArray(INTENT_EXTRA_DATA_OBJECT);
+                final int abilityId = Objects.requireNonNull(classAbilityData)[0];
                 final int level = classAbilityData[1];
                 final Ability ability = gameSystem.getAbilityService().getAbilityById(abilityId,
                         gameSystem.getAllAbilities());

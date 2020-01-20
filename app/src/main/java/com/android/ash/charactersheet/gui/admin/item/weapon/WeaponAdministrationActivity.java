@@ -1,9 +1,6 @@
 package com.android.ash.charactersheet.gui.admin.item.weapon;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
@@ -23,8 +20,12 @@ import com.d20charactersheet.framework.boc.model.WeaponFamily;
 import com.d20charactersheet.framework.boc.model.WeaponType;
 import com.d20charactersheet.framework.boc.util.WeaponFamilyComparator;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
- * Creates the weapoon administration GUI, which allows to create or edit a weapon. The GUI allows to enter name, type,
+ * Creates the weapon administration GUI, which allows to create or edit a weapon. The GUI allows to enter name, type,
  * cost weight, magical, damage, critical and description of the weapon. At the bottom a ok and cancel button allows to
  * save or cancel the action. Filling the GUI and reading the data from the GUI is handled by this class, while
  * providing the data and storing it must be handled by its derived classes.
@@ -33,6 +34,7 @@ public abstract class WeaponAdministrationActivity extends ItemAdministrationAct
 
     private Weapon weapon;
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.weapon_administration);
@@ -54,9 +56,7 @@ public abstract class WeaponAdministrationActivity extends ItemAdministrationAct
 
     @Override
     protected SpinnerAdapter getTypeAdapter() {
-        final ArrayAdapter<WeaponType> weaponTypeArrayAdapter = new WeaponTypeArrayAdapter(this, displayService,
-                Arrays.asList(WeaponType.values()));
-        return weaponTypeArrayAdapter;
+        return new WeaponTypeArrayAdapter(this, displayService, Arrays.asList(WeaponType.values()));
     }
 
     @Override
@@ -107,7 +107,7 @@ public abstract class WeaponAdministrationActivity extends ItemAdministrationAct
     private void setWeaponFamily() {
         final List<WeaponFamily> allWeaponFamilies = gameSystem.getAllWeaponFamilies();
         Collections.sort(allWeaponFamilies, new WeaponFamilyComparator());
-        final ArrayAdapter<WeaponFamily> weaponFamilyAdapter = new SpinnerArrayAdapter<WeaponFamily>(this,
+        final ArrayAdapter<WeaponFamily> weaponFamilyAdapter = new SpinnerArrayAdapter<>(this,
                 displayService, allWeaponFamilies);
         final int selectedIndex = getWeaponFamilyIndex(weapon.getWeaponFamily(), allWeaponFamilies);
         setSpinner(R.id.weapon_administration_weapon_family, weaponFamilyAdapter, selectedIndex);

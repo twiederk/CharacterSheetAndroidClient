@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
@@ -17,16 +11,22 @@ import android.graphics.BitmapFactory;
 import com.android.ash.charactersheet.dac.dao.TableAndColumnNames;
 import com.android.ash.charactersheet.gui.util.Logger;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Provides access to the SQLite 3 database of the Android platform. Creates the whole database by running a single
  * script.
  */
 public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
-    /** Semphore to synchronize database access */
+    /** Semaphore to synchronize database access */
     public static final Object DB_LOCK = new Object();
 
-    private static final List<DBHelper> DB_HELPERS = new ArrayList<DBHelper>();
+    private static final List<DBHelper> DB_HELPERS = new ArrayList<>();
 
     private final Context context;
     private SQLiteDatabase db;
@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     /**
      * Creates a helper to create, open and upgrade the database. Adds the helper to the list of all DBHelpers.
-     * 
+     *
      * @param context
      *            The context in which the database is running.
      * @param name
@@ -56,7 +56,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
      *            The images of the default characters.
      */
     public DBHelper(final Context context, final String name, final int dbVersion, final int[] createScripts,
-            final int[][] updateScripts, final int[] images) {
+                    final int[][] updateScripts, final int[] images) {
         super(context, name, null, dbVersion);
         this.context = context;
         this.createScripts = createScripts;
@@ -66,9 +66,9 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
     }
 
     /**
-     * Returns all instanciated db helpers.
-     * 
-     * @return All instanciated db helpers.
+     * Returns all instantiated db helpers.
+     *
+     * @return All instantiated db helpers.
      */
     public static List<DBHelper> getDBHelpers() {
         return DB_HELPERS;
@@ -76,7 +76,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     /**
      * Returns the names of all databases.
-     * 
+     *
      * @return The names of all databases.
      */
     public static String[] getDatabaseNames() {
@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     /**
      * Creates the database from a single SQL scripts, located in the raw directory.
-     * 
+     *
      * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
      */
     @Override
@@ -100,37 +100,37 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     private void createDatabase() {
         try {
-            for (int i = 0; i < createScripts.length; i++) {
-                final int createScript = createScripts[i];
+            for (final int createScript : createScripts) {
                 executeSqlScript(createScript);
             }
             initImageTable();
         } catch (final SQLException sqlException) {
             Logger.error("Can't create database: " + sqlException.getMessage());
         } catch (final IOException ioException) {
-            Logger.error("Can't find SQL Skript: create tables", ioException);
+            Logger.error("Can't find SQL script: create tables", ioException);
         }
 
     }
 
     private void executeSqlScript(final int resourceId) throws IOException {
-        final String[] sqls = getSqlsFromRawResource(resourceId);
+        final String[] sqlScripts = getSqlScriptsFromRawResource(resourceId);
         synchronized (DBHelper.DB_LOCK) {
-            for (int i = 0; i < sqls.length; i++) {
-                if (sqls[i].trim().length() == 0) {
+            for (String sqlScript : sqlScripts) {
+                if (sqlScript.trim().length() == 0) {
                     continue;
                 }
-                // Logger.debug("sqls[" + i + "]: " + sqls[i]);
+                // Logger.debug("sqlScripts[" + i + "]: " + sqlScripts[i]);
                 try {
-                    db.execSQL(sqls[i]);
+                    db.execSQL(sqlScript);
                 } catch (final SQLException sqlException) {
-                    Logger.error("Can't execute statement: " + sqls[i], sqlException);
+                    Logger.error("Can't execute statement: " + sqlScript, sqlException);
                 }
             }
         }
     }
 
-    private String[] getSqlsFromRawResource(final int resourceId) throws IOException {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private String[] getSqlScriptsFromRawResource(final int resourceId) throws IOException {
         // read sql script from file
         final InputStream inputStream = context.getResources().openRawResource(resourceId);
         final byte[] buffer = new byte[inputStream.available()];
@@ -138,8 +138,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
         // split sql script in separate sql statements
         final String sql = new String(buffer);
-        final String[] sqls = sql.split(";");
-        return sqls;
+        return sql.split(";");
     }
 
     private void initImageTable() {
@@ -149,7 +148,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
         }
     }
 
-    protected Bitmap getBitmap(final int resourceId) {
+    private Bitmap getBitmap(final int resourceId) {
         return BitmapFactory.decodeResource(context.getResources(), resourceId);
     }
 
@@ -163,7 +162,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
         }
     }
 
-    protected byte[] getBitmapData(final Bitmap bitmap) {
+    private byte[] getBitmapData(final Bitmap bitmap) {
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         return bytes.toByteArray();
@@ -171,7 +170,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     /**
      * Upgrades the database to the next version.
-     * 
+     *
      * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)
      */
     @Override
@@ -205,7 +204,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
         upgrade = true;
     }
 
-    protected void upgradeDatabase(final int upgradeScript) {
+    private void upgradeDatabase(final int upgradeScript) {
         try {
             executeSqlScript(upgradeScript);
         } catch (final IOException ioException) {
@@ -215,7 +214,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     /**
      * Returns true, if the database was upgraded.
-     * 
+     *
      * @return True, if the database was upgraded.
      */
     public boolean isUpgrade() {
@@ -224,20 +223,11 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     /**
      * Returns the old version of the database.
-     * 
+     *
      * @return The old version of the database.
      */
     public int getOldVersion() {
         return oldVersion;
-    }
-
-    /**
-     * Returns the new version of the database.
-     * 
-     * @return The new version of the database.
-     */
-    public int getNewVersion() {
-        return newVersion;
     }
 
 }

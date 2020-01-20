@@ -15,7 +15,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
  * Handles click on metamagic feat checkbox in spell slot. It checks if it is possible to add the metamagic feat to the
  * spell slot, if not it displays a message.
  */
-public class FeatOnClickListener implements OnClickListener {
+class FeatOnClickListener implements OnClickListener {
 
     private final SpellSlotActivityModel spellSlotActivityModel;
     private final Feat feat;

@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore.MediaColumns;
 
+import java.util.Objects;
+
 /**
  * Utility class to handle images in Android specific manner.
  */
-public class ImageHandler {
+class ImageHandler {
 
     private static final String SCHEME_FILE = "file";
 
@@ -40,8 +42,7 @@ public class ImageHandler {
      */
     public String getFilename(final Intent intent) {
         final Uri uri = getImageUri(intent);
-        final String filename = getImageFilename(uri);
-        return filename;
+        return getImageFilename(uri);
     }
 
     /**
@@ -51,7 +52,7 @@ public class ImageHandler {
      *            The result of the CropImage activity.
      * @return The uri of the cropped image.
      */
-    public Uri getImageUri(final Intent intent) {
+    private Uri getImageUri(final Intent intent) {
         Uri croppedImage;
         final String action = intent.getAction();
         if (action != null) {
@@ -65,13 +66,13 @@ public class ImageHandler {
     String getImageFilename(final Uri uri) {
         final String scheme = uri.getScheme();
         String filename;
-        if (scheme.startsWith(SCHEME_FILE)) {
+        if (Objects.requireNonNull(scheme).startsWith(SCHEME_FILE)) {
             filename = uri.getPath();
 
         } else {
             final String[] projection = { MediaColumns.DATA };
             final Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
-            cursor.moveToFirst();
+            Objects.requireNonNull(cursor).moveToFirst();
             final int columnIndex = cursor.getColumnIndexOrThrow(MediaColumns.DATA);
             filename = cursor.getString(columnIndex);
             cursor.close();

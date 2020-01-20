@@ -1,13 +1,8 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Observable;
-import java.util.Observer;
-
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,13 +16,19 @@ import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.d20charactersheet.framework.boc.model.Item;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Adapter to display items in a ListView.
  * 
  * @param <T>
  *            The class to export.
  */
-public class ExportItemListAdapter<T extends Item> extends BaseAdapter implements Observer, Filterable {
+class ExportItemListAdapter<T extends Item> extends BaseAdapter implements Observer, Filterable {
 
     private final Resources resources;
     private final int itemViewResourceId;
@@ -57,10 +58,10 @@ public class ExportItemListAdapter<T extends Item> extends BaseAdapter implement
         this.itemViewResourceId = itemViewResourceId;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.allItems = allItems;
-        this.filteredItems = new ArrayList<T>(allItems);
+        this.filteredItems = new ArrayList<>(allItems);
         this.equipmentFilter = equipmentFilter;
         equipmentFilter.addObserver(this);
-        selectedItems = new ArrayList<T>(allItems.size());
+        selectedItems = new ArrayList<>(allItems.size());
     }
 
     @Override
@@ -99,7 +100,7 @@ public class ExportItemListAdapter<T extends Item> extends BaseAdapter implement
 
     private void fillView(final View view, final T item) {
         setBackgroundColor(view, item.isMagic());
-        final CheckBox checkbox = (CheckBox) view.findViewById(R.id.listitem_export_checkbox);
+        final CheckBox checkbox = view.findViewById(R.id.listitem_export_checkbox);
         checkbox.setText(item.getName());
 
         checkbox.setOnClickListener(new OnClickListener() {
@@ -118,10 +119,11 @@ public class ExportItemListAdapter<T extends Item> extends BaseAdapter implement
     }
 
     private void setBackgroundColor(final View view, final boolean magic) {
+        Context context = view.getContext();
         if (magic) {
-            view.setBackgroundColor(resources.getColor(R.color.magic));
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.magic));
         } else {
-            view.setBackgroundColor(resources.getColor(R.color.transparent));
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
         }
     }
 
@@ -132,14 +134,14 @@ public class ExportItemListAdapter<T extends Item> extends BaseAdapter implement
     }
 
     private void filterItems() {
-        filteredItems = new ArrayList<T>(allItems);
+        filteredItems = new ArrayList<>(allItems);
         filterByMagic();
         filterByName();
     }
 
     private void filterByMagic() {
         if (equipmentFilter.isMagic()) {
-            final List<T> itemsToFilter = new ArrayList<T>(filteredItems);
+            final List<T> itemsToFilter = new ArrayList<>(filteredItems);
             for (final T item : itemsToFilter) {
                 if (!item.isMagic()) {
                     filteredItems.remove(item);
@@ -153,7 +155,7 @@ public class ExportItemListAdapter<T extends Item> extends BaseAdapter implement
             return;
         }
 
-        final List<T> itemsToFilter = new ArrayList<T>(filteredItems);
+        final List<T> itemsToFilter = new ArrayList<>(filteredItems);
         for (final T item : itemsToFilter) {
             final String name = item.getName().toLowerCase(Locale.getDefault());
 
@@ -165,10 +167,9 @@ public class ExportItemListAdapter<T extends Item> extends BaseAdapter implement
 
     private boolean matchSplittedValue(final String name) {
         final String[] words = name.split(" ");
-        final int wordCount = words.length;
 
-        for (int i = 0; i < wordCount; i++) {
-            if (words[i].startsWith(equipmentFilter.getName())) {
+        for (String word : words) {
+            if (word.startsWith(equipmentFilter.getName())) {
                 return true;
             }
         }

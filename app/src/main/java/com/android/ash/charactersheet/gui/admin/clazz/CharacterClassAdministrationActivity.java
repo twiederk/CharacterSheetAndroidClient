@@ -1,12 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +25,14 @@ import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.SkillService;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * The form to create or edit an character class. It contains the name, alignments, hit die, base attack bonus, high
  * saves, skill points per level and class skills to administer.
@@ -39,22 +40,23 @@ import com.d20charactersheet.framework.boc.service.SkillService;
 public abstract class CharacterClassAdministrationActivity extends FormularActivity<CharacterClass> {
 
     /** Request code of the CharacterClassAlignmentActivity */
-    public static final int REQUEST_CODE_ALIGNMENT = 0;
+    private static final int REQUEST_CODE_ALIGNMENT = 0;
 
     /** Request code of the CharacterClassSkillActivity */
-    public static final int REQUEST_CODE_SKILL = 1;
+    private static final int REQUEST_CODE_SKILL = 1;
 
     /** Request code of the CharacterClassAbilityActivity */
-    public static final int REQUEST_CODE_ABILITY = 2;
+    private static final int REQUEST_CODE_ABILITY = 2;
 
-    protected GameSystem gameSystem;
-    protected CharacterClassService characterClassService;
-    protected CharacterService characterService;
+    GameSystem gameSystem;
+    CharacterClassService characterClassService;
+    CharacterService characterService;
 
-    protected CharacterClassAdministrationHelper helper;
+    CharacterClassAdministrationHelper helper;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         characterClassService = gameSystem.getCharacterClassService();
@@ -137,7 +139,7 @@ public abstract class CharacterClassAdministrationActivity extends FormularActiv
     }
 
     private List<ClassAbility> getDeletedClassAbilities() {
-        final List<ClassAbility> deletedClassAbilities = new LinkedList<ClassAbility>();
+        final List<ClassAbility> deletedClassAbilities = new LinkedList<>();
         final List<ClassAbility> newClassAbilities = helper.getClassAbilities();
         for (final ClassAbility oldClassAbility : form.getClassAbilities()) {
             if (!contains(newClassAbilities, oldClassAbility)) {
@@ -178,7 +180,7 @@ public abstract class CharacterClassAdministrationActivity extends FormularActiv
         case REQUEST_CODE_ALIGNMENT:
             if (resultCode != RESULT_CANCELED) {
                 final Bundle bundle = resultIntent.getExtras();
-                final EnumSet<Alignment> alignments = (EnumSet<Alignment>) bundle.get(INTENT_EXTRA_DATA_OBJECT);
+                final EnumSet<Alignment> alignments = (EnumSet<Alignment>) Objects.requireNonNull(bundle).get(INTENT_EXTRA_DATA_OBJECT);
                 helper.setAlignments(alignments);
             }
             break;
@@ -186,10 +188,10 @@ public abstract class CharacterClassAdministrationActivity extends FormularActiv
         case REQUEST_CODE_ABILITY:
             if (resultCode != RESULT_CANCELED) {
                 final Bundle bundle = resultIntent.getExtras();
-                final int[] classAbilitiesData = bundle.getIntArray(INTENT_EXTRA_DATA_OBJECT);
+                final int[] classAbilitiesData = Objects.requireNonNull(bundle).getIntArray(INTENT_EXTRA_DATA_OBJECT);
                 final AbilityService abilityService = gameSystem.getAbilityService();
                 final List<Ability> allAbilities = gameSystem.getAllAbilities();
-                final List<ClassAbility> classAbilities = new ArrayList<ClassAbility>(classAbilitiesData.length / 2);
+                final List<ClassAbility> classAbilities = new ArrayList<>(Objects.requireNonNull(classAbilitiesData).length / 2);
                 for (int i = 0; i < classAbilitiesData.length; i = i + 2) {
                     final int abilityId = classAbilitiesData[i];
                     final int level = classAbilitiesData[i + 1];
@@ -205,12 +207,11 @@ public abstract class CharacterClassAdministrationActivity extends FormularActiv
         case REQUEST_CODE_SKILL:
             if (resultCode != RESULT_CANCELED) {
                 final Bundle bundle = resultIntent.getExtras();
-                final int[] skillIds = bundle.getIntArray(INTENT_EXTRA_DATA_OBJECT);
-                final List<Skill> skills = new ArrayList<Skill>(skillIds.length);
+                final int[] skillIds = Objects.requireNonNull(bundle).getIntArray(INTENT_EXTRA_DATA_OBJECT);
+                final List<Skill> skills = new ArrayList<>(Objects.requireNonNull(skillIds).length);
                 final SkillService skillService = gameSystem.getSkillService();
                 final List<Skill> allSkills = gameSystem.getAllSkills();
-                for (int i = 0; i < skillIds.length; i++) {
-                    final int skillId = skillIds[i];
+                for (final int skillId : skillIds) {
                     final Skill skill = skillService.getSkillById(skillId, allSkills);
                     skills.add(skill);
                 }

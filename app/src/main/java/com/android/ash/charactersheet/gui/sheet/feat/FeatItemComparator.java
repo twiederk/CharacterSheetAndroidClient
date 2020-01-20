@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * Compares feats by name.
  */
-public class FeatItemComparator implements Comparator<FeatListItem>, Serializable {
+class FeatItemComparator implements Comparator<FeatListItem>, Serializable {
 
     private static final long serialVersionUID = -5375490327201622772L;
 

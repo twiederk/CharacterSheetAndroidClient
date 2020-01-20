@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +17,10 @@ import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all spells and allows to search them and select one.
@@ -41,16 +41,16 @@ public class SpellSearchActivity extends LogActivity implements OnItemClickListe
         setContentView(R.layout.activity_spell_search);
         setTitle(R.string.spell_search_title);
         final List<Spell> allSpells = gameSystem.getAllSpells();
-        final ArrayAdapter<Spell> adapter = new NameDisplayArrayAdapter<Spell>(this, gameSystem.getDisplayService(),
+        final ArrayAdapter<Spell> adapter = new NameDisplayArrayAdapter<>(this, gameSystem.getDisplayService(),
                 allSpells);
         adapter.sort(new SpellComparator());
 
-        final ListView listView = (ListView) findViewById(android.R.id.list);
+        final ListView listView = findViewById(android.R.id.list);
         listView.setAdapter(adapter);
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(this);
 
-        final EditText searchEditText = (EditText) findViewById(android.R.id.input);
+        final EditText searchEditText = findViewById(android.R.id.input);
         searchEditText.addTextChangedListener(new SearchTextWatcher(listView));
     }
 

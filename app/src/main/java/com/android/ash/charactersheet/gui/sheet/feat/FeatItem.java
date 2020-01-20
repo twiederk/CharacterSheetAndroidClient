@@ -5,7 +5,7 @@ import com.d20charactersheet.framework.boc.model.Feat;
 /**
  * Wraps a static feat to display in a list view.
  */
-public class FeatItem extends AbstractFeatListItem {
+class FeatItem extends AbstractFeatListItem {
 
     /**
      * Creates StaticFeatItem of feat.

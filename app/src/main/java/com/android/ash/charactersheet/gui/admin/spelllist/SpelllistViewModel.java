@@ -1,18 +1,18 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Model of spell list. Spells are ordered by level and then sorted alphabetically.
  */
-public class SpelllistViewModel extends ListModel<SpelllevelView> {
+class SpelllistViewModel extends ListModel<SpelllevelView> {
 
     /**
      * Instanciates SpellListViewModel.
@@ -27,8 +27,8 @@ public class SpelllistViewModel extends ListModel<SpelllevelView> {
     }
 
     private List<SpelllevelView> createSpelllevelViews(final Spelllist spelllist) {
-        final List<SpelllevelView> viewObjects = new ArrayList<SpelllevelView>();
-        final List<Integer> levels = new ArrayList<Integer>(spelllist.getSpellsByLevel().keySet());
+        final List<SpelllevelView> viewObjects = new ArrayList<>();
+        final List<Integer> levels = new ArrayList<>(spelllist.getSpellsByLevel().keySet());
         Collections.sort(levels);
         for (final Integer level : levels) {
             viewObjects.addAll(createViewObjects(spelllist, level));
@@ -37,9 +37,9 @@ public class SpelllistViewModel extends ListModel<SpelllevelView> {
     }
 
     private List<SpelllevelView> createViewObjects(final Spelllist spelllist, final int level) {
-        final List<Spell> spells = new ArrayList<Spell>(spelllist.getSpellsOfLevel(level));
+        final List<Spell> spells = new ArrayList<>(spelllist.getSpellsOfLevel(level));
         Collections.sort(spells, new SpellComparator());
-        final List<SpelllevelView> viewObjects = new ArrayList<SpelllevelView>(spells.size());
+        final List<SpelllevelView> viewObjects = new ArrayList<>(spells.size());
         for (final Spell spell : spells) {
             final SpelllevelView viewObject = new SpelllevelView(spelllist, spell, level);
             viewObjects.add(viewObject);

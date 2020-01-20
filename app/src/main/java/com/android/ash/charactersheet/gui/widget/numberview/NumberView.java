@@ -30,8 +30,6 @@ public abstract class NumberView extends LinearLayout {
     TextView numberTextView;
     EditText numberEditText;
 
-    boolean editable;
-
     /**
      * Instanciates NumberView contained in a layout file.
      * 
@@ -48,10 +46,6 @@ public abstract class NumberView extends LinearLayout {
     }
 
     abstract void initView(Context context, AttributeSet attributeSet, LayoutParams layoutParams);
-
-    abstract View createIncreaseTextView(Context context, AttributeSet attributeSet);
-
-    abstract View createDecreaseTextView(Context context, AttributeSet attributeSet);
 
     private LayoutParams createLayoutParams() {
         final LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -82,7 +76,7 @@ public abstract class NumberView extends LinearLayout {
         numberEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         numberEditText.setVisibility(View.GONE);
         numberEditText.setMinWidth((int) (EDITTEXT_SIZE * scale));
-        numberEditText.setGravity(Gravity.RIGHT);
+        numberEditText.setGravity(Gravity.END);
         numberEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         numberEditText.setOnKeyListener(new OnKeyListener() {
 
@@ -137,39 +131,12 @@ public abstract class NumberView extends LinearLayout {
         return "";
     }
 
-    /**
-     * Set to true to display an EditText instead of an TextView. The EditText allows to edit the number value directly.
-     * 
-     * @param editable
-     *            True to edit number value directly.
-     */
-    public void setEditable(final boolean editable) {
-        if (editable) {
-            numberTextView.setVisibility(View.GONE);
-            numberEditText.setVisibility(View.VISIBLE);
-        } else {
-            numberTextView.setVisibility(View.VISIBLE);
-            numberEditText.setVisibility(View.GONE);
-        }
-        this.editable = editable;
-    }
-
-    /**
-     * Returns true, if number value is editable directly.
-     * 
-     * @return True, if number value is editable directly.
-     */
-    public boolean isEditable() {
-        return editable;
-    }
-
     Number getNumber(final TextView textView) {
         final String text = textView.getText().toString();
         if ("".equals(text)) {
             return 0;
         }
-        final Float number = Float.valueOf(text);
-        return number;
+        return Float.valueOf(text);
     }
 
 }

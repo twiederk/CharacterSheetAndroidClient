@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,15 +20,18 @@ import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ItemService;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Base class to expand activities to edit items from. Displays items in a list view. The number of each item can be
  * edit by a NumberView. Saves data if back button is pressed.
  */
 public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
 
-    protected ItemService itemService;
+    ItemService itemService;
 
-    protected List<ExpandableListItem> allExpandListViews;
+    private List<ExpandableListItem> allExpandListViews;
     private EquipmentHelper equipmentHelper;
     private ItemFilter equipmentFilter;
 
@@ -59,11 +59,11 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
         allExpandListViews = equipmentHelper.createItemGroups(getAllExpandListViews(), getCharacterItems());
         final ItemEditArrayAdapter itemEditArrayAdapter = new ItemEditArrayAdapter(this, displayService,
                 R.layout.listitem_item_edit, equipmentFilter, allExpandListViews);
-        final ListView listView = (ListView) findViewById(R.id.item_edit_list);
+        final ListView listView = findViewById(R.id.item_edit_list);
         listView.setAdapter(itemEditArrayAdapter);
         listView.setTextFilterEnabled(true);
 
-        final EditText searchEditText = (EditText) findViewById(R.id.item_edit_search_text);
+        final EditText searchEditText = findViewById(R.id.item_edit_search_text);
         searchEditText.addTextChangedListener(new SearchTextWatcher(listView));
     }
 
@@ -82,7 +82,7 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
     }
 
     private List<ItemGroup> getItems() {
-        final List<ItemGroup> items = new LinkedList<ItemGroup>();
+        final List<ItemGroup> items = new LinkedList<>();
         for (final ExpandableListItem expandListView : allExpandListViews) {
             final ItemGroup itemGroup = (ItemGroup) expandListView.getObject();
             if (itemGroup.getNumber() > 0) {

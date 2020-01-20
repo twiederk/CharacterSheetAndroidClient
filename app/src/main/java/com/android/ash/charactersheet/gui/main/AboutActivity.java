@@ -25,7 +25,7 @@ public class AboutActivity extends LogActivity {
     }
 
     private void setVersionName() {
-        final TextView versionNameTextView = (TextView) findViewById(R.id.app_version);
+        final TextView versionNameTextView = findViewById(R.id.app_version);
         versionNameTextView.setText(getString(R.string.app_version_name));
     }
 

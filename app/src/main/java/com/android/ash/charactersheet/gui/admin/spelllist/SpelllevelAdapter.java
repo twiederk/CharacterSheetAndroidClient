@@ -40,13 +40,13 @@ public class SpelllevelAdapter extends ListAdapter<SpelllevelView> {
     protected void fillView(final View view, final Object item) {
         final SpelllevelView spellLevelView = (SpelllevelView) item;
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.item_name);
+        final TextView nameTextView = view.findViewById(R.id.item_name);
         nameTextView.setText(spellLevelView.getSpell().getName());
 
-        final StepNumberView goodNumberView = (StepNumberView) view.findViewById(R.id.item_number);
+        final StepNumberView goodNumberView = view.findViewById(R.id.item_number);
         goodNumberView.setController(new SpelllevelNumberViewController(gameSystem, spellLevelView));
 
-        final ImageButton deleteButton = (ImageButton) view.findViewById(R.id.item_delete);
+        final ImageButton deleteButton = view.findViewById(R.id.item_delete);
         deleteButton.setOnClickListener(new OnClickListener() {
 
             @Override

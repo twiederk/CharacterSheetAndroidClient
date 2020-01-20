@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.appearance;
 
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -19,6 +16,10 @@ import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.model.Sex;
 import com.d20charactersheet.framework.boc.model.XpTable;
 import com.d20charactersheet.framework.boc.util.RaceComparator;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Allow to edit the stats of the character.
@@ -53,14 +54,14 @@ public class AppearanceEditActivity extends EditActivity {
     }
 
     private void getViews() {
-        nameEditText = (EditText) findViewById(R.id.appearance_name);
-        playerEditText = (EditText) findViewById(R.id.appearance_player);
-        raceSpinner = (Spinner) findViewById(R.id.appearance_race);
-        sexSpinner = (Spinner) findViewById(R.id.appearance_sex);
-        classLevelButton = (Button) findViewById(R.id.appearance_class_level);
-        alignmentSpinner = (Spinner) findViewById(R.id.appearance_alignment);
-        xpTableSpinner = (Spinner) findViewById(R.id.appearance_xptable);
-        experienceEditText = (EditText) findViewById(R.id.appearance_experience);
+        nameEditText = findViewById(R.id.appearance_name);
+        playerEditText = findViewById(R.id.appearance_player);
+        raceSpinner = findViewById(R.id.appearance_race);
+        sexSpinner = findViewById(R.id.appearance_sex);
+        classLevelButton = findViewById(R.id.appearance_class_level);
+        alignmentSpinner = findViewById(R.id.appearance_alignment);
+        xpTableSpinner = findViewById(R.id.appearance_xptable);
+        experienceEditText = findViewById(R.id.appearance_experience);
     }
 
     private void createSpinnerAdapter() {
@@ -85,7 +86,7 @@ public class AppearanceEditActivity extends EditActivity {
         classLevelButton.setOnClickListener(new IntentOnClickListener(new Intent(this, ClassLevelEditActivity.class)));
         alignmentSpinner.setSelection(character.getAlignment().ordinal());
         xpTableSpinner.setSelection(getXpTableIndex(character.getXpTable()));
-        experienceEditText.setText(Integer.toString(character.getExperiencePoints()));
+        experienceEditText.setText(String.format(Locale.US, "%d", character.getExperiencePoints()));
     }
 
     private int getRaceIndex(final Race race) {

@@ -10,13 +10,13 @@ import java.util.List;
 public class KnownSpellPageModel {
 
     private boolean showAll;
-    List<SpelllistModel> spelllistModels;
+    private final List<SpelllistModel> spelllistModels;
 
     /**
      * Instanciates KnownSpellPageModel with empty list of spell list models.
      */
     public KnownSpellPageModel() {
-        spelllistModels = new LinkedList<SpelllistModel>();
+        spelllistModels = new LinkedList<>();
     }
 
     /**

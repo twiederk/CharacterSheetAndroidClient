@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.race.ability;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -27,6 +21,13 @@ import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.AbilityComparator;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all abilities with checkboxes. By checking a ability it is associated with the race.
@@ -57,7 +58,7 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
     private void setAbilities() {
         abilities = getAbilitiesFromIntent();
 
-        adapter = new NameDisplayArrayAdapter<Ability>(this, gameSystem.getDisplayService(), abilities);
+        adapter = new NameDisplayArrayAdapter<>(this, gameSystem.getDisplayService(), abilities);
         adapter.sort(new AbilityComparator());
         final ListView abilityListView = getListView();
         abilityListView.setOnCreateContextMenuListener(this);
@@ -68,8 +69,8 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
     private List<Ability> getAbilitiesFromIntent() {
         final Intent intent = getIntent();
         final Bundle extras = intent.getExtras();
-        final List<Integer> abilityIds = (List<Integer>) extras.getSerializable(INTENT_EXTRA_DATA_OBJECT);
-        final List<Ability> abilities = new ArrayList<Ability>(abilityIds.size());
+        final List<Integer> abilityIds = (List<Integer>) Objects.requireNonNull(extras).getSerializable(INTENT_EXTRA_DATA_OBJECT);
+        final List<Ability> abilities = new ArrayList<>(Objects.requireNonNull(abilityIds).size());
         for (final Integer abilityId : abilityIds) {
             final Ability ability = gameSystem.getAbilityService().getAbilityById(abilityId,
                     gameSystem.getAllAbilities());
@@ -94,7 +95,7 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
     }
 
     private List<Integer> getAbilityIds() {
-        final List<Integer> abilityIds = new ArrayList<Integer>(abilities.size());
+        final List<Integer> abilityIds = new ArrayList<>(abilities.size());
         for (final Ability ability : abilities) {
             abilityIds.add(ability.getId());
         }
@@ -117,16 +118,13 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
     @Override
     public boolean onContextItemSelected(final MenuItem menuItem) {
 
-        switch (menuItem.getItemId()) {
-
-        case CONTEXT_MENU_ABILITY_REMOVE:
+        if (menuItem.getItemId() == CONTEXT_MENU_ABILITY_REMOVE) {
             return removeAbility();
-
-        default:
-            return super.onContextItemSelected(menuItem);
         }
+        return super.onContextItemSelected(menuItem);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean removeAbility() {
         Logger.debug("selectedAbility: " + selectedAbility);
         adapter.remove(selectedAbility);
@@ -141,12 +139,9 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
 
     @Override
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_admin_create:
+        if (item.getItemId() == R.id.menu_admin_create) {
             searchAbility();
-            break;
-
-        default:
+        } else {
             return super.onMenuItemSelected(featureId, item);
         }
         return true;
@@ -162,18 +157,15 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
 
         // see which child activity is calling us back.
-        switch (requestCode) {
-        case REQUEST_CODE_SEARCH_ABILITY:
+        if (requestCode == REQUEST_CODE_SEARCH_ABILITY) {
             if (resultCode != RESULT_CANCELED) {
                 final Bundle extras = resultIntent.getExtras();
-                final int abilityId = extras.getInt(INTENT_EXTRA_DATA_OBJECT);
+                final int abilityId = Objects.requireNonNull(extras).getInt(INTENT_EXTRA_DATA_OBJECT);
                 final Ability ability = gameSystem.getAbilityService().getAbilityById(abilityId,
                         gameSystem.getAllAbilities());
                 adapter.add(ability);
             }
-            break;
-
-        default:
+        } else {
             throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
     }

@@ -1,10 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +29,12 @@ import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Displays a tab for each spell caster class of the character. Each tab displays the spell slots of the character for
@@ -68,7 +69,7 @@ public class SpellSlotPageFragment extends PageFragment {
     }
 
     private boolean isSpellSlotsChanged() {
-        final List<SpellSlot> characterSpellSlots = new LinkedList<SpellSlot>(character.getSpellSlots());
+        final List<SpellSlot> characterSpellSlots = new LinkedList<>(character.getSpellSlots());
         final List<SpellSlot> calculatedSpellSlots = ruleService.calculateSpellSlots(character);
         if (characterSpellSlots.size() != calculatedSpellSlots.size()) {
             return true;
@@ -94,11 +95,8 @@ public class SpellSlotPageFragment extends PageFragment {
     }
 
     private boolean equals(final SpellSlot spellSlot, final SpellSlot characterSpellSlot) {
-        if (spellSlot.getLevel() == characterSpellSlot.getLevel()
-                && equals(spellSlot.getSpelllistAbilities(), characterSpellSlot.getSpelllistAbilities())) {
-            return true;
-        }
-        return false;
+        return spellSlot.getLevel() == characterSpellSlot.getLevel()
+                && equals(spellSlot.getSpelllistAbilities(), characterSpellSlot.getSpelllistAbilities());
     }
 
     private boolean equals(final List<SpelllistAbility> spelllistAbilities,
@@ -125,7 +123,7 @@ public class SpellSlotPageFragment extends PageFragment {
         characterService.updateSpellSlots(character, calculatedSpellSlots);
 
         spellSlotPageModel = new SpellSlotPageModel();
-        final List<SpellSlot> allSpellSlots = new LinkedList<SpellSlot>(character.getSpellSlots());
+        final List<SpellSlot> allSpellSlots = new LinkedList<>(character.getSpellSlots());
         for (final ClassLevel classLevel : character.getClassLevels()) {
             final CharacterClass clazz = classLevel.getCharacterClass();
             final List<SpelllistAbility> spelllistAbilities = getSpelllistAbilitiesOfClass(clazz);
@@ -144,7 +142,7 @@ public class SpellSlotPageFragment extends PageFragment {
     }
 
     private List<SpelllistAbility> getSpelllistAbilitiesOfClass(final CharacterClass clazz) {
-        final List<SpelllistAbility> spelllistAbilities = new LinkedList<SpelllistAbility>();
+        final List<SpelllistAbility> spelllistAbilities = new LinkedList<>();
         for (final ClassAbility classAbility : clazz.getClassAbilities()) {
             if (classAbility.getAbility() instanceof SpelllistAbility) {
                 final SpelllistAbility spelllistAbility = (SpelllistAbility) classAbility.getAbility();
@@ -156,7 +154,7 @@ public class SpellSlotPageFragment extends PageFragment {
 
     private List<SpellSlot> getSpellSlotsOfSpelllistAbilities(final List<SpelllistAbility> spelllistAbilities,
             final List<SpellSlot> allSpellSlots) {
-        final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+        final List<SpellSlot> spellSlots = new ArrayList<>();
         for (final SpellSlot spellSlot : allSpellSlots) {
             if (contains(spellSlot, spelllistAbilities)) {
                 spellSlots.add(spellSlot);
@@ -175,7 +173,7 @@ public class SpellSlotPageFragment extends PageFragment {
     }
 
     private void createClassTabs() {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
         tabHost.clearAllTabs();
 
@@ -213,13 +211,8 @@ public class SpellSlotPageFragment extends PageFragment {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
-        switch (item.getItemId()) {
-        case R.id.menu_page_spell_slot_rest:
+        if (item.getItemId() == R.id.menu_page_spell_slot_rest) {
             rest();
-            break;
-
-        default:
-            break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -236,7 +229,7 @@ public class SpellSlotPageFragment extends PageFragment {
     /**
      * Creates tabs for each spell caster class of the character.
      */
-    public class ClassTabContentFactory implements TabHost.TabContentFactory {
+    class ClassTabContentFactory implements TabHost.TabContentFactory {
 
         private final HashMap<String, View> tabs;
 
@@ -248,9 +241,9 @@ public class SpellSlotPageFragment extends PageFragment {
          * @param onCreateContextMenuListener
          *            The create context menu listener.
          */
-        public ClassTabContentFactory(final OnItemClickListener onItemClickListener,
-                final OnCreateContextMenuListener onCreateContextMenuListener) {
-            tabs = new HashMap<String, View>();
+        ClassTabContentFactory(final OnItemClickListener onItemClickListener,
+                               final OnCreateContextMenuListener onCreateContextMenuListener) {
+            tabs = new HashMap<>();
 
             for (final SpellSlotModel spellSlotModel : spellSlotPageModel.getSpellSlotModels()) {
                 final View tabView = inflateTabView();
@@ -266,7 +259,7 @@ public class SpellSlotPageFragment extends PageFragment {
 
         private void setClassLevel(final View tabView, final SpellSlotModel spellSlotModel) {
             final String text = displayService.getDisplayClassLevel(spellSlotModel.getClassLevel());
-            final TextView classLevelTextView = (TextView) tabView.findViewById(R.id.page_spell_slot_class_level);
+            final TextView classLevelTextView = tabView.findViewById(R.id.page_spell_slot_class_level);
             classLevelTextView.setText(text);
         }
 
@@ -276,7 +269,7 @@ public class SpellSlotPageFragment extends PageFragment {
             text.append(displayService.getDisplayAttributeShort(attribute));
             text.append(": ");
             text.append(character.getAttribute(attribute));
-            final TextView attributeTextView = (TextView) tabView.findViewById(R.id.page_spell_slot_attribute);
+            final TextView attributeTextView = tabView.findViewById(R.id.page_spell_slot_attribute);
             attributeTextView.setText(text);
         }
 
@@ -286,7 +279,7 @@ public class SpellSlotPageFragment extends PageFragment {
             final SpellSlotAdapter spelllistAdapter = new SpellSlotAdapter(getActivity(), character, displayService,
                     ruleService, spellSlotModel);
             // final ListView listView = new ListView(getActivity());
-            final ListView listView = (ListView) tabView.findViewById(android.R.id.list);
+            final ListView listView = tabView.findViewById(android.R.id.list);
             listView.setAdapter(spelllistAdapter);
             listView.setOnItemClickListener(onItemClickListener);
             listView.setOnCreateContextMenuListener(onCreateContextMenuListener);
@@ -295,11 +288,10 @@ public class SpellSlotPageFragment extends PageFragment {
         }
 
         private View inflateTabView() {
-            final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
-            final LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(
+            final TabHost tabHost = view.findViewById(android.R.id.tabhost);
+            final LayoutInflater layoutInflater = (LayoutInflater) Objects.requireNonNull(getActivity()).getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
-            final View tabView = layoutInflater.inflate(R.layout.page_spell_slot_tab, tabHost, false);
-            return tabView;
+            return layoutInflater.inflate(R.layout.page_spell_slot_tab, tabHost, false);
         }
 
         @Override

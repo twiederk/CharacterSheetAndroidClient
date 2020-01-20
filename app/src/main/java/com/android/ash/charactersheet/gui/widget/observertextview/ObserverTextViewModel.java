@@ -13,13 +13,13 @@ public interface ObserverTextViewModel extends Observer {
      * @param observer
      *            The observer to add.
      */
-    public void addObserver(Observer observer);
+    void addObserver(Observer observer);
 
     /**
      * Returns the text of the model.
      * 
      * @return The text of the model.
      */
-    public String getText();
+    String getText();
 
 }

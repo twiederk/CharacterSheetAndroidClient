@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.spell;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 
@@ -12,6 +8,10 @@ import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all spells and allows to create a new one or edit an existing one.
@@ -26,7 +26,7 @@ public class SpellAdministrationListActivity extends AdministrationListActivity<
     @Override
     protected ArrayAdapter<Spell> getAdapter() {
         final List<Spell> allSpells = gameSystem.getAllSpells();
-        final ArrayAdapter<Spell> adapter = new NameDisplayArrayAdapter<Spell>(this, displayService, allSpells);
+        final ArrayAdapter<Spell> adapter = new NameDisplayArrayAdapter<>(this, displayService, allSpells);
         adapter.sort(new SpellComparator());
         return adapter;
     }

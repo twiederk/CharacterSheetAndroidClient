@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
+import android.support.annotation.NonNull;
+
 import com.d20charactersheet.framework.boc.model.Spell;
 
 /**
@@ -79,6 +81,7 @@ public class SpellItem {
         return knownSpell;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return spell.getName();

@@ -19,7 +19,7 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 /**
  * The administration offers lists of entities to administer, like character classes, races and abilities. These lists
  * share the same basic functionalities, like alphabetically listed entities, create and update entities. Derive from
- * this class to create list of differnet entities, sharing these basic functionalities.
+ * this class to create list of different entities, sharing these basic functionalities.
  * 
  * @param <T>
  *            The entity to administer, like character class, race or ability.
@@ -39,7 +39,7 @@ public abstract class AdministrationListActivity<T> extends LogActivity implemen
         gameSystem = application.getGameSystem();
         displayService = gameSystem.getDisplayService();
 
-        final EditText searchEditText = (EditText) findViewById(android.R.id.input);
+        final EditText searchEditText = findViewById(android.R.id.input);
         searchEditText.addTextChangedListener(new SearchTextWatcher(getListView()));
     }
 
@@ -74,12 +74,9 @@ public abstract class AdministrationListActivity<T> extends LogActivity implemen
 
     @Override
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_admin_create:
+        if (item.getItemId() == R.id.menu_admin_create) {
             startActivity(getCreateIntent());
-            break;
-
-        default:
+        } else {
             return super.onMenuItemSelected(featureId, item);
         }
         return true;

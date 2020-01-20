@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.skill;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +12,8 @@ import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.RuleService;
+
+import java.util.List;
 
 /**
  * Adapter of skill list.
@@ -60,10 +60,10 @@ public class CharacterSkillArrayAdapter extends DisplayArrayAdapter<CharacterSki
     protected void fillView(final View view, final CharacterSkill characterSkill) {
 
         // first row
-        final TextView skillNameTextView = (TextView) view.findViewById(R.id.skill_name);
+        final TextView skillNameTextView = view.findViewById(R.id.skill_name);
         skillNameTextView.setText(characterSkill.getSkill().getName());
 
-        final Button skillModifierButton = (Button) view.findViewById(R.id.skill_roll_button);
+        final Button skillModifierButton = view.findViewById(R.id.skill_roll_button);
         final int skillModifier = ruleService.getSkillModifier(character, characterSkill);
         skillModifierButton.setText(displayService.getDisplayModifier(skillModifier));
 
@@ -71,39 +71,33 @@ public class CharacterSkillArrayAdapter extends DisplayArrayAdapter<CharacterSki
                 dieRollView));
 
         // second row
-        final TextView attributeModifierTextView = (TextView) view.findViewById(R.id.skill_attribute_modifier);
+        final TextView attributeModifierTextView = view.findViewById(R.id.skill_attribute_modifier);
         attributeModifierTextView.setText(getAttributeModifier(characterSkill));
 
-        final TextView rankTextView = (TextView) view.findViewById(R.id.skill_rank);
+        final TextView rankTextView = view.findViewById(R.id.skill_rank);
         rankTextView.setText(getRankModifier(characterSkill));
 
-        final TextView modifierTextView = (TextView) view.findViewById(R.id.skill_modifier);
+        final TextView modifierTextView = view.findViewById(R.id.skill_modifier);
         modifierTextView.setText(getModifier(characterSkill));
     }
 
     private String getAttributeModifier(final CharacterSkill characterSkill) {
         final int attributeModifier = ruleService.getAttributeModifier(character, characterSkill.getSkill()
                 .getAttribute());
-        final StringBuilder text = new StringBuilder();
-        text.append(displayService.getDisplayAttributeShort(characterSkill.getSkill().getAttribute()));
-        text.append(COLON);
-        text.append(displayService.getDisplayModifier(attributeModifier));
-        return text.toString();
+        return displayService.getDisplayAttributeShort(characterSkill.getSkill().getAttribute()) +
+                COLON +
+                displayService.getDisplayModifier(attributeModifier);
     }
 
     private String getRankModifier(final CharacterSkill characterSkill) {
-        final StringBuilder text = new StringBuilder();
-        text.append(getContext().getResources().getString(R.string.skill_list_rank));
-        text.append(COLON);
-        text.append(characterSkill.getRank());
-        return text.toString();
+        return getContext().getResources().getString(R.string.skill_list_rank) +
+                COLON +
+                characterSkill.getRank();
     }
 
     private CharSequence getModifier(final CharacterSkill characterSkill) {
-        final StringBuilder text = new StringBuilder();
-        text.append(getContext().getResources().getString(R.string.skill_list_mod));
-        text.append(COLON);
-        text.append(displayService.getDisplayModifier(characterSkill.getModifier()));
-        return text.toString();
+        return getContext().getResources().getString(R.string.skill_list_mod) +
+                COLON +
+                displayService.getDisplayModifier(characterSkill.getModifier());
     }
 }

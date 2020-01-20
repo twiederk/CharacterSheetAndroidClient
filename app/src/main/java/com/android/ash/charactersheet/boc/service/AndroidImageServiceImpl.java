@@ -1,11 +1,12 @@
 package com.android.ash.charactersheet.boc.service;
 
-import java.io.ByteArrayOutputStream;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.d20charactersheet.framework.dac.dao.ImageDao;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * Implements Android OS specific class of ImageService.
@@ -38,8 +39,7 @@ public class AndroidImageServiceImpl implements AndroidImageService {
     @Override
     public Bitmap getBitmap(final int imageId) {
         final byte[] imageData = imageDao.getImage(imageId);
-        final Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
-        return bitmap;
+        return BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
     }
 
     /**
@@ -51,9 +51,16 @@ public class AndroidImageServiceImpl implements AndroidImageService {
             throw new IllegalArgumentException("filename is null");
         }
         final byte[] imageData = getImageData(filename);
-        final int imageId = imageDao.createImage(imageData);
-        return imageId;
+        return imageDao.createImage(imageData);
     }
+
+    public int createImage(final InputStream inputStream) {
+        final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        return imageDao.createImage(bytes.toByteArray());
+    }
+
 
     private byte[] getImageData(final String filename) {
         final Bitmap bitmap = BitmapFactory.decodeFile(filename);

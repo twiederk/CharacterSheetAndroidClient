@@ -1,15 +1,17 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
+import android.support.annotation.NonNull;
+
+import com.d20charactersheet.framework.boc.model.CharacterFeat;
+import com.d20charactersheet.framework.boc.model.Feat;
+import com.d20charactersheet.framework.boc.model.FeatType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
-
-import com.d20charactersheet.framework.boc.model.CharacterFeat;
-import com.d20charactersheet.framework.boc.model.Feat;
-import com.d20charactersheet.framework.boc.model.FeatType;
 
 /**
  * Model of feat list. Stores current filter settings and returns feats according to filter settings. Notifies observers
@@ -39,7 +41,7 @@ public class FeatModel extends Observable {
     }
 
     private List<FeatItem> createFeatItems(final List<Feat> allFeats) {
-        final List<FeatItem> featItems = new ArrayList<FeatItem>();
+        final List<FeatItem> featItems = new ArrayList<>();
         for (final Feat feat : allFeats) {
             featItems.add(new FeatItem(feat));
         }
@@ -47,7 +49,7 @@ public class FeatModel extends Observable {
     }
 
     private List<CharacterFeatItem> createCharacterFeatItems(final List<CharacterFeat> characterFeats) {
-        final List<CharacterFeatItem> characterFeatItems = new ArrayList<CharacterFeatItem>();
+        final List<CharacterFeatItem> characterFeatItems = new ArrayList<>();
         for (final CharacterFeat characterFeat : characterFeats) {
             characterFeatItems.add(new CharacterFeatItem(characterFeat));
         }
@@ -90,7 +92,7 @@ public class FeatModel extends Observable {
     }
 
     private List<FeatListItem> getFeatItems(final List<? extends FeatListItem> featItems, final FeatType featType) {
-        final List<FeatListItem> featsOfType = new ArrayList<FeatListItem>();
+        final List<FeatListItem> featsOfType = new ArrayList<>();
         for (final FeatListItem featItem : featItems) {
             if (featItem.getFeatType().equals(featType)) {
                 featsOfType.add(featItem);
@@ -103,13 +105,13 @@ public class FeatModel extends Observable {
 
     private List<FeatListItem> performFiltering(final List<FeatListItem> featsOfType) {
         if (filter == null || filter.length() == 0) {
-            return new ArrayList<FeatListItem>(featsOfType);
+            return new ArrayList<>(featsOfType);
         }
         return filterFeatItems(featsOfType);
     }
 
     private List<FeatListItem> filterFeatItems(final List<FeatListItem> featsOfType) {
-        final List<FeatListItem> filteredFeatItems = new ArrayList<FeatListItem>();
+        final List<FeatListItem> filteredFeatItems = new ArrayList<>();
         for (final FeatListItem featItem : featsOfType) {
             final String name = featItem.getName().toLowerCase(Locale.getDefault());
 
@@ -126,10 +128,9 @@ public class FeatModel extends Observable {
     private void matchSplittedValue(final FeatListItem featItem, final String name,
             final List<FeatListItem> filteredFeatItems) {
         final String[] words = name.split(" ");
-        final int wordCount = words.length;
 
-        for (int i = 0; i < wordCount; i++) {
-            if (words[i].startsWith(filter)) {
+        for (String word : words) {
+            if (word.startsWith(filter)) {
                 filteredFeatItems.add(featItem);
                 break;
             }
@@ -139,6 +140,7 @@ public class FeatModel extends Observable {
     /**
      * @see java.lang.Object#toString()
      */
+    @NonNull
     @Override
     public String toString() {
         return "FeatModel: showAllFeats = " + showAllFeats;
@@ -191,11 +193,10 @@ public class FeatModel extends Observable {
     }
 
     private void removeMultipleFeat(final CharacterFeatItem featItem) {
-        final CharacterFeatItem removeFeatItem = featItem;
         for (final Iterator<? extends FeatListItem> iterator = characterFeatItems.iterator(); iterator.hasNext();) {
             final CharacterFeatItem characterFeatItem = (CharacterFeatItem) iterator.next();
             if (featItem.getId() == characterFeatItem.getId()) {
-                if (removeFeatItem.getCategory().equals(characterFeatItem.getCategory())) {
+                if (featItem.getCategory().equals(characterFeatItem.getCategory())) {
                     iterator.remove();
                     fireEvent();
                     return;
@@ -255,7 +256,7 @@ public class FeatModel extends Observable {
      * @return The list of character feats.
      */
     public List<CharacterFeat> getCharacterFeats() {
-        final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>();
+        final List<CharacterFeat> characterFeats = new ArrayList<>();
         for (final FeatListItem featListItem : characterFeatItems) {
             final CharacterFeatItem characterFeatItem = (CharacterFeatItem) featListItem;
             characterFeats.add(characterFeatItem.getCharacterFeat());

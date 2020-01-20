@@ -60,7 +60,7 @@ public class ImportMessageAdapter extends ListAdapter<ImportMessage> {
         final View hiddenTextView = view.findViewById(hiddenTextViewId);
         hiddenTextView.setVisibility(View.GONE);
 
-        final TextView messageTextView = (TextView) view.findViewById(messageTextViewId);
+        final TextView messageTextView = view.findViewById(messageTextViewId);
         messageTextView.setVisibility(View.VISIBLE);
         return messageTextView;
     }

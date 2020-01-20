@@ -26,9 +26,7 @@ public class CharacterFeatItem extends AbstractFeatListItem {
     @Override
     public String getName() {
         if (isMultiple()) {
-            final StringBuilder name = new StringBuilder(getFeat().getName());
-            name.append(" (").append(getCategory()).append(")");
-            return name.toString();
+            return getFeat().getName() + " (" + getCategory() + ")";
         }
         return getFeat().getName();
     }

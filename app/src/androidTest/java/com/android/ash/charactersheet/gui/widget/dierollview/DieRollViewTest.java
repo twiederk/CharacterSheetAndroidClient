@@ -1,55 +1,73 @@
 package com.android.ash.charactersheet.gui.widget.dierollview;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.d20charactersheet.framework.boc.model.Die;
 import com.d20charactersheet.framework.boc.model.DieRoll;
 
-public class DieRollViewTest extends AndroidTestCase {
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-    DieRollView dieRollView;
-    TestDieRollController controller;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-    @Override
-    protected void setUp() throws Exception {
-        dieRollView = new DieRollView(getContext(), null);
+@RunWith(AndroidJUnit4.class)
+public class DieRollViewTest {
+
+    private DieRollView dieRollView;
+    private TestDieRollController controller;
+
+    @Before
+    public void setUp() {
+        final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        dieRollView = new DieRollView(context, null);
         dieRollView.setScale(1.0f);
         controller = new TestDieRollController();
     }
 
-    public void testCreateMultipleDieBitmap1D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap1D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1});
         assertBitmap(dieRoll, 64, 64);
     }
 
-    public void testCreateMultipleDieBitmap2D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1, 2 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap2D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1, 2});
         assertBitmap(dieRoll, 128, 64);
     }
 
-    public void testCreateMultipleDieBitmap3D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1, 2, 3 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap3D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1, 2, 3});
         assertBitmap(dieRoll, 192, 64);
     }
 
-    public void testCreateMultipleDieBitmap4D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1, 2, 3, 4 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap4D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1, 2, 3, 4});
         assertBitmap(dieRoll, 192, 128);
     }
 
-    public void testCreateMultipleDieBitmap5D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1, 2, 3, 4, 5 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap5D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1, 2, 3, 4, 5});
         assertBitmap(dieRoll, 192, 128);
     }
 
-    public void testCreateMultipleDieBitmap6D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1, 2, 3, 4, 5, 6 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap6D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1, 2, 3, 4, 5, 6});
         assertBitmap(dieRoll, 192, 128);
     }
 
-    public void testCreateMultipleDieBitmap7D6() throws Exception {
-        final DieRoll dieRoll = createDieRoll(Die.D6, new int[] { 1, 2, 3, 4, 5, 6, 1 }, 0);
+    @Test
+    public void testCreateMultipleDieBitmap7D6() {
+        final DieRoll dieRoll = createDieRoll(new int[]{1, 2, 3, 4, 5, 6, 1});
         assertBitmap(dieRoll, 192, 192);
     }
 
@@ -65,11 +83,11 @@ public class DieRollViewTest extends AndroidTestCase {
 
     }
 
-    private DieRoll createDieRoll(final Die die, final int[] rolls, final int bonus) {
+    private DieRoll createDieRoll(final int[] rolls) {
         final DieRoll dieRoll = new DieRoll();
-        dieRoll.setDie(die);
+        dieRoll.setDie(Die.D6);
         dieRoll.setRolls(rolls);
-        dieRoll.setBonus(bonus);
+        dieRoll.setBonus(0);
         return dieRoll;
     }
 
@@ -97,12 +115,13 @@ public class DieRollViewTest extends AndroidTestCase {
             return null;
         }
 
-        public void setDieRoll(final DieRoll dieRoll) {
+        void setDieRoll(final DieRoll dieRoll) {
             this.dieRoll = dieRoll;
         }
     }
 
-    public void testGetBitmapWidth() throws Exception {
+    @Test
+    public void testGetBitmapWidth() {
         int bitmapWidth = dieRollView.getBitmapWidth(1, 64);
         assertEquals(64, bitmapWidth);
 
@@ -116,7 +135,8 @@ public class DieRollViewTest extends AndroidTestCase {
         assertEquals(192, bitmapWidth);
     }
 
-    public void testGetBitmapHeight() throws Exception {
+    @Test
+    public void testGetBitmapHeight() {
         int bitmapHeight = dieRollView.getBitmapHeight(1, 64);
         assertEquals(64, bitmapHeight);
 
@@ -139,7 +159,8 @@ public class DieRollViewTest extends AndroidTestCase {
         assertEquals(192, bitmapHeight);
     }
 
-    public void testGetX() throws Exception {
+    @Test
+    public void testGetX() {
         final int[] expectedX = new int[] { 0, 64, 128, 0, 64, 128, 0 };
         for (int i = 0; i < 7; i++) {
             assertEquals(expectedX[i], dieRollView.getX(i, 64));

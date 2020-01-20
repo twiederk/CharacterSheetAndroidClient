@@ -18,12 +18,12 @@ import com.d20charactersheet.framework.boc.service.RuleService;
  */
 public abstract class RollOnClickListener implements OnClickListener {
 
-    protected static final String SPACE = " ";
+    private static final String SPACE = " ";
 
     protected final Character character;
     protected final DisplayService displayService;
     protected final RuleService ruleService;
-    protected final DieRollView dieRollView;
+    private final DieRollView dieRollView;
 
     /**
      * Instanciates RollOnClickListener.
@@ -37,8 +37,8 @@ public abstract class RollOnClickListener implements OnClickListener {
      * @param dieRollView
      *            The view to display the result.
      */
-    public RollOnClickListener(final Character character, final DisplayService displayService,
-            final RuleService ruleService, final DieRollView dieRollView) {
+    protected RollOnClickListener(final Character character, final DisplayService displayService,
+                                  final RuleService ruleService, final DieRollView dieRollView) {
         this.character = character;
         this.displayService = displayService;
         this.ruleService = ruleService;
@@ -54,12 +54,10 @@ public abstract class RollOnClickListener implements OnClickListener {
         dieRollView.setVisibility(View.VISIBLE);
     }
 
-    protected String getTitle(final View view) {
-        final StringBuilder title = new StringBuilder();
-        title.append(getTitle(view.getResources()));
-        title.append(SPACE);
-        title.append(view.getResources().getString(R.string.page_sheet_die_roll_title));
-        return title.toString();
+    private String getTitle(final View view) {
+        return getTitle(view.getResources()) +
+                SPACE +
+                view.getResources().getString(R.string.page_sheet_die_roll_title);
     }
 
     protected abstract String getTitle(Resources resources);

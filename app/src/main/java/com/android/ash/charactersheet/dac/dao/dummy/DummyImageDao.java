@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.dummy;
 
-import java.io.ByteArrayOutputStream;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +7,8 @@ import android.util.SparseArray;
 
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.dac.dao.ImageDao;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Dummy implementation of the ImageDao interface to simulate a persistence layer in memory.
@@ -38,7 +38,7 @@ public class DummyImageDao implements ImageDao {
     }
 
     private void initImageMap() {
-        imageTable = new SparseArray<byte[]>(imageResourceIds.length);
+        imageTable = new SparseArray<>(imageResourceIds.length);
         for (imageCounter = 0; imageCounter < imageResourceIds.length; imageCounter++) {
             final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), imageResourceIds[imageCounter]);
             final ByteArrayOutputStream bytes = new ByteArrayOutputStream();

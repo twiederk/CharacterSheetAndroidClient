@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:importantForAutofill="noExcludeDescendants"
         android:orientation="vertical" >
 
         <TableLayout
@@ -21,6 +22,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:labelFor="@+id/ability_administration_name"
                     android:text="@string/ability_administration_edit_name" />
 
                 <EditText
@@ -54,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:labelFor="@+id/ability_administration_desc"
             android:text="@string/ability_administration_edit_desc" />
 
         <EditText

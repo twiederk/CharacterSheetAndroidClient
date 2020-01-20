@@ -1,10 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -33,6 +28,11 @@ import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.util.CharacterSkillComparator;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * The SkillListActivity displays the max class rank and max cross class rank of the character. It displays the skill
  * points of the character. The skills are displayed in three different skill lists. Each skill list is contained in a
@@ -48,10 +48,6 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
 
     private ArrayAdapter<CharacterSkill> favoriteSkillsAdpater;
 
-    private List<CharacterSkill> favoriteSkills;
-    private List<CharacterSkill> trainedSkills;
-    private List<CharacterSkill> allSkills;
-
     @Override
     protected int getLayoutId() {
         return R.layout.page_skill;
@@ -64,42 +60,38 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     }
 
     private void setHeader() {
-        final TextView maxRanksTextView = (TextView) view.findViewById(R.id.max_ranks);
+        final TextView maxRanksTextView = view.findViewById(R.id.max_ranks);
         maxRanksTextView.setText(getMaxRank());
 
-        final TextView skillPointsTextView = (TextView) view.findViewById(R.id.skill_points);
+        final TextView skillPointsTextView = view.findViewById(R.id.skill_points);
         skillPointsTextView.setText(getSkillPoints());
     }
 
     private String getMaxRank() {
         final int maxClassSkillRank = ruleService.getMaxClassSkillRank(character);
         final float maxCrossClassSkillRank = ruleService.getMaxCrossClassSkillRank(character);
-        final StringBuilder text = new StringBuilder();
-        text.append(getResources().getString(R.string.skill_list_max_ranks));
-        text.append(": ");
-        text.append(maxClassSkillRank);
-        text.append(" / ");
-        text.append(maxCrossClassSkillRank);
-        return text.toString();
+        return getResources().getString(R.string.skill_list_max_ranks) +
+                ": " +
+                maxClassSkillRank +
+                " / " +
+                maxCrossClassSkillRank;
     }
 
     private String getSkillPoints() {
         final CharacterClass startClass = character.getClassLevels().get(0).getCharacterClass();
         final int skillPoints = ruleService.getSkillPoints(character, startClass);
         final int spentSkillPoints = ruleService.getSpentSkillPoints(character);
-        final StringBuilder text = new StringBuilder();
-        text.append(getResources().getString(R.string.skill_list_skill_points));
-        text.append(": ");
-        text.append(spentSkillPoints);
-        text.append(" ");
-        text.append(getResources().getString(R.string.skill_list_skill_points_of));
-        text.append(" ");
-        text.append(skillPoints);
-        return text.toString();
+        return getResources().getString(R.string.skill_list_skill_points) +
+                ": " +
+                spentSkillPoints +
+                " " +
+                getResources().getString(R.string.skill_list_skill_points_of) +
+                " " +
+                skillPoints;
     }
 
     private void setTabs() {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         addTab(R.string.skill_list_tab_title_fav, R.id.skill_list_list_favorite, android.R.drawable.btn_star);
@@ -121,18 +113,18 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     }
 
     private void setAllSkills() {
-        allSkills = character.getCharacterSkills();
+        List<CharacterSkill> allSkills = character.getCharacterSkills();
         createAdapterAndListView(allSkills, R.id.skill_list_list_all);
     }
 
     private ArrayAdapter<CharacterSkill> createAdapterAndListView(final List<CharacterSkill> characterSkills,
             final int listViewResourceId) {
-        final DieRollView dieRollView = (DieRollView) view.findViewById(R.id.die_roll_view);
+        final DieRollView dieRollView = view.findViewById(R.id.die_roll_view);
         final CharacterSkillArrayAdapter characterSkillsArrayAdapter = new CharacterSkillArrayAdapter(getActivity(),
                 character, ruleService, displayService, R.layout.listitem_skill, dieRollView, characterSkills);
         characterSkillsArrayAdapter.sort(new CharacterSkillComparator());
 
-        final ListView listView = (ListView) view.findViewById(listViewResourceId);
+        final ListView listView = view.findViewById(listViewResourceId);
         listView.setAdapter(characterSkillsArrayAdapter);
         listView.setTextFilterEnabled(true);
         listView.setOnCreateContextMenuListener(this);
@@ -143,7 +135,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
 
     private List<CharacterSkill> getTrainedSkills() {
         final List<CharacterSkill> allSkills = character.getCharacterSkills();
-        trainedSkills = new ArrayList<CharacterSkill>();
+        List<CharacterSkill> trainedSkills = new ArrayList<>();
         for (final CharacterSkill skill : allSkills) {
             if (ruleService.isTrained(skill)) {
                 trainedSkills.add(skill);
@@ -154,7 +146,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
 
     private List<CharacterSkill> getFavoriteCharacterSkills() {
         final List<CharacterSkill> allSkills = character.getCharacterSkills();
-        favoriteSkills = new ArrayList<CharacterSkill>();
+        List<CharacterSkill> favoriteSkills = new ArrayList<>();
         for (final CharacterSkill characterSkill : allSkills) {
             if (characterSkill instanceof FavoriteCharacterSkill) {
                 final FavoriteCharacterSkill favCharacterSkill = (FavoriteCharacterSkill) characterSkill;
@@ -183,8 +175,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     private CharacterSkill getSelectedSkill(final View view, final ContextMenuInfo menuInfo) {
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         final ListView listView = (ListView) view;
-        final CharacterSkill characterSkill = (CharacterSkill) listView.getAdapter().getItem(info.position);
-        return characterSkill;
+        return (CharacterSkill) listView.getAdapter().getItem(info.position);
     }
 
     /**
@@ -244,12 +235,9 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
      */
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_page_skill_edit_skills:
+        if (item.getItemId() == R.id.menu_page_skill_edit_skills) {
             jumpToEditSkills();
-            break;
-
-        default:
+        } else {
             return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
@@ -263,7 +251,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     private void setSkillRoll() {
         final View skillRollView = view.findViewById(R.id.die_roll_view);
         skillRollView.setOnClickListener(new HideOnClickListener());
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setOnTabChangedListener(new HideOnTabChangeListener(skillRollView));
     }
 

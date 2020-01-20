@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +9,9 @@ import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.XpTableRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.XpTable;
 import com.d20charactersheet.framework.dac.dao.XpDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Create data access object to access xp tables in SQLite3 database.
@@ -30,7 +30,7 @@ public class SQLiteXpDao extends BaseSQLiteDao implements XpDao {
 
     @Override
     public List<XpTable> getAllXpTables() {
-        final List<XpTable> allXpTables = new ArrayList<XpTable>();
+        final List<XpTable> allXpTables = new ArrayList<>();
         Cursor cursor = null;
         try {
             final RowMapper xpTableRowMapper = new XpTableRowMapper();
@@ -51,7 +51,7 @@ public class SQLiteXpDao extends BaseSQLiteDao implements XpDao {
 
     private int[] selectLevels(final XpTable xpTable) {
         Cursor cursor = null;
-        final List<Integer> levelList = new ArrayList<Integer>(20);
+        final List<Integer> levelList = new ArrayList<>(20);
         try {
             final String[] xpTableId = new String[] { Integer.toString(xpTable.getId()) };
             cursor = db.rawQuery(SQL_GET_XP_LEVELS, xpTableId);

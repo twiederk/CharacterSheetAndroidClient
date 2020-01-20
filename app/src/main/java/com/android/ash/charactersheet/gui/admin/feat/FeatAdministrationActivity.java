@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.feat;
 
-import java.util.Arrays;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +15,8 @@ import com.d20charactersheet.framework.boc.model.FeatType;
 import com.d20charactersheet.framework.boc.service.FeatService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.Arrays;
+
 /**
  * Form to create and edit feats. Displays text boxes to enter name, benefit and prerequisit of feat. The type of feat
  * is displayed in a spinner. Fighter bonus feat, multiple and stack can be set by checkboxes. The multiple and stack
@@ -24,11 +24,12 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
  */
 public abstract class FeatAdministrationActivity extends FormularActivity<Feat> {
 
-    protected GameSystem gameSystem;
-    protected FeatService featService;
+    GameSystem gameSystem;
+    FeatService featService;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         featService = gameSystem.getFeatService();
@@ -52,8 +53,8 @@ public abstract class FeatAdministrationActivity extends FormularActivity<Feat> 
     }
 
     private void setMultipleAndStackOnClickListener() {
-        final CheckBox multipleCheckBox = (CheckBox) findViewById(R.id.feat_administration_multiple);
-        final CheckBox stackCheckBox = (CheckBox) findViewById(R.id.feat_administration_stack);
+        final CheckBox multipleCheckBox = findViewById(R.id.feat_administration_multiple);
+        final CheckBox stackCheckBox = findViewById(R.id.feat_administration_stack);
 
         multipleCheckBox.setOnClickListener(new OnClickListener() {
 

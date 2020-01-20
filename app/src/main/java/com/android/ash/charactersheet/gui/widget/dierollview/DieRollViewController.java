@@ -12,27 +12,27 @@ public interface DieRollViewController {
      * 
      * @return the title of the DieRollView.
      */
-    public String getTitle();
+    String getTitle();
 
     /**
      * Returns the die roll.
      * 
      * @return The die roll.
      */
-    public DieRoll getDieRoll();
+    DieRoll getDieRoll();
 
     /**
      * Returns the color of the die.
      * 
      * @return The color of the die.
      */
-    public int getColor();
+    int getColor();
 
     /**
      * Returns the subtitle of the DieRollView.
      * 
      * @return The subtitle of the DieRollView.
      */
-    public String getSubtitle();
+    String getSubtitle();
 
 }

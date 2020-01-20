@@ -3,25 +3,37 @@ package com.android.ash.charactersheet.boc.service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.android.AndroidPreferenceDao;
 
-public class PreferenceServiceTest extends AndroidTestCase {
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+@RunWith(AndroidJUnit4.class)
+public class PreferenceServiceTest {
 
     private SharedPreferences.Editor editor;
     private PreferenceService preferenceService;
 
-    @Override
-    protected void setUp() throws Exception {
-        final SharedPreferences preferences = getContext().getSharedPreferences(AndroidPreferenceDao.FILENAME,
+    @Before
+    public void setUp() {
+        final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        final SharedPreferences preferences = context.getSharedPreferences(AndroidPreferenceDao.FILENAME,
                 Context.MODE_PRIVATE);
         editor = preferences.edit();
-        preferenceService = new PreferenceServiceImpl(new AndroidPreferenceDao(getContext()));
+        preferenceService = new PreferenceServiceImpl(new AndroidPreferenceDao(context));
     }
 
-    public void testGetBooleanException() throws Exception {
+    @Test
+    public void testGetBooleanException() {
         try {
             preferenceService.getBoolean("unknownPreference");
             fail("Missing exception, expected IllegalArgumentException");
@@ -32,7 +44,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         }
     }
 
-    public void testGetIntException() throws Exception {
+    @Test
+    public void testGetIntException() {
         try {
             preferenceService.getInt("unknownPreference");
             fail("Missing exception, expected IllegalArgumentException");
@@ -43,7 +56,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         }
     }
 
-    public void testSetBoolenException() throws Exception {
+    @Test
+    public void testSetBooleanException() {
         try {
             preferenceService.setBoolean("unknownPrefence", false);
             fail("Missing exception, expected IllegalArgumentException");
@@ -54,7 +68,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         }
     }
 
-    public void testSetIntException() throws Exception {
+    @Test
+    public void testSetIntException() {
         try {
             preferenceService.setInt("unknownPrefence", 0);
             fail("Missing exception, expected IllegalArgumentException");
@@ -65,6 +80,7 @@ public class PreferenceServiceTest extends AndroidTestCase {
         }
     }
 
+    @Test
     public void testGetShowImageAsBackground() {
         editor.putBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND, true);
         editor.commit();
@@ -73,7 +89,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         assertTrue(showImageAsBackground);
     }
 
-    public void testGetBackgroundColor() throws Exception {
+    @Test
+    public void testGetBackgroundColor() {
         editor.putInt(PreferenceService.BACKGROUND_COLOR, Color.RED);
         editor.commit();
 
@@ -81,7 +98,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         assertEquals(Color.RED, color);
     }
 
-    public void testSetShowImageAsBackground() throws Exception {
+    @Test
+    public void testSetShowImageAsBackground() {
         editor.putBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND, false);
         editor.commit();
 
@@ -91,7 +109,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         assertTrue(showImageAsBackground);
     }
 
-    public void testSetBackgroundColor() throws Exception {
+    @Test
+    public void testSetBackgroundColor() {
         editor.putInt(PreferenceService.BACKGROUND_COLOR, Color.BLACK);
         editor.commit();
 
@@ -101,7 +120,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         assertEquals(Color.RED, color);
     }
 
-    public void testGetGameSystemType() throws Exception {
+    @Test
+    public void testGetGameSystemType() {
         editor.putInt(PreferenceService.GAME_SYSTEM_TYPE, 0);
         editor.commit();
 
@@ -111,7 +131,8 @@ public class PreferenceServiceTest extends AndroidTestCase {
         assertEquals(GameSystemType.PATHFINDER.ordinal(), gameSystemTypeId);
     }
 
-    public void testSetGameSystemType() throws Exception {
+    @Test
+    public void testSetGameSystemType() {
         editor.putInt(PreferenceService.GAME_SYSTEM_TYPE, GameSystemType.DNDV35.ordinal());
         editor.commit();
 

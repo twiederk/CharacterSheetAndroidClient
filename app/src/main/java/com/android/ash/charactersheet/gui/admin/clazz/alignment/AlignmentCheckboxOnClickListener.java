@@ -8,7 +8,7 @@ import android.widget.CheckBox;
  * OnClickListener for the alignment checkbox in the CharacterClassAlignmentActivity. It updates the model of the
  * alignment according to the state of the checkbox.
  */
-public class AlignmentCheckboxOnClickListener implements OnClickListener {
+class AlignmentCheckboxOnClickListener implements OnClickListener {
 
     private final AlignmentModel alignmentModel;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">d20 Character Sheet</string>
-    <string name="app_version_code">43</string>
-    <string name="app_version_name">2.11.3</string>
+    <string name="app_version_code">44</string>
+    <string name="app_version_name">2.11.4</string>
     <string name="attribute_title">Abilities</string>
     <string name="attribute_str">STR</string>
     <string name="attribute_dex">DEX</string>
@@ -153,6 +153,7 @@
     <string name="weaponattack_damage_bonus_modifier">Misc Damage Bonus</string>
     <string name="weaponattack_ammo">Ammunition</string>
     <string name="weaponattack_desc">Description</string>
+    <string name="weaponattack_search_hint">Search</string>
 
     <!-- WeaponAttackCreateActivity -->
     <string name="weaponattack_create_title">Create Attack</string>
@@ -212,6 +213,9 @@
     <string name="administration_menu_spelllist_button">Spell Lists</string>
     <string name="administration_menu_spell_button">Spells</string>
 
+    <!-- AdministrationList -->
+    <string name="administration_search_hint">Search</string>
+
     <!-- CharacterClassAdministrationListActivity -->
     <string name="character_class_administration_list_title">Character Class Administration</string>
 
@@ -265,20 +269,24 @@
 
     <!-- ItemAdministrationListActivity -->
     <string name="item_administration_list_magic">Magic Item</string>
+    <string name="item_search_hint">Search</string>
 
     <!-- WeaponAdministrationListActivity -->
     <string name="weapon_administration_list_title">Weapon Administration</string>
 
     <!-- WeaponAdministrationActivity -->
-    <string name="weapon_administration_enhancement_bonus">Enh. Bonus</string>
-    <string name="weapon_administration_damage">Damage</string>
-    <string name="weapon_administration_critical">Critical</string>
-    <string name="weapon_administration_critical_separator">/x</string>
-    <string name="weapon_administration_combat_type">Combat</string>
-    <string name="weapon_administration_weapon_encumbrance">Encumbrance</string>
-    <string name="weapon_administration_weapon_category">Category</string>
-    <string name="weapon_administration_weapon_family">Family</string>
-    <string name="weapon_administration_range_increment">Range</string>
+    <string name="weapon_administration_enhancement_bonus" tools:keep="@string/weapon_administration_enhancement_bonus">Enh. Bonus</string>
+    <string name="weapon_administration_damage" tools:keep="@string/weapon_administration_damage">Damage</string>
+    <string name="weapon_administration_damage_number_of_dice_hint" tools:keep="@string/weapon_administration_damage_number_of_dice_hint">Number of Dice</string>
+    <string name="weapon_administration_critical" tools:keep="@string/weapon_administration_critical">Critical</string>
+    <string name="weapon_administration_critical_hit_hint" tools:keep="@string/weapon_administration_critical_hit_hint">Hit</string>
+    <string name="weapon_administration_critical_separator" tools:keep="@string/weapon_administration_critical_separator">/x</string>
+    <string name="weapon_administration_critical_multiplier_hint" tools:keep="@string/weapon_administration_critical_multiplier_hint">Multiplier</string>
+    <string name="weapon_administration_combat_type" tools:keep="@string/weapon_administration_combat_type">Combat</string>
+    <string name="weapon_administration_weapon_encumbrance" tools:keep="@string/weapon_administration_weapon_encumbrance">Encumbrance</string>
+    <string name="weapon_administration_weapon_category" tools:keep="@string/weapon_administration_weapon_category">Category</string>
+    <string name="weapon_administration_weapon_family" tools:keep="@string/weapon_administration_weapon_family">Family</string>
+    <string name="weapon_administration_range_increment" tools:keep="@string/weapon_administration_range_increment">Range</string>
 
     <!-- WeaponAdministrationCreateActivity -->
     <string name="weapon_administration_create_title">Create Weapon</string>
@@ -310,6 +318,7 @@
 
     <!-- AbilityAdministrationListActivity -->
     <string name="ability_administration_list_title">Ability Administration</string>
+    <string name="ability_administration_search_hint">Search</string>
 
     <!-- AbilityAdministrationCreateActivity -->
     <string name="ability_administration_create_title">Create Ability</string>
@@ -374,13 +383,16 @@
     <string name="note_list_menu_create_note">Create Note</string>
     <string name="note_list_context_menu_delete_note">Delete Note</string>
 
+    <!-- NoteActivity -->
+    <string name="note_content_description">Note content</string>
+
     <!-- ClassAbilityPageFragment -->
     <string name="page_class_ability_title">Class Abilities</string>
     <string name="character_class_ability_list_show_all_abilities">Show all abilities</string>
     <string name="character_class_ability_class">Class</string>
     <string name="character_class_ability_level">Level</string>
 
-    <!-- AboutActivit -->
+    <!-- AboutActivity -->
     <string name="about_title">Manual</string>
     <string name="about_manual">Manual: http://www.d20CharacterSheet.com/manual.html</string>
     <string name="about_homepage">Homepage: http://www.d20CharacterSheet.com</string>
@@ -563,6 +575,7 @@
 
     <!-- SpellAdministrationListActivity -->
     <string name="spell_administration_list_title">Spell Administration</string>
+    <string name="spell_administration_search_hint">Search</string>
 
     <!-- SpellAdministrationCreateActivity -->
     <string name="spell_administration_create_title">Create Spell</string>
@@ -873,6 +886,7 @@
     <string name="release_notes_2_11_1">Release 2.11.1\nBug fix: Fixed missing spells slots of max spell level of spell list\nBug fix: Fixed spell slots lower then min level of spell list\nBug fix: Fixed modifying spell list abilities created before version 2.11.0\nBug fix: Fixed saving of skills, including negative modifiers\n\n</string>
     <string name="release_notes_2_11_2">Release 2.11.2\nBug fix: Fixed missing icon in action bar to export equipment\nBug fix: Fixed missing result of die roll on high density devices\nBug fix: Fixed unreadable labels on buttons on high density devices\n\n</string>
     <string name="release_notes_2_11_3">Release 2.11.3\nBug fix: Fixed missing result of die roll, if many dice were rolled\nBug fix: Fixes width of edit field, if number had many digits\nBug fix: Fixed crash, if number of damage dice was zero\nBug fix: Fixed position of saves for character with long class name\n\n</string>
+    <string name="release_notes_2_11_4">Release 2.11.4\nBug fix: Updated project to current technology\n\n</string>
     <string name="release_notes_not_found">No Release Notes found\n\n</string>
 
 </resources>

@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -18,6 +14,10 @@ import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.dac.dao.ClassDao;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Provides access to character class data stored in an SQLite database.
@@ -64,7 +64,7 @@ public class SQLiteClassDao extends BaseSQLiteDao implements ClassDao {
     }
 
     private List<CharacterClass> selectCharacterClassTable() {
-        final List<CharacterClass> characterClasses = new ArrayList<CharacterClass>();
+        final List<CharacterClass> characterClasses = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_CLASSES, new String[0]);
@@ -81,7 +81,7 @@ public class SQLiteClassDao extends BaseSQLiteDao implements ClassDao {
     }
 
     private List<Skill> selectCharacterClassSkillTable(final int id, final List<Skill> allSkills) {
-        final List<Skill> skills = new ArrayList<Skill>();
+        final List<Skill> skills = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(id) };
@@ -108,7 +108,7 @@ public class SQLiteClassDao extends BaseSQLiteDao implements ClassDao {
     }
 
     private List<ClassAbility> selectClassAbilityTable(final int characterClassId, final List<Ability> allAbilities) {
-        final List<ClassAbility> classAbilities = new ArrayList<ClassAbility>();
+        final List<ClassAbility> classAbilities = new ArrayList<>();
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(characterClassId) };

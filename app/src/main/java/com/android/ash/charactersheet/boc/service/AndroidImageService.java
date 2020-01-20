@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 import com.d20charactersheet.framework.boc.service.ImageService;
 
+import java.io.InputStream;
+
 
 /**
  * The AndroidImageService interface extends the ImageService with Android specific methods.
@@ -17,5 +19,7 @@ public interface AndroidImageService extends ImageService {
      *            The id of the image.
      * @return The bitmap of the given id.
      */
-    public Bitmap getBitmap(int imageId);
+    Bitmap getBitmap(int imageId);
+
+    int createImage(final InputStream inputStream);
 }

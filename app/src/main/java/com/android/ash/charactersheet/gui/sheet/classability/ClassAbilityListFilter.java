@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet.classability;
 
+import com.android.ash.charactersheet.gui.util.ExpandableListItem;
+import com.android.ash.charactersheet.gui.widget.StringListFilter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.android.ash.charactersheet.gui.util.ExpandableListItem;
-import com.android.ash.charactersheet.gui.widget.StringListFilter;
 
 /**
  * Filters list of class abilities by the level of the character in this class.
@@ -35,7 +35,7 @@ public class ClassAbilityListFilter extends StringListFilter<ExpandableListItem>
     private List<ExpandableListItem> filterByLevel(final List<ExpandableListItem> items) {
         final CharacterAbilityModel characterAbilityModel = (CharacterAbilityModel) model;
         final Map<String, Integer> characterClassLevels = characterAbilityModel.getCharacterClassLevels();
-        final List<ExpandableListItem> filteredItems = new ArrayList<ExpandableListItem>();
+        final List<ExpandableListItem> filteredItems = new ArrayList<>();
         for (final ExpandableListItem expandableListItem : items) {
             final CharacterAbilityListItem listItem = (CharacterAbilityListItem) expandableListItem.getObject();
             final int level = characterClassLevels.get(listItem.getCharacterClassName());

@@ -8,7 +8,9 @@
         android:id="@android:id/input"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:inputType="text"
+        android:importantForAutofill="no"
+        android:hint="@string/administration_search_hint" />
 
     <ListView
         android:id="@android:id/list"

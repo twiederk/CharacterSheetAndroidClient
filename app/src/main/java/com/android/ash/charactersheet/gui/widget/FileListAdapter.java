@@ -1,12 +1,12 @@
 package com.android.ash.charactersheet.gui.widget;
 
-import java.io.File;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.ash.charactersheet.R;
+
+import java.io.File;
 
 /**
  * Adapter to display file names in a ListView.
@@ -30,7 +30,7 @@ public class FileListAdapter extends ListAdapter<File> {
     @Override
     protected void fillView(final View convertView, final Object item) {
         final File file = (File) item;
-        final TextView nameTextView = (TextView) convertView.findViewById(R.id.name);
+        final TextView nameTextView = convertView.findViewById(R.id.name);
         nameTextView.setText(file.getName());
     }
 

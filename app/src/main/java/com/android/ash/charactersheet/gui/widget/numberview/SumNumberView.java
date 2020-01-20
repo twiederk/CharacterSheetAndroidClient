@@ -44,13 +44,12 @@ public class SumNumberView extends NumberView {
         summandEditText.setMinWidth((int) (EDITTEXT_SIZE * scale));
         summandEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         summandEditText.setText("1");
-        summandEditText.setGravity(Gravity.RIGHT);
+        summandEditText.setGravity(Gravity.END);
         summandEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         return summandEditText;
     }
 
-    @Override
-    View createIncreaseTextView(final Context context, final AttributeSet attributeSet) {
+    private View createIncreaseTextView(final Context context, final AttributeSet attributeSet) {
         final Button increaseButton = createButton(context, "+", attributeSet);
         increaseButton.setOnClickListener(new OnClickListener() {
 
@@ -66,8 +65,7 @@ public class SumNumberView extends NumberView {
         return increaseButton;
     }
 
-    @Override
-    View createDecreaseTextView(final Context context, final AttributeSet attributeSet) {
+    private View createDecreaseTextView(final Context context, final AttributeSet attributeSet) {
         final Button decreaseButton = createButton(context, "-", attributeSet);
         decreaseButton.setOnClickListener(new OnClickListener() {
 
@@ -84,13 +82,4 @@ public class SumNumberView extends NumberView {
         return decreaseButton;
     }
 
-    /**
-     * Sets the summand in the textfield.
-     *
-     * @param number
-     *            The sumand.
-     */
-    public void setSummand(final Number number) {
-        summandEditText.setText(number.toString());
-    }
 }

@@ -14,7 +14,7 @@ public interface PreferenceDao {
      *            The default value of the preference.
      * @return boolean value of perference.
      */
-    public boolean getBoolean(String key, boolean defaultValue);
+    boolean getBoolean(String key, boolean defaultValue);
 
     /**
      * Returns int value of preference.
@@ -25,7 +25,7 @@ public interface PreferenceDao {
      *            The default value of the preference.
      * @return int value of the preference.
      */
-    public int getInt(String key, int defaultValue);
+    int getInt(String key, int defaultValue);
 
     /**
      * Sets boolean value of preference.
@@ -35,7 +35,7 @@ public interface PreferenceDao {
      * @param value
      *            The value to set.
      */
-    public void setBoolean(String key, boolean value);
+    void setBoolean(String key, boolean value);
 
     /**
      * Sets int value of preference.
@@ -45,6 +45,6 @@ public interface PreferenceDao {
      * @param value
      *            The preference value.
      */
-    public void setInt(String key, int value);
+    void setInt(String key, int value);
 
 }

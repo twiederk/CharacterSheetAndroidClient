@@ -58,10 +58,10 @@ public class SkillEditArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
      */
     @Override
     protected void fillView(final View view, final CharacterSkill characterSkill) {
-        final TextView skillNameTextView = (TextView) view.findViewById(R.id.skill_name);
+        final TextView skillNameTextView = view.findViewById(R.id.skill_name);
         skillNameTextView.setText(characterSkill.getSkill().getName());
 
-        final StepNumberView skillRankNumberView = (StepNumberView) view.findViewById(R.id.skill_rank);
+        final StepNumberView skillRankNumberView = view.findViewById(R.id.skill_rank);
 
         final float maxRank = getMaxRank(characterSkill.getSkill());
         final float step = ruleService.getRankPerSkillPoint(character, characterSkill.getSkill());
@@ -69,7 +69,7 @@ public class SkillEditArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
         skillRankNumberView.setController(new SkillRankNumberViewController(characterService, character,
                 characterSkill, maxRank, step, messageManager));
 
-        final StepNumberView skillModifierNumberView = (StepNumberView) view.findViewById(R.id.skill_modifier);
+        final StepNumberView skillModifierNumberView = view.findViewById(R.id.skill_modifier);
         skillModifierNumberView.setController(new SkillModifierNumberViewController(characterService, character,
                 characterSkill));
 

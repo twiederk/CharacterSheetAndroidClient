@@ -41,14 +41,4 @@ public class FavoriteCharacterSkill extends CharacterSkill {
         this.favorite = favorite;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return super.equals(obj);
-    }
-
 }

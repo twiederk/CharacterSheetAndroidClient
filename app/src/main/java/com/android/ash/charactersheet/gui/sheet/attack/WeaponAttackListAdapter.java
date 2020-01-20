@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -23,6 +19,10 @@ import com.android.ash.charactersheet.gui.widget.attackbonusview.DefaultAttackBo
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.model.WeaponCategory;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays a weaopn attack. The name is displayes in upper left corner. In the upper right corner the attack bonuses
@@ -71,7 +71,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
     }
 
     private void setName(final View view, final WeaponAttack weaponAttack, final OnClickListener onClickListener) {
-        final TextView nameTextView = (TextView) view.findViewById(R.id.weaponattack_name);
+        final TextView nameTextView = view.findViewById(R.id.weaponattack_name);
         nameTextView.setText(weaponAttack.getName());
         nameTextView.setOnClickListener(onClickListener);
         nameTextView.setOnLongClickListener(new OnLongClickListener() {
@@ -85,13 +85,13 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
 
     private void setAttackBonus(final View view, final WeaponAttack weaponAttack,
             final AmmunitionViewController ammunitionViewController) {
-        final AttackBonusView attackBonusView = (AttackBonusView) view.findViewById(R.id.weaponattack_attackbonus);
+        final AttackBonusView attackBonusView = view.findViewById(R.id.weaponattack_attackbonus);
         attackBonusView.setController(new DefaultAttackBonusViewController(weaponAttack), ammunitionViewController);
         attackBonusView.setAttackOnClickListener(attackOnClickListener);
     }
 
     private void setDamage(final View view, final WeaponAttack weaponAttack) {
-        final Button damageButton = (Button) view.findViewById(R.id.weaponattack_damage);
+        final Button damageButton = view.findViewById(R.id.weaponattack_damage);
         damageButton.setText(displayService.getDisplayDamage(weaponAttack));
         damageButton.setOnClickListener(new OnClickListener() {
 
@@ -103,7 +103,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
     }
 
     private void setCritical(final View view, final WeaponAttack weaponAttack) {
-        final Button criticalButton = (Button) view.findViewById(R.id.weaponattack_critical);
+        final Button criticalButton = view.findViewById(R.id.weaponattack_critical);
         criticalButton.setText(displayService.getDisplayCritical(weaponAttack.getCritical()));
         criticalButton.setOnClickListener(new OnClickListener() {
 
@@ -115,7 +115,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
     }
 
     private void setRangeIncrement(final View view, final WeaponAttack weaponAttack) {
-        final TextView rangeIncrementTextView = (TextView) view.findViewById(R.id.weaponattack_range_increment);
+        final TextView rangeIncrementTextView = view.findViewById(R.id.weaponattack_range_increment);
         final int rangeIncrement = weaponAttack.getWeapon().getRangeIncrement();
         if (rangeIncrement == 0) {
             rangeIncrementTextView.setVisibility(View.GONE);
@@ -127,7 +127,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
 
     private void setAmmunition(final View view, final WeaponAttack weaponAttack,
             final AmmunitionViewController ammunitionViewController) {
-        final AmmunitionView ammunitionView = (AmmunitionView) view.findViewById(R.id.weaponattack_ammunition);
+        final AmmunitionView ammunitionView = view.findViewById(R.id.weaponattack_ammunition);
         ammunitionView.setController(ammunitionViewController);
         if (WeaponCategory.PROJECTILE_WEAPON.equals(weaponAttack.getWeapon().getWeaponCategory())) {
             ammunitionView.setVisibility(View.VISIBLE);
@@ -138,7 +138,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
 
     private void setDescription(final View view, final WeaponAttack weaponAttack, final OnClickListener onClickListener) {
         final String description = weaponAttack.getDescription();
-        final TextView descriptionTextView = (TextView) view.findViewById(R.id.weaponattack_description);
+        final TextView descriptionTextView = view.findViewById(R.id.weaponattack_description);
         if (description.trim().length() == 0) {
             descriptionTextView.setVisibility(View.GONE);
         } else {

@@ -3,6 +3,8 @@
     android:id="@+id/name"
     style="@style/base"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:padding="8dp"
+    android:textSize="20sp">
 
 </TextView>

@@ -1,15 +1,15 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The model of the ListView in SpelllistPageFragment.
@@ -40,8 +40,8 @@ public class SpelllistModel extends ListModel<Object> {
     }
 
     private List<Object> createSpelllistItems(final Spelllist spelllist) {
-        final List<Object> spelllistItems = new ArrayList<Object>();
-        final List<Integer> levels = new ArrayList<Integer>(spelllist.getSpellsByLevel().keySet());
+        final List<Object> spelllistItems = new ArrayList<>();
+        final List<Integer> levels = new ArrayList<>(spelllist.getSpellsByLevel().keySet());
         Collections.sort(levels);
         for (final Integer level : levels) {
             final LevelItem levelItem = createLevelItem(level);
@@ -62,9 +62,9 @@ public class SpelllistModel extends ListModel<Object> {
     }
 
     private List<SpellItem> createSpellItems(final Spelllist spelllist, final LevelItem levelItem) {
-        final List<Spell> spells = new ArrayList<Spell>(spelllist.getSpellsOfLevel(levelItem.getLevel()));
+        final List<Spell> spells = new ArrayList<>(spelllist.getSpellsOfLevel(levelItem.getLevel()));
         Collections.sort(spells, new SpellComparator());
-        final List<SpellItem> spellItems = new ArrayList<SpellItem>(spells.size());
+        final List<SpellItem> spellItems = new ArrayList<>(spells.size());
         for (final Spell spell : spells) {
             final SpellItem spellItem = new SpellItem(spell, levelItem);
             spellItem.setKnownSpell(isKnownSpell(spell));

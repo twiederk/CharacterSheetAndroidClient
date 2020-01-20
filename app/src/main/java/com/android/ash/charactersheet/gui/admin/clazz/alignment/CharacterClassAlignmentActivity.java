@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.clazz.alignment;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -20,6 +14,13 @@ import com.android.ash.charactersheet.gui.util.LogActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all alignments. Alignments can be checked to add them to a character class.
@@ -58,12 +59,11 @@ public class CharacterClassAlignmentActivity extends LogActivity {
     private EnumSet<Alignment> getAlignmentsFromIntent() {
         final Intent intent = getIntent();
         final Bundle extras = intent.getExtras();
-        final EnumSet<Alignment> alignments = (EnumSet<Alignment>) extras.getSerializable(INTENT_EXTRA_DATA_OBJECT);
-        return alignments;
+        return (EnumSet<Alignment>) Objects.requireNonNull(extras).getSerializable(INTENT_EXTRA_DATA_OBJECT);
     }
 
     private List<AlignmentModel> createAlignmentModels(final EnumSet<Alignment> alignments) {
-        final List<AlignmentModel> alignmentModels = new ArrayList<AlignmentModel>();
+        final List<AlignmentModel> alignmentModels = new ArrayList<>();
         for (final Alignment alignment : Alignment.values()) {
             final AlignmentModel alignmentModel = new AlignmentModel(alignment, alignments.contains(alignment));
             alignmentModels.add(alignmentModel);
@@ -72,7 +72,7 @@ public class CharacterClassAlignmentActivity extends LogActivity {
     }
 
     private void fillTable() {
-        final TableLayout characterClassTableLayout = (TableLayout) findViewById(R.id.character_class_alignment_table);
+        final TableLayout characterClassTableLayout = findViewById(R.id.character_class_alignment_table);
         for (final AlignmentModel alignmentModel : alignmentModels) {
             final TableRow tableRow = createTableRow(alignmentModel);
             characterClassTableLayout.addView(tableRow);

@@ -1,9 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.item.good;
 
-import java.util.Arrays;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.R;
@@ -12,6 +10,8 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.GoodType;
 
+import java.util.Arrays;
+
 /**
  * Form to create of edit a good.
  */
@@ -19,6 +19,7 @@ public abstract class GoodAdministrationActivity extends ItemAdministrationActiv
 
     private Good good;
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.good_administration);
@@ -32,9 +33,7 @@ public abstract class GoodAdministrationActivity extends ItemAdministrationActiv
 
     @Override
     protected SpinnerAdapter getTypeAdapter() {
-        final ArrayAdapter<GoodType> weaponTypeArrayAdapter = new GoodTypeArrayAdapter(this, displayService,
-                Arrays.asList(GoodType.values()));
-        return weaponTypeArrayAdapter;
+        return new GoodTypeArrayAdapter(this, displayService, Arrays.asList(GoodType.values()));
     }
 
     @Override

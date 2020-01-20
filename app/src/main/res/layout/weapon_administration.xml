@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="vertical" >
+    android:scrollbars="vertical"
+    tools:keep="@layout/weapon_administration">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:importantForAutofill="noExcludeDescendants">
 
         <TableLayout
             android:layout_width="fill_parent"
@@ -20,14 +23,15 @@
                     style="@style/base"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/item_administration_name" />
+                    android:text="@string/item_administration_name"
+                    android:labelFor="@+id/item_administration_name" />
 
                 <EditText
                     android:id="@+id/item_administration_name"
                     style="@style/base"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:inputType="textCapWords" />
             </TableRow>
 
@@ -87,7 +91,8 @@
                     style="@style/base"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/weapon_administration_enhancement_bonus" />
+                    android:text="@string/weapon_administration_enhancement_bonus"
+                    android:labelFor="@+id/weapon_administration_enhancement_bonus" />
 
                 <EditText
                     android:id="@+id/weapon_administration_enhancement_bonus"
@@ -181,14 +186,15 @@
                     style="@style/base"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/weapon_administration_range_increment" />
+                    android:text="@string/weapon_administration_range_increment"
+                    android:labelFor="@+id/weapon_administration_range_increment" />
 
                 <EditText
                     android:id="@+id/weapon_administration_range_increment"
                     style="@style/base"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:inputType="number" />
             </TableRow>
         </TableLayout>
@@ -197,14 +203,15 @@
             style="@style/base"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_administration_desc" />
+            android:text="@string/item_administration_desc"
+            android:labelFor="@+id/item_administration_desc" />
 
         <EditText
             android:id="@+id/item_administration_desc"
             style="@style/base"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
     </LinearLayout>
 

@@ -21,15 +21,17 @@
             style="@style/base"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/skill_administration_description_label" />
+            android:text="@string/skill_administration_description_label"
+            android:labelFor="@+id/skill_administration_description" />
 
         <EditText
             android:id="@+id/skill_administration_description"
             style="@style/base"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:inputType="textCapSentences|textMultiLine" />
+            android:layout_marginStart="4dp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:importantForAutofill="no" />
     </LinearLayout>
 
 </ScrollView>

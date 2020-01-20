@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/table"
     android:layout_below="@id/attribute_include"
-    android:layout_toRightOf="@id/combat_include" >
+    android:layout_toEndOf="@id/combat_include">
 
     <TextView
         style="@style/heading"

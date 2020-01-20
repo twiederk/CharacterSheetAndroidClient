@@ -1,16 +1,12 @@
 package com.android.ash.charactersheet.gui.main;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.backup.BackupManager;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -33,6 +29,13 @@ import com.android.ash.charactersheet.gui.widget.FileListAdapter;
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Allows to backup databases to cloud and file and restore from file. The Backup to Cloud button uses the Android
  * backup mechanism to store the database to the cloud. The button Backup to File stores the selecte database with
@@ -43,6 +46,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
 
     private static final String LINE_FEED = "\n";
     private static final String COLON = ": ";
+    private static final int PERMISSION_EXTERNAL_STORAGE = 100;
 
     private CheckBox dndv35Checkbox;
     private CheckBox pathfinderCheckbox;
@@ -74,7 +78,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
     }
 
     private void createBackupToCloudButton() {
-        final Button backupToCloudButton = (Button) findViewById(R.id.backup_restore_backup_to_cloud_button);
+        final Button backupToCloudButton = findViewById(R.id.backup_restore_backup_to_cloud_button);
         backupToCloudButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -97,16 +101,16 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
     }
 
     private void createBackupCheckBoxes() {
-        dndv35Checkbox = (CheckBox) findViewById(R.id.backup_restore_backup_dndv35);
+        dndv35Checkbox = findViewById(R.id.backup_restore_backup_dndv35);
         dndv35Checkbox.setText(GameSystemType.DNDV35.getName());
 
-        pathfinderCheckbox = (CheckBox) findViewById(R.id.backup_restore_backup_pathfinder);
+        pathfinderCheckbox = findViewById(R.id.backup_restore_backup_pathfinder);
         pathfinderCheckbox.setText(GameSystemType.PATHFINDER.getName());
 
     }
 
     private void createBackupToFileButton() {
-        final Button backupToFileButton = (Button) findViewById(R.id.backup_restore_backup_to_file_button);
+        final Button backupToFileButton = findViewById(R.id.backup_restore_backup_to_file_button);
         backupToFileButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -118,7 +122,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
 
     private void backupToFile() {
         Logger.debug("backupToFile()");
-        final List<String> messages = new ArrayList<String>(GameSystemType.values().length);
+        final List<String> messages = new ArrayList<>(GameSystemType.values().length);
         backupToFile(GameSystemType.DNDV35, dndv35Checkbox, messages);
         backupToFile(GameSystemType.PATHFINDER, pathfinderCheckbox, messages);
         Toast.makeText(this, getMessage(messages), Toast.LENGTH_LONG).show();
@@ -139,13 +143,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
     }
 
     private String getMessage(final GameSystemType gameSystemType, final int resourceId, final String text) {
-        final StringBuilder message = new StringBuilder();
-        message.append(gameSystemType.getName());
-        message.append(COLON);
-        message.append(getResources().getString(resourceId));
-        message.append(COLON);
-        message.append(text);
-        return message.toString();
+        return gameSystemType.getName() + COLON + getResources().getString(resourceId) + COLON + text;
     }
 
     private String getMessage(final List<String> messages) {
@@ -154,7 +152,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
         }
 
         final StringBuilder message = new StringBuilder();
-        for (final Iterator<String> iterator = messages.iterator(); iterator.hasNext();) {
+        for (final Iterator<String> iterator = messages.iterator(); iterator.hasNext(); ) {
             final String currentMessage = iterator.next();
             message.append(currentMessage);
             if (iterator.hasNext()) {
@@ -171,30 +169,47 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
     }
 
     private void createDirectoryTextView(final int textViewId, final int textId) {
-        final StringBuilder text = new StringBuilder();
-        text.append(getResources().getString(textId));
-        text.append(" ");
-        text.append(DirectoryAndFileHelper.getBackupDirectory().getPath());
 
-        final TextView textView = (TextView) findViewById(textViewId);
-        textView.setText(text.toString());
+        final TextView textView = findViewById(textViewId);
+        String text = getResources().getString(textId) +
+                " " +
+                DirectoryAndFileHelper.getBackupDirectory().getPath();
+        textView.setText(text);
     }
 
     private void createFilesListView() {
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
+        } else {
+            readBackupFilesAndShowInListView();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                readBackupFilesAndShowInListView();
+            }
+        }
+    }
+
+    private void readBackupFilesAndShowInListView() {
         final List<File> files = fileBackupAgent.getBackupFiles();
         Collections.sort(files, new FileComparator());
-        final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<File>(files));
+        final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<>(files));
 
         final ListView listView = getListView();
         listView.setAdapter(adapter);
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(this);
-
     }
 
+
     private ListView getListView() {
-        final ListView listView = (ListView) findViewById(android.R.id.list);
-        return listView;
+        return findViewById(android.R.id.list);
     }
 
     @Override
@@ -234,9 +249,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
     }
 
     private String getMessage(final GameSystemType gameSystemType, final File restoreFile) {
-        final StringBuilder message = new StringBuilder();
-        message.append("Restore ").append(gameSystemType.getName()).append(" from file ").append(restoreFile.getName());
-        return message.toString();
+        return "Restore " + gameSystemType.getName() + " from file " + restoreFile.getName();
     }
 
     private void restoreFromFile(final GameSystemType gameSystemType, final File restoreFile) {
@@ -270,6 +283,6 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
                 return dbHelper;
             }
         }
-        throw new IllegalArgumentException("Can't get dbHelper of game sytem: " + gameSystemType);
+        throw new IllegalArgumentException("Can't get dbHelper of game system: " + gameSystemType);
     }
 }

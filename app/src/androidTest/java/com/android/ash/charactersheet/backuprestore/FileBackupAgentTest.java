@@ -1,29 +1,41 @@
 package com.android.ash.charactersheet.backuprestore;
 
-import static com.android.ash.charactersheet.backuprestore.FileBackupAgent.SEPARATER;
+import android.content.Context;
+import android.os.Environment;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+
+import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.boc.model.GameSystemType;
+import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import android.os.Environment;
-import android.test.AndroidTestCase;
+import static com.android.ash.charactersheet.backuprestore.FileBackupAgent.SEPARATOR;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.boc.model.GameSystemType;
-import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
+@RunWith(AndroidJUnit4.class)
+public class FileBackupAgentTest {
 
-public class FileBackupAgentTest extends AndroidTestCase {
-
+    private Context context;
     private FileBackupAgent fileBackupAgent;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        fileBackupAgent = new FileBackupAgent(getContext());
+    @Before
+    public void setUp() {
+        context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        fileBackupAgent = new FileBackupAgent(context);
     }
 
+    @Test
     public void testBackup() {
         deleteOldBackup();
 
@@ -35,6 +47,7 @@ public class FileBackupAgentTest extends AndroidTestCase {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void deleteOldBackup() {
         for (final File backupFile : fileBackupAgent.getBackupFiles()) {
             backupFile.delete();
@@ -47,23 +60,26 @@ public class FileBackupAgentTest extends AndroidTestCase {
         assertTrue("Missing backup file: " + backupFile, backupFile.getName().startsWith(databaseName));
     }
 
-    public void testGetBackupName() throws Exception {
+    @Test
+    public void testGetBackupName() {
+        // Arrange
         final String databaseName = GameSystemType.DNDV35.getDatabaseName();
-        final String pattern = getContext().getResources().getString(R.string.backup_date_pattern);
+        final String pattern = context.getResources().getString(R.string.backup_date_pattern);
         final String date = new SimpleDateFormat(pattern, Locale.US).format(new Date());
 
-        final StringBuilder expectedName = new StringBuilder();
-        expectedName.append(databaseName).append(SEPARATER);
-        expectedName.append(getContext().getResources().getString(R.string.app_version_name)).append(SEPARATER);
-        expectedName.append(date);
-
+        // Act
         final String backupName = fileBackupAgent.getBackupName(databaseName);
 
-        assertEquals(expectedName.toString(), backupName);
+        // Assert
+        String expectedName = databaseName + SEPARATOR +
+                context.getResources().getString(R.string.app_version_name) + SEPARATOR +
+                date;
+        assertEquals(expectedName, backupName);
     }
 
-    public void testGetBackupDirectory() throws Exception {
-        final File backupDirectoy = DirectoryAndFileHelper.getBackupDirectory();
-        assertTrue(backupDirectoy.getPath().endsWith("ownload"));
+    @Test
+    public void testGetBackupDirectory() {
+        final File backupDirectory = DirectoryAndFileHelper.getBackupDirectory();
+        assertTrue(backupDirectory.getPath().endsWith("ownload"));
     }
 }

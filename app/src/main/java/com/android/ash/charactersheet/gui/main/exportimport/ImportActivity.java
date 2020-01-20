@@ -1,21 +1,12 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -49,9 +40,21 @@ import com.d20charactersheet.framework.boc.service.ExportImportService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ItemService;
 import com.d20charactersheet.framework.boc.service.exportimport.ImportMessage;
-import com.d20charactersheet.framework.boc.service.exportimport.ImportReport;
 import com.d20charactersheet.framework.boc.service.exportimport.ImportMessage.Type;
+import com.d20charactersheet.framework.boc.service.exportimport.ImportReport;
 import com.d20charactersheet.framework.boc.util.ImportReportComparator;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
 
 /**
  * Allows to select a file to import characters. Displays the import directory and all files starting with
@@ -60,6 +63,7 @@ import com.d20charactersheet.framework.boc.util.ImportReportComparator;
  */
 public class ImportActivity extends LogActivity implements OnItemClickListener {
 
+    private static final int PERMISSION_EXTERNAL_STORAGE = 100;
     private static final String EMPTY_SPACE = " ";
     private static final Object COLON = ": ";
 
@@ -79,24 +83,39 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         setContentView(R.layout.activity_import);
         setTitle(R.string.import_title);
 
-        createImportDirectoryTextView();
-        createFilesListView();
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
+        } else {
+            createImportDirectoryTextView();
+            createFilesListView();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                createImportDirectoryTextView();
+                createFilesListView();
+            }
+        }
     }
 
     private void createImportDirectoryTextView() {
-        final StringBuilder text = new StringBuilder();
-        text.append(getResources().getString(R.string.import_import_directory));
-        text.append(" ");
-        text.append(DirectoryAndFileHelper.getExportDirectory().getPath());
 
-        final TextView textView = (TextView) findViewById(R.id.import_import_directory);
-        textView.setText(text.toString());
+        final TextView textView = findViewById(R.id.import_import_directory);
+        String text = getResources().getString(R.string.import_import_directory) +
+                " " +
+                DirectoryAndFileHelper.getExportDirectory().getPath();
+        textView.setText(text);
     }
 
     private void createFilesListView() {
         final List<File> files = getImportFiles();
         Collections.sort(files, new FileComparator());
-        final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<File>(files));
+        final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<>(files));
 
         final ListView listView = getListView();
         listView.setAdapter(adapter);
@@ -110,8 +129,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
     }
 
     private ListView getListView() {
-        final ListView listView = (ListView) findViewById(android.R.id.list);
-        return listView;
+        return findViewById(android.R.id.list);
     }
 
     @Override
@@ -123,15 +141,12 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
     /**
      * Filters files which name starts with d20cs_characters and end with xml.
      */
-    public static class ImportFilenameFilter implements FilenameFilter {
+    static class ImportFilenameFilter implements FilenameFilter {
 
         @Override
         public boolean accept(final File dir, final String name) {
-            if (name.endsWith(EXPORT_FILE_SUFFIX)
-                    && (name.startsWith(EXPORT_CHARACTER_FILE_PREFIX) || name.startsWith(EXPORT_EQUIPMENT_FILE_PREFIX))) {
-                return true;
-            }
-            return false;
+            return name.endsWith(EXPORT_FILE_SUFFIX)
+                    && (name.startsWith(EXPORT_CHARACTER_FILE_PREFIX) || name.startsWith(EXPORT_EQUIPMENT_FILE_PREFIX));
         }
     }
 
@@ -156,11 +171,9 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
     }
 
     private String getMessage(final File importFile) {
-        final StringBuilder message = new StringBuilder();
-        message.append(getResources().getString(R.string.import_dialog_message));
-        message.append(EMPTY_SPACE);
-        message.append(importFile.getName());
-        return message.toString();
+        return getResources().getString(R.string.import_dialog_message) +
+                EMPTY_SPACE +
+                importFile.getName();
     }
 
     private void importFile(final File importFile) {
@@ -171,12 +184,8 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         }
     }
 
-    private String getMessage(final int resourceId, final String text) {
-        final StringBuilder message = new StringBuilder();
-        message.append(getResources().getString(resourceId));
-        message.append(COLON);
-        message.append(text);
-        return message.toString();
+    private String getMessage(final String text) {
+        return getResources().getString(R.string.import_message_import_failure) + COLON + text;
     }
 
     private void displayImportReports(final List importReports) {
@@ -185,15 +194,15 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         final List<ImportMessage> importMessages = getImportMessages(importReports);
 
         final ImportMessageAdapter adapter = new ImportMessageAdapter(this, R.layout.listitem_importmessage,
-                new ListModel<ImportMessage>(importMessages));
+                new ListModel<>(importMessages));
 
         final ListView listView = getListView();
         listView.setAdapter(adapter);
     }
 
     private List<ImportMessage> getImportMessages(final List<ImportReport<? super Object>> importReports) {
-        final List<ImportMessage> importMessages = new ArrayList<ImportMessage>();
-        for (final ImportReport<? extends Object> importReport : importReports) {
+        final List<ImportMessage> importMessages = new ArrayList<>();
+        for (final ImportReport<?> importReport : importReports) {
             final ImportMessage resultMessage = getResultMessage(importReport);
             importMessages.add(resultMessage);
             importMessages.addAll(importReport.getImportMessages());
@@ -201,7 +210,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         return importMessages;
     }
 
-    private ImportMessage getResultMessage(final ImportReport<? extends Object> importReport) {
+    private ImportMessage getResultMessage(final ImportReport<?> importReport) {
         ImportMessage resultMessage;
         if (importReport.isSuccess()) {
             resultMessage = getResultMessage(importReport, R.string.importmessage_import_success,
@@ -213,40 +222,36 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         return resultMessage;
     }
 
-    private ImportMessage getResultMessage(final ImportReport<? extends Object> importReport, final int resourceId,
-            final Type type) {
-        final StringBuilder message = new StringBuilder();
-        message.append(importReport.getImportObject().toString());
-        message.append(EMPTY_SPACE);
-        message.append(getString(resourceId));
-        final ImportMessage resultMessage = new ImportMessage(message.toString(), type);
-        return resultMessage;
+    private ImportMessage getResultMessage(final ImportReport<?> importReport, final int resourceId,
+                                           final Type type) {
+        String message = importReport.getImportObject().toString() +
+                EMPTY_SPACE +
+                getString(resourceId);
+        return new ImportMessage(message, type);
     }
 
     /**
      * Imports characters and creates them in the game system.
      */
-    public class ImportCharacter {
+    class ImportCharacter {
 
         private final Context context;
 
         /**
          * Creates ImportCharacter.
-         * 
-         * @param context
-         *            The context of the activity.
+         *
+         * @param context The context of the activity.
          */
-        public ImportCharacter(final Context context) {
+        ImportCharacter(final Context context) {
             this.context = context;
         }
 
         /**
          * Imports characters from the given file and creates them in the game system.
-         * 
-         * @param importFile
-         *            The file to import.
+         *
+         * @param importFile The file to import.
          */
-        public void importCharacters(final File importFile) {
+        void importCharacters(final File importFile) {
             Logger.debug("importCharacters");
             final ExportImportService exportImportService = gameSystem.getExportImportService();
             try {
@@ -255,7 +260,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
                 createCharacters(importReports);
             } catch (final Exception exception) {
                 Logger.error("Can't import characters: " + importFile, exception);
-                final String message = getMessage(R.string.import_message_import_failure, exception.getMessage());
+                final String message = getMessage(exception.getMessage());
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
         }
@@ -303,8 +308,8 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         }
 
         private void createCharacterSkills(final Character character, final List<CharacterSkill> characterSkills,
-                final CharacterService characterService) {
-            final List<FavoriteCharacterSkill> favCharacterSkills = new ArrayList<FavoriteCharacterSkill>(
+                                           final CharacterService characterService) {
+            final List<FavoriteCharacterSkill> favCharacterSkills = new ArrayList<>(
                     characterSkills.size());
 
             // create list of FavoriteCharacterSkill
@@ -318,7 +323,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
             }
 
             // remove FavoriteCharacterSkill from all character skills
-            final List<CharacterSkill> newCharacterSkills = new ArrayList<CharacterSkill>(character
+            final List<CharacterSkill> newCharacterSkills = new ArrayList<>(character
                     .getCharacterSkills().size());
             for (final CharacterSkill characterSkill : character.getCharacterSkills()) {
                 if (!contains(characterSkill, favCharacterSkills)) {
@@ -335,7 +340,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         }
 
         private boolean contains(final CharacterSkill characterSkill,
-                final List<FavoriteCharacterSkill> favCharacterSkills) {
+                                 final List<FavoriteCharacterSkill> favCharacterSkills) {
             for (final FavoriteCharacterSkill favoriteCharacterSkill : favCharacterSkills) {
                 if (characterSkill.getSkill().equals(favoriteCharacterSkill.getSkill())) {
                     return true;
@@ -365,7 +370,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
     /**
      * Imports equipment from a file and creates it in the game system.
      */
-    public class ImportEquipment {
+    class ImportEquipment {
 
         private final Context context;
         private final DisplayService displayService;
@@ -376,13 +381,11 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         /**
          * Creates ImportEquipment. Creates list of names of all weapons, armor and goods.
-         * 
-         * @param context
-         *            The context of the app.
-         * @param displayService
-         *            The service to display data.
+         *
+         * @param context        The context of the app.
+         * @param displayService The service to display data.
          */
-        public ImportEquipment(final Context context, final DisplayService displayService) {
+        ImportEquipment(final Context context, final DisplayService displayService) {
             this.context = context;
             this.displayService = displayService;
             allWeaponNames = getAllNames(gameSystem.getAllWeapons());
@@ -391,7 +394,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
         }
 
         private List<String> getAllNames(final List<? extends Item> items) {
-            final List<String> allNames = new LinkedList<String>();
+            final List<String> allNames = new LinkedList<>();
             for (final Item item : items) {
                 allNames.add(displayService.getDisplayItem(item));
             }
@@ -400,11 +403,10 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         /**
          * Imports equipment form the given file and creates it in the game system.
-         * 
-         * @param importFile
-         *            The file to import.
+         *
+         * @param importFile The file to import.
          */
-        public void importEquipment(final File importFile) {
+        void importEquipment(final File importFile) {
             Logger.debug("importEquipment");
             final ExportImportService exportImportService = gameSystem.getExportImportService();
             try {
@@ -416,7 +418,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
                 }
             } catch (final Exception exception) {
                 Logger.error("Can't import equipment: " + importFile, exception);
-                final String message = getMessage(R.string.import_message_import_failure, exception.getMessage());
+                final String message = getMessage(exception.getMessage());
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
         }
@@ -477,8 +479,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         private ImportMessage getDuplicateItemMessage(final String name) {
             final String message = "Item named " + name + " already exists. Ignoring it";
-            final ImportMessage importMessage = new ImportMessage(message, ImportMessage.Type.ERROR);
-            return importMessage;
+            return new ImportMessage(message, Type.ERROR);
         }
 
     }

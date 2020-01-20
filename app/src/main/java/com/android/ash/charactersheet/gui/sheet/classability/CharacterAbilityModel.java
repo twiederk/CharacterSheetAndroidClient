@@ -1,12 +1,12 @@
 package com.android.ash.charactersheet.gui.sheet.classability;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.android.ash.charactersheet.gui.util.ExpandableListItem;
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Stores all abilities a character gained by its classes.
@@ -31,7 +31,7 @@ public class CharacterAbilityModel extends ListModel<ExpandableListItem> {
     }
 
     private void setCharacterClassLevels(final List<ClassLevel> classLevels) {
-        characterClassLevels = new HashMap<String, Integer>();
+        characterClassLevels = new HashMap<>();
         for (final ClassLevel classLevel : classLevels) {
             characterClassLevels.put(classLevel.getCharacterClass().getName(), classLevel.getLevel());
         }

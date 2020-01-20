@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:importantForAutofill="noExcludeDescendants">
 
     <!-- BENEFIT -->
 
@@ -10,7 +11,8 @@
         style="@style/base"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/feat_administration_benefit_label" />
+        android:text="@string/feat_administration_benefit_label"
+        android:labelFor="@+id/feat_administration_benefit" />
 
     <EditText
         android:id="@+id/feat_administration_benefit"
@@ -25,7 +27,8 @@
         style="@style/base"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/feat_administration_prerequisit_label" />
+        android:text="@string/feat_administration_prerequisit_label"
+        android:labelFor="@+id/feat_administration_prerequisit" />
 
     <EditText
         android:id="@+id/feat_administration_prerequisit"

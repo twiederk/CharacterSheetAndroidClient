@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +12,10 @@ import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.util.AbilityComparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Display the detailed data of a race, containing its name, favored class, size, reach, space, speed and its abilities.
@@ -37,23 +37,23 @@ public class RaceAbilityPageFragment extends PageFragment {
     private void setHeader() {
         final Race race = character.getRace();
 
-        final TextView raceName = (TextView) view.findViewById(R.id.race_name);
+        final TextView raceName = view.findViewById(R.id.race_name);
         raceName.setText(getName(race));
 
-        final TextView raceFavoriteCharacterClass = (TextView) view
+        final TextView raceFavoriteCharacterClass = view
                 .findViewById(R.id.race_favorite_character_class_name);
         raceFavoriteCharacterClass.setText(getFavoriteCharacterClass(race));
 
-        final TextView raceSize = (TextView) view.findViewById(R.id.race_size);
+        final TextView raceSize = view.findViewById(R.id.race_size);
         raceSize.setText(getSize(race));
 
-        final TextView raceReach = (TextView) view.findViewById(R.id.race_reach);
+        final TextView raceReach = view.findViewById(R.id.race_reach);
         raceReach.setText(getReach(race));
 
-        final TextView raceSpace = (TextView) view.findViewById(R.id.race_space);
+        final TextView raceSpace = view.findViewById(R.id.race_space);
         raceSpace.setText(getSpace(race));
 
-        final TextView raceSpeed = (TextView) view.findViewById(R.id.race_speed);
+        final TextView raceSpeed = view.findViewById(R.id.race_speed);
         raceSpeed.setText(getSpeed(race));
 
     }
@@ -101,18 +101,16 @@ public class RaceAbilityPageFragment extends PageFragment {
     }
 
     private String composeText(final String label, final String value) {
-        final StringBuilder text = new StringBuilder();
-        text.append(label);
-        text.append(": ");
-        text.append(value);
-        return text.toString();
+        return label +
+                ": " +
+                value;
     }
 
     private void setBody() {
         final List<ExpandableListItem> racialAbilities = getRaceAbilities();
         final ArrayAdapter<ExpandableListItem> raceAbilityArrayAdapter = new RaceAbilityAdapter(getActivity(),
                 displayService, R.layout.listitem_race_ability, racialAbilities);
-        final ListView listView = (ListView) view.findViewById(R.id.race_ability_list_view);
+        final ListView listView = view.findViewById(R.id.race_ability_list_view);
         listView.setAdapter(raceAbilityArrayAdapter);
         listView.setOnItemClickListener(new ExpandOnClickListener());
         listView.setTextFilterEnabled(true);
@@ -121,18 +119,12 @@ public class RaceAbilityPageFragment extends PageFragment {
     private List<ExpandableListItem> getRaceAbilities() {
         final List<Ability> abilities = character.getRace().getAbilities();
         Collections.sort(abilities, new AbilityComparator());
-        final List<ExpandableListItem> racialAbilities = new ArrayList<ExpandableListItem>();
+        final List<ExpandableListItem> racialAbilities = new ArrayList<>();
         for (final Ability ability : abilities) {
             final ExpandableListItem expandListView = new ExpandableListItem(ability);
             racialAbilities.add(expandListView);
         }
         return racialAbilities;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // nothing to resume
     }
 
 }

@@ -72,16 +72,16 @@ public class CombatEditActivity extends EditActivity {
     }
 
     private void findViews() {
-        hitPointsQuickNumberView = (SumNumberView) findViewById(R.id.combat_hitpoints);
-        maxHitPointsNumberView = (SumNumberView) findViewById(R.id.combat_max_hitpoints);
-        armorClassNumberView = (StepNumberView) findViewById(R.id.combat_armorclass);
-        armorClassFormularTextView = (TextView) findViewById(R.id.combat_armorclass_formular);
-        initiativeNumberView = (StepNumberView) findViewById(R.id.combat_initiative);
-        initiativeFormularTextView = (TextView) findViewById(R.id.combat_initative_formular);
-        cmbNumberView = (StepNumberView) findViewById(R.id.combat_cmb);
-        cmbFormularTextView = (TextView) findViewById(R.id.combat_cmb_formular);
-        cmdNumberView = (StepNumberView) findViewById(R.id.combat_cmd);
-        cmdFormularTextView = (TextView) findViewById(R.id.combat_cmd_formular);
+        hitPointsQuickNumberView = findViewById(R.id.combat_hitpoints);
+        maxHitPointsNumberView = findViewById(R.id.combat_max_hitpoints);
+        armorClassNumberView = findViewById(R.id.combat_armorclass);
+        armorClassFormularTextView = findViewById(R.id.combat_armorclass_formular);
+        initiativeNumberView = findViewById(R.id.combat_initiative);
+        initiativeFormularTextView = findViewById(R.id.combat_initative_formular);
+        cmbNumberView = findViewById(R.id.combat_cmb);
+        cmbFormularTextView = findViewById(R.id.combat_cmb_formular);
+        cmdNumberView = findViewById(R.id.combat_cmd);
+        cmdFormularTextView = findViewById(R.id.combat_cmd_formular);
     }
 
     @Override

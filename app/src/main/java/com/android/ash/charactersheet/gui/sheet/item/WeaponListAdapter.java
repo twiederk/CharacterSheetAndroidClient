@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.TableRow;
@@ -13,6 +11,9 @@ import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * The Adapter of the weapon list of the character. Displays the number, name and damage of the weapon in the first
@@ -47,30 +48,30 @@ public class WeaponListAdapter extends ItemListAdapter {
 
         setBackgroundColor(view, weapon.isMagic());
 
-        final TextView numberTextView = (TextView) view.findViewById(R.id.weapon_number);
-        numberTextView.setText(Integer.toString(itemGroup.getNumber()));
+        final TextView numberTextView = view.findViewById(R.id.weapon_number);
+        numberTextView.setText(String.format(Locale.US, "%d", itemGroup.getNumber()));
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.weapon_name);
+        final TextView nameTextView = view.findViewById(R.id.weapon_name);
         nameTextView.setText(displayService.getDisplayItem(weapon));
 
-        final TextView damageTextView = (TextView) view.findViewById(R.id.weapon_damage);
+        final TextView damageTextView = view.findViewById(R.id.weapon_damage);
         damageTextView.setText(displayService.getDisplayDamage(weapon));
 
-        final TableRow secondTableRow = (TableRow) view.findViewById(R.id.second_row);
-        final TableRow thirdTableRow = (TableRow) view.findViewById(R.id.third_row);
+        final TableRow secondTableRow = view.findViewById(R.id.second_row);
+        final TableRow thirdTableRow = view.findViewById(R.id.third_row);
         if (expandListView.isExpanded()) {
             secondTableRow.setVisibility(View.VISIBLE);
 
-            final TextView typeTextView = (TextView) view.findViewById(R.id.weapon_type);
+            final TextView typeTextView = view.findViewById(R.id.weapon_type);
             typeTextView.setText(displayService.getDisplayWeaponType(weapon.getWeaponType()));
 
-            final TextView costTextView = (TextView) view.findViewById(R.id.weapon_cost);
+            final TextView costTextView = view.findViewById(R.id.weapon_cost);
             costTextView.setText(displayService.getDisplayCost(weapon.getCost()));
 
-            final TextView weightTextView = (TextView) view.findViewById(R.id.weapon_weight);
+            final TextView weightTextView = view.findViewById(R.id.weapon_weight);
             weightTextView.setText(displayService.getDisplayWeight(weapon.getWeight()));
 
-            final TextView criticalTextView = (TextView) view.findViewById(R.id.weapon_critical);
+            final TextView criticalTextView = view.findViewById(R.id.weapon_critical);
             criticalTextView.setText(displayService.getDisplayCritical(weapon.getCritical()));
 
             displayDescription(weapon, thirdTableRow, view);

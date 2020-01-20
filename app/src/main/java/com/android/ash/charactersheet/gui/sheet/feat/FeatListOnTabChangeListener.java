@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.widget.ListView;
 import android.widget.TabHost.OnTabChangeListener;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Sets the current filter to the new list view which is displayed on tab change.
@@ -22,7 +22,7 @@ public class FeatListOnTabChangeListener implements OnTabChangeListener {
      */
     public FeatListOnTabChangeListener(final FeatModel featModel) {
         this.featModel = featModel;
-        listViews = new LinkedList<ListView>();
+        listViews = new LinkedList<>();
     }
 
     /**

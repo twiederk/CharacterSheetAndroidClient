@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.TableRow;
@@ -13,6 +11,9 @@ import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Adapter of ListView of armor. It displays item groups containing armor with number, name and bonus of armor in first
@@ -46,31 +47,31 @@ public class ArmorListAdapter extends ItemListAdapter {
 
         setBackgroundColor(view, armor.isMagic());
 
-        final TextView numberTextView = (TextView) view.findViewById(R.id.armor_number);
-        numberTextView.setText(Integer.toString(itemGroup.getNumber()));
+        final TextView numberTextView = view.findViewById(R.id.armor_number);
+        numberTextView.setText(String.format(Locale.US, "%d", itemGroup.getNumber()));
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.armor_name);
+        final TextView nameTextView = view.findViewById(R.id.armor_name);
         nameTextView.setText(displayService.getDisplayItem(armor));
 
-        final TextView damageTextView = (TextView) view.findViewById(R.id.armor_bonus);
+        final TextView damageTextView = view.findViewById(R.id.armor_bonus);
         damageTextView.setText(getArmorBonusText(armor.getArmorBonus()));
 
-        final TableRow secondTableRow = (TableRow) view.findViewById(R.id.second_row);
-        final TableRow thirdTableRow = (TableRow) view.findViewById(R.id.third_row);
+        final TableRow secondTableRow = view.findViewById(R.id.second_row);
+        final TableRow thirdTableRow = view.findViewById(R.id.third_row);
         if (expandListView.isExpanded()) {
             secondTableRow.setVisibility(View.VISIBLE);
 
-            final TextView typeTextView = (TextView) view.findViewById(R.id.armor_type);
+            final TextView typeTextView = view.findViewById(R.id.armor_type);
             typeTextView.setText(displayService.getDisplayArmorType(armor.getArmorType()));
 
-            final TextView costTextView = (TextView) view.findViewById(R.id.armor_cost);
+            final TextView costTextView = view.findViewById(R.id.armor_cost);
             costTextView.setText(displayService.getDisplayCost(armor.getCost()));
 
-            final TextView weightTextView = (TextView) view.findViewById(R.id.armor_weight);
+            final TextView weightTextView = view.findViewById(R.id.armor_weight);
             weightTextView.setText(displayService.getDisplayWeight(armor.getWeight()));
 
-            final TextView criticalTextView = (TextView) view.findViewById(R.id.armor_check_penalty);
-            criticalTextView.setText(Integer.toString(armor.getArmorCheckPenalty()));
+            final TextView criticalTextView = view.findViewById(R.id.armor_check_penalty);
+            criticalTextView.setText(String.format(Locale.US, "%d", armor.getArmorCheckPenalty()));
 
             displayDescription(armor, thirdTableRow, view);
         } else {
@@ -80,11 +81,9 @@ public class ArmorListAdapter extends ItemListAdapter {
     }
 
     private String getArmorBonusText(final int armorBonus) {
-        final StringBuilder output = new StringBuilder();
-        output.append(resources.getString(R.string.equipment_list_armor_bonus));
-        output.append(" ");
-        output.append(displayService.getDisplayModifier(armorBonus));
-        return output.toString();
+        return resources.getString(R.string.equipment_list_armor_bonus) +
+                " " +
+                displayService.getDisplayModifier(armorBonus);
     }
 
 }

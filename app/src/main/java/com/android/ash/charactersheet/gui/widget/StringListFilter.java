@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.widget;
 
+import com.android.ash.charactersheet.gui.util.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import com.android.ash.charactersheet.gui.util.Logger;
 
 /**
  * Filters instances of T by their toString() value.
@@ -35,13 +35,13 @@ public class StringListFilter<T> extends ListFilter<T> {
     public List<T> performFiltering() {
         final String constraint = model.getStringConstraint();
         if (constraint == null || constraint.length() == 0) {
-            return new ArrayList<T>(model.getItems());
+            return new ArrayList<>(model.getItems());
         }
         return filterItems(model.getItems());
     }
 
     private List<T> filterItems(final List<T> items) {
-        final List<T> filteredItems = new ArrayList<T>();
+        final List<T> filteredItems = new ArrayList<>();
         final String constraint = model.getStringConstraint();
         for (final T item : items) {
             final String name = item.toString().toLowerCase(Locale.getDefault());
@@ -59,10 +59,9 @@ public class StringListFilter<T> extends ListFilter<T> {
     private void matchSplittedValue(final T item, final String name, final String constraint,
             final List<T> filteredItems) {
         final String[] words = name.split(" ");
-        final int wordCount = words.length;
 
-        for (int i = 0; i < wordCount; i++) {
-            if (words[i].startsWith(constraint)) {
+        for (String word : words) {
+            if (word.startsWith(constraint)) {
                 filteredItems.add(item);
                 break;
             }

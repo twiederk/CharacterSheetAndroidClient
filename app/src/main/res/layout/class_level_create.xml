@@ -4,9 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <Spinner
+    <ListView
         android:id="@+id/class_level_create_class"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        style="@style/transparentListView" />
 
 </LinearLayout>

@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Observable;
-
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.Spell;
@@ -11,10 +7,14 @@ import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.service.RuleService;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Observable;
+
 /**
  * The model of the spell slot activity.
  */
-public class SpellSlotActivityModel extends Observable {
+class SpellSlotActivityModel extends Observable {
 
     private final RuleService ruleService;
     private final Character character;
@@ -86,15 +86,6 @@ public class SpellSlotActivityModel extends Observable {
     private void fireEvent() {
         setChanged();
         notifyObservers();
-    }
-
-    /**
-     * Returns the character.
-     * 
-     * @return The character.
-     */
-    public Character getCharacter() {
-        return character;
     }
 
     /**

@@ -123,11 +123,11 @@ public class SpelllistAdapter extends ListAdapter<Object> {
     }
 
     private void fillLevelItemView(final View view, final LevelItem levelItem) {
-        final TextView titleTextView = (TextView) view.findViewById(R.id.spelllevel_title);
+        final TextView titleTextView = view.findViewById(R.id.spelllevel_title);
         String text = displayService.getDisplaySpellLevel(levelItem.getLevel());
         titleTextView.setText(text);
 
-        final TextView numberOfKnowSpellsTextView = (TextView) view
+        final TextView numberOfKnowSpellsTextView = view
                 .findViewById(R.id.spelllevel_number_of_known_spells);
         final int numberOfKnownSpells = levelItem.getNumberOfKnownSpells();
         final int maxNumberOfKnownSpells = ruleService.getNumberOfKnownSpells(character,
@@ -142,7 +142,7 @@ public class SpelllistAdapter extends ListAdapter<Object> {
     private void fillSpellItemView(final View view, final SpellItem spellItem) {
 
         if (showAllModel.isShowAll()) {
-            final CheckBox knownSpellCheckBox = (CheckBox) view.findViewById(R.id.spell_known_spell);
+            final CheckBox knownSpellCheckBox = view.findViewById(R.id.spell_known_spell);
             knownSpellCheckBox.setChecked(spellItem.isKnownSpell());
             knownSpellCheckBox.setOnClickListener(new OnClickListener() {
 
@@ -176,10 +176,10 @@ public class SpelllistAdapter extends ListAdapter<Object> {
 
         }
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.spell_name);
+        final TextView nameTextView = view.findViewById(R.id.spell_name);
         nameTextView.setText(spellItem.getName());
 
-        final TextView titleTextView = (TextView) view.findViewById(R.id.spell_short_description);
+        final TextView titleTextView = view.findViewById(R.id.spell_short_description);
         titleTextView.setText(spellItem.getShortDescription());
     }
 }

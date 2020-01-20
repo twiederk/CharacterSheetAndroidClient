@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +10,9 @@ import com.android.ash.charactersheet.gui.widget.DisplayArrayAdapter;
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Displays the characters to export in a list view. Each character is displayed with a checkbox and its name.
@@ -36,12 +36,12 @@ public class ExportCharacterAdapter extends DisplayArrayAdapter<Character> {
     public ExportCharacterAdapter(final Context context, final DisplayService displayService, final int resourceId,
             final ListModel<Character> listModel) {
         super(context, displayService, resourceId, listModel.getItems());
-        selectedCharacters = new ArrayList<Character>(listModel.getItems().size());
+        selectedCharacters = new ArrayList<>(listModel.getItems().size());
     }
 
     @Override
     protected void fillView(final View view, final Character character) {
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.listitem_export_checkbox);
+        final CheckBox checkBox = view.findViewById(R.id.listitem_export_checkbox);
         checkBox.setText(character.getName());
 
         checkBox.setOnClickListener(new OnClickListener() {

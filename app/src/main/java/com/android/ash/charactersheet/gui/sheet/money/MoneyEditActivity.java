@@ -50,7 +50,7 @@ public class MoneyEditActivity extends EditActivity {
     }
 
     private void setController(final int numberViewResourceId, final NumberViewController controller) {
-        final SumNumberView numberView = (SumNumberView) findViewById(numberViewResourceId);
+        final SumNumberView numberView = findViewById(numberViewResourceId);
         numberView.setController(controller);
     }
 

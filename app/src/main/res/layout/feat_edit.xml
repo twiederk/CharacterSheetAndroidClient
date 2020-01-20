@@ -8,15 +8,18 @@
 
         <!-- CATEGORY -->
 
-<TextView
+        <TextView
             style="@style/tableCell_string"
-            android:text="@string/feat_edit_category_label" />
+            android:text="@string/feat_edit_category_label"
+            android:labelFor="@+id/feat_edit_category" />
 
         <EditText
             android:id="@+id/feat_edit_category"
             style="@style/edit"
             android:layout_width="fill_parent"
-            android:inputType="textCapWords" />
+            android:inputType="textCapWords"
+            android:importantForAutofill="no" />
+
     </TableLayout>
 
 </ScrollView>

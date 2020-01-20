@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.feat;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -17,6 +13,10 @@ import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.util.FeatComparator;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all feats. The option menu allows to call the create feat activity. The context menu of each feat allows to
@@ -47,23 +47,19 @@ public class FeatAdministrationListActivity extends AdministrationListActivity<F
     @Override
     public boolean onContextItemSelected(final MenuItem menuItem) {
 
-        switch (menuItem.getItemId()) {
-
-        case CONTEXT_MENU_FEAT_DELETE:
+        if (menuItem.getItemId() == CONTEXT_MENU_FEAT_DELETE) {
             final Feat feat = getFeat(menuItem);
             return deleteFeat(feat);
-
-        default:
-            return super.onContextItemSelected(menuItem);
         }
+        return super.onContextItemSelected(menuItem);
     }
 
     private Feat getFeat(final MenuItem menuItem) {
         final AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) menuItem.getMenuInfo();
-        final Feat feat = (Feat) getListView().getAdapter().getItem(menuInfo.position);
-        return feat;
+        return (Feat) getListView().getAdapter().getItem(menuInfo.position);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean deleteFeat(final Feat feat) {
         gameSystem.deleteFeat(feat);
         final ArrayAdapter<Feat> adapter = (ArrayAdapter<Feat>) getListView().getAdapter();
@@ -80,7 +76,7 @@ public class FeatAdministrationListActivity extends AdministrationListActivity<F
     @Override
     protected ArrayAdapter<Feat> getAdapter() {
         final List<Feat> allFeats = gameSystem.getAllFeats();
-        final ArrayAdapter<Feat> adapter = new NameDisplayArrayAdapter<Feat>(this, displayService, allFeats);
+        final ArrayAdapter<Feat> adapter = new NameDisplayArrayAdapter<>(this, displayService, allFeats);
         adapter.sort(new FeatComparator());
         return adapter;
     }

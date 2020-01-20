@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,10 +10,13 @@ import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper class of the ItemDao. Handles all database activities concerning armor. Its like an ArmorDao.
  */
-public class ArmorHelper extends ItemHelper {
+class ArmorHelper extends ItemHelper {
 
     private static final String SQL_GET_ALL_ARMOR = SELECT
             + "id, name, description, cost, weight, armor_bonus, armor_penalty, armor_type_id, quality_type_id FROM "
@@ -50,7 +50,7 @@ public class ArmorHelper extends ItemHelper {
      */
     public List<Armor> getAllArmor() {
         final List<Item> allItems = getAllItems(SQL_GET_ALL_ARMOR, armorRowMapper);
-        final List<Armor> allArmor = new ArrayList<Armor>();
+        final List<Armor> allArmor = new ArrayList<>();
         for (final Item item : allItems) {
             allArmor.add((Armor) item);
         }

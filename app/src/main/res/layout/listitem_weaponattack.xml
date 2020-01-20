@@ -47,7 +47,7 @@
             style="@style/weaponattack"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:gravity="right"
+            android:gravity="end"
             android:textColor="@android:color/white" />
 
         <com.android.ash.charactersheet.gui.widget.ammunitionview.AmmunitionView

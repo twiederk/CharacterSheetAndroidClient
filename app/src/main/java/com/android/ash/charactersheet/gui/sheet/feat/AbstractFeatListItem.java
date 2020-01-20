@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
+import android.support.annotation.NonNull;
+
 import com.android.ash.charactersheet.gui.util.ExpandableListItem;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
@@ -17,7 +19,7 @@ public abstract class AbstractFeatListItem extends ExpandableListItem implements
      * @param feat
      *            The feat of the FeatItem.
      */
-    public AbstractFeatListItem(final Feat feat) {
+    AbstractFeatListItem(final Feat feat) {
         super(feat);
         this.feat = feat;
     }
@@ -47,6 +49,7 @@ public abstract class AbstractFeatListItem extends ExpandableListItem implements
         return feat.isMultiple();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return getName();

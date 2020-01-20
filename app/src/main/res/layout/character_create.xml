@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:importantForAutofill="noExcludeDescendants">
 
         <TableLayout style="@style/centered" >
 
@@ -17,7 +18,8 @@
 
                 <TextView
                     style="@style/tableCell_string"
-                    android:text="@string/create_name_label" />
+                    android:text="@string/create_name_label"
+                    android:labelFor="@+id/create_name" />
 
                 <EditText
                     android:id="@+id/create_name"
@@ -32,7 +34,8 @@
 
                 <TextView
                     style="@style/tableCell_string"
-                    android:text="@string/create_player_label" />
+                    android:text="@string/create_player_label"
+                    android:labelFor="@+id/create_player" />
 
                 <EditText
                     android:id="@+id/create_player"

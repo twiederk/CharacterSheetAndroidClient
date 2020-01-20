@@ -12,6 +12,6 @@ public enum AbilityClass {
     /** Extra Skill Points Ability */
     EXTRA_SKILL_POINTS_ABILITY,
     /** Spell List Ability */
-    SPELLLIST_ABILITY;
+    SPELLLIST_ABILITY
 
 }

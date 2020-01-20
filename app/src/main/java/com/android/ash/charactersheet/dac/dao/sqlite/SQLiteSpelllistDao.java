@@ -1,10 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -23,6 +18,11 @@ import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpellsPerDayTable;
 import com.d20charactersheet.framework.dac.dao.SpelllistDao;
 import com.d20charactersheet.framework.dac.dao.util.SpellSerializor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Data access object for SpelllistService. Retrieves spells and spell lists from SQLite3 database.
@@ -52,7 +52,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
 
     @Override
     public List<Spell> getAllSpells() {
-        final List<Spell> allSpells = new ArrayList<Spell>();
+        final List<Spell> allSpells = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_SPELLS, new String[0]);
@@ -70,7 +70,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
 
     @Override
     public List<Spelllist> getAllSpelllists(final List<Spell> allSpells) {
-        final List<Spelllist> allSpelllists = new ArrayList<Spelllist>();
+        final List<Spelllist> allSpelllists = new ArrayList<>();
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(SQL_GET_ALL_SPELLLISTS, new String[0]);
@@ -92,7 +92,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
         Cursor cursor = null;
         try {
             final String[] params = new String[] { Integer.toString(spelllist.getId()) };
-            final Map<Integer, List<Spell>> spells = new HashMap<Integer, List<Spell>>();
+            final Map<Integer, List<Spell>> spells = new HashMap<>();
             cursor = db.rawQuery(SQL_GET_SPELLS_OF_SPELLLIST, params);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 final Spell spell = getSpellById(cursor.getInt(0), allSpells);
@@ -120,7 +120,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
     private void assignSpell(final Map<Integer, List<Spell>> spells, final Spell spell, final int level) {
         List<Spell> spellsOfLevel = spells.get(level);
         if (spellsOfLevel == null) {
-            spellsOfLevel = new ArrayList<Spell>();
+            spellsOfLevel = new ArrayList<>();
             spells.put(level, spellsOfLevel);
         }
         spellsOfLevel.add(spell);
@@ -292,7 +292,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
 
     @Override
     public List<KnownSpellsTable> getAllKnownSpellsTables() {
-        final List<KnownSpellsTable> allKnownSpellsTables = new ArrayList<KnownSpellsTable>();
+        final List<KnownSpellsTable> allKnownSpellsTables = new ArrayList<>();
         Cursor cursor = null;
         try {
             final RowMapper rowMapper = new KnownSpellsTableRowMapper();
@@ -342,7 +342,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
 
     @Override
     public List<SpellsPerDayTable> getAllSpellsPerDayTables() {
-        final List<SpellsPerDayTable> allSpellsPerDayTables = new ArrayList<SpellsPerDayTable>();
+        final List<SpellsPerDayTable> allSpellsPerDayTables = new ArrayList<>();
         Cursor cursor = null;
         try {
             final RowMapper rowMapper = new SpellsPerDayTableRowMapper();

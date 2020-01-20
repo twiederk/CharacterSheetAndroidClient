@@ -1,12 +1,14 @@
 package com.android.ash.charactersheet.gui.util;
 
+import android.support.annotation.NonNull;
+
 /**
  * Used by ListViews which allow to expand data of list items by touching them. Stores the object to display and the
  * info if list item is expanded or not.
  */
 public class ExpandableListItem {
 
-    private Object object;
+    private final Object object;
     private boolean expanded;
 
     /**
@@ -16,21 +18,9 @@ public class ExpandableListItem {
      *            The object to display as list item.
      */
     public ExpandableListItem(final Object object) {
-        this(object, false);
+        this.object = object;
     }
 
-    /**
-     * Stores object and expand or collapse state.
-     * 
-     * @param object
-     *            The object to store.
-     * @param expanded
-     *            True to expand item view.
-     */
-    public ExpandableListItem(final Object object, final boolean expanded) {
-        this.object = object;
-        this.expanded = expanded;
-    }
 
     /**
      * Returns the stored object.
@@ -39,16 +29,6 @@ public class ExpandableListItem {
      */
     public Object getObject() {
         return object;
-    }
-
-    /**
-     * Sets the object to store.
-     * 
-     * @param object
-     *            The object to store.
-     */
-    public void setObject(final Object object) {
-        this.object = object;
     }
 
     /**
@@ -70,6 +50,7 @@ public class ExpandableListItem {
         this.expanded = expanded;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return object.toString();

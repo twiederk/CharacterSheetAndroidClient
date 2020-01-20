@@ -7,7 +7,7 @@ import android.widget.CheckBox;
 /**
  * Handles clicks on character classes checkboxes. If a checkbox is clicked the skill is a class skill of this class.
  */
-public class CharacterClassCheckboxOnClickListener implements OnClickListener {
+class CharacterClassCheckboxOnClickListener implements OnClickListener {
 
     private final CharacterClassSkillModel model;
 

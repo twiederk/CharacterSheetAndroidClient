@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.Iterator;
-
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.CheckBox;
@@ -22,6 +18,11 @@ import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.Iterator;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * Displays spell slot to select spell for. Displays spell list ability the spell slot belongs to. Displays spells to
  * select in a spinner. Displays metamagic feats to select.
@@ -35,6 +36,7 @@ public class SpellSlotActivity extends FormularActivity<SpellSlot> {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         character = application.getCharacter();
@@ -49,7 +51,7 @@ public class SpellSlotActivity extends FormularActivity<SpellSlot> {
 
     @Override
     protected SpellSlot createForm() {
-        final int spellSlotId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
+        final int spellSlotId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
         for (final SpellSlot spellSlot : character.getSpellSlots()) {
             if (spellSlot.getId() == spellSlotId) {
                 spellSlotActivityModel = new SpellSlotActivityModel(gameSystem.getRuleService(), character, spellSlot);
@@ -68,7 +70,7 @@ public class SpellSlotActivity extends FormularActivity<SpellSlot> {
 
     private String displayAbilities() {
         final StringBuilder text = new StringBuilder();
-        for (final Iterator<SpelllistAbility> iterator = form.getSpelllistAbilities().iterator(); iterator.hasNext();) {
+        for (final Iterator<SpelllistAbility> iterator = form.getSpelllistAbilities().iterator(); iterator.hasNext(); ) {
             final SpelllistAbility spelllistAbility = iterator.next();
             text.append(spelllistAbility.getName());
             if (iterator.hasNext()) {
@@ -79,7 +81,7 @@ public class SpellSlotActivity extends FormularActivity<SpellSlot> {
     }
 
     private void setFeats() {
-        final TableLayout featTableLayout = (TableLayout) findViewById(R.id.spellslot_feat_table);
+        final TableLayout featTableLayout = findViewById(R.id.spellslot_feat_table);
         for (final Feat feat : character.getMetamagicFeats()) {
             final TableRow tableRow = createTableRow(feat);
             featTableLayout.addView(tableRow);
@@ -103,7 +105,7 @@ public class SpellSlotActivity extends FormularActivity<SpellSlot> {
     }
 
     private void setSpellSelection() {
-        final Spinner spinner = (Spinner) findViewById(R.id.spellslot_spell);
+        final Spinner spinner = findViewById(R.id.spellslot_spell);
         final SpinnerAdapter adapter = new SpellSelectionAdapter(this, spinner, displayService, spellSlotActivityModel);
         setSpinner(R.id.spellslot_spell, adapter, spellSlotActivityModel.getSpellPosition());
     }

@@ -1,9 +1,6 @@
 package com.android.ash.charactersheet.gui.admin.item;
 
-import java.util.Arrays;
-
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
@@ -16,6 +13,8 @@ import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.QualityType;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ItemService;
+
+import java.util.Arrays;
 
 /**
  * Base activity to handle the GUI of creating and editing items. The properties of all items are filled and read from
@@ -62,7 +61,7 @@ public abstract class ItemAdministrationActivity<T> extends FormularActivity<Ite
     }
 
     private void setNumberView(final NumberViewController controller, final int resourceId) {
-        final StepNumberView numberView = (StepNumberView) findViewById(resourceId);
+        final StepNumberView numberView = findViewById(resourceId);
         numberView.setEditable(true);
         numberView.setController(controller);
     }
@@ -71,13 +70,12 @@ public abstract class ItemAdministrationActivity<T> extends FormularActivity<Ite
 
     protected abstract int getTypeSelectedId();
 
-    protected SpinnerAdapter getQualityAdapter() {
-        final ArrayAdapter<QualityType> qualityTypeArrayAdapter = new QualityTypeArrayAdapter(this, displayService,
+    private SpinnerAdapter getQualityAdapter() {
+        return new QualityTypeArrayAdapter(this, displayService,
                 Arrays.asList(QualityType.values()));
-        return qualityTypeArrayAdapter;
     }
 
-    protected int getQualitySelectedId() {
+    private int getQualitySelectedId() {
         return form.getQualityType().ordinal();
     }
 

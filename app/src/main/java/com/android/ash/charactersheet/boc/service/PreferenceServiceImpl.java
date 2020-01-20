@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.boc.service;
 
-import java.util.Arrays;
-
 import android.graphics.Color;
 
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.PreferenceDao;
+
+import java.util.Arrays;
 
 /**
  * Handles preferences. Checks if preference exists and if correct type of preferenc value is stored.
@@ -19,8 +19,8 @@ public class PreferenceServiceImpl implements PreferenceService {
 
     /**
      * Instanciates PreferenceServiceImpl with given data access object.
-     * 
-     * @param preferenceDao
+     *
+     * @param preferenceDao The dao to persist preferences
      */
     public PreferenceServiceImpl(final PreferenceDao preferenceDao) {
         this.preferenceDao = preferenceDao;

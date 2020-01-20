@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import com.android.ash.charactersheet.gui.util.ExpandOnClickListener;
 import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.util.MagicOnClickListener;
+
+import java.util.Objects;
 
 /**
  * Displays equipment of the character. Weapons, armor and goods are displayed in seperate tabs. Items can be touched to
@@ -50,23 +53,21 @@ public class EquipmentPageFragement extends PageFragment {
     }
 
     private void resumeLoad() {
-        final TextView loadTextView = (TextView) view.findViewById(R.id.equipment_list_load);
+        final TextView loadTextView = view.findViewById(R.id.equipment_list_load);
         loadTextView.setText(getLoadText());
     }
 
     private String getLoadText() {
         final float weight = ruleService.getLoad(character);
-        final StringBuilder text = new StringBuilder();
-        text.append(getResources().getString(R.string.equipment_list_load));
-        text.append(": ");
-        text.append(weight);
-        text.append(" ");
-        text.append(getResources().getString(R.string.unit_weight));
-        return text.toString();
+        return getResources().getString(R.string.equipment_list_load) +
+                ": " +
+                weight +
+                " " +
+                getResources().getString(R.string.unit_weight);
     }
 
     private void createTabs() {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         addTab(R.string.tab_label_weapon, R.id.weapon_list, R.drawable.icon_sword);
@@ -77,11 +78,11 @@ public class EquipmentPageFragement extends PageFragment {
     }
 
     @Override
-    public void addTab(final int labelId, final int layoutId, final int iconId) {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
-        final String label = (String) getActivity().getResources().getText(labelId);
+    void addTab(final int labelId, final int layoutId, final int iconId) {
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
+        final String label = (String) Objects.requireNonNull(getActivity()).getResources().getText(labelId);
         final TabSpec tabSpec = tabHost.newTabSpec(label);
-        tabSpec.setIndicator(label, getActivity().getResources().getDrawable(iconId));
+        tabSpec.setIndicator(label, ContextCompat.getDrawable(getActivity(), iconId));
         tabSpec.setContent(layoutId);
         tabHost.addTab(tabSpec);
     }
@@ -116,7 +117,7 @@ public class EquipmentPageFragement extends PageFragment {
     }
 
     private void setListView(final int listViewId, final BaseAdapter adapter) {
-        final ListView listView = (ListView) view.findViewById(listViewId);
+        final ListView listView = view.findViewById(listViewId);
         listView.setAdapter(adapter);
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(new ExpandOnClickListener());

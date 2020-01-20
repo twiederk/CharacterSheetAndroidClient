@@ -11,17 +11,17 @@ public interface NumberViewController {
      * 
      * @return The number.
      */
-    public Number getNumber();
+    Number getNumber();
 
     /**
      * Increase the number.
      */
-    public void increase();
+    void increase();
 
     /**
      * Decrease the number.
      */
-    public void decrease();
+    void decrease();
 
     /**
      * Set the number to the given value.
@@ -29,7 +29,7 @@ public interface NumberViewController {
      * @param number
      *            The value to set.
      */
-    public void setNumber(Number number);
+    void setNumber(Number number);
 
     /**
      * Decrease the number by the given value.
@@ -37,7 +37,7 @@ public interface NumberViewController {
      * @param number
      *            The value to decrease the number by.
      */
-    public void decrease(Number number);
+    void decrease(Number number);
 
     /**
      * Increase the number by the given value.
@@ -45,6 +45,6 @@ public interface NumberViewController {
      * @param number
      *            The value to increase the number by.
      */
-    public void increase(Number number);
+    void increase(Number number);
 
 }

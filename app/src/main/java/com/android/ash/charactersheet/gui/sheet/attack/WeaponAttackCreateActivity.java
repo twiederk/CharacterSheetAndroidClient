@@ -1,16 +1,17 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-
 import android.content.Intent;
 
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.AttackWield;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays a weapon attack and creates it.
@@ -36,9 +37,8 @@ public class WeaponAttackCreateActivity extends WeaponAttackActivity {
 
     private Weapon getWeaponFromIntent() {
         final Intent intent = getIntent();
-        final int weaponId = intent.getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final Weapon weapon = getWeaponById(weaponId);
-        return weapon;
+        final int weaponId = Objects.requireNonNull(intent.getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return getWeaponById(weaponId);
     }
 
     private Weapon getWeaponById(final int weaponId) {
@@ -52,7 +52,7 @@ public class WeaponAttackCreateActivity extends WeaponAttackActivity {
 
     private AttackWield getAttackWield(final Weapon weapon) {
         final EnumSet<AttackWield> attackWields = gameSystem.getRuleService().getAttackWields(weapon);
-        return new ArrayList<AttackWield>(attackWields).get(0);
+        return new ArrayList<>(attackWields).get(0);
     }
 
     @Override

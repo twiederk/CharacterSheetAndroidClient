@@ -1,9 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.item.armor;
 
-import java.util.Arrays;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.R;
@@ -14,8 +12,10 @@ import com.android.ash.charactersheet.gui.widget.numberview.ZeroAndNegativeNumbe
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.ArmorType;
 
+import java.util.Arrays;
+
 /**
- * Creates the weapoon administration GUI, which allows to create or edit a weapon. The GUI allows to enter name, type,
+ * Creates the weapon administration GUI, which allows to create or edit a weapon. The GUI allows to enter name, type,
  * cost weight, magical, damage, critical and description of the weapon. At the bottom a ok and cancel button allows to
  * save or cancel the action. Filling the GUI and reading the data from the GUI is handled by this class, while
  * providing the data and storing it must be handled by its derived classes.
@@ -24,6 +24,7 @@ public abstract class ArmorAdministrationActivity extends ItemAdministrationActi
 
     private Armor armor;
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.armor_administration);
@@ -41,9 +42,7 @@ public abstract class ArmorAdministrationActivity extends ItemAdministrationActi
 
     @Override
     protected SpinnerAdapter getTypeAdapter() {
-        final ArrayAdapter<ArmorType> armorTypeArrayAdapater = new ArmorTypeArrayAdapter(this, displayService,
-                Arrays.asList(ArmorType.values()));
-        return armorTypeArrayAdapater;
+        return new ArmorTypeArrayAdapter(this, displayService, Arrays.asList(ArmorType.values()));
     }
 
     @Override

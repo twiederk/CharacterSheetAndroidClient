@@ -1,15 +1,16 @@
 package com.android.ash.charactersheet.gui.widget;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Abstract base class to expand by ArrayAdapters of ListView and Spinner to display data using the DisplayManager and a
@@ -20,28 +21,26 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
  */
 public abstract class DisplayArrayAdapter<T> extends ArrayAdapter<T> {
 
-    private int itemViewResourceId;
-    private LayoutInflater mInflater;
-    protected DisplayService displayService;
+    private final int itemViewResourceId;
+    private final LayoutInflater mInflater;
+    protected final DisplayService displayService;
 
     /**
-     * Instanciates the ArrayAdapter with an array of the given items
-     * 
-     * @param context
+     *  Instantiates the ArrayAdapter with an array of the given items
+     *
+     *  @param context
      *            The context the view is shown.
      * @param displayService
      *            The display service to display data in the GUI.
-     * @param itemViewResourceId
-     *            The resource id of the view.
      * @param items
      *            The items to display.
      */
-    public DisplayArrayAdapter(final Context context, final DisplayService displayService, final int itemViewResourceId, final T[] items) {
-        this(context, displayService, itemViewResourceId, Arrays.asList(items));
+    DisplayArrayAdapter(final Context context, final DisplayService displayService, final T[] items) {
+        this(context, displayService, com.android.ash.charactersheet.R.layout.spinner_name, Arrays.asList(items));
     }
 
     /**
-     * Instanciates the ArrayAdapter with a list of the given items
+     * Instantiates the ArrayAdapter with a list of the given items
      * 
      * @param context
      *            The context the view is shown.
@@ -52,7 +51,7 @@ public abstract class DisplayArrayAdapter<T> extends ArrayAdapter<T> {
      * @param items
      *            The items to display.
      */
-    public DisplayArrayAdapter(final Context context, final DisplayService displayService, final int itemViewResourceId, final List<T> items) {
+    protected DisplayArrayAdapter(final Context context, final DisplayService displayService, final int itemViewResourceId, final List<T> items) {
         super(context, itemViewResourceId, items);
         this.displayService = displayService;
         this.itemViewResourceId = itemViewResourceId;
@@ -64,8 +63,9 @@ public abstract class DisplayArrayAdapter<T> extends ArrayAdapter<T> {
      * 
      * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
      */
+    @NonNull
     @Override
-    public View getView(final int position, final View convertView, final ViewGroup parent) {
+    public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
         final View view = prepareView(convertView, parent);
         final T item = getItem(position);
         fillView(view, item);
@@ -88,7 +88,7 @@ public abstract class DisplayArrayAdapter<T> extends ArrayAdapter<T> {
      * @see android.widget.ArrayAdapter#getDropDownView(int, android.view.View, android.view.ViewGroup)
      */
     @Override
-    public View getDropDownView(final int position, final View convertView, final ViewGroup parent) {
+    public View getDropDownView(final int position, final View convertView, @NonNull final ViewGroup parent) {
         return getView(position, convertView, parent);
     }
 

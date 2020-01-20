@@ -5,7 +5,7 @@ import com.d20charactersheet.framework.boc.model.SpellSlot;
 /**
  * Displays spell slot in list of spell slots.
  */
-public class SpellSlotView {
+class SpellSlotView {
 
     private final SpellSlot spellSlot;
     private final LevelView levelView;

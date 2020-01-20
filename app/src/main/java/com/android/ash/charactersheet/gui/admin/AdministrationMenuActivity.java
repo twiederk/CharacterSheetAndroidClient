@@ -48,7 +48,7 @@ public class AdministrationMenuActivity extends LogActivity {
     }
 
     private void setButtonOnClickListener(final int id, final Class<? extends Activity> activity) {
-        final Button button = (Button) findViewById(id);
+        final Button button = findViewById(id);
         button.setOnClickListener(new IntentOnClickListener(new Intent(this, activity)));
     }
 }

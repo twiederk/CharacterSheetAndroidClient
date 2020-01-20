@@ -1,23 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import static com.d20charactersheet.framework.dac.abilitybuilder.ExtraFeatsAbilityBuilder.KEY_NUMBER_OF_EXTRA_FEATS;
-import static com.d20charactersheet.framework.dac.abilitybuilder.ExtraSkillPointsAbilityBuilder.KEY_NUMBER_OF_SKILL_POINTS;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.ANY_SCHOOL_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_ATTRIBUTE_BONUS_SPELL_SLOTS;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_CASTING_TYPE_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_KNOWN_SPELLS_TABLE_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SCHOOL_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELLLIST_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELLS_PER_DAY_TABLE_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELL_ATTRIBUTE_ID;
-import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELL_SOURCE_ID;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -42,6 +24,23 @@ import com.d20charactersheet.framework.dac.abilitybuilder.ExtraFeatsAbilityBuild
 import com.d20charactersheet.framework.dac.abilitybuilder.ExtraSkillPointsAbilityBuilder;
 import com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder;
 import com.d20charactersheet.framework.dac.dao.AbilityDao;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.d20charactersheet.framework.dac.abilitybuilder.ExtraFeatsAbilityBuilder.KEY_NUMBER_OF_EXTRA_FEATS;
+import static com.d20charactersheet.framework.dac.abilitybuilder.ExtraSkillPointsAbilityBuilder.KEY_NUMBER_OF_SKILL_POINTS;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.ANY_SCHOOL_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_CASTING_TYPE_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_KNOWN_SPELLS_TABLE_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SCHOOL_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELLLIST_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELLS_PER_DAY_TABLE_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELL_ATTRIBUTE_ID;
+import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELL_SOURCE_ID;
 
 /**
  * Provides access to the ability tables in the SQLite database.
@@ -69,7 +68,7 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
     @Override
     public List<Ability> getAllAbilities(final List<Spelllist> allSpelllists,
             final List<KnownSpellsTable> allKnownSpellsTables, final List<SpellsPerDayTable> allSpellsPerDayTables) {
-        final List<Ability> allAbilities = new ArrayList<Ability>();
+        final List<Ability> allAbilities = new ArrayList<>();
         final AbilityBuilderFactory abilityBuilderFactoy = createAbilityBuilderFactory(allSpelllists,
                 allKnownSpellsTables, allSpellsPerDayTables);
         Cursor cursor = null;
@@ -91,7 +90,7 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
 
     private void selectAbilityProperties(final AbilityConfig abilityConfig) {
         if (!abilityConfig.getClassname().equals(Ability.class.getSimpleName())) {
-            final Map<String, String> abilityProperties = new HashMap<String, String>();
+            final Map<String, String> abilityProperties = new HashMap<>();
             Cursor cursor = null;
             try {
                 final String[] params = new String[] { Integer.toString(abilityConfig.getId()) };
@@ -112,8 +111,7 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
 
     private Ability createAbility(final AbilityConfig abilityConfig, final AbilityBuilderFactory abilityBuilderFactory) {
         final AbilityBuilder abilityBuilder = abilityBuilderFactory.getAbilityBuilder(abilityConfig.getClassname());
-        final Ability ability = abilityBuilder.createAbility(abilityConfig);
-        return ability;
+        return abilityBuilder.createAbility(abilityConfig);
     }
 
     @Override
@@ -174,7 +172,7 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
                 .getId());
         insertAbilityProperty(ability.getId(), KEY_SPELLS_PER_DAY_TABLE_ID, spelllistAbility.getSpellsPerDayTable()
                 .getId());
-        insertAbilityProperty(ability.getId(), KEY_ATTRIBUTE_BONUS_SPELL_SLOTS,
+        insertAbilityProperty(ability.getId(),
                 spelllistAbility.isAttributeBonusSpellSlots());
         insertAbilityProperty(ability.getId(), KEY_SCHOOL_ID, getSchoolId(spelllistAbility.getSchools()));
     }
@@ -188,8 +186,8 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
         return ANY_SCHOOL_ID;
     }
 
-    private void insertAbilityProperty(final int abilityId, final String property_key, final boolean property_value) {
-        insertAbilityProperty(abilityId, property_key, Boolean.toString(property_value));
+    private void insertAbilityProperty(final int abilityId, final boolean property_value) {
+        insertAbilityProperty(abilityId, SpelllistAbilityBuilder.KEY_ATTRIBUTE_BONUS_SPELL_SLOTS, Boolean.toString(property_value));
     }
 
     private void insertAbilityProperty(final int abilityId, final String property_key, final int property_value) {
@@ -254,13 +252,13 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
                 .getId());
         updateAbilityProperty(ability.getId(), KEY_SPELLS_PER_DAY_TABLE_ID, spelllistAbility.getSpellsPerDayTable()
                 .getId());
-        updateAbilityProperty(ability.getId(), KEY_ATTRIBUTE_BONUS_SPELL_SLOTS,
+        updateAbilityProperty(ability.getId(),
                 spelllistAbility.isAttributeBonusSpellSlots());
         updateAbilityProperty(ability.getId(), KEY_SCHOOL_ID, getSchoolId(spelllistAbility.getSchools()));
     }
 
-    private void updateAbilityProperty(final int abilityId, final String property_key, final boolean property_value) {
-        updateAbilityProperty(abilityId, property_key, Boolean.toString(property_value));
+    private void updateAbilityProperty(final int abilityId, final boolean property_value) {
+        updateAbilityProperty(abilityId, SpelllistAbilityBuilder.KEY_ATTRIBUTE_BONUS_SPELL_SLOTS, Boolean.toString(property_value));
     }
 
     private void updateAbilityProperty(final int abilityId, final String property_key, final int property_value) {

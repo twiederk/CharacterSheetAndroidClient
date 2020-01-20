@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/table"
-    android:layout_toRightOf="@id/appearance_include" >
+    android:layout_toEndOf="@id/appearance_include">
 
     <TextView
         style="@style/heading"

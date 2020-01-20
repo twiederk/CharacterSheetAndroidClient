@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.skill;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -13,6 +12,10 @@ import com.android.ash.charactersheet.gui.util.TableTagHander;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.SkillService;
+
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays the description of a skill including some HTML tags.
@@ -30,7 +33,7 @@ public class SkillDescriptionActivity extends LogActivity {
     private Skill getSkill() {
         // get skill id from intent
         final Bundle bundle = getIntent().getExtras();
-        final int skillId = bundle.getInt(INTENT_EXTRA_DATA_OBJECT);
+        final int skillId = Objects.requireNonNull(bundle).getInt(INTENT_EXTRA_DATA_OBJECT);
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         final GameSystem gameSystem = application.getGameSystem();
@@ -46,7 +49,7 @@ public class SkillDescriptionActivity extends LogActivity {
         setContentView(R.layout.skill_description);
         setTitle(skill.getName());
 
-        final TextView descriptionTextView = (TextView) findViewById(R.id.skill_description);
+        final TextView descriptionTextView = findViewById(R.id.skill_description);
         final Spanned htmlDescription = Html.fromHtml(skill.getDescription(), null, new TableTagHander());
         descriptionTextView.setText(htmlDescription);
     }

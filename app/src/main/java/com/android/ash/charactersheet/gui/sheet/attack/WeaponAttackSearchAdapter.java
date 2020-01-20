@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +8,8 @@ import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
 
 /**
  * Displays weapon in list view of WeaponAttackPageFragment.
@@ -33,7 +33,7 @@ public class WeaponAttackSearchAdapter extends NameDisplayArrayAdapter<Weapon> {
 
     @Override
     protected void fillView(final View view, final Weapon weapon) {
-        final TextView nameTextView = (TextView) view.findViewById(R.id.name);
+        final TextView nameTextView = view.findViewById(R.id.name);
         nameTextView.setText(displayService.getDisplayItem(weapon));
     }
 

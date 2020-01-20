@@ -46,7 +46,7 @@ public class MessageManager {
         showMessage(R.string.error_dialog_title, message);
     }
 
-    String getMessage(final Exception exception) {
+    private String getMessage(final Exception exception) {
         if (exception instanceof RuleException) {
             final RuleException ruleException = (RuleException) exception;
             return getMessage(ruleException);
@@ -69,20 +69,18 @@ public class MessageManager {
      *            The id of the resource.
      */
     public void showInfoMessage(final int resourceId) {
-        showMessage(R.string.info_dialog_title, resourceId);
+        showMessage(resourceId);
     }
 
     /**
      * Shows an info message with the given title and message.
-     * 
-     * @param title
-     *            The id of the title to display.
+     *
      * @param resourceId
      *            The message to display.
      */
-    public void showMessage(final int title, final int resourceId) {
+    private void showMessage(final int resourceId) {
         final String message = context.getResources().getString(resourceId);
-        showMessage(title, message);
+        showMessage(R.string.info_dialog_title, message);
     }
 
     /**
@@ -93,7 +91,7 @@ public class MessageManager {
      * @param message
      *            The message to show.
      */
-    public void showMessage(final int title, final String message) {
+    private void showMessage(final int title, final String message) {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);

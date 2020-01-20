@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite.rowmapper;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.List;
-
 import android.database.Cursor;
 import android.database.SQLException;
 
@@ -15,6 +9,12 @@ import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.QualityType;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.model.XpTable;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.List;
 
 /**
  * Base class of row mapper implemations. Contains util function to map enumerations.
@@ -81,7 +81,7 @@ public abstract class BaseRowMapper implements RowMapper {
     }
 
     Date parseDate(final String dateParameter, final DateFormat dateFormat) {
-        Date date = null;
+        Date date;
         try {
             date = dateFormat.parse(dateParameter);
         } catch (final ParseException parseException) {

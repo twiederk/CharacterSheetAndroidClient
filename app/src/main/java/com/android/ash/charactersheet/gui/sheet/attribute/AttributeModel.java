@@ -1,13 +1,13 @@
 package com.android.ash.charactersheet.gui.sheet.attribute;
 
-import java.util.Observable;
-
 import com.android.ash.charactersheet.gui.util.Logger;
+
+import java.util.Observable;
 
 /**
  * Observable attribute value.
  */
-public class AttributeModel extends Observable {
+class AttributeModel extends Observable {
 
     private int attributeValue;
 

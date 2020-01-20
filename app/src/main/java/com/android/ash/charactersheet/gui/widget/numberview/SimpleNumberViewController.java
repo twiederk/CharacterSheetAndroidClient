@@ -5,7 +5,7 @@ package com.android.ash.charactersheet.gui.widget.numberview;
  */
 public class SimpleNumberViewController implements NumberViewController {
 
-    protected int number;
+    int number;
 
     /**
      * Creates controller handling integers.

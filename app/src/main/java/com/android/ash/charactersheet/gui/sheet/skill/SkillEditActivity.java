@@ -26,7 +26,7 @@ public class SkillEditActivity extends BaseCharacterSheetActivity {
         final SkillEditArrayAdapter skillsArrayAdapter = new SkillEditArrayAdapter(this, character, gameSystem,
                 R.layout.listitem_skill_edit);
         skillsArrayAdapter.sort(new CharacterSkillComparator());
-        final ListView listView = (ListView) findViewById(R.id.skill_edit_list);
+        final ListView listView = findViewById(R.id.skill_edit_list);
         listView.setAdapter(skillsArrayAdapter);
         listView.setTextFilterEnabled(true);
     }

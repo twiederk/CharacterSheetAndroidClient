@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    tools:keep="@layout/weapon_administration_critical_include">
 
-    <TableRow>
+    <TableRow android:importantForAutofill="noExcludeDescendants">
 
         <EditText
             android:id="@+id/weapon_administration_critical_hit"
             style="@style/base"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="end"
             android:inputType="number"
-            android:width="80dp" />
+            android:width="80dp"
+            android:hint="@string/weapon_administration_critical_hit_hint" />
 
         <TextView
             style="@style/base"
@@ -23,9 +26,10 @@
             android:id="@+id/weapon_administration_critical_multiplier"
             style="@style/base"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="end"
             android:inputType="numberSigned"
-            android:width="80dp" />
+            android:width="80dp"
+            android:hint="@string/weapon_administration_critical_multiplier_hint" />
     </TableRow>
 
 </TableLayout>

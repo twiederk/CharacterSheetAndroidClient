@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.TableRow;
@@ -13,6 +11,9 @@ import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Adapter to display good in a ListView. Displays number and name of the good in the first row. The second row can be
@@ -46,24 +47,24 @@ public class GoodListAdapter extends ItemListAdapter {
 
         setBackgroundColor(view, good.isMagic());
 
-        final TextView numberTextView = (TextView) view.findViewById(R.id.good_number);
-        numberTextView.setText(Integer.toString(goodGroup.getNumber()));
+        final TextView numberTextView = view.findViewById(R.id.good_number);
+        numberTextView.setText(String.format(Locale.US, "%d", goodGroup.getNumber()));
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.good_name);
+        final TextView nameTextView = view.findViewById(R.id.good_name);
         nameTextView.setText(displayService.getDisplayItem(good));
 
-        final TableRow secondTableRow = (TableRow) view.findViewById(R.id.second_row);
-        final TableRow thirdTableRow = (TableRow) view.findViewById(R.id.third_row);
+        final TableRow secondTableRow = view.findViewById(R.id.second_row);
+        final TableRow thirdTableRow = view.findViewById(R.id.third_row);
         if (expandListView.isExpanded()) {
             secondTableRow.setVisibility(View.VISIBLE);
 
-            final TextView typeTextView = (TextView) view.findViewById(R.id.good_type);
+            final TextView typeTextView = view.findViewById(R.id.good_type);
             typeTextView.setText(displayService.getDisplayGoodType(good.getGoodType()));
 
-            final TextView costTextView = (TextView) view.findViewById(R.id.good_cost);
+            final TextView costTextView = view.findViewById(R.id.good_cost);
             costTextView.setText(displayService.getDisplayCost(good.getCost()));
 
-            final TextView weightTextView = (TextView) view.findViewById(R.id.good_weight);
+            final TextView weightTextView = view.findViewById(R.id.good_weight);
             weightTextView.setText(displayService.getDisplayWeight(good.getWeight()));
 
             displayDescription(good, thirdTableRow, view);

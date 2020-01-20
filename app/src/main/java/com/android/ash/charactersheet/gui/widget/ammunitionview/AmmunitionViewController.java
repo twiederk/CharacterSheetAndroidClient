@@ -1,9 +1,9 @@
 package com.android.ash.charactersheet.gui.widget.ammunitionview;
 
-import java.util.Observable;
-
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.model.WeaponCategory;
+
+import java.util.Observable;
 
 /**
  * The controller of the AmmunitionView. It increases and decreases the number of ammunition for projectile weapons.
@@ -44,15 +44,6 @@ public class AmmunitionViewController extends Observable {
     }
 
     /**
-     * Returns the weapon attack.
-     * 
-     * @return The weapon attack.
-     */
-    public WeaponAttack getWeaponAttack() {
-        return weaponAttack;
-    }
-
-    /**
      * Returns the current number of ammunition of projectile weapon. A dash(-) is return for weapons of other
      * categories.
      * 
@@ -66,10 +57,7 @@ public class AmmunitionViewController extends Observable {
     }
 
     private boolean isProjectileWeapon() {
-        if (WeaponCategory.PROJECTILE_WEAPON.equals(weaponAttack.getWeapon().getWeaponCategory())) {
-            return true;
-        }
-        return false;
+        return WeaponCategory.PROJECTILE_WEAPON.equals(weaponAttack.getWeapon().getWeaponCategory());
     }
 
     private void fireEvent() {

@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.util;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +23,10 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.SpelllistService;
 import com.d20charactersheet.framework.boc.util.AbilityComparator;
+
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all abilities in alphabetical order.
@@ -56,14 +56,14 @@ public class AbilitySearchActivity extends LogActivity implements OnItemClickLis
 
         final List<Ability> allAbilities = abilityService.getAllAbilities(allSpelllists, allKnownSpellsTables,
                 allSpellsPerDayTables);
-        final ArrayAdapter<Ability> adapter = new NameDisplayArrayAdapter<Ability>(this, displayService, allAbilities);
+        final ArrayAdapter<Ability> adapter = new NameDisplayArrayAdapter<>(this, displayService, allAbilities);
         adapter.sort(new AbilityComparator());
-        final ListView listView = (ListView) findViewById(android.R.id.list);
+        final ListView listView = findViewById(android.R.id.list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
         listView.setTextFilterEnabled(true);
 
-        final EditText searchEditText = (EditText) findViewById(android.R.id.input);
+        final EditText searchEditText = findViewById(android.R.id.input);
         searchEditText.addTextChangedListener(new SearchTextWatcher(listView));
     }
 

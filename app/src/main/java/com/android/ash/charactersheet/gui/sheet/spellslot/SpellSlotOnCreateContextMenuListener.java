@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.ContextMenu;
@@ -16,6 +15,8 @@ import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.knownspell.SpellActivity;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Creates context menu, which allows to call detailed spell information.
@@ -62,17 +63,15 @@ public class SpellSlotOnCreateContextMenuListener implements OnCreateContextMenu
      *            The selected menu item.
      * @return Always true, because the event is consumed.
      */
+    @SuppressWarnings("SameReturnValue")
     public boolean onContextItemSelected(final MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-        case CONTEXT_MENU_SHOW_DESCRIPTION:
+        if (menuItem.getItemId() == CONTEXT_MENU_SHOW_DESCRIPTION) {
             final Intent intent = new Intent(activity, SpellActivity.class);
             intent.putExtra(INTENT_EXTRA_DATA_OBJECT, selectedSpell.getId());
             activity.startActivity(intent);
             return true;
-
-        default:
-            return true;
         }
+        return true;
     }
 
 }

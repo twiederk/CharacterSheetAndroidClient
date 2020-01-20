@@ -1,11 +1,13 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
-import java.util.HashMap;
-import java.util.List;
+import android.annotation.SuppressLint;
 
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Creates a new spell list and allows to edit it.
@@ -17,6 +19,7 @@ public class SpelllistAdministrationCreateActivity extends SpelllistAdministrati
         return getString(R.string.spelllist_administration_create_title);
     }
 
+    @SuppressLint("UseSparseArrays")
     @Override
     protected Spelllist createForm() {
         final Spelllist spelllist = new Spelllist();

@@ -24,7 +24,7 @@ public class AbilityAdministrationEditExtraSkillPointsActivity extends AbilityAd
     protected void fillViews() {
         super.fillViews();
         final ExtraSkillPointsAbility extraSkillPointsAbility = (ExtraSkillPointsAbility) form;
-        final NumberView numberView = (NumberView) findViewById(R.id.ability_administration_extraskillpoints);
+        final NumberView numberView = findViewById(R.id.ability_administration_extraskillpoints);
         numberView.setController(new PositiveNumberViewController(extraSkillPointsAbility.getSkillPoints()));
     }
 
@@ -32,7 +32,7 @@ public class AbilityAdministrationEditExtraSkillPointsActivity extends AbilityAd
     protected void fillForm() {
         super.fillForm();
         final ExtraSkillPointsAbility extraSkillPointsAbility = (ExtraSkillPointsAbility) form;
-        final NumberView numberView = (NumberView) findViewById(R.id.ability_administration_extraskillpoints);
+        final NumberView numberView = findViewById(R.id.ability_administration_extraskillpoints);
         final int skillPoints = numberView.getController().getNumber().intValue();
         extraSkillPointsAbility.setSkillPoints(skillPoints);
     }

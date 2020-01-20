@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="vertical" >
+    android:scrollbars="vertical"
+    android:importantForAutofill="noExcludeDescendants">
 
     <TableLayout style="@style/centered" >
 
@@ -12,7 +13,8 @@
 
             <TextView
                 style="@style/tableCell_string"
-                android:text="@string/appearance_name_label" />
+                android:text="@string/appearance_name_label"
+                android:labelFor="@+id/appearance_name" />
 
             <EditText
                 android:id="@+id/appearance_name"
@@ -26,7 +28,8 @@
 
             <TextView
                 style="@style/tableCell_string"
-                android:text="@string/appearance_player_label" />
+                android:text="@string/appearance_player_label"
+                android:labelFor="@+id/appearance_player" />
 
             <EditText
                 android:id="@+id/appearance_player"
@@ -112,12 +115,13 @@
 
             <TextView
                 style="@style/tableCell_string"
-                android:text="@string/appearance_experience_label" />
+                android:text="@string/appearance_experience_label"
+                android:labelFor="@+id/appearance_experience" />
 
             <EditText
                 android:id="@+id/appearance_experience"
                 style="@style/edit"
-                android:gravity="right"
+                android:gravity="end"
                 android:inputType="number" />
         </TableRow>
     </TableLayout>

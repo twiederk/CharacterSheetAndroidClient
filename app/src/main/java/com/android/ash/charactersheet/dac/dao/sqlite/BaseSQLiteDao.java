@@ -11,9 +11,9 @@ import com.android.ash.charactersheet.gui.util.Logger;
  * Base class to extend SQLite specific Dao from. Supplies methods required by all Daos. Contains constants representing
  * database specific objects like tables and columns.
  */
-public class BaseSQLiteDao implements TableAndColumnNames {
+class BaseSQLiteDao implements TableAndColumnNames {
 
-    SQLiteDatabase db;
+    final SQLiteDatabase db;
 
     /**
      * Create BaseSQLiteDao with given database.
@@ -21,7 +21,7 @@ public class BaseSQLiteDao implements TableAndColumnNames {
      * @param db
      *            The database to access.
      */
-    public BaseSQLiteDao(final SQLiteDatabase db) {
+    BaseSQLiteDao(final SQLiteDatabase db) {
         this.db = db;
     }
 
@@ -32,8 +32,7 @@ public class BaseSQLiteDao implements TableAndColumnNames {
         try {
             cursor = db.rawQuery(sql, bindVariables);
             cursor.moveToFirst();
-            final int id = cursor.getInt(0);
-            return id;
+            return cursor.getInt(0);
         } catch (final SQLException sqlException) {
             Logger.error("Can't get id of rowId: " + rowId);
             throw sqlException;

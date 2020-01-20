@@ -24,14 +24,14 @@
                 style="@style/base"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp" />
+                android:layout_marginStart="8dp" />
 
             <TextView
                 android:id="@+id/difficulty_class"
                 style="@style/base"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp" />
         </TableRow>
@@ -43,14 +43,14 @@
                 style="@style/base"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp" />
+                android:layout_marginEnd="8dp" />
 
             <TextView
                 android:id="@+id/spell_school"
                 style="@style/base"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp" />
         </TableRow>

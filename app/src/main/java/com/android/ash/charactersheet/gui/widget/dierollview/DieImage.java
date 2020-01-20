@@ -5,10 +5,10 @@ import com.android.ash.charactersheet.R;
 /**
  * Contains all die images used by DieRollView. The images are stored in a three dimenstional array [Die][Color][digit]
  */
-public interface DieImage {
+interface DieImage {
 
     /** The images are stored in a three dimenstional array [Die][Color][digit] */
-    public static int[][][] IMAGES = new int[][][] {
+    int[][][] IMAGES = new int[][][]{
             // D2
             {
             // BLUE

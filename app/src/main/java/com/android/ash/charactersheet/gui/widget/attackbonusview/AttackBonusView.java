@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.widget.attackbonusview;
 
-import java.util.List;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.android.ash.charactersheet.gui.widget.ammunitionview.AmmunitionViewController;
+
+import java.util.List;
 
 /**
  * View to display attack bonus. Each attack bonus is displayed on a separate button. Each click on the a attack bonus
@@ -34,15 +34,6 @@ public class AttackBonusView extends LinearLayout {
     public AttackBonusView(final Context context, final AttributeSet attributeSet) {
         super(context, attributeSet);
         this.setOrientation(HORIZONTAL);
-    }
-
-    /**
-     * Returns the AttackBonusViewcontroller
-     * 
-     * @return The AttackBonusViewController
-     */
-    public AttackBonusViewController getController() {
-        return controller;
     }
 
     /**

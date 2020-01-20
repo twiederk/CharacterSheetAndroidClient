@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.skill;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -31,25 +25,28 @@ import com.d20charactersheet.framework.boc.service.SkillService;
 import com.d20charactersheet.framework.boc.service.SpelllistService;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Base class for layout of skill creation and edition. Only the methods getSkill and saveSkill must be overwritten. The
  * other methods handle the skill administration layout, independently of creation or edition mode.
  */
 public abstract class SkillAdministrationActivity extends FormularActivity<Skill> {
 
-    private static final int TEXT_SIZE = 15;
-
-    protected GameSystem gameSystem;
-    protected SkillService skillService;
-    protected AbilityService abilityService;
-    protected CharacterClassService characterClassService;
-    protected SpelllistService spelllistService;
-    protected List<CharacterClassSkillModel> characterClassSkillModels;
-
-    private float scale;
+    GameSystem gameSystem;
+    SkillService skillService;
+    private AbilityService abilityService;
+    private CharacterClassService characterClassService;
+    private SpelllistService spelllistService;
+    private List<CharacterClassSkillModel> characterClassSkillModels;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         skillService = gameSystem.getSkillService();
@@ -59,10 +56,7 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
 
         super.onCreate(savedInstanceState, R.layout.skill_administration);
 
-        characterClassSkillModels = new LinkedList<CharacterClassSkillModel>();
-
-        scale = getResources().getDisplayMetrics().density;
-
+        characterClassSkillModels = new LinkedList<>();
     }
 
     @Override
@@ -75,7 +69,7 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
         createCheckBoxesOfCharacterClasses();
     }
 
-    protected void setAttributeSpinner() {
+    private void setAttributeSpinner() {
         final ArrayAdapter<Attribute> attributeArrayAdapter = new AttributeArrayAdapter(this, displayService,
                 Arrays.asList(Attribute.values()));
         setSpinner(R.id.skill_administration_attribute, attributeArrayAdapter, form.getAttribute().ordinal());
@@ -87,7 +81,7 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
     }
 
     private List<CheckBox> createCheckBoxes() {
-        final List<CheckBox> checkBoxes = new ArrayList<CheckBox>();
+        final List<CheckBox> checkBoxes = new ArrayList<>();
         for (final CharacterClass characterClass : getSortedCharacterClasses()) {
             checkBoxes.add(createCheckBox(characterClass));
         }
@@ -95,7 +89,7 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
     }
 
     private void createTable(final List<CheckBox> checkBoxes) {
-        final TableLayout characterClassTableLayout = (TableLayout) findViewById(R.id.skill_administration_character_class_table);
+        final TableLayout characterClassTableLayout = findViewById(R.id.skill_administration_character_class_table);
         boolean odd = true;
         final int numberOfCheckBoxes = checkBoxes.size();
         for (int i = 0; i < numberOfCheckBoxes; i += 2, odd = !odd) {
@@ -125,7 +119,6 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
     private CheckBox createCheckBox(final CharacterClass characterClass) {
         final CheckBox checkBox = new CheckBox(this);
         checkBox.setText(characterClass.getName());
-        checkBox.setTextSize(TEXT_SIZE * scale);
         final boolean classSkill = characterClass.getSkills().contains(form);
         final CharacterClassSkillModel model = new CharacterClassSkillModel(characterClass, classSkill);
         checkBox.setChecked(model.isClassSkill());
@@ -151,7 +144,7 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
     }
 
     private List<CharacterClass> getCharacterClassesToAddSkillTo() {
-        final List<CharacterClass> characterClasses = new LinkedList<CharacterClass>();
+        final List<CharacterClass> characterClasses = new LinkedList<>();
         for (final CharacterClassSkillModel model : characterClassSkillModels) {
             Logger.debug(model.getCharacterClass().getName() + ": " + model.isClassSkill());
             if (model.isClassSkill()) {

@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +21,13 @@ import com.android.ash.charactersheet.gui.util.ExpandOnClickListener;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.CharacterFeat;
 import com.d20charactersheet.framework.boc.model.FeatType;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Observable;
+import java.util.Observer;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * List of feats. The feats are listed in three tabs. One tab for genereal feats, one for item creation and one for
@@ -68,26 +69,24 @@ public class FeatPageFragment extends PageFragment implements Observer {
     }
 
     private void setNumberOfFeats() {
-        final TextView freeFeatsTextView = (TextView) view.findViewById(R.id.feat_list_number_of_feats);
+        final TextView freeFeatsTextView = view.findViewById(R.id.feat_list_number_of_feats);
         freeFeatsTextView.setText(getNumberOfFreeFeats());
     }
 
     private String getNumberOfFreeFeats() {
         final int numberOfFeats = featModel.getCharacterFeats().size();
         final int maxNumberOfFeats = ruleService.getNumberOfFeats(character);
-        final StringBuilder text = new StringBuilder();
-        text.append(Integer.toString(numberOfFeats));
-        text.append(SPACE);
-        text.append(getResources().getString(R.string.feat_list_preposition));
-        text.append(SPACE);
-        text.append(Integer.toString(maxNumberOfFeats));
-        text.append(SPACE);
-        text.append(getResources().getString(R.string.feat_list_feats));
-        return text.toString();
+        return numberOfFeats +
+                SPACE +
+                getResources().getString(R.string.feat_list_preposition) +
+                SPACE +
+                maxNumberOfFeats +
+                SPACE +
+                getResources().getString(R.string.feat_list_feats);
     }
 
     private void setTabs() {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         addTab(R.string.feat_type_general, R.id.feat_list_general, android.R.drawable.ic_menu_view);
@@ -102,9 +101,9 @@ public class FeatPageFragment extends PageFragment implements Observer {
     }
 
     private void setFeatListView(final FeatType featType, final int listViewResourceId) {
-        final FeatListAdapter featListAdapter = new FeatListAdapter(getActivity(), R.layout.listitem_feat, featModel,
+        final FeatListAdapter featListAdapter = new FeatListAdapter(Objects.requireNonNull(getActivity()), R.layout.listitem_feat, featModel,
                 featType);
-        final ListView listView = (ListView) view.findViewById(listViewResourceId);
+        final ListView listView = view.findViewById(listViewResourceId);
         listView.setAdapter(featListAdapter);
         listView.setTextFilterEnabled(true);
         listView.setOnItemClickListener(new ExpandOnClickListener());
@@ -116,21 +115,18 @@ public class FeatPageFragment extends PageFragment implements Observer {
     public void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
 
         // see which child activity is calling us back.
-        switch (requestCode) {
-        case RESULT_CODE_CATEGORY:
+        if (requestCode == RESULT_CODE_CATEGORY) {
             if (resultCode != Activity.RESULT_CANCELED) {
                 editFeatCategory(resultIntent);
             }
-            break;
-
-        default:
+        } else {
             throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
     }
 
     private void editFeatCategory(final Intent resultIntent) {
         final Bundle bundle = resultIntent.getExtras();
-        final String category = (String) bundle.get(INTENT_EXTRA_DATA_OBJECT);
+        final String category = (String) Objects.requireNonNull(bundle).get(INTENT_EXTRA_DATA_OBJECT);
         featModel.setCategory(category);
     }
 

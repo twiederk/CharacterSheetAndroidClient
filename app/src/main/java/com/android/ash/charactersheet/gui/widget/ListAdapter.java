@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.widget;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Filterable ListAdapter with observerable model.
@@ -34,7 +34,7 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable, 
      * @param listModel
      *            The model of the items to list.
      */
-    public ListAdapter(final Context context, final int itemViewResourceId, final ListModel<T> listModel) {
+    protected ListAdapter(final Context context, final int itemViewResourceId, final ListModel<T> listModel) {
         super();
         this.itemViewResourceId = itemViewResourceId;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -85,7 +85,7 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable, 
      * 
      * @return The list model.
      */
-    public ListModel<T> getListModel() {
+    protected ListModel<T> getListModel() {
         return listModel;
     }
 

@@ -75,11 +75,9 @@ public class AttackOnClickListener {
     }
 
     private String getCriticalSubtitle(final DieRoll confirmRoll, final Resources resources) {
-        final StringBuilder output = new StringBuilder();
-        output.append(resources.getString(R.string.weaponattack_list_critical_subtitle));
-        output.append(" ");
-        output.append(confirmRoll.getResult());
-        return output.toString();
+        return resources.getString(R.string.weaponattack_list_critical_subtitle) +
+                " " +
+                confirmRoll.getResult();
     }
 
     private String getFumbleSubtitle(final Resources resources) {

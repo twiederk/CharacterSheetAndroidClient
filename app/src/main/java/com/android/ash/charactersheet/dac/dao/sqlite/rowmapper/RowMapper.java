@@ -17,6 +17,6 @@ public interface RowMapper {
      * @throws SQLException
      *             Thrown by wrong cursor handling.
      */
-    public Object mapRow(Cursor cursor) throws SQLException;
+    Object mapRow(Cursor cursor) throws SQLException;
 
 }

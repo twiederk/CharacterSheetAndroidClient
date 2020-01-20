@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.util;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.widget.EditText;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.d20charactersheet.framework.boc.model.Character;
@@ -73,12 +72,6 @@ public abstract class EditActivity extends LogActivity {
             messageManager.showErrorMessage(exception);
             setData();
         }
-    }
-
-    protected int getValue(final EditText editText) {
-        final String text = editText.getText().toString();
-        final int value = Integer.parseInt(text);
-        return value;
     }
 
     protected abstract void setData();

@@ -15,8 +15,6 @@ import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
-import com.d20charactersheet.framework.boc.service.RuleService;
-import com.d20charactersheet.framework.boc.service.XpService;
 
 /**
  * Base class of CharacterSheetActivities. Derive activities in the character sheet part of the application from this
@@ -26,11 +24,9 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
 
     protected GameSystem gameSystem;
     protected CharacterService characterService;
-    protected RuleService ruleService;
-    protected AndroidImageService imageService;
+    private AndroidImageService imageService;
     protected DisplayService displayService;
-    protected PreferenceService preferenceService;
-    protected XpService xpService;
+    private PreferenceService preferenceService;
     protected Character character;
 
     @Override
@@ -41,11 +37,11 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         characterService = gameSystem.getCharacterService();
-        ruleService = gameSystem.getRuleService();
+        gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
         imageService = (AndroidImageService) gameSystem.getImageService();
         preferenceService = application.getPreferenceService();
-        xpService = gameSystem.getXpService();
+        gameSystem.getXpService();
         character = application.getCharacter();
 
         setTitle(character.getName());
@@ -54,7 +50,7 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
         doCreate();
     }
 
-    protected void setBackground() {
+    private void setBackground() {
         final boolean showImageAsBackground = preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND);
         if (showImageAsBackground) {
             final Bitmap bitmap = imageService.getBitmap(character.getImageId());
@@ -74,7 +70,7 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
     }
 
     private void configImageView(final int color, final Bitmap bitmap, final int minimumHeight) {
-        final ImageView imageView = (ImageView) findViewById(R.id.background);
+        final ImageView imageView = findViewById(R.id.background);
         imageView.setBackgroundColor(color);
         imageView.setMinimumHeight(minimumHeight);
         imageView.setImageBitmap(bitmap);

@@ -1,10 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.io.Serializable;
-import java.util.List;
-
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -25,6 +20,11 @@ import com.android.ash.charactersheet.gui.sheet.note.NoteEditActivity;
 import com.d20charactersheet.framework.boc.model.Note;
 import com.d20charactersheet.framework.boc.util.NoteComparator;
 
+import java.io.Serializable;
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * Displays the notes of the character as a list. The notes are displayed with date and text. The option menu offers the
  * option to create a new note. Single touch on a note opens it for edit. Long touch on a note opens the context menu
@@ -44,7 +44,7 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
 
     @Override
     protected void doCreateView() {
-        listView = (ListView) view.findViewById(R.id.note_list_view);
+        listView = view.findViewById(R.id.note_list_view);
     }
 
     @Override
@@ -72,22 +72,18 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
-        switch (item.getItemId()) {
-        case R.id.menu_page_note_create_note:
+        if (item.getItemId() == R.id.menu_page_note_create_note) {
             startActivity(new Intent(getActivity(), NoteCreateActivity.class));
-            break;
-
-        default:
+        } else {
             return super.onOptionsItemSelected(item);
         }
         return true;
     }
 
-    private boolean edit(final Serializable item) {
+    private void edit(final Serializable item) {
         final Intent intent = new Intent(getActivity(), NoteEditActivity.class);
         intent.putExtra(INTENT_EXTRA_DATA_OBJECT, item);
         startActivity(intent);
-        return true;
     }
 
     @Override
@@ -103,22 +99,18 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     public boolean onContextItemSelected(final MenuItem menuItem) {
 
         final Note note = getNote(menuItem);
-        switch (menuItem.getItemId()) {
-
-        case CONTEXT_MENU_NOTE_DELETE:
+        if (menuItem.getItemId() == CONTEXT_MENU_NOTE_DELETE) {
             return deleteNote(note);
-
-        default:
-            return super.onContextItemSelected(menuItem);
         }
+        return super.onContextItemSelected(menuItem);
     }
 
     private Note getNote(final MenuItem menuItem) {
         final AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) menuItem.getMenuInfo();
-        final Note note = (Note) listView.getAdapter().getItem(menuInfo.position);
-        return note;
+        return (Note) listView.getAdapter().getItem(menuInfo.position);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean deleteNote(final Note note) {
         characterService.deleteNote(note, character);
         adapter.remove(note);

@@ -10,7 +10,7 @@ import com.android.ash.charactersheet.R;
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.
  */
-public class PageAdapter extends FragmentPagerAdapter {
+class PageAdapter extends FragmentPagerAdapter {
 
     private final PageFragment[] pageFragments;
     private final String[] pageTitles;

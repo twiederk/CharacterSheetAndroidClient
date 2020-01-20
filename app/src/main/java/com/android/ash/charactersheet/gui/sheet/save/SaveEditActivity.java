@@ -33,15 +33,15 @@ public class SaveEditActivity extends EditActivity {
     private void setSave(final Save save, final int baseResourceId, final int attributeResourceId,
             final int modifierResourceId) {
         final int baseSave = ruleService.getBaseSave(character, save);
-        final TextView baseTextView = (TextView) findViewById(baseResourceId);
+        final TextView baseTextView = findViewById(baseResourceId);
         baseTextView.setText(displayService.getDisplayModifier(baseSave));
 
         final int attributeModifier = ruleService.getSaveAttributeModifier(character, save);
-        final TextView attributeTextView = (TextView) findViewById(attributeResourceId);
+        final TextView attributeTextView = findViewById(attributeResourceId);
         attributeTextView.setText(displayService.getDisplayModifier(attributeModifier));
 
         final int modifier = ruleService.getSaveModifier(character, save);
-        final StepNumberView modifierNumberView = (StepNumberView) findViewById(modifierResourceId);
+        final StepNumberView modifierNumberView = findViewById(modifierResourceId);
         modifierNumberView.setController(new SimpleNumberViewController(modifier));
     }
 
@@ -53,10 +53,9 @@ public class SaveEditActivity extends EditActivity {
     }
 
     private int getModifier(final int modifierResourceId) {
-        final StepNumberView modifierNumberView = (StepNumberView) findViewById(modifierResourceId);
+        final StepNumberView modifierNumberView = findViewById(modifierResourceId);
         final NumberViewController controller = modifierNumberView.getController();
-        final int modifier = (Integer) controller.getNumber();
-        return modifier;
+        return (int) (Integer) controller.getNumber();
     }
 
 }

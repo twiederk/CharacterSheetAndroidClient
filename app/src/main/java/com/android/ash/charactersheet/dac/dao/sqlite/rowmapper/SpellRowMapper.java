@@ -52,11 +52,7 @@ public class SpellRowMapper extends BaseRowMapper {
 
     private boolean isSet(final int components, final int position) {
         final int mask = 1 << position;
-        final boolean isSet = (components & mask) > 0;
-        if (isSet) {
-            return true;
-        }
-        return false;
+        return (components & mask) > 0;
     }
 
 }

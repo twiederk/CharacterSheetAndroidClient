@@ -1,11 +1,13 @@
 package com.android.ash.charactersheet.gui.admin.clazz.alignment;
 
+import android.support.annotation.NonNull;
+
 import com.d20charactersheet.framework.boc.model.Alignment;
 
 /**
  * The alignment model stores if an alignment is a class alignment or not.
  */
-public class AlignmentModel {
+class AlignmentModel {
 
     private final Alignment alignment;
     private boolean classAlignment;
@@ -54,6 +56,7 @@ public class AlignmentModel {
     /**
      * @see java.lang.Object#toString()
      */
+    @NonNull
     @Override
     public String toString() {
         return alignment + ": " + classAlignment;

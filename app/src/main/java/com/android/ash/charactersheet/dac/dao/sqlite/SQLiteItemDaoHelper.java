@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -12,10 +10,12 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.dac.dao.ItemDaoHelper;
 
+import java.util.List;
+
 /**
  * Expands ItemDaoHelper to use optimized update of item groups.
  */
-public class SQLiteItemDaoHelper extends ItemDaoHelper implements TableAndColumnNames {
+class SQLiteItemDaoHelper extends ItemDaoHelper implements TableAndColumnNames {
 
     private final SQLiteDatabase db;
 
@@ -104,8 +104,7 @@ public class SQLiteItemDaoHelper extends ItemDaoHelper implements TableAndColumn
         try {
             cursor = db.rawQuery(sql, bindVariables);
             cursor.moveToFirst();
-            final int id = cursor.getInt(0);
-            return id;
+            return cursor.getInt(0);
         } catch (final SQLException sqlException) {
             Logger.error("Can't get id of rowId: " + rowId);
             throw sqlException;

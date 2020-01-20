@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.main;
 
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
@@ -14,9 +12,11 @@ import com.android.ash.charactersheet.gui.widget.DisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 
+import java.util.List;
+
 /**
  * Creates an item of the character list. Displaying an face image of the character to the right. The character name to
- * the left and bejond the race, class and level of the character.
+ * the left and beyond the race, class and level of the character.
  */
 public class CharacterArrayAdapter extends DisplayArrayAdapter<Character> {
 
@@ -45,25 +45,23 @@ public class CharacterArrayAdapter extends DisplayArrayAdapter<Character> {
     @Override
     protected void fillView(final View view, final Character character) {
         // face of character
-        final ImageView faceImageView = (ImageView) view.findViewById(R.id.character_face);
+        final ImageView faceImageView = view.findViewById(R.id.character_face);
         final Bitmap bitmap = imageService.getBitmap(character.getThumbImageId());
         faceImageView.setImageBitmap(bitmap);
 
         // name of character
-        final TextView nameTextView = (TextView) view.findViewById(R.id.character_name);
+        final TextView nameTextView = view.findViewById(R.id.character_name);
         nameTextView.setText(character.getName());
 
         // stats of character
-        final TextView statsTextView = (TextView) view.findViewById(R.id.character_stats);
+        final TextView statsTextView = view.findViewById(R.id.character_stats);
         statsTextView.setText(getStats(character));
     }
 
     private CharSequence getStats(final Character character) {
-        final StringBuilder stats = new StringBuilder();
-        stats.append(character.getRace().getName());
-        stats.append(", ");
-        stats.append(displayService.getDisplayClassLevels(character.getClassLevels()));
-        return stats.toString();
+        return character.getRace().getName() +
+                ", " +
+                displayService.getDisplayClassLevels(character.getClassLevels());
     }
 
 }

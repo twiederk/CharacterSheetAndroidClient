@@ -8,7 +8,7 @@ import com.android.ash.charactersheet.gui.util.Logger;
  * Filter of the feat list. The filtering is done by the Feat Model. This class is only implemented to follow the
  * construct Android uses to filter list views.
  */
-public class FeatFilter extends Filter {
+class FeatFilter extends Filter {
 
     private final FeatModel featModel;
 

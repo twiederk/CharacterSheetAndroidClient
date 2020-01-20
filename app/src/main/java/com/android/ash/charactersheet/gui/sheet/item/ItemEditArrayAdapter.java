@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +11,8 @@ import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.service.DisplayService;
+
+import java.util.List;
 
 /**
  * Adapater to display item groups in a ListView.
@@ -45,10 +45,10 @@ public class ItemEditArrayAdapter extends ItemListAdapter {
 
         setBackgroundColor(view, item.isMagic());
 
-        final TextView nameTextView = (TextView) view.findViewById(R.id.item_name);
+        final TextView nameTextView = view.findViewById(R.id.item_name);
         nameTextView.setText(displayService.getDisplayItem(item));
 
-        final StepNumberView goodNumberView = (StepNumberView) view.findViewById(R.id.item_number);
+        final StepNumberView goodNumberView = view.findViewById(R.id.item_number);
         goodNumberView.setController(new ItemGroupNumberViewController(itemGroup));
 
     }

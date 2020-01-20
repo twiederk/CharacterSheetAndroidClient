@@ -1,13 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Observable;
-import java.util.Observer;
-
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,18 +19,24 @@ import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Adapter to display items in a ListView.
  */
 public abstract class ItemListAdapter extends BaseAdapter implements Observer, Filterable {
 
-    protected Resources resources;
+    final Resources resources;
     private final int itemViewResourceId;
     private final LayoutInflater mInflater;
     private final List<ExpandableListItem> allItems;
     private List<ExpandableListItem> filteredItems;
 
-    protected DisplayService displayService;
+    final DisplayService displayService;
     private final ItemFilter equipmentFilter;
 
     /**
@@ -52,15 +53,15 @@ public abstract class ItemListAdapter extends BaseAdapter implements Observer, F
      * @param allItems
      *            The items to display.
      */
-    public ItemListAdapter(final Context context, final DisplayService displayService, final int itemViewResourceId,
-            final ItemFilter equipmentFilter, final List<ExpandableListItem> allItems) {
+    ItemListAdapter(final Context context, final DisplayService displayService, final int itemViewResourceId,
+                    final ItemFilter equipmentFilter, final List<ExpandableListItem> allItems) {
         super();
         this.resources = context.getResources();
         this.itemViewResourceId = itemViewResourceId;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.displayService = displayService;
         this.allItems = allItems;
-        this.filteredItems = new ArrayList<ExpandableListItem>(allItems);
+        this.filteredItems = new ArrayList<>(allItems);
         this.equipmentFilter = equipmentFilter;
         equipmentFilter.addObserver(this);
 
@@ -102,11 +103,12 @@ public abstract class ItemListAdapter extends BaseAdapter implements Observer, F
 
     protected abstract void fillView(View convertView, ExpandableListItem expandListView);
 
-    protected void setBackgroundColor(final View view, final boolean magic) {
+    void setBackgroundColor(final View view, final boolean magic) {
+        Context context = view.getContext();
         if (magic) {
-            view.setBackgroundColor(resources.getColor(R.color.magic));
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.magic));
         } else {
-            view.setBackgroundColor(resources.getColor(R.color.transparent));
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
         }
     }
 
@@ -117,14 +119,14 @@ public abstract class ItemListAdapter extends BaseAdapter implements Observer, F
     }
 
     private void filterItems() {
-        filteredItems = new ArrayList<ExpandableListItem>(allItems);
+        filteredItems = new ArrayList<>(allItems);
         filterByMagic();
         filterByName();
     }
 
     private void filterByMagic() {
         if (equipmentFilter.isMagic()) {
-            final List<ExpandableListItem> itemsToFilter = new ArrayList<ExpandableListItem>(filteredItems);
+            final List<ExpandableListItem> itemsToFilter = new ArrayList<>(filteredItems);
             for (final ExpandableListItem expandListView : itemsToFilter) {
                 final ItemGroup itemGroup = (ItemGroup) expandListView.getObject();
                 if (!itemGroup.getItem().isMagic()) {
@@ -139,7 +141,7 @@ public abstract class ItemListAdapter extends BaseAdapter implements Observer, F
             return;
         }
 
-        final List<ExpandableListItem> itemsToFilter = new ArrayList<ExpandableListItem>(filteredItems);
+        final List<ExpandableListItem> itemsToFilter = new ArrayList<>(filteredItems);
         for (final ExpandableListItem expandListView : itemsToFilter) {
             final ItemGroup itemGroup = (ItemGroup) expandListView.getObject();
             final String name = itemGroup.getItem().getName().toLowerCase(Locale.getDefault());
@@ -152,21 +154,20 @@ public abstract class ItemListAdapter extends BaseAdapter implements Observer, F
 
     private boolean matchSplittedValue(final String name) {
         final String[] words = name.split(" ");
-        final int wordCount = words.length;
 
-        for (int i = 0; i < wordCount; i++) {
-            if (words[i].startsWith(equipmentFilter.getName())) {
+        for (String word : words) {
+            if (word.startsWith(equipmentFilter.getName())) {
                 return true;
             }
         }
         return false;
     }
 
-    protected void displayDescription(final Item item, final TableRow tableRow, final View view) {
+    void displayDescription(final Item item, final TableRow tableRow, final View view) {
         if (item.getDescription() != null && item.getDescription().length() > 0) {
             tableRow.setVisibility(View.VISIBLE);
 
-            final TextView descTextView = (TextView) view.findViewById(R.id.item_desc);
+            final TextView descTextView = view.findViewById(R.id.item_desc);
             descTextView.setText(item.getDescription());
         } else {
             tableRow.setVisibility(View.GONE);

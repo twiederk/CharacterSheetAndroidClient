@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +15,9 @@ import com.android.ash.charactersheet.gui.util.SearchTextWatcher;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponCategory;
 import com.d20charactersheet.framework.boc.util.ItemComparator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Displays an alphabetical list of all weapons and a search box at the top of it. Entering letters in the search box
@@ -41,14 +41,14 @@ public class WeaponAttackSearchActivity extends BaseCharacterSheetActivity imple
         weaponListView.setTextFilterEnabled(true);
         weaponListView.setOnItemClickListener(this);
 
-        final EditText searchEditText = (EditText) findViewById(R.id.weaponattack_search_text);
+        final EditText searchEditText = findViewById(R.id.weaponattack_search_text);
         searchEditText.addTextChangedListener(new SearchTextWatcher(weaponListView));
 
     }
 
     private List<Weapon> getWeapons() {
         final List<Weapon> allWeapons = gameSystem.getAllWeapons();
-        final List<Weapon> weapons = new ArrayList<Weapon>(allWeapons.size());
+        final List<Weapon> weapons = new ArrayList<>(allWeapons.size());
         for (final Weapon weapon : allWeapons) {
             if (!WeaponCategory.AMMUNITION.equals(weapon.getWeaponCategory())) {
                 weapons.add(weapon);
@@ -58,8 +58,7 @@ public class WeaponAttackSearchActivity extends BaseCharacterSheetActivity imple
     }
 
     private ListView getListView() {
-        final ListView listView = (ListView) findViewById(R.id.weaponattack_search_list);
-        return listView;
+        return findViewById(R.id.weaponattack_search_list);
     }
 
     @Override

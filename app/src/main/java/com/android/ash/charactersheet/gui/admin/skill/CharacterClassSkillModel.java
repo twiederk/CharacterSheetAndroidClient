@@ -5,7 +5,7 @@ import com.d20charactersheet.framework.boc.model.CharacterClass;
 /**
  * Stores a character class and if it is a class of the skill.
  */
-public class CharacterClassSkillModel {
+class CharacterClassSkillModel {
 
     private final CharacterClass characterClass;
     private boolean classSkill;

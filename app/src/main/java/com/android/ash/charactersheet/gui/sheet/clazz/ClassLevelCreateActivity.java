@@ -1,18 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet.clazz;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ListView;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
@@ -24,18 +17,25 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
- * This activity creates a new class level. It displays the classes a spinner. Only classas the character has no levels
- * sofar in are displayed. The level can be entered. The ok and cancel buttons are used to created or cancel the new
+ * This activity creates a new class level. It displays the classes a spinner. Only classes the character has no levels
+ * so far in are displayed. The level can be entered. The ok and cancel buttons are used to created or cancel the new
  * class level.
  */
-public class ClassLevelCreateActivity extends LogActivity {
+public class ClassLevelCreateActivity extends LogActivity implements AdapterView.OnItemClickListener {
 
     private GameSystem gameSystem;
     private DisplayService displayService;
     private Character character;
 
-    private Spinner classSpinner;
+    private ArrayList<CharacterClass> availableCharacterClasses;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -55,14 +55,15 @@ public class ClassLevelCreateActivity extends LogActivity {
     private void setCharacterClass() {
         final List<CharacterClass> availableCharacterClasses = getAvailableCharacterClasses();
         final ArrayAdapter<CharacterClass> classArrayAdapter = new CharacterClassArrayAdapter(this, displayService,
-                new ArrayList<CharacterClass>(availableCharacterClasses));
-        classSpinner = (Spinner) findViewById(R.id.class_level_create_class);
-        classSpinner.setAdapter(classArrayAdapter);
+                new ArrayList<>(availableCharacterClasses));
+        ListView classListView = findViewById(R.id.class_level_create_class);
+        classListView.setAdapter(classArrayAdapter);
+        classListView.setOnItemClickListener(this);
+
     }
 
     private List<CharacterClass> getAvailableCharacterClasses() {
-        final List<CharacterClass> availableCharacterClasses = new ArrayList<CharacterClass>(
-                gameSystem.getAllCharacterClasses());
+        availableCharacterClasses = new ArrayList<>(gameSystem.getAllCharacterClasses());
         final List<CharacterClass> classesOfCharacter = getClassesOfCharacter();
         availableCharacterClasses.removeAll(classesOfCharacter);
         Collections.sort(availableCharacterClasses, new CharacterClassComparator());
@@ -70,7 +71,7 @@ public class ClassLevelCreateActivity extends LogActivity {
     }
 
     private List<CharacterClass> getClassesOfCharacter() {
-        final List<CharacterClass> classesOfCharacter = new LinkedList<CharacterClass>();
+        final List<CharacterClass> classesOfCharacter = new LinkedList<>();
         for (final ClassLevel classLevel : character.getClassLevels()) {
             classesOfCharacter.add(classLevel.getCharacterClass());
         }
@@ -78,28 +79,16 @@ public class ClassLevelCreateActivity extends LogActivity {
     }
 
     @Override
-    public boolean onTouchEvent(final MotionEvent event) {
-        if (MotionEvent.ACTION_DOWN == event.getAction()) {
-            save();
-            finish();
-            return true;
-        }
-        return super.onTouchEvent(event);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final CharacterClass characterClass = availableCharacterClasses.get(position);
+        sendSelectedCharacterClass(characterClass);
+        finish();
+
     }
 
-    @Override
-    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
-        if (KeyEvent.KEYCODE_BACK == keyCode) {
-            save();
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    private void save() {
-        final CharacterClass characterClass = (CharacterClass) classSpinner.getSelectedItem();
+    private void sendSelectedCharacterClass(CharacterClass characterClass) {
         final Intent resultIntent = new Intent();
         resultIntent.putExtra(INTENT_EXTRA_DATA_OBJECT, characterClass.getId());
         setResult(RESULT_OK, resultIntent);
     }
-
 }

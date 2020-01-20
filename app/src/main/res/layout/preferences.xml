@@ -33,7 +33,7 @@
             android:id="@+id/preferences_background_colors"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp" />
+            android:layout_marginStart="32dp" />
     </RadioGroup>
 
     <View style="@style/horizontal_line" />

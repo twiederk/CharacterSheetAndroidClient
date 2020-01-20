@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.gui.util;
 
+import android.widget.Filter;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Observer;
-
-import android.widget.Filter;
 
 /**
  * Filter of items. It filters items by name an magic. Stores the current filter settings and notifies all observers.
@@ -21,7 +21,7 @@ public class ItemFilter extends Filter {
      */
     public ItemFilter() {
         super();
-        observers = new LinkedList<Observer>();
+        observers = new LinkedList<>();
     }
 
     /**
@@ -59,7 +59,7 @@ public class ItemFilter extends Filter {
      * @param name
      *            The name to filter
      */
-    public void setName(final String name) {
+    private void setName(final String name) {
         this.name = name;
         fireEvent();
     }

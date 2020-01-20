@@ -1,11 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.ability;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
@@ -18,16 +12,24 @@ import com.d20charactersheet.framework.boc.model.AbilityType;
 import com.d20charactersheet.framework.boc.service.AbilityService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * Displays a form to handle abilities. Derive from this class to create or update a ability using this form.
  */
 public class AbilityAdministrationEditActivity extends FormularActivity<Ability> {
 
-    protected GameSystem gameSystem;
-    protected AbilityService abilityService;
+    GameSystem gameSystem;
+    private AbilityService abilityService;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         abilityService = gameSystem.getAbilityService();
@@ -35,7 +37,7 @@ public class AbilityAdministrationEditActivity extends FormularActivity<Ability>
         super.onCreate(savedInstanceState, getLayout());
     }
 
-    protected int getLayout() {
+    int getLayout() {
         return R.layout.ability_administration_edit;
     }
 
@@ -46,7 +48,7 @@ public class AbilityAdministrationEditActivity extends FormularActivity<Ability>
         setText(form.getDescription(), R.id.ability_administration_desc);
     }
 
-    protected void setAbilityTypeSpinner() {
+    private void setAbilityTypeSpinner() {
         final List<AbilityType> abilityTypes = Arrays.asList(AbilityType.values());
         final List<Enum<?>> enumAbilityTypes = new ArrayList<Enum<?>>(abilityTypes);
 
@@ -71,9 +73,8 @@ public class AbilityAdministrationEditActivity extends FormularActivity<Ability>
 
     @Override
     protected Ability createForm() {
-        final int abilityId = getIntent().getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
-        final Ability ability = abilityService.getAbilityById(abilityId, gameSystem.getAllAbilities());
-        return ability;
+        final int abilityId = Objects.requireNonNull(getIntent().getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
+        return abilityService.getAbilityById(abilityId, gameSystem.getAllAbilities());
     }
 
     @Override

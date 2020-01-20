@@ -11,7 +11,7 @@ import com.d20charactersheet.framework.boc.model.RuleException;
 /**
  * Deletes a class level of the character.
  */
-public class DeleteLevelOnClickListener implements OnClickListener {
+class DeleteLevelOnClickListener implements OnClickListener {
 
     private final ClassLevelArrayAdapter adapter;
     private final ClassLevel classLevel;

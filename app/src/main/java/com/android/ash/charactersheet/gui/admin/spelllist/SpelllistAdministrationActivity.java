@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +16,10 @@ import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
  * Displays a spell list with name, short name and spell assignments. Allows to create a new spell assignment.
  */
@@ -27,6 +30,7 @@ public abstract class SpelllistAdministrationActivity extends FormularActivity<S
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
 
@@ -54,11 +58,10 @@ public abstract class SpelllistAdministrationActivity extends FormularActivity<S
 
     private ListAdapter getAdapter() {
         final ListModel<SpelllevelView> viewModel = new SpelllistViewModel(form);
-        final ListAdapter adapter = new SpelllevelAdapter(this, gameSystem, viewModel);
-        return adapter;
+        return new SpelllevelAdapter(this, gameSystem, viewModel);
     }
 
-    protected ListView getListView() {
+    private ListView getListView() {
         return (ListView) findViewById(android.R.id.list);
     }
 
@@ -70,13 +73,10 @@ public abstract class SpelllistAdministrationActivity extends FormularActivity<S
 
     @Override
     public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_activity_spelllist_administration_add_spell:
+        if (item.getItemId() == R.id.menu_activity_spelllist_administration_add_spell) {
             fillForm();
             startActivityForResult(new Intent(this, SpellSearchActivity.class), REQUEST_CODE_SPELL_SEARCH);
-            break;
-
-        default:
+        } else {
             return super.onMenuItemSelected(featureId, item);
         }
         return true;
@@ -86,16 +86,13 @@ public abstract class SpelllistAdministrationActivity extends FormularActivity<S
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
 
         // see which child activity is calling us back.
-        switch (requestCode) {
-        case REQUEST_CODE_SPELL_SEARCH:
+        if (requestCode == REQUEST_CODE_SPELL_SEARCH) {
             if (resultCode != RESULT_CANCELED) {
-                final int spellId = resultIntent.getExtras().getInt(INTENT_EXTRA_DATA_OBJECT);
+                final int spellId = Objects.requireNonNull(resultIntent.getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
                 final Spell spell = gameSystem.getSpelllistService().findSpellById(spellId, gameSystem.getAllSpells());
                 gameSystem.getSpelllistService().createSpelllevel(form, spell, 1);
             }
-            break;
-
-        default:
+        } else {
             throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
     }

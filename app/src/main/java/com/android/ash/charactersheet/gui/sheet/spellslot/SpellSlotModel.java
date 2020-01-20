@@ -1,16 +1,18 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.annotation.SuppressLint;
 
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.d20charactersheet.framework.boc.model.Attribute;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.util.SpellSlotComparator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Model of spell slot list. Contains all class level, spell attribute an all spell slots.
@@ -41,9 +43,9 @@ public class SpellSlotModel extends ListModel<Object> {
     }
 
     private List<Object> createSpellSlotItems() {
-        final List<Object> spellSlotItems = new ArrayList<Object>();
+        final List<Object> spellSlotItems = new ArrayList<>();
         final Map<Integer, List<SpellSlot>> spellSlotsByLevel = createSpellSlotsByLevel();
-        final List<Integer> levels = new ArrayList<Integer>(spellSlotsByLevel.keySet());
+        final List<Integer> levels = new ArrayList<>(spellSlotsByLevel.keySet());
         Collections.sort(levels);
         for (final Integer level : levels) {
             final LevelView levelView = createLevelView(level);
@@ -57,12 +59,12 @@ public class SpellSlotModel extends ListModel<Object> {
     }
 
     private Map<Integer, List<SpellSlot>> createSpellSlotsByLevel() {
-        final Map<Integer, List<SpellSlot>> spellSlotsByLevel = new HashMap<Integer, List<SpellSlot>>();
+        @SuppressLint("UseSparseArrays") final Map<Integer, List<SpellSlot>> spellSlotsByLevel = new HashMap<>();
         for (final SpellSlot spellSlot : spellSlots) {
             final Integer level = spellSlot.getLevel();
             List<SpellSlot> spellSlots = spellSlotsByLevel.get(level);
             if (spellSlots == null) {
-                spellSlots = new ArrayList<SpellSlot>();
+                spellSlots = new ArrayList<>();
             }
             spellSlots.add(spellSlot);
             spellSlotsByLevel.put(level, spellSlots);
@@ -71,13 +73,12 @@ public class SpellSlotModel extends ListModel<Object> {
     }
 
     private LevelView createLevelView(final Integer level) {
-        final LevelView levelView = new LevelView(level);
-        return levelView;
+        return new LevelView(level);
     }
 
     private List<SpellSlotView> createSpellSlotViews(final LevelView levelView, final List<SpellSlot> spellSlots) {
         Collections.sort(spellSlots, new SpellSlotComparator());
-        final List<SpellSlotView> spellSlotViews = new ArrayList<SpellSlotView>();
+        final List<SpellSlotView> spellSlotViews = new ArrayList<>();
         for (final SpellSlot spellSlot : spellSlots) {
             final SpellSlotView spellSlotView = new SpellSlotView(levelView, spellSlot);
             spellSlotViews.add(spellSlotView);

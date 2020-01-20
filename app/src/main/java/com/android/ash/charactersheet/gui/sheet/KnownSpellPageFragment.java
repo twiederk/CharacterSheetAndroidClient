@@ -1,11 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +26,12 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * The KnownSpellPageFragment displays a tab for each spell list the character can access. The checkbox show all,
@@ -81,7 +83,7 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
     }
 
     private void createSpelllistTabs() {
-        final TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         final TabHost.TabContentFactory tabContenctFactory = new SpelllistTabContentFactory(this);
@@ -130,7 +132,7 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
     /**
      * Creates a tab for each spell list the character has access to.
      */
-    public class SpelllistTabContentFactory implements TabHost.TabContentFactory {
+    class SpelllistTabContentFactory implements TabHost.TabContentFactory {
 
         private final HashMap<String, ListView> tabs;
 
@@ -140,8 +142,8 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
          * @param onItemClickListener
          *            Called if a spell is clicked.
          */
-        public SpelllistTabContentFactory(final OnItemClickListener onItemClickListener) {
-            tabs = new HashMap<String, ListView>();
+        SpelllistTabContentFactory(final OnItemClickListener onItemClickListener) {
+            tabs = new HashMap<>();
 
             for (final SpelllistModel spelllistModel : knownSpellPageModel.getSpelllistModels()) {
 
@@ -151,7 +153,7 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
                 listView.setAdapter(spelllistAdapter);
                 listView.setOnItemClickListener(onItemClickListener);
                 listView.setDrawSelectorOnTop(false);
-                listView.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.paperscroll));
+                listView.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), R.drawable.paperscroll));
                 listView.setCacheColorHint(0);
 
                 tabs.put(spelllistModel.getName(), listView);

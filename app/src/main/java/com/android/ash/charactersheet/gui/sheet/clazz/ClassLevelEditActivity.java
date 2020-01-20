@@ -1,10 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.clazz;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +19,12 @@ import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * The activity displays a list view of all class levels. The level of the class can be decrease and increased. The
@@ -57,7 +58,7 @@ public class ClassLevelEditActivity extends LogActivity {
     }
 
     private void setClassLevels() {
-        final ListView classLevelListView = (ListView) findViewById(R.id.class_level_list_view);
+        final ListView classLevelListView = findViewById(R.id.class_level_list_view);
 
         classLevels = getClassLevels();
         classLevelArrayAdapter = new ClassLevelArrayAdapter(this, gameSystem.getDisplayService(),
@@ -68,7 +69,7 @@ public class ClassLevelEditActivity extends LogActivity {
 
     private List<ClassLevel> getClassLevels() {
         final List<ClassLevel> characterClassLevels = character.getClassLevels();
-        final List<ClassLevel> adapterClassLevels = new ArrayList<ClassLevel>();
+        final List<ClassLevel> adapterClassLevels = new ArrayList<>();
         for (final ClassLevel classLevel : characterClassLevels) {
             final ClassLevel adapterClassLevel = new ClassLevel(classLevel.getCharacterClass(), classLevel.getLevel());
             adapterClassLevel.setId(classLevel.getId());
@@ -81,7 +82,7 @@ public class ClassLevelEditActivity extends LogActivity {
 
     private void setNewClassLevelButton() {
         final Context context = this;
-        final Button newClassLevelButton = (Button) findViewById(R.id.class_level_new);
+        final Button newClassLevelButton = findViewById(R.id.class_level_new);
         newClassLevelButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -143,28 +144,22 @@ public class ClassLevelEditActivity extends LogActivity {
     }
 
     private boolean isNew(final ClassLevel classLevel) {
-        if (classLevel.getId() == -1) {
-            return true;
-        }
-        return false;
+        return classLevel.getId() == -1;
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
 
         // see which child activity is calling us back.
-        switch (requestCode) {
-        case RESULT_CODE_NEW_CLASS_LEVEL:
+        if (requestCode == RESULT_CODE_NEW_CLASS_LEVEL) {
             if (resultCode != RESULT_CANCELED) {
                 final Bundle extras = resultIntent.getExtras();
-                final int classId = (Integer) extras.getSerializable(INTENT_EXTRA_DATA_OBJECT);
+                final int classId = (Integer) Objects.requireNonNull(extras).getSerializable(INTENT_EXTRA_DATA_OBJECT);
                 final CharacterClass characterClass = getClassById(classId);
                 final ClassLevel classLevel = new ClassLevel(characterClass, 1);
                 classLevelArrayAdapter.add(classLevel);
             }
-            break;
-
-        default:
+        } else {
             throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
     }
