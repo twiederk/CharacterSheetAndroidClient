@@ -1,8 +1,8 @@
 package com.android.ash.charactersheet.boc.model;
 
-import android.support.annotation.NonNull;
-
 import com.android.ash.charactersheet.R;
+
+import androidx.annotation.NonNull;
 
 /**
  * Enumration of supported GameSystems.
@@ -157,6 +157,7 @@ public enum GameSystemType {
                 { R.raw.dndv35_upgrade_41_to_42, }, //
                 { R.raw.dndv35_upgrade_42_to_43, }, //
                 {R.raw.dndv35_upgrade_43_to_44,}, //
+                {R.raw.dndv35_upgrade_44_to_45,}, //
         };
 
         int[] IMAGES = { //
@@ -236,6 +237,7 @@ public enum GameSystemType {
                 { R.raw.pathfinder_upgrade_41_to_42, },//
                 { R.raw.pathfinder_upgrade_42_to_43, },//
                 {R.raw.pathfinder_upgrade_43_to_44,},//
+                {R.raw.pathfinder_upgrade_44_to_45,},//
         };
 
     }

@@ -1,11 +1,10 @@
 package com.android.ash.charactersheet.gui.admin.spell;
 
-import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.EnumSpinnerAdapter;
 import com.d20charactersheet.framework.boc.model.CastingTime;
 import com.d20charactersheet.framework.boc.model.Descriptor;
@@ -25,17 +24,19 @@ import java.util.List;
 /**
  * Mask to administer spells.
  */
-public abstract class SpellAdministrationActivity extends FormularActivity<Spell> {
+public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
 
     GameSystem gameSystem;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.spell_administration;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-
-        super.onCreate(savedInstanceState, R.layout.spell_administration);
     }
 
     @Override

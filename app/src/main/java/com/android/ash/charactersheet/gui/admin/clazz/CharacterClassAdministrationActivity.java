@@ -9,7 +9,7 @@ import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.clazz.ability.ClassAdministrationAbilityListActivity;
 import com.android.ash.charactersheet.gui.admin.clazz.alignment.CharacterClassAlignmentActivity;
 import com.android.ash.charactersheet.gui.admin.clazz.skill.CharacterClassSkillActivity;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.util.IntentAndResultOnClickListener;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Alignment;
@@ -37,7 +37,7 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
  * The form to create or edit an character class. It contains the name, alignments, hit die, base attack bonus, high
  * saves, skill points per level and class skills to administer.
  */
-public abstract class CharacterClassAdministrationActivity extends FormularActivity<CharacterClass> {
+public abstract class CharacterClassAdministrationActivity extends FormActivity<CharacterClass> {
 
     /** Request code of the CharacterClassAlignmentActivity */
     private static final int REQUEST_CODE_ALIGNMENT = 0;
@@ -57,16 +57,25 @@ public abstract class CharacterClassAdministrationActivity extends FormularActiv
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        characterClassService = gameSystem.getCharacterClassService();
-        characterService = gameSystem.getCharacterService();
 
-        super.onCreate(savedInstanceState, R.layout.character_class_administration);
 
         helper = new CharacterClassAdministrationHelper(this, form, displayService);
         helper.createViews();
     }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.character_class_administration;
+    }
+
+    @Override
+    protected void createServices() {
+        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
+        gameSystem = application.getGameSystem();
+        characterClassService = gameSystem.getCharacterClassService();
+        characterService = gameSystem.getCharacterService();
+    }
+
 
     @Override
     protected void fillViews() {
@@ -174,53 +183,53 @@ public abstract class CharacterClassAdministrationActivity extends FormularActiv
     @Override
     @SuppressWarnings("unchecked")
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
+        super.onActivityResult(requestCode, resultCode, resultIntent);
 
-        // see which child activity is calling us back.
         switch (requestCode) {
-        case REQUEST_CODE_ALIGNMENT:
-            if (resultCode != RESULT_CANCELED) {
-                final Bundle bundle = resultIntent.getExtras();
-                final EnumSet<Alignment> alignments = (EnumSet<Alignment>) Objects.requireNonNull(bundle).get(INTENT_EXTRA_DATA_OBJECT);
-                helper.setAlignments(alignments);
-            }
-            break;
-
-        case REQUEST_CODE_ABILITY:
-            if (resultCode != RESULT_CANCELED) {
-                final Bundle bundle = resultIntent.getExtras();
-                final int[] classAbilitiesData = Objects.requireNonNull(bundle).getIntArray(INTENT_EXTRA_DATA_OBJECT);
-                final AbilityService abilityService = gameSystem.getAbilityService();
-                final List<Ability> allAbilities = gameSystem.getAllAbilities();
-                final List<ClassAbility> classAbilities = new ArrayList<>(Objects.requireNonNull(classAbilitiesData).length / 2);
-                for (int i = 0; i < classAbilitiesData.length; i = i + 2) {
-                    final int abilityId = classAbilitiesData[i];
-                    final int level = classAbilitiesData[i + 1];
-                    final Ability ability = abilityService.getAbilityById(abilityId, allAbilities);
-                    final ClassAbility classAbility = new ClassAbility(ability);
-                    classAbility.setLevel(level);
-                    classAbilities.add(classAbility);
+            case REQUEST_CODE_ALIGNMENT:
+                if (resultCode != RESULT_CANCELED) {
+                    final Bundle bundle = resultIntent.getExtras();
+                    final EnumSet<Alignment> alignments = (EnumSet<Alignment>) Objects.requireNonNull(bundle).get(INTENT_EXTRA_DATA_OBJECT);
+                    helper.setAlignments(alignments);
                 }
-                helper.setClassAbilities(classAbilities);
-            }
-            break;
+                break;
 
-        case REQUEST_CODE_SKILL:
-            if (resultCode != RESULT_CANCELED) {
-                final Bundle bundle = resultIntent.getExtras();
-                final int[] skillIds = Objects.requireNonNull(bundle).getIntArray(INTENT_EXTRA_DATA_OBJECT);
-                final List<Skill> skills = new ArrayList<>(Objects.requireNonNull(skillIds).length);
-                final SkillService skillService = gameSystem.getSkillService();
-                final List<Skill> allSkills = gameSystem.getAllSkills();
-                for (final int skillId : skillIds) {
-                    final Skill skill = skillService.getSkillById(skillId, allSkills);
-                    skills.add(skill);
+            case REQUEST_CODE_ABILITY:
+                if (resultCode != RESULT_CANCELED) {
+                    final Bundle bundle = resultIntent.getExtras();
+                    final int[] classAbilitiesData = Objects.requireNonNull(bundle).getIntArray(INTENT_EXTRA_DATA_OBJECT);
+                    final AbilityService abilityService = gameSystem.getAbilityService();
+                    final List<Ability> allAbilities = gameSystem.getAllAbilities();
+                    final List<ClassAbility> classAbilities = new ArrayList<>(Objects.requireNonNull(classAbilitiesData).length / 2);
+                    for (int i = 0; i < classAbilitiesData.length; i = i + 2) {
+                        final int abilityId = classAbilitiesData[i];
+                        final int level = classAbilitiesData[i + 1];
+                        final Ability ability = abilityService.getAbilityById(abilityId, allAbilities);
+                        final ClassAbility classAbility = new ClassAbility(ability);
+                        classAbility.setLevel(level);
+                        classAbilities.add(classAbility);
+                    }
+                    helper.setClassAbilities(classAbilities);
                 }
-                helper.setSkills(skills);
-            }
-            break;
+                break;
 
-        default:
-            throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
+            case REQUEST_CODE_SKILL:
+                if (resultCode != RESULT_CANCELED) {
+                    final Bundle bundle = resultIntent.getExtras();
+                    final int[] skillIds = Objects.requireNonNull(bundle).getIntArray(INTENT_EXTRA_DATA_OBJECT);
+                    final List<Skill> skills = new ArrayList<>(Objects.requireNonNull(skillIds).length);
+                    final SkillService skillService = gameSystem.getSkillService();
+                    final List<Skill> allSkills = gameSystem.getAllSkills();
+                    for (final int skillId : skillIds) {
+                        final Skill skill = skillService.getSkillById(skillId, allSkills);
+                        skills.add(skill);
+                    }
+                    helper.setSkills(skills);
+                }
+                break;
+
+            default:
+                throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
         }
     }
 }

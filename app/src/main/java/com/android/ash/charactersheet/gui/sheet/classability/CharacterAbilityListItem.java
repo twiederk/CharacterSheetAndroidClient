@@ -1,9 +1,9 @@
 package com.android.ash.charactersheet.gui.sheet.classability;
 
-import android.support.annotation.NonNull;
-
 import com.d20charactersheet.framework.boc.model.AbilityType;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
+
+import androidx.annotation.NonNull;
 
 /**
  * Hold data to display class ability and its according class.

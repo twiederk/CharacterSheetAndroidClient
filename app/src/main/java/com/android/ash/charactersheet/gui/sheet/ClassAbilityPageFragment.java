@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 /**
  * Displays all abilities of an character gained by its classes. The abilities can be filtered by the level of the
  * character in its classes.
@@ -50,7 +52,7 @@ public class ClassAbilityPageFragment extends PageFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
         inflater.inflate(R.menu.menu_page_class_ability, menu);

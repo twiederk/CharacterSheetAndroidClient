@@ -1,11 +1,10 @@
 package com.android.ash.charactersheet.gui.admin.item;
 
-import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberViewController;
 import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView;
 import com.android.ash.charactersheet.gui.widget.numberview.ZeroAndPositiveDecimalNumberViewController;
@@ -23,7 +22,7 @@ import java.util.Arrays;
  * @param <T>
  *            The specific item type like weapon, armor or good.
  */
-public abstract class ItemAdministrationActivity<T> extends FormularActivity<Item> {
+public abstract class ItemAdministrationActivity<T> extends FormActivity<Item> {
 
     protected ItemService itemService;
     protected GameSystem gameSystem;
@@ -32,12 +31,10 @@ public abstract class ItemAdministrationActivity<T> extends FormularActivity<Ite
     private NumberViewController weightController;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState, final int layoutResourceId) {
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         itemService = gameSystem.getItemService();
-
-        super.onCreate(savedInstanceState, layoutResourceId);
     }
 
     @Override

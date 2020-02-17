@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.gui.main.exportimport;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,6 +13,8 @@ import com.d20charactersheet.framework.boc.service.ExportImportService;
 
 import java.io.File;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
 

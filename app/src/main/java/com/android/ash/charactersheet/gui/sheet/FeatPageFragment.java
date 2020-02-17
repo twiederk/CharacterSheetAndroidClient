@@ -27,6 +27,8 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
+import androidx.annotation.NonNull;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
@@ -140,7 +142,7 @@ public class FeatPageFragment extends PageFragment implements Observer {
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
         inflater.inflate(R.menu.menu_page_feat, menu);

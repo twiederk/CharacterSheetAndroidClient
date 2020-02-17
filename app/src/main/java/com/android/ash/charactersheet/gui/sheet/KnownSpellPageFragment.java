@@ -1,7 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +29,9 @@ import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
@@ -114,7 +116,7 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
         if (character.getSpelllists().isEmpty()) {

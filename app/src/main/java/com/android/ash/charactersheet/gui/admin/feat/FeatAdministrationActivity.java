@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.feat;
 
-import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -8,7 +7,7 @@ import android.widget.CheckBox;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.ZeroAndPositiveNumberViewController;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
@@ -22,20 +21,23 @@ import java.util.Arrays;
  * is displayed in a spinner. Fighter bonus feat, multiple and stack can be set by checkboxes. The multiple and stack
  * checkbox exclude each other.
  */
-public abstract class FeatAdministrationActivity extends FormularActivity<Feat> {
+public abstract class FeatAdministrationActivity extends FormActivity<Feat> {
 
     GameSystem gameSystem;
     FeatService featService;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.feat_administration;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         featService = gameSystem.getFeatService();
-
-        super.onCreate(savedInstanceState, R.layout.feat_administration);
     }
+
 
     @Override
     protected void fillViews() {

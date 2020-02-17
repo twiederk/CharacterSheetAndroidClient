@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -10,7 +9,7 @@ import android.widget.TableRow;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.Spell;
@@ -27,7 +26,7 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
  * Displays spell slot to select spell for. Displays spell list ability the spell slot belongs to. Displays spells to
  * select in a spinner. Displays metamagic feats to select.
  */
-public class SpellSlotActivity extends FormularActivity<SpellSlot> {
+public class SpellSlotActivity extends FormActivity<SpellSlot> {
 
     private static final Object COMMA = ", ";
     private GameSystem gameSystem;
@@ -35,13 +34,15 @@ public class SpellSlotActivity extends FormularActivity<SpellSlot> {
     private SpellSlotActivityModel spellSlotActivityModel;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.activity_spellslot;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         character = application.getCharacter();
-
-        super.onCreate(savedInstanceState, R.layout.activity_spellslot);
     }
 
     @Override

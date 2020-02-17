@@ -1,8 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +20,9 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 import com.d20charactersheet.framework.boc.service.XpService;
 
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * Base class for fragments which are part of the character sheet.

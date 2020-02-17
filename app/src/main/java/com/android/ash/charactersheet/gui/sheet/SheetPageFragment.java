@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +43,8 @@ import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
 
 /**
  * A dummy fragment representing a section of the app, but that simply displays dummy text.
@@ -320,7 +321,7 @@ public class SheetPageFragment extends PageFragment {
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.menu_page_sheet, menu);
     }
 

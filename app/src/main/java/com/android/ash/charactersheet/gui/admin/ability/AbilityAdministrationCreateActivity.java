@@ -1,7 +1,6 @@
 package com.android.ash.charactersheet.gui.admin.ability;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +13,7 @@ import android.widget.SpinnerAdapter;
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.AbilityClass;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.EnumSpinnerAdapter;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.AbilityType;
@@ -37,17 +36,21 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 /**
  * Creates a new ability.
  */
-public class AbilityAdministrationCreateActivity extends FormularActivity<Ability> {
+public class AbilityAdministrationCreateActivity extends FormActivity<Ability> {
 
     private GameSystem gameSystem;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.ability_administration_create;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-        super.onCreate(savedInstanceState, R.layout.ability_administration_create);
     }
+
 
     @Override
     protected Ability createForm() {

@@ -2,8 +2,6 @@ package com.android.ash.charactersheet.backuprestore;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
@@ -17,6 +15,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static com.android.ash.charactersheet.backuprestore.FileBackupAgent.SEPARATOR;
 import static org.junit.Assert.assertEquals;

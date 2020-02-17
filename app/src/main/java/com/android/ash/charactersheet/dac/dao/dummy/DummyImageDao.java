@@ -17,16 +17,16 @@ public class DummyImageDao implements ImageDao {
 
     private static int imageCounter;
 
-    private final Context context;
-    private SparseArray<byte[]> imageTable;
 
     private final int[] imageResourceIds = { // image resource id, face resource id
-    R.drawable.char_default, R.drawable.char_default_face, // Default
+            R.drawable.char_default, R.drawable.char_default_face, // Default
             R.drawable.char_belvador, R.drawable.char_belvador_face,// Belvador
     };
+    private final Context context;
+    private final SparseArray<byte[]> imageTable = new SparseArray<>(imageResourceIds.length);
 
     /**
-     * Instanciates ImageDaoDummy with given context.
+     * Instantiates ImageDaoDummy with given context.
      *
      * @param context
      *            The context the resources are retrieved from.
@@ -38,7 +38,6 @@ public class DummyImageDao implements ImageDao {
     }
 
     private void initImageMap() {
-        imageTable = new SparseArray<>(imageResourceIds.length);
         for (imageCounter = 0; imageCounter < imageResourceIds.length; imageCounter++) {
             final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), imageResourceIds[imageCounter]);
             final ByteArrayOutputStream bytes = new ByteArrayOutputStream();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="base" parent="android:Theme.Holo">
+    <style name="base" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">20sp</item>
     </style>
 
@@ -22,8 +22,11 @@
     </style>
 
     <style name="list_item_spelllist_level" parent="list_item_spelllist">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">23sp</item>
         <item name="android:textColor">@color/blue</item>
+        <item name="android:gravity">left</item>
     </style>
 
     <style name="list_item_spelllist_spell_name" parent="list_item_spelllist">

@@ -1,11 +1,10 @@
 package com.android.ash.charactersheet.gui.admin.ability;
 
-import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.EnumSpinnerAdapter;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.AbilityType;
@@ -22,23 +21,21 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 /**
  * Displays a form to handle abilities. Derive from this class to create or update a ability using this form.
  */
-public class AbilityAdministrationEditActivity extends FormularActivity<Ability> {
+public class AbilityAdministrationEditActivity extends FormActivity<Ability> {
 
     GameSystem gameSystem;
     private AbilityService abilityService;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.ability_administration_edit;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         abilityService = gameSystem.getAbilityService();
-
-        super.onCreate(savedInstanceState, getLayout());
-    }
-
-    int getLayout() {
-        return R.layout.ability_administration_edit;
     }
 
     @Override

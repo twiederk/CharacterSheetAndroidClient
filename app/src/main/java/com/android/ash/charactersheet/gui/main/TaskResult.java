@@ -1,6 +1,6 @@
 package com.android.ash.charactersheet.gui.main;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Contains information about execution of task. If the task was executes successful only successful is set to true and

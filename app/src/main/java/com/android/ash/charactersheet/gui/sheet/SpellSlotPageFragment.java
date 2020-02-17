@@ -36,6 +36,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+
 /**
  * Displays a tab for each spell caster class of the character. Each tab displays the spell slots of the character for
  * this class.
@@ -190,7 +192,7 @@ public class SpellSlotPageFragment extends PageFragment {
     }
 
     @Override
-    public boolean onContextItemSelected(final MenuItem menuItem) {
+    public boolean onContextItemSelected(@NonNull final MenuItem menuItem) {
         return contextMenuListener.onContextItemSelected(menuItem);
     }
 
@@ -202,7 +204,7 @@ public class SpellSlotPageFragment extends PageFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         if (!character.getSpelllists().isEmpty()) {
             inflater.inflate(R.menu.menu_page_spell_slot, menu);
         }

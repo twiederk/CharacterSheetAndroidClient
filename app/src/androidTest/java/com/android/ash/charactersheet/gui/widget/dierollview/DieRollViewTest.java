@@ -2,8 +2,6 @@ package com.android.ash.charactersheet.gui.widget.dierollview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.d20charactersheet.framework.boc.model.Die;
 import com.d20charactersheet.framework.boc.model.DieRoll;
@@ -11,6 +9,9 @@ import com.d20charactersheet.framework.boc.model.DieRoll;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

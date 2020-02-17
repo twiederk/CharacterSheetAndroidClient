@@ -8,7 +8,7 @@ import android.widget.SpinnerAdapter;
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.race.ability.RaceAdministrationAbilityListActivity;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.util.IntentAndResultOnClickListener;
 import com.android.ash.charactersheet.gui.widget.SpinnerArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Ability;
@@ -33,7 +33,7 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 /**
  * Fills and stores the form of a race. Derive from this class to use the form for create or update.
  */
-public abstract class RaceAdministrationActivity extends FormularActivity<Race> {
+public abstract class RaceAdministrationActivity extends FormActivity<Race> {
 
     private static final int REQUEST_CODE_ABILITIES = 1;
 
@@ -45,14 +45,20 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        abilities = new ArrayList<>(form.getAbilities());
+        createViews();
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.race_administration;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         raceService = gameSystem.getRaceService();
-        super.onCreate(savedInstanceState, R.layout.race_administration);
-
-        abilities = new ArrayList<>(form.getAbilities());
-
-        createViews();
     }
 
     private void createViews() {
@@ -143,8 +149,8 @@ public abstract class RaceAdministrationActivity extends FormularActivity<Race> 
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
+        super.onActivityResult(requestCode, resultCode, resultIntent);
 
-        // see which child activity is calling us back.
         if (requestCode == REQUEST_CODE_ABILITIES) {
             if (resultCode != RESULT_CANCELED) {
                 abilities = getAbilitiesFromIntend(resultIntent);

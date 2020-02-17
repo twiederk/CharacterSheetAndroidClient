@@ -1,8 +1,8 @@
 package com.android.ash.charactersheet.gui.admin.clazz.skill;
 
-import android.support.annotation.NonNull;
-
 import com.d20charactersheet.framework.boc.model.Skill;
+
+import androidx.annotation.NonNull;
 
 /**
  * The skill model stores if a skill is a class skill or not.

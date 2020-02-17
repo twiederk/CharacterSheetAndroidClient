@@ -1,8 +1,6 @@
 package com.android.ash.charactersheet.boc.service;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -26,6 +24,9 @@ import org.junit.runner.RunWith;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

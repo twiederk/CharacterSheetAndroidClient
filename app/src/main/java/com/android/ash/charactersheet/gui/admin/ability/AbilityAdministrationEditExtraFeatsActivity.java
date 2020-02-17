@@ -11,7 +11,7 @@ import com.d20charactersheet.framework.boc.model.ExtraFeatsAbility;
 public class AbilityAdministrationEditExtraFeatsActivity extends AbilityAdministrationEditActivity {
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutResourceId() {
         return R.layout.ability_administration_edit_extrafeats;
     }
 

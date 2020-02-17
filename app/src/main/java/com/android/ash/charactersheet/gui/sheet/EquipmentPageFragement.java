@@ -1,7 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +26,9 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.util.MagicOnClickListener;
 
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * Displays equipment of the character. Weapons, armor and goods are displayed in seperate tabs. Items can be touched to
@@ -124,7 +126,7 @@ public class EquipmentPageFragement extends PageFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater menuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater);
         menuInflater.inflate(R.menu.menu_page_equip, menu);
 

@@ -33,7 +33,6 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
 
     private boolean upgrade;
     private int oldVersion;
-    private int newVersion;
 
     private final int[] createScripts;
     private final int[][] updateScripts;
@@ -177,7 +176,7 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         this.db = db;
         upgradeDatabase(oldVersion, newVersion);
-        configureApplication(oldVersion, newVersion);
+        configureApplication(oldVersion);
     }
 
     private void upgradeDatabase(final int oldVersion, final int newVersion) {
@@ -198,9 +197,8 @@ public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
         }
     }
 
-    private void configureApplication(final int oldVersion, final int newVersion) {
+    private void configureApplication(final int oldVersion) {
         this.oldVersion = oldVersion;
-        this.newVersion = newVersion;
         upgrade = true;
     }
 

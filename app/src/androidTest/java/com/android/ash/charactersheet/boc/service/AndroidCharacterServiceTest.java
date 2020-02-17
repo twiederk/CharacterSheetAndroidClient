@@ -1,14 +1,15 @@
 package com.android.ash.charactersheet.boc.service;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.AndroidObjectMother;
 import com.d20charactersheet.framework.boc.service.BaseCharacterServiceTest;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 @RunWith(AndroidJUnit4.class)
 public class AndroidCharacterServiceTest extends BaseCharacterServiceTest {

@@ -1,30 +1,33 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.res.Resources;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
 import com.android.ash.charactersheet.R;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.
  */
-class PageAdapter extends FragmentPagerAdapter {
+class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     private final PageFragment[] pageFragments;
     private final String[] pageTitles;
 
     /**
-     * Instanciates PageFragment of character sheet.
-     * 
+     * Instantiates PageFragment of character sheet.
+     *
      * @param fragmentManager
      *            The manager of fragments.
      * @param resources
      *            The resources to read strings from.
      */
-    public PageAdapter(final FragmentManager fragmentManager, final Resources resources) {
-        super(fragmentManager);
+    SectionsPagerAdapter(final FragmentManager fragmentManager, final Resources resources) {
+        super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         pageFragments = new PageFragment[] { //
         //
@@ -55,6 +58,7 @@ class PageAdapter extends FragmentPagerAdapter {
         };
     }
 
+    @NonNull
     @Override
     public Fragment getItem(final int position) {
         return pageFragments[position];

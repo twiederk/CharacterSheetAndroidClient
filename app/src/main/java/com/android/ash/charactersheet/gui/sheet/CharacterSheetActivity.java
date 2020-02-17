@@ -1,13 +1,9 @@
 package com.android.ash.charactersheet.gui.sheet;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
 import android.view.Display;
 import android.widget.ImageView;
 
@@ -15,23 +11,26 @@ import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.GameSystem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * The character sheet of the character. Displays the stats, abilities and combat values of the character. The
  * background shows the image of the character.
  */
-public class CharacterSheetActivity extends FragmentActivity implements ActionBar.TabListener {
+public class CharacterSheetActivity extends LogAppCompatActivity {
 
     private GameSystem gameSystem;
     private PreferenceService preferenceService;
     private Character character;
-
-    private ViewPager viewPager;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -45,28 +44,22 @@ public class CharacterSheetActivity extends FragmentActivity implements ActionBa
         character = application.getCharacter();
 
         setContentView(R.layout.activity_character_sheet);
+        setToolbar();
         setBackground();
 
-        // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
-        Objects.requireNonNull(actionBar).setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), getResources());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
 
-        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), getResources());
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
 
-        // Set up the ViewPager with the page adapter.
-        viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(pageAdapter);
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(final int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
+    }
 
-        for (int i = 0; i < pageAdapter.getCount(); i++) {
-            actionBar.addTab(actionBar.newTab().setText(pageAdapter.getPageTitle(i)).setTabListener(this));
-        }
-
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     void setBackground() {
@@ -92,21 +85,6 @@ public class CharacterSheetActivity extends FragmentActivity implements ActionBa
         imageView.setMinimumWidth(minWidth);
         imageView.setMinimumHeight(minHeight);
         imageView.setImageBitmap(bitmap);
-    }
-
-    @Override
-    public void onTabSelected(final ActionBar.Tab tab, final FragmentTransaction fragmentTransaction) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(final ActionBar.Tab tab, final FragmentTransaction fragmentTransaction) {
-        // nothing to do
-    }
-
-    @Override
-    public void onTabReselected(final ActionBar.Tab tab, final FragmentTransaction fragmentTransaction) {
-        // nothing to do
     }
 
     @Override

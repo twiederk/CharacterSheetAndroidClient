@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.gui.sheet.item;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
+
+import androidx.core.content.ContextCompat;
 
 /**
  * Adapter to display items in a ListView.

@@ -1,8 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
-import android.support.annotation.NonNull;
-
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * Model of spell level which is display on SpelllistPageFragment. Spell list can be expanded or collapsed.

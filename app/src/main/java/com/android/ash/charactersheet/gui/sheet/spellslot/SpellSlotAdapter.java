@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.gui.sheet.spellslot;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +17,8 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 
 import java.util.Iterator;
 import java.util.List;
+
+import androidx.core.content.ContextCompat;
 
 /**
  * Displays the spell slots of a spell list for a character. Each spell slot is displayed with the spell name, the spell

@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
-import android.support.annotation.NonNull;
-
 import com.d20charactersheet.framework.boc.model.CharacterFeat;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
@@ -12,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Observable;
+
+import androidx.annotation.NonNull;
 
 /**
  * Model of feat list. Stores current filter settings and returns feats according to filter settings. Notifies observers

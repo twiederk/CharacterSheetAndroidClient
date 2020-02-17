@@ -20,7 +20,7 @@ import java.util.List;
  * @param <T>
  *            The object the form allows to modify.
  */
-public abstract class FormularActivity<T> extends LogActivity {
+public abstract class FormActivity<T> extends LogAppCompatActivity {
 
     protected DisplayService displayService;
     protected T form;
@@ -32,20 +32,21 @@ public abstract class FormularActivity<T> extends LogActivity {
      * and display service.
      *
      * @param savedInstanceState The saved instance state
-     * @param layoutResourceId The resource id of the layout
      */
-    protected void onCreate(final Bundle savedInstanceState, final int layoutResourceId) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layoutResourceId);
+        setContentView(getLayoutResourceId());
         setTitle(getHeading());
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         displayService = application.getGameSystem().getDisplayService();
-
         messageManager = new MessageManager(this, displayService);
+
+        createServices();
 
         form = createForm();
     }
+
 
     @Override
     protected void onResume() {
@@ -131,6 +132,10 @@ public abstract class FormularActivity<T> extends LogActivity {
         final NumberView numberView = findViewById(numberViewResourceId);
         return numberView.getController().getNumber().intValue();
     }
+
+    protected abstract int getLayoutResourceId();
+
+    protected abstract void createServices();
 
     protected abstract String getHeading();
 

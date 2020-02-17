@@ -1,23 +1,17 @@
 package com.android.ash.charactersheet.gui.util;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 /**
- * Superclass for Fragments wich log their events.
+ * Superclass for Fragments which log their events.
  */
 public class LogFragment extends Fragment {
-
-    @Override
-    public void onAttach(final Activity activity) {
-        Logger.info(getClass().getSimpleName() + ".onAttach");
-        super.onAttach(activity);
-    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

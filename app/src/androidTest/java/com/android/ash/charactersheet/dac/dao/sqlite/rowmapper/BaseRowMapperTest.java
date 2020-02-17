@@ -2,13 +2,14 @@ package com.android.ash.charactersheet.dac.dao.sqlite.rowmapper;
 
 import android.database.Cursor;
 import android.database.SQLException;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.d20charactersheet.framework.boc.model.Alignment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

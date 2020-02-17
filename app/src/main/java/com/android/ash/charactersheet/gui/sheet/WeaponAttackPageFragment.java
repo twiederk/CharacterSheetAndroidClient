@@ -21,6 +21,8 @@ import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.util.WeaponAttackComparator;
 
+import androidx.annotation.NonNull;
+
 /**
  * Displays all weapon attacks of a character. New weapon attacks can be created. Existing weapon attacks can be edited
  * or deleted.
@@ -74,7 +76,7 @@ public class WeaponAttackPageFragment extends PageFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.menu_page_weapon_attack, menu);
     }
 
@@ -94,8 +96,8 @@ public class WeaponAttackPageFragment extends PageFragment {
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
+    public void onCreateContextMenu(@NonNull final ContextMenu menu, @NonNull final View view, final ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, view, menuInfo);
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         final WeaponAttack weaponAttack = (WeaponAttack) getListView().getAdapter().getItem(info.position);
         menu.setHeaderTitle(weaponAttack.getName());

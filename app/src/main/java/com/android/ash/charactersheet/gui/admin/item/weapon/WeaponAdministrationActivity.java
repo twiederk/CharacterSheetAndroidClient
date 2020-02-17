@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.item.weapon;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
@@ -34,11 +33,15 @@ public abstract class WeaponAdministrationActivity extends ItemAdministrationAct
 
     private Weapon weapon;
 
-    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.weapon_administration);
+        super.onCreate(savedInstanceState);
         weapon = (Weapon) form;
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.weapon_administration;
     }
 
     @Override

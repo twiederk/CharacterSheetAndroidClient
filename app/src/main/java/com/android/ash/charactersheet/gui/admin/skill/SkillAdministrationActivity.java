@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Attribute;
@@ -35,7 +35,7 @@ import java.util.List;
  * Base class for layout of skill creation and edition. Only the methods getSkill and saveSkill must be overwritten. The
  * other methods handle the skill administration layout, independently of creation or edition mode.
  */
-public abstract class SkillAdministrationActivity extends FormularActivity<Skill> {
+public abstract class SkillAdministrationActivity extends FormActivity<Skill> {
 
     GameSystem gameSystem;
     SkillService skillService;
@@ -47,16 +47,23 @@ public abstract class SkillAdministrationActivity extends FormularActivity<Skill
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        characterClassSkillModels = new LinkedList<>();
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.skill_administration;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         skillService = gameSystem.getSkillService();
         abilityService = gameSystem.getAbilityService();
         characterClassService = gameSystem.getCharacterClassService();
         spelllistService = gameSystem.getSpelllistService();
-
-        super.onCreate(savedInstanceState, R.layout.skill_administration);
-
-        characterClassSkillModels = new LinkedList<>();
     }
 
     @Override

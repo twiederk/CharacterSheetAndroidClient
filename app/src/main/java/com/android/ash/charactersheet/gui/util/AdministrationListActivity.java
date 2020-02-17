@@ -16,15 +16,19 @@ import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
+
 /**
  * The administration offers lists of entities to administer, like character classes, races and abilities. These lists
- * share the same basic functionalities, like alphabetically listed entities, create and update entities. Derive from
- * this class to create list of different entities, sharing these basic functionalities.
+ * share the same basic functionality, like alphabetically listed entities, create and update entities. Derive from
+ * this class to create list of different entities, sharing these basic functionality.
  * 
  * @param <T>
  *            The entity to administer, like character class, race or ability.
  */
-public abstract class AdministrationListActivity<T> extends LogActivity implements OnItemClickListener {
+public abstract class AdministrationListActivity<T> extends LogAppCompatActivity implements OnItemClickListener {
 
     protected GameSystem gameSystem;
     protected DisplayService displayService;
@@ -34,6 +38,7 @@ public abstract class AdministrationListActivity<T> extends LogActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         setTitle(getTitleResource());
+        setToolbar();
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
@@ -41,6 +46,12 @@ public abstract class AdministrationListActivity<T> extends LogActivity implemen
 
         final EditText searchEditText = findViewById(android.R.id.input);
         searchEditText.addTextChangedListener(new SearchTextWatcher(getListView()));
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     protected int getLayoutResource() {
@@ -73,11 +84,11 @@ public abstract class AdministrationListActivity<T> extends LogActivity implemen
     }
 
     @Override
-    public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        if (item.getItemId() == R.id.menu_admin_create) {
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.menu_admin_create) {
             startActivity(getCreateIntent());
         } else {
-            return super.onMenuItemSelected(featureId, item);
+            return super.onOptionsItemSelected(menuItem);
         }
         return true;
     }

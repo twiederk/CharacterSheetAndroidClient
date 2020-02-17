@@ -29,7 +29,7 @@ public class PreferencesActivity extends LogActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preferences);
+        setContentView(R.layout.activity_preferences);
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         preferenceService = application.getPreferenceService();

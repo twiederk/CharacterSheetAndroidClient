@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberView;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberViewController;
 import com.android.ash.charactersheet.gui.widget.numberview.PositiveNumberViewController;
@@ -20,18 +20,22 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 /**
  * Displays class ability with name and level to create or edit.
  */
-public class ClassAdministrationAbilityEditActivity extends FormularActivity<ClassAbility> {
+public class ClassAdministrationAbilityEditActivity extends FormActivity<ClassAbility> {
 
     private NumberViewController levelController;
     private GameSystem gameSystem;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.class_admininistration_edit_ability;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-        super.onCreate(savedInstanceState, R.layout.class_admininistration_edit_ability);
     }
+
 
     @Override
     protected String getHeading() {

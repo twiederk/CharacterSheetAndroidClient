@@ -1,20 +1,20 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
-import android.support.annotation.NonNull;
-
 import com.android.ash.charactersheet.gui.util.ExpandableListItem;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
 
+import androidx.annotation.NonNull;
+
 /**
- * Abstract implemention of FeatItem. Use to derive FeatItem implementations from it.
+ * Abstract implementation of FeatItem. Use to derive FeatItem implementations from it.
  */
 public abstract class AbstractFeatListItem extends ExpandableListItem implements FeatListItem {
 
     private final Feat feat;
 
     /**
-     * Instanciate FeatItem of given feat.
+     * Instantiate FeatItem of given feat.
      *
      * @param feat
      *            The feat of the FeatItem.

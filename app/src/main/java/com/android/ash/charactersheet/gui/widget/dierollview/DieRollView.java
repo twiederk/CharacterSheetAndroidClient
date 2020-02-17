@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -16,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.ash.charactersheet.R;
+
+import androidx.core.content.ContextCompat;
 
 /**
  * View to display the result of a die roll. Displays a title at top and an optional subtitle at the buttom. In the

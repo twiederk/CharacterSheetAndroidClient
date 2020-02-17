@@ -15,7 +15,7 @@ import android.widget.ListView;
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.util.AbilitySearchActivity;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Ability;
@@ -27,12 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all abilities with checkboxes. By checking a ability it is associated with the race.
  */
-public class RaceAdministrationAbilityListActivity extends LogActivity {
+public class RaceAdministrationAbilityListActivity extends LogAppCompatActivity {
 
     private static final int CONTEXT_MENU_ABILITY_REMOVE = 1;
 
@@ -48,11 +50,18 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.race_administration_abilities);
         setTitle(R.string.race_administration_ability_list_title);
+        setToolbar();
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
 
         setAbilities();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void setAbilities() {
@@ -138,11 +147,11 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
     }
 
     @Override
-    public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        if (item.getItemId() == R.id.menu_admin_create) {
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.menu_admin_create) {
             searchAbility();
         } else {
-            return super.onMenuItemSelected(featureId, item);
+            return super.onOptionsItemSelected(menuItem);
         }
         return true;
     }
@@ -155,8 +164,8 @@ public class RaceAdministrationAbilityListActivity extends LogActivity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
+        super.onActivityResult(requestCode, resultCode, resultIntent);
 
-        // see which child activity is calling us back.
         if (requestCode == REQUEST_CODE_SEARCH_ABILITY) {
             if (resultCode != RESULT_CANCELED) {
                 final Bundle extras = resultIntent.getExtras();

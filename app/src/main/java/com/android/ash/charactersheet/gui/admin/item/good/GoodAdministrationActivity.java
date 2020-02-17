@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.item.good;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
@@ -19,11 +18,15 @@ public abstract class GoodAdministrationActivity extends ItemAdministrationActiv
 
     private Good good;
 
-    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.good_administration);
+        super.onCreate(savedInstanceState);
         good = (Good) form;
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.good_administration;
     }
 
     @Override

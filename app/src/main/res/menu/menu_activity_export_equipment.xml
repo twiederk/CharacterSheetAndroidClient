@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menu_activity_abstract_export_export"
         android:icon="@android:drawable/ic_menu_set_as"
-        android:showAsAction="ifRoom"
-        android:title="@string/export_export_button"/>
+        android:title="@string/export_export_button"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_activity_export_equipment_magic_item"
-        android:actionViewClass="android.widget.CheckBox"
-        android:showAsAction="always"
-        android:title="@string/equipment_list_show_magic"/>
+        android:title="@string/equipment_list_show_magic"
+        app:actionViewClass="android.widget.CheckBox"
+        app:showAsAction="always" />
 
 </menu>

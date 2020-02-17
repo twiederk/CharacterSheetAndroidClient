@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">d20 Character Sheet</string>
-    <string name="app_version_code">44</string>
-    <string name="app_version_name">2.11.4</string>
+    <string name="app_version_code">45</string>
+    <string name="app_version_name">2.11.5</string>
     <string name="attribute_title">Abilities</string>
     <string name="attribute_str">STR</string>
     <string name="attribute_dex">DEX</string>
@@ -887,6 +887,7 @@
     <string name="release_notes_2_11_2">Release 2.11.2\nBug fix: Fixed missing icon in action bar to export equipment\nBug fix: Fixed missing result of die roll on high density devices\nBug fix: Fixed unreadable labels on buttons on high density devices\n\n</string>
     <string name="release_notes_2_11_3">Release 2.11.3\nBug fix: Fixed missing result of die roll, if many dice were rolled\nBug fix: Fixes width of edit field, if number had many digits\nBug fix: Fixed crash, if number of damage dice was zero\nBug fix: Fixed position of saves for character with long class name\n\n</string>
     <string name="release_notes_2_11_4">Release 2.11.4\nBug fix: Updated project to current technology\n\n</string>
+    <string name="release_notes_2_11_5">Release 2.11.5\nBug fix: AndroidX Migration\n\n</string>
     <string name="release_notes_not_found">No Release Notes found\n\n</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.admin.item.armor;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.SpinnerAdapter;
 
@@ -24,11 +23,15 @@ public abstract class ArmorAdministrationActivity extends ItemAdministrationActi
 
     private Armor armor;
 
-    @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.armor_administration);
+        super.onCreate(savedInstanceState);
         armor = (Armor) form;
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.armor_administration;
     }
 
     @Override

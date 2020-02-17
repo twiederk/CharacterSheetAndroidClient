@@ -29,7 +29,7 @@ import java.util.List;
 public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministrationEditActivity {
 
     @Override
-    protected int getLayout() {
+    protected int getLayoutResourceId() {
         return R.layout.ability_administration_edit_spelllist;
     }
 

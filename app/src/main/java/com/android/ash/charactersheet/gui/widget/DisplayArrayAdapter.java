@@ -1,7 +1,6 @@
 package com.android.ash.charactersheet.gui.widget;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * Abstract base class to expand by ArrayAdapters of ListView and Spinner to display data using the DisplayManager and a

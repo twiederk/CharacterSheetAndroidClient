@@ -1,9 +1,6 @@
 package com.android.ash.charactersheet.gui.admin.item;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +20,15 @@ import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 /**
- * The adapter of listview in ItemAdministrationListActivity. It displays a listitem with its name. Filters the list by
- * name and magical. Magic items are displayed with a different background color.
+ * The adapter of ListView in ItemAdministrationListActivity. It displays a list item with its name.
+ * Filters the list by name and magical. Magic items are displayed with a different background color.
  */
 class ItemAdministrationAdapter extends ArrayAdapter<Item> implements Observer, Filterable {
 
-    private final Resources resources;
     private final int itemViewResourceId;
     private final LayoutInflater mInflater;
     private final List<Item> allItems;
@@ -40,22 +39,16 @@ class ItemAdministrationAdapter extends ArrayAdapter<Item> implements Observer, 
 
     /**
      * Creates the ItemAdministrationAdapter with the given filter and list of items.
-     * 
-     * @param context
-     *            The activtiy context.
-     * @param displayService
-     *            The service to display data in humanreadable format.
-     * @param itemViewResourceId
-     *            The id of the layout resource.
-     * @param equipmentFilter
-     *            The filter of the equipment.
-     * @param allItems
-     *            The list of all items to display.
+     *
+     * @param context            The activity context.
+     * @param displayService     The service to display data in human readable format.
+     * @param itemViewResourceId The id of the layout resource.
+     * @param equipmentFilter    The filter of the equipment.
+     * @param allItems           The list of all items to display.
      */
-    public ItemAdministrationAdapter(final Context context, final DisplayService displayService,
-            final int itemViewResourceId, final ItemFilter equipmentFilter, final List<Item> allItems) {
+    ItemAdministrationAdapter(final Context context, final DisplayService displayService,
+                              final int itemViewResourceId, final ItemFilter equipmentFilter, final List<Item> allItems) {
         super(context, itemViewResourceId);
-        this.resources = context.getResources();
         this.itemViewResourceId = itemViewResourceId;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.displayService = displayService;

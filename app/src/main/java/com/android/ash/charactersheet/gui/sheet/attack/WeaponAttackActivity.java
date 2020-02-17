@@ -1,13 +1,12 @@
 package com.android.ash.charactersheet.gui.sheet.attack;
 
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FormularActivity;
+import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.d20charactersheet.framework.boc.model.AttackWield;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
@@ -21,20 +20,23 @@ import java.util.List;
 /**
  * Displays a WeaponAttack to be created or edited.
  */
-public abstract class WeaponAttackActivity extends FormularActivity<WeaponAttack> {
+public abstract class WeaponAttackActivity extends FormActivity<WeaponAttack> {
 
     GameSystem gameSystem;
     Character character;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.weaponattack;
+    }
+
+    @Override
+    protected void createServices() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
         character = application.getCharacter();
-
-        super.onCreate(savedInstanceState, R.layout.weaponattack);
     }
+
 
     @Override
     protected void fillViews() {

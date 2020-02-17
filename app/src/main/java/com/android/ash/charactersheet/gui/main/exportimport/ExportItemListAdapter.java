@@ -1,8 +1,6 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,15 +20,15 @@ import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
+import androidx.core.content.ContextCompat;
+
 /**
  * Adapter to display items in a ListView.
- * 
- * @param <T>
- *            The class to export.
+ *
+ * @param <T> The class to export.
  */
 class ExportItemListAdapter<T extends Item> extends BaseAdapter implements Observer, Filterable {
 
-    private final Resources resources;
     private final int itemViewResourceId;
     private final LayoutInflater mInflater;
     private final List<T> allItems;
@@ -41,20 +39,15 @@ class ExportItemListAdapter<T extends Item> extends BaseAdapter implements Obser
 
     /**
      * Creates adapter to display given items.
-     * 
-     * @param context
-     *            The application context.
-     * @param itemViewResourceId
-     *            The id of the layout file used by each item view.
-     * @param equipmentFilter
-     *            The filter of the equipment.
-     * @param allItems
-     *            The items to display.
+     *
+     * @param context            The application context.
+     * @param itemViewResourceId The id of the layout file used by each item view.
+     * @param equipmentFilter    The filter of the equipment.
+     * @param allItems           The items to display.
      */
-    public ExportItemListAdapter(final Context context, final int itemViewResourceId, final ItemFilter equipmentFilter,
-            final List<T> allItems) {
+    ExportItemListAdapter(final Context context, final int itemViewResourceId, final ItemFilter equipmentFilter,
+                          final List<T> allItems) {
         super();
-        this.resources = context.getResources();
         this.itemViewResourceId = itemViewResourceId;
         this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.allItems = allItems;
@@ -178,10 +171,10 @@ class ExportItemListAdapter<T extends Item> extends BaseAdapter implements Obser
 
     /**
      * Returns list of selected items for export.
-     * 
+     *
      * @return List of selected items for export.
      */
-    public List<T> getSelectedItems() {
+    List<T> getSelectedItems() {
         return selectedItems;
     }
 }

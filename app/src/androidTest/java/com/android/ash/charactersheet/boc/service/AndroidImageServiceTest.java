@@ -2,14 +2,15 @@ package com.android.ash.charactersheet.boc.service;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.dac.dao.dummy.DummyImageDao;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static com.d20charactersheet.framework.boc.service.ImageService.DEFAULT_CHARACTER_IMAGE_ID;
 import static com.d20charactersheet.framework.boc.service.ImageService.DEFAULT_THUMB_IMAGE_ID;

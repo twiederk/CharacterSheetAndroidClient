@@ -31,6 +31,8 @@ import com.d20charactersheet.framework.boc.util.CharacterSkillComparator;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
@@ -159,7 +161,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, @NonNull final View view, final ContextMenuInfo menuInfo) {
         selectedSkill = (FavoriteCharacterSkill) getSelectedSkill(view, menuInfo);
 
         menu.setHeaderTitle(selectedSkill.getSkill().getName());
@@ -226,7 +228,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
      * The option menu offers the menu item to edit the skills in the EditSkillActivity.
      */
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.menu_page_skill, menu);
     }
 

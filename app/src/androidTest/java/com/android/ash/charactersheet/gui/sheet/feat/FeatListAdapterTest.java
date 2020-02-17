@@ -2,8 +2,6 @@ package com.android.ash.charactersheet.gui.sheet.feat;
 
 import android.content.Context;
 import android.os.Looper;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Character;
@@ -20,6 +18,9 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35FeatStorage.FEAT;
 import static org.junit.Assert.assertEquals;

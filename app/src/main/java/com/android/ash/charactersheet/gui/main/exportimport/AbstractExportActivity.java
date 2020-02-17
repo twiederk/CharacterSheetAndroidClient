@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
@@ -16,6 +16,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
 
@@ -23,9 +26,9 @@ import static com.d20charactersheet.framework.boc.service.ExportImportService.EX
  * Base class for export activities. Displays export directory. Provides template pattern to allow export of different
  * classes.
  */
-public abstract class AbstractExportActivity extends LogActivity {
+public abstract class AbstractExportActivity extends LogAppCompatActivity {
 
-    private static final String SEPARATER = "_";
+    private static final String SEPARATOR = "_";
     private static final String COLON = ": ";
 
     GameSystem gameSystem;
@@ -44,9 +47,16 @@ public abstract class AbstractExportActivity extends LogActivity {
     private void createLayout() {
         setContentView(getLayoutId());
         setTitle(getTitleId());
+        setToolbar();
 
         createExportDirectoryTextView();
         createExportView();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void createExportDirectoryTextView() {
@@ -70,7 +80,7 @@ public abstract class AbstractExportActivity extends LogActivity {
         final String pattern = getResources().getString(R.string.backup_date_pattern);
         final String date = new SimpleDateFormat(pattern, Locale.US).format(new Date());
 
-        String filename = exportFilePrefix + SEPARATER + date + EXPORT_FILE_SUFFIX;
+        String filename = exportFilePrefix + SEPARATOR + date + EXPORT_FILE_SUFFIX;
         return new File(DirectoryAndFileHelper.getExportDirectory(), filename);
     }
 
@@ -83,16 +93,13 @@ public abstract class AbstractExportActivity extends LogActivity {
         return true;
     }
 
-    /**
-     * @see android.app.Activity#onMenuItemSelected(int, android.view.MenuItem)
-     */
     @Override
-    public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        if (item.getItemId() == R.id.menu_activity_abstract_export_export) {
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.menu_activity_abstract_export_export) {
             export();
             return true;
         }
-        return super.onMenuItemSelected(featureId, item);
+        return super.onOptionsItemSelected(menuItem);
     }
 
     abstract int getLayoutId();

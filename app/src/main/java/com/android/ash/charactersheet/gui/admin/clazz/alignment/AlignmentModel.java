@@ -1,8 +1,8 @@
 package com.android.ash.charactersheet.gui.admin.clazz.alignment;
 
-import android.support.annotation.NonNull;
-
 import com.d20charactersheet.framework.boc.model.Alignment;
+
+import androidx.annotation.NonNull;
 
 /**
  * The alignment model stores if an alignment is a class alignment or not.

@@ -1,23 +1,24 @@
 package com.android.ash.charactersheet.gui.widget.observertextview;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import com.android.ash.charactersheet.gui.util.Logger;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import androidx.appcompat.widget.AppCompatTextView;
+
 /**
- * This TextView observs its model and updates its text if the model changes.
+ * This TextView observes its model and updates its text if the model changes.
  */
-public class ObserverTextView extends TextView implements Observer {
+public class ObserverTextView extends AppCompatTextView implements Observer {
 
     private ObserverTextViewModel model;
 
     /**
-     * Instanciates ObserverTextView.
+     * Instantiates ObserverTextView.
      * 
      * @param context
      *            The application context.
@@ -27,7 +28,7 @@ public class ObserverTextView extends TextView implements Observer {
     }
 
     /**
-     * Instanciates ObserverTextView from XML resource.
+     * Instantiates ObserverTextView from XML resource.
      * 
      * @param context
      *            The application context.
@@ -39,7 +40,7 @@ public class ObserverTextView extends TextView implements Observer {
     }
 
     /**
-     * Instanciates ObserverTextView from XML resource with defStyle.
+     * Instantiates ObserverTextView from XML resource with defStyle.
      * 
      * @param context
      *            The application context.

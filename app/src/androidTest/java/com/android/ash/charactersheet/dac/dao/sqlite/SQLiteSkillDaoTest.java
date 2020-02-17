@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.dac.dao.sqlite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.test.InstrumentationRegistry;
 
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
@@ -13,6 +12,8 @@ import com.d20charactersheet.framework.dac.dao.BaseSkillDaoTest;
 import org.junit.Before;
 
 import java.util.List;
+
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

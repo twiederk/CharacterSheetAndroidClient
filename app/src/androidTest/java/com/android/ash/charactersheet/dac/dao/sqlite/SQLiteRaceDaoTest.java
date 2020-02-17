@@ -2,13 +2,14 @@ package com.android.ash.charactersheet.dac.dao.sqlite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.test.InstrumentationRegistry;
 
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.d20charactersheet.framework.dac.dao.BaseRaceDaoTest;
 
 import org.junit.Before;
+
+import androidx.test.platform.app.InstrumentationRegistry;
 
 public class SQLiteRaceDaoTest extends BaseRaceDaoTest {
 

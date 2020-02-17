@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menu_page_equip_magic_item"
-        android:actionViewClass="android.widget.CheckBox"
-        android:showAsAction="always"
-        android:title="@string/equipment_list_show_magic"/>
+        android:title="@string/equipment_list_show_magic"
+        app:actionViewClass="android.widget.CheckBox"
+        app:showAsAction="always" />
     <item
         android:id="@+id/menu_page_equip_edit_weapons"
         android:icon="@drawable/icon_sword"
-        android:showAsAction="ifRoom"
-        android:title="@string/equipment_list_menu_edit_weapons"/>
+        android:title="@string/equipment_list_menu_edit_weapons"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_page_equip_edit_armor"
         android:icon="@drawable/icon_shield"
-        android:showAsAction="ifRoom"
-        android:title="@string/equipment_list_menu_edit_armor"/>
+        android:title="@string/equipment_list_menu_edit_armor"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_page_equip_edit_goods"
         android:icon="@drawable/icon_backpack"
-        android:showAsAction="ifRoom"
-        android:title="@string/equipment_list_menu_edit_goods"/>
+        android:title="@string/equipment_list_menu_edit_goods"
+        app:showAsAction="ifRoom" />
 
 </menu>

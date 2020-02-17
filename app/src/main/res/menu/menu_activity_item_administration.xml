@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menu_admin_create"
         android:icon="@android:drawable/ic_menu_add"
-        android:showAsAction="ifRoom"
-        android:title="@string/administration_list_menu_create"/>
+        android:title="@string/administration_list_menu_create"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_activity_item_administration_magic_item"
-        android:actionViewClass="android.widget.CheckBox"
-        android:showAsAction="always"
-        android:title="@string/item_administration_list_magic"/>
+        android:title="@string/item_administration_list_magic"
+        app:actionViewClass="android.widget.CheckBox"
+        app:showAsAction="always" />
 
 </menu>

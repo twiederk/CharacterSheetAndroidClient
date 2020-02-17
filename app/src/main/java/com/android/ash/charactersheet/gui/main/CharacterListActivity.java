@@ -28,7 +28,7 @@ import com.android.ash.charactersheet.gui.admin.AdministrationMenuActivity;
 import com.android.ash.charactersheet.gui.main.exportimport.ExportMenuActivity;
 import com.android.ash.charactersheet.gui.main.exportimport.ImportActivity;
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.DisplayService;
@@ -37,11 +37,14 @@ import com.d20charactersheet.framework.boc.util.CharacterComparator;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * The list of characters available. Each character is listed with an image, its name, race, class and level.
  */
-public class CharacterListActivity extends LogActivity implements OnItemClickListener,
+public class CharacterListActivity extends LogAppCompatActivity implements OnItemClickListener,
         AbstractAsyncTask.GameSystemLoadable {
 
     private static final int CONTEXT_MENU_DELETE_CHARACTER = 10;
@@ -128,47 +131,41 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
         startActivity(intent);
     }
 
-    /**
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-     */
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_character_list, menu);
         return true;
     }
 
-    /**
-     * @see android.app.Activity#onMenuItemSelected(int, android.view.MenuItem)
-     */
     @Override
-    public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.menu_activity_character_list_new_character:
-            return callActivity(CharacterCreateActivity.class);
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_activity_character_list_new_character:
+                return callActivity(CharacterCreateActivity.class);
 
-        case R.id.menu_activity_character_list_about:
-            return callActivity(AboutActivity.class);
+            case R.id.menu_activity_character_list_about:
+                return callActivity(AboutActivity.class);
 
-        case R.id.menu_activity_character_list_administration:
-            return callActivity(AdministrationMenuActivity.class);
+            case R.id.menu_activity_character_list_administration:
+                return callActivity(AdministrationMenuActivity.class);
 
-        case R.id.menu_activity_character_list_preference:
-            return callActivity(PreferencesActivity.class);
+            case R.id.menu_activity_character_list_preference:
+                return callActivity(PreferencesActivity.class);
 
-        case R.id.menu_activity_character_list_switch_game_system:
-            return switchGameSystem();
+            case R.id.menu_activity_character_list_switch_game_system:
+                return switchGameSystem();
 
-        case R.id.menu_activity_character_list_backup_restore:
-            return callActivity(BackupRestoreActivity.class);
+            case R.id.menu_activity_character_list_backup_restore:
+                return callActivity(BackupRestoreActivity.class);
 
-        case R.id.menu_activity_character_list_export:
-            return callActivity(ExportMenuActivity.class);
+            case R.id.menu_activity_character_list_export:
+                return callActivity(ExportMenuActivity.class);
 
-        case R.id.menu_activity_character_list_import:
-            return callActivity(ImportActivity.class);
+            case R.id.menu_activity_character_list_import:
+                return callActivity(ImportActivity.class);
 
-        default:
-            return super.onMenuItemSelected(featureId, item);
+            default:
+                return super.onOptionsItemSelected(menuItem);
         }
     }
 
@@ -195,9 +192,9 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
 
     /**
      * Creates a context menu displaying a delete option of the selected character.
-     * 
+     *
      * @see android.app.Activity#onCreateContextMenu(android.view.ContextMenu, android.view.View,
-     *      android.view.ContextMenu.ContextMenuInfo)
+     * android.view.ContextMenu.ContextMenuInfo)
      */
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
@@ -214,7 +211,7 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
 
     /**
      * Deletes the character if the delete option is selected.
-     * 
+     *
      * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
      */
     @Override
@@ -265,97 +262,99 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
     private String getReleaseNotes() {
         final StringBuilder releaseNotes = new StringBuilder();
         switch (dndDbHelper.getOldVersion()) {
-        case 1:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_1_0));
-        case 2:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_2_0));
-        case 3:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_3_0));
-        case 4:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_4_0));
-        case 5:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_5_0));
-        case 6:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_6_0));
-        case 7:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_7_0));
-        case 8:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_8_0));
-        case 9:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_9_0));
-        case 10:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_10_0));
-        case 11:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_11_0));
-        case 12:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_11_1));
-        case 13:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_12_0));
-        case 14:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_12_1));
-        case 15:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_13_0));
-        case 16:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_14_0));
-        case 17:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_15_0));
-        case 18:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_16_0));
-        case 19:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_17_0));
-        case 20:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_18_0));
-        case 21:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_19_0));
-        case 22:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_19_1));
-        case 23:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_20_0));
-        case 24:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_21_0));
-        case 25:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_0_0));
-        case 26:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_0_1));
-        case 27:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_1_0));
-        case 28:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_2_0));
-        case 29:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_2_1));
-        case 30:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_3_0));
-        case 31:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_4_0));
-        case 32:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_5_0));
-        case 33:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_6_0));
-        case 34:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_6_1));
-        case 35:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_7_0));
-        case 36:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_8_0));
-        case 37:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_9_0));
-        case 38:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_10_0));
-        case 39:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_0));
-        case 40:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_1));
-        case 41:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_2));
-        case 42:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_3));
-        case 43:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_4));
-        break;
+            case 1:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_1_0));
+            case 2:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_2_0));
+            case 3:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_3_0));
+            case 4:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_4_0));
+            case 5:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_5_0));
+            case 6:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_6_0));
+            case 7:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_7_0));
+            case 8:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_8_0));
+            case 9:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_9_0));
+            case 10:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_10_0));
+            case 11:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_11_0));
+            case 12:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_11_1));
+            case 13:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_12_0));
+            case 14:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_12_1));
+            case 15:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_13_0));
+            case 16:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_14_0));
+            case 17:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_15_0));
+            case 18:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_16_0));
+            case 19:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_17_0));
+            case 20:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_18_0));
+            case 21:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_19_0));
+            case 22:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_19_1));
+            case 23:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_20_0));
+            case 24:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_21_0));
+            case 25:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_0_0));
+            case 26:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_0_1));
+            case 27:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_1_0));
+            case 28:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_2_0));
+            case 29:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_2_1));
+            case 30:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_3_0));
+            case 31:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_4_0));
+            case 32:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_5_0));
+            case 33:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_6_0));
+            case 34:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_6_1));
+            case 35:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_7_0));
+            case 36:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_8_0));
+            case 37:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_9_0));
+            case 38:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_10_0));
+            case 39:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_0));
+            case 40:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_1));
+            case 41:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_2));
+            case 42:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_3));
+            case 43:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_4));
+            case 44:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_5));
+                break;
 
-        default:
-            releaseNotes.insert(0, getResources().getString(R.string.release_notes_not_found));
-            break;
+            default:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_not_found));
+                break;
         }
         return releaseNotes.toString();
     }
@@ -366,10 +365,18 @@ public class CharacterListActivity extends LogActivity implements OnItemClickLis
         gameSystem = application.getGameSystem();
 
         setContentView(R.layout.activity_character_list);
+
+        setToolbar();
         setTitle(createTitle());
         setReleaseNotes();
         setOkButton();
         onResumeLayout();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private String createTitle() {

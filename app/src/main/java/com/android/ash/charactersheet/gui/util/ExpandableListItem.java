@@ -1,6 +1,6 @@
 package com.android.ash.charactersheet.gui.util;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Used by ListViews which allow to expand data of list items by touching them. Stores the object to display and the

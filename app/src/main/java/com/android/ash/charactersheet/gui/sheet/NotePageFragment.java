@@ -23,6 +23,8 @@ import com.d20charactersheet.framework.boc.util.NoteComparator;
 import java.io.Serializable;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
@@ -65,7 +67,7 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.menu_page_note, menu);
     }
 
@@ -87,7 +89,7 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(@NonNull final ContextMenu menu, @NonNull final View view, final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, view, menuInfo);
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         final Note note = (Note) listView.getAdapter().getItem(info.position);
@@ -96,7 +98,7 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     }
 
     @Override
-    public boolean onContextItemSelected(final MenuItem menuItem) {
+    public boolean onContextItemSelected(@NonNull final MenuItem menuItem) {
 
         final Note note = getNote(menuItem);
         if (menuItem.getItemId() == CONTEXT_MENU_NOTE_DELETE) {
