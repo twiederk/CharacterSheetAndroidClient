@@ -293,7 +293,7 @@ public class SpellSlotPageFragment extends PageFragment {
             final TabHost tabHost = view.findViewById(android.R.id.tabhost);
             final LayoutInflater layoutInflater = (LayoutInflater) Objects.requireNonNull(getActivity()).getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
-            return layoutInflater.inflate(R.layout.page_spell_slot_tab, tabHost, false);
+            return Objects.requireNonNull(layoutInflater).inflate(R.layout.page_spell_slot_tab, tabHost, false);
         }
 
         @Override

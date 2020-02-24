@@ -36,6 +36,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/about_manual"
         style="@style/list_item_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -12,7 +12,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.util.AbilitySearchActivity;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
@@ -28,8 +28,10 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays all abilities with checkboxes. By checking a ability it is associated with the race.
@@ -40,6 +42,8 @@ public class RaceAdministrationAbilityListActivity extends LogAppCompatActivity 
 
     private static final int REQUEST_CODE_SEARCH_ABILITY = 100;
 
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
     private GameSystem gameSystem;
     private List<Ability> abilities;
     private ArrayAdapter<Ability> adapter;
@@ -49,11 +53,9 @@ public class RaceAdministrationAbilityListActivity extends LogAppCompatActivity 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.race_administration_abilities);
-        setTitle(R.string.race_administration_ability_list_title);
         setToolbar();
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         setAbilities();
     }
@@ -61,6 +63,7 @@ public class RaceAdministrationAbilityListActivity extends LogAppCompatActivity 
     private void setToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.race_administration_ability_list_title);
         Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 

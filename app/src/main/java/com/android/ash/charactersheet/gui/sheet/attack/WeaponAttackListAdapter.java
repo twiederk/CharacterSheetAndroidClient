@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -74,13 +73,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
         final TextView nameTextView = view.findViewById(R.id.weaponattack_name);
         nameTextView.setText(weaponAttack.getName());
         nameTextView.setOnClickListener(onClickListener);
-        nameTextView.setOnLongClickListener(new OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(final View view) {
-                return false;
-            }
-        });
+        nameTextView.setOnLongClickListener(view1 -> false);
     }
 
     private void setAttackBonus(final View view, final WeaponAttack weaponAttack,
@@ -93,25 +86,13 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
     private void setDamage(final View view, final WeaponAttack weaponAttack) {
         final Button damageButton = view.findViewById(R.id.weaponattack_damage);
         damageButton.setText(displayService.getDisplayDamage(weaponAttack));
-        damageButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                damageOnClickListener.onClick(view, weaponAttack);
-            }
-        });
+        damageButton.setOnClickListener(view1 -> damageOnClickListener.onClick(view1, weaponAttack));
     }
 
     private void setCritical(final View view, final WeaponAttack weaponAttack) {
         final Button criticalButton = view.findViewById(R.id.weaponattack_critical);
         criticalButton.setText(displayService.getDisplayCritical(weaponAttack.getCritical()));
-        criticalButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                criticalOnClickListener.onClick(view, weaponAttack);
-            }
-        });
+        criticalButton.setOnClickListener(view1 -> criticalOnClickListener.onClick(view1, weaponAttack));
     }
 
     private void setRangeIncrement(final View view, final WeaponAttack weaponAttack) {

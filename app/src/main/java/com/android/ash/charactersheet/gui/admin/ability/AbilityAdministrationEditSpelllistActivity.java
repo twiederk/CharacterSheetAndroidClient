@@ -71,7 +71,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
 
     private void setSpellAttribute() {
         final List<Attribute> attributes = Arrays.asList(Attribute.values());
-        final List<Enum<?>> enumAttributes = new ArrayList<Enum<?>>(attributes);
+        final List<Enum<?>> enumAttributes = new ArrayList<>(attributes);
 
         final SpinnerAdapter attributeAdapter = new EnumSpinnerAdapter(this, displayService, enumAttributes) {
 
@@ -88,7 +88,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
 
     private void setCastingType() {
         final List<CastingType> castingTypes = Arrays.asList(CastingType.values());
-        final List<Enum<?>> enumCastingTypes = new ArrayList<Enum<?>>(castingTypes);
+        final List<Enum<?>> enumCastingTypes = new ArrayList<>(castingTypes);
 
         final SpinnerAdapter castingTypeAdapter = new EnumSpinnerAdapter(this, displayService, enumCastingTypes) {
 
@@ -105,7 +105,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
 
     private void setSpellSource() {
         final List<SpellSource> spellSources = Arrays.asList(SpellSource.values());
-        final List<Enum<?>> enumSpellSources = new ArrayList<Enum<?>>(spellSources);
+        final List<Enum<?>> enumSpellSources = new ArrayList<>(spellSources);
 
         final SpinnerAdapter spellSourceAdapter = new EnumSpinnerAdapter(this, displayService, enumSpellSources) {
 

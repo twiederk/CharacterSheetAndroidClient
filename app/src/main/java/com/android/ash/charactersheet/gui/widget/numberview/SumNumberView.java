@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Displays a number, a textfield, a plus and minus button. By pressing the plus or minus butten the value in the
- * textfield is added/substracted to/from the displayed number.
+ * Displays a number, a text field, a plus and minus button. By pressing the plus or minus button the value in the
+ * text field is added/subtracted to/from the displayed number.
  */
 public class SumNumberView extends NumberView {
 
@@ -19,7 +19,7 @@ public class SumNumberView extends NumberView {
 
     /**
      *
-     * Creates a SumNumberview using the given context and attribute Set
+     * Creates a SumNumberView using the given context and attribute Set
      *
      * @param context
      *            The context to use.
@@ -32,16 +32,16 @@ public class SumNumberView extends NumberView {
 
     @Override
     void initView(final Context context, final AttributeSet attributeSet, final LayoutParams layoutParams) {
-        addView(createNumberTextView(context, attributeSet), layoutParams);
-        addView(createNumberEditText(context, attributeSet), layoutParams);
+        addView(createNumberTextView(context), layoutParams);
+        addView(createNumberEditText(context), layoutParams);
         addView(createSummandEditText(context, attributeSet), layoutParams);
-        addView(createDecreaseTextView(context, attributeSet), layoutParams);
-        addView(createIncreaseTextView(context, attributeSet), layoutParams);
+        addView(createDecreaseTextView(context), layoutParams);
+        addView(createIncreaseTextView(context), layoutParams);
     }
 
     private View createSummandEditText(final Context context, final AttributeSet attributeSet) {
         summandEditText = new EditText(context, attributeSet);
-        summandEditText.setMinWidth((int) (EDITTEXT_SIZE * scale));
+        summandEditText.setMinWidth((int) (EDIT_TEXT_SIZE * scale));
         summandEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         summandEditText.setText("1");
         summandEditText.setGravity(Gravity.END);
@@ -49,34 +49,24 @@ public class SumNumberView extends NumberView {
         return summandEditText;
     }
 
-    private View createIncreaseTextView(final Context context, final AttributeSet attributeSet) {
-        final Button increaseButton = createButton(context, "+", attributeSet);
-        increaseButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                if (controller != null) {
-                    controller.increase(getNumber(summandEditText));
-                    setNumber(getNumber());
-                }
+    private View createIncreaseTextView(final Context context) {
+        final Button increaseButton = createButton(context, "+");
+        increaseButton.setOnClickListener(view -> {
+            if (controller != null) {
+                controller.increase(getNumber(summandEditText));
+                setNumber(getNumber());
             }
-
         });
         return increaseButton;
     }
 
-    private View createDecreaseTextView(final Context context, final AttributeSet attributeSet) {
-        final Button decreaseButton = createButton(context, "-", attributeSet);
-        decreaseButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                if (controller != null) {
-                    controller.decrease(getNumber(summandEditText));
-                    setNumber(getNumber());
-                }
+    private View createDecreaseTextView(final Context context) {
+        final Button decreaseButton = createButton(context, "-");
+        decreaseButton.setOnClickListener(view -> {
+            if (controller != null) {
+                controller.decrease(getNumber(summandEditText));
+                setNumber(getNumber());
             }
-
         });
 
         return decreaseButton;

@@ -34,7 +34,7 @@ public class SpellActivity extends SlideActivity {
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-        displayService = gameSystem.getDisplayService();
+        displayService = Objects.requireNonNull(gameSystem).getDisplayService();
 
         final Spell spell = getSpellFromIntent();
         setTitle(spell.getName());

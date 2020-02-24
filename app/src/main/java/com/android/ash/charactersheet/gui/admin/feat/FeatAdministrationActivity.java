@@ -1,11 +1,9 @@
 package com.android.ash.charactersheet.gui.admin.feat;
 
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.ZeroAndPositiveNumberViewController;
@@ -15,6 +13,11 @@ import com.d20charactersheet.framework.boc.service.FeatService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
 import java.util.Arrays;
+import java.util.Objects;
+
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Form to create and edit feats. Displays text boxes to enter name, benefit and prerequisit of feat. The type of feat
@@ -22,6 +25,8 @@ import java.util.Arrays;
  * checkbox exclude each other.
  */
 public abstract class FeatAdministrationActivity extends FormActivity<Feat> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     GameSystem gameSystem;
     FeatService featService;
@@ -33,9 +38,8 @@ public abstract class FeatAdministrationActivity extends FormActivity<Feat> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        featService = gameSystem.getFeatService();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        featService = Objects.requireNonNull(gameSystem).getFeatService();
     }
 
 
@@ -58,21 +62,9 @@ public abstract class FeatAdministrationActivity extends FormActivity<Feat> {
         final CheckBox multipleCheckBox = findViewById(R.id.feat_administration_multiple);
         final CheckBox stackCheckBox = findViewById(R.id.feat_administration_stack);
 
-        multipleCheckBox.setOnClickListener(new OnClickListener() {
+        multipleCheckBox.setOnClickListener(view -> stackCheckBox.setChecked(false));
 
-            @Override
-            public void onClick(final View view) {
-                stackCheckBox.setChecked(false);
-            }
-        });
-
-        stackCheckBox.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                multipleCheckBox.setChecked(false);
-            }
-        });
+        stackCheckBox.setOnClickListener(v -> multipleCheckBox.setChecked(false));
     }
 
     private void setFeatTypeSpinner() {

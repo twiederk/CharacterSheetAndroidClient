@@ -22,6 +22,7 @@ import com.d20charactersheet.framework.boc.service.ItemService;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Base class to expand activities to edit items from. Displays items in a list view. The number of each item can be
@@ -44,7 +45,7 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
     protected void doCreate() {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         final GameSystem gameSystem = application.getGameSystem();
-        itemService = gameSystem.getItemService();
+        itemService = Objects.requireNonNull(gameSystem).getItemService();
 
         createLayout();
     }

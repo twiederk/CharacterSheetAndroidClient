@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.gui.admin.spelllist;
 
 import android.content.Context;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -47,14 +46,10 @@ public class SpelllevelAdapter extends ListAdapter<SpelllevelView> {
         goodNumberView.setController(new SpelllevelNumberViewController(gameSystem, spellLevelView));
 
         final ImageButton deleteButton = view.findViewById(R.id.item_delete);
-        deleteButton.setOnClickListener(new OnClickListener() {
+        deleteButton.setOnClickListener(view1 -> {
+            gameSystem.deleteSpellFromSpelllist(spellLevelView.getSpelllist(), spellLevelView.getSpell());
+            getListModel().remove(spellLevelView);
 
-            @Override
-            public void onClick(final View view) {
-                gameSystem.deleteSpellFromSpelllist(spellLevelView.getSpelllist(), spellLevelView.getSpell());
-                getListModel().remove(spellLevelView);
-
-            }
         });
     }
 }

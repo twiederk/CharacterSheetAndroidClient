@@ -11,6 +11,8 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.RuleService;
 
+import java.util.Objects;
+
 /**
  * Activities to edit values of the character class expand from this class.
  */
@@ -32,7 +34,7 @@ public abstract class EditActivity extends LogActivity {
         character = application.getCharacter();
         gameSystem = application.getGameSystem();
 
-        characterService = gameSystem.getCharacterService();
+        characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         ruleService = gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
 

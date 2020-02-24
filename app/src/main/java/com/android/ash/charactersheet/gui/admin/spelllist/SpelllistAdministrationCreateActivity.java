@@ -3,11 +3,9 @@ package com.android.ash.charactersheet.gui.admin.spelllist;
 import android.annotation.SuppressLint;
 
 import com.android.ash.charactersheet.R;
-import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Creates a new spell list and allows to edit it.
@@ -25,7 +23,7 @@ public class SpelllistAdministrationCreateActivity extends SpelllistAdministrati
         final Spelllist spelllist = new Spelllist();
         spelllist.setName("");
         spelllist.setShortname("");
-        spelllist.setSpellsByLevel(new HashMap<Integer, List<Spell>>());
+        spelllist.setSpellsByLevel(new HashMap<>());
         gameSystem.getSpelllistService().createSpelllist(spelllist);
         return spelllist;
     }

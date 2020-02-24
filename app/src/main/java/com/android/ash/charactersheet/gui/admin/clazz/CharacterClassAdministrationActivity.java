@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.clazz.ability.ClassAdministrationAbilityListActivity;
 import com.android.ash.charactersheet.gui.admin.clazz.alignment.CharacterClassAlignmentActivity;
@@ -31,7 +31,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The form to create or edit an character class. It contains the name, alignments, hit die, base attack bonus, high
@@ -39,14 +42,22 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
  */
 public abstract class CharacterClassAdministrationActivity extends FormActivity<CharacterClass> {
 
-    /** Request code of the CharacterClassAlignmentActivity */
+    /**
+     * Request code of the CharacterClassAlignmentActivity
+     */
     private static final int REQUEST_CODE_ALIGNMENT = 0;
 
-    /** Request code of the CharacterClassSkillActivity */
+    /**
+     * Request code of the CharacterClassSkillActivity
+     */
     private static final int REQUEST_CODE_SKILL = 1;
 
-    /** Request code of the CharacterClassAbilityActivity */
+    /**
+     * Request code of the CharacterClassAbilityActivity
+     */
     private static final int REQUEST_CODE_ABILITY = 2;
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     GameSystem gameSystem;
     CharacterClassService characterClassService;
@@ -70,9 +81,8 @@ public abstract class CharacterClassAdministrationActivity extends FormActivity<
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        characterClassService = gameSystem.getCharacterClassService();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        characterClassService = Objects.requireNonNull(gameSystem).getCharacterClassService();
         characterService = gameSystem.getCharacterService();
     }
 
@@ -138,7 +148,7 @@ public abstract class CharacterClassAdministrationActivity extends FormActivity<
         form.setAlignments(helper.getAlignments());
         form.setHitDie((Die) getSelectedItemOfSpinner(R.id.character_class_administration_hitdie));
         form.setBaseAttackBonus((BaseAttackBonus) //
-        getSelectedItemOfSpinner(R.id.character_class_administration_baseattackbonus));
+                getSelectedItemOfSpinner(R.id.character_class_administration_baseattackbonus));
         form.setSaves(getSaves());
         final List<ClassAbility> deletedClassAbilities = getDeletedClassAbilities();
         helper.setDeletedClassAbilities(deletedClassAbilities);
@@ -170,8 +180,8 @@ public abstract class CharacterClassAdministrationActivity extends FormActivity<
 
     private EnumSet<Save> getSaves() {
         final EnumSet<Save> saves = EnumSet.noneOf(Save.class);
-        final int[] resourceIds = { R.id.character_class_administration_save_fortitide,
-                R.id.character_class_administration_save_reflex, R.id.character_class_administration_save_will };
+        final int[] resourceIds = {R.id.character_class_administration_save_fortitide,
+                R.id.character_class_administration_save_reflex, R.id.character_class_administration_save_will};
         for (final Save save : Save.values()) {
             if (isChecked(resourceIds[save.ordinal()])) {
                 saves.add(save);

@@ -42,14 +42,7 @@ public class PreferencesActivity extends LogActivity {
 
     private void setRadioButtons() {
         final boolean showImageAsBackground = preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND);
-        final OnClickListener onClickListener = new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                save();
-            }
-
-        };
+        final OnClickListener onClickListener = view -> save();
         setRadioButton(R.id.preferences_background_image, showImageAsBackground, onClickListener);
         setRadioButton(R.id.preferences_background_color, !showImageAsBackground, onClickListener);
     }

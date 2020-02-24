@@ -8,9 +8,9 @@ import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.service.GameSystem;
@@ -22,12 +22,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays all skills with a checkbox to select them as class skills.
  */
-public class CharacterClassSkillActivity extends LogActivity {
+public class CharacterClassSkillActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private GameSystem gameSystem;
     private List<SkillModel> skillModels;
@@ -35,19 +41,23 @@ public class CharacterClassSkillActivity extends LogActivity {
     /**
      * Creates table of skills with checkboxes to select them as class skills. At the bottom an ok and cancel button is
      * offered.
-     * 
-     * @see com.android.ash.charactersheet.gui.util.LogActivity#onCreate(android.os.Bundle)
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.character_class_skill);
-        setTitle(R.string.character_class_administration_skills_label);
+        setToolbar();
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         setSkills();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.character_class_administration_skills_label);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void setSkills() {

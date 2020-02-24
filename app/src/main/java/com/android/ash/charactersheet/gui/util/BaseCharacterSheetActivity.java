@@ -16,6 +16,8 @@ import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
+import java.util.Objects;
+
 /**
  * Base class of CharacterSheetActivities. Derive activities in the character sheet part of the application from this
  * class. It supplies standard functionallity for character sheet activities.
@@ -36,7 +38,7 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-        characterService = gameSystem.getCharacterService();
+        characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
         imageService = (AndroidImageService) gameSystem.getImageService();
@@ -44,7 +46,7 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
         gameSystem.getXpService();
         character = application.getCharacter();
 
-        setTitle(character.getName());
+        setTitle(Objects.requireNonNull(character).getName());
         setBackground();
 
         doCreate();

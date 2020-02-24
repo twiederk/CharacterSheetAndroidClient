@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.gui.admin.clazz.ability;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberView;
@@ -15,12 +15,17 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 
 import java.util.Objects;
 
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays class ability with name and level to create or edit.
  */
 public class ClassAdministrationAbilityEditActivity extends FormActivity<ClassAbility> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private NumberViewController levelController;
     private GameSystem gameSystem;
@@ -32,8 +37,7 @@ public class ClassAdministrationAbilityEditActivity extends FormActivity<ClassAb
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
     }
 
 

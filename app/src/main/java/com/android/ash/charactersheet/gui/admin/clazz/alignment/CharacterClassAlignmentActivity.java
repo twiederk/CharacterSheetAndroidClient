@@ -8,9 +8,9 @@ import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.service.DisplayService;
@@ -20,12 +20,18 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays all alignments. Alignments can be checked to add them to a character class.
  */
-public class CharacterClassAlignmentActivity extends LogActivity {
+public class CharacterClassAlignmentActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private DisplayService displayService;
 
@@ -34,20 +40,25 @@ public class CharacterClassAlignmentActivity extends LogActivity {
     /**
      * Creates table with all alignments and ok/cancel buttons at the bottom. Each alignment with a checkbox to select
      * it as a character class.
-     * 
-     * @see com.android.ash.charactersheet.gui.util.LogActivity#onCreate(android.os.Bundle)
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.character_class_alignment);
-        setTitle(R.string.character_class_administration_alignments_label);
+        setToolbar();
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        displayService = application.getGameSystem().getDisplayService();
+        displayService = Objects.requireNonNull(gameSystemHolder.getValue().getGameSystem()).getDisplayService();
 
         setAlignments();
     }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.character_class_administration_alignments_label);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
 
     private void setAlignments() {
         final EnumSet<Alignment> alignments = getAlignmentsFromIntent();

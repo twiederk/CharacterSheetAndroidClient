@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
-import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Damage;
 import com.d20charactersheet.framework.boc.model.Descriptor;
@@ -50,7 +49,7 @@ public class AndroidDisplayServiceTest {
         final CharacterClass characterClass = new CharacterClass();
         characterClass.setId(id);
         characterClass.setName(name);
-        characterClass.setClassAbilities(new LinkedList<ClassAbility>());
+        characterClass.setClassAbilities(new LinkedList<>());
         return characterClass;
     }
 

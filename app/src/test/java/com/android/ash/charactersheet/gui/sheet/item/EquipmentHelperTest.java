@@ -66,7 +66,7 @@ public class EquipmentHelperTest {
         final ItemService itemService = new ItemServiceImpl(new DummyItemDao(WEAPON_FAMILY, WEAPON, ARMOR, GOOD));
 
         final List<ExpandableListItem> allGoods = equipmentHelper.createItemGroups(
-                new ArrayList<Item>(itemService.getAllGoods()), character.getEquipment().getGoods());
+                new ArrayList<>(itemService.getAllGoods()), character.getEquipment().getGoods());
         assertNotNull(allGoods);
         assertEquals(131, allGoods.size());
         assertItem(allGoods, "Backpack", 1);

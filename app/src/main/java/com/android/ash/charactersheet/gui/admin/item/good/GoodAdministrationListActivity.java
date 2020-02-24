@@ -1,17 +1,17 @@
 package com.android.ash.charactersheet.gui.admin.item.good;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
-import java.util.List;
-
 import android.content.Intent;
 
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.item.ItemAdministrationListActivity;
 import com.d20charactersheet.framework.boc.model.Item;
 
+import java.util.List;
+
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 /**
- * Displays all goods of the game system in an alphabethical list. Allows to create or edit a good.
+ * Displays all goods of the game system in an alphabetical list. Allows to create or edit a good.
  */
 public class GoodAdministrationListActivity extends ItemAdministrationListActivity {
 

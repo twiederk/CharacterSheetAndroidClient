@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
@@ -44,7 +45,7 @@ public class ClassLevelCreateActivity extends LogActivity implements AdapterView
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-        displayService = gameSystem.getDisplayService();
+        displayService = Objects.requireNonNull(gameSystem).getDisplayService();
         character = application.getCharacter();
 
         setTitle(R.string.class_level_create_title);

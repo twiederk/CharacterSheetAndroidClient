@@ -17,21 +17,33 @@ import com.android.ash.charactersheet.gui.admin.skill.SkillAdministrationListAct
 import com.android.ash.charactersheet.gui.admin.spell.SpellAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.spelllist.SpelllistAdministrationListActivity;
 import com.android.ash.charactersheet.gui.util.IntentOnClickListener;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
+
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * The administration contains a button for each administration sub menu.
  */
-public class AdministrationMenuActivity extends LogActivity {
+public class AdministrationMenuActivity extends LogAppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administration_menu);
-        setTitle(R.string.administration_menu_title);
+        setToolbar();
         setButtonsOnClickListeners();
 
     }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.administration_menu_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
 
     private void setButtonsOnClickListeners() {
         setButtonOnClickListener(R.id.administration_menu_race_button, RaceAdministrationListActivity.class);

@@ -7,7 +7,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
@@ -30,12 +30,19 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class for layout of skill creation and edition. Only the methods getSkill and saveSkill must be overwritten. The
  * other methods handle the skill administration layout, independently of creation or edition mode.
  */
 public abstract class SkillAdministrationActivity extends FormActivity<Skill> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     GameSystem gameSystem;
     SkillService skillService;
@@ -58,9 +65,8 @@ public abstract class SkillAdministrationActivity extends FormActivity<Skill> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        skillService = gameSystem.getSkillService();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        skillService = Objects.requireNonNull(gameSystem).getSkillService();
         abilityService = gameSystem.getAbilityService();
         characterClassService = gameSystem.getCharacterClassService();
         spelllistService = gameSystem.getSpelllistService();

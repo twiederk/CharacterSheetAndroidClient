@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.main.exportimport;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +49,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 
@@ -126,7 +126,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
     }
 
     private List<File> getImportFiles() {
-        return Arrays.asList(DirectoryAndFileHelper.getBackupDirectory().listFiles(new ImportFilenameFilter()));
+        return Arrays.asList(Objects.requireNonNull(DirectoryAndFileHelper.getBackupDirectory().listFiles(new ImportFilenameFilter())));
     }
 
     private ListView getListView() {
@@ -156,16 +156,9 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         builder.setTitle(R.string.import_dialog_title);
         builder.setMessage(getMessage(importFile));
-        builder.setPositiveButton(R.string.import_dialog_import_button, new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, final int id) {
-                importFile(importFile);
-            }
-
-        });
-        builder.setNegativeButton(R.string.import_dialog_cancel_button, new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, final int id) {
-                // user cancelled the dialog
-            }
+        builder.setPositiveButton(R.string.import_dialog_import_button, (dialog, id) -> importFile(importFile));
+        builder.setNegativeButton(R.string.import_dialog_cancel_button, (dialog, id) -> {
+            // user cancelled the dialog
         });
         final AlertDialog dialog = builder.create();
         dialog.show();
@@ -294,7 +287,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         private void createKnownSpells(final Character character, final CharacterService characterService) {
             final List<KnownSpell> knownSpells = character.getKnownSpells();
-            character.setKnownSpells(new ArrayList<KnownSpell>(knownSpells.size()));
+            character.setKnownSpells(new ArrayList<>(knownSpells.size()));
             for (final KnownSpell knownSpell : knownSpells) {
                 characterService.createKnownSpell(character, knownSpell);
             }
@@ -302,7 +295,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         private void createSpellSlots(final Character character, final CharacterService characterService) {
             final List<SpellSlot> spellSlots = character.getSpellSlots();
-            character.setSpellSlots(new ArrayList<SpellSlot>(spellSlots.size()));
+            character.setSpellSlots(new ArrayList<>(spellSlots.size()));
             for (final SpellSlot spellSlot : spellSlots) {
                 characterService.createSpellSlot(character, spellSlot);
             }
@@ -352,7 +345,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         private void createNotes(final Character character, final CharacterService characterService) {
             final List<Note> notes = character.getNotes();
-            character.setNotes(new ArrayList<Note>(notes.size()));
+            character.setNotes(new ArrayList<>(notes.size()));
             for (final Note note : notes) {
                 characterService.createNote(note, character);
             }
@@ -360,7 +353,7 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
 
         private void createWeaponAttacks(final Character character, final CharacterService characterService) {
             final List<WeaponAttack> weaponAttacks = character.getWeaponAttacks();
-            character.setWeaponAttacks(new ArrayList<WeaponAttack>(weaponAttacks.size()));
+            character.setWeaponAttacks(new ArrayList<>(weaponAttacks.size()));
             for (final WeaponAttack weaponAttack : weaponAttacks) {
                 characterService.createWeaponAttack(character, weaponAttack);
             }

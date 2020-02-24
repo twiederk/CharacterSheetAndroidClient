@@ -37,7 +37,7 @@ public class SkillDescriptionActivity extends LogActivity {
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         final GameSystem gameSystem = application.getGameSystem();
-        final SkillService skillService = gameSystem.getSkillService();
+        final SkillService skillService = Objects.requireNonNull(gameSystem).getSkillService();
 
         // get skill and fill description
         Skill skill = skillService.getSkillById(skillId, gameSystem.getAllSkills());

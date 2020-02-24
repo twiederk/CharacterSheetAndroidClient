@@ -1,16 +1,14 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.BaseAttackBonus;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
-import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.Die;
 import com.d20charactersheet.framework.boc.model.Save;
-import com.d20charactersheet.framework.boc.model.Skill;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
 
 /**
  * Activity to create an character class using the CharacterClassAdministrationActivity as base.
@@ -25,9 +23,9 @@ public class CharacterClassAdministrationCreateActivity extends CharacterClassAd
         characterClass.setHitDie(Die.D8);
         characterClass.setBaseAttackBonus(BaseAttackBonus.AVERAGE);
         characterClass.setSaves(EnumSet.noneOf(Save.class));
-        characterClass.setClassAbilities(new ArrayList<ClassAbility>());
+        characterClass.setClassAbilities(new ArrayList<>());
         characterClass.setSkillPointsPerLevel(4);
-        characterClass.setSkills(new ArrayList<Skill>());
+        characterClass.setSkills(new ArrayList<>());
         return characterClass;
     }
 

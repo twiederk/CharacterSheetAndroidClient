@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -47,7 +45,7 @@ public class ClassLevelEditActivity extends LogActivity {
 
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
-        characterService = gameSystem.getCharacterService();
+        characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         character = application.getCharacter();
 
         setContentView(R.layout.class_level_edit);
@@ -83,14 +81,9 @@ public class ClassLevelEditActivity extends LogActivity {
     private void setNewClassLevelButton() {
         final Context context = this;
         final Button newClassLevelButton = findViewById(R.id.class_level_new);
-        newClassLevelButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                final Intent intent = new Intent(context, ClassLevelCreateActivity.class);
-                startActivityForResult(intent, RESULT_CODE_NEW_CLASS_LEVEL);
-            }
-
+        newClassLevelButton.setOnClickListener(view -> {
+            final Intent intent = new Intent(context, ClassLevelCreateActivity.class);
+            startActivityForResult(intent, RESULT_CODE_NEW_CLASS_LEVEL);
         });
     }
 

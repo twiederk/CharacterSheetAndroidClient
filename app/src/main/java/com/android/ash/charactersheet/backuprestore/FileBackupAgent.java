@@ -3,6 +3,7 @@ package com.android.ash.charactersheet.backuprestore;
 import android.content.Context;
 import android.os.Environment;
 
+import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
@@ -107,7 +108,7 @@ public class FileBackupAgent {
     }
 
     String getBackupName(final String databaseName) {
-        final String versionName = context.getResources().getString(R.string.app_version_name);
+        final String versionName = BuildConfig.VERSION_NAME;
         final String pattern = context.getResources().getString(R.string.backup_date_pattern);
         final String date = new SimpleDateFormat(pattern, Locale.US).format(new Date());
 

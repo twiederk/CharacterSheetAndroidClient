@@ -2,8 +2,6 @@ package com.android.ash.charactersheet.gui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +31,7 @@ import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Activity to create a new character.
@@ -58,7 +57,7 @@ public class CharacterCreateActivity extends LogActivity {
         application = (CharacterSheetApplication) getApplication();
         gameSystem = application.getGameSystem();
 
-        messageManager = new MessageManager(this, gameSystem.getDisplayService());
+        messageManager = new MessageManager(this, Objects.requireNonNull(gameSystem).getDisplayService());
 
         getViews();
         setRace();
@@ -81,13 +80,7 @@ public class CharacterCreateActivity extends LogActivity {
 
     private void setCreateButtonOnClickListener() {
         final Button okButton = findViewById(R.id.create_button);
-        okButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                createCharacter();
-            }
-        });
+        okButton.setOnClickListener(view -> createCharacter());
     }
 
     private void createCharacter() {

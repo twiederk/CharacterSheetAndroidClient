@@ -158,8 +158,7 @@
         <!-- CharacterClassAlignmentActivity -->
         <activity
             android:name=".gui.admin.clazz.alignment.CharacterClassAlignmentActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- ClassAdministrationAbilityListActivity -->
         <activity
@@ -169,8 +168,7 @@
         <!-- CharacterClassSkillActivity -->
         <activity
             android:name=".gui.admin.clazz.skill.CharacterClassSkillActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- GoodsEditActivity -->
         <activity

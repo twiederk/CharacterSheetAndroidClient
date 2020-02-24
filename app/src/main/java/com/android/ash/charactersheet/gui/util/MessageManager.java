@@ -28,10 +28,8 @@ public class MessageManager {
     public MessageManager(final Context context, final DisplayService displayService) {
         this.context = context;
         this.displayService = displayService;
-        onClickListener = new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, final int arg1) {
-                // Empty OnClickListener
-            }
+        onClickListener = (dialog, arg1) -> {
+            // Empty OnClickListener
         };
     }
 

@@ -24,7 +24,7 @@ public class ListModel<T> extends Observable {
      * Create ListModel instance with empty list and no filter.
      */
     protected ListModel() {
-        this(new ArrayList<T>(), null);
+        this(new ArrayList<>(), null);
     }
 
     /**

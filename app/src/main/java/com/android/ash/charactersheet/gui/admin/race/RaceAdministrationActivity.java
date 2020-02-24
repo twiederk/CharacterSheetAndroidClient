@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SpinnerAdapter;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.race.ability.RaceAdministrationAbilityListActivity;
 import com.android.ash.charactersheet.gui.util.FormActivity;
@@ -28,7 +28,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Fills and stores the form of a race. Derive from this class to use the form for create or update.
@@ -36,6 +39,9 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 public abstract class RaceAdministrationActivity extends FormActivity<Race> {
 
     private static final int REQUEST_CODE_ABILITIES = 1;
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
 
     GameSystem gameSystem;
     RaceService raceService;
@@ -56,9 +62,8 @@ public abstract class RaceAdministrationActivity extends FormActivity<Race> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        raceService = gameSystem.getRaceService();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        raceService = Objects.requireNonNull(gameSystem).getRaceService();
     }
 
     private void createViews() {

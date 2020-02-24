@@ -46,7 +46,7 @@ public abstract class PageFragment extends LogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final CharacterSheetApplication application = (CharacterSheetApplication) Objects.requireNonNull(getActivity()).getApplication();
         gameSystem = application.getGameSystem();
-        characterService = gameSystem.getCharacterService();
+        characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         ruleService = gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
         imageService = (AndroidImageService) gameSystem.getImageService();

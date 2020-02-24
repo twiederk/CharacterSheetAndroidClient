@@ -2,7 +2,7 @@ package com.android.ash.charactersheet.gui.admin.ability;
 
 import android.widget.SpinnerAdapter;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.EnumSpinnerAdapter;
@@ -16,12 +16,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays a form to handle abilities. Derive from this class to create or update a ability using this form.
  */
 public class AbilityAdministrationEditActivity extends FormActivity<Ability> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     GameSystem gameSystem;
     private AbilityService abilityService;
@@ -33,9 +38,8 @@ public class AbilityAdministrationEditActivity extends FormActivity<Ability> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        abilityService = gameSystem.getAbilityService();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        abilityService = Objects.requireNonNull(gameSystem).getAbilityService();
     }
 
     @Override
@@ -47,7 +51,7 @@ public class AbilityAdministrationEditActivity extends FormActivity<Ability> {
 
     private void setAbilityTypeSpinner() {
         final List<AbilityType> abilityTypes = Arrays.asList(AbilityType.values());
-        final List<Enum<?>> enumAbilityTypes = new ArrayList<Enum<?>>(abilityTypes);
+        final List<Enum<?>> enumAbilityTypes = new ArrayList<>(abilityTypes);
 
         final SpinnerAdapter abilityTypeAdapter = new EnumSpinnerAdapter(this, displayService, enumAbilityTypes) {
 

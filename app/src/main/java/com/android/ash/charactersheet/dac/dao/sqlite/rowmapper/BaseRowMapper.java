@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Base class of row mapper implemations. Contains util function to map enumerations.
@@ -102,7 +103,7 @@ public abstract class BaseRowMapper implements RowMapper {
 
     <U extends Enum<U>> EnumSet<U> getEnums(final int ids, final Class<U> enumClass) {
         final EnumSet<U> enumSet = EnumSet.noneOf(enumClass);
-        for (final U currentEnum : enumClass.getEnumConstants()) {
+        for (final U currentEnum : Objects.requireNonNull(enumClass.getEnumConstants())) {
             final int mask = 1 << currentEnum.ordinal();
             if ((ids & mask) > 0) {
                 enumSet.add(currentEnum);

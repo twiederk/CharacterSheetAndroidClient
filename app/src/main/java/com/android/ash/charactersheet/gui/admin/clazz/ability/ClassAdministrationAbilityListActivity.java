@@ -14,7 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.admin.util.AbilitySearchActivity;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
@@ -31,13 +31,18 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
- * Displays all skills with a checkbox to select them as class skills.
+ * Displays all abilities to assign them to a character class.
  */
 public class ClassAdministrationAbilityListActivity extends LogAppCompatActivity implements OnItemClickListener {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
 
     private static final int CONTEXT_MENU_CLASS_ABILITY_REMOVE = 1;
 
@@ -54,11 +59,9 @@ public class ClassAdministrationAbilityListActivity extends LogAppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_administration_abilities);
-        setTitle(R.string.class_administration_ability_list_title);
         setToolbar();
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         setAbilities();
     }
@@ -66,6 +69,7 @@ public class ClassAdministrationAbilityListActivity extends LogAppCompatActivity
     private void setToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.class_administration_ability_list_title);
         Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
@@ -225,7 +229,7 @@ public class ClassAdministrationAbilityListActivity extends LogAppCompatActivity
     private void editClassAbility(final ClassAbility classAbility) {
         final Intent intent = new Intent(this, ClassAdministrationAbilityEditActivity.class);
         intent.putExtra(INTENT_EXTRA_DATA_OBJECT,
-                new int[] { classAbility.getAbility().getId(), classAbility.getLevel() });
+                new int[]{classAbility.getAbility().getId(), classAbility.getLevel()});
         startActivityForResult(intent, REQUEST_CODE_EDIT_CLASS_ABILITY);
     }
 

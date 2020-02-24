@@ -7,12 +7,20 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
+import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberView;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberViewController;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 
 import java.util.List;
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 
 /**
  * Base class to build forms for a specific object.
@@ -22,8 +30,11 @@ import java.util.List;
  */
 public abstract class FormActivity<T> extends LogAppCompatActivity {
 
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
     protected DisplayService displayService;
     protected T form;
+
 
     private MessageManager messageManager;
 
@@ -36,15 +47,21 @@ public abstract class FormActivity<T> extends LogAppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
-        setTitle(getHeading());
+        setToolbar();
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        displayService = application.getGameSystem().getDisplayService();
+        displayService = Objects.requireNonNull(gameSystemHolder.getValue().getGameSystem()).getDisplayService();
         messageManager = new MessageManager(this, displayService);
 
         createServices();
 
         form = createForm();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getHeading());
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
 

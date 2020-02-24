@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_collapseMode="pin"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="@string/app_name" />
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
     <EditText
         android:id="@android:id/input"
         android:layout_width="fill_parent"

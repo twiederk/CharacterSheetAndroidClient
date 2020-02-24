@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.main.exportimport;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -96,16 +95,12 @@ class ExportItemListAdapter<T extends Item> extends BaseAdapter implements Obser
         final CheckBox checkbox = view.findViewById(R.id.listitem_export_checkbox);
         checkbox.setText(item.getName());
 
-        checkbox.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                final CheckBox checkBox = (CheckBox) view;
-                if (checkBox.isChecked()) {
-                    selectedItems.add(item);
-                } else {
-                    selectedItems.remove(item);
-                }
+        checkbox.setOnClickListener(view1 -> {
+            final CheckBox checkBox = (CheckBox) view1;
+            if (checkBox.isChecked()) {
+                selectedItems.add(item);
+            } else {
+                selectedItems.remove(item);
             }
         });
 

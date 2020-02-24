@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.SearchTextWatcher;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Spell;
@@ -19,22 +19,36 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
 
 import java.util.List;
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays all spells and allows to search them and select one.
  */
-public class SpellSearchActivity extends LogActivity implements OnItemClickListener {
+public class SpellSearchActivity extends LogAppCompatActivity implements OnItemClickListener {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        final GameSystem gameSystem = application.getGameSystem();
+        final GameSystem gameSystem = gameSystemHolder.getValue().getGameSystem();
 
-        createLayout(gameSystem);
+        createLayout(Objects.requireNonNull(gameSystem));
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.spell_search_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void createLayout(final GameSystem gameSystem) {

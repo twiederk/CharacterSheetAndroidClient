@@ -2,7 +2,7 @@ package com.android.ash.charactersheet.gui.admin.spell;
 
 import android.widget.SpinnerAdapter;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.EnumSpinnerAdapter;
@@ -21,11 +21,16 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 /**
  * Mask to administer spells.
  */
 public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
 
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     GameSystem gameSystem;
 
     @Override
@@ -35,8 +40,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
     }
 
     @Override
@@ -60,7 +64,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
 
     private void setSchoolSpinner() {
         final List<School> schools = Arrays.asList(School.values());
-        final List<Enum<?>> sortedSchools = new ArrayList<Enum<?>>(schools);
+        final List<Enum<?>> sortedSchools = new ArrayList<>(schools);
         final SpinnerAdapter schoolAdapter = new EnumSpinnerAdapter(this, displayService, sortedSchools) {
 
             @Override
@@ -75,7 +79,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
 
     private void setSubSchoolSpinner() {
         final List<SubSchool> subSchools = Arrays.asList(SubSchool.values());
-        final List<Enum<?>> sortedSubSchools = new ArrayList<Enum<?>>(subSchools);
+        final List<Enum<?>> sortedSubSchools = new ArrayList<>(subSchools);
         final SpinnerAdapter subSchoolAdapter = new EnumSpinnerAdapter(this, displayService, sortedSubSchools) {
 
             @Override
@@ -189,7 +193,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
     private void setCastingTimeSpinner() {
         final List<CastingTime> castingTimes = Arrays.asList(CastingTime.values());
         Collections.sort(castingTimes);
-        final List<Enum<?>> sortedCastingTimes = new ArrayList<Enum<?>>(castingTimes);
+        final List<Enum<?>> sortedCastingTimes = new ArrayList<>(castingTimes);
         final SpinnerAdapter castingTimeAdapter = new EnumSpinnerAdapter(this, displayService, sortedCastingTimes) {
 
             @Override
@@ -205,7 +209,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
     private void setRangeSpinner() {
         final List<Range> range = Arrays.asList(Range.values());
         Collections.sort(range);
-        final List<Enum<?>> sortedRanges = new ArrayList<Enum<?>>(range);
+        final List<Enum<?>> sortedRanges = new ArrayList<>(range);
         final SpinnerAdapter rangeAdapter = new EnumSpinnerAdapter(this, displayService, sortedRanges) {
 
             @Override
@@ -221,7 +225,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
     private void setSpellResistanceSpinner() {
         final List<SpellResistance> spellResistance = Arrays.asList(SpellResistance.values());
         Collections.sort(spellResistance);
-        final List<Enum<?>> sortedSpellResistance = new ArrayList<Enum<?>>(spellResistance);
+        final List<Enum<?>> sortedSpellResistance = new ArrayList<>(spellResistance);
         final SpinnerAdapter spellResistanceAdapter = new EnumSpinnerAdapter(this, displayService,
                 sortedSpellResistance) {
 

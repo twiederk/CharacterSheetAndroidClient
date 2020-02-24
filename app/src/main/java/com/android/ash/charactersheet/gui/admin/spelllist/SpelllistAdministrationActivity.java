@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.ListModel;
@@ -18,8 +18,10 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays a spell list with name, short name and spell assignments. Allows to create a new spell assignment.
@@ -27,6 +29,9 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 public abstract class SpelllistAdministrationActivity extends FormActivity<Spelllist> {
 
     private static final int REQUEST_CODE_SPELL_SEARCH = 100;
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
     GameSystem gameSystem;
 
     @Override
@@ -36,8 +41,7 @@ public abstract class SpelllistAdministrationActivity extends FormActivity<Spell
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
     }
 
     @Override

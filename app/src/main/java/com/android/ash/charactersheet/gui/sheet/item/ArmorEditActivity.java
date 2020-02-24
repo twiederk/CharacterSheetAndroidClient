@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Allows to edit the armor of the character.
@@ -13,7 +13,7 @@ public class ArmorEditActivity extends ItemEditActivity {
 
     @Override
     protected List<Item> getAllExpandListViews() {
-        return new ArrayList<Item>(gameSystem.getAllArmor());
+        return new ArrayList<>(gameSystem.getAllArmor());
     }
 
     @Override

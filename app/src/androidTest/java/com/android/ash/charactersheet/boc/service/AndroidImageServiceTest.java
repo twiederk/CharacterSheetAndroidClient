@@ -56,7 +56,7 @@ public class AndroidImageServiceTest {
     }
 
     @Test
-    public void testDeleteImageDontDeleteDefaultImages() {
+    public void testDeleteImageDoNotDeleteDefaultImages() {
         imageService.deleteImage(DEFAULT_CHARACTER_IMAGE_ID);
         final byte[] image = imageService.getImage(DEFAULT_CHARACTER_IMAGE_ID);
         assertNotNull(image);

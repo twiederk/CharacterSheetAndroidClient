@@ -3,6 +3,7 @@ package com.android.ash.charactersheet.backuprestore;
 import android.content.Context;
 import android.os.Environment;
 
+import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
@@ -72,9 +73,7 @@ public class FileBackupAgentTest {
         final String backupName = fileBackupAgent.getBackupName(databaseName);
 
         // Assert
-        String expectedName = databaseName + SEPARATOR +
-                context.getResources().getString(R.string.app_version_name) + SEPARATOR +
-                date;
+        String expectedName = databaseName + SEPARATOR + BuildConfig.VERSION_NAME + SEPARATOR + date;
         assertEquals(expectedName, backupName);
     }
 

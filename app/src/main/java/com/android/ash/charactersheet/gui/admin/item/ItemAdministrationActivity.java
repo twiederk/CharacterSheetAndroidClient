@@ -2,7 +2,7 @@ package com.android.ash.charactersheet.gui.admin.item;
 
 import android.widget.SpinnerAdapter;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberViewController;
@@ -14,6 +14,11 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ItemService;
 
 import java.util.Arrays;
+import java.util.Objects;
+
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base activity to handle the GUI of creating and editing items. The properties of all items are filled and read from
@@ -24,7 +29,9 @@ import java.util.Arrays;
  */
 public abstract class ItemAdministrationActivity<T> extends FormActivity<Item> {
 
-    protected ItemService itemService;
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
+    public ItemService itemService;
     protected GameSystem gameSystem;
 
     private NumberViewController costController;
@@ -32,9 +39,8 @@ public abstract class ItemAdministrationActivity<T> extends FormActivity<Item> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        itemService = gameSystem.getItemService();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        itemService = Objects.requireNonNull(gameSystem).getItemService();
     }
 
     @Override

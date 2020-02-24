@@ -3,11 +3,9 @@ package com.android.ash.charactersheet.gui.main;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.backup.BackupManager;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -80,13 +78,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
 
     private void createBackupToCloudButton() {
         final Button backupToCloudButton = findViewById(R.id.backup_restore_backup_to_cloud_button);
-        backupToCloudButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                backupToCloud();
-            }
-        });
+        backupToCloudButton.setOnClickListener(v -> backupToCloud());
     }
 
     private void backupToCloud() {
@@ -112,13 +104,7 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
 
     private void createBackupToFileButton() {
         final Button backupToFileButton = findViewById(R.id.backup_restore_backup_to_file_button);
-        backupToFileButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                backupToFile();
-            }
-        });
+        backupToFileButton.setOnClickListener(v -> backupToFile());
     }
 
     private void backupToFile() {
@@ -235,15 +221,9 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
 
         builder.setTitle(R.string.backup_restore_dialog_title);
         builder.setMessage(getMessage(gameSystemType, restoreFile));
-        builder.setPositiveButton(R.string.backup_restore_dialog_restore_button, new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, final int id) {
-                restoreFromFile(gameSystemType, restoreFile);
-            }
-        });
-        builder.setNegativeButton(R.string.backup_restore_dialog_cancel_button, new DialogInterface.OnClickListener() {
-            public void onClick(final DialogInterface dialog, final int id) {
-                // user cancelled the dialog
-            }
+        builder.setPositiveButton(R.string.backup_restore_dialog_restore_button, (dialog, id) -> restoreFromFile(gameSystemType, restoreFile));
+        builder.setNegativeButton(R.string.backup_restore_dialog_cancel_button, (dialog, id) -> {
+            // user cancelled the dialog
         });
         final AlertDialog dialog = builder.create();
         dialog.show();

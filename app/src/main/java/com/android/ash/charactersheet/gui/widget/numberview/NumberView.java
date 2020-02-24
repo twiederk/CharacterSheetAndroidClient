@@ -5,7 +5,6 @@ import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,12 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * This view offers the possiblity to increase and decrease number values. An minus and plus button is displayed to
- * decrease and increase the number. The number is displayed inbetween the buttons. The buttons are of size 48.
+ * This view offers the possibility to increase and decrease number values. An minus and plus button is displayed to
+ * decrease and increase the number. The number is displayed between the buttons. The buttons are of size 48.
  */
 public abstract class NumberView extends LinearLayout {
 
-    static final int EDITTEXT_SIZE = 48;
+    static final int EDIT_TEXT_SIZE = 48;
     static final int TEXT_SIZE = 15;
 
     private static final int BUTTON_SIZE = 48;
@@ -31,7 +30,7 @@ public abstract class NumberView extends LinearLayout {
     EditText numberEditText;
 
     /**
-     * Instanciates NumberView contained in a layout file.
+     * Instantiates NumberView contained in a layout file.
      * 
      * @param context
      *            The context of the activity.
@@ -54,8 +53,8 @@ public abstract class NumberView extends LinearLayout {
         return layoutParams;
     }
 
-    Button createButton(final Context context, final String text, final AttributeSet attributeSet) {
-        final Button button = new Button(context, attributeSet);
+    Button createButton(final Context context, final String text) {
+        final Button button = new Button(context);
         button.setText(text);
         button.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         button.setWidth((int) (BUTTON_SIZE * scale));
@@ -65,28 +64,24 @@ public abstract class NumberView extends LinearLayout {
         return button;
     }
 
-    View createNumberTextView(final Context context, final AttributeSet attributeSet) {
-        numberTextView = new TextView(context, attributeSet);
+    View createNumberTextView(final Context context) {
+        numberTextView = new TextView(context);
         numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         return numberTextView;
     }
 
-    View createNumberEditText(final Context context, final AttributeSet attributeSet) {
-        numberEditText = new EditText(context, attributeSet);
+    View createNumberEditText(final Context context) {
+        numberEditText = new EditText(context);
         numberEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         numberEditText.setVisibility(View.GONE);
-        numberEditText.setMinWidth((int) (EDITTEXT_SIZE * scale));
+        numberEditText.setMinWidth((int) (EDIT_TEXT_SIZE * scale));
         numberEditText.setGravity(Gravity.END);
         numberEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        numberEditText.setOnKeyListener(new OnKeyListener() {
-
-            @Override
-            public boolean onKey(final View view, final int keyCode, final KeyEvent event) {
-                if (controller != null) {
-                    controller.setNumber(getNumber(numberEditText));
-                }
-                return false;
+        numberEditText.setOnKeyListener((view, keyCode, event) -> {
+            if (controller != null) {
+                controller.setNumber(getNumber(numberEditText));
             }
+            return false;
         });
         return numberEditText;
     }

@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.admin.ability;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -79,7 +78,7 @@ public class AbilityAdministrationCreateActivity extends FormActivity<Ability> {
 
     private void setAbilityClassSpinner() {
         final List<AbilityClass> abilityClass = Arrays.asList(AbilityClass.values());
-        final List<Enum<?>> enumAbilityTypes = new ArrayList<Enum<?>>(abilityClass);
+        final List<Enum<?>> enumAbilityTypes = new ArrayList<>(abilityClass);
 
         final SpinnerAdapter abilityTypeAdapter = new EnumSpinnerAdapter(this, displayService, enumAbilityTypes) {
 
@@ -125,14 +124,7 @@ public class AbilityAdministrationCreateActivity extends FormActivity<Ability> {
 
     private void setCreateButton() {
         final Button createButton = findViewById(R.id.create_button);
-        createButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                save();
-            }
-
-        });
+        createButton.setOnClickListener(view -> save());
     }
 
     @Override

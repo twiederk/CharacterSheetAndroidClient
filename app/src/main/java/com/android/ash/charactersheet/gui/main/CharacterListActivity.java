@@ -8,7 +8,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -231,7 +230,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private void deleteCharacter(final Character character) {
         Logger.debug("deleteCharacter");
         Logger.debug("character: " + character);
-        application.getGameSystem().deleteCharacter(character);
+        Objects.requireNonNull(application.getGameSystem()).deleteCharacter(character);
         adapter.remove(character);
     }
 
@@ -350,6 +349,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_4));
             case 44:
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_5));
+            case 45:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_6));
                 break;
 
             default:
@@ -394,13 +395,9 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
     private void setOkButton() {
         final Button okButton = findViewById(R.id.button_ok);
-        okButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                final View releaseNotesView = findViewById(R.id.character_list_release_notes);
-                releaseNotesView.setVisibility(View.INVISIBLE);
-            }
+        okButton.setOnClickListener(v -> {
+            final View releaseNotesView = findViewById(R.id.character_list_release_notes);
+            releaseNotesView.setVisibility(View.INVISIBLE);
         });
     }
 

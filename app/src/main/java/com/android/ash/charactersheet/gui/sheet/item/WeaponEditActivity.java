@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Activity to edit number of weapons in equipment of character.
@@ -14,7 +14,7 @@ public class WeaponEditActivity extends ItemEditActivity {
     @Override
     protected List<Item> getAllExpandListViews() {
 
-        return new ArrayList<Item>(itemService.getEquipableWeapons(gameSystem.getAllWeapons()));
+        return new ArrayList<>(itemService.getEquipableWeapons(gameSystem.getAllWeapons()));
     }
 
     @Override

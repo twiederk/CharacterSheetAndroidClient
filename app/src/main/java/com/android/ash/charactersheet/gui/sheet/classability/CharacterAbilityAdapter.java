@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -81,14 +80,10 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
         if (characterAbilityModel.isShowAll()) {
             ownedCheckBox.setVisibility(View.VISIBLE);
             ownedCheckBox.setChecked(characterAbilityListItem.isOwned());
-            ownedCheckBox.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(final View view) {
-                    final CheckBox checkBox = (CheckBox) view;
-                    characterAbilityListItem.setOwned(checkBox.isChecked());
-                    characterService.updateCharacterAbility(characterAbilityListItem.getCharacterAbility());
-                }
+            ownedCheckBox.setOnClickListener(view1 -> {
+                final CheckBox checkBox = (CheckBox) view1;
+                characterAbilityListItem.setOwned(checkBox.isChecked());
+                characterService.updateCharacterAbility(characterAbilityListItem.getCharacterAbility());
             });
         } else {
             ownedCheckBox.setVisibility(View.GONE);

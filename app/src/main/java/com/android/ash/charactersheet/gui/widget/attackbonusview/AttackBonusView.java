@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.gui.widget.attackbonusview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -68,13 +67,9 @@ public class AttackBonusView extends LinearLayout {
         button.setText(getDisplay(attackBonus));
         button.setTextSize(22.0f);
         button.setPadding(4, 4, 4, 4);
-        button.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                attackOnClickListener.onClick(view, attackBonus, controller.getWeaponAttack());
-                ammoController.decrease();
-            }
+        button.setOnClickListener(view -> {
+            attackOnClickListener.onClick(view, attackBonus, controller.getWeaponAttack());
+            ammoController.decrease();
         });
         return button;
     }
