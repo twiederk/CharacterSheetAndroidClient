@@ -24,7 +24,7 @@ import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class AbilitySearchActivityInstrumentedTest : KoinTest {
+class AbilitySearchActivityInstrumentationTest : KoinTest {
 
     private val gameSystemHolder by inject<GameSystemHolder>()
 

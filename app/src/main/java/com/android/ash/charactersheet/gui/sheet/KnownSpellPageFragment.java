@@ -88,12 +88,12 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
         final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
 
-        final TabHost.TabContentFactory tabContenctFactory = new SpelllistTabContentFactory(this);
+        final TabHost.TabContentFactory tabContentFactory = new SpelllistTabContentFactory(this);
 
         for (final Spelllist spelllist : character.getSpelllists()) {
             final TabSpec tabSpec = tabHost.newTabSpec(spelllist.getName());
             tabSpec.setIndicator(spelllist.getName());
-            tabSpec.setContent(tabContenctFactory);
+            tabSpec.setContent(tabContentFactory);
             tabHost.addTab(tabSpec);
         }
     }

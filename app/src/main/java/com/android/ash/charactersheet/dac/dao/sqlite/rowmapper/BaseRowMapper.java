@@ -25,7 +25,7 @@ public abstract class BaseRowMapper implements RowMapper {
     private final DaoUtil daoUtil;
 
     /**
-     * Instanciates BaseRowMapper with DaoUtil.
+     * Instantiates BaseRowMapper with DaoUtil.
      */
     public BaseRowMapper() {
         super();

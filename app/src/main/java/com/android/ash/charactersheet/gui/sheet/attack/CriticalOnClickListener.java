@@ -20,7 +20,7 @@ public class CriticalOnClickListener {
     private final DieRollView dieRollView;
 
     /**
-     * Instanciates CriticalOnClickListener
+     * Instantiates CriticalOnClickListener
      * 
      * @param ruleService
      *            The service to execute the critical damage roll.

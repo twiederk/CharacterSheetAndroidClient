@@ -20,7 +20,7 @@ public class DamageOnClickListener {
     private final DieRollView dieRollView;
 
     /**
-     * Instanciates DamageOnClickListener.
+     * Instantiates DamageOnClickListener.
      * 
      * @param ruleService
      *            The service to execute the damage roll.

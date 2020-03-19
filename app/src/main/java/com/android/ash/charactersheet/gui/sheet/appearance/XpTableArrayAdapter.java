@@ -14,7 +14,7 @@ import java.util.List;
 class XpTableArrayAdapter extends SpinnerArrayAdapter<XpTable> {
 
     /**
-     * Instanciates XpTableArrayAdapter
+     * Instantiates XpTableArrayAdapter
      * 
      * @param context
      *            The context

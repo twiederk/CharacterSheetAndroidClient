@@ -16,7 +16,7 @@ public class CharacterFeatRowMapper extends BaseRowMapper {
     private final List<Feat> allFeats;
 
     /**
-     * Instanciates mapper with list of all feats.
+     * Instantiates mapper with list of all feats.
      * 
      * @param allFeats
      *            All feats.

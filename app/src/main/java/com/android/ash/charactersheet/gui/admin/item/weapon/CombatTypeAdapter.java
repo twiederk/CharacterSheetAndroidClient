@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 public class CombatTypeAdapter extends SpinnerArrayAdapter<CombatType> {
 
     /**
-     * Instanciates CombatTypeAdapter.
+     * Instantiates CombatTypeAdapter.
      * 
      * @param activity
      *            The activity the adapter is used in.

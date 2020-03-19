@@ -7,20 +7,31 @@ import android.widget.Button;
 
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.IntentOnClickListener;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
+
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * The administration contains a button for each administration sub menu.
  */
-public class ExportMenuActivity extends LogActivity {
+public class ExportMenuActivity extends LogAppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.export_menu);
-        setTitle(R.string.export_menu_title);
+        setToolbar();
         setButtonsOnClickListeners();
 
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.export_menu_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void setButtonsOnClickListeners() {

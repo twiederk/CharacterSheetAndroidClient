@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper to retrieve all items of a specific implemention (weapon, armor, good) from the database. Retrieves all items
+ * Helper to retrieve all items of a specific implementation (weapon, armor, good) from the database. Retrieves all items
  * of a character of a specific item type.
  */
 class ItemHelper extends BaseSQLiteDao {

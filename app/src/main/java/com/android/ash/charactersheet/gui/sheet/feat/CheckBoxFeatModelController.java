@@ -15,7 +15,7 @@ public class CheckBoxFeatModelController implements OnClickListener {
     private final CheckBox checkBox;
 
     /**
-     * Instanciates controller connecting the given FeatModel and CheckBox.
+     * Instantiates controller connecting the given FeatModel and CheckBox.
      * 
      * @param featModel
      *            The feat model to modify.

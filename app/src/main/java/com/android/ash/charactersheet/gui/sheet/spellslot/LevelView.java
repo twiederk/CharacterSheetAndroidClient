@@ -9,7 +9,7 @@ public class LevelView {
     private boolean expanded;
 
     /**
-     * Instanciates LevelView for given spell level.
+     * Instantiates LevelView for given spell level.
      * 
      * @param level
      *            The spell level of the view.

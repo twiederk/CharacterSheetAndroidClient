@@ -22,7 +22,7 @@ public class AttackOnClickListener {
     private final DieRollView dieRollView;
 
     /**
-     * Instanciates AttackOnClickListener.
+     * Instantiates AttackOnClickListener.
      * 
      * @param ruleService
      *            The service to execute the attack roll.

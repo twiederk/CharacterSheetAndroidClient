@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 public class WeaponEncumbranceAdapter extends SpinnerArrayAdapter<WeaponEncumbrance> {
 
     /**
-     * Instanciates WeaponEncumbranceAdapter.
+     * Instantiates WeaponEncumbranceAdapter.
      * 
      * @param context
      *            The context.

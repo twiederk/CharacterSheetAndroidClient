@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 public class AttackWieldAdapter extends SpinnerArrayAdapter<AttackWield> {
 
     /**
-     * Instanciates AttackWieldAdapter instance.
+     * Instantiates AttackWieldAdapter instance.
      * 
      * @param context
      *            The context of the activity.

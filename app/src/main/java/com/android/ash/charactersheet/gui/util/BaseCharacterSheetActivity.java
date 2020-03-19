@@ -20,7 +20,7 @@ import java.util.Objects;
 
 /**
  * Base class of CharacterSheetActivities. Derive activities in the character sheet part of the application from this
- * class. It supplies standard functionallity for character sheet activities.
+ * class. It supplies standard functionality for character sheet activities.
  */
 public abstract class BaseCharacterSheetActivity extends LogActivity {
 

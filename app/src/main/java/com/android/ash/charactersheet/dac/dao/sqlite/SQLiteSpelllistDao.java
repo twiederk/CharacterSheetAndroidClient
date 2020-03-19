@@ -38,7 +38,7 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
     private final SpellSerializor spellSerializor;
 
     /**
-     * Instanciates SQLiteSpelllistDao
+     * Instantiates SQLiteSpelllistDao
      * 
      * @param db
      *            The database to access.

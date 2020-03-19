@@ -20,7 +20,7 @@ public class SpelllistModel extends ListModel<Object> {
     private final List<KnownSpell> knownSpells;
 
     /**
-     * Instanciates SpelllistModel. If knownSpells is empty all spells are shown, otherwise only marked spells.
+     * Instantiates SpelllistModel. If knownSpells is empty all spells are shown, otherwise only marked spells.
      * 
      * @param knownSpellPageModel
      *            The known spell page model.

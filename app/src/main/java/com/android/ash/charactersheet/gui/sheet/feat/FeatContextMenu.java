@@ -35,7 +35,7 @@ public class FeatContextMenu implements OnCreateContextMenuListener, OnMenuItemC
     private final Resources resources;
 
     /**
-     * Instanciates feat context menu.
+     * Instantiates feat context menu.
      * 
      * @param fragment
      *            The fragment the context menu belongs to.

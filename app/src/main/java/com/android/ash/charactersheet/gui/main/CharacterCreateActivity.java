@@ -8,13 +8,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity;
 import com.android.ash.charactersheet.gui.sheet.appearance.AlignmentArrayAdapter;
 import com.android.ash.charactersheet.gui.sheet.appearance.RaceArrayAdapter;
 import com.android.ash.charactersheet.gui.sheet.appearance.SexArrayAdapter;
 import com.android.ash.charactersheet.gui.sheet.clazz.CharacterClassArrayAdapter;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.util.MessageManager;
 import com.d20charactersheet.framework.boc.model.Alignment;
@@ -33,10 +34,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 /**
  * Activity to create a new character.
  */
-public class CharacterCreateActivity extends LogActivity {
+public class CharacterCreateActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private CharacterSheetApplication application;
     private GameSystem gameSystem;
@@ -52,10 +60,10 @@ public class CharacterCreateActivity extends LogActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.character_create);
-        setTitle(R.string.create_title);
+        setToolbar();
 
         application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         messageManager = new MessageManager(this, Objects.requireNonNull(gameSystem).getDisplayService());
 
@@ -66,6 +74,14 @@ public class CharacterCreateActivity extends LogActivity {
         setClazz();
         setOnClickListener();
     }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.create_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
 
     private void getViews() {
         raceSpinner = findViewById(R.id.create_race);

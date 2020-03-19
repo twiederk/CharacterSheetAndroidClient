@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
@@ -19,14 +19,18 @@ import java.util.Locale;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class for export activities. Displays export directory. Provides template pattern to allow export of different
  * classes.
  */
 public abstract class AbstractExportActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private static final String SEPARATOR = "_";
     private static final String COLON = ": ";
@@ -37,8 +41,7 @@ public abstract class AbstractExportActivity extends LogAppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         createLayout();
 
@@ -46,7 +49,6 @@ public abstract class AbstractExportActivity extends LogAppCompatActivity {
 
     private void createLayout() {
         setContentView(getLayoutId());
-        setTitle(getTitleId());
         setToolbar();
 
         createExportDirectoryTextView();
@@ -56,6 +58,7 @@ public abstract class AbstractExportActivity extends LogAppCompatActivity {
     private void setToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getTitleId());
         Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 

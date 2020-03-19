@@ -18,7 +18,7 @@ public class AttributeRollOnClickListener extends RollOnClickListener {
     private final Attribute attribute;
 
     /**
-     * Instanciates AttributeRollOnClickListener
+     * Instantiates AttributeRollOnClickListener
      * 
      * @param character
      *            The character to roll for.

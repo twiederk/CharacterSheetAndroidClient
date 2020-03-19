@@ -18,7 +18,7 @@ public class PreferenceServiceImpl implements PreferenceService {
     private final PreferenceDao preferenceDao;
 
     /**
-     * Instanciates PreferenceServiceImpl with given data access object.
+     * Instantiates PreferenceServiceImpl with given data access object.
      *
      * @param preferenceDao The dao to persist preferences
      */

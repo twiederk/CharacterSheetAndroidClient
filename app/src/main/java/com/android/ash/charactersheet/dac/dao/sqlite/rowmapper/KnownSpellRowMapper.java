@@ -18,7 +18,7 @@ public class KnownSpellRowMapper implements RowMapper {
     private final List<Spelllist> allSpelllists;
 
     /**
-     * Instanciates KnownSpellRowMapper with all spell lists and spells of the game system.
+     * Instantiates KnownSpellRowMapper with all spell lists and spells of the game system.
      * 
      * @param allSpelllists
      *            All spell lists of the game system.

@@ -67,14 +67,12 @@
         <!-- AboutActivity -->
         <activity
             android:name=".gui.main.AboutActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- CharacterCreateActivity -->
         <activity
             android:name=".gui.main.CharacterCreateActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- ClassLevelEditActivity -->
         <activity

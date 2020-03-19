@@ -29,7 +29,7 @@ public class SpellSlotOnCreateContextMenuListener implements OnCreateContextMenu
     private Spell selectedSpell;
 
     /**
-     * Instanciates SpellSlotOnCreateContextMenuListener
+     * Instantiates SpellSlotOnCreateContextMenuListener
      * 
      * @param activity
      *            The activity the context menu belongs to.

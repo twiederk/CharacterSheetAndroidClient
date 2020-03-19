@@ -14,7 +14,7 @@ public class SpelllistFilter extends StringListFilter<Object> {
     private final KnownSpellPageModel knownSpellPageModel;
 
     /**
-     * Instanciates SpelllistFilter.
+     * Instantiates SpelllistFilter.
      * 
      * @param knownSpellPageModel
      *            The known spell page model, containing the show all information.

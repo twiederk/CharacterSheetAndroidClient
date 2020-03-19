@@ -15,7 +15,7 @@ import java.util.List;
 class SpelllistViewModel extends ListModel<SpelllevelView> {
 
     /**
-     * Instanciates SpellListViewModel.
+     * Instantiates SpellListViewModel.
      * 
      * @param spelllist
      *            The spell list of the model.

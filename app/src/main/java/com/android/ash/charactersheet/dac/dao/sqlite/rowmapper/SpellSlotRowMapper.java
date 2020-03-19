@@ -18,7 +18,7 @@ public class SpellSlotRowMapper implements RowMapper {
     private final DaoUtil daoUtil;
 
     /**
-     * Instanciates Mapper for spell slots.
+     * Instantiates Mapper for spell slots.
      * 
      * @param allSpells
      *            All spells of the game system.

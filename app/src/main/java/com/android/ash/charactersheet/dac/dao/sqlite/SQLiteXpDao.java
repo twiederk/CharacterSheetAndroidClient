@@ -19,7 +19,7 @@ import java.util.List;
 public class SQLiteXpDao extends BaseSQLiteDao implements XpDao {
 
     /**
-     * Instanciates SQLiteXpDao.
+     * Instantiates SQLiteXpDao.
      * 
      * @param db
      *            The database to access.

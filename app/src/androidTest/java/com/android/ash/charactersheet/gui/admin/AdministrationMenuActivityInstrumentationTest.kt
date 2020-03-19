@@ -1,26 +1,37 @@
 package com.android.ash.charactersheet.gui.admin
 
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Lifecycle
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import org.hamcrest.core.Is
-import org.junit.Rule
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class AdministrationMenuActivityInstrumentationTest {
 
-    @get:Rule
-    val activityRule = ActivityTestRule(AdministrationMenuActivity::class.java)
+    private lateinit var scenario: ActivityScenario<AdministrationMenuActivity>
+
+    @After
+    fun after() {
+        scenario.close()
+    }
 
     @Test
     fun onCreate() {
+        // Arrange
+        scenario = ActivityScenario.launch(AdministrationMenuActivity::class.java)
+
+        // Act
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
         // Assert
         onView(withId(R.id.administration_menu_race_button)).check(matches(withText("Races")))
         onView(withId(R.id.administration_menu_character_class_button)).check(matches(withText("Character Classes")))

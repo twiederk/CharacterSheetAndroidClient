@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 public class WeaponCategoryAdapter extends SpinnerArrayAdapter<WeaponCategory> {
 
     /**
-     * Instanciates WeaponCategoryAdapter
+     * Instantiates WeaponCategoryAdapter
      * 
      * @param context
      *            The context the adapter runs in.

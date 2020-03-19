@@ -1,30 +1,57 @@
 package com.android.ash.charactersheet.gui.main
 
-import android.widget.Button
+import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Lifecycle
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.android.ash.charactersheet.BuildConfig
 import com.android.ash.charactersheet.R
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.Rule
+import com.android.ash.charactersheet.withToolbarTitle
+import org.hamcrest.core.Is
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class AboutActivityInstrumentationTest {
 
-    @get:Rule
-    val activityRule = ActivityTestRule(AboutActivity::class.java)
+    private lateinit var scenario: ActivityScenario<AboutActivity>
+
+    @After
+    fun after() {
+        scenario.close()
+    }
 
     @Test
     fun onCreate() {
+        // Arrange
+        scenario = ActivityScenario.launch(AboutActivity::class.java)
+
+        // Act
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Manual"))))
         onView(withId(R.id.app_version)).check(matches(withText(BuildConfig.VERSION_NAME)))
         onView(withId(R.id.about_manual)).check(matches(withText("Manual: http://www.d20CharacterSheet.com/manual.html")))
-        val oglButton = activityRule.activity.findViewById<Button>(R.id.about_button_ogl)
-        assertThat(oglButton.hasOnClickListeners()).isTrue()
+        onView(withId(R.id.about_button_ogl)).check(matches(withText(R.string.about_ogl)))
     }
+
+    @Test
+    fun setOnClickListener_clickOglButton_startOglActivity() {
+        // Arrange
+        scenario = ActivityScenario.launch(AboutActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.about_button_ogl)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Open Gaming Licence"))))
+    }
+
 }

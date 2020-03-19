@@ -49,8 +49,7 @@ public class AndroidObjectMother {
     private final GameSystem gameSystem;
 
     public AndroidObjectMother(final Context context) {
-        final int dbVersion = Integer.parseInt(context.getString(R.string.app_version_code));
-        final DBHelper dndv35DbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), dbVersion,
+        final DBHelper dndv35DbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
                 GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
                 GameSystemType.DNDV35.getImages());
         final SQLiteDatabase db = dndv35DbHelper.getWritableDatabase();

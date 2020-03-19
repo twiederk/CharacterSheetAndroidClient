@@ -11,7 +11,7 @@ class SpellSlotView {
     private final LevelView levelView;
 
     /**
-     * Instanciates SpellSlotView with level of the spell slot and the spell slot.
+     * Instantiates SpellSlotView with level of the spell slot and the spell slot.
      * 
      * @param levelView
      *            The level of the spell slot.

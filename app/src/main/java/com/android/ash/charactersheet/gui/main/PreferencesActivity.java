@@ -13,18 +13,22 @@ import android.widget.Spinner;
 import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
+
+import java.util.Objects;
+
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Displays preferences. Preferences to choose background color or image. Preference to select game system to start up
  * with.
  */
-public class PreferencesActivity extends LogActivity {
+public class PreferencesActivity extends LogAppCompatActivity {
 
     private PreferenceService preferenceService;
 
-    private static final int[] colors = { Color.BLACK, Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN,
-            Color.LTGRAY, Color.MAGENTA, Color.RED, Color.WHITE, Color.YELLOW };
+    private static final int[] colors = {Color.BLACK, Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.GREEN,
+            Color.LTGRAY, Color.MAGENTA, Color.RED, Color.WHITE, Color.YELLOW};
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -34,10 +38,17 @@ public class PreferencesActivity extends LogActivity {
         final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
         preferenceService = application.getPreferenceService();
 
-        setTitle(R.string.preferences_title);
+        setToolbar();
         setRadioButtons();
         setColorSpinner();
         setGameSystemSpinner();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.preferences_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void setRadioButtons() {
@@ -48,7 +59,7 @@ public class PreferencesActivity extends LogActivity {
     }
 
     private void setRadioButton(final int radioButtonId, final boolean showImageAsBackground,
-            final OnClickListener onClickListener) {
+                                final OnClickListener onClickListener) {
         final RadioButton radioButton = findViewById(radioButtonId);
         radioButton.setChecked(showImageAsBackground);
         radioButton.setOnClickListener(onClickListener);

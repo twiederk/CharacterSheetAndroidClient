@@ -6,3 +6,4 @@ build
 # project management
 ToDos.txt
 misc
+/app/app.iml

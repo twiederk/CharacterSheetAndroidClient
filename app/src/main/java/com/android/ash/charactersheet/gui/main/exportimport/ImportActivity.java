@@ -12,11 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.FavoriteCharacterSkill;
 import com.android.ash.charactersheet.gui.util.FileComparator;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.FileListAdapter;
 import com.android.ash.charactersheet.gui.widget.ListModel;
@@ -52,17 +52,22 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Allows to select a file to import characters. Displays the import directory and all files starting with
  * d20_characters located in it. By touching an file the user has to confirm to import this file. The file is imported
  * if the user confirms.
  */
-public class ImportActivity extends LogActivity implements OnItemClickListener {
+public class ImportActivity extends LogAppCompatActivity implements OnItemClickListener {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private static final int PERMISSION_EXTERNAL_STORAGE = 100;
     private static final String EMPTY_SPACE = " ";
@@ -74,15 +79,14 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         createLayout();
     }
 
     private void createLayout() {
         setContentView(R.layout.activity_import);
-        setTitle(R.string.import_title);
+        setToolbar();
 
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -91,7 +95,13 @@ public class ImportActivity extends LogActivity implements OnItemClickListener {
             createImportDirectoryTextView();
             createFilesListView();
         }
+    }
 
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.import_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     @Override

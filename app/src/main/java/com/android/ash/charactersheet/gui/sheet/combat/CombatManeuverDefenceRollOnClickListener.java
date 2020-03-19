@@ -16,7 +16,7 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 public class CombatManeuverDefenceRollOnClickListener extends RollOnClickListener {
 
     /**
-     * Instanciates CombatManeuverDefenceRollOnClickListener
+     * Instantiates CombatManeuverDefenceRollOnClickListener
      * 
      * @param character
      *            The character to roll for.

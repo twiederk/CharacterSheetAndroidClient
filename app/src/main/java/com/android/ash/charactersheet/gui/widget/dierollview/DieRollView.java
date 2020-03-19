@@ -49,7 +49,7 @@ public class DieRollView extends RelativeLayout {
     private float scale;
 
     /**
-     * Instanciates DieRollView from XML layout.
+     * Instantiates DieRollView from XML layout.
      * 
      * @param context
      *            The context of the view.

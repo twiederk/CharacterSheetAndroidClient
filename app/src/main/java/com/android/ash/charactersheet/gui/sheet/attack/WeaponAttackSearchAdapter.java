@@ -17,7 +17,7 @@ import java.util.List;
 public class WeaponAttackSearchAdapter extends NameDisplayArrayAdapter<Weapon> {
 
     /**
-     * Instanciates WeaponAttackSearchAdapter.
+     * Instantiates WeaponAttackSearchAdapter.
      * 
      * @param context
      *            The context of the view.

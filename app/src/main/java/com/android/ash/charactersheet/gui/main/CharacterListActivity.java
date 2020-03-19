@@ -15,7 +15,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.ash.charactersheet.BuildConfig;
+import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
+import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
@@ -39,12 +43,19 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The list of characters available. Each character is listed with an image, its name, race, class and level.
  */
 public class CharacterListActivity extends LogAppCompatActivity implements OnItemClickListener,
         AbstractAsyncTask.GameSystemLoadable {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     private static final int CONTEXT_MENU_DELETE_CHARACTER = 10;
 
@@ -74,10 +85,10 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         renameDnDv35Database();
 
         application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         if (gameSystem == null) {
-            final int dbVersion = Integer.parseInt(getString(R.string.app_version_code));
+            final int dbVersion = BuildConfig.VERSION_CODE;
             dndDbHelper = new DBHelper(this, GameSystemType.DNDV35.getDatabaseName(), dbVersion,
                     GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
                     GameSystemType.DNDV35.getImages());
@@ -86,6 +97,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                     GameSystemType.PATHFINDER.getImages());
 
             preferenceService = new PreferenceServiceImpl(new AndroidPreferenceDao(this));
+            preferenceServiceHolder.getValue().setPreferenceService(preferenceService);
             application.setPreferenceService(preferenceService);
         }
     }
@@ -93,7 +105,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     @Override
     protected void onResume() {
         super.onResume();
-        final GameSystem gameSystem = application.getGameSystem();
+        final GameSystem gameSystem = gameSystemHolder.getValue().getGameSystem();
         if (gameSystem == null) {
             gameSystemType = getGameSystemTypeFromPreferences();
             new CreateDatabaseAndGameSystemAsyncTask(this, this, dndDbHelper, pathfinderDbHelper, gameSystemType)
@@ -123,6 +135,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         Logger.debug("character: " + character);
 
         // store character
+        characterHolder.getValue().setCharacter(character);
         application.setCharacter(character);
 
         // call character sheet
@@ -230,7 +243,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private void deleteCharacter(final Character character) {
         Logger.debug("deleteCharacter");
         Logger.debug("character: " + character);
-        Objects.requireNonNull(application.getGameSystem()).deleteCharacter(character);
+        Objects.requireNonNull(gameSystem).deleteCharacter(character);
         adapter.remove(character);
     }
 
@@ -351,6 +364,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_5));
             case 45:
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_6));
+            case 46:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_7));
                 break;
 
             default:
@@ -362,13 +377,11 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
     @Override
     public void onGameSystemLoaded() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         setContentView(R.layout.activity_character_list);
 
         setToolbar();
-        setTitle(createTitle());
         setReleaseNotes();
         setOkButton();
         onResumeLayout();
@@ -377,13 +390,12 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private void setToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(createTitle());
         Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private String createTitle() {
-        return getResources().getString(R.string.character_list_title) +
-                " - " +
-                gameSystem.getRuleService().getName();
+        return getResources().getString(R.string.character_list_title) + " - " + gameSystem.getRuleService().getName();
     }
 
     private void setReleaseNotes() {

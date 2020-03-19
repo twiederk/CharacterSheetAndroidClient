@@ -35,7 +35,7 @@ public class WeaponAttackListAdapter extends DisplayArrayAdapter<WeaponAttack> {
     private CriticalOnClickListener criticalOnClickListener;
 
     /**
-     * Instanciates WeaponAttackListAdapter
+     * Instantiates WeaponAttackListAdapter
      * 
      * @param context
      *            The context of the adapter.

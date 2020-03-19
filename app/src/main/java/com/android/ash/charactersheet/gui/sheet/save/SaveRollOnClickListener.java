@@ -18,7 +18,7 @@ public class SaveRollOnClickListener extends RollOnClickListener {
     private final Save save;
 
     /**
-     * Instanciates SaveRollOnClickListener.
+     * Instantiates SaveRollOnClickListener.
      * 
      * @param character
      *            Character to roll save for.

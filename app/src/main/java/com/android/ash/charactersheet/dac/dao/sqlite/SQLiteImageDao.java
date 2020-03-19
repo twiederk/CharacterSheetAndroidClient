@@ -18,7 +18,7 @@ public class SQLiteImageDao extends BaseSQLiteDao implements ImageDao {
     private static final String SQL_GET_ID = SELECT + COLUMN_ID + " FROM " + TABLE_IMAGE + " WHERE rowid = ?";
 
     /**
-     * Instanciates ImageDaoSQLite with the given context containing the database.
+     * Instantiates ImageDaoSQLite with the given context containing the database.
      * 
      * @param db
      *            The database to access.

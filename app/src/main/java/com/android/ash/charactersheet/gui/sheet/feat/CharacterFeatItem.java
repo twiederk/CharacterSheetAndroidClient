@@ -10,7 +10,7 @@ public class CharacterFeatItem extends AbstractFeatListItem {
     private final CharacterFeat characterFeat;
 
     /**
-     * Instanciates CharacterFeatItem with feat to wrap.
+     * Instantiates CharacterFeatItem with feat to wrap.
      *
      * @param characterFeat
      *            The character feat to wrap.

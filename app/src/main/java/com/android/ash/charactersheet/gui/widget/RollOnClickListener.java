@@ -26,7 +26,7 @@ public abstract class RollOnClickListener implements OnClickListener {
     private final DieRollView dieRollView;
 
     /**
-     * Instanciates RollOnClickListener.
+     * Instantiates RollOnClickListener.
      * 
      * @param character
      *            The character to roll die.

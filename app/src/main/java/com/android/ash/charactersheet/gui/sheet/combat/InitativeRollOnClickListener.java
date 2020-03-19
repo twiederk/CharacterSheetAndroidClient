@@ -16,7 +16,7 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 public class InitativeRollOnClickListener extends RollOnClickListener {
 
     /**
-     * Instanciates InitativeRollOnClickListener
+     * Instantiates InitativeRollOnClickListener
      * 
      * @param character
      *            The character to roll for.

@@ -13,7 +13,7 @@ public class SearchTextWatcher implements TextWatcher {
     private final ListView listView;
 
     /**
-     * Instanciates SearchTextWatcher and assigns given list view.
+     * Instantiates SearchTextWatcher and assigns given list view.
      * 
      * @param listView
      *            The list view to filter by text entry.

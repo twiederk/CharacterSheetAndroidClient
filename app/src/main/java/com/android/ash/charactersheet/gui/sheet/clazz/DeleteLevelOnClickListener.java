@@ -19,7 +19,7 @@ class DeleteLevelOnClickListener implements OnClickListener {
     private final MessageManager messageManager;
 
     /**
-     * Instanciates the listener.
+     * Instantiates the listener.
      * 
      * @param adapter
      *            The adapter containing all levels of the character.

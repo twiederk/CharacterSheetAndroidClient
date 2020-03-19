@@ -13,7 +13,7 @@ public class KnownSpellPageModel {
     private final List<SpelllistModel> spelllistModels;
 
     /**
-     * Instanciates KnownSpellPageModel with empty list of spell list models.
+     * Instantiates KnownSpellPageModel with empty list of spell list models.
      */
     public KnownSpellPageModel() {
         spelllistModels = new LinkedList<>();

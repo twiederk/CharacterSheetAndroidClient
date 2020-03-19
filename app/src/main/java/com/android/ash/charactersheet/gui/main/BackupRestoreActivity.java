@@ -20,7 +20,7 @@ import com.android.ash.charactersheet.backuprestore.FileBackupAgent;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.util.FileComparator;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.FileListAdapter;
 import com.android.ash.charactersheet.gui.widget.ListModel;
@@ -32,8 +32,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Allows to backup databases to cloud and file and restore from file. The Backup to Cloud button uses the Android
@@ -41,7 +43,7 @@ import androidx.annotation.NonNull;
  * version and date to the download directory. The list displays databases located in the download directory. Touching a
  * file restores it.
  */
-public class BackupRestoreActivity extends LogActivity implements OnItemClickListener {
+public class BackupRestoreActivity extends LogAppCompatActivity implements OnItemClickListener {
 
     private static final String LINE_FEED = "\n";
     private static final String COLON = ": ";
@@ -65,12 +67,20 @@ public class BackupRestoreActivity extends LogActivity implements OnItemClickLis
 
     private void createLayout() {
         setContentView(R.layout.activity_backup_restore);
-        setTitle(R.string.backup_restore_title);
+        setToolbar();
 
         createBackupToCloudLayout();
         createBackupToFileLayout();
         createRestoreFromFileLayout();
     }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.backup_restore_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
 
     private void createBackupToCloudLayout() {
         createBackupToCloudButton();

@@ -27,7 +27,7 @@ public class SpelllistAdapter extends ListAdapter<Object> {
     private final KnownSpellPageModel showAllModel;
 
     /**
-     * Instanciates SpelllistAdapter.
+     * Instantiates SpelllistAdapter.
      * 
      * @param context
      *            The context of the activity.
