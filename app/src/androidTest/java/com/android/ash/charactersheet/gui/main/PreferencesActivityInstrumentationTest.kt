@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.main
 
-import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
@@ -8,9 +7,8 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.platform.app.InstrumentationRegistry
-import com.android.ash.charactersheet.CharacterSheetApplication
 import com.android.ash.charactersheet.GameSystemHolder
+import com.android.ash.charactersheet.PreferenceServiceHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.withToolbarTitle
@@ -27,6 +25,7 @@ import org.koin.test.inject
 class PreferencesActivityInstrumentationTest : KoinTest {
 
     private val gameSystemHolder by inject<GameSystemHolder>()
+    private val preferenceServiceHolder by inject<PreferenceServiceHolder>()
 
     private lateinit var scenario: ActivityScenario<PreferencesActivity>
 
@@ -44,9 +43,7 @@ class PreferencesActivityInstrumentationTest : KoinTest {
         whenever(preferenceService.getInt(PreferenceService.GAME_SYSTEM_TYPE)).doReturn(0)
         whenever(preferenceService.getInt(PreferenceService.BACKGROUND_COLOR)).doReturn(Color.BLACK)
 
-        val targetContext: Context = InstrumentationRegistry.getInstrumentation().targetContext
-        val application = targetContext.applicationContext as CharacterSheetApplication
-        application.preferenceService = preferenceService
+        preferenceServiceHolder.preferenceService = preferenceService
 
         gameSystemHolder.gameSystem = mock()
 

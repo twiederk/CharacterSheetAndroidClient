@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.main;
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
@@ -33,11 +32,11 @@ public class CreateDatabaseAndGameSystemAsyncTask extends AbstractAsyncTask {
      * @param pathfinderDBHelper The helper to the Pathfinder database.
      * @param gameSystemType     The game system to create the game system for.
      */
-    public CreateDatabaseAndGameSystemAsyncTask(final Activity activity,
-                                                final AbstractAsyncTask.GameSystemLoadable callbackInterface,
-                                                final DBHelper dndDBHelper,
-                                                final DBHelper pathfinderDBHelper,
-                                                final GameSystemType gameSystemType) {
+    CreateDatabaseAndGameSystemAsyncTask(final Activity activity,
+                                         final AbstractAsyncTask.GameSystemLoadable callbackInterface,
+                                         final DBHelper dndDBHelper,
+                                         final DBHelper pathfinderDBHelper,
+                                         final GameSystemType gameSystemType) {
         super(activity, callbackInterface, gameSystemType);
         this.dndDBHelper = dndDBHelper;
         this.pathfinderDBHelper = pathfinderDBHelper;
@@ -60,8 +59,6 @@ public class CreateDatabaseAndGameSystemAsyncTask extends AbstractAsyncTask {
 
         final SQLiteDatabase currentDatabase = getDatabase(dndDatabase, pathfinderDatabase);
         final GameSystem gameSystem = createGameSystem(currentDatabase);
-        final CharacterSheetApplication application = (CharacterSheetApplication) activity.getApplication();
-        application.setGameSystem(gameSystem);
         gameSystemHolder.getValue().setGameSystem(gameSystem);
         return new TaskResult(true);
     }

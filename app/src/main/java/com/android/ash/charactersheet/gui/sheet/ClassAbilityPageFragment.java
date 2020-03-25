@@ -58,9 +58,11 @@ public class ClassAbilityPageFragment extends PageFragment {
         inflater.inflate(R.menu.menu_page_class_ability, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_page_class_abilitiy_show_all_abilities);
         final CheckBox showAllCheckBox = (CheckBox) menuItem.getActionView();
-        showAllCheckBox.setText(getString(R.string.character_class_ability_list_show_all_abilities));
-        showAllCheckBox.setChecked(model.isShowAll());
-        showAllCheckBox.setOnClickListener(new CheckBoxModelController(model, showAllCheckBox));
+        if (showAllCheckBox != null) {
+            showAllCheckBox.setText(getString(R.string.character_class_ability_list_show_all_abilities));
+            showAllCheckBox.setChecked(model.isShowAll());
+            showAllCheckBox.setOnClickListener(new CheckBoxModelController(model, showAllCheckBox));
+        }
     }
 
     private Collection<ExpandableListItem> getListItems(final ClassLevel classLevel) {

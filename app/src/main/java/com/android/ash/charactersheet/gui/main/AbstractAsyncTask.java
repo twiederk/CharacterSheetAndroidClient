@@ -64,7 +64,7 @@ import com.d20charactersheet.framework.dac.dao.XpDao;
  */
 abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
 
-    final Activity activity;
+    private final Activity activity;
     final Resources resources;
     final GameSystemType gameSystemType;
     private final GameSystemLoadable gameSystemLoadable;

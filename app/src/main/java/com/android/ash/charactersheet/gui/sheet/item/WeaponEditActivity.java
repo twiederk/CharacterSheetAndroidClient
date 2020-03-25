@@ -13,7 +13,6 @@ public class WeaponEditActivity extends ItemEditActivity {
 
     @Override
     protected List<Item> getAllExpandListViews() {
-
         return new ArrayList<>(itemService.getEquipableWeapons(gameSystem.getAllWeapons()));
     }
 

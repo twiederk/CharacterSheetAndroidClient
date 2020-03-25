@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.BaseCharacterSheetActivity;
 import com.android.ash.charactersheet.gui.util.ExpandableListItem;
@@ -17,7 +16,6 @@ import com.android.ash.charactersheet.gui.util.MagicOnClickListener;
 import com.android.ash.charactersheet.gui.util.SearchTextWatcher;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
-import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ItemService;
 
 import java.util.LinkedList;
@@ -43,8 +41,6 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
 
     @Override
     protected void doCreate() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        final GameSystem gameSystem = application.getGameSystem();
         itemService = Objects.requireNonNull(gameSystem).getItemService();
 
         createLayout();
@@ -59,7 +55,7 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
     private void setItemList() {
         allExpandListViews = equipmentHelper.createItemGroups(getAllExpandListViews(), getCharacterItems());
         final ItemEditArrayAdapter itemEditArrayAdapter = new ItemEditArrayAdapter(this, displayService,
-                R.layout.listitem_item_edit, equipmentFilter, allExpandListViews);
+                equipmentFilter, allExpandListViews);
         final ListView listView = findViewById(R.id.item_edit_list);
         listView.setAdapter(itemEditArrayAdapter);
         listView.setTextFilterEnabled(true);
@@ -91,11 +87,6 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
             }
         }
         return items;
-    }
-
-    @Override
-    protected void doResume() {
-        // nothing to reseume
     }
 
     @Override

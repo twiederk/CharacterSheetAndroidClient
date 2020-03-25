@@ -180,13 +180,13 @@ public class SpellSlotPageFragment extends PageFragment {
         tabHost.clearAllTabs();
 
         contextMenuListener = new SpellSlotOnCreateContextMenuListener(getActivity());
-        final TabHost.TabContentFactory tabContenctFactory = new ClassTabContentFactory(
+        final TabHost.TabContentFactory tabContentFactory = new ClassTabContentFactory(
                 new SpellSlotOnItemClickListener(this, characterService), contextMenuListener);
 
         for (final SpellSlotModel spellSlotModel : spellSlotPageModel.getSpellSlotModels()) {
             final TabSpec tabSpec = tabHost.newTabSpec(spellSlotModel.getName());
             tabSpec.setIndicator(spellSlotModel.getName());
-            tabSpec.setContent(tabContenctFactory);
+            tabSpec.setContent(tabContentFactory);
             tabHost.addTab(tabSpec);
         }
     }
@@ -291,7 +291,7 @@ public class SpellSlotPageFragment extends PageFragment {
 
         private View inflateTabView() {
             final TabHost tabHost = view.findViewById(android.R.id.tabhost);
-            final LayoutInflater layoutInflater = (LayoutInflater) Objects.requireNonNull(getActivity()).getSystemService(
+            final LayoutInflater layoutInflater = (LayoutInflater) requireActivity().getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
             return Objects.requireNonNull(layoutInflater).inflate(R.layout.page_spell_slot_tab, tabHost, false);
         }

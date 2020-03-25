@@ -15,27 +15,21 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import java.util.List;
 
 /**
- * Adapater to display item groups in a ListView.
+ * Adapter to display item groups in a ListView.
  */
 public class ItemEditArrayAdapter extends ItemListAdapter {
 
     /**
      * Creates adapter to display group items.
-     * 
-     * @param context
-     *            The context.
-     * @param displayService
-     *            Display service to format output.
-     * @param layoutResourceId
-     *            Id of layout file of item view.
-     * @param equipmentFilter
-     *            Filter of equipment.
-     * @param items
-     *            The list of item groups to display.
+     *
+     * @param context         The context.
+     * @param displayService  Display service to format output.
+     * @param equipmentFilter Filter of equipment.
+     * @param items           Items to display
      */
-    public ItemEditArrayAdapter(final Context context, final DisplayService displayService, final int layoutResourceId,
-            final ItemFilter equipmentFilter, final List<ExpandableListItem> items) {
-        super(context, displayService, layoutResourceId, equipmentFilter, items);
+    ItemEditArrayAdapter(final Context context, final DisplayService displayService,
+                         final ItemFilter equipmentFilter, final List<ExpandableListItem> items) {
+        super(context, displayService, R.layout.listitem_item_edit, equipmentFilter, items);
     }
 
     @Override

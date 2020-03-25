@@ -72,24 +72,14 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     private String getMaxRank() {
         final int maxClassSkillRank = ruleService.getMaxClassSkillRank(character);
         final float maxCrossClassSkillRank = ruleService.getMaxCrossClassSkillRank(character);
-        return getResources().getString(R.string.skill_list_max_ranks) +
-                ": " +
-                maxClassSkillRank +
-                " / " +
-                maxCrossClassSkillRank;
+        return getResources().getString(R.string.skill_list_max_ranks) + ": " + maxClassSkillRank + " / " + maxCrossClassSkillRank;
     }
 
     private String getSkillPoints() {
         final CharacterClass startClass = character.getClassLevels().get(0).getCharacterClass();
         final int skillPoints = ruleService.getSkillPoints(character, startClass);
         final int spentSkillPoints = ruleService.getSpentSkillPoints(character);
-        return getResources().getString(R.string.skill_list_skill_points) +
-                ": " +
-                spentSkillPoints +
-                " " +
-                getResources().getString(R.string.skill_list_skill_points_of) +
-                " " +
-                skillPoints;
+        return getResources().getString(R.string.skill_list_skill_points) + ": " + spentSkillPoints + " " + getResources().getString(R.string.skill_list_skill_points_of) + " " + skillPoints;
     }
 
     private void setTabs() {
@@ -97,10 +87,8 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
         tabHost.setup();
 
         addTab(R.string.skill_list_tab_title_fav, R.id.skill_list_list_favorite, android.R.drawable.btn_star);
-        addTab(R.string.skill_list_tab_title_trained, R.id.skill_list_list_trained,
-                android.R.drawable.ic_menu_preferences);
-        addTab(R.string.skill_list_tab_title_all, R.id.skill_list_list_all,
-                android.R.drawable.ic_menu_sort_alphabetically);
+        addTab(R.string.skill_list_tab_title_trained, R.id.skill_list_list_trained, android.R.drawable.ic_menu_preferences);
+        addTab(R.string.skill_list_tab_title_all, R.id.skill_list_list_all, android.R.drawable.ic_menu_sort_alphabetically);
         tabHost.setCurrentTab(0);
     }
 
@@ -120,7 +108,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     }
 
     private ArrayAdapter<CharacterSkill> createAdapterAndListView(final List<CharacterSkill> characterSkills,
-            final int listViewResourceId) {
+                                                                  final int listViewResourceId) {
         final DieRollView dieRollView = view.findViewById(R.id.die_roll_view);
         final CharacterSkillArrayAdapter characterSkillsArrayAdapter = new CharacterSkillArrayAdapter(getActivity(),
                 character, ruleService, displayService, R.layout.listitem_skill, dieRollView, characterSkills);
@@ -188,18 +176,18 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
         Logger.debug("onContextItemSelected");
         menuItem.getMenuInfo();
         switch (menuItem.getItemId()) {
-        case CONTEXT_MENU_ADD_TO_FAVORITES:
-            Logger.debug("add to favorites");
-            addSkillToFavorties();
-            return true;
+            case CONTEXT_MENU_ADD_TO_FAVORITES:
+                Logger.debug("add to favorites");
+                addSkillToFavorties();
+                return true;
 
-        case CONTEXT_MENU_REMOVE_FROM_FAVORITES:
-            Logger.debug("remove from favorites");
-            removeSkillFromFavorites();
-            return true;
+            case CONTEXT_MENU_REMOVE_FROM_FAVORITES:
+                Logger.debug("remove from favorites");
+                removeSkillFromFavorites();
+                return true;
 
-        default:
-            return super.onContextItemSelected(menuItem);
+            default:
+                return super.onContextItemSelected(menuItem);
         }
     }
 

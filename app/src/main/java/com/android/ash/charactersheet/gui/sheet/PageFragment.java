@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
+import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
 import com.android.ash.charactersheet.gui.util.LogFragment;
@@ -23,11 +25,18 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class for fragments which are part of the character sheet.
  */
 public abstract class PageFragment extends LogFragment {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     GameSystem gameSystem;
     CharacterService characterService;
@@ -44,16 +53,15 @@ public abstract class PageFragment extends LogFragment {
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        final CharacterSheetApplication application = (CharacterSheetApplication) Objects.requireNonNull(getActivity()).getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
         characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         ruleService = gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
         imageService = (AndroidImageService) gameSystem.getImageService();
-        preferenceService = application.getPreferenceService();
+        preferenceService = preferenceServiceHolder.getValue().getPreferenceService();
         xpService = gameSystem.getXpService();
         featService = gameSystem.getFeatService();
-        character = application.getCharacter();
+        character = characterHolder.getValue().getCharacter();
 
         setHasOptionsMenu(true);
 
@@ -63,20 +71,17 @@ public abstract class PageFragment extends LogFragment {
     }
 
     /**
-     * Adds a tab to the tabhost of the fragment.
-     * 
-     * @param labelId
-     *            The resource id of the tab label.
-     * @param layoutId
-     *            The resource id of XML layout of the tab.
-     * @param iconId
-     *            The resource id of the icon of the tab.
+     * Adds a tab to the tab host of the fragment.
+     *
+     * @param labelId  The resource id of the tab label.
+     * @param layoutId The resource id of XML layout of the tab.
+     * @param iconId   The resource id of the icon of the tab.
      */
     void addTab(final int labelId, final int layoutId, final int iconId) {
         final TabHost tabHost = view.findViewById(android.R.id.tabhost);
-        final String label = (String) Objects.requireNonNull(getActivity()).getResources().getText(labelId);
+        final String label = (String) requireActivity().getResources().getText(labelId);
         final TabSpec tabSpec = tabHost.newTabSpec(label);
-        tabSpec.setIndicator(label, ContextCompat.getDrawable(getActivity(), iconId));
+        tabSpec.setIndicator(label, ContextCompat.getDrawable(requireActivity(), iconId));
         tabSpec.setContent(layoutId);
         tabHost.addTab(tabSpec);
     }

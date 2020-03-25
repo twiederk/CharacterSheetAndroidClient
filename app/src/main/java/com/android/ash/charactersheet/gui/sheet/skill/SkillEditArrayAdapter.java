@@ -41,8 +41,8 @@ public class SkillEditArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
      * @param itemViewResourceId
      *            The resource id of the item view.
      */
-    public SkillEditArrayAdapter(final Context context, final Character character, final GameSystem gameSystem,
-            final int itemViewResourceId) {
+    SkillEditArrayAdapter(final Context context, final Character character, final GameSystem gameSystem,
+                          final int itemViewResourceId) {
         super(context, gameSystem.getDisplayService(), itemViewResourceId, character.getCharacterSkills());
         this.character = character;
         this.ruleService = gameSystem.getRuleService();

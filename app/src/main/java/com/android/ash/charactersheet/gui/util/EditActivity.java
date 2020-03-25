@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
+import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.DisplayService;
@@ -13,10 +15,18 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 /**
  * Activities to edit values of the character class expand from this class.
  */
-public abstract class EditActivity extends LogActivity {
+public abstract class EditActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     protected GameSystem gameSystem;
     private CharacterService characterService;
@@ -29,17 +39,25 @@ public abstract class EditActivity extends LogActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        setToolbar();
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        character = application.getCharacter();
-        gameSystem = application.getGameSystem();
+        character = characterHolder.getValue().getCharacter();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         ruleService = gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
 
         messageManager = new MessageManager(this, displayService);
+    }
 
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getHeading());
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     @Override
@@ -75,6 +93,10 @@ public abstract class EditActivity extends LogActivity {
             setData();
         }
     }
+
+    protected abstract int getLayoutId();
+
+    protected abstract int getHeading();
 
     protected abstract void setData();
 

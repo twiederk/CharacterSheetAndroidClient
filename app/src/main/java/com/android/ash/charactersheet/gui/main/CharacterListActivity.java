@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.CharacterHolder;
-import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
@@ -64,8 +63,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private List<Character> characters;
     private CharacterArrayAdapter adapter;
 
-    private CharacterSheetApplication application;
-
     private GameSystemType gameSystemType = GameSystemType.DNDV35;
 
     private DBHelper dndDbHelper;
@@ -84,7 +81,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         super.onCreate(savedInstanceState);
         renameDnDv35Database();
 
-        application = (CharacterSheetApplication) getApplication();
         gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         if (gameSystem == null) {
@@ -98,7 +94,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
             preferenceService = new PreferenceServiceImpl(new AndroidPreferenceDao(this));
             preferenceServiceHolder.getValue().setPreferenceService(preferenceService);
-            application.setPreferenceService(preferenceService);
         }
     }
 
@@ -136,7 +131,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
         // store character
         characterHolder.getValue().setCharacter(character);
-        application.setCharacter(character);
 
         // call character sheet
         final Intent intent = new Intent(this, CharacterSheetActivity.class);
@@ -366,6 +360,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_6));
             case 46:
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_7));
+            case 47:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_8));
                 break;
 
             default:
@@ -418,7 +414,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         super.onDestroy();
         dndDbHelper.close();
         pathfinderDbHelper.close();
-        application.close();
     }
 
     private void renameDnDv35Database() {

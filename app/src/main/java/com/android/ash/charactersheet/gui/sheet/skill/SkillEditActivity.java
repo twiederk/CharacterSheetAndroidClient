@@ -8,7 +8,7 @@ import com.d20charactersheet.framework.boc.util.CharacterSkillComparator;
 
 /**
  * The SkillEditActivity contains a list view with an item for each skill. The rank and the modifier for each skill can
- * be edited by using NumberViews. The option menue allows to save or cancel the edited skill values.
+ * be edited by using NumberViews. The option menu allows to save or cancel the edited skill values.
  */
 public class SkillEditActivity extends BaseCharacterSheetActivity {
 
@@ -29,11 +29,6 @@ public class SkillEditActivity extends BaseCharacterSheetActivity {
         final ListView listView = findViewById(R.id.skill_edit_list);
         listView.setAdapter(skillsArrayAdapter);
         listView.setTextFilterEnabled(true);
-    }
-
-    @Override
-    protected void doResume() {
-        // nothing to resume
     }
 
 }

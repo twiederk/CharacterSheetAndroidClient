@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.money;
 
-import android.os.Bundle;
-
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.EditActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.NumberViewController;
@@ -15,17 +13,19 @@ import com.d20charactersheet.framework.boc.model.Money;
  */
 public class MoneyEditActivity extends EditActivity {
 
-    private NumberViewController platiumnController;
+    private NumberViewController platinumController;
     private NumberViewController goldController;
     private NumberViewController silverController;
     private NumberViewController copperController;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        setContentView(R.layout.activity_money_edit);
-        setTitle(R.string.money_title);
-        super.onCreate(savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.activity_money_edit;
+    }
 
+    @Override
+    protected int getHeading() {
+        return R.string.money_title;
     }
 
     @Override
@@ -36,14 +36,14 @@ public class MoneyEditActivity extends EditActivity {
 
     private void createControllers() {
         final Money money = character.getMoney();
-        platiumnController = new ZeroAndPositiveNumberViewController(money.getPlatinum());
+        platinumController = new ZeroAndPositiveNumberViewController(money.getPlatinum());
         goldController = new ZeroAndPositiveNumberViewController(money.getGold());
         silverController = new ZeroAndPositiveNumberViewController(money.getSilver());
         copperController = new ZeroAndPositiveNumberViewController(money.getCopper());
     }
 
     private void setControllers() {
-        setController(R.id.money_platinum, platiumnController);
+        setController(R.id.money_platinum, platinumController);
         setController(R.id.money_gold, goldController);
         setController(R.id.money_silver, silverController);
         setController(R.id.money_copper, copperController);
@@ -57,7 +57,7 @@ public class MoneyEditActivity extends EditActivity {
     @Override
     protected void saveData() {
         final Money money = new Money();
-        money.setPlatinum(platiumnController.getNumber().intValue());
+        money.setPlatinum(platinumController.getNumber().intValue());
         money.setGold(goldController.getNumber().intValue());
         money.setSilver(silverController.getNumber().intValue());
         money.setCopper(copperController.getNumber().intValue());

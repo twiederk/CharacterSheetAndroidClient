@@ -32,8 +32,8 @@ import androidx.annotation.NonNull;
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
- * List of feats. The feats are listed in three tabs. One tab for genereal feats, one for item creation and one for
- * meatmagic. A checkbox is used to show all feats or only the feats of the character. The number of feat of the
+ * List of feats. The feats are listed in three tabs. One tab for general feats, one for item creation and one for
+ * meta magic. A checkbox is used to show all feats or only the feats of the character. The number of feat of the
  * character is displayed. Single click on a feat expands it view to show detail information. Long touch calls the
  * context menu, which offers options to add, remove or edit a feat.
  */
@@ -78,13 +78,7 @@ public class FeatPageFragment extends PageFragment implements Observer {
     private String getNumberOfFreeFeats() {
         final int numberOfFeats = featModel.getCharacterFeats().size();
         final int maxNumberOfFeats = ruleService.getNumberOfFeats(character);
-        return numberOfFeats +
-                SPACE +
-                getResources().getString(R.string.feat_list_preposition) +
-                SPACE +
-                maxNumberOfFeats +
-                SPACE +
-                getResources().getString(R.string.feat_list_feats);
+        return numberOfFeats + SPACE + getResources().getString(R.string.feat_list_preposition) + SPACE + maxNumberOfFeats + SPACE + getResources().getString(R.string.feat_list_feats);
     }
 
     private void setTabs() {
@@ -103,7 +97,7 @@ public class FeatPageFragment extends PageFragment implements Observer {
     }
 
     private void setFeatListView(final FeatType featType, final int listViewResourceId) {
-        final FeatListAdapter featListAdapter = new FeatListAdapter(Objects.requireNonNull(getActivity()), R.layout.listitem_feat, featModel,
+        final FeatListAdapter featListAdapter = new FeatListAdapter(requireActivity(), R.layout.listitem_feat, featModel,
                 featType);
         final ListView listView = view.findViewById(listViewResourceId);
         listView.setAdapter(featListAdapter);
@@ -148,9 +142,11 @@ public class FeatPageFragment extends PageFragment implements Observer {
         inflater.inflate(R.menu.menu_page_feat, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_page_feat_show_all);
         final CheckBox showAllCheckBox = (CheckBox) menuItem.getActionView();
-        showAllCheckBox.setText(getString(R.string.feat_list_show_all_feats));
-        showAllCheckBox.setChecked(featModel.isShowAllFeats());
-        showAllCheckBox.setOnClickListener(new CheckBoxFeatModelController(featModel, showAllCheckBox));
+        if (showAllCheckBox != null) {
+            showAllCheckBox.setText(getString(R.string.feat_list_show_all_feats));
+            showAllCheckBox.setChecked(featModel.isShowAllFeats());
+            showAllCheckBox.setOnClickListener(new CheckBoxFeatModelController(featModel, showAllCheckBox));
+        }
     }
 
 }

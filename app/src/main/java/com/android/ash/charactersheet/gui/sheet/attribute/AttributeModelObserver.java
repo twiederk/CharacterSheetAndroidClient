@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.sheet.attribute;
 
-import java.util.Observable;
-
 import com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextViewModel;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.RuleService;
+
+import java.util.Observable;
 
 /**
  * Observs an AttributeModel and informs TextView if the attribute value changed.
@@ -16,7 +16,7 @@ public class AttributeModelObserver extends Observable implements ObserverTextVi
     private final DisplayService displayService;
 
     /**
-     * Creates observer which observs the given AttributeModel.
+     * Creates observer which observes the given AttributeModel.
      * 
      * @param attributeModel
      *            The AttributeModel to observe.
@@ -25,7 +25,7 @@ public class AttributeModelObserver extends Observable implements ObserverTextVi
      * @param displayService
      *            Use to display the modifier of the attribute value.
      */
-    public AttributeModelObserver(final AttributeModel attributeModel, final RuleService ruleService, final DisplayService displayService) {
+    AttributeModelObserver(final AttributeModel attributeModel, final RuleService ruleService, final DisplayService displayService) {
         super();
         this.attributeModel = attributeModel;
         this.ruleService = ruleService;

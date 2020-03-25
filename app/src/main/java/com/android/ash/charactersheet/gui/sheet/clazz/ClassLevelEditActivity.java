@@ -9,9 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
@@ -22,16 +23,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The activity displays a list view of all class levels. The level of the class can be decrease and increased. The
  * class level can be deleted. A new class level buttons open the create class level dialog. The ok and cancel button
  * allows to save or cancel the changes.
  */
-public class ClassLevelEditActivity extends LogActivity {
+public class ClassLevelEditActivity extends LogAppCompatActivity {
 
     private static final int RESULT_CODE_NEW_CLASS_LEVEL = 100;
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     private GameSystem gameSystem;
     private CharacterService characterService;
@@ -43,16 +51,22 @@ public class ClassLevelEditActivity extends LogActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
         characterService = Objects.requireNonNull(gameSystem).getCharacterService();
-        character = application.getCharacter();
+        character = characterHolder.getValue().getCharacter();
 
         setContentView(R.layout.class_level_edit);
-        setTitle(R.string.class_level_edit_title);
+        setToolbar();
         setClassLevels();
         setNewClassLevelButton();
 
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.class_level_edit_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void setClassLevels() {
@@ -142,6 +156,7 @@ public class ClassLevelEditActivity extends LogActivity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
+        super.onActivityResult(requestCode, resultCode, resultIntent);
 
         // see which child activity is calling us back.
         if (requestCode == RESULT_CODE_NEW_CLASS_LEVEL) {

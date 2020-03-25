@@ -888,6 +888,7 @@
     <string name="release_notes_2_11_5">Release 2.11.5\nBug fix: AndroidX Migration\n\n</string>
     <string name="release_notes_2_11_6">Release 2.11.6\nBug fix: Added Espresso tests to administration\n\n</string>
     <string name="release_notes_2_11_7">Release 2.11.7\nBug fix: Added Espresso tests to main\n\n</string>
+    <string name="release_notes_2_11_8">Release 2.11.8\nBug fix: Added Espresso tests to sheet\n\n</string>
     <string name="release_notes_not_found">No Release Notes found\n\n</string>
 
 </resources>

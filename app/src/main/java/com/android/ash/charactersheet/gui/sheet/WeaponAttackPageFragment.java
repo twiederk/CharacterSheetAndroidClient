@@ -29,7 +29,7 @@ import androidx.annotation.NonNull;
  */
 public class WeaponAttackPageFragment extends PageFragment {
 
-    private static final int CONTEXT_MENU_DELETE_WEAPONATTACK = 100;
+    private static final int CONTEXT_MENU_DELETE_WEAPON_ATTACK = 100;
 
     private WeaponAttackListAdapter weaponAttackListAdapter;
 
@@ -101,12 +101,12 @@ public class WeaponAttackPageFragment extends PageFragment {
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         final WeaponAttack weaponAttack = (WeaponAttack) getListView().getAdapter().getItem(info.position);
         menu.setHeaderTitle(weaponAttack.getName());
-        menu.add(0, CONTEXT_MENU_DELETE_WEAPONATTACK, 0, R.string.weaponattack_list_delete);
+        menu.add(0, CONTEXT_MENU_DELETE_WEAPON_ATTACK, 0, R.string.weaponattack_list_delete);
     }
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        if (item.getItemId() == CONTEXT_MENU_DELETE_WEAPONATTACK) {
+        if (item.getItemId() == CONTEXT_MENU_DELETE_WEAPON_ATTACK) {
             deleteWeaponAttack(item);
             return true;
         }

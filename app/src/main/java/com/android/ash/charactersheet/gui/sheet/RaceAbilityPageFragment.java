@@ -101,9 +101,7 @@ public class RaceAbilityPageFragment extends PageFragment {
     }
 
     private String composeText(final String label, final String value) {
-        return label +
-                ": " +
-                value;
+        return label + ": " + value;
     }
 
     private void setBody() {

@@ -58,7 +58,7 @@
             android:focusable="false" />
     </TableRow>
 
-    <!-- Thrid Row -->
+    <!-- Third Row -->
 
     <TableRow android:id="@+id/third_row" >
 

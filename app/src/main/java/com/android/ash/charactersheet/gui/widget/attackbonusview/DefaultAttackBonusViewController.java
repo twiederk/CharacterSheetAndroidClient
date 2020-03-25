@@ -12,7 +12,7 @@ public class DefaultAttackBonusViewController implements AttackBonusViewControll
     private final WeaponAttack weaponAttack;
 
     /**
-     * Default implementation uses attack bonuses of weaopon attack.
+     * Default implementation uses attack bonuses of weapon attack.
      *
      * @param weaponAttack The weapon attack
      */

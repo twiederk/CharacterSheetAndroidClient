@@ -42,12 +42,12 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 /**
- * A dummy fragment representing a section of the app, but that simply displays dummy text.
+ * Displays the characters appearance, abilities, saves, money and combat values.
  */
 public class SheetPageFragment extends PageFragment {
 
@@ -317,6 +317,13 @@ public class SheetPageFragment extends PageFragment {
         return decimalFormat.format(gold);
     }
 
+    private void setCharacterName() {
+        Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle(character.getName());
+        }
+    }
+
     /**
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
@@ -401,7 +408,7 @@ public class SheetPageFragment extends PageFragment {
     }
 
     private InputStream getInputStream(Uri uri) throws FileNotFoundException {
-        ContentResolver contentResolver = Objects.requireNonNull(getActivity()).getContentResolver();
+        ContentResolver contentResolver = requireActivity().getContentResolver();
         return contentResolver.openInputStream(uri);
     }
 
@@ -424,7 +431,7 @@ public class SheetPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Objects.requireNonNull(getActivity()).setTitle(character.getName());
+        setCharacterName();
         setActivityBackground();
         setAppearance();
         setAttribute();

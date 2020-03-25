@@ -5,7 +5,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.TextView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.util.SlideActivity;
@@ -17,12 +17,18 @@ import com.d20charactersheet.framework.boc.service.SpelllistService;
 
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays detail information of a spell.
  */
 public class SpellActivity extends SlideActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private GameSystem gameSystem;
     private DisplayService displayService;
@@ -32,14 +38,21 @@ public class SpellActivity extends SlideActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spell);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
         displayService = Objects.requireNonNull(gameSystem).getDisplayService();
 
         final Spell spell = getSpellFromIntent();
-        setTitle(spell.getName());
+        setToolbar(spell);
         setSpell(spell);
     }
+
+    private void setToolbar(Spell spell) {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(spell.getName());
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
 
     private Spell getSpellFromIntent() {
         final Bundle extras = getIntent().getExtras();

@@ -37,7 +37,7 @@ class SectionsPagerAdapter extends FragmentStatePagerAdapter {
                 new RaceAbilityPageFragment(), //
                 new ClassAbilityPageFragment(), //
                 new FeatPageFragment(), //
-                new EquipmentPageFragement(), //
+                new EquipmentPageFragment(), //
                 new NotePageFragment(), //
                 new KnownSpellPageFragment(), //
                 new SpellSlotPageFragment(), //

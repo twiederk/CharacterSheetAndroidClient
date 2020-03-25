@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Display;
 import android.widget.ImageView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
+import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
@@ -18,11 +20,20 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 /**
  * Base class of CharacterSheetActivities. Derive activities in the character sheet part of the application from this
  * class. It supplies standard functionality for character sheet activities.
  */
-public abstract class BaseCharacterSheetActivity extends LogActivity {
+public abstract class BaseCharacterSheetActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     protected GameSystem gameSystem;
     protected CharacterService characterService;
@@ -36,21 +47,28 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        preferenceService = preferenceServiceHolder.getValue().getPreferenceService();
         characterService = Objects.requireNonNull(gameSystem).getCharacterService();
         gameSystem.getRuleService();
         displayService = gameSystem.getDisplayService();
         imageService = (AndroidImageService) gameSystem.getImageService();
-        preferenceService = application.getPreferenceService();
         gameSystem.getXpService();
-        character = application.getCharacter();
+        character = characterHolder.getValue().getCharacter();
 
-        setTitle(Objects.requireNonNull(character).getName());
+        setToolbar();
         setBackground();
 
         doCreate();
     }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(Objects.requireNonNull(character).getName());
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
 
     private void setBackground() {
         final boolean showImageAsBackground = preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND);
@@ -78,16 +96,8 @@ public abstract class BaseCharacterSheetActivity extends LogActivity {
         imageView.setImageBitmap(bitmap);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        doResume();
-    }
-
     protected abstract int getLayoutId();
 
     protected abstract void doCreate();
-
-    protected abstract void doResume();
 
 }

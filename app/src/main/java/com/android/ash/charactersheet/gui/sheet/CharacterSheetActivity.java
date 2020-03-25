@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Display;
 import android.widget.ImageView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
+import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
@@ -21,12 +23,19 @@ import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The character sheet of the character. Displays the stats, abilities and combat values of the character. The
  * background shows the image of the character.
  */
 public class CharacterSheetActivity extends LogAppCompatActivity {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<PreferenceServiceHolder> preferencesServiceHolder = inject(PreferenceServiceHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     private GameSystem gameSystem;
     private PreferenceService preferenceService;
@@ -37,11 +46,10 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         Logger.info(getClass().getSimpleName() + ".onCreate()");
         super.onCreate(savedInstanceState);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
 
-        preferenceService = application.getPreferenceService();
-        character = application.getCharacter();
+        preferenceService = preferencesServiceHolder.getValue().getPreferenceService();
+        character = characterHolder.getValue().getCharacter();
 
         setContentView(R.layout.activity_character_sheet);
         setToolbar();
@@ -59,6 +67,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private void setToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(character.getName());
         Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
@@ -85,19 +94,6 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         imageView.setMinimumWidth(minWidth);
         imageView.setMinimumHeight(minHeight);
         imageView.setImageBitmap(bitmap);
-    }
-
-    @Override
-    protected void onResume() {
-        Logger.info(getClass().getSimpleName() + ".onResume()");
-        super.onResume();
-        setTitle(character.getName());
-    }
-
-    @Override
-    protected void onDestroy() {
-        Logger.info(getClass().getSimpleName() + ".onDestroy()");
-        super.onDestroy();
     }
 
 }

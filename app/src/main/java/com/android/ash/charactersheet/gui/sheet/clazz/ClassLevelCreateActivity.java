@@ -7,9 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.LogActivity;
+import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
@@ -23,14 +24,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * This activity creates a new class level. It displays the classes a spinner. Only classes the character has no levels
  * so far in are displayed. The level can be entered. The ok and cancel buttons are used to created or cancel the new
  * class level.
  */
-public class ClassLevelCreateActivity extends LogActivity implements AdapterView.OnItemClickListener {
+public class ClassLevelCreateActivity extends LogAppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     private GameSystem gameSystem;
     private DisplayService displayService;
@@ -43,14 +51,20 @@ public class ClassLevelCreateActivity extends LogActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_level_create);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
         displayService = Objects.requireNonNull(gameSystem).getDisplayService();
-        character = application.getCharacter();
+        character = characterHolder.getValue().getCharacter();
 
-        setTitle(R.string.class_level_create_title);
+        setToolbar();
         setCharacterClass();
 
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.class_level_create_title);
+        Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
     }
 
     private void setCharacterClass() {

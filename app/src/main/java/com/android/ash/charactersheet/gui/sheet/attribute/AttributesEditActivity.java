@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.attribute;
 
-import android.os.Bundle;
-
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.EditActivity;
 import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView;
@@ -34,11 +32,13 @@ public class AttributesEditActivity extends EditActivity {
     private ObserverTextView charismaTextView;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        setContentView(R.layout.activity_attribute_edit);
-        super.onCreate(savedInstanceState);
-        setTitle(R.string.attribute_title);
+    protected int getLayoutId() {
+        return R.layout.activity_attribute_edit;
+    }
 
+    @Override
+    protected int getHeading() {
+        return R.string.attribute_title;
     }
 
     @Override

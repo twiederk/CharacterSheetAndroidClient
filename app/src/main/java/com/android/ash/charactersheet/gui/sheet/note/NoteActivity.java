@@ -51,11 +51,6 @@ public abstract class NoteActivity extends BaseCharacterSheetActivity {
     }
 
     @Override
-    protected void doResume() {
-        // nothing to resume
-    }
-
-    @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
             try {

@@ -62,12 +62,6 @@ public class WeaponAttackSearchActivity extends BaseCharacterSheetActivity imple
     }
 
     @Override
-    protected void doResume() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void onItemClick(final AdapterView<?> listView, final View view, final int position, final long id) {
         final Weapon weapon = (Weapon) listView.getItemAtPosition(position);
         final Intent intent = new Intent(this, WeaponAttackCreateActivity.class);

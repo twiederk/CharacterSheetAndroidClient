@@ -41,10 +41,10 @@ public abstract class NumberView extends LinearLayout {
         super(context, attributeSet);
         scale = getResources().getDisplayMetrics().density;
         this.setOrientation(HORIZONTAL);
-        initView(context, attributeSet, createLayoutParams());
+        initView(context, createLayoutParams());
     }
 
-    abstract void initView(Context context, AttributeSet attributeSet, LayoutParams layoutParams);
+    abstract void initView(Context context, LayoutParams layoutParams);
 
     private LayoutParams createLayoutParams() {
         final LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,

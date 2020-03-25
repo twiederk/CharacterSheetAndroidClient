@@ -43,26 +43,27 @@
         <!-- AppearanceEditActivity -->
         <activity
             android:name=".gui.sheet.appearance.AppearanceEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- AttributesEditActivity -->
         <activity
             android:name=".gui.sheet.attribute.AttributesEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- CombatEditActivity -->
         <activity
             android:name=".gui.sheet.combat.CombatEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SaveEditActivity -->
         <activity
             android:name=".gui.sheet.save.SaveEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- MoneyEditActivity -->
+        <activity
+            android:name=".gui.sheet.money.MoneyEditActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- AboutActivity -->
         <activity
@@ -77,14 +78,12 @@
         <!-- ClassLevelEditActivity -->
         <activity
             android:name=".gui.sheet.clazz.ClassLevelEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- ClassLevelCreateActivity -->
         <activity
             android:name=".gui.sheet.clazz.ClassLevelCreateActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SkillEditActivity -->
         <activity
@@ -94,14 +93,7 @@
         <!-- FeatEditActivity -->
         <activity
             android:name=".gui.sheet.feat.FeatEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
-
-        <!-- MoneyEditActivity -->
-        <activity
-            android:name=".gui.sheet.money.MoneyEditActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SkillAdministrationListActivity -->
         <activity
@@ -291,8 +283,7 @@
         <!-- SkillDescriptionActivity -->
         <activity
             android:name=".gui.sheet.skill.SkillDescriptionActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- PreferencesActivity -->
         <activity

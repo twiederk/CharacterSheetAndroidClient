@@ -11,7 +11,7 @@ import com.android.ash.charactersheet.R;
 /**
  * Activity slides from left into and out of activity.
  */
-public abstract class SlideActivity extends LogActivity {
+public abstract class SlideActivity extends LogAppCompatActivity {
 
     private boolean firstTime = true;
 

@@ -12,7 +12,7 @@ public class ExpandableListItem {
     private boolean expanded;
 
     /**
-     * Creates ExpandableListItem containg the given object.
+     * Creates ExpandableListItem containing the given object.
      * 
      * @param object
      *            The object to display as list item.

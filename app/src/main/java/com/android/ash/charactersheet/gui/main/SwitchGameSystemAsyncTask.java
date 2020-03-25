@@ -2,7 +2,6 @@ package com.android.ash.charactersheet.gui.main;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
@@ -30,10 +29,10 @@ public class SwitchGameSystemAsyncTask extends AbstractAsyncTask {
      * @param dbHelper          The helper to open the database.
      * @param gameSystemType    The game system to create.
      */
-    public SwitchGameSystemAsyncTask(final CharacterListActivity activity,
-                                     final AbstractAsyncTask.GameSystemLoadable callbackInterface,
-                                     final DBHelper dbHelper,
-                                     final GameSystemType gameSystemType) {
+    SwitchGameSystemAsyncTask(final CharacterListActivity activity,
+                              final AbstractAsyncTask.GameSystemLoadable callbackInterface,
+                              final DBHelper dbHelper,
+                              final GameSystemType gameSystemType) {
         super(activity, callbackInterface, gameSystemType);
         this.dbHelper = dbHelper;
     }
@@ -52,10 +51,6 @@ public class SwitchGameSystemAsyncTask extends AbstractAsyncTask {
 
         final GameSystem gameSystem = createGameSystem(database);
         gameSystemHolder.getValue().setGameSystem(gameSystem);
-
-
-        final CharacterSheetApplication application = (CharacterSheetApplication) activity.getApplication();
-        application.setGameSystem(gameSystem);
 
         return new TaskResult(true);
     }

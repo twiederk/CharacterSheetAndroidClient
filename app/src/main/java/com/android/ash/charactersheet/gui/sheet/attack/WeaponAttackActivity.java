@@ -4,7 +4,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SpinnerAdapter;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.d20charactersheet.framework.boc.model.AttackWield;
@@ -17,10 +18,17 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 /**
  * Displays a WeaponAttack to be created or edited.
  */
 public abstract class WeaponAttackActivity extends FormActivity<WeaponAttack> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
     GameSystem gameSystem;
     Character character;
@@ -32,9 +40,8 @@ public abstract class WeaponAttackActivity extends FormActivity<WeaponAttack> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        character = application.getCharacter();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        character = characterHolder.getValue().getCharacter();
     }
 
 

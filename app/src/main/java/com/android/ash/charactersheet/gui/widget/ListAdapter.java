@@ -12,7 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Filterable ListAdapter with observerable model.
+ * Filterable ListAdapter with observable model.
  * 
  * @param <T>
  *            The class of the listed items.

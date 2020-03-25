@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
@@ -18,12 +18,17 @@ import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays preferences. Preferences to choose background color or image. Preference to select game system to start up
  * with.
  */
 public class PreferencesActivity extends LogAppCompatActivity {
+
+    private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
 
     private PreferenceService preferenceService;
 
@@ -35,8 +40,7 @@ public class PreferencesActivity extends LogAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
 
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        preferenceService = application.getPreferenceService();
+        preferenceService = preferenceServiceHolder.getValue().getPreferenceService();
 
         setToolbar();
         setRadioButtons();

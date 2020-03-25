@@ -20,7 +20,7 @@ import kotlin.Lazy;
 import static org.koin.java.KoinJavaComponent.inject;
 
 /**
- * Form to create and edit feats. Displays text boxes to enter name, benefit and prerequisit of feat. The type of feat
+ * Form to create and edit feats. Displays text boxes to enter name, benefit and prerequisite of feat. The type of feat
  * is displayed in a spinner. Fighter bonus feat, multiple and stack can be set by checkboxes. The multiple and stack
  * checkbox exclude each other.
  */

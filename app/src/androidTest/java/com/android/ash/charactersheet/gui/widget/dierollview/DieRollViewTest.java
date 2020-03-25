@@ -92,7 +92,7 @@ public class DieRollViewTest {
         return dieRoll;
     }
 
-    public class TestDieRollController implements DieRollViewController {
+    public static class TestDieRollController implements DieRollViewController {
 
         private DieRoll dieRoll;
 

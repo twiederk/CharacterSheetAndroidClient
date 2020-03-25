@@ -25,16 +25,14 @@ import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.util.MagicOnClickListener;
 
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 /**
- * Displays equipment of the character. Weapons, armor and goods are displayed in seperate tabs. Items can be touched to
+ * Displays equipment of the character. Weapons, armor and goods are displayed in separate tabs. Items can be touched to
  * expand displayed information. The menu options call activities to edit number of weapons, armor and goods.
  */
-public class EquipmentPageFragement extends PageFragment {
+public class EquipmentPageFragment extends PageFragment {
 
     private ItemFilter equipmentFilter;
     private EquipmentHelper equipmentListHelper;
@@ -61,11 +59,7 @@ public class EquipmentPageFragement extends PageFragment {
 
     private String getLoadText() {
         final float weight = ruleService.getLoad(character);
-        return getResources().getString(R.string.equipment_list_load) +
-                ": " +
-                weight +
-                " " +
-                getResources().getString(R.string.unit_weight);
+        return getResources().getString(R.string.equipment_list_load) + ": " + weight + " " + getResources().getString(R.string.unit_weight);
     }
 
     private void createTabs() {
@@ -82,9 +76,9 @@ public class EquipmentPageFragement extends PageFragment {
     @Override
     void addTab(final int labelId, final int layoutId, final int iconId) {
         final TabHost tabHost = view.findViewById(android.R.id.tabhost);
-        final String label = (String) Objects.requireNonNull(getActivity()).getResources().getText(labelId);
+        final String label = (String) requireActivity().getResources().getText(labelId);
         final TabSpec tabSpec = tabHost.newTabSpec(label);
-        tabSpec.setIndicator(label, ContextCompat.getDrawable(getActivity(), iconId));
+        tabSpec.setIndicator(label, ContextCompat.getDrawable(requireActivity(), iconId));
         tabSpec.setContent(layoutId);
         tabHost.addTab(tabSpec);
     }
@@ -132,27 +126,29 @@ public class EquipmentPageFragement extends PageFragment {
 
         final MenuItem menuItem = menu.findItem(R.id.menu_page_equip_magic_item);
         final CheckBox magicItemCheckBox = (CheckBox) menuItem.getActionView();
-        magicItemCheckBox.setText(getString(R.string.equipment_list_show_magic));
-        magicItemCheckBox.setChecked(equipmentFilter.isMagic());
-        magicItemCheckBox.setOnClickListener(new MagicOnClickListener(equipmentFilter));
+        if (magicItemCheckBox != null) {
+            magicItemCheckBox.setText(getString(R.string.equipment_list_show_magic));
+            magicItemCheckBox.setChecked(equipmentFilter.isMagic());
+            magicItemCheckBox.setOnClickListener(new MagicOnClickListener(equipmentFilter));
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
         switch (item.getItemId()) {
-        case R.id.menu_page_equip_edit_weapons:
-            editWeapons();
-            break;
-        case R.id.menu_page_equip_edit_armor:
-            editArmor();
-            break;
-        case R.id.menu_page_equip_edit_goods:
-            editGoods();
-            break;
+            case R.id.menu_page_equip_edit_weapons:
+                editWeapons();
+                break;
+            case R.id.menu_page_equip_edit_armor:
+                editArmor();
+                break;
+            case R.id.menu_page_equip_edit_goods:
+                editGoods();
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

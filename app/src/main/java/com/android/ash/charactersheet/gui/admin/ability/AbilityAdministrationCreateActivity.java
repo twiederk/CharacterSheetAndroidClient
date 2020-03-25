@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.AbilityClass;
 import com.android.ash.charactersheet.gui.util.FormActivity;
@@ -30,12 +30,18 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Creates a new ability.
  */
 public class AbilityAdministrationCreateActivity extends FormActivity<Ability> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+
 
     private GameSystem gameSystem;
 
@@ -46,8 +52,7 @@ public class AbilityAdministrationCreateActivity extends FormActivity<Ability> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
     }
 
 

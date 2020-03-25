@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet.note;
 
-import java.util.Date;
-
 import com.d20charactersheet.framework.boc.model.Note;
 
+import java.util.Date;
+
 /**
- * Displays a form to create a new note. The note is initalized with the current date and an empty text.
+ * Displays a form to create a new note. The note is initialized with the current date and an empty text.
  */
 public class NoteCreateActivity extends NoteActivity {
 

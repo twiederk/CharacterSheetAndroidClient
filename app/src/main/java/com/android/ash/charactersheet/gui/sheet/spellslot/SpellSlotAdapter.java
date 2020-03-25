@@ -190,7 +190,7 @@ public class SpellSlotAdapter extends ListAdapter<Object> {
         spellSchoolView.setText(getSchoolText(spell));
 
         final TextView spelllistAbilityView = view.findViewById(R.id.spelllist_ability);
-        spelllistAbilityView.setText(getSpelllistAblilityText(spelllistAbilities));
+        spelllistAbilityView.setText(getSpelllistAbilityText(spelllistAbilities));
 
         final TextView metamagicFeatView = view.findViewById(R.id.metamagic_feat);
         metamagicFeatView.setText(getMetamagicFeatText(metamagicFeats));
@@ -215,7 +215,7 @@ public class SpellSlotAdapter extends ListAdapter<Object> {
         return text.toString();
     }
 
-    private String getSpelllistAblilityText(final List<SpelllistAbility> spelllistAbilities) {
+    private String getSpelllistAbilityText(final List<SpelllistAbility> spelllistAbilities) {
         final StringBuilder text = new StringBuilder();
         for (final Iterator<SpelllistAbility> iterator = spelllistAbilities.iterator(); iterator.hasNext();) {
             final SpelllistAbility spelllistAbility = iterator.next();

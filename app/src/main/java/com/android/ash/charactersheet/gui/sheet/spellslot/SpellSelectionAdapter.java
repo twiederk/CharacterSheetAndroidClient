@@ -19,7 +19,7 @@ class SpellSelectionAdapter extends SpinnerArrayAdapter<Spell> implements Observ
     private final Spinner spinner;
 
     /**
-     * Instanciate SpellSelectionAdapter for given spinner with given SpellSlotActivityModel.
+     * Instantiate SpellSelectionAdapter for given spinner with given SpellSlotActivityModel.
      * 
      * @param context
      *            The context of the activity.
@@ -30,8 +30,8 @@ class SpellSelectionAdapter extends SpinnerArrayAdapter<Spell> implements Observ
      * @param spellSlotActivityModel
      *            The model containing the spells for selection.
      */
-    public SpellSelectionAdapter(final Context context, final Spinner spinner, final DisplayService displayService,
-            final SpellSlotActivityModel spellSlotActivityModel) {
+    SpellSelectionAdapter(final Context context, final Spinner spinner, final DisplayService displayService,
+                          final SpellSlotActivityModel spellSlotActivityModel) {
         super(context, displayService, spellSlotActivityModel.getSpells());
         this.spinner = spinner;
         this.spellSlotActivityModel = spellSlotActivityModel;

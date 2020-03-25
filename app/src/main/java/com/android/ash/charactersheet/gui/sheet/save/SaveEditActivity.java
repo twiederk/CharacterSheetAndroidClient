@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.save;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.android.ash.charactersheet.R;
@@ -17,10 +16,13 @@ import com.d20charactersheet.framework.boc.model.Save;
 public class SaveEditActivity extends EditActivity {
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        setContentView(R.layout.activity_save_edit);
-        setTitle(R.string.save_title);
-        super.onCreate(savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.activity_save_edit;
+    }
+
+    @Override
+    protected int getHeading() {
+        return R.string.save_title;
     }
 
     @Override

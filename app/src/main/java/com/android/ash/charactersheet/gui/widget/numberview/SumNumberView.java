@@ -31,16 +31,16 @@ public class SumNumberView extends NumberView {
     }
 
     @Override
-    void initView(final Context context, final AttributeSet attributeSet, final LayoutParams layoutParams) {
+    void initView(final Context context, final LayoutParams layoutParams) {
         addView(createNumberTextView(context), layoutParams);
         addView(createNumberEditText(context), layoutParams);
-        addView(createSummandEditText(context, attributeSet), layoutParams);
+        addView(createSummandEditText(context), layoutParams);
         addView(createDecreaseTextView(context), layoutParams);
         addView(createIncreaseTextView(context), layoutParams);
     }
 
-    private View createSummandEditText(final Context context, final AttributeSet attributeSet) {
-        summandEditText = new EditText(context, attributeSet);
+    private View createSummandEditText(final Context context) {
+        summandEditText = new EditText(context);
         summandEditText.setMinWidth((int) (EDIT_TEXT_SIZE * scale));
         summandEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         summandEditText.setText("1");

@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.sheet.combat;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.android.ash.charactersheet.R;
@@ -35,10 +34,13 @@ public class CombatEditActivity extends EditActivity {
     private NumberViewController cmdController;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        setContentView(R.layout.activity_combat_edit);
-        setTitle(R.string.combat_title);
-        super.onCreate(savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.activity_combat_edit;
+    }
+
+    @Override
+    protected int getHeading() {
+        return R.string.combat_title;
     }
 
     @Override

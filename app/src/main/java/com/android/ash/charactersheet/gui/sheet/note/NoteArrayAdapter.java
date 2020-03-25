@@ -25,7 +25,7 @@ public class NoteArrayAdapter extends DisplayArrayAdapter<Note> {
      * @param context
      *            The application context.
      * @param displayService
-     *            The service used to display the note in humanreadable format.
+     *            The service used to display the note in human readable format.
      * @param notes
      *            The notes to display.
      */

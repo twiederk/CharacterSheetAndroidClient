@@ -24,7 +24,7 @@ public class StepNumberView extends NumberView {
     }
 
     @Override
-    void initView(final Context context, final AttributeSet attributeSet, final LayoutParams layoutParams) {
+    void initView(final Context context, final LayoutParams layoutParams) {
         addView(createDecreaseTextView(context), layoutParams);
         addView(createNumberTextView(context), layoutParams);
         addView(createNumberEditText(context), layoutParams);

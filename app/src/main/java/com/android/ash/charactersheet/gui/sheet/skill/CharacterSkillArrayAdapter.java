@@ -54,7 +54,7 @@ public class CharacterSkillArrayAdapter extends DisplayArrayAdapter<CharacterSki
     }
 
     /**
-     * Fill list item view with name of skill. The calculated skill modifer, the attribute, the rank and modifier.
+     * Fill list item view with name of skill. The calculated skill modifier, the attribute, the rank and modifier.
      */
     @Override
     protected void fillView(final View view, final CharacterSkill characterSkill) {

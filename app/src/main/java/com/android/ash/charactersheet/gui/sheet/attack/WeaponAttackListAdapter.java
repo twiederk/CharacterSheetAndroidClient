@@ -24,7 +24,7 @@ import java.util.List;
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
- * Displays a weaopn attack. The name is displayes in upper left corner. In the upper right corner the attack bonuses
+ * Displays a weapon attack. The name is displays in upper left corner. In the upper right corner the attack bonuses
  * are displayed on buttons. In the second row from right to left is the following displayed. Normal damage, critical
  * damage, range increment for range weapons, ammunition for projectile weapons.
  */

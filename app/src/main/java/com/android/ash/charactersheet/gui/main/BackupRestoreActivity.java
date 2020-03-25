@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.backuprestore.FileBackupAgent;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
@@ -36,14 +36,19 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Allows to backup databases to cloud and file and restore from file. The Backup to Cloud button uses the Android
- * backup mechanism to store the database to the cloud. The button Backup to File stores the selecte database with
+ * backup mechanism to store the database to the cloud. The button Backup to File stores the select database with
  * version and date to the download directory. The list displays databases located in the download directory. Touching a
  * file restores it.
  */
 public class BackupRestoreActivity extends LogAppCompatActivity implements OnItemClickListener {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     private static final String LINE_FEED = "\n";
     private static final String COLON = ": ";
@@ -255,8 +260,7 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
             fileBackupAgent.restore(gameSystemType, restoreFile);
 
             // drop game system to reload it in CharacterListActivity
-            final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-            application.setGameSystem(null);
+            gameSystemHolder.getValue().setGameSystem(null);
 
             // return to CharacterListActivity
             finish();

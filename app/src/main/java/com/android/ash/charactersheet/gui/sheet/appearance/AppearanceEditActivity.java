@@ -1,7 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet.appearance;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,13 +37,13 @@ public class AppearanceEditActivity extends EditActivity {
     private Button classLevelButton;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        setContentView(R.layout.activity_appearance_edit);
-        setTitle(R.string.appearance_title);
-        super.onCreate(savedInstanceState);
-        sortedRaces = getSortedRaces();
-        getViews();
-        createSpinnerAdapter();
+    protected int getLayoutId() {
+        return R.layout.activity_appearance_edit;
+    }
+
+    @Override
+    protected int getHeading() {
+        return R.string.appearance_title;
     }
 
     private List<Race> getSortedRaces() {
@@ -79,6 +78,10 @@ public class AppearanceEditActivity extends EditActivity {
 
     @Override
     protected void setData() {
+        sortedRaces = getSortedRaces();
+        getViews();
+        createSpinnerAdapter();
+
         nameEditText.setText(character.getName());
         playerEditText.setText(character.getPlayer());
         raceSpinner.setSelection(getRaceIndex(character.getRace()));

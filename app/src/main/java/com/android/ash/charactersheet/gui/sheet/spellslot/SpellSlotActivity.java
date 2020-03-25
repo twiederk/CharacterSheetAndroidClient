@@ -7,7 +7,8 @@ import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.d20charactersheet.framework.boc.model.Character;
@@ -20,13 +21,20 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 import java.util.Iterator;
 import java.util.Objects;
 
+import kotlin.Lazy;
+
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays spell slot to select spell for. Displays spell list ability the spell slot belongs to. Displays spells to
  * select in a spinner. Displays metamagic feats to select.
  */
 public class SpellSlotActivity extends FormActivity<SpellSlot> {
+
+    private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
+
 
     private static final Object COMMA = ", ";
     private GameSystem gameSystem;
@@ -40,9 +48,8 @@ public class SpellSlotActivity extends FormActivity<SpellSlot> {
 
     @Override
     protected void createServices() {
-        final CharacterSheetApplication application = (CharacterSheetApplication) getApplication();
-        gameSystem = application.getGameSystem();
-        character = application.getCharacter();
+        gameSystem = gameSystemHolder.getValue().getGameSystem();
+        character = characterHolder.getValue().getCharacter();
     }
 
     @Override

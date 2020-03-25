@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.android.ash.charactersheet.CharacterSheetApplication;
+import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity;
@@ -45,8 +45,8 @@ import static org.koin.java.KoinJavaComponent.inject;
 public class CharacterCreateActivity extends LogAppCompatActivity {
 
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
 
-    private CharacterSheetApplication application;
     private GameSystem gameSystem;
 
     private MessageManager messageManager;
@@ -62,7 +62,6 @@ public class CharacterCreateActivity extends LogAppCompatActivity {
         setContentView(R.layout.character_create);
         setToolbar();
 
-        application = (CharacterSheetApplication) getApplication();
         gameSystem = gameSystemHolder.getValue().getGameSystem();
 
         messageManager = new MessageManager(this, Objects.requireNonNull(gameSystem).getDisplayService());
@@ -102,7 +101,7 @@ public class CharacterCreateActivity extends LogAppCompatActivity {
     private void createCharacter() {
         try {
             final Character character = newCharacter();
-            application.setCharacter(character);
+            characterHolder.getValue().setCharacter(character);
             jumpToCharacterSheet();
         } catch (final Exception exception) {
             messageManager.showErrorMessage(exception);

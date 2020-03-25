@@ -28,7 +28,6 @@ import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -38,7 +37,7 @@ import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 /**
  * The KnownSpellPageFragment displays a tab for each spell list the character can access. The checkbox show all,
  * decides if all spells are listed or only the one known by the character. Known spells are added by checking the check
- * box in front of the spell name. Each heading of a spell level shows how many spells the character currently knowns
+ * box in front of the spell name. Each heading of a spell level shows how many spells the character currently knows
  * and how many he is allowed to know. Touch on a spell opens the detail info of the spell.
  */
 public class KnownSpellPageFragment extends PageFragment implements OnItemClickListener {
@@ -126,9 +125,11 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
         inflater.inflate(R.menu.menu_page_known_spell, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_page_known_spell_show_all);
         final CheckBox showAllCheckBox = (CheckBox) menuItem.getActionView();
-        showAllCheckBox.setText(getString(R.string.page_known_spell_menu_show_all));
-        showAllCheckBox.setChecked(knownSpellPageModel.isShowAll());
-        showAllCheckBox.setOnClickListener(new CheckBoxSpelllistModelController(knownSpellPageModel));
+        if (showAllCheckBox != null) {
+            showAllCheckBox.setText(getString(R.string.page_known_spell_menu_show_all));
+            showAllCheckBox.setChecked(knownSpellPageModel.isShowAll());
+            showAllCheckBox.setOnClickListener(new CheckBoxSpelllistModelController(knownSpellPageModel));
+        }
     }
 
     /**
@@ -155,7 +156,7 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
                 listView.setAdapter(spelllistAdapter);
                 listView.setOnItemClickListener(onItemClickListener);
                 listView.setDrawSelectorOnTop(false);
-                listView.setBackground(ContextCompat.getDrawable(Objects.requireNonNull(getActivity()), R.drawable.paperscroll));
+                listView.setBackground(ContextCompat.getDrawable(requireActivity(), R.drawable.paperscroll));
                 listView.setCacheColorHint(0);
 
                 tabs.put(spelllistModel.getName(), listView);

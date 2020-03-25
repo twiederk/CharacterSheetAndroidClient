@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="vertical"
-    android:importantForAutofill="noExcludeDescendants">
+    android:importantForAutofill="noExcludeDescendants"
+    android:orientation="vertical">
 
-    <TableLayout style="@style/centered" >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <TableLayout style="@style/centered">
 
         <!-- NAME -->
 
@@ -13,8 +24,8 @@
 
             <TextView
                 style="@style/tableCell_string"
-                android:text="@string/appearance_name_label"
-                android:labelFor="@+id/appearance_name" />
+                android:labelFor="@+id/appearance_name"
+                android:text="@string/appearance_name_label" />
 
             <EditText
                 android:id="@+id/appearance_name"
@@ -28,8 +39,8 @@
 
             <TextView
                 style="@style/tableCell_string"
-                android:text="@string/appearance_player_label"
-                android:labelFor="@+id/appearance_player" />
+                android:labelFor="@+id/appearance_player"
+                android:text="@string/appearance_player_label" />
 
             <EditText
                 android:id="@+id/appearance_player"
@@ -115,8 +126,8 @@
 
             <TextView
                 style="@style/tableCell_string"
-                android:text="@string/appearance_experience_label"
-                android:labelFor="@+id/appearance_experience" />
+                android:labelFor="@+id/appearance_experience"
+                android:text="@string/appearance_experience_label" />
 
             <EditText
                 android:id="@+id/appearance_experience"
@@ -126,4 +137,4 @@
         </TableRow>
     </TableLayout>
 
-</ScrollView>
+</LinearLayout>
