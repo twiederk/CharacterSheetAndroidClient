@@ -5,7 +5,7 @@ import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import java.util.List;
 
 /**
- * Default implementation of AttackBonusViewContoller.
+ * Default implementation of AttackBonusViewController.
  */
 public class DefaultAttackBonusViewController implements AttackBonusViewController {
 

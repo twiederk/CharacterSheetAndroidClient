@@ -8,7 +8,7 @@
 
         <CheckBox
             android:id="@+id/feat_administration_fighter_bonus"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/feat_administration_fighter_bonus" />
@@ -18,7 +18,7 @@
 
         <CheckBox
             android:id="@+id/feat_administration_multiple"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/feat_administration_multiple" />
@@ -28,7 +28,7 @@
 
         <CheckBox
             android:id="@+id/feat_administration_stack"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/feat_administration_stack" />

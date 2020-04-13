@@ -71,7 +71,7 @@ class CombatEditActivityInstrumentationTest : KoinTest {
         onView(allOf(withParent(withId(R.id.combat_max_hitpoints)), withClassName(endsWith("EditText")), isDisplayed())).check(matches(withText("1")))
         onView(withId(R.id.combat_armorclass_formular)).check(matches(withText("10+(+4)+")))
         onView(allOf(withParent(withId(R.id.combat_armorclass)), withClassName(endsWith("TextView")))).check(matches(withText("3")))
-        onView(withId(R.id.combat_initative_formular)).check(matches(withText("myFormular")))
+        onView(withId(R.id.combat_initiative_formular)).check(matches(withText("myFormular")))
         onView(allOf(withParent(withId(R.id.combat_initiative)), withClassName(endsWith("TextView")))).check(matches(withText("4")))
         onView(withId(R.id.combat_cmb_formular)).check(matches(withText("myFormular")))
         onView(allOf(withParent(withId(R.id.combat_cmb)), withClassName(endsWith("TextView")))).check(matches(withText("5")))

@@ -38,7 +38,7 @@ public class DamageOnClickListener {
      * @param view
      *            The parent view.
      * @param weaponAttack
-     *            The weaon attack to roll damage for.
+     *            The weapon attack to roll damage for.
      */
     public void onClick(final View view, final WeaponAttack weaponAttack) {
         final String title = view.getResources().getString(R.string.weaponattack_list_damage_roll);

@@ -25,6 +25,6 @@
 
     <ListView
         android:id="@android:id/list"
-        style="@style/transparentListView" />
+        style="@style/AppTheme.TransparentListView" />
 
 </LinearLayout>

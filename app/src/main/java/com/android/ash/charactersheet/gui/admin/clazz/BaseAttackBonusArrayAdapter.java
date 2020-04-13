@@ -1,15 +1,15 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
-import java.util.List;
-
 import android.content.Context;
 
 import com.android.ash.charactersheet.gui.widget.SpinnerArrayAdapter;
 import com.d20charactersheet.framework.boc.model.BaseAttackBonus;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 
+import java.util.List;
+
 /**
- * Adapter of the base attack bonus spinner in the CharacterClassAdminitrationActivity.
+ * Adapter of the base attack bonus spinner in the CharacterClassAdministrationActivity.
  */
 public class BaseAttackBonusArrayAdapter extends SpinnerArrayAdapter<BaseAttackBonus> {
 
@@ -23,8 +23,8 @@ public class BaseAttackBonusArrayAdapter extends SpinnerArrayAdapter<BaseAttackB
      * @param baseAttackBoni
      *            The base attack boni to display.
      */
-    public BaseAttackBonusArrayAdapter(final Context context, final DisplayService displayService,
-            final List<BaseAttackBonus> baseAttackBoni) {
+    BaseAttackBonusArrayAdapter(final Context context, final DisplayService displayService,
+                                final List<BaseAttackBonus> baseAttackBoni) {
         super(context, displayService, baseAttackBoni);
     }
 

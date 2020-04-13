@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/background"
-        style="@style/character_sheet_char_image"
+        style="@style/AppTheme.CharacterSheetImage"
         android:contentDescription="@string/activity_base_character_sheet_image_hint" />
 
     <LinearLayout
@@ -26,7 +26,7 @@
 
         <ListView
             android:id="@+id/skill_edit_list"
-            style="@style/transparentListView" />
+            style="@style/AppTheme.TransparentListView" />
 
     </LinearLayout>
 

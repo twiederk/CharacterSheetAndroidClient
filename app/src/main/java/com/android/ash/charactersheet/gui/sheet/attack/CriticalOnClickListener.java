@@ -33,7 +33,7 @@ public class CriticalOnClickListener {
     }
 
     /**
-     * Executes critical damage roll. Displays tilte of critical damage roll and displays result.
+     * Executes critical damage roll. Displays title of critical damage roll and displays result.
      * 
      * @param view
      *            The parent view.

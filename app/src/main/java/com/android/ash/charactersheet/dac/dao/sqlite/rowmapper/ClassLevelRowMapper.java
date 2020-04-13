@@ -1,12 +1,12 @@
 package com.android.ash.charactersheet.dac.dao.sqlite.rowmapper;
 
-import java.util.List;
-
 import android.database.Cursor;
 import android.database.SQLException;
 
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
+
+import java.util.List;
 
 /**
  * Maps a row of the table character_class_level to a ClassLevel object.
@@ -16,7 +16,7 @@ public class ClassLevelRowMapper implements RowMapper {
     private final List<CharacterClass> allCharacterClasses;
 
     /**
-     * Creates ClassLevelRowMapper, whicht requires all character classes to map the data to a ClassLevel.
+     * Creates ClassLevelRowMapper, which requires all character classes to map the data to a ClassLevel.
      * 
      * @param allCharacterClasses
      *            All character classes of the game system.

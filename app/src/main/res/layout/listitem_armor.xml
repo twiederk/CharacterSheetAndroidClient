@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/armor_number"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end"
@@ -19,14 +19,14 @@
 
         <TextView
             android:id="@+id/armor_name"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="3" />
 
         <TextView
             android:id="@+id/armor_bonus"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end" />
@@ -38,21 +38,21 @@
 
         <TextView
             android:id="@+id/armor_type"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="2" />
 
         <TextView
             android:id="@+id/armor_cost"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end" />
 
         <TextView
             android:id="@+id/armor_weight"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end"
@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/armor_check_penalty"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end"
@@ -73,7 +73,7 @@
 
         <TextView
             android:id="@+id/item_desc"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="4" />

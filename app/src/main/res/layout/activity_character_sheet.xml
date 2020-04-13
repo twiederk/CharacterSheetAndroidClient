@@ -30,7 +30,7 @@
 
         <ImageView
             android:id="@+id/background"
-            style="@style/character_sheet_char_image"
+            style="@style/AppTheme.CharacterSheetImage"
             android:contentDescription="@string/activity_base_character_sheet_image_hint" />
 
         <androidx.viewpager.widget.ViewPager

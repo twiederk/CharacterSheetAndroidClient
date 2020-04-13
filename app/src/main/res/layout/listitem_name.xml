@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/name"
-        style="@style/list_item_heading"
+        style="@style/AppTheme.ListItemHeading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

@@ -6,7 +6,7 @@
 
     <Button
         android:id="@+id/skill_roll_button"
-        style="@style/button_die_roll"
+        style="@style/AppTheme.ButtonDieRoll"
         android:layout_width="96dp"
         android:layout_height="fill_parent"
         android:layout_margin="4dp"
@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/skill_name"
-        style="@style/list_item_heading"
+        style="@style/AppTheme.ListItemHeading"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/skill_attribute_modifier"
-        style="@style/list_item_text"
+        style="@style/AppTheme.ListItemText"
         android:layout_width="96dp"
         android:layout_height="fill_parent"
         android:focusable="false"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/skill_rank"
-        style="@style/list_item_text"
+        style="@style/AppTheme.ListItemText"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:focusable="false"
@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/skill_modifier"
-        style="@style/list_item_text"
+        style="@style/AppTheme.ListItemText"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:focusable="false"

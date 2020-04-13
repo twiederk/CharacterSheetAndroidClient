@@ -18,7 +18,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:theme="@style/base">
+        android:theme="@style/AppTheme">
 
         <meta-data
             android:name="com.google.android.backup.api_key"
@@ -30,7 +30,6 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,46 +42,55 @@
         <!-- AppearanceEditActivity -->
         <activity
             android:name=".gui.sheet.appearance.AppearanceEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- AttributesEditActivity -->
         <activity
             android:name=".gui.sheet.attribute.AttributesEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- CombatEditActivity -->
         <activity
             android:name=".gui.sheet.combat.CombatEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SaveEditActivity -->
         <activity
             android:name=".gui.sheet.save.SaveEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- MoneyEditActivity -->
         <activity
             android:name=".gui.sheet.money.MoneyEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- AboutActivity -->
         <activity
             android:name=".gui.main.AboutActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- CharacterCreateActivity -->
         <activity
             android:name=".gui.main.CharacterCreateActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- ClassLevelEditActivity -->
         <activity
             android:name=".gui.sheet.clazz.ClassLevelEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- ClassLevelCreateActivity -->
         <activity
             android:name=".gui.sheet.clazz.ClassLevelCreateActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SkillEditActivity -->
@@ -93,6 +101,7 @@
         <!-- FeatEditActivity -->
         <activity
             android:name=".gui.sheet.feat.FeatEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SkillAdministrationListActivity -->
@@ -148,6 +157,7 @@
         <!-- CharacterClassAlignmentActivity -->
         <activity
             android:name=".gui.admin.clazz.alignment.CharacterClassAlignmentActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- ClassAdministrationAbilityListActivity -->
@@ -158,6 +168,7 @@
         <!-- CharacterClassSkillActivity -->
         <activity
             android:name=".gui.admin.clazz.skill.CharacterClassSkillActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- GoodsEditActivity -->
@@ -283,6 +294,7 @@
         <!-- SkillDescriptionActivity -->
         <activity
             android:name=".gui.sheet.skill.SkillDescriptionActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- PreferencesActivity -->
@@ -298,6 +310,7 @@
         <!-- ClassAdministrationAbilityEditActivity -->
         <activity
             android:name=".gui.admin.clazz.ability.ClassAdministrationAbilityEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- SpellActivity -->
@@ -318,11 +331,13 @@
         <!-- WeaponAttackCreateActivity -->
         <activity
             android:name=".gui.sheet.attack.WeaponAttackCreateActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- WeaponAttackEditActivity -->
         <activity
             android:name=".gui.sheet.attack.WeaponAttackEditActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- BackupRestoreActivity -->
@@ -388,6 +403,7 @@
         <!-- SpellSlotActivity -->
         <activity
             android:name=".gui.sheet.spellslot.SpellSlotActivity"
+            android:theme="@style/AppTheme.Dialog"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
     </application>
 

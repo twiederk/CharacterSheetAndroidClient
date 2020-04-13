@@ -7,11 +7,11 @@
 
     <TableRow
         android:id="@+id/first_row"
-        style="@style/tableRow_odd" >
+        style="@style/AppTheme.TableRowOdd">
 
         <TextView
             android:id="@+id/race_name"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/race_favorite_character_class_name"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,11 +30,11 @@
 
     <TableRow
         android:id="@+id/second_row"
-        style="@style/tableRow_even" >
+        style="@style/AppTheme.TableRowEven">
 
         <TextView
             android:id="@+id/race_size"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/race_reach"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,11 +53,11 @@
 
     <TableRow
         android:id="@+id/third_row"
-        style="@style/tableRow_odd" >
+        style="@style/AppTheme.TableRowOdd">
 
         <TextView
             android:id="@+id/race_speed"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,7 +65,7 @@
 
         <TextView
             android:id="@+id/race_space"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

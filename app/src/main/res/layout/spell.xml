@@ -24,47 +24,47 @@
 
         <TextView
             android:id="@+id/spell_school"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_components"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_casting_time"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_range"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_effect"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_duraction"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_saving_throw"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_spell_resistance"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_description"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_mat_component"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
 
         <TextView
             android:id="@+id/spell_focus"
-            style="@style/spell" />
+            style="@style/AppTheme.Spell" />
     </LinearLayout>
 
 </ScrollView>

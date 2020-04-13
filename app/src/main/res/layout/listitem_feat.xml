@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/feat_name"
-        style="@style/list_item_heading"
+        style="@style/AppTheme.ListItemHeading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
@@ -19,14 +19,14 @@
 
         <TextView
             android:id="@+id/feat_benefit_heading"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/feat_list_benefit" />
 
         <TextView
             android:id="@+id/feat_benefit"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp" />
@@ -39,14 +39,14 @@
 
         <TextView
             android:id="@+id/feat_prerequisit_heading"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/feat_list_prerequisit" />
 
         <TextView
             android:id="@+id/feat_prerequisit"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp" />
@@ -54,7 +54,7 @@
 
     <TextView
         android:id="@+id/feat_fighter_bonus_and_kind"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold" />

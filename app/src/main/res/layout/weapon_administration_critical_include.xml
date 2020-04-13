@@ -9,7 +9,7 @@
 
         <EditText
             android:id="@+id/weapon_administration_critical_hit"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:inputType="number"
@@ -17,14 +17,14 @@
             android:hint="@string/weapon_administration_critical_hit_hint" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/weapon_administration_critical_separator" />
 
         <EditText
             android:id="@+id/weapon_administration_critical_multiplier"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:inputType="numberSigned"

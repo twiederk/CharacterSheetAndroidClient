@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/table" >
+    style="@style/AppTheme.Table">
 
     <TextView
-        style="@style/heading"
+        style="@style/AppTheme.Heading"
         android:text="@string/appearance_title" />
 
     <TableLayout
@@ -12,77 +12,77 @@
 
         <!-- PLAYER -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_player_label" />
 
             <TextView
                 android:id="@+id/appearance_player"
-                style="@style/tableCell_string" />
+                style="@style/AppTheme.TableCellString" />
         </TableRow>
 
         <!-- RACE -->
 
-        <TableRow style="@style/tableRow_even" >
+        <TableRow style="@style/AppTheme.TableRowEven">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_race_label" />
 
             <TextView
                 android:id="@+id/appearance_race"
-                style="@style/tableCell_string" />
+                style="@style/AppTheme.TableCellString" />
         </TableRow>
 
         <!-- SEX -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_sex_label" />
 
             <TextView
                 android:id="@+id/appearance_sex"
-                style="@style/tableCell_string" />
+                style="@style/AppTheme.TableCellString" />
         </TableRow>
 
         <!-- CLASS -->
 
-        <TableRow style="@style/tableRow_even" >
+        <TableRow style="@style/AppTheme.TableRowEven">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_class_level_label" />
 
             <TextView
                 android:id="@+id/appearance_class_level"
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:singleLine="false" />
         </TableRow>
 
         <!-- ALIGNMENT -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_alignment_label" />
 
             <TextView
                 android:id="@+id/appearance_alignment"
-                style="@style/tableCell_string" />
+                style="@style/AppTheme.TableCellString" />
         </TableRow>
 
         <!-- EXPERIENCE POINTS -->
 
-        <TableRow style="@style/tableRow_even" >
+        <TableRow style="@style/AppTheme.TableRowEven">
 
             <TextView
                 android:id="@+id/appearance_experience_label"
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_experience_label" />
 
             <FrameLayout
@@ -98,7 +98,7 @@
 
                 <TextView
                     android:id="@+id/appearance_experience"
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" />
             </FrameLayout>

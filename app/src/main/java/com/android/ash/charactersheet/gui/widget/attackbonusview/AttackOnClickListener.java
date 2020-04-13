@@ -44,7 +44,7 @@ public class AttackOnClickListener {
      * @param attackBonus
      *            The bonus of the attack.
      * @param weaponAttack
-     *            The weaopon attack to roll the attack for.
+     *            The weapon attack to roll the attack for.
      */
     public void onClick(final View view, final int attackBonus, final WeaponAttack weaponAttack) {
         final Resources resources = view.getResources();

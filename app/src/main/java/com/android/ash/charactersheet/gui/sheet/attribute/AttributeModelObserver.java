@@ -7,7 +7,7 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 import java.util.Observable;
 
 /**
- * Observs an AttributeModel and informs TextView if the attribute value changed.
+ * Observes an AttributeModel and informs TextView if the attribute value changed.
  */
 public class AttributeModelObserver extends Observable implements ObserverTextViewModel {
 

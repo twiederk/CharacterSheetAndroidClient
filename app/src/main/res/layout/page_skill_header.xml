@@ -3,20 +3,20 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
-    <TableRow style="@style/tableRow_odd" >
+    <TableRow style="@style/AppTheme.TableRowOdd">
 
         <TextView
             android:id="@+id/max_ranks"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </TableRow>
 
-    <TableRow style="@style/tableRow_even" >
+    <TableRow style="@style/AppTheme.TableRowEven">
 
         <TextView
             android:id="@+id/skill_points"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </TableRow>

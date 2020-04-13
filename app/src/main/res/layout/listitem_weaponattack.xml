@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/weaponattack_name"
-            style="@style/weaponattack"
+            style="@style/AppTheme.Weaponattack"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="3"
@@ -30,21 +30,21 @@
 
         <Button
             android:id="@+id/weaponattack_damage"
-            style="@style/weaponattack"
+            style="@style/AppTheme.Weaponattack"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:focusable="false" />
 
         <Button
             android:id="@+id/weaponattack_critical"
-            style="@style/weaponattack"
+            style="@style/AppTheme.Weaponattack"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:focusable="false" />
 
         <TextView
             android:id="@+id/weaponattack_range_increment"
-            style="@style/weaponattack"
+            style="@style/AppTheme.Weaponattack"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end"
@@ -52,7 +52,7 @@
 
         <com.android.ash.charactersheet.gui.widget.ammunitionview.AmmunitionView
             android:id="@+id/weaponattack_ammunition"
-            style="@style/weaponattack"
+            style="@style/AppTheme.Weaponattack"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:focusable="false" />
@@ -64,7 +64,7 @@
 
         <TextView
             android:id="@+id/weaponattack_description"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="4"

@@ -67,10 +67,10 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
         nameTextView.setText(characterAbilityListItem.getAbilityName());
 
         if (expandableListItem.isExpanded()) {
-            setVisiblity(view, View.VISIBLE);
+            setVisibility(view, View.VISIBLE);
             setText(view, characterAbilityListItem);
         } else {
-            setVisiblity(view, View.GONE);
+            setVisibility(view, View.GONE);
         }
     }
 
@@ -90,7 +90,7 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
         }
     }
 
-    private void setVisiblity(final View view, final int visibility) {
+    private void setVisibility(final View view, final int visibility) {
         final TableRow secondRow = view.findViewById(R.id.second_row);
         final TableRow thirdRow = view.findViewById(R.id.third_row);
         final TableRow forthRow = view.findViewById(R.id.forth_row);

@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="base" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="list_item_heading" parent="base">
+    <style name="AppTheme.ListItemHeading" parent="AppTheme">
         <item name="android:textSize">23sp</item>
         <item name="android:padding">4dp</item>
     </style>
 
-    <style name="list_item_text" parent="base">
+    <style name="AppTheme.ListItemText" parent="AppTheme">
         <item name="android:textSize">18sp</item>
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingRight">4dp</item>
     </style>
 
-    <style name="list_item_spelllist_name" parent="list_item_spelllist" tools:keep="@style/list_item_spelllist_name">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
-    <style name="list_item_spelllist_level" parent="list_item_spelllist">
+    <style name="AppTheme.ListItemSpelllistLevel" parent="AppTheme.ListItemSpelllist">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">23sp</item>
@@ -29,13 +24,13 @@
         <item name="android:gravity">left</item>
     </style>
 
-    <style name="list_item_spelllist_spell_name" parent="list_item_spelllist">
+    <style name="AppTheme.ListItemSpelllistSpellName" parent="AppTheme.ListItemSpelllist">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="list_item_spelllist_spell_short_description" parent="list_item_spelllist">
+    <style name="AppTheme.ListItemSpelllistSpellShortDescription" parent="AppTheme.ListItemSpelllist">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/dark_gary</item>

@@ -16,20 +16,20 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TableLayout style="@style/centered">
+    <TableLayout style="@style/AppTheme.Centered">
 
         <!-- NAME -->
 
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:labelFor="@+id/appearance_name"
                 android:text="@string/appearance_name_label" />
 
             <EditText
                 android:id="@+id/appearance_name"
-                style="@style/edit"
+                style="@style/AppTheme.Edit"
                 android:inputType="textCapWords" />
         </TableRow>
 
@@ -38,13 +38,13 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:labelFor="@+id/appearance_player"
                 android:text="@string/appearance_player_label" />
 
             <EditText
                 android:id="@+id/appearance_player"
-                style="@style/edit"
+                style="@style/AppTheme.Edit"
                 android:inputType="textCapWords" />
         </TableRow>
 
@@ -53,7 +53,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_race_label" />
 
             <Spinner
@@ -67,7 +67,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_sex_label" />
 
             <Spinner
@@ -81,12 +81,12 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_class_level_label" />
 
             <Button
                 android:id="@+id/appearance_class_level"
-                style="@style/base"
+                style="@style/AppTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/appearance_class_level_button" />
@@ -97,7 +97,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_alignment_label" />
 
             <Spinner
@@ -111,7 +111,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/appearance_xptable_label" />
 
             <Spinner
@@ -125,13 +125,13 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:labelFor="@+id/appearance_experience"
                 android:text="@string/appearance_experience_label" />
 
             <EditText
                 android:id="@+id/appearance_experience"
-                style="@style/edit"
+                style="@style/AppTheme.Edit"
                 android:gravity="end"
                 android:inputType="number" />
         </TableRow>

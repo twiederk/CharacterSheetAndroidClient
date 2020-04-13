@@ -23,8 +23,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 48
-        versionName "2.11.8"
+        versionCode 49
+        versionName "2.11.9-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

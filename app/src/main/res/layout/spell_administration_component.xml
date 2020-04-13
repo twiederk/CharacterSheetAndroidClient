@@ -8,7 +8,7 @@
 
         <CheckBox
             android:id="@+id/spell_administration_component_verbal"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -16,7 +16,7 @@
 
         <CheckBox
             android:id="@+id/spell_administration_component_somatic"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -27,7 +27,7 @@
 
         <CheckBox
             android:id="@+id/spell_administration_component_material"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -35,7 +35,7 @@
 
         <CheckBox
             android:id="@+id/spell_administration_component_focus"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -46,7 +46,7 @@
 
         <CheckBox
             android:id="@+id/spell_administration_component_divinefocus"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -54,7 +54,7 @@
 
         <CheckBox
             android:id="@+id/spell_administration_component_xpcost"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"

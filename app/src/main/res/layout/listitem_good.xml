@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/good_number"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end"
@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/good_name"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="3" />
@@ -31,21 +31,21 @@
 
         <TextView
             android:id="@+id/good_type"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="2" />
 
         <TextView
             android:id="@+id/good_cost"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end" />
 
         <TextView
             android:id="@+id/good_weight"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="end"
@@ -58,7 +58,7 @@
 
         <TextView
             android:id="@+id/item_desc"
-            style="@style/list_item_text"
+            style="@style/AppTheme.ListItemText"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="5" />

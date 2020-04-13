@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/background"
-        style="@style/character_sheet_char_image"
+        style="@style/AppTheme.CharacterSheetImage"
         android:contentDescription="@string/activity_base_character_sheet_image_hint" />
 
     <ScrollView
@@ -32,7 +32,7 @@
 
             <TextView
                 android:id="@+id/note_date"
-                style="@style/base"
+                style="@style/AppTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/translucent_black"

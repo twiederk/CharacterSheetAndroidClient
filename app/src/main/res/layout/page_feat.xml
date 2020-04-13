@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/feat_list_number_of_feats"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp" />
@@ -29,19 +29,19 @@
 
             <ListView
                 android:id="@+id/feat_list_general"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/feat_list_item_creation"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/feat_list_metamagic"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/feat_list_teamwork"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
         </FrameLayout>
     </LinearLayout>
 

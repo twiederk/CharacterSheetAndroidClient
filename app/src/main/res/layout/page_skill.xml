@@ -24,15 +24,15 @@
 
             <ListView
                 android:id="@+id/skill_list_list_favorite"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/skill_list_list_trained"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/skill_list_list_all"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <com.android.ash.charactersheet.gui.widget.dierollview.DieRollView
                 android:id="@+id/die_roll_view"

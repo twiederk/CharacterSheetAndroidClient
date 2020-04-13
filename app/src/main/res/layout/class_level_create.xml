@@ -17,6 +17,6 @@
 
     <ListView
         android:id="@+id/class_level_create_class"
-        style="@style/transparentListView" />
+        style="@style/AppTheme.TransparentListView" />
 
 </LinearLayout>

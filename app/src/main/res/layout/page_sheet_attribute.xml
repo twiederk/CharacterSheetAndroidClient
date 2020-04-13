@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/table"
+    style="@style/AppTheme.Table"
     android:layout_toEndOf="@id/appearance_include">
 
     <TextView
-        style="@style/heading"
+        style="@style/AppTheme.Heading"
         android:text="@string/attribute_title" />
 
     <TableLayout
@@ -13,104 +13,104 @@
 
         <!-- STRENGTH (STR) -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_str" />
 
             <TextView
                 android:id="@+id/attribute_str_value"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <Button
                 android:id="@+id/attribute_str_mod"
-                style="@style/button_die_roll" />
+                style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
         <!-- DEXTERITY (DEX) -->
 
-        <TableRow style="@style/tableRow_even" >
+        <TableRow style="@style/AppTheme.TableRowEven">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_dex" />
 
             <TextView
                 android:id="@+id/attribute_dex_value"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <Button
                 android:id="@+id/attribute_dex_mod"
-                style="@style/button_die_roll" />
+                style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
         <!-- CONSTITUTION (CON) -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_con" />
 
             <TextView
                 android:id="@+id/attribute_con_value"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <Button
                 android:id="@+id/attribute_con_mod"
-                style="@style/button_die_roll" />
+                style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
         <!-- INTELLIGENCE (INT) -->
 
-        <TableRow style="@style/tableRow_even" >
+        <TableRow style="@style/AppTheme.TableRowEven">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_int" />
 
             <TextView
                 android:id="@+id/attribute_int_value"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <Button
                 android:id="@+id/attribute_int_mod"
-                style="@style/button_die_roll" />
+                style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
         <!-- WISDOM (WIS) -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_wis" />
 
             <TextView
                 android:id="@+id/attribute_wis_value"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <Button
                 android:id="@+id/attribute_wis_mod"
-                style="@style/button_die_roll" />
+                style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
         <!-- CHARISMA (CHA) -->
 
-        <TableRow style="@style/tableRow_even" >
+        <TableRow style="@style/AppTheme.TableRowEven">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_cha" />
 
             <TextView
                 android:id="@+id/attribute_cha_value"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <Button
                 android:id="@+id/attribute_cha_mod"
-                style="@style/button_die_roll" />
+                style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
     </TableLayout>
 

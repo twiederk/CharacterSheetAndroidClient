@@ -5,7 +5,7 @@
 
     <ListView
         android:id="@+id/attack_list"
-        style="@style/transparentListView" />
+        style="@style/AppTheme.TransparentListView" />
 
     <com.android.ash.charactersheet.gui.widget.dierollview.DieRollView
         android:id="@+id/attack_list_die_roll"

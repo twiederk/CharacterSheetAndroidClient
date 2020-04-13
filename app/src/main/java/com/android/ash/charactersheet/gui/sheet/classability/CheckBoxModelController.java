@@ -16,7 +16,7 @@ public class CheckBoxModelController implements OnClickListener {
      * Creates controller which connects the ShowAll checkbox with the model.
      * 
      * @param model
-     *            The model storing class abilties.
+     *            The model storing class abilities.
      * @param checkBox
      *            The checkbox to show all abilities or only those gained by level.
      */

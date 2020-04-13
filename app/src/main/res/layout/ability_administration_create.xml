@@ -21,7 +21,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -34,7 +34,7 @@
             android:layout_margin="8dp" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/ability_administration_create_explanation"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp" />

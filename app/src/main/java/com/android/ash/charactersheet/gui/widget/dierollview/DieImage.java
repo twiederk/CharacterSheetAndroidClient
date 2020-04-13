@@ -3,11 +3,13 @@ package com.android.ash.charactersheet.gui.widget.dierollview;
 import com.android.ash.charactersheet.R;
 
 /**
- * Contains all die images used by DieRollView. The images are stored in a three dimenstional array [Die][Color][digit]
+ * Contains all die images used by DieRollView. The images are stored in a three dimensional array [Die][Color][digit]
  */
 interface DieImage {
 
-    /** The images are stored in a three dimenstional array [Die][Color][digit] */
+    /**
+     * The images are stored in a three dimensional array [Die][Color][digit]
+     */
     int[][][] IMAGES = new int[][][]{
             // D2
             {

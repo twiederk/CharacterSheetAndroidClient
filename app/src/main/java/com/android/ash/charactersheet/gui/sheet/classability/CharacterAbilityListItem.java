@@ -31,7 +31,7 @@ public class CharacterAbilityListItem {
      * 
      * @return The name of the ability.
      */
-    public String getAbilityName() {
+    String getAbilityName() {
         return characterAbility.getClassAbility().getAbility().getName();
     }
 
@@ -40,7 +40,7 @@ public class CharacterAbilityListItem {
      * 
      * @return The type of the ability.
      */
-    public AbilityType getAbilityType() {
+    AbilityType getAbilityType() {
         return characterAbility.getClassAbility().getAbility().getAbilityType();
     }
 
@@ -49,12 +49,12 @@ public class CharacterAbilityListItem {
      * 
      * @return The description of the ability.
      */
-    public String getAbilityDescription() {
+    String getAbilityDescription() {
         return characterAbility.getClassAbility().getAbility().getDescription();
     }
 
     /**
-     * Returns the level the abiltiy is gained.
+     * Returns the level the ability is gained.
      * 
      * @return The level the ability is gained.
      */
@@ -86,7 +86,7 @@ public class CharacterAbilityListItem {
      * 
      * @return The name of the class the ability belongs to.
      */
-    public String getCharacterClassName() {
+    String getCharacterClassName() {
         return characterClassName;
     }
 
@@ -95,7 +95,7 @@ public class CharacterAbilityListItem {
      * 
      * @return The CharacterAbility.
      */
-    public CharacterAbility getCharacterAbility() {
+    CharacterAbility getCharacterAbility() {
         return characterAbility;
     }
 

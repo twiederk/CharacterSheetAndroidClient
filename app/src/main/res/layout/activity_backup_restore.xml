@@ -19,58 +19,58 @@
 
     <Button
         android:id="@+id/backup_restore_backup_to_cloud_button"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/backup_restore_backup_to_cloud" />
 
-    <View style="@style/horizontal_line" />
+    <View style="@style/AppTheme.HorizontalLine" />
 
     <!-- Backup to File -->
 
     <TextView
         android:id="@+id/backup_restore_backup_directory"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
     <CheckBox
         android:id="@+id/backup_restore_backup_dndv35"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
     <CheckBox
         android:id="@+id/backup_restore_backup_pathfinder"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
     <Button
         android:id="@+id/backup_restore_backup_to_file_button"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/backup_restore_backup_to_file" />
 
-    <View style="@style/horizontal_line" />
+    <View style="@style/AppTheme.HorizontalLine" />
 
     <!-- Restore from File -->
 
     <TextView
         android:id="@+id/backup_restore_restore_directory"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
     <TextView
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

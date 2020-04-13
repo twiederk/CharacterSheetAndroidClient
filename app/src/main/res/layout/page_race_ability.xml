@@ -8,6 +8,6 @@
 
     <ListView
         android:id="@+id/race_ability_list_view"
-        style="@style/transparentListView" />
+        style="@style/AppTheme.TransparentListView" />
 
 </LinearLayout>

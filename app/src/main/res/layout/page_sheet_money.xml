@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/table"
+    style="@style/AppTheme.Table"
     android:layout_below="@id/appearance_include" >
 
     <TextView
-        style="@style/heading"
+        style="@style/AppTheme.Heading"
         android:text="@string/money_title" />
 
     <TableLayout
@@ -13,15 +13,15 @@
 
         <!-- MONEY -->
 
-        <TableRow style="@style/tableRow_odd" >
+        <TableRow style="@style/AppTheme.TableRowOdd">
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/money_gold_label" />
 
             <TextView
                 android:id="@+id/money_gold"
-                style="@style/tableCell_number"
+                style="@style/AppTheme.TableCellNumber"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </TableRow>

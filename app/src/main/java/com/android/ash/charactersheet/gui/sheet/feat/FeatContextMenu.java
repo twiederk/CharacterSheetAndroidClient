@@ -87,7 +87,7 @@ public class FeatContextMenu implements OnCreateContextMenuListener, OnMenuItemC
     }
 
     /**
-     * Handels selected menu item. This could be add/remove feat or edit category.
+     * Handles selected menu item. This could be add/remove feat or edit category.
      */
     @Override
     public boolean onMenuItemClick(final MenuItem menuItem) {

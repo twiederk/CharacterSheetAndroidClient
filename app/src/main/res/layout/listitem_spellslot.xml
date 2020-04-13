@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/spelllevel_title"
-        style="@style/list_item_spellslot_level"
+        style="@style/AppTheme.ListItemSpellslotLevel"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
 
@@ -21,14 +21,14 @@
 
             <TextView
                 android:id="@+id/spell_name"
-                style="@style/base"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp" />
 
             <TextView
                 android:id="@+id/difficulty_class"
-                style="@style/base"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -40,14 +40,14 @@
 
             <TextView
                 android:id="@+id/spelllist_ability"
-                style="@style/base"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp" />
 
             <TextView
                 android:id="@+id/spell_school"
-                style="@style/base"
+                style="@style/AppTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -58,7 +58,7 @@
 
     <TextView
         android:id="@+id/metamagic_feat"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -66,6 +66,6 @@
 
     <View
         android:id="@+id/spell_divider"
-        style="@style/horizontal_line" />
+        style="@style/AppTheme.HorizontalLine" />
 
 </LinearLayout>

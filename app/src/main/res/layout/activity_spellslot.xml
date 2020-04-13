@@ -29,14 +29,14 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spellslot_abilities" />
 
                 <TextView
                     android:id="@+id/spellslot_abilities"
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp" />
@@ -45,7 +45,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spellslot_spell" />

@@ -18,14 +18,14 @@
     <TableRow>
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/class_administration_ability_edit_label_name" />
 
         <TextView
             android:id="@+id/class_administration_ability_edit_name"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent" />
     </TableRow>
@@ -33,7 +33,7 @@
     <TableRow>
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/class_administration_ability_edit_label_level" />

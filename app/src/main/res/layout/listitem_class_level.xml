@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/class_name"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:gravity="center" />
@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/class_level_delete"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_gravity="end"

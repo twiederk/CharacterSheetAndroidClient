@@ -15,23 +15,23 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TableLayout style="@style/centered" >
+    <TableLayout style="@style/AppTheme.Centered">
 
         <!-- STRENGTH (STR) -->
 
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_str" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/attribute_str"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
 
             <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
                 android:id="@+id/modifier_str"
-                style="@style/tableCell_number_attribute_modifier" />
+                style="@style/AppTheme.TableCellNumberAttributeModifier" />
         </TableRow>
 
         <!-- DEXTERITY (DEX) -->
@@ -39,16 +39,16 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_dex" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/attribute_dex"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
 
             <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
                 android:id="@+id/modifier_dex"
-                style="@style/tableCell_number_attribute_modifier" />
+                style="@style/AppTheme.TableCellNumberAttributeModifier" />
         </TableRow>
 
         <!-- CONSTITUTION (CON) -->
@@ -56,16 +56,16 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_con" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/attribute_con"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
 
             <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
                 android:id="@+id/modifier_con"
-                style="@style/tableCell_number_attribute_modifier" />
+                style="@style/AppTheme.TableCellNumberAttributeModifier" />
         </TableRow>
 
         <!-- INTELLIGENCE (INT) -->
@@ -73,16 +73,16 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_int" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/attribute_int"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
 
             <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
                 android:id="@+id/modifier_int"
-                style="@style/tableCell_number_attribute_modifier" />
+                style="@style/AppTheme.TableCellNumberAttributeModifier" />
         </TableRow>
 
         <!-- WISDOM (WIS) -->
@@ -90,16 +90,16 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_wis" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/attribute_wis"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
 
             <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
                 android:id="@+id/modifier_wis"
-                style="@style/tableCell_number_attribute_modifier" />
+                style="@style/AppTheme.TableCellNumberAttributeModifier" />
         </TableRow>
 
         <!-- CHARISMA (CHA) -->
@@ -107,16 +107,16 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/attribute_cha" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/attribute_cha"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
 
             <com.android.ash.charactersheet.gui.widget.observertextview.ObserverTextView
                 android:id="@+id/modifier_cha"
-                style="@style/tableCell_number_attribute_modifier" />
+                style="@style/AppTheme.TableCellNumberAttributeModifier" />
         </TableRow>
     </TableLayout>
 

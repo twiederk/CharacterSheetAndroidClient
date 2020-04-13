@@ -16,7 +16,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import java.util.List;
 
 /**
- * Adapter to display class levels in a list view. Displays the class, the level with a NumberView and a buttoon to
+ * Adapter to display class levels in a list view. Displays the class, the level with a NumberView and a button to
  * delete the class. If the last class level is to be deleted a message is shown.
  */
 public class ClassLevelArrayAdapter extends DisplayArrayAdapter<ClassLevel> {
@@ -35,8 +35,8 @@ public class ClassLevelArrayAdapter extends DisplayArrayAdapter<ClassLevel> {
      * @param classLevels
      *            The class levels to display.
      */
-    public ClassLevelArrayAdapter(final Context context, final DisplayService displayService,
-            final int itemViewResourceId, final List<ClassLevel> classLevels) {
+    ClassLevelArrayAdapter(final Context context, final DisplayService displayService,
+                           final int itemViewResourceId, final List<ClassLevel> classLevels) {
         super(context, displayService, itemViewResourceId, classLevels);
         messageManager = new MessageManager(context, displayService);
     }

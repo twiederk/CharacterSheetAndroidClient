@@ -108,19 +108,19 @@ public class FeatListAdapter extends BaseAdapter implements Observer, Filterable
         final TextView benefitTextView = view.findViewById(R.id.feat_benefit);
         benefitTextView.setText(featItem.getBenefit());
         final TextView headingBenefitTextView = view.findViewById(R.id.feat_benefit_heading);
-        setVisibiliy(headingBenefitTextView, benefitTextView, featItem.isExpanded());
+        setVisibility(headingBenefitTextView, benefitTextView, featItem.isExpanded());
 
         final TextView prerequisitTextView = view.findViewById(R.id.feat_prerequisit);
         prerequisitTextView.setText(featItem.getPrerequisit());
         final TextView headingPrerequisitTextView = view.findViewById(R.id.feat_prerequisit_heading);
-        setVisibiliy(headingPrerequisitTextView, prerequisitTextView, featItem.isExpanded());
+        setVisibility(headingPrerequisitTextView, prerequisitTextView, featItem.isExpanded());
 
         final TextView fighterBonusAndKindTextView = view.findViewById(R.id.feat_fighter_bonus_and_kind);
         fighterBonusAndKindTextView.setText(getFighterBonusAndKind(featItem));
-        setVisibiliy(null, fighterBonusAndKindTextView, featItem.isExpanded());
+        setVisibility(null, fighterBonusAndKindTextView, featItem.isExpanded());
     }
 
-    private void setVisibiliy(final TextView headingTextView, final TextView contentTextView, final boolean expanded) {
+    private void setVisibility(final TextView headingTextView, final TextView contentTextView, final boolean expanded) {
         int visibility = View.GONE;
         if (expanded && !"".equals(contentTextView.getText().toString())) {
             visibility = View.VISIBLE;

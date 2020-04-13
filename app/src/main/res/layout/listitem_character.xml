@@ -13,14 +13,14 @@
 
     <TextView
         android:id="@+id/character_name"
-        style="@style/list_item_heading"
+        style="@style/AppTheme.ListItemHeading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/character_face" />
 
     <TextView
         android:id="@+id/character_stats"
-        style="@style/list_item_text"
+        style="@style/AppTheme.ListItemText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/character_name"

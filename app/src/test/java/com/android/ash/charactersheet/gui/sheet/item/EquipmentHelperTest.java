@@ -27,23 +27,23 @@ public class EquipmentHelperTest {
 
     private List<ItemGroup> createGoodsAndFillBackpack() {
         final Good backpack = createGood(0, "Backpack");
-        final Good waterskin = createGood(68, "Waterskin");
+        final Good waterSkin = createGood(68, "Waterskin");
         final Good trailRation = createGood(51, "Trail Rations (per Day)");
         final Good bedroll = createGood(3, "Bedroll");
         final Good flintAndSteel = createGood(22, "Flint and Steel");
         final Good candle = createGood(10, "Candle");
 
         final List<ItemGroup> goods = new LinkedList<>();
-        goods.add(creatItemGroup(backpack, 1));
-        goods.add(creatItemGroup(waterskin, 1));
-        goods.add(creatItemGroup(trailRation, 10));
-        goods.add(creatItemGroup(bedroll, 1));
-        goods.add(creatItemGroup(flintAndSteel, 1));
-        goods.add(creatItemGroup(candle, 8));
+        goods.add(createItemGroup(backpack, 1));
+        goods.add(createItemGroup(waterSkin, 1));
+        goods.add(createItemGroup(trailRation, 10));
+        goods.add(createItemGroup(bedroll, 1));
+        goods.add(createItemGroup(flintAndSteel, 1));
+        goods.add(createItemGroup(candle, 8));
         return goods;
     }
 
-    private ItemGroup creatItemGroup(final Good good, final int number) {
+    private ItemGroup createItemGroup(final Good good, final int number) {
         final ItemGroup goodGroup = new ItemGroup();
         goodGroup.setItem(good);
         goodGroup.setNumber(number);

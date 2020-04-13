@@ -24,7 +24,7 @@
 
         <include layout="@layout/feat_administration_desc_include" />
 
-        <include layout="@layout/feat_administration_checkboxes_inlcude" />
+        <include layout="@layout/feat_administration_checkboxes_include" />
     </LinearLayout>
 
 </ScrollView>

@@ -6,13 +6,13 @@
 
     <TextView
         android:id="@+id/importmessage_heading"
-        style="@style/list_item_heading"
+        style="@style/AppTheme.ListItemHeading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/importmessage_text"
-        style="@style/list_item_text"
+        style="@style/AppTheme.ListItemText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp" />

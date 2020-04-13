@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/equipment_list_load"
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -30,15 +30,15 @@
 
             <ListView
                 android:id="@+id/weapon_list"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/armor_list"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
 
             <ListView
                 android:id="@+id/good_list"
-                style="@style/transparentListView" />
+                style="@style/AppTheme.TransparentListView" />
         </FrameLayout>
     </LinearLayout>
 

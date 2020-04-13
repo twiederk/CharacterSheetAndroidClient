@@ -15,18 +15,18 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TableLayout style="@style/centered" >
+    <TableLayout style="@style/AppTheme.Centered">
 
         <!-- CATEGORY -->
 
         <TextView
-            style="@style/tableCell_string"
+            style="@style/AppTheme.TableCellString"
             android:text="@string/feat_edit_category_label"
             android:labelFor="@+id/feat_edit_category" />
 
         <EditText
             android:id="@+id/feat_edit_category"
-            style="@style/edit"
+            style="@style/AppTheme.Edit"
             android:layout_width="fill_parent"
             android:inputType="textCapWords"
             android:importantForAutofill="no" />

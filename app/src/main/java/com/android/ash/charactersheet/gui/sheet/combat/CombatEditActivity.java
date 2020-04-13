@@ -79,7 +79,7 @@ public class CombatEditActivity extends EditActivity {
         armorClassNumberView = findViewById(R.id.combat_armorclass);
         armorClassFormularTextView = findViewById(R.id.combat_armorclass_formular);
         initiativeNumberView = findViewById(R.id.combat_initiative);
-        initiativeFormularTextView = findViewById(R.id.combat_initative_formular);
+        initiativeFormularTextView = findViewById(R.id.combat_initiative_formular);
         cmbNumberView = findViewById(R.id.combat_cmb);
         cmbFormularTextView = findViewById(R.id.combat_cmb_formular);
         cmdNumberView = findViewById(R.id.combat_cmd);

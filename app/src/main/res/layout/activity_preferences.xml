@@ -16,7 +16,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <TextView
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/preferences_background_label" />
@@ -28,14 +28,14 @@
 
         <RadioButton
             android:id="@+id/preferences_background_image"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/preferences_background_image" />
 
         <RadioButton
             android:id="@+id/preferences_background_color"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/preferences_background_color" />
@@ -47,10 +47,10 @@
             android:layout_marginStart="32dp" />
     </RadioGroup>
 
-    <View style="@style/horizontal_line" />
+    <View style="@style/AppTheme.HorizontalLine" />
 
     <TextView
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/preferences_game_system_label" />
@@ -60,6 +60,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
-    <View style="@style/horizontal_line" />
+    <View style="@style/AppTheme.HorizontalLine" />
 
 </LinearLayout>

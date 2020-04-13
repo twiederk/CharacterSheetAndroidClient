@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * View to display attack bonus. Each attack bonus is displayed on a separate button. Each click on the a attack bonus
- * send a message to the AttackOnClickListener and the AmmonitionViewController.
+ * send a message to the AttackOnClickListener and the AmmunitionViewController.
  */
 public class AttackBonusView extends LinearLayout {
 

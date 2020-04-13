@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="base" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textSize">20sp</item>
     </style>
 
@@ -9,50 +9,55 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
-    <style name="table" parent="base">
+    <style name="AppTheme.Dialog" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Table" parent="AppTheme">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="tableRow" parent="base">
+    <style name="AppTheme.TableRow" parent="AppTheme">
         <item name="android:padding">1dp</item>
         <item name="android:layout_height">fill_parent</item>
     </style>
 
-    <style name="tableRow_odd" parent="tableRow">
+    <style name="AppTheme.TableRowOdd" parent="AppTheme.TableRow">
         <item name="android:background">@color/odd</item>
     </style>
 
-    <style name="tableRow_even" parent="tableRow">
+    <style name="AppTheme.TableRowEven" parent="AppTheme.TableRow">
         <item name="android:background">@color/even</item>
     </style>
 
-    <style name="tableCell_string" parent="base">
+    <style name="AppTheme.TableCellString" parent="AppTheme">
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginRight">4dp</item>
     </style>
 
-    <style name="tableCell_string_heading" parent="base">
+    <style name="AppTheme.TableCellStringHeading" parent="AppTheme">
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginRight">4dp</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="tableCell_number" parent="base">
+    <style name="AppTheme.TableCellNumber" parent="AppTheme">
         <item name="android:layout_marginRight">4dp</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:gravity">right</item>
     </style>
 
-    <style name="tableCell_number_attribute_modifier" parent="tableCell_number">
+    <style name="AppTheme.TableCellNumberAttributeModifier" parent="AppTheme.TableCellNumber">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:gravity">right|center_vertical</item>
     </style>
 
-    <style name="heading" parent="base">
+    <style name="AppTheme.Heading" parent="AppTheme">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#FF000000</item>
@@ -60,49 +65,49 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="list_item_heading" parent="base">
+    <style name="AppTheme.ListItemHeading" parent="AppTheme">
         <item name="android:textSize">18sp</item>
         <item name="android:padding">4dp</item>
     </style>
 
-    <style name="list_item_text" parent="base">
+    <style name="AppTheme.ListItemText" parent="AppTheme">
         <item name="android:textSize">13sp</item>
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingRight">4dp</item>
     </style>
 
-    <style name="character_sheet_char_image" parent="base">
+    <style name="AppTheme.CharacterSheetImage" parent="AppTheme">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:scaleType">center</item>
     </style>
 
-    <style name="edit" parent="base">
+    <style name="AppTheme.Edit" parent="AppTheme">
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="centered" parent="base">
+    <style name="AppTheme.Centered" parent="AppTheme">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="about" parent="base">
+    <style name="AppTheme.About" parent="AppTheme">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="transparentListView" parent="android:style/Widget.ListView">
+    <style name="AppTheme.TransparentListView" parent="android:style/Widget.ListView">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:cacheColorHint">#00000000</item>
         <item name="android:background">#AA000000</item>
     </style>
 
-    <style name="releaseNotes" parent="android:Theme.Holo.Dialog">
+    <style name="AppTheme.ReleaseNotes">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
@@ -111,25 +116,12 @@
         <item name="android:padding">6dp</item>
     </style>
 
-    <style name="paperscroll" parent="base" tools:keep="@style/paperscroll">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:drawSelectorOnTop">false</item>
-        <item name="android:background">@drawable/paperscroll</item>
-        <item name="android:cacheColorHint">#00000000</item>
-    </style>
-
-    <style name="list_item_spelllist" parent="base">
+    <style name="AppTheme.ListItemSpelllist" parent="AppTheme">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="list_item_spelllist_name" parent="list_item_spelllist" tools:keep="@style/list_item_spelllist_name">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
-    <style name="list_item_spelllist_level" parent="list_item_spelllist">
+    <style name="AppTheme.ListItemSpelllistLevel" parent="AppTheme.ListItemSpelllist">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
@@ -137,7 +129,7 @@
         <item name="android:gravity">left</item>
     </style>
 
-    <style name="list_item_spelllist_number" parent="base">
+    <style name="list_item_spelllist_number" parent="AppTheme">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">15sp</item>
@@ -145,25 +137,25 @@
         <item name="android:gravity">right</item>
     </style>
 
-    <style name="list_item_spelllist_spell_name" parent="list_item_spelllist">
+    <style name="AppTheme.ListItemSpelllistSpellName" parent="AppTheme.ListItemSpelllist">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="list_item_spelllist_spell_short_description" parent="list_item_spelllist">
+    <style name="AppTheme.ListItemSpelllistSpellShortDescription" parent="AppTheme.ListItemSpelllist">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/dark_gary</item>
     </style>
 
-    <style name="spell" parent="base">
+    <style name="AppTheme.Spell" parent="AppTheme">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="horizontal_line" parent="base">
+    <style name="AppTheme.HorizontalLine" parent="AppTheme">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:paddingLeft">2dp</item>
@@ -171,23 +163,23 @@
         <item name="android:background">@color/light_gray</item>
     </style>
 
-    <style name="weaponattack" parent="base">
+    <style name="AppTheme.Weaponattack" parent="AppTheme">
         <item name="android:textSize">22sp</item>
         <item name="android:padding">4dp</item>
     </style>
 
-    <style name="button_die_roll" parent="base">
+    <style name="AppTheme.ButtonDieRoll" parent="AppTheme">
         <item name="android:layout_width">56dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="list_item_spellslot" parent="base">
+    <style name="AppTheme.ListItemSpellslot" parent="AppTheme">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="list_item_spellslot_level" parent="list_item_spellslot">
+    <style name="AppTheme.ListItemSpellslotLevel" parent="AppTheme.ListItemSpellslot">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/blue</item>
         <item name="android:paddingLeft">8dp</item>

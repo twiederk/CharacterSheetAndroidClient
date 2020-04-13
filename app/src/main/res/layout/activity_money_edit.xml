@@ -15,14 +15,14 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TableLayout style="@style/centered" >
+    <TableLayout style="@style/AppTheme.Centered">
 
         <!-- PLATINUM -->
 
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/money_platinum_label" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_platinum" />
@@ -33,7 +33,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/money_gold_label" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_gold" />
@@ -44,7 +44,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/money_silver_label" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_silver" />
@@ -55,7 +55,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/money_copper_label" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView android:id="@+id/money_copper" />

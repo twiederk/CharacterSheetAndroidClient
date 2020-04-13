@@ -4,7 +4,7 @@ import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.model.Skill;
 
 /**
- * Extands CharacterSkill to offer favorite skills.
+ * Expands CharacterSkill to offer favorite skills.
  */
 public class FavoriteCharacterSkill extends CharacterSkill {
 

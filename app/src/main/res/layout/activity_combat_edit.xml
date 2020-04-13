@@ -15,19 +15,19 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TableLayout style="@style/centered" >
+    <TableLayout style="@style/AppTheme.Centered">
 
         <!-- HIP POINTS (HP) -->
 
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/combat_hitpoints_label" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
                 android:id="@+id/combat_hitpoints"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
         </TableRow>
 
         <!-- MAX HIT POINTS -->
@@ -35,12 +35,12 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/combat_max_hitpoints_label" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
                 android:id="@+id/combat_max_hitpoints"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
         </TableRow>
 
         <!-- ARMOR CLASS (AC) -->
@@ -48,7 +48,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/combat_armorclass_label" />
 
             <LinearLayout
@@ -58,13 +58,13 @@
 
                 <TextView
                     android:id="@+id/combat_armorclass_formular"
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" />
 
                 <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                     android:id="@+id/combat_armorclass"
-                    style="@style/edit"
+                    style="@style/AppTheme.Edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -75,7 +75,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/combat_initiative_label" />
 
             <LinearLayout
@@ -84,14 +84,14 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/combat_initative_formular"
-                    style="@style/tableCell_string"
+                    android:id="@+id/combat_initiative_formular"
+                    style="@style/AppTheme.TableCellString"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" />
 
                 <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                     android:id="@+id/combat_initiative"
-                    style="@style/edit"
+                    style="@style/AppTheme.Edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -102,7 +102,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/combat_cmb_label" />
 
             <LinearLayout
@@ -112,13 +112,13 @@
 
                 <TextView
                     android:id="@+id/combat_cmb_formular"
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" />
 
                 <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                     android:id="@+id/combat_cmb"
-                    style="@style/edit"
+                    style="@style/AppTheme.Edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -129,7 +129,7 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/combat_cmd_label" />
 
             <LinearLayout
@@ -139,13 +139,13 @@
 
                 <TextView
                     android:id="@+id/combat_cmd_formular"
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent" />
 
                 <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                     android:id="@+id/combat_cmd"
-                    style="@style/edit"
+                    style="@style/AppTheme.Edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

@@ -19,8 +19,8 @@ import com.android.ash.charactersheet.R;
 import androidx.core.content.ContextCompat;
 
 /**
- * View to display the result of a die roll. Displays a title at top and an optional subtitle at the buttom. In the
- * center a number of dice plus bonus and the result is displaye.
+ * View to display the result of a die roll. Displays a title at top and an optional subtitle at the button. In the
+ * center a number of dice plus bonus and the result is displayed.
  */
 public class DieRollView extends RelativeLayout {
 

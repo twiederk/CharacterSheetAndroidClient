@@ -15,7 +15,7 @@ public class CheckBoxSpelllistModelController implements OnClickListener {
      * Creates controller which connects the ShowAll checkbox with the model.
      * 
      * @param spelllistModel
-     *            The model storing class abilties.
+     *            The model storing class abilities.
      */
     public CheckBoxSpelllistModelController(final KnownSpellPageModel spelllistModel) {
         this.spelllistModel = spelllistModel;

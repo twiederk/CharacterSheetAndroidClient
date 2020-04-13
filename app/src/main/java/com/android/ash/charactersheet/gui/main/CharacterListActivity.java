@@ -362,6 +362,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_7));
             case 47:
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_8));
+            case 48:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_9));
                 break;
 
             default:

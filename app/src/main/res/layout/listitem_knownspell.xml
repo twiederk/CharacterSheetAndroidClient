@@ -14,7 +14,7 @@
 
             <TextView
                 android:id="@+id/spelllevel_title"
-                style="@style/list_item_spelllist_level" />
+                style="@style/AppTheme.ListItemSpelllistLevel" />
 
             <TextView
                 android:id="@+id/spelllevel_number_of_known_spells"
@@ -29,7 +29,7 @@
 
         <CheckBox
             android:id="@+id/spell_known_spell"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:drawable/checkbox_off_background"
@@ -37,17 +37,17 @@
 
         <TextView
             android:id="@+id/spell_name"
-            style="@style/list_item_spelllist_spell_name"
+            style="@style/AppTheme.ListItemSpelllistSpellName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/spell_short_description"
-        style="@style/list_item_spelllist_spell_short_description" />
+        style="@style/AppTheme.ListItemSpelllistSpellShortDescription" />
 
     <View
         android:id="@+id/spell_divider"
-        style="@style/horizontal_line" />
+        style="@style/AppTheme.HorizontalLine" />
 
 </LinearLayout>

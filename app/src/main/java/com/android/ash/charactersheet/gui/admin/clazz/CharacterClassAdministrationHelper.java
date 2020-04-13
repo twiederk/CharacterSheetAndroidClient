@@ -56,8 +56,8 @@ class CharacterClassAdministrationHelper {
      * @param displayService
      *            The display service to display data properly.
      */
-    public CharacterClassAdministrationHelper(final Activity activity, final CharacterClass characterClass,
-            final DisplayService displayService) {
+    CharacterClassAdministrationHelper(final Activity activity, final CharacterClass characterClass,
+                                       final DisplayService displayService) {
         this.activity = activity;
         this.characterClass = characterClass;
         this.displayService = displayService;
@@ -67,7 +67,7 @@ class CharacterClassAdministrationHelper {
      * Creates the view for name, alignments, hit die, base attack bonus, high saves, skill points per level and class
      * skills.
      */
-    public void createViews() {
+    void createViews() {
         createName();
         createAlignments();
         createHitDieSpinner();
@@ -198,7 +198,7 @@ class CharacterClassAdministrationHelper {
      * 
      * @return The skill points per level.
      */
-    public int getSkillPointsPerLevel() {
+    int getSkillPointsPerLevel() {
         return skillPointsController.getNumber().intValue();
     }
 
@@ -207,7 +207,7 @@ class CharacterClassAdministrationHelper {
      * 
      * @return The text of the alignments to display.
      */
-    public String getAlignmentsText() {
+    String getAlignmentsText() {
         final StringBuilder builder = new StringBuilder();
         for (final Iterator<Alignment> iterator = alignments.iterator(); iterator.hasNext();) {
             final Alignment alignment = iterator.next();
@@ -224,7 +224,7 @@ class CharacterClassAdministrationHelper {
      * 
      * @return The text to display the class skills.
      */
-    public String getSkillText() {
+    String getSkillText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(activity.getResources().getString(R.string.character_class_administration_skills_label));
         builder.append(":\n");
@@ -240,12 +240,12 @@ class CharacterClassAdministrationHelper {
     }
 
     /**
-     * Creates the text to display the abilties in the character class formular. After a heading each ability with its
+     * Creates the text to display the abilities in the character class formular. After a heading each ability with its
      * name and level in brackets is displayed on a separate line.
      * 
      * @return The text to display the abilities in the character class formular.
      */
-    public String getClassAbilityText() {
+    String getClassAbilityText() {
         Collections.sort(classAbilities, new ClassAbilityLevelNameComparator());
         final StringBuilder builder = new StringBuilder();
         builder.append(activity.getResources().getString(R.string.character_class_administration_abilities_label));
@@ -269,7 +269,7 @@ class CharacterClassAdministrationHelper {
      * @param deletedClassAbilities
      *            The class abilities to delete.
      */
-    public void setDeletedClassAbilities(final List<ClassAbility> deletedClassAbilities) {
+    void setDeletedClassAbilities(final List<ClassAbility> deletedClassAbilities) {
         this.deletedClassAbilities = deletedClassAbilities;
     }
 
@@ -278,7 +278,7 @@ class CharacterClassAdministrationHelper {
      * 
      * @return List of class abilities to delete.
      */
-    public List<ClassAbility> getDeletedClassAbilities() {
+    List<ClassAbility> getDeletedClassAbilities() {
         return deletedClassAbilities;
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Base class of row mapper implemations. Contains util function to map enumerations.
+ * Base class of row mapper implementations. Contains util function to map enumerations.
  */
 public abstract class BaseRowMapper implements RowMapper {
 

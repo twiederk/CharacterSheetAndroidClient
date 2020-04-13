@@ -8,7 +8,7 @@
     <!-- BENEFIT -->
 
     <TextView
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/feat_administration_benefit_label"
@@ -16,7 +16,7 @@
 
     <EditText
         android:id="@+id/feat_administration_benefit"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textCapSentences" />
@@ -24,7 +24,7 @@
     <!-- PREREQUISIT -->
 
     <TextView
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/feat_administration_prerequisit_label"
@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/feat_administration_prerequisit"
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textCapSentences" />
@@ -40,7 +40,7 @@
     <!-- SPELLSLOT -->
 
     <TextView
-        style="@style/base"
+        style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/feat_administration_spellslot_label" />

@@ -13,12 +13,12 @@ class FeatFilter extends Filter {
     private final FeatModel featModel;
 
     /**
-     * Creats FeatFilter.
+     * Creates FeatFilter.
      * 
      * @param featModel
      *            The feat model.
      */
-    public FeatFilter(final FeatModel featModel) {
+    FeatFilter(final FeatModel featModel) {
         super();
         this.featModel = featModel;
     }
@@ -34,7 +34,7 @@ class FeatFilter extends Filter {
     }
 
     /**
-     * Sets the filter to the feat model, which perfoms the filtering and notifies the views.
+     * Sets the filter to the feat model, which performs the filtering and notifies the views.
      */
     @Override
     protected void publishResults(final CharSequence filter, final FilterResults filterResults) {

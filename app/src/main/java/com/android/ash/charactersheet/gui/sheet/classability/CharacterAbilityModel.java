@@ -22,7 +22,7 @@ public class CharacterAbilityModel extends ListModel<ExpandableListItem> {
      * @param classLevels
      *            The classes of the character.
      * @param characterAbilities
-     *            The abilites of the character.
+     *            The abilities of the character.
      */
     public CharacterAbilityModel(final List<ClassLevel> classLevels, final List<ExpandableListItem> characterAbilities) {
         super(characterAbilities);
@@ -42,9 +42,9 @@ public class CharacterAbilityModel extends ListModel<ExpandableListItem> {
      * character is of proper level in this class.
      * 
      * @param showAll
-     *            True, to show all abilities. False, to show only abilites allowed by class level.
+     *            True, to show all abilities. False, to show only abilities allowed by class level.
      */
-    public void setShowAll(final boolean showAll) {
+    void setShowAll(final boolean showAll) {
         this.showAll = showAll;
         filter();
     }
@@ -63,7 +63,7 @@ public class CharacterAbilityModel extends ListModel<ExpandableListItem> {
      * 
      * @return The class name and the level the character has in this class.
      */
-    public Map<String, Integer> getCharacterClassLevels() {
+    Map<String, Integer> getCharacterClassLevels() {
         return characterClassLevels;
     }
 }

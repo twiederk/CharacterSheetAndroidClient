@@ -15,26 +15,26 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TableLayout style="@style/centered" >
+    <TableLayout style="@style/AppTheme.Centered">
 
         <!-- HEADING -->
 
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/save_name" />
 
             <TextView
-                style="@style/tableCell_string_heading"
+                style="@style/AppTheme.TableCellStringHeading"
                 android:text="@string/save_base_save" />
 
             <TextView
-                style="@style/tableCell_string_heading"
+                style="@style/AppTheme.TableCellStringHeading"
                 android:text="@string/save_attribute_modifier" />
 
             <TextView
-                style="@style/tableCell_string_heading"
+                style="@style/AppTheme.TableCellStringHeading"
                 android:text="@string/save_modifier" />
         </TableRow>
 
@@ -43,20 +43,20 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/save_fortitude_label" />
 
             <TextView
                 android:id="@+id/save_fortitude_base"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <TextView
                 android:id="@+id/save_fortitude_attribute"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/save_fortitude_modifier"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
         </TableRow>
 
         <!-- REFLEX -->
@@ -64,20 +64,20 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/save_reflex_label" />
 
             <TextView
                 android:id="@+id/save_reflex_base"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <TextView
                 android:id="@+id/save_reflex_attribute"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/save_reflex_modifier"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
         </TableRow>
 
         <!-- WILL -->
@@ -85,20 +85,20 @@
         <TableRow>
 
             <TextView
-                style="@style/tableCell_string"
+                style="@style/AppTheme.TableCellString"
                 android:text="@string/save_will_label" />
 
             <TextView
                 android:id="@+id/save_will_base"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <TextView
                 android:id="@+id/save_will_attribute"
-                style="@style/tableCell_number" />
+                style="@style/AppTheme.TableCellNumber" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
                 android:id="@+id/save_will_modifier"
-                style="@style/edit" />
+                style="@style/AppTheme.Edit" />
         </TableRow>
     </TableLayout>
 

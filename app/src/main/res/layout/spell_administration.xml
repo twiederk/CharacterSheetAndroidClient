@@ -30,7 +30,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spell_administration_name"
@@ -38,7 +38,7 @@
 
                 <EditText
                     android:id="@+id/spell_administration_name"
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords" />
@@ -47,7 +47,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spell_administration_school" />
@@ -61,7 +61,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spell_administration_subschool" />
@@ -74,7 +74,7 @@
         </TableLayout>
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_descriptor" />
@@ -82,7 +82,7 @@
         <include layout="@layout/spell_administration_descriptor" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_component" />
@@ -97,7 +97,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spell_administration_castingtime" />
@@ -111,7 +111,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spell_administration_range" />
@@ -125,7 +125,7 @@
             <TableRow android:layout_width="fill_parent" >
 
                 <TextView
-                    style="@style/base"
+                    style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/spell_administration_spellresistance" />
@@ -138,7 +138,7 @@
         </TableLayout>
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_effect"
@@ -146,14 +146,14 @@
 
         <EditText
             android:id="@+id/spell_administration_effect"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_duration"
@@ -161,14 +161,14 @@
 
         <EditText
             android:id="@+id/spell_administration_duration"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_savingthrow"
@@ -176,14 +176,14 @@
 
         <EditText
             android:id="@+id/spell_administration_savingthrow"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_materialcomponent"
@@ -191,14 +191,14 @@
 
         <EditText
             android:id="@+id/spell_administration_materialcomponent"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_focus"
@@ -206,14 +206,14 @@
 
         <EditText
             android:id="@+id/spell_administration_focus"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_shortdescription"
@@ -221,14 +221,14 @@
 
         <EditText
             android:id="@+id/spell_administration_shortdescription"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spell_administration_description"
@@ -236,7 +236,7 @@
 
         <EditText
             android:id="@+id/spell_administration_description"
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

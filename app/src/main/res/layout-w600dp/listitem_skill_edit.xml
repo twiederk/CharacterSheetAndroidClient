@@ -8,7 +8,7 @@
 
         <TextView
             android:id="@+id/skill_name"
-            style="@style/list_item_heading"
+            style="@style/AppTheme.ListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="2" />
@@ -17,13 +17,13 @@
     <TableRow>
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/skill_edit_rank" />
 
         <TextView
-            style="@style/base"
+            style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/skill_edit_modifier" />

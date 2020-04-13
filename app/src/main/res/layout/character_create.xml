@@ -21,20 +21,20 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <TableLayout style="@style/centered" >
+        <TableLayout style="@style/AppTheme.Centered">
 
             <!-- NAME -->
 
             <TableRow>
 
                 <TextView
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:text="@string/create_name_label"
                     android:labelFor="@+id/create_name" />
 
                 <EditText
                     android:id="@+id/create_name"
-                    style="@style/edit"
+                    style="@style/AppTheme.Edit"
                     android:inputType="textCapWords"
                     android:width="200dip" />
             </TableRow>
@@ -44,13 +44,13 @@
             <TableRow>
 
                 <TextView
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:text="@string/create_player_label"
                     android:labelFor="@+id/create_player" />
 
                 <EditText
                     android:id="@+id/create_player"
-                    style="@style/edit"
+                    style="@style/AppTheme.Edit"
                     android:inputType="textCapWords" />
             </TableRow>
 
@@ -59,7 +59,7 @@
             <TableRow>
 
                 <TextView
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:text="@string/create_race_label" />
 
                 <Spinner
@@ -73,7 +73,7 @@
             <TableRow>
 
                 <TextView
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:text="@string/create_sex_label" />
 
                 <Spinner
@@ -87,7 +87,7 @@
             <TableRow>
 
                 <TextView
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:text="@string/create_alignment_label" />
 
                 <Spinner
@@ -101,7 +101,7 @@
             <TableRow>
 
                 <TextView
-                    style="@style/tableCell_string"
+                    style="@style/AppTheme.TableCellString"
                     android:text="@string/create_class_label" />
 
                 <Spinner
