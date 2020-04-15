@@ -17,7 +17,6 @@ import com.d20charactersheet.framework.boc.model.Ability
 import com.d20charactersheet.framework.boc.model.AbilityType
 import com.d20charactersheet.framework.boc.service.AbilityService
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
@@ -52,7 +51,7 @@ class AbilityAdministrationEditActivityInstrumentationTest : KoinTest {
         whenever(abilityService.getAbilityById(any(), any())).doReturn(ability)
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.abilityService).doReturn(abilityService)
 
         gameSystemHolder.gameSystem = gameSystem

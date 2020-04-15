@@ -63,7 +63,7 @@ public abstract class AbstractFeatListItem extends ExpandableListItem implements
         return feat.isStack();
     }
 
-    public String getPrerequisit() {
+    public String getPrerequisite() {
         return feat.getPrerequisit();
     }
 

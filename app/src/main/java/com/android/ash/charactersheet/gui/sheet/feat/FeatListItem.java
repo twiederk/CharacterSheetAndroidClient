@@ -65,16 +65,16 @@ interface FeatListItem {
     boolean isStack();
 
     /**
-     * Returns the prerequisit of the feat.
-     * 
-     * @return The prerequisit of the feat.
+     * Returns the prerequisite of the feat.
+     *
+     * @return The prerequisite of the feat.
      */
-    String getPrerequisit();
+    String getPrerequisite();
 
     /**
      * Returns true for fighter bonus feats.
-     * 
-     * @return True for fighter bonsu feats.
+     *
+     * @return True for fighter bonus feats.
      */
     boolean isFighterBonus();
 

@@ -21,17 +21,17 @@
         android:layout_height="wrap_content"
         android:inputType="textCapSentences" />
 
-    <!-- PREREQUISIT -->
+    <!-- PREREQUISITE -->
 
     <TextView
         style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/feat_administration_prerequisit_label"
-        android:labelFor="@+id/feat_administration_prerequisit" />
+        android:text="@string/feat_administration_prerequisite_label"
+        android:labelFor="@+id/feat_administration_prerequisite" />
 
     <EditText
-        android:id="@+id/feat_administration_prerequisit"
+        android:id="@+id/feat_administration_prerequisite"
         style="@style/AppTheme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -19,7 +19,7 @@ import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Size
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.boc.service.RaceService
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -59,7 +59,7 @@ class RaceAdministrationEditActivityInstrumentationTest : KoinTest {
         whenever(raceService.findRaceById(race.id, allRaces)).doReturn(race)
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.raceService).doReturn(raceService)
         whenever(gameSystem.allRaces).doReturn(allRaces)
 

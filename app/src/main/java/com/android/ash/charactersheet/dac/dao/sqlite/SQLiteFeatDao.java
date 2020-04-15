@@ -82,7 +82,7 @@ public class SQLiteFeatDao extends BaseSQLiteDao implements FeatDao {
         final ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME, feat.getName());
         contentValues.put(COLUMN_BENEFIT, feat.getBenefit());
-        contentValues.put(COLUMN_PREREQUISIT, feat.getPrerequisit());
+        contentValues.put(COLUMN_PREREQUISITE, feat.getPrerequisit());
         contentValues.put(COLUMN_FEAT_TYPE_ID, feat.getFeatType().ordinal());
         contentValues.put(COLUMN_FIGHTER_BONUS, feat.isFighterBonus());
         contentValues.put(COLUMN_MULTIPLE, feat.isMultiple());

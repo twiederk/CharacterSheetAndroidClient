@@ -208,8 +208,10 @@ public interface TableAndColumnNames {
     String COLUMN_CATEGORY = "category";
 
     // columns of feat table
-    /** prerequisit column */
-    String COLUMN_PREREQUISIT = "prerequisit";
+    /**
+     * prerequisite column
+     */
+    String COLUMN_PREREQUISITE = "prerequisit";
     /** benefit column */
     String COLUMN_BENEFIT = "benefit";
     /** feat type id column */

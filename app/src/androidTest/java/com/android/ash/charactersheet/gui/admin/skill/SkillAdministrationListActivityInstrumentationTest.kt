@@ -4,13 +4,17 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
+import com.d20charactersheet.framework.boc.model.Attribute
 import com.d20charactersheet.framework.boc.model.Skill
 import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.boc.service.SkillService
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -35,12 +39,8 @@ class SkillAdministrationListActivityInstrumentationTest : KoinTest {
     fun onCreate() {
 
         // Arrange
-        val skill = Skill()
-        skill.id = 1
-        skill.name = "MySkill"
-        val allSkills = listOf(skill)
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allSkills).doReturn(allSkills)
+        whenever(gameSystem.allSkills).doReturn(listOf(Skill().apply { id = 1; name = "mySkill" }))
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(SkillAdministrationListActivity::class.java)
@@ -49,12 +49,34 @@ class SkillAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Skill Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Skill Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("mySkill"))).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MySkill")))
-                .check(matches(isDisplayed()))
+    @Test
+    fun fab_onClick_displaySkillAdministrationCreateActivity() {
+
+        // Arrange
+        val skillService: SkillService = mock()
+        whenever(skillService.getSkillDescription(any())).doReturn(Skill().apply { attribute = Attribute.STRENGTH })
+
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.allSkills).doReturn(listOf(Skill().apply { id = 1; name = "mySkill" }))
+        whenever(gameSystem.displayService).doReturn(mock())
+        whenever(gameSystem.skillService).doReturn(skillService)
+        whenever(gameSystem.spelllistService).doReturn(mock())
+        whenever(gameSystem.abilityService).doReturn(mock())
+        whenever(gameSystem.characterClassService).doReturn(mock())
+        gameSystemHolder.gameSystem = gameSystem
+
+        scenario = ActivityScenario.launch(SkillAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Skill"))))
     }
 
 }

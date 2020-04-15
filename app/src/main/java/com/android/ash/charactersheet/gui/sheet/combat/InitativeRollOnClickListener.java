@@ -34,7 +34,7 @@ public class InitativeRollOnClickListener extends RollOnClickListener {
 
     @Override
     protected String getTitle(final Resources resources) {
-        return resources.getString(R.string.page_sheet_roll_initative_title);
+        return resources.getString(R.string.page_sheet_roll_initiative_title);
     }
 
     @Override

@@ -16,7 +16,7 @@ import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.boc.service.ItemService
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
@@ -63,7 +63,7 @@ class WeaponAdministrationEditActivityInstrumentationTest : KoinTest {
         whenever(itemService.getItemById(any(), any())).doReturn(weapon)
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.itemService).doReturn(itemService)
 
         gameSystemHolder.gameSystem = gameSystem

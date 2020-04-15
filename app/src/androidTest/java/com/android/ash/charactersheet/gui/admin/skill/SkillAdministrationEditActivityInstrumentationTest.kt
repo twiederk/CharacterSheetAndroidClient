@@ -16,7 +16,7 @@ import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Attribute
 import com.d20charactersheet.framework.boc.model.Skill
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.d20charactersheet.framework.boc.service.SkillService
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
@@ -54,7 +54,7 @@ class SkillAdministrationEditActivityInstrumentationTest : KoinTest {
         whenever(skillService.getSkillDescription(any())).doReturn(skill)
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.skillService).doReturn(skillService)
         whenever(gameSystem.spelllistService).doReturn(mock())
         whenever(gameSystem.abilityService).doReturn(mock())

@@ -4,13 +4,16 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -35,12 +38,8 @@ class CharacterClassAdministrationListActivityInstrumentationTest : KoinTest {
     fun onCreate() {
 
         // Arrange
-        val clazz = CharacterClass()
-        clazz.id = 1
-        clazz.name = "MyClass"
-        val allClasses = listOf(clazz)
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allCharacterClasses).doReturn(allClasses)
+        whenever(gameSystem.allCharacterClasses).doReturn(listOf(CharacterClass().apply { id = 1; name = "myClass" }))
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(CharacterClassAdministrationListActivity::class.java)
@@ -49,12 +48,30 @@ class CharacterClassAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Character Class Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Character Class Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("myClass"))).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MyClass")))
-                .check(matches(isDisplayed()))
+    @Test
+    fun fab_onClick_displayCharacterClassAdministrationCreateActivity() {
+
+        // Arrange
+        val displayService: DisplayService = mock()
+        whenever(displayService.getDisplayAlignment(any())).doReturn("MyAlignment")
+
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.displayService).doReturn(displayService)
+        whenever(gameSystem.allCharacterClasses).doReturn(listOf(CharacterClass().apply { id = 1; name = "myClass" }))
+        gameSystemHolder.gameSystem = gameSystem
+
+        scenario = ActivityScenario.launch(CharacterClassAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(ViewActions.click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Character Class"))))
     }
 
 }

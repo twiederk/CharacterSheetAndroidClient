@@ -15,7 +15,7 @@ import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Spelllist
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.d20charactersheet.framework.boc.service.SpelllistService
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
@@ -53,7 +53,7 @@ class SpelllistAdministrationEditActivityInstrumentationTest : KoinTest {
         whenever(spelllistService.findSpelllistById(any(), any())).doReturn(spelllist)
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.spelllistService).doReturn(spelllistService)
 
         gameSystemHolder.gameSystem = gameSystem

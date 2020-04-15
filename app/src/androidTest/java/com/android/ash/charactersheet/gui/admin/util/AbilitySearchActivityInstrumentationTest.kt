@@ -12,7 +12,7 @@ import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Ability
 import com.d20charactersheet.framework.boc.service.AbilityService
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.d20charactersheet.framework.boc.service.SpelllistService
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
@@ -45,7 +45,7 @@ class AbilitySearchActivityInstrumentationTest : KoinTest {
         whenever(abilityService.getAllAbilities(any(), any(), any())).doReturn(allAbilities)
         val spelllistService: SpelllistService = mock()
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.abilityService).doReturn(abilityService)
         whenever(gameSystem.spelllistService).doReturn(spelllistService)
         gameSystemHolder.gameSystem = gameSystem

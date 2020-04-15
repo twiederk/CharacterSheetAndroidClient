@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.GameSystemHolder
@@ -35,12 +36,8 @@ class AbilityAdministrationListActivityInstrumentationTest : KoinTest {
     fun onCreate() {
 
         // Arrange
-        val ability = Ability()
-        ability.id = 1
-        ability.name = "MyAbility"
-        val allAbilities = listOf(ability)
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allAbilities).doReturn(allAbilities)
+        whenever(gameSystem.allAbilities).doReturn(listOf(Ability().apply { id = 1; name = "myAbility" }))
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(AbilityAdministrationListActivity::class.java)
@@ -49,12 +46,27 @@ class AbilityAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Ability Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Ability Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("myAbility"))).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MyAbility")))
-                .check(matches(isDisplayed()))
+    @Test
+    fun fab_onClick_displayAbilityAdministrationCreateActivity() {
+
+        // Arrange
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.allAbilities).doReturn(listOf(Ability().apply { id = 1; name = "myAbility" }))
+        gameSystemHolder.gameSystem = gameSystem
+        whenever(gameSystem.displayService).doReturn(mock())
+
+        scenario = ActivityScenario.launch(AbilityAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Ability"))))
     }
 
 } 

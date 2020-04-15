@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.GameSystemHolder
@@ -35,12 +36,8 @@ class SpelllistAdministrationListActivityInstrumentationTest : KoinTest {
     fun onCreate() {
 
         // Arrange
-        val spelllist = Spelllist()
-        spelllist.id = 1
-        spelllist.name = "MySpelllist"
-        val allSpelllists = listOf(spelllist)
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allSpelllists).doReturn(allSpelllists)
+        whenever(gameSystem.allSpelllists).doReturn(listOf(Spelllist().apply { id = 1; name = "mySpelllist" }))
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(SpelllistAdministrationListActivity::class.java)
@@ -49,12 +46,28 @@ class SpelllistAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Spell List Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Spell List Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("mySpelllist"))).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MySpelllist")))
-                .check(matches(isDisplayed()))
+    @Test
+    fun fab_onClick_displaySpelllistAdministrationCreateActivity() {
+
+        // Arrange
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.displayService).doReturn(mock())
+        whenever(gameSystem.spelllistService).doReturn(mock())
+        whenever(gameSystem.allSpelllists).doReturn(listOf(Spelllist().apply { id = 1; name = "mySpelllist" }))
+        gameSystemHolder.gameSystem = gameSystem
+
+        scenario = ActivityScenario.launch(SpelllistAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Spell List"))))
     }
 
 }

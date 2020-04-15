@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.GameSystemHolder
@@ -35,12 +36,8 @@ class FeatAdministrationListActivityInstrumentationTest : KoinTest {
     fun onCreate() {
 
         // Arrange
-        val feat = Feat()
-        feat.id = 1
-        feat.name = "MyFeat"
-        val allFeats = listOf(feat)
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allFeats).doReturn(allFeats)
+        whenever(gameSystem.allFeats).doReturn(listOf(Feat().apply { id = 1; name = "myFeat" }))
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(FeatAdministrationListActivity::class.java)
@@ -49,12 +46,27 @@ class FeatAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Feat Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Feat Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("myFeat"))).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MyFeat")))
-                .check(matches(isDisplayed()))
+    @Test
+    fun fab_onClick_displayFeatAdministrationCreateActivity() {
+
+        // Arrange
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.displayService).doReturn(mock())
+        whenever(gameSystem.allFeats).doReturn(listOf(Feat().apply { id = 1; name = "myFeat" }))
+        gameSystemHolder.gameSystem = gameSystem
+
+        scenario = ActivityScenario.launch(FeatAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Feat"))))
     }
 
 }

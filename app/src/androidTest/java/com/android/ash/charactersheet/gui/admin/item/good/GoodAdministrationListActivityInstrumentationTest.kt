@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.GameSystemHolder
@@ -38,7 +39,7 @@ class GoodAdministrationListActivityInstrumentationTest : KoinTest {
 
         // Arrange
         val displayService: DisplayService = mock()
-        whenever(displayService.getDisplayItem(any())).doReturn("MyGood")
+        whenever(displayService.getDisplayItem(any())).doReturn("myGood")
         val gameSystem: GameSystem = mock()
         whenever(gameSystem.allGoods).doReturn(listOf(Good()))
         whenever(gameSystem.displayService).doReturn(displayService)
@@ -50,12 +51,29 @@ class GoodAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Good Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Good Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("myGood"))).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MyGood")))
-                .check(matches(isDisplayed()))
+    @Test
+    fun fab_onClick_displayGoodAdministrationCreateActivity() {
+
+        // Arrange
+        val displayService: DisplayService = mock()
+        whenever(displayService.getDisplayItem(any())).doReturn("myGood")
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.allGoods).doReturn(listOf(Good()))
+        whenever(gameSystem.displayService).doReturn(displayService)
+        gameSystemHolder.gameSystem = gameSystem
+
+        scenario = ActivityScenario.launch(GoodAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Good"))))
     }
 
 }

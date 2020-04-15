@@ -110,10 +110,10 @@ public class FeatListAdapter extends BaseAdapter implements Observer, Filterable
         final TextView headingBenefitTextView = view.findViewById(R.id.feat_benefit_heading);
         setVisibility(headingBenefitTextView, benefitTextView, featItem.isExpanded());
 
-        final TextView prerequisitTextView = view.findViewById(R.id.feat_prerequisit);
-        prerequisitTextView.setText(featItem.getPrerequisit());
-        final TextView headingPrerequisitTextView = view.findViewById(R.id.feat_prerequisit_heading);
-        setVisibility(headingPrerequisitTextView, prerequisitTextView, featItem.isExpanded());
+        final TextView prerequisiteTextView = view.findViewById(R.id.feat_prerequisite);
+        prerequisiteTextView.setText(featItem.getPrerequisite());
+        final TextView headingPrerequisiteTextView = view.findViewById(R.id.feat_prerequisite_heading);
+        setVisibility(headingPrerequisiteTextView, prerequisiteTextView, featItem.isExpanded());
 
         final TextView fighterBonusAndKindTextView = view.findViewById(R.id.feat_fighter_bonus_and_kind);
         fighterBonusAndKindTextView.setText(getFighterBonusAndKind(featItem));
@@ -131,7 +131,7 @@ public class FeatListAdapter extends BaseAdapter implements Observer, Filterable
         contentTextView.setVisibility(visibility);
     }
 
-    String getFighterBonusAndKind(final FeatListItem featItem) {
+    public String getFighterBonusAndKind(final FeatListItem featItem) {
         final StringBuilder output = new StringBuilder();
         if (featItem.isFighterBonus() || featItem.isMultiple() || featItem.isStack()) {
             output.append("[");

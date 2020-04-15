@@ -43,7 +43,7 @@
             style="@style/AppTheme.Spell" />
 
         <TextView
-            android:id="@+id/spell_duraction"
+            android:id="@+id/spell_duration"
             style="@style/AppTheme.Spell" />
 
         <TextView

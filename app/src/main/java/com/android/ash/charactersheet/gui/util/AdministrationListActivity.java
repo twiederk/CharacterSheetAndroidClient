@@ -2,8 +2,6 @@ package com.android.ash.charactersheet.gui.util;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,9 +26,8 @@ import static org.koin.java.KoinJavaComponent.inject;
  * The administration offers lists of entities to administer, like character classes, races and abilities. These lists
  * share the same basic functionality, like alphabetically listed entities, create and update entities. Derive from
  * this class to create list of different entities, sharing these basic functionality.
- * 
- * @param <T>
- *            The entity to administer, like character class, race or ability.
+ *
+ * @param <T> The entity to administer, like character class, race or ability.
  */
 public abstract class AdministrationListActivity<T> extends LogAppCompatActivity implements OnItemClickListener {
 
@@ -44,6 +41,7 @@ public abstract class AdministrationListActivity<T> extends LogAppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         setToolbar();
+        setFavoriteActionButton();
 
         gameSystem = gameSystemHolder.getValue().getGameSystem();
         displayService = Objects.requireNonNull(gameSystem).getDisplayService();
@@ -57,6 +55,10 @@ public abstract class AdministrationListActivity<T> extends LogAppCompatActivity
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(getTitleResource());
         Objects.requireNonNull(getSupportActionBar()).setIcon(R.drawable.icon);
+    }
+
+    private void setFavoriteActionButton() {
+        findViewById(R.id.favorite_action_button).setOnClickListener(view -> startActivity(getCreateIntent()));
     }
 
     protected int getLayoutResource() {
@@ -76,27 +78,6 @@ public abstract class AdministrationListActivity<T> extends LogAppCompatActivity
     }
 
     protected abstract ArrayAdapter<T> getAdapter();
-
-    /**
-     * Contains option to create a new item.
-     *
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-     */
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_admin, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.menu_admin_create) {
-            startActivity(getCreateIntent());
-        } else {
-            return super.onOptionsItemSelected(menuItem);
-        }
-        return true;
-    }
 
     protected abstract Intent getCreateIntent();
 

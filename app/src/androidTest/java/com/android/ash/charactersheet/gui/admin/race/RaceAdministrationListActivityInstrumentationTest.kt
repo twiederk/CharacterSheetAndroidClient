@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -39,12 +40,8 @@ class RaceAdministrationListActivityInstrumentationTest : KoinTest {
     fun onCreate() {
 
         // Arrange
-        val race = Race()
-        race.id = 1
-        race.name = "MyRace"
-        val allRaces = listOf(race)
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allRaces).doReturn(allRaces)
+        whenever(gameSystem.allRaces).doReturn(listOf(Race().apply { id = 1; name = "myRace" }))
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(RaceAdministrationListActivity::class.java)
@@ -53,13 +50,28 @@ class RaceAdministrationListActivityInstrumentationTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java))
-                .check(matches(withToolbarTitle(Is.`is`("Race Administration"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Race Administration"))))
+        onView(withId(R.id.name)).check(matches(withText("myRace"))).check(matches(isDisplayed()))
 
-        onView(withId(R.id.name))
-                .check(matches(withText("MyRace")))
-                .check(matches(isDisplayed()))
+    }
 
+    @Test
+    fun fab_onClick_displayRaceAdministrationCreateActivity() {
+
+        // Arrange
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.displayService).doReturn(mock())
+        whenever(gameSystem.allRaces).doReturn(listOf(Race().apply { id = 1; name = "myRace" }))
+        gameSystemHolder.gameSystem = gameSystem
+
+        scenario = ActivityScenario.launch(RaceAdministrationListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        // Act
+        onView(withId(R.id.favorite_action_button)).perform(click())
+
+        // Assert
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Race"))))
     }
 
 }

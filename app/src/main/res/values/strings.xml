@@ -48,7 +48,7 @@
     <string name="page_sheet_message_add_thumbnail_failed">Error occurred while processing thumbnail</string>
     <string name="page_sheet_message_add_image_failed">Error occurred while processing image</string>
     <string name="page_sheet_die_roll_title">Roll</string>
-    <string name="page_sheet_roll_initative_title">Initative</string>
+    <string name="page_sheet_roll_initiative_title">Initiative</string>
     <string name="page_sheet_roll_bab_title">BAB</string>
     <string name="page_sheet_roll_cmb_title">CMB/Grapple</string>
     <string name="page_sheet_roll_cmd_title">CMD</string>
@@ -56,7 +56,6 @@
     <!-- CharacterListActivity -->
     <string name="character_list_title">Character List</string>
     <string name="character_list_delete">Delete</string>
-    <string name="character_list_menu_new_character">Create Character</string>
     <string name="character_list_menu_about">Manual</string>
     <string name="character_list_menu_switch_game_system">Switch Game System</string>
     <string name="character_list_menu_administration">Administration</string>
@@ -64,7 +63,7 @@
     <string name="character_list_menu_export">Export</string>
     <string name="character_list_menu_import">Import</string>
     <string name="character_list_menu_backup_restore">Backup &amp; Restore</string>
-    <string name="character_list_wait_load_gamesystem">Load Gamesystem</string>
+    <string name="character_list_wait_load_game_system">Load Game System</string>
     <string name="character_list_wait_load_dndv35">Load DnD v.3.5</string>
     <string name="character_list_wait_load_pathfinder">Load Pathfinder</string>
     <string name="character_list_wait_create_dndv35_database">Create DnD v.3.5 Database</string>
@@ -121,7 +120,7 @@
     <string name="feat_list_multiple">Multiple times, do not stack</string>
     <string name="feat_list_stack">Multiple times, do stack</string>
     <string name="feat_list_benefit"><b><u>Benefit:</u></b></string>
-    <string name="feat_list_prerequisit"><b><u>Prerequisit:</u></b></string>
+    <string name="feat_list_prerequisite"><b><u>Prerequisite:</u></b></string>
 
     <!-- FeatEditActivity -->
     <string name="feat_edit_category_label">Category:</string>
@@ -186,7 +185,7 @@
     <string name="feat_administration_name_label">Name</string>
     <string name="feat_administration_type">Type</string>
     <string name="feat_administration_benefit_label">Benefit</string>
-    <string name="feat_administration_prerequisit_label">Prerequisit</string>
+    <string name="feat_administration_prerequisite_label">Prerequisite</string>
     <string name="feat_administration_spellslot_label">Additional spell levels</string>
     <string name="feat_administration_fighter_bonus">Fighter Bonus Feat</string>
     <string name="feat_administration_multiple">Multiple times, do not stack</string>
@@ -397,7 +396,7 @@
     <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
     <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5</string>
     <string name="about_ogl">Open Gaming Licence</string>
-    <string name="about_copyright">Copyright &#169; 2009&#8211;2015 Torsten Wiederkehr\nAll rights reserved</string>
+    <string name="about_copyright">Copyright &#169; 2009&#8211;2020 Torsten Wiederkehr\nAll rights reserved</string>
     <string name="about_image_hint">Icon of application</string>
 
     <!-- OpenGamingLicenceActivity -->
@@ -463,8 +462,9 @@
     <string name="spell_school">School</string>
     <string name="spell_component">Components</string>
     <string name="spell_casting_time">Casting Time</string>
+    <string name="spell_range">Range</string>
     <string name="spell_effect">Effect</string>
-    <string name="spell_duraction">Duration</string>
+    <string name="spell_duration">Duration</string>
     <string name="spell_saving_throw">Saving Throw</string>
     <string name="spell_spell_resistance">Spell Resistance</string>
     <string name="spell_description">Description</string>
@@ -890,6 +890,7 @@
     <string name="release_notes_2_11_7">Release 2.11.7\nBug fix: Added Espresso tests to main\n\n</string>
     <string name="release_notes_2_11_8">Release 2.11.8\nBug fix: Added Espresso tests to sheet\n\n</string>
     <string name="release_notes_2_11_9">Release 2.11.9\nBug fix: Fixed display of dialogs\n\n</string>
+    <string name="release_notes_2_12_0">Release 2.12.0\n- Added favorite action buttons\n\n</string>
     <string name="release_notes_not_found">No Release Notes found\n\n</string>
 
 </resources>

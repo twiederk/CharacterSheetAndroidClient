@@ -31,7 +31,7 @@ public class LoadGameSystemAsyncTask extends AbstractAsyncTask {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        waitAnimation.setText(resources.getString(R.string.character_list_wait_load_gamesystem));
+        waitAnimation.setText(resources.getString(R.string.character_list_wait_load_game_system));
     }
 
     @Override

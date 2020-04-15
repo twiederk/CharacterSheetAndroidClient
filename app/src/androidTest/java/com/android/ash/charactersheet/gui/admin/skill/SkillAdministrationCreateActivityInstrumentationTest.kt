@@ -12,7 +12,7 @@ import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Attribute
 import com.d20charactersheet.framework.boc.model.Skill
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.d20charactersheet.framework.boc.service.SkillService
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
@@ -41,11 +41,9 @@ class SkillAdministrationCreateActivityInstrumentationTest : KoinTest {
 
         // Arrange
         val skillService: SkillService = mock()
-        val skill = Skill()
-        skill.attribute = Attribute.STRENGTH
-        whenever(skillService.getSkillDescription(any())).doReturn(skill)
+        whenever(skillService.getSkillDescription(any())).doReturn(Skill().apply { attribute = Attribute.STRENGTH })
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.skillService).doReturn(skillService)
         whenever(gameSystem.spelllistService).doReturn(mock())
         whenever(gameSystem.abilityService).doReturn(mock())
@@ -63,8 +61,6 @@ class SkillAdministrationCreateActivityInstrumentationTest : KoinTest {
         onView(withId(R.id.skill_administration_attribute)).check(matches(withSpinnerText("STRENGTH")))
         onView(withId(R.id.skill_administration_untrained)).check(matches(isNotChecked()))
         onView(withId(R.id.skill_administration_description)).check(matches(withText(isEmptyString())))
-
-
     }
 
 }

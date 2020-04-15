@@ -12,7 +12,7 @@ import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -39,7 +39,7 @@ class CharacterCreateActivityInstrumentationTest : KoinTest {
 
         // Arrange
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.allRaces).doReturn(listOf(Race().apply { name = "myRace" }))
         whenever(gameSystem.allCharacterClasses).doReturn(listOf(CharacterClass().apply { name = "myClass" }))
         gameSystemHolder.gameSystem = gameSystem

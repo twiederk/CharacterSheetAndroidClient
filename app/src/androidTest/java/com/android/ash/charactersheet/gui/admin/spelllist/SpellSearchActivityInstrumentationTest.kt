@@ -11,7 +11,7 @@ import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Spell
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -40,7 +40,7 @@ class SpellSearchActivityInstrumentationTest : KoinTest {
         spell.name = "mySpell"
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.allSpells).doReturn(listOf(spell))
         gameSystemHolder.gameSystem = gameSystem
 

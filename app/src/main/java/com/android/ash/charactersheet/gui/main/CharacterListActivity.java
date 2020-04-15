@@ -36,6 +36,7 @@ import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.CharacterComparator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.util.List;
@@ -146,8 +147,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     @Override
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.menu_activity_character_list_new_character:
-                return callActivity(CharacterCreateActivity.class);
 
             case R.id.menu_activity_character_list_about:
                 return callActivity(AboutActivity.class);
@@ -364,6 +363,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_8));
             case 48:
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_9));
+            case 49:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_12_0));
                 break;
 
             default:
@@ -382,6 +383,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         setToolbar();
         setReleaseNotes();
         setOkButton();
+        setFavoriteActionButton();
         onResumeLayout();
     }
 
@@ -409,6 +411,11 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
             final View releaseNotesView = findViewById(R.id.character_list_release_notes);
             releaseNotesView.setVisibility(View.INVISIBLE);
         });
+    }
+
+    private void setFavoriteActionButton() {
+        final FloatingActionButton favoriteActionButton = findViewById(R.id.favorite_action_button);
+        favoriteActionButton.setOnClickListener(view -> callActivity(CharacterCreateActivity.class));
     }
 
     @Override

@@ -70,9 +70,9 @@ public class SpellActivity extends SlideActivity {
                 getText(R.string.spell_component, displayService.getDisplaySpellComponents(spell)));
         setText(R.id.spell_casting_time,
                 getText(R.string.spell_casting_time, displayService.getDisplayCastingTime(spell.getCastingTime())));
-        setText(R.id.spell_range, displayService.getDisplayRange(spell.getRange()));
+        setText(R.id.spell_range, getText(R.string.spell_range, displayService.getDisplayRange(spell.getRange())));
         setText(R.id.spell_effect, getText(R.string.spell_effect, spell.getEffect()));
-        setText(R.id.spell_duraction, getText(R.string.spell_duraction, spell.getDuration()));
+        setText(R.id.spell_duration, getText(R.string.spell_duration, spell.getDuration()));
         setText(R.id.spell_saving_throw, getText(R.string.spell_saving_throw, spell.getSavingThrow()));
         setText(R.id.spell_spell_resistance,
                 getText(R.string.spell_spell_resistance,

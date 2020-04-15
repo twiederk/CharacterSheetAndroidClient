@@ -10,7 +10,7 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -37,7 +37,7 @@ class FeatAdministrationCreateActivityInstrumentationTest : KoinTest {
 
         // Arrange
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         gameSystemHolder.gameSystem = gameSystem
 
         scenario = ActivityScenario.launch(FeatAdministrationCreateActivity::class.java)
@@ -50,7 +50,7 @@ class FeatAdministrationCreateActivityInstrumentationTest : KoinTest {
         onView(withId(R.id.feat_administration_name)).check(matches(withText(isEmptyString())))
         onView(withId(R.id.feat_administration_feattype)).check(matches(withSpinnerText("GENERAL")))
         onView(withId(R.id.feat_administration_benefit)).check(matches(withText(isEmptyString())))
-        onView(withId(R.id.feat_administration_prerequisit)).check(matches(withText(isEmptyString())))
+        onView(withId(R.id.feat_administration_prerequisite)).check(matches(withText(isEmptyString())))
         onView(allOf(withParent(withId(R.id.feat_administration_spellslot)), withClassName(endsWith("TextView")))).check(matches(withText("0")))
         onView(withId(R.id.feat_administration_fighter_bonus)).check(matches(isNotChecked()))
         onView(withId(R.id.feat_administration_multiple)).check(matches(isNotChecked()))

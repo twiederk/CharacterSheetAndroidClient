@@ -48,7 +48,7 @@ public abstract class FeatAdministrationActivity extends FormActivity<Feat> {
         setText(form.getName(), R.id.feat_administration_name);
         setFeatTypeSpinner();
         setText(form.getBenefit(), R.id.feat_administration_benefit);
-        setText(form.getPrerequisit(), R.id.feat_administration_prerequisit);
+        setText(form.getPrerequisit(), R.id.feat_administration_prerequisite);
         setNumberViewController(new ZeroAndPositiveNumberViewController(form.getSpellSlot()),
                 R.id.feat_administration_spellslot);
         setCheckBox(form.isFighterBonus(), R.id.feat_administration_fighter_bonus);
@@ -78,7 +78,7 @@ public abstract class FeatAdministrationActivity extends FormActivity<Feat> {
         form.setName(getTextOfTextView(R.id.feat_administration_name));
         form.setFeatType((FeatType) getSelectedItemOfSpinner(R.id.feat_administration_feattype));
         form.setBenefit(getTextOfTextView(R.id.feat_administration_benefit));
-        form.setPrerequisit(getTextOfTextView(R.id.feat_administration_prerequisit));
+        form.setPrerequisit(getTextOfTextView(R.id.feat_administration_prerequisite));
         form.setSpellSlot(getIntegerOfNumberView(R.id.feat_administration_spellslot));
         form.setFighterBonus(isChecked(R.id.feat_administration_fighter_bonus));
         form.setMultiple(isChecked(R.id.feat_administration_multiple));

@@ -17,7 +17,7 @@ import com.d20charactersheet.framework.boc.model.Feat
 import com.d20charactersheet.framework.boc.model.FeatType
 import com.d20charactersheet.framework.boc.service.FeatService
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.d20charactersheet.framework.boc.service.SimpleDisplayService
+
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
@@ -57,7 +57,7 @@ class FeatAdministrationEditActivityInstrumentationTest : KoinTest {
         whenever(featService.findFeatById(any(), any())).doReturn(feat)
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(SimpleDisplayService())
+        whenever(gameSystem.displayService).doReturn(mock())
         whenever(gameSystem.featService).doReturn(featService)
 
         gameSystemHolder.gameSystem = gameSystem
@@ -74,7 +74,7 @@ class FeatAdministrationEditActivityInstrumentationTest : KoinTest {
         onView(withId(R.id.feat_administration_name)).check(matches(withText("myFeat")))
         onView(withId(R.id.feat_administration_feattype)).check(matches(withSpinnerText("GENERAL")))
         onView(withId(R.id.feat_administration_benefit)).check(matches(withText(isEmptyString())))
-        onView(withId(R.id.feat_administration_prerequisit)).check(matches(withText(isEmptyString())))
+        onView(withId(R.id.feat_administration_prerequisite)).check(matches(withText(isEmptyString())))
         onView(allOf(withParent(withId(R.id.feat_administration_spellslot)), withClassName(endsWith("TextView")))).check(matches(withText("0")))
         onView(withId(R.id.feat_administration_fighter_bonus)).check(matches(isNotChecked()))
         onView(withId(R.id.feat_administration_multiple)).check(matches(isNotChecked()))
