@@ -1,5 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -8,6 +9,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FormActivity;
@@ -17,6 +19,7 @@ import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import com.d20charactersheet.framework.boc.service.GameSystem;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Iterator;
 import java.util.Objects;
@@ -34,7 +37,7 @@ public class SpellSlotActivity extends FormActivity<SpellSlot> {
 
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
-
+    private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     private static final Object COMMA = ", ";
     private GameSystem gameSystem;
@@ -128,6 +131,13 @@ public class SpellSlotActivity extends FormActivity<SpellSlot> {
     protected void saveForm() {
         gameSystem.getCharacterService().updateSpellSlot(form);
         setResult(RESULT_OK);
+        logEventSpellSlot(form);
+    }
+
+    private void logEventSpellSlot(SpellSlot form) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FBAnalytics.Param.SPELL_NAME, form.getSpell().getName());
+        firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.SPELL_SLOT_ASSIGN, bundle);
     }
 
     @Override

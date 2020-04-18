@@ -17,16 +17,23 @@ import com.android.ash.charactersheet.gui.util.SearchTextWatcher;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.service.ItemService;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class to expand activities to edit items from. Displays items in a list view. The number of each item can be
  * edit by a NumberView. Saves data if back button is pressed.
  */
 public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
+
+    final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     ItemService itemService;
 

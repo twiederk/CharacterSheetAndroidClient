@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity;
@@ -28,6 +29,7 @@ import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.ImageService;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +48,7 @@ public class CharacterCreateActivity extends LogAppCompatActivity {
 
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
+    private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     private GameSystem gameSystem;
 
@@ -102,10 +105,18 @@ public class CharacterCreateActivity extends LogAppCompatActivity {
         try {
             final Character character = newCharacter();
             characterHolder.getValue().setCharacter(character);
+            logEventCharacterCreate(character);
             jumpToCharacterSheet();
         } catch (final Exception exception) {
             messageManager.showErrorMessage(exception);
         }
+    }
+
+    void logEventCharacterCreate(Character character) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FBAnalytics.Param.RACE_NAME, character.getRace().getName());
+        bundle.putString(FBAnalytics.Param.CLASS_NAME, character.getCharacterClasses().get(0).getName());
+        firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.CHARACTER_CREATE, bundle);
     }
 
     private Character newCharacter() {

@@ -1,0 +1,358 @@
+= d20 Character Sheet - Android App
+Torsten Wiederkehr <torsten.wiederkehr@gmail.com>
+v3.0.0, 2020-04-22
+// Settings:
+:icons: font
+:toc: left
+
+== Firebase
+
+The https://firebase.google.com/[Firebase] is used for analysing user behavior.
+The FirebaseAnalytics singleton is stored in the Koin context.
+
+[source,kotlin]
+----
+include::../main/java/com/android/ash/charactersheet/KoinConfiguration.kt[tag=koinConfiguration]
+----
+
+=== ADB Commands
+
+Enable Analytics Debug mode: `adb shell setprop debug.firebase.analytics.app com.android.ash.charactersheet`
+
+Disable Debug mode: `adb shell setprop debug.firebase.analytics.app .none.`
+
+== User Properties
+
+.User Properties
+|===
+|Name |Activity
+
+|game_system
+|CharacterListActivity
+
+|character_count
+|CharacterListActivity
+
+|===
+
+== Events
+
+.Custom Events
+|===
+|Event |Name |Param |Activity/Method
+
+|Open a character
+|character_open
+|race_name, class_name
+|CharacterSheetActivity.onCreate
+
+|Create a character
+|character_create
+|race_name, class_name
+|CharacterCreateActivity.createCharacter
+
+|Delete a character
+|character_delete
+|race_name, class_name
+|CharacterListActivity.deleteCharacter
+
+|Add an image to a character
+|image_add
+|
+|SheetPageFragment.addImage
+
+|Add an thumbnail to a character
+|thumbnail_add
+|
+|SheetPageFragment.addThumbnail
+
+|Create an attack for a weapon
+|weapon_attack_create
+|weapon name
+|WeaponAttackCreateActivity.saveForm
+
+|Show description of spell
+|spell_description
+|spell name
+|SpellActivity.onCreate
+
+|Edit weapons in equipment
+|weapon_edit
+|
+|WeaponEditActivity.onSave
+
+|Edit armor in equipment
+|armor_edit
+|
+|ArmorEditActivity.onSave
+
+|Edit goods in equipment
+|good_edit
+|
+|GoodEditActivity.onSave
+
+|Assign spell to spell slot
+|spell_slot_assign
+|
+|SpellSlotActivity.saveForm
+
+|Roll a die
+|die_roll
+|die_roll_name
+|RollOnClickListener.onClick
+
+|===
+
+.Main Screen Views
+|===
+|Screen |Class|Name
+|Select character to export
+|ExportCharacterActivity
+|
+
+|Select equipment to export
+|ExportEquipmentActivity
+|
+
+|Select file to import
+|ImportActivity
+|
+
+|Select data and format to backup
+|BackupActivity
+|
+
+|Display about information
+|AboutActivity
+|
+
+|Display Open Gaming Licence
+|OpenGamingLicenceActivity
+|
+|===
+
+.Sheet Screen Views
+|===
+|Screen |Class|Name
+
+|Display character sheet
+|SheetPageFragment
+|sheet_fragment
+
+|Display and edit appearance
+|AppearanceEditActivity
+|
+
+|Display and edit attributes
+|AttributesEditActivity
+|
+
+|Display and edit saves
+|SavesEditActivity
+|
+
+|Display and edit money
+|MoneyEditActivity
+|
+
+|Display and edit combat values
+|CombatEditActivity
+|
+
+|Display skills
+|SkillPageFragment
+|skill_fragment
+
+|Edit skills
+|SkillEditActivity
+|
+
+|Display skill description
+|SkillDescriptionActivity
+|
+
+|Display feats
+|FeatPageFragment
+|
+
+|Edit feat category
+|FeatEditActivity
+|
+
+|Display weapon attacks
+|WeaponAttackPageFragment
+|weapon_attack_fragment
+
+|Create a weapon attack
+|WeaponAttackCreateActivity
+|
+
+|Edit a weapon attack
+|WeaponAttackEditActivity
+|
+
+|Display equipment
+|EquipmentPageFragment
+|equipment_fragment
+
+|Display notes
+|NotePageFragment
+|note_fragment
+
+|Create a note
+|NoteCreateActivity
+|
+
+|Edit a note
+|NoteEditActivity
+|
+
+|Display race abilities
+|RaceAbilityPageFragment
+|race_ability_fragment
+
+|Display class abilities
+|ClassPageFragment
+|class_ability_fragment
+
+|Display known spells
+|KnownSpellPageFragment
+|
+
+|Display spell description
+|SpellDescriptionActivity
+|
+
+|Display spell slots
+|SpellSlotPageFragment
+|spell_slot_fragment
+|===
+
+.Administration Screen Views
+|===
+|Screen |Class|Name
+
+|Administration main menu
+|AdministrationActivity
+|
+
+|Race administration
+|RaceAdministrationListActivity
+|
+
+|Create race
+|RaceAdministrationCreateActivity
+|
+
+|Edit race
+|RaceAdministrationEditActivity
+|
+
+|Class administration
+|ClassAdministrationListActivity
+|
+
+|Create class
+|ClassAdministrationCreateActivity
+|
+
+|Edit class
+|ClassAdministrationEditActivity
+|
+
+|Ability administration
+|AbilityAdministrationListActivity
+|
+
+|Create ability
+|AbilityAdministrationCreateActivity
+|
+
+|Edit ability
+|AbilityAdministrationEditActivity
+|
+
+|Skill administration
+|SkillAdministrationListActivity
+|
+
+|Create skill
+|SkillAdministrationCreateActivity
+|
+
+|Edit skill
+|SkillAdministrationEditActivity
+|
+
+|Feat
+|FeatAdministrationListActivity
+|
+
+|Create feat
+|FeatAdministrationCreateActivity
+|
+
+|Edit feat
+|FeatAdministrationEditActivity
+|
+
+|Weapon administration
+|WeaponAdministrationListActivity
+|
+
+|Create weapon
+|WeaponAdministrationCreateActivity
+|
+
+|Edit weapon
+|WeaponAdministrationEditActivity
+|
+
+|Armor administration
+|ArmorAdministrationListActivity
+|
+
+|Create armor
+|ArmorAdministrationEditActivity
+|
+
+|Edit armor
+|ArmorAdministrationEditActivity
+|
+
+|Good administration
+|GoodAdministrationListActivity
+|
+
+|Create good
+|GoodAdministrationCreateActivity
+|
+
+|Edit good
+|GoodAdministrationEditActivity
+|
+
+|Spelllist administration
+|SpelllistAdministrationListActivity
+|
+
+|Create spelllist
+|SpelllistAdministrationCreateActivity
+|
+
+|Edit spelllist
+|SpelllistAdministrationEditActivity
+|
+
+|Spell administration
+|SpellAdministrationListActivity
+|
+
+|Create spell
+|SpellAdministrationCreateActivity
+|
+
+|Edit spell
+|SpellAdministrationEditActivity
+|
+|===

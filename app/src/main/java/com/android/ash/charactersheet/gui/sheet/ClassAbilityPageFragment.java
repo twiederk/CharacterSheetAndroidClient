@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.classability.CharacterAbilityAdapter;
 import com.android.ash.charactersheet.gui.sheet.classability.CharacterAbilityListComparator;
@@ -49,6 +50,12 @@ public class ClassAbilityPageFragment extends PageFragment {
         model.filter();
 
         setBody();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.CLASS_ABILITY, "ClassAbilityPageFragment");
     }
 
     @Override

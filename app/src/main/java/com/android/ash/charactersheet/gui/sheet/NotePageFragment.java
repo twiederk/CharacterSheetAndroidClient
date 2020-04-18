@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.note.NoteArrayAdapter;
 import com.android.ash.charactersheet.gui.sheet.note.NoteCreateActivity;
@@ -52,6 +53,7 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     @Override
     public void onResume() {
         super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.NOTE, "NotePageFragment");
         adapter = createAdapter();
         listView.setAdapter(adapter);
         listView.setTextFilterEnabled(true);

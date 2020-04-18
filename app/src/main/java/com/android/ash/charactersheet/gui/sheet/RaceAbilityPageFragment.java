@@ -4,6 +4,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.raceability.RaceAbilityAdapter;
 import com.android.ash.charactersheet.gui.util.ExpandOnClickListener;
@@ -32,6 +33,13 @@ public class RaceAbilityPageFragment extends PageFragment {
     protected void doCreateView() {
         setHeader();
         setBody();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.RACE_ABILITY, "RaceAbilityPageFragment");
+
     }
 
     private void setHeader() {

@@ -16,6 +16,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.spellslot.SpellSlotAdapter;
 import com.android.ash.charactersheet.gui.sheet.spellslot.SpellSlotModel;
@@ -65,6 +66,7 @@ public class SpellSlotPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.SPELL_SLOT, "SpellSlotPageFragment");
         if (!character.getSpelllists().isEmpty() && (createForFirstTime || isSpellSlotsChanged())) {
             createLayout();
         }

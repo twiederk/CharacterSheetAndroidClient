@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.feat.CheckBoxFeatModelController;
 import com.android.ash.charactersheet.gui.sheet.feat.FeatContextMenu;
@@ -50,6 +51,12 @@ public class FeatPageFragment extends PageFragment implements Observer {
     @Override
     protected int getLayoutId() {
         return R.layout.page_feat;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.FEAT, "FeatPageFragment");
     }
 
     @Override

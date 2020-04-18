@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "651396003907",
+    "firebase_url": "https://d20-character-sheet.firebaseio.com",
+    "project_id": "d20-character-sheet",
+    "storage_bucket": "d20-character-sheet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651396003907:android:7f5527bb6b80f2088efcf6",
+        "android_client_info": {
+          "package_name": "com.android.ash.charactersheet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651396003907-h6ms0hd9rfiifrpp9sn72idnhlrmcuts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtPKIvrgHF-WtT90MqMoP__iTD5Do4BgI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651396003907-h6ms0hd9rfiifrpp9sn72idnhlrmcuts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

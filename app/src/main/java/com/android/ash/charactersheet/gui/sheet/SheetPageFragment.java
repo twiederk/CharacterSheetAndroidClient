@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
 import com.android.ash.charactersheet.gui.sheet.appearance.AppearanceEditActivity;
@@ -23,7 +24,7 @@ import com.android.ash.charactersheet.gui.sheet.combat.BaseAttackBonusRollOnClic
 import com.android.ash.charactersheet.gui.sheet.combat.CombatEditActivity;
 import com.android.ash.charactersheet.gui.sheet.combat.CombatManeuverBonusRollOnClickListener;
 import com.android.ash.charactersheet.gui.sheet.combat.CombatManeuverDefenceRollOnClickListener;
-import com.android.ash.charactersheet.gui.sheet.combat.InitativeRollOnClickListener;
+import com.android.ash.charactersheet.gui.sheet.combat.InitiativeRollOnClickListener;
 import com.android.ash.charactersheet.gui.sheet.money.MoneyEditActivity;
 import com.android.ash.charactersheet.gui.sheet.save.SaveEditActivity;
 import com.android.ash.charactersheet.gui.sheet.save.SaveRollOnClickListener;
@@ -124,7 +125,7 @@ public class SheetPageFragment extends PageFragment {
         combatView.setOnClickListener(new IntentOnClickListener(new Intent(getActivity(), CombatEditActivity.class)));
 
         final Button initiativeButton = view.findViewById(R.id.combat_initiative);
-        initiativeButton.setOnClickListener(new InitativeRollOnClickListener(character, displayService, ruleService,
+        initiativeButton.setOnClickListener(new InitiativeRollOnClickListener(character, displayService, ruleService,
                 getDieRollView()));
 
         final Button baseAttackBonusButton = view.findViewById(R.id.combat_baseattackbonus);
@@ -400,6 +401,7 @@ public class SheetPageFragment extends PageFragment {
             character.setImageId(newImageId);
             characterService.updateCharacter(character);
             imageService.deleteImage(oldImageId);
+            firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.IMAGE_ADD, null);
         } catch (final Exception exception) {
             Logger.error("Failed to add image", exception);
             String message = getString(R.string.page_sheet_message_add_image_failed) + COLON + exception.getMessage();
@@ -421,6 +423,7 @@ public class SheetPageFragment extends PageFragment {
             character.setThumbImageId(newImageId);
             characterService.updateCharacter(character);
             imageService.deleteImage(oldImageId);
+            firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.THUMBNAIL_ADD, null);
         } catch (final Exception exception) {
             Logger.error("Failed to add thumbnail", exception);
             String message = getString(R.string.page_sheet_message_add_thumbnail_failed) + COLON + exception.getMessage();
@@ -431,6 +434,7 @@ public class SheetPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.SHEET, "SheetPageFragment");
         setCharacterName();
         setActivityBackground();
         setAppearance();

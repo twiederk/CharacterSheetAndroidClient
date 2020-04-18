@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
@@ -37,6 +38,7 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.CharacterComparator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.File;
 import java.util.List;
@@ -56,6 +58,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
+    private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     private static final int CONTEXT_MENU_DELETE_CHARACTER = 10;
 
@@ -236,8 +239,16 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private void deleteCharacter(final Character character) {
         Logger.debug("deleteCharacter");
         Logger.debug("character: " + character);
+        logEventCharacterDelete(character);
         Objects.requireNonNull(gameSystem).deleteCharacter(character);
         adapter.remove(character);
+    }
+
+    void logEventCharacterDelete(Character character) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FBAnalytics.Param.RACE_NAME, character.getRace().getName());
+        bundle.putString(FBAnalytics.Param.CLASS_NAME, character.getCharacterClasses().get(0).getName());
+        firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.CHARACTER_DELETE, bundle);
     }
 
     /**
@@ -365,6 +376,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_9));
             case 49:
                 releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_12_0));
+            case 50:
+                releaseNotes.insert(0, getResources().getString(R.string.release_notes_3_0_0));
                 break;
 
             default:
@@ -377,6 +390,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     @Override
     public void onGameSystemLoaded() {
         gameSystem = gameSystemHolder.getValue().getGameSystem();
+        setUserProperties(Objects.requireNonNull(gameSystem));
 
         setContentView(R.layout.activity_character_list);
 
@@ -385,6 +399,11 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         setOkButton();
         setFavoriteActionButton();
         onResumeLayout();
+    }
+
+    public void setUserProperties(GameSystem gameSystem) {
+        firebaseAnalytics.getValue().setUserProperty(FBAnalytics.UserProperty.GAME_SYSTEM, gameSystem.getName());
+        firebaseAnalytics.getValue().setUserProperty(FBAnalytics.UserProperty.CHARACTER_COUNT, String.valueOf(gameSystem.getAllCharacters().size()));
     }
 
     private void setToolbar() {

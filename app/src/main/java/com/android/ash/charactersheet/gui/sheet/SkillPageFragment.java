@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.FavoriteCharacterSkill;
 import com.android.ash.charactersheet.gui.sheet.skill.CharacterSkillArrayAdapter;
@@ -248,6 +249,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     @Override
     public void onResume() {
         super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.SKILL, "SkillPageFragment");
         setHeader();
         setFavoriteSkills();
         setTrainedSkills();

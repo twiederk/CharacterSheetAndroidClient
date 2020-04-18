@@ -20,6 +20,7 @@ import com.d20charactersheet.framework.boc.service.FeatService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.RuleService;
 import com.d20charactersheet.framework.boc.service.XpService;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
@@ -37,6 +38,7 @@ public abstract class PageFragment extends LogFragment {
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
+    final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     GameSystem gameSystem;
     CharacterService characterService;

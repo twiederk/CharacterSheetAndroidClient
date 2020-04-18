@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.knownspell.CheckBoxSpelllistModelController;
 import com.android.ash.charactersheet.gui.sheet.knownspell.KnownSpellPageModel;
@@ -47,6 +48,12 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
     @Override
     protected int getLayoutId() {
         return R.layout.page_known_spell;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.KNOWN_SPELL, "KnownSpellPageFragment");
     }
 
     @Override

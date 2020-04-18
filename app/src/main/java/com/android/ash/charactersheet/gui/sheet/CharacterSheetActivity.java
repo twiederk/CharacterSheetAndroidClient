@@ -8,6 +8,7 @@ import android.view.Display;
 import android.widget.ImageView;
 
 import com.android.ash.charactersheet.CharacterHolder;
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
@@ -16,8 +17,10 @@ import com.android.ash.charactersheet.boc.service.PreferenceService;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
+import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
@@ -36,6 +39,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     private final Lazy<PreferenceServiceHolder> preferencesServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
+    private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     private GameSystem gameSystem;
     private PreferenceService preferenceService;
@@ -51,6 +55,8 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         preferenceService = preferencesServiceHolder.getValue().getPreferenceService();
         character = characterHolder.getValue().getCharacter();
 
+        logEventCharacter(Objects.requireNonNull(character));
+
         setContentView(R.layout.activity_character_sheet);
         setToolbar();
         setBackground();
@@ -62,6 +68,21 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+    }
+
+    void logEventCharacter(Character character) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FBAnalytics.Param.RACE_NAME, character.getRace().getName());
+        bundle.putString(FBAnalytics.Param.CLASS_LEVELS, buildClassLevelsParam(character));
+        firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.CHARACTER_OPEN, bundle);
+    }
+
+    private String buildClassLevelsParam(Character character) {
+        StringBuilder classLevels = new StringBuilder();
+        for (ClassLevel classLevel : character.getClassLevels()) {
+            classLevels.append(classLevel.getCharacterClass().getName()).append(" (").append(classLevel.getLevel()).append(");");
+        }
+        return classLevels.toString();
     }
 
     private void setToolbar() {

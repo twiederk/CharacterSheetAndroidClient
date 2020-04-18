@@ -11,24 +11,24 @@ import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.RuleService;
 
 /**
- * Listener for initative rolls.
+ * Listener for initiative rolls.
  */
-public class InitativeRollOnClickListener extends RollOnClickListener {
+public class InitiativeRollOnClickListener extends RollOnClickListener {
 
     /**
-     * Instantiates InitativeRollOnClickListener
+     * Instantiates InitiativeRollOnClickListener
      * 
      * @param character
      *            The character to roll for.
      * @param displayService
      *            The service to display data.
      * @param ruleService
-     *            The service to execute the initative roll.
+     *            The service to execute the initiative roll.
      * @param dieRollView
      *            The view to display the result.
      */
-    public InitativeRollOnClickListener(final Character character, final DisplayService displayService,
-            final RuleService ruleService, final DieRollView dieRollView) {
+    public InitiativeRollOnClickListener(final Character character, final DisplayService displayService,
+                                         final RuleService ruleService, final DieRollView dieRollView) {
         super(character, displayService, ruleService, dieRollView);
     }
 

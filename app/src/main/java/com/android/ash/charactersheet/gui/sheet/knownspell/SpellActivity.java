@@ -5,6 +5,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.TextView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.Logger;
@@ -14,6 +15,7 @@ import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.SpelllistService;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
@@ -29,6 +31,7 @@ import static org.koin.java.KoinJavaComponent.inject;
 public class SpellActivity extends SlideActivity {
 
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
+    private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
 
     private GameSystem gameSystem;
     private DisplayService displayService;
@@ -44,6 +47,7 @@ public class SpellActivity extends SlideActivity {
         final Spell spell = getSpellFromIntent();
         setToolbar(spell);
         setSpell(spell);
+        logEventSpellDescription(spell);
     }
 
     private void setToolbar(Spell spell) {
@@ -96,4 +100,11 @@ public class SpellActivity extends SlideActivity {
         }
         return Html.fromHtml(output.toString(), null, new TableTagHander());
     }
+
+    private void logEventSpellDescription(Spell spell) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FBAnalytics.Param.SPELL_NAME, spell.getName());
+        firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.SPELL_DESCRIPTION_SHOW, bundle);
+    }
+
 }

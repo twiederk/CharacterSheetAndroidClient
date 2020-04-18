@@ -1,5 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 
@@ -24,6 +25,7 @@ public class ArmorEditActivity extends ItemEditActivity {
     @Override
     protected void onSave(final List<ItemGroup> items) {
         characterService.updateArmor(character, items);
+        firebaseAnalytics.getValue().logEvent(FBAnalytics.Event.ARMOR_EDIT, null);
     }
 
 }

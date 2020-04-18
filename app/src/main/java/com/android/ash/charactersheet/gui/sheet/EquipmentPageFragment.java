@@ -11,6 +11,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.item.ArmorEditActivity;
 import com.android.ash.charactersheet.gui.sheet.item.ArmorListAdapter;
@@ -86,6 +87,7 @@ public class EquipmentPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.EQUIPMENT, null);
         equipmentListHelper = new EquipmentHelper(character);
 
         resumeLoad();

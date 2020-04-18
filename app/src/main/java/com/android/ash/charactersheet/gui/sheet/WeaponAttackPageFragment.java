@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
+import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.attack.CriticalOnClickListener;
 import com.android.ash.charactersheet.gui.sheet.attack.DamageOnClickListener;
@@ -59,6 +60,7 @@ public class WeaponAttackPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.WEAPON_ATTACK, "WeaponAttackPageFragment");
 
         for (final WeaponAttack weaponAttack : character.getWeaponAttacks()) {
             ruleService.calculateWeaponAttack(character, weaponAttack);
