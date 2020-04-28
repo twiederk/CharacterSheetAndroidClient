@@ -3,8 +3,6 @@ package com.android.ash.charactersheet.gui.sheet;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +18,7 @@ import com.android.ash.charactersheet.gui.sheet.note.NoteCreateActivity;
 import com.android.ash.charactersheet.gui.sheet.note.NoteEditActivity;
 import com.d20charactersheet.framework.boc.model.Note;
 import com.d20charactersheet.framework.boc.util.NoteComparator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
 import java.util.List;
@@ -47,7 +46,13 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
 
     @Override
     protected void doCreateView() {
+        setFavoriteActionButton();
         listView = view.findViewById(R.id.note_list_view);
+    }
+
+    private void setFavoriteActionButton() {
+        final FloatingActionButton favoriteActionButton = view.findViewById(R.id.favorite_action_button);
+        favoriteActionButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), NoteCreateActivity.class)));
     }
 
     @Override
@@ -66,22 +71,6 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
         final ArrayAdapter<Note> adapter = new NoteArrayAdapter(getActivity(), displayService, notes);
         adapter.sort(new NoteComparator());
         return adapter;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.menu_page_note, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-
-        if (item.getItemId() == R.id.menu_page_note_create_note) {
-            startActivity(new Intent(getActivity(), NoteCreateActivity.class));
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-        return true;
     }
 
     private void edit(final Serializable item) {

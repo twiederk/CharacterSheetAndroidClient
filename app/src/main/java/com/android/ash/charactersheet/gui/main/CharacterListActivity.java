@@ -267,125 +267,14 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         listView.setOnCreateContextMenuListener(this);
     }
 
-    private void showReleaseNotes() {
+    private void showReleaseNotes(int oldVersion) {
         final View releaseNotesView = findViewById(R.id.character_list_release_notes);
         releaseNotesView.setVisibility(View.VISIBLE);
 
         final TextView releaseNotesTextView = findViewById(R.id.list_of_release_notes);
-        releaseNotesTextView.setText(getReleaseNotes());
+        releaseNotesTextView.setText(new ReleaseNotes(getResources()).getReleaseNotes(oldVersion));
     }
 
-    private String getReleaseNotes() {
-        final StringBuilder releaseNotes = new StringBuilder();
-        switch (dndDbHelper.getOldVersion()) {
-            case 1:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_1_0));
-            case 2:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_2_0));
-            case 3:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_3_0));
-            case 4:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_4_0));
-            case 5:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_5_0));
-            case 6:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_6_0));
-            case 7:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_7_0));
-            case 8:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_8_0));
-            case 9:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_9_0));
-            case 10:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_10_0));
-            case 11:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_11_0));
-            case 12:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_11_1));
-            case 13:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_12_0));
-            case 14:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_12_1));
-            case 15:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_13_0));
-            case 16:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_14_0));
-            case 17:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_15_0));
-            case 18:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_16_0));
-            case 19:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_17_0));
-            case 20:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_18_0));
-            case 21:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_19_0));
-            case 22:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_19_1));
-            case 23:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_20_0));
-            case 24:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_1_21_0));
-            case 25:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_0_0));
-            case 26:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_0_1));
-            case 27:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_1_0));
-            case 28:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_2_0));
-            case 29:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_2_1));
-            case 30:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_3_0));
-            case 31:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_4_0));
-            case 32:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_5_0));
-            case 33:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_6_0));
-            case 34:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_6_1));
-            case 35:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_7_0));
-            case 36:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_8_0));
-            case 37:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_9_0));
-            case 38:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_10_0));
-            case 39:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_0));
-            case 40:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_1));
-            case 41:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_2));
-            case 42:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_3));
-            case 43:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_4));
-            case 44:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_5));
-            case 45:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_6));
-            case 46:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_7));
-            case 47:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_8));
-            case 48:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_11_9));
-            case 49:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_2_12_0));
-            case 50:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_3_0_0));
-                break;
-
-            default:
-                releaseNotes.insert(0, getResources().getString(R.string.release_notes_not_found));
-                break;
-        }
-        return releaseNotes.toString();
-    }
 
     @Override
     public void onGameSystemLoaded() {
@@ -419,7 +308,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
     private void setReleaseNotes() {
         if (dndDbHelper.isUpgrade() && !showedReleaseNotes) {
-            showReleaseNotes();
+            showReleaseNotes(dndDbHelper.getOldVersion());
             showedReleaseNotes = true;
         }
     }

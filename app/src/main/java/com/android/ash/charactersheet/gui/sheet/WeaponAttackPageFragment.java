@@ -3,8 +3,6 @@ package com.android.ash.charactersheet.gui.sheet;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -21,6 +19,7 @@ import com.android.ash.charactersheet.gui.widget.attackbonusview.AttackOnClickLi
 import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.util.WeaponAttackComparator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 
@@ -41,12 +40,19 @@ public class WeaponAttackPageFragment extends PageFragment {
 
     @Override
     protected void doCreateView() {
+        setFavoriteActionButton();
+
         final DieRollView dieRollView = getDieRollView();
         dieRollView.setOnClickListener(new HideOnClickListener());
 
         final ListView listView = getListView();
         listView.setTextFilterEnabled(true);
         listView.setOnCreateContextMenuListener(this);
+    }
+
+    private void setFavoriteActionButton() {
+        final FloatingActionButton favoriteActionButton = view.findViewById(R.id.favorite_action_button);
+        favoriteActionButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), WeaponAttackSearchActivity.class)));
     }
 
     private DieRollView getDieRollView() {
@@ -75,26 +81,6 @@ public class WeaponAttackPageFragment extends PageFragment {
         weaponAttackListAdapter.sort(new WeaponAttackComparator());
 
         getListView().setAdapter(weaponAttackListAdapter);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater menuInflater) {
-        menuInflater.inflate(R.menu.menu_page_weapon_attack, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.menu_page_weapon_attack_create) {
-            createWeaponAttack();
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
-
-    private void createWeaponAttack() {
-        final Intent intent = new Intent(getActivity(), WeaponAttackSearchActivity.class);
-        startActivity(intent);
     }
 
     @Override

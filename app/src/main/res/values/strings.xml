@@ -139,7 +139,6 @@
     <string name="weaponattack_list_fumble_subtitle">You fumbled!!!</string>
     <string name="weaponattack_list_damage_roll">Damage Roll</string>
     <string name="weaponattack_list_critical_roll">Critical Roll</string>
-    <string name="weaponattack_list_create">Create Attack</string>
     <string name="weaponattack_list_delete">Delete Attack</string>
 
     <!-- WeaponAttackActivity -->
@@ -377,7 +376,6 @@
 
     <!-- NotePageFragment -->
     <string name="page_note_title">Notes</string>
-    <string name="note_list_menu_create_note">Create Note</string>
     <string name="note_list_context_menu_delete_note">Delete Note</string>
 
     <!-- NoteActivity -->
@@ -891,7 +889,7 @@
     <string name="release_notes_2_11_8">Release 2.11.8\nBug fix: Added Espresso tests to sheet\n\n</string>
     <string name="release_notes_2_11_9">Release 2.11.9\nBug fix: Fixed display of dialogs\n\n</string>
     <string name="release_notes_2_12_0">Release 2.12.0\n- Added favorite action buttons\n\n</string>
-    <string name="release_notes_3_0_0">Release 3.0.0\n- Added in-app payment\n\n</string>
-    <string name="release_notes_not_found">No Release Notes found\n\n</string>
+    <string name="release_notes_2_12_1">Release 2.12.1\n- Added user behavior analyse\n\n</string>
+    <string name="release_notes_2_12_2">Release 2.12.2\n- Added favorite action buttons to create an attack or a note\n- Bug fix. Fixed text color of spell name in spell description\n- Bug fix. Fixed display of dialogs in task manager\n</string>
 
 </resources>

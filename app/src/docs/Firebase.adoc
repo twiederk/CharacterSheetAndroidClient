@@ -38,6 +38,9 @@ Disable Debug mode: `adb shell setprop debug.firebase.analytics.app .none.`
 == Events
 
 .Custom Events
+Custom events always describe and action performed by the user.
+The event name starts with a substantive naming the subject of the action and ending with a verb describing the action performed on the substantive.
+Examples: `spell_slot_assign` or `character_open`
 |===
 |Event |Name |Param |Activity/Method
 

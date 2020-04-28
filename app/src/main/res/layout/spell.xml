@@ -20,7 +20,8 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="#000000" />
 
         <TextView
             android:id="@+id/spell_school"
