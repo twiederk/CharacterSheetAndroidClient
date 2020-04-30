@@ -2,7 +2,7 @@ package com.android.ash.charactersheet.gui.sheet.clazz;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.ash.charactersheet.R;
@@ -25,15 +25,11 @@ public class ClassLevelArrayAdapter extends DisplayArrayAdapter<ClassLevel> {
 
     /**
      * Creates the adapter.
-     * 
-     * @param context
-     *            The context on the Activity.
-     * @param displayService
-     *            The display service to display class name.
-     * @param itemViewResourceId
-     *            The id of the layout resource.
-     * @param classLevels
-     *            The class levels to display.
+     *
+     * @param context            The context on the Activity.
+     * @param displayService     The display service to display class name.
+     * @param itemViewResourceId The id of the layout resource.
+     * @param classLevels        The class levels to display.
      */
     ClassLevelArrayAdapter(final Context context, final DisplayService displayService,
                            final int itemViewResourceId, final List<ClassLevel> classLevels) {
@@ -45,7 +41,7 @@ public class ClassLevelArrayAdapter extends DisplayArrayAdapter<ClassLevel> {
     protected void fillView(final View view, final ClassLevel classLevel) {
         final TextView classTextView = view.findViewById(R.id.class_name);
         final StepNumberView classLevelNumberView = view.findViewById(R.id.class_level);
-        final Button deleteButton = view.findViewById(R.id.class_level_delete);
+        final ImageButton deleteButton = view.findViewById(R.id.class_level_delete);
 
         final CharacterClass characterClass = classLevel.getCharacterClass();
         classTextView.setText(characterClass.getName());

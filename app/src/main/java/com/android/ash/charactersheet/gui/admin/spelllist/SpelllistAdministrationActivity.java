@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
@@ -104,11 +105,17 @@ public abstract class SpelllistAdministrationActivity extends FormActivity<Spell
         if (requestCode == REQUEST_CODE_SPELL_SEARCH) {
             if (resultCode != RESULT_CANCELED) {
                 final int spellId = Objects.requireNonNull(resultIntent.getExtras()).getInt(INTENT_EXTRA_DATA_OBJECT);
-                final Spell spell = gameSystem.getSpelllistService().findSpellById(spellId, gameSystem.getAllSpells());
-                gameSystem.getSpelllistService().createSpelllevel(form, spell, 1);
+                addSpell(spellId);
             }
         } else {
             throw new IllegalStateException("Result code (" + requestCode + ") is unknown");
+        }
+    }
+
+    private void addSpell(int spellId) {
+        final Spell spell = gameSystem.getSpelllistService().findSpellById(spellId, gameSystem.getAllSpells());
+        if (!gameSystem.getSpelllistService().createSpelllevel(form, spell, 1)) {
+            Toast.makeText(this, getString(R.string.spelllist_administration_add_spell_failure, spell.getName()), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -512,13 +512,14 @@
     <!-- SpelllistAdministrationListActivity -->
     <string name="spelllist_administration_list_title">Spell List Administration</string>
 
-    <!-- SpellistAdministrationActivity -->
+    <!-- SpelllistAdministrationActivity -->
     <string name="spelllist_administration_name">Name</string>
     <string name="spelllist_administration_short_name">Short Name</string>
     <string name="spelllist_administration_domain">Domain</string>
     <string name="spelllist_administration_min_level">Min. Level</string>
     <string name="spelllist_administration_max_level">Max. Level</string>
     <string name="spelllist_administration_add_spell">Add Spell</string>
+    <string name="spelllist_administration_add_spell_failure">%1$s already exists in the spell list!</string>
     <string name="spelllist_administration_remove_spell">Remove Spell</string>
 
     <!-- SpelllistAdministrationCreateActivity -->
@@ -877,7 +878,7 @@
     <string name="release_notes_2_7_0">Release 2.7.0\n- Added Backup &amp; Restore to/from File (SD Card)\n- Bug Fix: Fixed display of misc modifier buttons in edit skill mask on phones\n- Bug Fix: Fixed removing an item while adding a new one to the equipment list\n- Bug Fix: Allow negative values for misc attack and damage modifier\n- Pathfinder: Bug Fix: Fixed base attack bonus of Rogue from good to average\n\n</string>
     <string name="release_notes_2_8_0">Release 2.8.0\n- Added export and import of characters\n- Display skills in one line on 7 inch devices\n- Bug Fix: App crashed by assigning spell ability to a class or race in administration\n- Bug Fix: Display bonuses with two digits on buttons correctly\n\n</string>
     <string name="release_notes_2_9_0">Release 2.9.0\n- Added export and import of weapons, armor and goods. I would like to offer new equipment to import via download from the homepage (www.d20charactersheet.com). If you have items you want to share with other users of the app. It would be great if you send me your exported items and I will place them on the homepage for download. Please contact me via torsten.wiederkehr@gmail.com\n- Reduced memory requirements to improve stability, while app is running in background\n\n</string>
-    <string name="release_notes_2_10_0">Release 2.10.0\n- Added creation of spells.\n- Added creation of spell lists and assign spells to them.\n- Added creation of spell ablities to assign spell lists to them. By assigning spell abilities to a race or class you can assign your own spell lists with your own spells to your character.\n- Added search to all administration menus.\n- Bug fix: Fixed calculation of CMD.\n- Bug fix: Fixed import of masterwork items.\n- Bug fix: Fixed adding skills to classes in skill administration.\n\n</string>
+    <string name="release_notes_2_10_0">Release 2.10.0\n- Added creation of spells.\n- Added creation of spell lists and assign spells to them.\n- Added creation of spell abilities to assign spell lists to them. By assigning spell abilities to a race or class you can assign your own spell lists with your own spells to your character.\n- Added search to all administration menus.\n- Bug fix: Fixed calculation of CMD.\n- Bug fix: Fixed import of masterwork items.\n- Bug fix: Fixed adding skills to classes in skill administration.\n\n</string>
     <string name="release_notes_2_11_0">Release 2.11.0\n- Added spell preparation. The tab Spells is replaced by two new tabs. The tab Known Spells allows to select the spells the character knows from a spell list and displays how many spells the character is allowed to known per spell level. The tab Spell Slots shows the spell slots of the character. Each spell slot can be touched to select a spell. A spell slot displays the name, DC, ability and school of the spell. Spell slots are in the color of the school to easily identify counter spells. After a spell is cast, the color changes to grey and the spell name is striked through. Metamagic feats are supported.\n- Added search field to add/remove equipment mask.\n- Added Immediate and Swift action" to casting time.\n- Bug Fix. Fixed bug when adding extra points received by an extra feat ability of a class.\n\n</string>
     <string name="release_notes_2_11_1">Release 2.11.1\nBug fix: Fixed missing spells slots of max spell level of spell list\nBug fix: Fixed spell slots lower then min level of spell list\nBug fix: Fixed modifying spell list abilities created before version 2.11.0\nBug fix: Fixed saving of skills, including negative modifiers\n\n</string>
     <string name="release_notes_2_11_2">Release 2.11.2\nBug fix: Fixed missing icon in action bar to export equipment\nBug fix: Fixed missing result of die roll on high density devices\nBug fix: Fixed unreadable labels on buttons on high density devices\n\n</string>
@@ -890,6 +891,7 @@
     <string name="release_notes_2_11_9">Release 2.11.9\nBug fix: Fixed display of dialogs\n\n</string>
     <string name="release_notes_2_12_0">Release 2.12.0\n- Added favorite action buttons\n\n</string>
     <string name="release_notes_2_12_1">Release 2.12.1\n- Added user behavior analyse\n\n</string>
-    <string name="release_notes_2_12_2">Release 2.12.2\n- Added favorite action buttons to create an attack or a note\n- Bug fix. Fixed text color of spell name in spell description\n- Bug fix. Fixed display of dialogs in task manager\n</string>
+    <string name="release_notes_2_12_2">Release 2.12.2\n- Added favorite action buttons to create an attack or a note\n- Bug fix. Fixed text color of spell name in spell description\n- Bug fix. Fixed display of dialogs in task manager\n\n</string>
+    <string name="release_notes_2_12_3">Release 2.12.3\n- Bug fix: Fixed menu option to create a weapon/armor/good in administration\nBug fix: Fixed not visible text to remove a class from a character\n- Bug fix: Fixed app crash if a thumbnail image missing\n- Bug fix: Fixed app crashed by adding a spell more than once to a spell list\n\n</string>
 
 </resources>

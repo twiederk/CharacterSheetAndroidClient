@@ -46,7 +46,7 @@ Examples: `spell_slot_assign` or `character_open`
 
 |Open a character
 |character_open
-|race_name, class_name
+|race_name, class_levels
 |CharacterSheetActivity.onCreate
 
 |Create a character
@@ -71,12 +71,12 @@ Examples: `spell_slot_assign` or `character_open`
 
 |Create an attack for a weapon
 |weapon_attack_create
-|weapon name
+|weapon_name
 |WeaponAttackCreateActivity.saveForm
 
 |Show description of spell
 |spell_description
-|spell name
+|spell_name
 |SpellActivity.onCreate
 
 |Edit weapons in equipment
@@ -96,7 +96,7 @@ Examples: `spell_slot_assign` or `character_open`
 
 |Assign spell to spell slot
 |spell_slot_assign
-|
+|spell_name
 |SpellSlotActivity.saveForm
 
 |Roll a die

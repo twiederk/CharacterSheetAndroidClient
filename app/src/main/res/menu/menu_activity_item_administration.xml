@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_admin_create"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/administration_list_menu_create"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/menu_activity_item_administration_magic_item"
         android:title="@string/item_administration_list_magic"
         app:actionViewClass="android.widget.CheckBox"

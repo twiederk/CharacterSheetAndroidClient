@@ -56,7 +56,8 @@ class ReleaseNotes(val resources: Resources) {
             resources.getString(R.string.release_notes_2_11_9),  //
             resources.getString(R.string.release_notes_2_12_0),  //
             resources.getString(R.string.release_notes_2_12_1),  //
-            resources.getString(R.string.release_notes_2_12_2)  //
+            resources.getString(R.string.release_notes_2_12_2),  //
+            resources.getString(R.string.release_notes_2_12_3)  //
     )
 
     fun getReleaseNotes(oldVersion: Int): String {

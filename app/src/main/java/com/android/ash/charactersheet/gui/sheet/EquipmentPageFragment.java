@@ -87,7 +87,7 @@ public class EquipmentPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.EQUIPMENT, null);
+        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.EQUIPMENT, "EquipmentPageFragment");
         equipmentListHelper = new EquipmentHelper(character);
 
         resumeLoad();
