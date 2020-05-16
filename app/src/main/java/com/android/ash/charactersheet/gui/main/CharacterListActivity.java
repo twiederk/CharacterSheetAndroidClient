@@ -31,12 +31,14 @@ import com.android.ash.charactersheet.gui.admin.AdministrationMenuActivity;
 import com.android.ash.charactersheet.gui.main.exportimport.ExportMenuActivity;
 import com.android.ash.charactersheet.gui.main.exportimport.ImportActivity;
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity;
+import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.CharacterComparator;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -84,6 +86,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         renameDnDv35Database();
+
+        MobileAds.initialize(this);
 
         gameSystem = gameSystemHolder.getValue().getGameSystem();
 
@@ -287,6 +291,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         setReleaseNotes();
         setOkButton();
         setFavoriteActionButton();
+        new AdViewConfiguration().setAdView(this);
         onResumeLayout();
     }
 

@@ -14,6 +14,7 @@ import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
+import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
@@ -60,6 +61,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         setContentView(R.layout.activity_character_sheet);
         setToolbar();
         setBackground();
+        new AdViewConfiguration().setAdView(this);
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), getResources());
         ViewPager viewPager = findViewById(R.id.view_pager);

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences.Editor
 import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.dac.dao.android.AndroidPreferenceDao
@@ -11,9 +12,12 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-class PreferenceServiceInstrumentedTest {
+@Config(manifest = Config.NONE)
+@MediumTest
+class PreferenceServiceRobotronicTest {
 
     private lateinit var editor: Editor
     private lateinit var preferenceService: PreferenceService

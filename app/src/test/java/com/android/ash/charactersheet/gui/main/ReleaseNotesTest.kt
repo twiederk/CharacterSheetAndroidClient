@@ -17,7 +17,7 @@ class ReleaseNotesTest {
         whenever(resources.getString(any())).doReturn("myReleaseNote\n")
 
         // Act
-        val releaseNotes = ReleaseNotes(resources).getReleaseNotes(51)
+        val releaseNotes = ReleaseNotes(resources).getReleaseNotes(52)
 
         // Assert
         assertThat(releaseNotes).isEqualTo("myReleaseNote\nmyReleaseNote\n")

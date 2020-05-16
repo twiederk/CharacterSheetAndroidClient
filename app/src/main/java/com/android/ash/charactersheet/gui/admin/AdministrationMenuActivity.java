@@ -16,6 +16,7 @@ import com.android.ash.charactersheet.gui.admin.race.RaceAdministrationListActiv
 import com.android.ash.charactersheet.gui.admin.skill.SkillAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.spell.SpellAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.spelllist.SpelllistAdministrationListActivity;
+import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.IntentOnClickListener;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 
@@ -33,6 +34,7 @@ public class AdministrationMenuActivity extends LogAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.administration_menu);
         setToolbar();
+        new AdViewConfiguration().setAdView(this);
         setButtonsOnClickListeners();
 
     }
@@ -63,4 +65,5 @@ public class AdministrationMenuActivity extends LogAppCompatActivity {
         final Button button = findViewById(id);
         button.setOnClickListener(new IntentOnClickListener(new Intent(this, activity)));
     }
+
 }

@@ -40,6 +40,7 @@
 
     <!-- CharacterSheetActivity -->
     <string name="activity_base_character_sheet_image_hint">Image of character</string>
+    <string name="character_sheet_ad_unit_id">ca-app-pub-8129946526938446/6306190451</string>
 
     <!-- SheetPageFragment -->
     <string name="page_sheet_title">Sheet</string>
@@ -69,6 +70,7 @@
     <string name="character_list_wait_create_dndv35_database">Create DnD v.3.5 Database</string>
     <string name="character_list_wait_create_pathfinder_database">Create Pathfinder Database</string>
     <string name="character_list_image_hint">Thumbnail of character</string>
+    <string name="character_list_ad_unit_id">ca-app-pub-8129946526938446/7481006483</string>
 
     <!-- CombatEditActivity -->
     <string name="combat_title">Combat</string>
@@ -208,6 +210,8 @@
     <string name="administration_menu_good_button">Goods</string>
     <string name="administration_menu_spelllist_button">Spell Lists</string>
     <string name="administration_menu_spell_button">Spells</string>
+    <string name="administration_menu_ad_unit_id">ca-app-pub-8129946526938446/4427268042</string>
+
 
     <!-- AdministrationList -->
     <string name="administration_search_hint">Search</string>
@@ -893,5 +897,6 @@
     <string name="release_notes_2_12_1">Release 2.12.1\n- Added user behavior analyse\n\n</string>
     <string name="release_notes_2_12_2">Release 2.12.2\n- Added favorite action buttons to create an attack or a note\n- Bug fix. Fixed text color of spell name in spell description\n- Bug fix. Fixed display of dialogs in task manager\n\n</string>
     <string name="release_notes_2_12_3">Release 2.12.3\n- Bug fix: Fixed menu option to create a weapon/armor/good in administration\nBug fix: Fixed not visible text to remove a class from a character\n- Bug fix: Fixed app crash if a thumbnail image missing\n- Bug fix: Fixed app crashed by adding a spell more than once to a spell list\n\n</string>
+    <string name="release_notes_3_0_0">Release 3.0.0\n- Changed business model to be based on advertisement\n\n</string>
 
 </resources>
