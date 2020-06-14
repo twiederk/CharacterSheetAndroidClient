@@ -11,7 +11,7 @@ import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nhaarman.mockitokotlin2.*
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -73,8 +73,8 @@ class CharacterListActivityRobotronicTest : KoinTest {
         // Assert
         argumentCaptor<Bundle> {
             verify(firebaseAnalytics.value).logEvent(eq("character_delete"), capture())
-            Assertions.assertThat(firstValue.getString("race_name")).isEqualTo("myRace")
-            Assertions.assertThat(firstValue.getString("class_name")).isEqualTo("myClass")
+            assertThat(firstValue.getString("race_name")).isEqualTo("myRace")
+            assertThat(firstValue.getString("class_name")).isEqualTo("myClass")
         }
     }
 

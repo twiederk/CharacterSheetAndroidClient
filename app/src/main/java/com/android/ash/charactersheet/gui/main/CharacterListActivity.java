@@ -21,6 +21,7 @@ import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.billing.Billing;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
@@ -30,10 +31,14 @@ import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.admin.AdministrationMenuActivity;
 import com.android.ash.charactersheet.gui.main.exportimport.ExportMenuActivity;
 import com.android.ash.charactersheet.gui.main.exportimport.ImportActivity;
+import com.android.ash.charactersheet.gui.main.promocode.PromoCode;
+import com.android.ash.charactersheet.gui.main.purchase.PurchaseDialog;
+import com.android.ash.charactersheet.gui.main.purchase.PurchaseListener;
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity;
 import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
+import com.android.billingclient.api.BillingClient;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.service.DisplayService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
@@ -46,6 +51,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
@@ -61,6 +67,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private final Lazy<PreferenceServiceHolder> preferenceServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
     private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
+    private final Lazy<Billing> billing = inject(Billing.class);
 
     private static final int CONTEXT_MENU_DELETE_CHARACTER = 10;
 
@@ -78,6 +85,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     private PreferenceService preferenceService;
 
     private boolean showedReleaseNotes;
+    protected final PromoCode promoCode = new PromoCode();
 
     /**
      * Creates list of all available character. The characters are retrieved from the CharacterDao implementation.
@@ -88,6 +96,8 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         renameDnDv35Database();
 
         MobileAds.initialize(this);
+
+        billing.getValue().startConnection(BillingClient.newBuilder(this));
 
         gameSystem = gameSystemHolder.getValue().getGameSystem();
 
@@ -108,6 +118,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
     @Override
     protected void onResume() {
         super.onResume();
+        billing.getValue().startConnection(BillingClient.newBuilder(this));
         final GameSystem gameSystem = gameSystemHolder.getValue().getGameSystem();
         if (gameSystem == null) {
             gameSystemType = getGameSystemTypeFromPreferences();
@@ -176,9 +187,18 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
             case R.id.menu_activity_character_list_import:
                 return callActivity(ImportActivity.class);
 
+            case R.id.menu_activity_character_list_purchase_premium_version:
+                return openPurchaseDialog();
+
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    private boolean openPurchaseDialog() {
+        new PurchaseDialog(new AlertDialog.Builder(this)).show(this);
+        return true;
     }
 
     @SuppressWarnings("SameReturnValue")
@@ -259,6 +279,11 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
      * Fills list view with characters.
      */
     private void onResumeLayout() {
+        new AdViewConfiguration().setAdView(this);
+        setListView();
+    }
+
+    private void setListView() {
         characters = gameSystem.getAllCharacters();
         final DisplayService displayService = gameSystem.getDisplayService();
         final AndroidImageService imageService = (AndroidImageService) gameSystem.getImageService();
@@ -289,9 +314,9 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
         setToolbar();
         setReleaseNotes();
+        promoCode.execute(this, dndDbHelper);
         setOkButton();
         setFavoriteActionButton();
-        new AdViewConfiguration().setAdView(this);
         onResumeLayout();
     }
 
@@ -328,7 +353,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
 
     private void setFavoriteActionButton() {
         final FloatingActionButton favoriteActionButton = findViewById(R.id.favorite_action_button);
-        favoriteActionButton.setOnClickListener(view -> callActivity(CharacterCreateActivity.class));
+        favoriteActionButton.setOnClickListener(new PurchaseListener(this, new PurchaseDialog(new AlertDialog.Builder(this))));
     }
 
     @Override
@@ -336,6 +361,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements OnIte
         super.onDestroy();
         dndDbHelper.close();
         pathfinderDbHelper.close();
+        billing.getValue().endConnection();
     }
 
     private void renameDnDv35Database() {

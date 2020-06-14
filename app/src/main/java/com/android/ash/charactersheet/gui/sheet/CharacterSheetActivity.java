@@ -12,11 +12,12 @@ import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.billing.Billing;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
 import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
-import com.android.ash.charactersheet.gui.util.Logger;
+import com.android.billingclient.api.BillingClient;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.service.GameSystem;
@@ -41,6 +42,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private final Lazy<PreferenceServiceHolder> preferencesServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
     private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
+    private final Lazy<Billing> billing = inject(Billing.class);
 
     private GameSystem gameSystem;
     private PreferenceService preferenceService;
@@ -48,8 +50,9 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        Logger.info(getClass().getSimpleName() + ".onCreate()");
         super.onCreate(savedInstanceState);
+
+        billing.getValue().startConnection(BillingClient.newBuilder(this));
 
         gameSystem = gameSystemHolder.getValue().getGameSystem();
 
@@ -117,6 +120,12 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         imageView.setMinimumWidth(minWidth);
         imageView.setMinimumHeight(minHeight);
         imageView.setImageBitmap(bitmap);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        billing.getValue().startConnection(BillingClient.newBuilder(this));
     }
 
 }

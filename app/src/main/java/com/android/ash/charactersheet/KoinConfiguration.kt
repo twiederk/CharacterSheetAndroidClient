@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet
 
+import com.android.ash.charactersheet.billing.Billing
+import com.android.ash.charactersheet.billing.MessageDisplay
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
@@ -25,5 +27,7 @@ val appModule = module {
     single { PreferenceServiceHolder() }
     single { CharacterHolder() }
     single { FirebaseAnalytics.getInstance(androidContext()) }
+    single { Billing() }
+    single { MessageDisplay(androidContext()) }
 }
 // end::koinConfiguration[]

@@ -167,6 +167,7 @@ public enum GameSystemType {
                 {R.raw.dndv35_upgrade_51_to_52,}, //
                 {R.raw.dndv35_upgrade_52_to_53,}, //
                 {R.raw.dndv35_upgrade_53_to_54,}, //
+                {R.raw.dndv35_upgrade_54_to_55,}, //
         };
 
         int[] IMAGES = { //
@@ -256,6 +257,7 @@ public enum GameSystemType {
                 {R.raw.pathfinder_upgrade_51_to_52,},//
                 {R.raw.pathfinder_upgrade_52_to_53,},//
                 {R.raw.pathfinder_upgrade_53_to_54,},//
+                {R.raw.pathfinder_upgrade_54_to_55,},//
         };
 
     }

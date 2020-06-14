@@ -64,6 +64,7 @@
     <string name="character_list_menu_export">Export</string>
     <string name="character_list_menu_import">Import</string>
     <string name="character_list_menu_backup_restore">Backup &amp; Restore</string>
+    <string name="character_list_menu_purchase">Purchase Premium Version</string>
     <string name="character_list_wait_load_game_system">Load Game System</string>
     <string name="character_list_wait_load_dndv35">Load DnD v.3.5</string>
     <string name="character_list_wait_load_pathfinder">Load Pathfinder</string>
@@ -589,6 +590,29 @@
     <string name="spellslot_abilities">Abilities</string>
     <string name="spellslot_spell">Spell</string>
 
+    <!-- PurchaseDialog -->
+    <string name="purchase_dialog_premium_version">Permium Version</string>
+    <string name="purchase_dialog_content">* Unlimited number of characters\n* Banner ad removed</string>
+    <string name="purchase_dialog_purchase_button">Purchase Now</string>
+    <string name="purchase_dialog_restore_purchase_button">Restore Purchase</string>
+    <string name="purchase_dialog_cancel_button">Cancel</string>
+
+    <!-- PromoCodeDialog -->
+    <string name="promo_dialog_explanation">d20 Character Sheet now contains advertisement. You as an existing customer can easily activate the advertisement free version. Just click the button below. Your promotion code will pop up ready to redeem.</string>
+    <string name="promo_dialog_activate_code_button">Activate advertisement free version</string>
+    <string name="promo_dialog_help">If you have any problems activating the advertisement free version don’t hesitate to contact me torsten.wiederkehr@gmail.com</string>
+    <string name="promo_dialog_done_button">Done</string>
+    <string name="promo_dialog_activation_error_message">Play Store app is not installed</string>
+
+    <!-- Billing -->
+    <string name="billing_no_connection">No connection established to Google Play. Please restart the app.</string>
+    <string name="billing_no_connection_queryPurchases">Connection to Google Play is not ready (queryPurchases). Please restart the app.</string>
+    <string name="billing_no_connection_querySkuDetailsList">Connection to Google Play is not ready (querySkuDetailsList). Please restart the app.</string>
+    <string name="billing_connection_error">Can\'t connect to Google Play. Response code is %1$d</string>
+    <string name="billing_purchasesUpdated_error">Can\'t handle purchases. Response code is %1$d</string>
+    <string name="billing_onAcknowledgePurchaseResponse_error">Can\'t acknowledge purchase. Response code is %1$d</string>
+    <string name="billing_purchase_pending">Purchase is pending</string>
+
     <!-- COMMON -->
     <string name="button_ok">OK</string>
     <string name="error_dialog_title">Error</string>
@@ -896,7 +920,8 @@
     <string name="release_notes_2_12_0">Release 2.12.0\n- Added favorite action buttons\n\n</string>
     <string name="release_notes_2_12_1">Release 2.12.1\n- Added user behavior analyse\n\n</string>
     <string name="release_notes_2_12_2">Release 2.12.2\n- Added favorite action buttons to create an attack or a note\n- Bug fix. Fixed text color of spell name in spell description\n- Bug fix. Fixed display of dialogs in task manager\n\n</string>
-    <string name="release_notes_2_12_3">Release 2.12.3\n- Bug fix: Fixed menu option to create a weapon/armor/good in administration\nBug fix: Fixed not visible text to remove a class from a character\n- Bug fix: Fixed app crash if a thumbnail image missing\n- Bug fix: Fixed app crashed by adding a spell more than once to a spell list\n\n</string>
+    <string name="release_notes_2_12_3">Release 2.12.3\n- Bug fix: Fixed menu option to create a weapon/armor/good in administration\n- Bug fix: Fixed not visible text to remove a class from a character\n- Bug fix: Fixed app crash if a thumbnail image missing\n- Bug fix: Fixed app crashed by adding a spell more than once to a spell list\n\n</string>
     <string name="release_notes_3_0_0">Release 3.0.0\n- Changed business model to be based on advertisement\n\n</string>
+    <string name="release_notes_3_1_0">Release 3.1.0\n- Added premium version containing unlimited number of characters and remove of banner ad\n- Added promo codes for existing users\n\n</string>
 
 </resources>

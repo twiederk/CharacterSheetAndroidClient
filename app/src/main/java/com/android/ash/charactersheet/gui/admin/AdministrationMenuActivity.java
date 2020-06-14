@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.billing.Billing;
 import com.android.ash.charactersheet.gui.admin.ability.AbilityAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.clazz.CharacterClassAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.feat.FeatAdministrationListActivity;
@@ -19,19 +20,29 @@ import com.android.ash.charactersheet.gui.admin.spelllist.SpelllistAdministratio
 import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.IntentOnClickListener;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
+import com.android.billingclient.api.BillingClient;
 
 import java.util.Objects;
 
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
+
 
 /**
  * The administration contains a button for each administration sub menu.
  */
 public class AdministrationMenuActivity extends LogAppCompatActivity {
 
+    private final Lazy<Billing> billing = inject(Billing.class);
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        billing.getValue().startConnection(BillingClient.newBuilder(this));
+
         setContentView(R.layout.administration_menu);
         setToolbar();
         new AdViewConfiguration().setAdView(this);
@@ -64,6 +75,12 @@ public class AdministrationMenuActivity extends LogAppCompatActivity {
     private void setButtonOnClickListener(final int id, final Class<? extends Activity> activity) {
         final Button button = findViewById(id);
         button.setOnClickListener(new IntentOnClickListener(new Intent(this, activity)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        billing.getValue().startConnection(BillingClient.newBuilder(this));
     }
 
 }

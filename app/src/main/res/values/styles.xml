@@ -187,4 +187,9 @@
         <item name="android:background">@color/parchment</item>
     </style>
 
+    <style name="AppTheme.PurchaseDialogHeading" parent="AppTheme">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -4,9 +4,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.platform.app.InstrumentationRegistry
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
@@ -57,6 +59,26 @@ class CharacterListActivityEspressoTest : KoinTest {
 
         // Assert
         onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Character"))))
+    }
+
+    @Test
+    fun actionBarOverflowMenu_onClickPurchasePremiumVersion_displayPurchaseDialog() {
+
+        // Arrange
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        gameSystemHolder.gameSystem = null
+        scenario = ActivityScenario.launch(CharacterListActivity::class.java)
+        scenario.moveToState(Lifecycle.State.RESUMED)
+        openActionBarOverflowOrOptionsMenu(context)
+
+        // Act
+        onView(withText(R.string.character_list_menu_purchase)).perform(click())
+
+        // Assert
+        onView(withText(R.string.purchase_dialog_premium_version)).check(matches(isDisplayed()))
+        onView(withText(R.string.purchase_dialog_purchase_button)).check(matches(isDisplayed()))
+        onView(withText(R.string.purchase_dialog_restore_purchase_button)).check(matches(isDisplayed()))
+        onView(withText(R.string.purchase_dialog_cancel_button)).check(matches(isDisplayed()))
     }
 
 }

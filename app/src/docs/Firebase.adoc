@@ -104,6 +104,31 @@ Examples: `spell_slot_assign` or `character_open`
 |die_roll_name
 |RollOnClickListener.onClick
 
+|Activate a promo code
+|promo_code_activate
+|
+|PromoCode.activatePromoCode
+
+|Show purchase dialog
+|purchase_dialog_show
+|
+|PurchaseDialog.show
+
+|Perform purchase
+|purchase_perform
+|
+|PurchaseDialog.performPurchase
+
+|Cancel purchase
+|purchase_cancel
+|
+|PurchaseDialog.cancelPurchase
+
+|Restore purchase
+|purchase_restore
+|
+|PurchaseDialog.restorePurchase
+
 |===
 
 .Main Screen Views

@@ -20,6 +20,11 @@ object FBAnalytics {
         const val GOOD_EDIT = "good_edit"
         const val SPELL_SLOT_ASSIGN = "spell_slot_assign"
         const val DIE_ROLL = "die_roll"
+        const val PROMO_CODE_ACTIVATE = "promo_code_activate"
+        const val PURCHASE_DIALOG_SHOW = "purchase_dialog_show"
+        const val PURCHASE_PERFORM = "purchase_perform"
+        const val PURCHASE_CANCEL = "purchase_cancel"
+        const val PURCHASE_RESTORE = "purchase_restore"
     }
 
     object Param {
