@@ -328,7 +328,7 @@
     <string name="ability_administration_create_class_description">Create an ability with description only.</string>
     <string name="ability_administration_create_class_extrafeats">Create an ability to add extra feat points.</string>
     <string name="ability_administration_create_class_extraskillpoints">Create an ability to add extra skill points.</string>
-    <string name="ability_administration_create_class_splelllist">Create an ability to assign a spell list to it.</string>
+    <string name="ability_administration_create_class_spelllist">Create an ability to assign a spell list to it.</string>
 
     <!-- AbilityAdministrationEditActivity -->
     <string name="ability_administration_edit_title_description">Edit Description Ability</string>
@@ -438,10 +438,10 @@
         <item>Black</item>
         <item>Blue</item>
         <item>Cyan</item>
-        <item>Darkgray</item>
+        <item>Dark Gray</item>
         <item>Gray</item>
         <item>Green</item>
-        <item>Lightgray</item>
+        <item>Light Gray</item>
         <item>Magenta</item>
         <item>Red</item>
         <item>White</item>
@@ -481,7 +481,7 @@
     <string name="page_spell_slot_toast_resting">Resting&#8230;</string>
 
     <!-- SpellSlotActivity -->
-    <string name="spellslot_message_error_to_many_metamagicfeats">You selected to many metamagic feats</string>
+    <string name="spellslot_message_error_to_many_metamagic_feats">You selected to many metamagic feats</string>
 
     <!-- ExportMenuActivity -->
     <string name="export_menu_title">Export</string>
@@ -511,8 +511,8 @@
     <string name="import_dialog_cancel_button">Cancel</string>
     <string name="import_dialog_message">Import from file</string>
     <string name="import_message_import_failure">Failed to import characters</string>
-    <string name="importmessage_import_success">successfully imported.</string>
-    <string name="importmessage_import_failure">failed to import.</string>
+    <string name="import_message_import_success">successfully imported.</string>
+    <string name="import_message_import_failed">failed to import.</string>
 
     <!-- SpelllistAdministrationListActivity -->
     <string name="spelllist_administration_list_title">Spell List Administration</string>
@@ -592,7 +592,7 @@
 
     <!-- PurchaseDialog -->
     <string name="purchase_dialog_premium_version">Permium Version</string>
-    <string name="purchase_dialog_content">* Unlimited number of characters\n* Banner ad removed</string>
+    <string name="purchase_dialog_content">* Unlimited number of characters\n* Banner ad removed\n* Import of characters and equipment</string>
     <string name="purchase_dialog_purchase_button">Purchase Now</string>
     <string name="purchase_dialog_restore_purchase_button">Restore Purchase</string>
     <string name="purchase_dialog_cancel_button">Cancel</string>
@@ -640,7 +640,7 @@
     <string name="align_chaotic_good">Chaotic Good</string>
     <string name="align_lawful_neutral">Lawful Neutral</string>
     <string name="align_neutral">Neutral</string>
-    <string name="align_chaotic_neutal">Chaotic Neutral</string>
+    <string name="align_chaotic_neutral">Chaotic Neutral</string>
     <string name="align_lawful_evil">Lawful Evil</string>
     <string name="align_neutral_evil">Neutral Evil</string>
     <string name="align_chaotic_evil">Chaotic Evil</string>
@@ -752,8 +752,8 @@
     <string name="spell_school_enchantment">Enchantment</string>
     <string name="spell_school_evocation">Evocation</string>
     <string name="spell_school_illusion">Illusion</string>
-    <string name="spell_school_necormancy">Necromancy</string>
-    <string name="spell_school_transmuation">Transmutation</string>
+    <string name="spell_school_necromancy">Necromancy</string>
+    <string name="spell_school_transmutation">Transmutation</string>
     <string name="spell_school_universal">Universal</string>
 
     <!-- SPELL SCHOOLS -->
@@ -808,14 +808,14 @@
 
     <!-- SPELL CASTING TIME -->
     <string name="spell_castingtime_none">None</string>
-    <string name="spell_castingtime_onestandardaction">1 standard action</string>
-    <string name="spell_castingtime_onefreeaction">1 free action</string>
-    <string name="spell_castingtime_oneround">1 round</string>
-    <string name="spell_castingtime_oneminute">1 minute</string>
-    <string name="spell_castingtime_tenminutes">10 minutes</string>
-    <string name="spell_castingtime_onehour">1 hour</string>
-    <string name="spell_castingtime_oneimmediateaction">1 immediate action</string>
-    <string name="spell_castingtime_oneswiftaction">1 swift action</string>
+    <string name="spell_castingtime_one_standard_action">1 standard action</string>
+    <string name="spell_castingtime_one_free_action">1 free action</string>
+    <string name="spell_castingtime_one_round">1 round</string>
+    <string name="spell_castingtime_one_minute">1 minute</string>
+    <string name="spell_castingtime_ten_minutes">10 minutes</string>
+    <string name="spell_castingtime_one_hour">1 hour</string>
+    <string name="spell_castingtime_one_immediate_action">1 immediate action</string>
+    <string name="spell_castingtime_one_swift_action">1 swift action</string>
     <string name="spell_castingtime_specific">specific</string>
 
     <!-- SPELL RANGE -->
@@ -829,9 +829,9 @@
     <!-- SPELL RESISTANCE -->
     <string name="spell_spellresistance_no">No</string>
     <string name="spell_spellresistance_yes">Yes</string>
-    <string name="spell_spellresistance_yesharmless">Yes (harmless)</string>
-    <string name="spell_spellresistance_yesobject">Yes (object)</string>
-    <string name="spell_spellresistance_yesharmlessobject">Yes (harmless, object)</string>
+    <string name="spell_spellresistance_yes_harmless">Yes (harmless)</string>
+    <string name="spell_spellresistance_yes_object">Yes (object)</string>
+    <string name="spell_spellresistance_yes_harmless_object">Yes (harmless, object)</string>
     <string name="spell_spellresistance_specific">Specific</string>
     <string name="spell_spellresistance_none">None</string>
 
@@ -860,7 +860,7 @@
     <string name="weapon_encumbrance_two_handed">Two-Handed</string>
 
     <!-- CASTING TYPES -->
-    <string name="casting_type_sponanteous">Spontaneous</string>
+    <string name="casting_type_spontaneous">Spontaneous</string>
     <string name="casting_type_prepared">Prepared</string>
 
     <!-- SPELL SOURCES -->
@@ -884,7 +884,7 @@
     <string name="release_notes_1_12_0">Release 1.12.0\n- Armor creation and edition added\n\n</string>
     <string name="release_notes_1_12_1">Release 1.12.1\n- Bug Fix. Fixed bug occurred by adding images with Android 2.x\n\n</string>
     <string name="release_notes_1_13_0">Release 1.13.0\n- Good creation and edition added\n\n</string>
-    <string name="release_notes_1_14_0">Release 1.14.0\n- Subraces added\n- Racial abilities added\n- Support large screens (Samsung Galagxy Tab)\n- Knowledge (locale) set as class skill for Rogue\n- Spelling fixed in German version\n- Wait anmimation while creating database and loading gamesystem added\n\n</string>
+    <string name="release_notes_1_14_0">Release 1.14.0\n- Sub races added\n- Racial abilities added\n- Support large screens (Samsung Galaxy Tab)\n- Knowledge (locale) set as class skill for Rogue\n- Spelling fixed in German version\n- Wait anmimation while creating database and loading gamesystem added\n\n</string>
     <string name="release_notes_1_15_0">Release 1.15.0\n- Custom races added\n- Custom abilities added\n- Counting feats added\n- Quick add and subtract of money, hit points and experience points added\n- Names of abilities extended\n\n</string>
     <string name="release_notes_1_16_0">Release 1.16.0\n- Note section added\n- Support app installation on external storage media (sd-card)\n- Entering of max HP improved\n- Fixed typing error in racial abilities\n\n</string>
     <string name="release_notes_1_17_0">Release 1.17.0\n- Items support masterwork\n- Last activity stays active if app is put in background\n\n</string>
@@ -895,19 +895,19 @@
     <string name="release_notes_1_21_0">Release 1.21.0\n- Spells added\n- Background image of different sizes supported\n\n</string>
     <string name="release_notes_2_0_0">Release 2.0.0\n- Pathfinder support added\n- Bug Fix. Fixed missing money tab on tablets\n- Performance of masks to add and edit classes of character improved\n- German version removed\n\n</string>
     <string name="release_notes_2_0_1">Release 2.0.1\n- Bug Fix. Fixed calculation of skills for Pathfinder\n\n</string>
-    <string name="release_notes_2_1_0">Release 2.1.0\n- Markable abilities\n- Pathfinder: Support ability Skilled in calculation of available skill points\n- Bug Fix. Fixed bug occurring by adding images with Android 3.x\n- Bug Fix. Fixed bug occurring by deleting a character. The equipment and notes of the deleted character remained in the database.\n\n</string>
+    <string name="release_notes_2_1_0">Release 2.1.0\n- Checkable abilities\n- Pathfinder: Support ability Skilled in calculation of available skill points\n- Bug Fix. Fixed bug occurring by adding images with Android 3.x\n- Bug Fix. Fixed bug occurring by deleting a character. The equipment and notes of the deleted character remained in the database.\n\n</string>
     <string name="release_notes_2_2_0">Release 2.2.0\n- Added attack and damage rolls\n- Moved abilities right to appearance\n- DnDv35: Added description to weapons and armor\n\n</string>
     <string name="release_notes_2_2_1">Release 2.2.1\n- Bug Fix. Fixed bug occurred loading customized weapons\n\n</string>
-    <string name="release_notes_2_3_0">Release 2.3.0\n- Markable spells added\n- Support of different XP Tables added\n- Added CMB and CMD\n- Display XP in red if they doesn\'t match character level\n- Display checkboxes of selected abilities and spells only if "Show All" is checked\n- Bug Fix: Display masterwork in list of weapons when creating an attack\n- Bug Fix: Display spell lists only of owned abilities\n- Bug Fix: Weapon Focus checked weapon name instead of weapon family\n- Bug Fix: Fix weight of Pathfinder "Rations, trail (per day)" from 11 to 1\n\n</string>
+    <string name="release_notes_2_3_0">Release 2.3.0\n- Checkable spells added\n- Support of different XP Tables added\n- Added CMB and CMD\n- Display XP in red if they doesn\'t match character level\n- Display checkboxes of selected abilities and spells only if "Show All" is checked\n- Bug Fix: Display masterwork in list of weapons when creating an attack\n- Bug Fix: Display spell lists only of owned abilities\n- Bug Fix: Weapon Focus checked weapon name instead of weapon family\n- Bug Fix: Fix weight of Pathfinder "Rations, trail (per day)" from 11 to 1\n\n</string>
     <string name="release_notes_2_4_0">Release 2.4.0\n- Optimization for tablets\n- DnDv35: Description of goods added\n\n</string>
     <string name="release_notes_2_5_0">Release 2.5.0\n- Pathfinder: Advanced Player\'s Guide\n\n</string>
-    <string name="release_notes_2_6_0">Release 2.6.0\n- Added misc modifier for attack and damage rolls\n- Support Backup &amp; Restore for Android\n- Save data if dialog is closed by touching outside of it\n- Bugfix: Amazon Kindle: Images couldn\'t be added\n- Bugfix: Platinum coins weren\'t saved\n- Bugfix: Pathfinder: Wizard and Sorcerer couldn\'t be edited in class administration\n- Bugfix: Thumbnails weren\'t scaled correctly in character list\n\n</string>
+    <string name="release_notes_2_6_0">Release 2.6.0\n- Added misc modifier for attack and damage rolls\n- Support Backup &amp; Restore for Android\n- Save data if dialog is closed by touching outside of it\n- Bug fix: Amazon Kindle: Images couldn\'t be added\n- Bug fix: Platinum coins weren\'t saved\n- Bug fix: Pathfinder: Wizard and Sorcerer couldn\'t be edited in class administration\n- Bugfix: Thumbnails weren\'t scaled correctly in character list\n\n</string>
     <string name="release_notes_2_6_1">Release 2.6.1\n- Bug Fix. Fixed bug displaying notes in one line only\n\n</string>
     <string name="release_notes_2_7_0">Release 2.7.0\n- Added Backup &amp; Restore to/from File (SD Card)\n- Bug Fix: Fixed display of misc modifier buttons in edit skill mask on phones\n- Bug Fix: Fixed removing an item while adding a new one to the equipment list\n- Bug Fix: Allow negative values for misc attack and damage modifier\n- Pathfinder: Bug Fix: Fixed base attack bonus of Rogue from good to average\n\n</string>
     <string name="release_notes_2_8_0">Release 2.8.0\n- Added export and import of characters\n- Display skills in one line on 7 inch devices\n- Bug Fix: App crashed by assigning spell ability to a class or race in administration\n- Bug Fix: Display bonuses with two digits on buttons correctly\n\n</string>
     <string name="release_notes_2_9_0">Release 2.9.0\n- Added export and import of weapons, armor and goods. I would like to offer new equipment to import via download from the homepage (www.d20charactersheet.com). If you have items you want to share with other users of the app. It would be great if you send me your exported items and I will place them on the homepage for download. Please contact me via torsten.wiederkehr@gmail.com\n- Reduced memory requirements to improve stability, while app is running in background\n\n</string>
     <string name="release_notes_2_10_0">Release 2.10.0\n- Added creation of spells.\n- Added creation of spell lists and assign spells to them.\n- Added creation of spell abilities to assign spell lists to them. By assigning spell abilities to a race or class you can assign your own spell lists with your own spells to your character.\n- Added search to all administration menus.\n- Bug fix: Fixed calculation of CMD.\n- Bug fix: Fixed import of masterwork items.\n- Bug fix: Fixed adding skills to classes in skill administration.\n\n</string>
-    <string name="release_notes_2_11_0">Release 2.11.0\n- Added spell preparation. The tab Spells is replaced by two new tabs. The tab Known Spells allows to select the spells the character knows from a spell list and displays how many spells the character is allowed to known per spell level. The tab Spell Slots shows the spell slots of the character. Each spell slot can be touched to select a spell. A spell slot displays the name, DC, ability and school of the spell. Spell slots are in the color of the school to easily identify counter spells. After a spell is cast, the color changes to grey and the spell name is striked through. Metamagic feats are supported.\n- Added search field to add/remove equipment mask.\n- Added Immediate and Swift action" to casting time.\n- Bug Fix. Fixed bug when adding extra points received by an extra feat ability of a class.\n\n</string>
+    <string name="release_notes_2_11_0">Release 2.11.0\n- Added spell preparation. The tab Spells is replaced by two new tabs. The tab Known Spells allows to select the spells the character knows from a spell list and displays how many spells the character is allowed to known per spell level. The tab Spell Slots shows the spell slots of the character. Each spell slot can be touched to select a spell. A spell slot displays the name, DC, ability and school of the spell. Spell slots are in the color of the school to easily identify counter spells. After a spell is cast, the color changes to grey and the spell name is stroked through. Metamagic feats are supported.\n- Added search field to add/remove equipment mask.\n- Added Immediate and Swift action" to casting time.\n- Bug Fix. Fixed bug when adding extra points received by an extra feat ability of a class.\n\n</string>
     <string name="release_notes_2_11_1">Release 2.11.1\nBug fix: Fixed missing spells slots of max spell level of spell list\nBug fix: Fixed spell slots lower then min level of spell list\nBug fix: Fixed modifying spell list abilities created before version 2.11.0\nBug fix: Fixed saving of skills, including negative modifiers\n\n</string>
     <string name="release_notes_2_11_2">Release 2.11.2\nBug fix: Fixed missing icon in action bar to export equipment\nBug fix: Fixed missing result of die roll on high density devices\nBug fix: Fixed unreadable labels on buttons on high density devices\n\n</string>
     <string name="release_notes_2_11_3">Release 2.11.3\nBug fix: Fixed missing result of die roll, if many dice were rolled\nBug fix: Fixes width of edit field, if number had many digits\nBug fix: Fixed crash, if number of damage dice was zero\nBug fix: Fixed position of saves for character with long class name\n\n</string>
@@ -923,5 +923,6 @@
     <string name="release_notes_2_12_3">Release 2.12.3\n- Bug fix: Fixed menu option to create a weapon/armor/good in administration\n- Bug fix: Fixed not visible text to remove a class from a character\n- Bug fix: Fixed app crash if a thumbnail image missing\n- Bug fix: Fixed app crashed by adding a spell more than once to a spell list\n\n</string>
     <string name="release_notes_3_0_0">Release 3.0.0\n- Changed business model to be based on advertisement\n\n</string>
     <string name="release_notes_3_1_0">Release 3.1.0\n- Added premium version containing unlimited number of characters and remove of banner ad\n- Added promo codes for existing users\n\n</string>
+    <string name="release_notes_3_1_1">Release 3.1.1\n- Added import of characters to premium version\n- Bug fix: App crashed by resuming it from background\n\n</string>
 
 </resources>

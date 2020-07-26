@@ -27,10 +27,7 @@ public class AttributeNumberViewController implements NumberViewController {
      */
     @Override
     public void decrease() {
-        final int attributeValue = attributeModel.getAttributeValue();
-        if (attributeValue > MIN_ATTRIBUTE_VALUE) {
-            attributeModel.setAttributeValue(attributeValue - 1);
-        }
+        decrease(1);
     }
 
     /**
@@ -46,10 +43,7 @@ public class AttributeNumberViewController implements NumberViewController {
      */
     @Override
     public void increase() {
-        final int attributeValue = attributeModel.getAttributeValue();
-        if (attributeValue < MAX_ATTRIBUTE_VALUE) {
-            attributeModel.setAttributeValue(attributeValue + 1);
-        }
+        increase(1);
     }
 
     /**
@@ -62,23 +56,13 @@ public class AttributeNumberViewController implements NumberViewController {
 
     @Override
     public void decrease(final Number number) {
-        final int attributeValue = attributeModel.getAttributeValue();
-        if (attributeValue - number.intValue() >= MIN_ATTRIBUTE_VALUE) {
-            attributeModel.setAttributeValue(attributeValue - number.intValue());
-        } else {
-            attributeModel.setAttributeValue(MIN_ATTRIBUTE_VALUE);
-        }
+        attributeModel.setAttributeValue(Math.max(attributeModel.getAttributeValue() - number.intValue(), MIN_ATTRIBUTE_VALUE));
 
     }
 
     @Override
     public void increase(final Number number) {
-        final int attributeValue = attributeModel.getAttributeValue();
-        if (attributeValue + number.intValue() < MAX_ATTRIBUTE_VALUE) {
-            attributeModel.setAttributeValue(attributeValue + number.intValue());
-        } else {
-            attributeModel.setAttributeValue(MAX_ATTRIBUTE_VALUE);
-        }
+        attributeModel.setAttributeValue(Math.min(attributeModel.getAttributeValue() + number.intValue(), MAX_ATTRIBUTE_VALUE));
     }
 
 }

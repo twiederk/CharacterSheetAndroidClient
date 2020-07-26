@@ -5,7 +5,7 @@ import com.android.ash.charactersheet.R;
 import androidx.annotation.NonNull;
 
 /**
- * Enumration of supported GameSystems.
+ * Enumeration of supported GameSystems.
  */
 public enum GameSystemType {
 
@@ -168,6 +168,7 @@ public enum GameSystemType {
                 {R.raw.dndv35_upgrade_52_to_53,}, //
                 {R.raw.dndv35_upgrade_53_to_54,}, //
                 {R.raw.dndv35_upgrade_54_to_55,}, //
+                {R.raw.dndv35_upgrade_55_to_56,}, //
         };
 
         int[] IMAGES = { //
@@ -258,6 +259,7 @@ public enum GameSystemType {
                 {R.raw.pathfinder_upgrade_52_to_53,},//
                 {R.raw.pathfinder_upgrade_53_to_54,},//
                 {R.raw.pathfinder_upgrade_54_to_55,},//
+                {R.raw.pathfinder_upgrade_55_to_56,},//
         };
 
     }

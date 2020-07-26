@@ -53,7 +53,7 @@ class FeatOnClickListener implements OnClickListener {
             if (spellSlot.getLevel() - levelReduction >= spelllistMinLevel) {
                 spellSlotActivityModel.add(feat);
             } else {
-                messageManager.showInfoMessage(R.string.spellslot_message_error_to_many_metamagicfeats);
+                messageManager.showInfoMessage(R.string.spellslot_message_error_to_many_metamagic_feats);
                 checkBox.setChecked(false);
             }
         } else {

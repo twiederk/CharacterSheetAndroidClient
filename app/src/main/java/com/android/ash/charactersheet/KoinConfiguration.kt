@@ -2,7 +2,9 @@ package com.android.ash.charactersheet
 
 import com.android.ash.charactersheet.billing.Billing
 import com.android.ash.charactersheet.billing.MessageDisplay
+import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
+import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -11,6 +13,9 @@ import org.koin.dsl.module
 
 class GameSystemHolder {
     var gameSystem: GameSystem? = null
+    var gameSystemType: GameSystemType? = null
+    var dndDbHelper: DBHelper? = null
+    var pathfinderDbHelper: DBHelper? = null
 }
 
 class PreferenceServiceHolder {

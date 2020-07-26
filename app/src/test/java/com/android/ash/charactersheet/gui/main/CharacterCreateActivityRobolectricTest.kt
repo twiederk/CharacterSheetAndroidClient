@@ -1,7 +1,8 @@
-package com.android.ash.charactersheet.gui.sheet
+package com.android.ash.charactersheet.gui.main
 
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.android.ash.charactersheet.appModule
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.model.CharacterClass
@@ -25,7 +26,8 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
-class CharacterSheetActivityTest : KoinTest {
+@MediumTest
+class CharacterCreateActivityRobolectricTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
@@ -44,23 +46,21 @@ class CharacterSheetActivityTest : KoinTest {
     }
 
     @Test
-    fun logEventCharacter_character_logsCharacterRaceAndClassLevels() {
+    fun logEventCharacterCreate_createCharacter_logsCharacterCreateEvent() {
         // Arrange
         val character = Character().apply {
             race = Race().apply { name = "myRace" }
-            classLevels = listOf(
-                    ClassLevel(CharacterClass().apply { name = "myFirstClass"; classAbilities = listOf() }, 1),
-                    ClassLevel(CharacterClass().apply { name = "mySecondClass"; classAbilities = listOf() }, 2))
+            classLevels = listOf(ClassLevel(CharacterClass().apply { name = "myClass"; classAbilities = listOf() }))
         }
 
         // Act
-        CharacterSheetActivity().logEventCharacter(character)
+        CharacterCreateActivity().logEventCharacterCreate(character)
 
         // Assert
         argumentCaptor<Bundle> {
-            verify(firebaseAnalytics).logEvent(eq("character_open"), capture())
+            verify(firebaseAnalytics).logEvent(eq("character_create"), capture())
             assertThat(firstValue.getString("race_name")).isEqualTo("myRace")
-            assertThat(firstValue.getString("class_levels")).isEqualTo("myFirstClass (1);mySecondClass (2);")
+            assertThat(firstValue.getString("class_name")).isEqualTo("myClass")
         }
     }
 

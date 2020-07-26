@@ -12,10 +12,9 @@ public class ItemGroupNumberViewController implements NumberViewController {
     private final ItemGroup itemGroup;
 
     /**
-     * Create controller with given item grop as model.
-     * 
-     * @param itemGroup
-     *            The item group as model.
+     * Create controller with given item group as model.
+     *
+     * @param itemGroup The item group as model.
      */
     public ItemGroupNumberViewController(final ItemGroup itemGroup) {
         this.itemGroup = itemGroup;
@@ -23,9 +22,7 @@ public class ItemGroupNumberViewController implements NumberViewController {
 
     @Override
     public void decrease() {
-        if (itemGroup.getNumber() > 0) {
-            itemGroup.setNumber(itemGroup.getNumber() - 1);
-        }
+        decrease(1);
     }
 
     @Override
@@ -35,7 +32,7 @@ public class ItemGroupNumberViewController implements NumberViewController {
 
     @Override
     public void increase() {
-        itemGroup.setNumber(itemGroup.getNumber() + 1);
+        increase(1);
     }
 
     @Override
@@ -45,11 +42,7 @@ public class ItemGroupNumberViewController implements NumberViewController {
 
     @Override
     public void decrease(final Number number) {
-        if (itemGroup.getNumber() - number.intValue() >= 0) {
-            itemGroup.setNumber(itemGroup.getNumber() - number.intValue());
-        } else {
-            itemGroup.setNumber(0);
-        }
+        itemGroup.setNumber(Math.max(itemGroup.getNumber() - number.intValue(), 0));
     }
 
     @Override

@@ -1,0 +1,45 @@
+= d20 Character Sheet - Android App
+Torsten Wiederkehr <torsten.wiederkehr@gmail.com>
+v1.0.0, 2020-06-13
+// Settings:
+:icons: font
+:toc: left
+
+== Advertising
+
+The app used AdMob for advertising.
+Banner ads are shown at three locations in the app.
+The configuration of the AdView and loading of the ad is done by `AdViewConfiguration`.
+
+The advertising App-ID is: `ca-app-pub-8129946526938446~6622100821`
+
+.Locations
+|===
+|Location                          |Activity                   |Ad unit id
+|Character List                    |CharacterListActivity      |ca-app-pub-8129946526938446/7481006483
+|Character Sheet                   |CharacterSheetActivity     |ca-app-pub-8129946526938446/6306190451
+|Administration Menu               |AdministrationMenuActivity |ca-app-pub-8129946526938446/4427268042
+|===
+
+.Test Devices
+|===
+|Name    |Description           |Test Device Id
+|Nokia 8 |Smartphone of Torsten |ECF07E3D74B89832BDAEDD0D6F9B34B0
+|===
+
+== Products
+
+The only product is the Premium version.
+It contains unlimited number of characters, removes the ad banner and import of characters and equipment.
+The premium version can be bought via in-app payment in the app.
+The `PurchaseDialog` contains the functionality to purchase the Premium Version.
+
+The `PurchaseDialog` is shown in three situations:
+
+* The user chooses Purchase Premium Version from the options menu in the `CharacterListActivity`
+* The user chooses Import from the options menu in the `CharacterListActivity` and has already one character created
+* The user touches the favorite action button to create a character and has already one character created
+
+
+
+

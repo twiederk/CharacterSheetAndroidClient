@@ -79,7 +79,7 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
             case NEUTRAL:
                 return resources.getString(R.string.align_neutral);
             case CHAOTIC_NEUTRAL:
-                return resources.getString(R.string.align_chaotic_neutal);
+                return resources.getString(R.string.align_chaotic_neutral);
             case LAWFUL_EVIL:
                 return resources.getString(R.string.align_lawful_evil);
             case NEUTRAL_EVIL:
@@ -538,21 +538,21 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
             case NONE:
                 return resources.getString(R.string.spell_castingtime_none);
             case ONE_FREE_ACTION:
-                return resources.getString(R.string.spell_castingtime_onefreeaction);
+                return resources.getString(R.string.spell_castingtime_one_free_action);
             case ONE_STANDARD_ACTION:
-                return resources.getString(R.string.spell_castingtime_onestandardaction);
+                return resources.getString(R.string.spell_castingtime_one_standard_action);
             case ONE_ROUND:
-                return resources.getString(R.string.spell_castingtime_oneround);
+                return resources.getString(R.string.spell_castingtime_one_round);
             case ONE_MINUTE:
-                return resources.getString(R.string.spell_castingtime_oneminute);
+                return resources.getString(R.string.spell_castingtime_one_minute);
             case TEN_MINUTES:
-                return resources.getString(R.string.spell_castingtime_tenminutes);
+                return resources.getString(R.string.spell_castingtime_ten_minutes);
             case ONE_HOUR:
-                return resources.getString(R.string.spell_castingtime_onehour);
+                return resources.getString(R.string.spell_castingtime_one_hour);
             case ONE_IMMEDIATE_ACTION:
-                return resources.getString(R.string.spell_castingtime_oneimmediateaction);
+                return resources.getString(R.string.spell_castingtime_one_immediate_action);
             case ONE_SWIFT_ACTION:
-                return resources.getString(R.string.spell_castingtime_oneswiftaction);
+                return resources.getString(R.string.spell_castingtime_one_swift_action);
             case SPECIFIC:
                 return resources.getString(R.string.spell_castingtime_specific);
             default:
@@ -576,9 +576,9 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
             case ILLUSION:
                 return resources.getString(R.string.spell_school_illusion);
             case NECROMANCY:
-                return resources.getString(R.string.spell_school_necormancy);
+                return resources.getString(R.string.spell_school_necromancy);
             case TRANSMUTATION:
-                return resources.getString(R.string.spell_school_transmuation);
+                return resources.getString(R.string.spell_school_transmutation);
             case UNIVERSAL:
                 return resources.getString(R.string.spell_school_universal);
             default:
@@ -726,11 +726,11 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
             case YES:
                 return resources.getString(R.string.spell_spellresistance_yes);
             case YES_HARMLESS:
-                return resources.getString(R.string.spell_spellresistance_yesharmless);
+                return resources.getString(R.string.spell_spellresistance_yes_harmless);
             case YES_OBJECT:
-                return resources.getString(R.string.spell_spellresistance_yesobject);
+                return resources.getString(R.string.spell_spellresistance_yes_object);
             case YES_HARMLESS_OBJECT:
-                return resources.getString(R.string.spell_spellresistance_yesharmlessobject);
+                return resources.getString(R.string.spell_spellresistance_yes_harmless_object);
             case SPECIFIC:
                 return resources.getString(R.string.spell_spellresistance_specific);
             case NONE:
@@ -790,7 +790,7 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
     public String getDisplayCastingType(final CastingType castingType) {
         switch (castingType) {
             case SPONTANEOUS:
-                return resources.getString(R.string.casting_type_sponanteous);
+                return resources.getString(R.string.casting_type_spontaneous);
             case PREPARED:
                 return resources.getString(R.string.casting_type_prepared);
 

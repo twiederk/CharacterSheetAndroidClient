@@ -199,7 +199,7 @@ public class AbilityAdministrationCreateActivity extends FormActivity<Ability> {
                 explanation = getString(R.string.ability_administration_create_class_extraskillpoints);
                 break;
             case SPELLLIST_ABILITY:
-                explanation = getString(R.string.ability_administration_create_class_splelllist);
+                explanation = getString(R.string.ability_administration_create_class_spelllist);
                 break;
             default:
                 explanation = getString(R.string.ability_administration_create_class_description);

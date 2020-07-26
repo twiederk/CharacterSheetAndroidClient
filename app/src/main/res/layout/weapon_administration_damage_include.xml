@@ -6,7 +6,7 @@
     android:stretchColumns="0,1"
     tools:keep="@layout/weapon_administration_damage_include">
 
-    <TableRow>
+    <TableRow tools:ignore="UselessParent">
 
         <EditText
             android:id="@+id/weapon_administration_damage_number_of_dice"

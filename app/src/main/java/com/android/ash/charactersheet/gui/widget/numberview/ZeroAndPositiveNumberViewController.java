@@ -6,10 +6,9 @@ package com.android.ash.charactersheet.gui.widget.numberview;
 public class ZeroAndPositiveNumberViewController extends SimpleNumberViewController {
 
     /**
-     * Creates ZeroAndPostiveNumberViewController with the given number.
-     * 
-     * @param number
-     *            The starting number of the controller.
+     * Creates ZeroAndPositiveNumberViewController with the given number.
+     *
+     * @param number The starting number of the controller.
      */
     public ZeroAndPositiveNumberViewController(final int number) {
         super(number);
@@ -22,18 +21,12 @@ public class ZeroAndPositiveNumberViewController extends SimpleNumberViewControl
      */
     @Override
     public void decrease() {
-        if (number > 0) {
-            number--;
-        }
+        decrease(1);
     }
 
     @Override
     public void decrease(final Number number) {
-        if (this.number - number.intValue() >= 0) {
-            this.number = this.number - number.intValue();
-        } else {
-            this.number = 0;
-        }
+        this.number = Math.max(this.number - number.intValue(), 0);
     }
 
 }

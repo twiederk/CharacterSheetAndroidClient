@@ -217,10 +217,10 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
     private ImportMessage getResultMessage(final ImportReport<?> importReport) {
         ImportMessage resultMessage;
         if (importReport.isSuccess()) {
-            resultMessage = getResultMessage(importReport, R.string.importmessage_import_success,
+            resultMessage = getResultMessage(importReport, R.string.import_message_import_success,
                     ImportMessage.Type.SUCCESS);
         } else {
-            resultMessage = getResultMessage(importReport, R.string.importmessage_import_failure,
+            resultMessage = getResultMessage(importReport, R.string.import_message_import_failed,
                     ImportMessage.Type.FAILURE);
         }
         return resultMessage;

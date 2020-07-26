@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/spelllevel_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         android:stretchColumns="1" >
 
-        <TableRow>
+        <TableRow tools:ignore="UselessParent">
 
             <TextView
                 android:id="@+id/spelllevel_title"
