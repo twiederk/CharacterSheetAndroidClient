@@ -8,13 +8,18 @@ import android.database.sqlite.SQLiteDatabase;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.dac.dao.ImageDao;
 
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_IMAGE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_IMAGE;
+
 /**
  * SQLite specific implementation of the ImageDao interface.
  */
 public class SQLiteImageDao extends BaseSQLiteDao implements ImageDao {
 
-    private static final String SQL_GET_IMAGE = SELECT + COLUMN_IMAGE + " FROM " + TABLE_IMAGE + " WHERE " + COLUMN_ID
-            + " = ?";
+    private static final String SQL_GET_IMAGE = SELECT + COLUMN_IMAGE + " FROM " + TABLE_IMAGE + " WHERE " + COLUMN_ID + " = ?";
     private static final String SQL_GET_ID = SELECT + COLUMN_ID + " FROM " + TABLE_IMAGE + " WHERE rowid = ?";
 
     /**

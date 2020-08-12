@@ -1,7 +1,5 @@
 package com.android.ash.charactersheet.dac.dao.sqlite;
 
-import java.util.List;
-
 import android.database.sqlite.SQLiteDatabase;
 
 import com.d20charactersheet.framework.boc.model.Armor;
@@ -9,6 +7,8 @@ import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
 import com.d20charactersheet.framework.dac.dao.ItemDao;
+
+import java.util.List;
 
 /**
  * Provides access to SQLite database on Android device storing items.
@@ -20,10 +20,9 @@ public class SQLiteItemDao extends BaseSQLiteDao implements ItemDao {
     private final GoodHelper goodHelper;
 
     /**
-     * Creates DAO to acces SQLite database on Android device with given helper.
-     * 
-     * @param db
-     *            The database to access.
+     * Creates DAO to access SQLite database on Android device with given helper.
+     *
+     * @param db The database to access.
      */
     public SQLiteItemDao(final SQLiteDatabase db) {
         super(db);

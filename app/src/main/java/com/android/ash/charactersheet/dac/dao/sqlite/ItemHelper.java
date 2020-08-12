@@ -4,12 +4,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.ItemGroupRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ItemGroupRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +50,10 @@ class ItemHelper extends BaseSQLiteDao {
         try {
             cursor = db.rawQuery(sql, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Item item = (Item) rowMapper.mapRow(cursor);
+                final Item item = (Item) rowMapper.mapRow(new SQLiteDataRow(cursor));
                 allItems.add(item);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all items", sqlException);
         } finally {
             close(cursor);
@@ -94,7 +94,7 @@ class ItemHelper extends BaseSQLiteDao {
     private void mapAndAddItemGroup(final Cursor cursor, final List<ItemGroup> characterItem,
             final ItemGroupRowMapper itemGroupRowMapper) {
         try {
-            final ItemGroup itemGroup = (ItemGroup) itemGroupRowMapper.mapRow(cursor);
+            final ItemGroup itemGroup = (ItemGroup) itemGroupRowMapper.mapRow(new SQLiteDataRow(cursor));
             characterItem.add(itemGroup);
         } catch (final Exception exception) {
             Logger.error("Can't map item group, skipping it", exception);

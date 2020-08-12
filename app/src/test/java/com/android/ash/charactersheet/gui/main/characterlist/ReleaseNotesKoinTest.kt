@@ -39,7 +39,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val resources: Resources = mock()
         whenever(resources.getString(any())).doReturn("myReleaseNote\n")
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(54)
+        whenever(dbHelper.oldVersion).doReturn(55)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act

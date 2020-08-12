@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.android.ash.charactersheet.dac.dao.TableAndColumnNames;
 import com.android.ash.charactersheet.gui.util.Logger;
 
 import java.io.ByteArrayOutputStream;
@@ -17,13 +16,18 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_IMAGE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_IMAGE;
+
 /**
  * Provides access to the SQLite 3 database of the Android platform. Creates the whole database by running a single
  * script.
  */
-public class DBHelper extends SQLiteOpenHelper implements TableAndColumnNames {
+public class DBHelper extends SQLiteOpenHelper {
 
-    /** Semaphore to synchronize database access */
+    /**
+     * Semaphore to synchronize database access
+     */
     public static final Object DB_LOCK = new Object();
 
     private static final List<DBHelper> DB_HELPERS = new ArrayList<>();

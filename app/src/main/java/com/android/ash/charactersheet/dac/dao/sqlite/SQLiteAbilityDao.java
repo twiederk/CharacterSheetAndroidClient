@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.AbilityConfigRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.ExtraFeatsAbility;
@@ -24,6 +22,8 @@ import com.d20charactersheet.framework.dac.abilitybuilder.ExtraFeatsAbilityBuild
 import com.d20charactersheet.framework.dac.abilitybuilder.ExtraSkillPointsAbilityBuilder;
 import com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder;
 import com.d20charactersheet.framework.dac.dao.AbilityDao;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.AbilityConfigRowMapper;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -41,6 +41,20 @@ import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilit
 import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELLS_PER_DAY_TABLE_ID;
 import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELL_ATTRIBUTE_ID;
 import static com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder.KEY_SPELL_SOURCE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ABILITY_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ABILITY_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CLASSNAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_PROPERTY_KEY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_PROPERTY_VALUE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ABILITY_PROPERTIES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_ABILITIES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_ABILITY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_ABILITY_PROPERTY;
 
 /**
  * Provides access to the ability tables in the SQLite database.
@@ -55,10 +69,9 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
     private final RowMapper abilityConfigRowMapper;
 
     /**
-     * Creates SQLiteAbilityDao accessin the given database.
-     * 
-     * @param db
-     *            The database to access.
+     * Creates SQLiteAbilityDao accessing the given database.
+     *
+     * @param db The database to access.
      */
     public SQLiteAbilityDao(final SQLiteDatabase db) {
         super(db);
@@ -75,12 +88,12 @@ public class SQLiteAbilityDao extends BaseSQLiteDao implements AbilityDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_ABILITIES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final AbilityConfig abilityConfig = (AbilityConfig) abilityConfigRowMapper.mapRow(cursor);
+                final AbilityConfig abilityConfig = (AbilityConfig) abilityConfigRowMapper.mapRow(new SQLiteDataRow(cursor));
                 selectAbilityProperties(abilityConfig);
                 final Ability ability = createAbility(abilityConfig, abilityBuilderFactoy);
                 allAbilities.add(ability);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all abilities", sqlException);
         } finally {
             close(cursor);

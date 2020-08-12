@@ -4,22 +4,19 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.TableAndColumnNames;
 import com.android.ash.charactersheet.gui.util.Logger;
 
 /**
- * Base class to extend SQLite specific Dao from. Supplies methods required by all Daos. Contains constants representing
- * database specific objects like tables and columns.
+ * Base class to extend SQLite specific Dao from. Supplies methods required by all dao implementations.
  */
-class BaseSQLiteDao implements TableAndColumnNames {
+class BaseSQLiteDao {
 
     final SQLiteDatabase db;
 
     /**
      * Create BaseSQLiteDao with given database.
-     * 
-     * @param db
-     *            The database to access.
+     *
+     * @param db The database to access.
      */
     BaseSQLiteDao(final SQLiteDatabase db) {
         this.db = db;

@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.WeaponFamilyRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.WeaponRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Critical;
@@ -15,9 +13,35 @@ import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.WeaponFamilyRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.WeaponRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_COMBAT_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_COST;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CRITICAL_HIT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CRITICAL_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DIE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ENHANCEMENT_BONUS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NUMBER_OF_DICE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_QUALITY_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_RANGE_INCREMENT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEAPON_CATEGORY_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEAPON_ENCUMBRANCE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEAPON_FAMILY_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEAPON_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEIGHT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.FROM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_WEAPON;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_WEAPON;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_WEAPON_FAMILY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.WHERE;
 
 /**
  * Helper class of the ItemDao. Handles all database activities concerning weapons. Its like a WeaponDao.
@@ -190,10 +214,10 @@ class WeaponHelper extends ItemHelper {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_WEAPON_FAMILIES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final WeaponFamily weaponFamily = (WeaponFamily) weaponFamilyRowMapper.mapRow(cursor);
+                final WeaponFamily weaponFamily = (WeaponFamily) weaponFamilyRowMapper.mapRow(new SQLiteDataRow(cursor));
                 allWeaponFamilies.add(weaponFamily);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all weapon families", sqlException);
         } finally {
             close(cursor);

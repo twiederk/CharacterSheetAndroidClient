@@ -5,17 +5,31 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.FeatRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.dac.dao.FeatDao;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.FeatRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_BENEFIT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FEAT_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FIGHTER_BONUS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_MULTIPLE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_PREREQUISITE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELL_SLOT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_STACK;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_FEATS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_FEAT;
+
 /**
- * Implemenation of FeatDao to access data in a SQLite database on an Android device.
+ * Implementation of FeatDao to access data in a SQLite database on an Android device.
  */
 public class SQLiteFeatDao extends BaseSQLiteDao implements FeatDao {
 
@@ -46,10 +60,10 @@ public class SQLiteFeatDao extends BaseSQLiteDao implements FeatDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_FEATS, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Feat staticFeat = (Feat) featRowMapper.mapRow(cursor);
+                final Feat staticFeat = (Feat) featRowMapper.mapRow(new SQLiteDataRow(cursor));
                 feats.add(staticFeat);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all feats", sqlException);
         } finally {
             close(cursor);

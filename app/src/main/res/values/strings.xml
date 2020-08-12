@@ -924,5 +924,6 @@
     <string name="release_notes_3_0_0">Release 3.0.0\n- Changed business model to be based on advertisement\n\n</string>
     <string name="release_notes_3_1_0">Release 3.1.0\n- Added premium version containing unlimited number of characters and remove of banner ad\n- Added promo codes for existing users\n\n</string>
     <string name="release_notes_3_1_1">Release 3.1.1\n- Added import of characters to premium version\n- Bug fix: App crashed by resuming it from background\n\n</string>
+    <string name="release_notes_3_1_2">Release 3.1.2\n- Bug fix: Fixed crash in spell slots tab\n\n</string>
 
 </resources>

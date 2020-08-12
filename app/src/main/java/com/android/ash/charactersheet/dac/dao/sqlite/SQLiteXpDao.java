@@ -4,14 +4,17 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.XpTableRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.XpTable;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
 import com.d20charactersheet.framework.dac.dao.XpDao;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.XpTableRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_XP_TABLES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_XP_LEVELS;
 
 /**
  * Create data access object to access xp tables in SQLite3 database.
@@ -20,7 +23,7 @@ public class SQLiteXpDao extends BaseSQLiteDao implements XpDao {
 
     /**
      * Instantiates SQLiteXpDao.
-     * 
+     *
      * @param db
      *            The database to access.
      */
@@ -36,12 +39,12 @@ public class SQLiteXpDao extends BaseSQLiteDao implements XpDao {
             final RowMapper xpTableRowMapper = new XpTableRowMapper();
             cursor = db.rawQuery(SQL_GET_ALL_XP_TABLES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final XpTable xpTable = (XpTable) xpTableRowMapper.mapRow(cursor);
+                final XpTable xpTable = (XpTable) xpTableRowMapper.mapRow(new SQLiteDataRow(cursor));
                 final int[] levels = selectLevels(xpTable);
                 xpTable.setLevelTable(levels);
                 allXpTables.add(xpTable);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all xp tables", sqlException);
         } finally {
             close(cursor);

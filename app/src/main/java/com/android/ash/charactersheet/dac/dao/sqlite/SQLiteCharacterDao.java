@@ -6,20 +6,12 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.boc.model.FavoriteCharacterSkill;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.CharacterAbilityRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.CharacterFeatRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.CharacterRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.CharacterSkillRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.ClassLevelRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.KnownSpellRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.NoteRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SpellSlotRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.WeaponAttackRowMapper;
+import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SQLiteCharacterSkillRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.androidash.memorydb.DaoUtil;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Armor;
+import com.d20charactersheet.framework.boc.model.Body;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -30,6 +22,7 @@ import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
 import com.d20charactersheet.framework.boc.model.Good;
+import com.d20charactersheet.framework.boc.model.HumanoidBody;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Money;
@@ -44,12 +37,103 @@ import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.model.XpTable;
 import com.d20charactersheet.framework.dac.dao.CharacterDao;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.CharacterAbilityRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.CharacterFeatRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.CharacterRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassLevelRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.KnownSpellRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.NoteRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SpellSlotRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.WeaponAttackRowMapper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ABILITY_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ALIGNMENT_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_AMMUNITION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ARMOR;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ATTACK_BONUS_MODIFIER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ATTACK_WIELD_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CAST;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CATEGORY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CHARAKTER_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CHARISMA;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CLASS_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CMB_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CMD_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CONSTITUTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_COPPER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DAMAGE_BONUS_MODIFIER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DATE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DEXTERITY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_EXPERIENCE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FAVORITE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FEAT_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FORTITUDE_MISC_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_GOLD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_HITPOINTS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_IMAGE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_INI_MISC_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_INTELLIGENCE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_MAX_HITPOINTS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_MISC_MODIFIER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_OWNED;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_PLATINUM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_PLAYER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_RACE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_RANK;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_REFLEX_MISC_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SEX_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SILVER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SKILL_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELLLIST_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELL_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELL_SLOT_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_STRENGTH;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_TEXT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_THUMB_IMAGE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEAPON_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WILL_MISC_MOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WISDOM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_XP_TABLE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.FROM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_CHARACTERS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_ABILITIES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_CLASS_LEVELS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_FEATS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_KNOWN_SPELLS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_NOTES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_SKILLS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_SPELL_SLOTS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_SPELL_SLOT_ABILITIES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_SPELL_SLOT_FEATS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CHARACTER_WEAPON_ATTACKS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_ABILITY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_ARMOR;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_CLASS_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_FEAT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_GOOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_KNOWN_SPELL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_NOTE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_SKILL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_SPELL_SLOT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_SPELL_SLOT_ABILITY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_SPELL_SLOT_FEAT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_WEAPON;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_WEAPON_ATTACK;
 
 /**
  * Data access object to access data of a SQLite 3 database.
@@ -111,11 +195,11 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
             cursor = db.rawQuery(SQL_GET_ALL_CHARACTERS, new String[0]);
             final RowMapper characterRowMapper = new CharacterRowMapper(allRaces, allXpTables);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Character character = (Character) characterRowMapper.mapRow(cursor);
+                final Character character = (Character) characterRowMapper.mapRow(new SQLiteDataRow(cursor));
                 character.setClassLevels(getClassLevels(character, allCharacterClasses));
                 characters.add(character);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all characters", sqlException);
         } finally {
             close(cursor);
@@ -131,11 +215,11 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
             cursor = db.rawQuery(SQL_GET_CHARACTER_CLASS_LEVELS, characterId);
             final RowMapper classLevelRowMapper = new ClassLevelRowMapper(allCharacterClasses);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final ClassLevel classLevel = (ClassLevel) classLevelRowMapper.mapRow(cursor);
+                final ClassLevel classLevel = (ClassLevel) classLevelRowMapper.mapRow(new SQLiteDataRow(cursor));
                 classLevel.setCharacterAbilities(getCharacterAbilities(character, classLevel.getCharacterClass()));
                 classLevels.add(classLevel);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get class levels of character: " + character, sqlException);
         } finally {
             close(cursor);
@@ -156,7 +240,7 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
             if (character != null) {
                 character.setClassLevels(getClassLevels(character, allCharacterClasses));
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get character with id: " + id, sqlException);
         } finally {
             close(cursor);
@@ -164,13 +248,13 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         return character;
     }
 
-    private Character getCharacter(final Cursor cursor, final List<Race> allRaces, final List<XpTable> allXpTables) {
+    private Character getCharacter(final Cursor cursor, final List<Race> allRaces, final List<XpTable> allXpTables) throws java.sql.SQLException {
         final int count = cursor.getCount();
         if (count == 0) {
             return null;
         } else if (count == 1) {
             cursor.moveToFirst();
-            return (Character) new CharacterRowMapper(allRaces, allXpTables).mapRow(cursor);
+            return (Character) new CharacterRowMapper(allRaces, allXpTables).mapRow(new SQLiteDataRow(cursor));
         }
         throw new IllegalStateException("Too many characters found");
     }
@@ -317,14 +401,14 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         final List<CharacterFeat> characterFeats = new ArrayList<>();
         Cursor cursor = null;
         try {
-            final String[] params = new String[] { Integer.toString(character.getId()) };
+            final String[] params = new String[]{Integer.toString(character.getId())};
             cursor = db.rawQuery(SQL_GET_CHARACTER_FEATS, params);
             final RowMapper characterFeatRowMapper = new CharacterFeatRowMapper(allFeats);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final CharacterFeat characterFeat = (CharacterFeat) characterFeatRowMapper.mapRow(cursor);
+                final CharacterFeat characterFeat = (CharacterFeat) characterFeatRowMapper.mapRow(new SQLiteDataRow(cursor));
                 characterFeats.add(characterFeat);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get character feats", sqlException);
         } finally {
             close(cursor);
@@ -364,15 +448,15 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
     public List<CharacterSkill> getCharacterSkills(final Character character, final List<Skill> allSkills) {
         final List<CharacterSkill> characterSkills = new ArrayList<>();
         Cursor cursor = null;
-        final RowMapper characterSkillRowMapper = new CharacterSkillRowMapper(allSkills);
+        final RowMapper characterSkillRowMapper = new SQLiteCharacterSkillRowMapper(allSkills);
         try {
-            final String[] params = new String[] { Integer.toString(character.getId()) };
+            final String[] params = new String[]{Integer.toString(character.getId())};
             cursor = db.rawQuery(SQL_GET_CHARACTER_SKILLS, params);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final CharacterSkill characterSkill = (CharacterSkill) characterSkillRowMapper.mapRow(cursor);
+                final CharacterSkill characterSkill = (CharacterSkill) characterSkillRowMapper.mapRow(new SQLiteDataRow(cursor));
                 characterSkills.add(characterSkill);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get character skills", sqlException);
         } finally {
             close(cursor);
@@ -442,14 +526,14 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         final List<Note> notes = new ArrayList<>();
         Cursor cursor = null;
         try {
-            final String[] params = new String[] { Integer.toString(character.getId()) };
+            final String[] params = new String[]{Integer.toString(character.getId())};
             cursor = db.rawQuery(SQL_GET_CHARACTER_NOTES, params);
             final NoteRowMapper noteRowMapper = new NoteRowMapper(DATE_FORMAT);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Note note = (Note) noteRowMapper.mapRow(cursor);
+                final Note note = (Note) noteRowMapper.mapRow(new SQLiteDataRow(cursor));
                 notes.add(note);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get items of character", sqlException);
         } finally {
             close(cursor);
@@ -553,13 +637,13 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
                     characterClass.getClassAbilities());
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 try {
-                    final CharacterAbility characterAbility = (CharacterAbility) rowMapper.mapRow(cursor);
+                    final CharacterAbility characterAbility = (CharacterAbility) rowMapper.mapRow(new SQLiteDataRow(cursor));
                     characterAbilities.add(characterAbility);
                 } catch (final IllegalArgumentException illegalArgumentException) {
                     Logger.warn(illegalArgumentException.getMessage(), illegalArgumentException);
                 }
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get character abilities of character", sqlException);
         } finally {
             close(cursor);
@@ -702,14 +786,14 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         final List<WeaponAttack> weaponAttacks = new ArrayList<>();
         Cursor cursor = null;
         try {
-            final String[] characterId = new String[] { Integer.toString(character.getId()) };
+            final String[] characterId = new String[]{Integer.toString(character.getId())};
             cursor = db.rawQuery(SQL_GET_CHARACTER_WEAPON_ATTACKS, characterId);
             final WeaponAttackRowMapper weaponAttackRowMapper = new WeaponAttackRowMapper(allWeapons);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final WeaponAttack weaponAttack = (WeaponAttack) weaponAttackRowMapper.mapRow(cursor);
+                final WeaponAttack weaponAttack = (WeaponAttack) weaponAttackRowMapper.mapRow(new SQLiteDataRow(cursor));
                 weaponAttacks.add(weaponAttack);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get weapon attacks of " + character, sqlException);
         } finally {
             close(cursor);
@@ -825,17 +909,17 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         Cursor cursor = null;
         try {
             final RowMapper knownSpellRowMapper = new KnownSpellRowMapper(allSpelllists, allSpells);
-            final String[] characterId = new String[] { Integer.toString(character.getId()) };
+            final String[] characterId = new String[]{Integer.toString(character.getId())};
             cursor = db.rawQuery(SQL_GET_CHARACTER_KNOWN_SPELLS, characterId);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 try {
-                    final KnownSpell knownSpell = (KnownSpell) knownSpellRowMapper.mapRow(cursor);
+                    final KnownSpell knownSpell = (KnownSpell) knownSpellRowMapper.mapRow(new SQLiteDataRow(cursor));
                     knownSpells.add(knownSpell);
                 } catch (final IllegalArgumentException illegalArgumentException) {
                     Logger.warn(illegalArgumentException.getLocalizedMessage(), illegalArgumentException);
                 }
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all known spells", sqlException);
         } finally {
             close(cursor);
@@ -853,16 +937,16 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
         Cursor cursor = null;
         try {
             final RowMapper spellSlotRowMapper = new SpellSlotRowMapper(allSpells);
-            final String[] characterId = new String[] { Integer.toString(character.getId()) };
+            final String[] characterId = new String[]{Integer.toString(character.getId())};
             cursor = db.rawQuery(SQL_GET_CHARACTER_SPELL_SLOTS, characterId);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final SpellSlot spellSlot = (SpellSlot) spellSlotRowMapper.mapRow(cursor);
+                final SpellSlot spellSlot = (SpellSlot) spellSlotRowMapper.mapRow(new SQLiteDataRow(cursor));
                 spellSlot.setSpelllistAbilities(getSpelllistAbilities(spellSlot, spelllistAbilities));
                 spellSlot.setMetamagicFeats(getMetaMagicFeats(spellSlot, metaMagicFeats));
 
                 spellSlots.add(spellSlot);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all spell slots", sqlException);
         } finally {
             close(cursor);
@@ -1098,6 +1182,26 @@ public class SQLiteCharacterDao extends BaseSQLiteDao implements CharacterDao {
                 throw new SQLException("More than 1 row affected: " + numberOfAffectedRows);
             }
         }
+    }
+
+    @Override
+    public Body getBody(Character character, List<Weapon> allWeapons, List<Armor> allArmors, List<Good> allGoods) {
+        return new HumanoidBody();
+    }
+
+    @Override
+    public Body createBody(Character character, Body body) {
+        return body;
+    }
+
+    @Override
+    public void deleteBody(Character character) {
+
+    }
+
+    @Override
+    public void updateBody(Character character) {
+
     }
 
     private ContentValues getCharacterSkillContentValues(final CharacterSkill characterSkill) {

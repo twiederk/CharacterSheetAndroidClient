@@ -5,25 +5,35 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.TableAndColumnNames;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.dac.dao.ItemDaoHelper;
 
 import java.util.List;
 
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ARMOR_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CHARAKTER_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_GOOD_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NUMBER;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEAPON_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_ARMOR;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_GOOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_WEAPON;
+
 /**
  * Expands ItemDaoHelper to use optimized update of item groups.
  */
-class SQLiteItemDaoHelper extends ItemDaoHelper implements TableAndColumnNames {
+class SQLiteItemDaoHelper extends ItemDaoHelper {
 
     private final SQLiteDatabase db;
 
     /**
      * Creates SQLiteItemDaoHelper with access to given database.
-     * 
-     * @param db
-     *            Database to access.
+     *
+     * @param db Database to access.
      */
     public SQLiteItemDaoHelper(final SQLiteDatabase db) {
         super();

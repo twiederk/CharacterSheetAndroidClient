@@ -5,16 +5,30 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RaceRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.dac.dao.RaceDao;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.jdbc.rowmapper.RaceRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ABILITY_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_BASE_LAND_SPEED;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FAV_CLASS_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_RACE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SIZE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ABILITY_IDS_OF_RACE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_RACES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_RACE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_RACE_ABILITY;
 
 /**
  * Provides access to the tables storing the races in a SQLite database.
@@ -49,10 +63,10 @@ public class SQLiteRaceDao extends BaseSQLiteDao implements RaceDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_RACES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Race race = (Race) raceRowMapper.mapRow(cursor);
+                final Race race = (Race) raceRowMapper.mapRow(new SQLiteDataRow(cursor));
                 allRaces.add(race);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all races", sqlException);
         } finally {
             close(cursor);

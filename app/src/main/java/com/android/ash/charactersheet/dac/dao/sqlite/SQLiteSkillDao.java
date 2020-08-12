@@ -5,14 +5,27 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SkillRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Skill;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
 import com.d20charactersheet.framework.dac.dao.SkillDao;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SkillRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ATTRIBUTE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_UNTRAINED;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.FROM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_SKILLS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_SKILL_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_SKILL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.WHERE;
 
 /**
  * Implementation of data interface SkillDao using SQLite3 database.
@@ -46,10 +59,10 @@ public class SQLiteSkillDao extends BaseSQLiteDao implements SkillDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_SKILLS, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Skill skill = (Skill) skillRowMapper.mapRow(cursor);
+                final Skill skill = (Skill) skillRowMapper.mapRow(new SQLiteDataRow(cursor));
                 skills.add(skill);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all skills", sqlException);
         } finally {
             close(cursor);

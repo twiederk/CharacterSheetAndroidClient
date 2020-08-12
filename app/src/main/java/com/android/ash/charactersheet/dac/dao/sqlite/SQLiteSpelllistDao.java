@@ -6,23 +6,60 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.KnownSpellsTableRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SpellRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SpelllistRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.SpellsPerDayTableRowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.KnownSpellsTable;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpellsPerDayTable;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
 import com.d20charactersheet.framework.dac.dao.SpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.KnownSpellsTableRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SpellRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SpelllistRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SpellsPerDayTableRowMapper;
 import com.d20charactersheet.framework.dac.dao.util.SpellSerializor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CASTING_TIME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_COMPONENTS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DOMAIN;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DURATION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_EFFECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_FOCUS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_MATERIAL_COMPONENT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_MAX_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_MIN_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_RANGE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SAVING_THROW;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SCHOOL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SHORTNAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SHORT_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELLLIST_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELL_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SPELL_RESISTANCE;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.FROM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_KNOWN_SPELLS_TABLES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_SPELLLISTS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_SPELLS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_SPELLS_PER_DAY_TABLES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_KNOWN_SPELLS_LEVELS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_SPELLS_OF_SPELLLIST;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_SPELLS_PER_DAY_LEVELS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_SPELL_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_WHERE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_SPELL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_SPELLLIST;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_SPELLLIST_SPELL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.WHERE;
 
 /**
  * Data access object for SpelllistService. Retrieves spells and spell lists from SQLite3 database.
@@ -57,10 +94,10 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_SPELLS, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Spell spell = (Spell) spellRowMapper.mapRow(cursor);
+                final Spell spell = (Spell) spellRowMapper.mapRow(new SQLiteDataRow(cursor));
                 allSpells.add(spell);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all spells", sqlException);
         } finally {
             close(cursor);
@@ -75,11 +112,11 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_SPELLLISTS, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final Spelllist spelllist = (Spelllist) spelllistRowMapper.mapRow(cursor);
+                final Spelllist spelllist = (Spelllist) spelllistRowMapper.mapRow(new SQLiteDataRow(cursor));
                 assignSpells(spelllist, allSpells);
                 allSpelllists.add(spelllist);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all spelllists", sqlException);
         } finally {
             close(cursor);
@@ -298,12 +335,12 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
             final RowMapper rowMapper = new KnownSpellsTableRowMapper();
             cursor = db.rawQuery(SQL_GET_ALL_KNOWN_SPELLS_TABLES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final KnownSpellsTable knownSpellsTable = (KnownSpellsTable) rowMapper.mapRow(cursor);
+                final KnownSpellsTable knownSpellsTable = (KnownSpellsTable) rowMapper.mapRow(new SQLiteDataRow(cursor));
                 final int[][] knownSpellsLevels = selectKnownSpellsLevels(knownSpellsTable);
                 knownSpellsTable.setKnownSpells(knownSpellsLevels);
                 allKnownSpellsTables.add(knownSpellsTable);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all xp tables", sqlException);
         } finally {
             close(cursor);
@@ -348,12 +385,12 @@ public class SQLiteSpelllistDao extends BaseSQLiteDao implements SpelllistDao {
             final RowMapper rowMapper = new SpellsPerDayTableRowMapper();
             cursor = db.rawQuery(SQL_GET_ALL_SPELLS_PER_DAY_TABLES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final SpellsPerDayTable spellsPerDayTable = (SpellsPerDayTable) rowMapper.mapRow(cursor);
+                final SpellsPerDayTable spellsPerDayTable = (SpellsPerDayTable) rowMapper.mapRow(new SQLiteDataRow(cursor));
                 final int[][] spellsPerDayLevels = selectSpellsPerDayLevels(spellsPerDayTable);
                 spellsPerDayTable.setSpellsPerDay(spellsPerDayLevels);
                 allSpellsPerDayTables.add(spellsPerDayTable);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all spells per day tables", sqlException);
         } finally {
             close(cursor);

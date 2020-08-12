@@ -5,19 +5,38 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.ClassAbilityRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.ClassRowMapper;
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.RowMapper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.dac.dao.ClassDao;
+import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassAbilityRowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassRowMapper;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ABILITY_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ALIGNMENTS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_BASE_ATTACK_BONUS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_CLASS_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_HIT_DIE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SAVES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SKILL_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_SKILL_POINTS_PER_LEVEL;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_ALL_CLASSES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CLASS_ABILITIES;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SQL_GET_CLASS_SKILLS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CLASS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CLASS_ABILITY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CLASS_SKILL;
 
 /**
  * Provides access to character class data stored in an SQLite database.
@@ -69,10 +88,10 @@ public class SQLiteClassDao extends BaseSQLiteDao implements ClassDao {
         try {
             cursor = db.rawQuery(SQL_GET_ALL_CLASSES, new String[0]);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final CharacterClass characterClass = (CharacterClass) classRowMapper.mapRow(cursor);
+                final CharacterClass characterClass = (CharacterClass) classRowMapper.mapRow(new SQLiteDataRow(cursor));
                 characterClasses.add(characterClass);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all classes", sqlException);
         } finally {
             close(cursor);
@@ -111,14 +130,14 @@ public class SQLiteClassDao extends BaseSQLiteDao implements ClassDao {
         final List<ClassAbility> classAbilities = new ArrayList<>();
         Cursor cursor = null;
         try {
-            final String[] params = new String[] { Integer.toString(characterClassId) };
+            final String[] params = new String[]{Integer.toString(characterClassId)};
             cursor = db.rawQuery(SQL_GET_CLASS_ABILITIES, params);
             final RowMapper classAbilityRowMapper = new ClassAbilityRowMapper(allAbilities);
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                final ClassAbility classAbility = (ClassAbility) classAbilityRowMapper.mapRow(cursor);
+                final ClassAbility classAbility = (ClassAbility) classAbilityRowMapper.mapRow(new SQLiteDataRow(cursor));
                 classAbilities.add(classAbility);
             }
-        } catch (final SQLException sqlException) {
+        } catch (final SQLException | java.sql.SQLException sqlException) {
             Logger.error("Can't get all class abilities", sqlException);
         } finally {
             close(cursor);

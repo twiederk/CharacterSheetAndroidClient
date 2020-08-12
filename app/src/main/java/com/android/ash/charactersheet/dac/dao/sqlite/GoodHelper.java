@@ -4,14 +4,27 @@ import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.GoodRowMapper;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.GoodRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_COST;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_GOOD_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_QUALITY_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEIGHT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.FROM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_GOOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_GOOD;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.WHERE;
 
 /**
  * Helper class of the ItemDao. Handles all database activities concerning goods. Its like an GoodDao.

@@ -4,14 +4,29 @@ import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.rowmapper.ArmorRowMapper;
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ArmorRowMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ARMOR_BONUS;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ARMOR_PENALTY;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ARMOR_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_COST;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_DESCRIPTION;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_NAME;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_QUALITY_TYPE_ID;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_WEIGHT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.FROM;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.SELECT;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_ARMOR;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_CHARAKTER_ARMOR;
+import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.WHERE;
 
 /**
  * Helper class of the ItemDao. Handles all database activities concerning armor. Its like an ArmorDao.
