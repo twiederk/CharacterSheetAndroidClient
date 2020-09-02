@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.gui.main.characterlist
 import android.content.res.Resources
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -88,7 +88,8 @@ class ReleaseNotes : KoinComponent {
             resources.getString(R.string.release_notes_3_1_0), //
             resources.getString(R.string.release_notes_3_1_1), //
             resources.getString(R.string.release_notes_3_1_2), //
-            resources.getString(R.string.release_notes_3_1_3) //
+            resources.getString(R.string.release_notes_3_1_3), //
+            resources.getString(R.string.release_notes_3_1_4) //
     )
 
 }

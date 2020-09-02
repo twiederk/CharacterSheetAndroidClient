@@ -1,17 +1,20 @@
-package com.android.ash.charactersheet.dac.dao.sqlite;
+package com.android.ash.charactersheet.dac.dao.sql;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
-import com.d20charactersheet.framework.dac.dao.BaseImageDaoTest;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase;
+import com.d20charactersheet.framework.dac.dao.BaseFeatDaoTest;
+import com.d20charactersheet.framework.dac.dao.sql.SqlCharacterDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlFeatDao;
 
 import org.junit.Before;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-public class SQLiteImageDaoInstrumentedTest extends BaseImageDaoTest {
+public class SqlFeatDaoInstrumentedTest extends BaseFeatDaoTest {
 
     @Before
     public void setUp() {
@@ -19,8 +22,9 @@ public class SQLiteImageDaoInstrumentedTest extends BaseImageDaoTest {
         final DBHelper dbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
                 GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
                 GameSystemType.DNDV35.getImages());
-        final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        imageDao = new SQLiteImageDao(db);
+        final SqliteDatabase db = new SqliteDatabase(dbHelper.getWritableDatabase());
+        featDao = new SqlFeatDao(db);
+        characterDao = new SqlCharacterDao(db);
     }
 
 }

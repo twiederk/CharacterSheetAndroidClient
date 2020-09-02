@@ -8,7 +8,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.android.ash.charactersheet.boc.model.FavoriteCharacterSkill
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem

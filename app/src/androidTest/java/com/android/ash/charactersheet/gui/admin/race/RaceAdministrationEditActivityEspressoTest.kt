@@ -14,12 +14,11 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Ability
-import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS
 import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Size
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.boc.service.RaceService
-
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -50,7 +49,7 @@ class RaceAdministrationEditActivityEspressoTest : KoinTest {
         race.name = "High Elf"
         race.size = Size.MEDIUM
         race.baseLandSpeed = 30
-        race.favoredCharacterClass = CharacterClass.ANY_CHARACTER_CLASS
+        race.favoredCharacterClass = ANY_CHARACTER_CLASS
         val ability = Ability()
         ability.name = "Resist Sleep"
         race.abilities = listOf(ability)

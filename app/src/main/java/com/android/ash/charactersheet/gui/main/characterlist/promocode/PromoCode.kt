@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.KoinComponent
 import org.koin.core.inject

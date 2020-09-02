@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.boc.model.FavoriteCharacterSkill;
 import com.android.ash.charactersheet.gui.util.FileComparator;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
@@ -24,6 +23,7 @@ import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
+import com.d20charactersheet.framework.boc.model.FavoriteCharacterSkill;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.KnownSpell;

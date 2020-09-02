@@ -1,9 +1,5 @@
 package com.android.ash.charactersheet.backuprestore;
 
-import static com.android.ash.charactersheet.dac.dao.android.AndroidPreferenceDao.FILENAME;
-
-import java.io.IOException;
-
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
@@ -11,8 +7,12 @@ import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 import android.os.ParcelFileDescriptor;
 
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.util.Logger;
+
+import java.io.IOException;
+
+import static com.android.ash.charactersheet.dac.dao.android.AndroidPreferenceDao.FILENAME;
 
 /**
  * Stores the databases and the preference to the cloud and restores them if the app is installed on a new device. This

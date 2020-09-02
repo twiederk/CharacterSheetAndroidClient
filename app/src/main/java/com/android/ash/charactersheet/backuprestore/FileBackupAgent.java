@@ -6,7 +6,7 @@ import android.os.Environment;
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 

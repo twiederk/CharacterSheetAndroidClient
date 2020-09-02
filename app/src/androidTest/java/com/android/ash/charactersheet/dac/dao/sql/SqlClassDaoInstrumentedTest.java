@@ -1,14 +1,19 @@
-package com.android.ash.charactersheet.dac.dao.sqlite;
+package com.android.ash.charactersheet.dac.dao.sql;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase;
 import com.d20charactersheet.framework.boc.model.KnownSpellsTable;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpellsPerDayTable;
 import com.d20charactersheet.framework.dac.dao.BaseClassDaoTest;
+import com.d20charactersheet.framework.dac.dao.sql.SqlAbilityDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlClassDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSkillDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSpelllistDao;
 
 import org.junit.Before;
 
@@ -16,7 +21,7 @@ import java.util.List;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-public class SQLiteClassDaoInstrumentedTest extends BaseClassDaoTest {
+public class SqlClassDaoInstrumentedTest extends BaseClassDaoTest {
 
 
     @Before
@@ -25,11 +30,12 @@ public class SQLiteClassDaoInstrumentedTest extends BaseClassDaoTest {
         final DBHelper dbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
                 GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
                 GameSystemType.DNDV35.getImages());
-        final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        skillDao = new SQLiteSkillDao(db);
-        abilityDao = new SQLiteAbilityDao(db);
-        characterClassDao = new SQLiteClassDao(db);
-        spelllistDao = new SQLiteSpelllistDao(db);
+        final SqliteDatabase sqliteDatabase = new SqliteDatabase(dbHelper.getWritableDatabase());
+
+        skillDao = new SqlSkillDao(sqliteDatabase);
+        abilityDao = new SqlAbilityDao(sqliteDatabase);
+        characterClassDao = new SqlClassDao(sqliteDatabase);
+        spelllistDao = new SqlSpelllistDao(sqliteDatabase);
 
         final List<Spelllist> allSpelllists = spelllistDao.getAllSpelllists(spelllistDao.getAllSpells());
         final List<KnownSpellsTable> allKnownSpellsTables = spelllistDao.getAllKnownSpellsTables();

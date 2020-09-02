@@ -1,21 +1,11 @@
 package com.android.ash.charactersheet;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.boc.service.AndroidImageServiceImpl;
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteAbilityDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteCharacterDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteClassDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteFeatDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteImageDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteItemDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteRaceDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteSkillDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteSpelllistDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteXpDao;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.service.AbilityService;
@@ -43,6 +33,16 @@ import com.d20charactersheet.framework.boc.service.SpelllistService;
 import com.d20charactersheet.framework.boc.service.SpelllistServiceImpl;
 import com.d20charactersheet.framework.boc.service.XpService;
 import com.d20charactersheet.framework.boc.service.XpServiceImpl;
+import com.d20charactersheet.framework.dac.dao.sql.SqlAbilityDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlCharacterDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlClassDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlFeatDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlImageDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlItemDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlRaceDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSkillDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlXpDao;
 
 public class AndroidObjectMother {
 
@@ -52,18 +52,19 @@ public class AndroidObjectMother {
         final DBHelper dndv35DbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
                 GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
                 GameSystemType.DNDV35.getImages());
-        final SQLiteDatabase db = dndv35DbHelper.getWritableDatabase();
-        final SkillService skillService = new SkillServiceImpl(new SQLiteSkillDao(db));
-        final FeatService featService = new FeatServiceImpl(new SQLiteFeatDao(db));
-        final CharacterClassService characterClassService = new CharacterClassServiceImpl(new SQLiteClassDao(db));
-        final RaceService raceService = new RaceServiceImpl(new SQLiteRaceDao(db));
-        final AbilityService abilityService = new AbilityServiceImpl(new SQLiteAbilityDao(db));
-        final ItemService itemService = new ItemServiceImpl(new SQLiteItemDao(db));
-        final CharacterService characterService = new CharacterServiceImpl(new SQLiteCharacterDao(db));
-        final ImageService imageService = new AndroidImageServiceImpl(new SQLiteImageDao(db));
+        final SqliteDatabase db = new SqliteDatabase(dndv35DbHelper.getWritableDatabase());
+
+        final SkillService skillService = new SkillServiceImpl(new SqlSkillDao(db));
+        final FeatService featService = new FeatServiceImpl(new SqlFeatDao(db));
+        final CharacterClassService characterClassService = new CharacterClassServiceImpl(new SqlClassDao(db));
+        final RaceService raceService = new RaceServiceImpl(new SqlRaceDao(db));
+        final AbilityService abilityService = new AbilityServiceImpl(new SqlAbilityDao(db));
+        final ItemService itemService = new ItemServiceImpl(new SqlItemDao(db));
+        final CharacterService characterService = new CharacterServiceImpl(new SqlCharacterDao(db));
+        final ImageService imageService = new AndroidImageServiceImpl(new SqlImageDao(db));
         final RuleService ruleService = new DnDv35RuleServiceImpl();
-        final SpelllistService spelllistService = new SpelllistServiceImpl(new SQLiteSpelllistDao(db));
-        final XpService xpService = new XpServiceImpl(new SQLiteXpDao(db));
+        final SpelllistService spelllistService = new SpelllistServiceImpl(new SqlSpelllistDao(db));
+        final XpService xpService = new XpServiceImpl(new SqlXpDao(db));
         final ExportImportService exportImportService = new ExportImportServiceImpl();
 
         gameSystem = new GameSystemCacheImpl(GameSystemType.DNDV35.getId(), GameSystemType.DNDV35.getName());

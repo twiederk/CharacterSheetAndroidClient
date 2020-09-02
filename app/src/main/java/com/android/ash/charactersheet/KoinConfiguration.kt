@@ -4,7 +4,7 @@ import com.android.ash.charactersheet.billing.Billing
 import com.android.ash.charactersheet.billing.MessageDisplay
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics

@@ -7,7 +7,11 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.boc.model.Ability
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS
+import com.d20charactersheet.framework.boc.model.Race
+import com.d20charactersheet.framework.boc.model.Size
 import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.nhaarman.mockitokotlin2.any
@@ -37,7 +41,7 @@ class RaceAbilityPageFragmentEspressoTest : KoinTest {
         characterHolder.character = Character().apply {
             race = Race().apply {
                 name = "myRace"
-                favoredCharacterClass = CharacterClass.ANY_CHARACTER_CLASS
+                favoredCharacterClass = ANY_CHARACTER_CLASS
                 size = Size.MEDIUM
                 baseLandSpeed = 20
                 abilities = listOf(Ability().apply { name = "myAbility" })

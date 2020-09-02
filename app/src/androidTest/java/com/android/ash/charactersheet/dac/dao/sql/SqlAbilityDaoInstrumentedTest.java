@@ -1,17 +1,21 @@
-package com.android.ash.charactersheet.dac.dao.sqlite;
+package com.android.ash.charactersheet.dac.dao.sql;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase;
 import com.d20charactersheet.framework.dac.dao.BaseAbilityDaoTest;
+import com.d20charactersheet.framework.dac.dao.sql.Database;
+import com.d20charactersheet.framework.dac.dao.sql.SqlAbilityDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSpelllistDao;
 
 import org.junit.Before;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-public class SQLiteAbilityDaoInstrumentedTest extends BaseAbilityDaoTest {
+public class SqlAbilityDaoInstrumentedTest extends BaseAbilityDaoTest {
 
     @Before
     public void setUp() {
@@ -20,9 +24,9 @@ public class SQLiteAbilityDaoInstrumentedTest extends BaseAbilityDaoTest {
         final DBHelper dbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), dbVersion,
                 GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
                 GameSystemType.DNDV35.getImages());
-        final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        abilityDao = new SQLiteAbilityDao(db);
-        spelllistDao = new SQLiteSpelllistDao(db);
+        final Database sqliteDatabase = new SqliteDatabase(dbHelper.getWritableDatabase());
+        abilityDao = new SqlAbilityDao(sqliteDatabase);
+        spelllistDao = new SqlSpelllistDao(sqliteDatabase);
     }
 
 }

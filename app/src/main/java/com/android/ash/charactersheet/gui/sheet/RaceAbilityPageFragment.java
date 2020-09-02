@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
+
 /**
  * Display the detailed data of a race, containing its name, favored class, size, reach, space, speed and its abilities.
  * The abilities are displayed as list. Each ability can be expanded and collapes in the list.
@@ -39,7 +41,6 @@ public class RaceAbilityPageFragment extends PageFragment {
     public void onResume() {
         super.onResume();
         firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.RACE_ABILITY, "RaceAbilityPageFragment");
-
     }
 
     private void setHeader() {
@@ -76,7 +77,7 @@ public class RaceAbilityPageFragment extends PageFragment {
         final String label = getResources().getString(R.string.race_ability_list_favorite_character_class);
         String value;
         final CharacterClass favoriteCharacterClass = race.getFavoredCharacterClass();
-        if (CharacterClass.ANY_CHARACTER_CLASS.equals(favoriteCharacterClass)) {
+        if (ANY_CHARACTER_CLASS.equals(favoriteCharacterClass)) {
             value = getResources().getString(R.string.race_ability_any_character_class);
         } else {
             value = race.getFavoredCharacterClass().getName();

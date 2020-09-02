@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.gui.main.characterlist
 import android.content.res.Resources
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
@@ -39,7 +39,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val resources: Resources = mock()
         whenever(resources.getString(any())).doReturn("myReleaseNote\n")
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(56)
+        whenever(dbHelper.oldVersion).doReturn(57)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act

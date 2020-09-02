@@ -31,6 +31,7 @@ import java.util.Objects;
 import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
 import static org.koin.java.KoinJavaComponent.inject;
 
 /**
@@ -90,7 +91,7 @@ public abstract class RaceAdministrationActivity extends FormActivity<Race> {
 
     private List<CharacterClass> getCharacterClassesOfSpinner() {
         final List<CharacterClass> characterClasses = gameSystem.getAllCharacterClasses();
-        characterClasses.add(CharacterClass.ANY_CHARACTER_CLASS);
+        characterClasses.add(ANY_CHARACTER_CLASS);
         Collections.sort(characterClasses, new CharacterClassComparator());
         return characterClasses;
     }

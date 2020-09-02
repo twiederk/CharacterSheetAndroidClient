@@ -10,16 +10,7 @@ import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl;
 import com.android.ash.charactersheet.boc.service.AndroidImageServiceImpl;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteAbilityDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteCharacterDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteClassDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteFeatDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteImageDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteItemDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteRaceDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteSkillDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteSpelllistDao;
-import com.android.ash.charactersheet.dac.dao.sqlite.SQLiteXpDao;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.waitanimation.WaitAnimation;
 import com.d20charactersheet.framework.boc.service.AbilityService;
@@ -59,6 +50,17 @@ import com.d20charactersheet.framework.dac.dao.RaceDao;
 import com.d20charactersheet.framework.dac.dao.SkillDao;
 import com.d20charactersheet.framework.dac.dao.SpelllistDao;
 import com.d20charactersheet.framework.dac.dao.XpDao;
+import com.d20charactersheet.framework.dac.dao.sql.Database;
+import com.d20charactersheet.framework.dac.dao.sql.SqlAbilityDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlCharacterDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlClassDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlFeatDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlImageDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlItemDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlRaceDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSkillDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlXpDao;
 
 import kotlin.Lazy;
 
@@ -138,16 +140,18 @@ abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
         // KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE, SPELLS_PER_DAY_LEVEL);
         // final XpDao xpDao = new DummyXpDao(XP_TABLE, XP_LEVEL);
 
-        final SkillDao skillDao = new SQLiteSkillDao(database);
-        final FeatDao featDao = new SQLiteFeatDao(database);
-        final ItemDao itemDao = new SQLiteItemDao(database);
-        final ClassDao classDao = new SQLiteClassDao(database);
-        final RaceDao raceDao = new SQLiteRaceDao(database);
-        final AbilityDao abilityDao = new SQLiteAbilityDao(database);
-        final CharacterDao characterDao = new SQLiteCharacterDao(database);
-        final ImageDao imageDao = new SQLiteImageDao(database);
-        final SpelllistDao spelllistDao = new SQLiteSpelllistDao(database);
-        final XpDao xpDao = new SQLiteXpDao(database);
+        final Database sqliteDatabase = new SqliteDatabase(database);
+
+        final SkillDao skillDao = new SqlSkillDao(sqliteDatabase);
+        final FeatDao featDao = new SqlFeatDao(sqliteDatabase);
+        final ItemDao itemDao = new SqlItemDao(sqliteDatabase);
+        final ClassDao classDao = new SqlClassDao(sqliteDatabase);
+        final RaceDao raceDao = new SqlRaceDao(sqliteDatabase);
+        final AbilityDao abilityDao = new SqlAbilityDao(sqliteDatabase);
+        final CharacterDao characterDao = new SqlCharacterDao(sqliteDatabase);
+        final ImageDao imageDao = new SqlImageDao(sqliteDatabase);
+        final SpelllistDao spelllistDao = new SqlSpelllistDao(sqliteDatabase);
+        final XpDao xpDao = new SqlXpDao(sqliteDatabase);
 
         final DisplayService displayService = new AndroidDisplayServiceImpl(resources);
         final ImageService imageService = new AndroidImageServiceImpl(imageDao);

@@ -1,4 +1,4 @@
-package com.android.ash.charactersheet.dac.dao.sqlite;
+package com.android.ash.charactersheet.dac.dao.sql.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,8 +16,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.COLUMN_IMAGE;
-import static com.d20charactersheet.framework.dac.dao.TableAndColumnNames.TABLE_IMAGE;
+import static com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_IMAGE;
+import static com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_IMAGE;
 
 /**
  * Provides access to the SQLite 3 database of the Android platform. Creates the whole database by running a single

@@ -1,11 +1,12 @@
 package com.android.ash.charactersheet.gui.admin.race;
 
 import com.android.ash.charactersheet.R;
-import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.model.Size;
 
 import java.util.ArrayList;
+
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
 
 /**
  * Activity to create a new race.
@@ -18,7 +19,7 @@ public class RaceAdministrationCreateActivity extends RaceAdministrationActivity
         race.setName("");
         race.setSize(Size.MEDIUM);
         race.setBaseLandSpeed(30);
-        race.setFavoredCharacterClass(CharacterClass.ANY_CHARACTER_CLASS);
+        race.setFavoredCharacterClass(ANY_CHARACTER_CLASS);
         race.setAbilities(new ArrayList<>());
         return race;
     }

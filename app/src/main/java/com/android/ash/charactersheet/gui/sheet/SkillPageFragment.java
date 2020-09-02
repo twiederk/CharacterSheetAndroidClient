@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.boc.model.FavoriteCharacterSkill;
 import com.android.ash.charactersheet.gui.sheet.skill.CharacterSkillArrayAdapter;
 import com.android.ash.charactersheet.gui.sheet.skill.HideOnTabChangeListener;
 import com.android.ash.charactersheet.gui.sheet.skill.SkillDescriptionActivity;
@@ -27,6 +26,7 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
+import com.d20charactersheet.framework.boc.model.FavoriteCharacterSkill;
 import com.d20charactersheet.framework.boc.util.CharacterSkillComparator;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
 
     private FavoriteCharacterSkill selectedSkill;
 
-    private ArrayAdapter<CharacterSkill> favoriteSkillsAdpater;
+    private ArrayAdapter<CharacterSkill> favoriteSkillsAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -95,7 +95,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
 
     private void setFavoriteSkills() {
         final List<CharacterSkill> favoriteSkills = getFavoriteCharacterSkills();
-        favoriteSkillsAdpater = createAdapterAndListView(favoriteSkills, R.id.skill_list_list_favorite);
+        favoriteSkillsAdapter = createAdapterAndListView(favoriteSkills, R.id.skill_list_list_favorite);
     }
 
     private void setTrainedSkills() {
@@ -195,15 +195,15 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     private void addSkillToFavorties() {
         if (!selectedSkill.isFavorite()) {
             selectedSkill.setFavorite(true);
-            favoriteSkillsAdpater.add(selectedSkill);
-            favoriteSkillsAdpater.sort(new CharacterSkillComparator());
+            favoriteSkillsAdapter.add(selectedSkill);
+            favoriteSkillsAdapter.sort(new CharacterSkillComparator());
             characterService.updateCharacterSkill(character, selectedSkill);
         }
     }
 
     private void removeSkillFromFavorites() {
         selectedSkill.setFavorite(false);
-        favoriteSkillsAdpater.remove(selectedSkill);
+        favoriteSkillsAdapter.remove(selectedSkill);
         characterService.updateCharacterSkill(character, selectedSkill);
     }
 

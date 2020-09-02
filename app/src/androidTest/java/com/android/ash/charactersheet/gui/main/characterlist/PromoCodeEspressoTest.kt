@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.android.ash.charactersheet.gui.main.characterlist.promocode.PromoCode
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock

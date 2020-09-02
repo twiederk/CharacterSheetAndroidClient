@@ -5,7 +5,7 @@ import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.billing.Billing
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nhaarman.mockitokotlin2.*
 import org.junit.After

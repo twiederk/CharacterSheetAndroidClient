@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.gui.main.characterlist;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.GameSystemHolder;
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 

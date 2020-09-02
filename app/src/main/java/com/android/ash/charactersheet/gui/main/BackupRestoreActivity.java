@@ -18,7 +18,7 @@ import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.backuprestore.FileBackupAgent;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
 import com.android.ash.charactersheet.gui.util.FileComparator;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;

@@ -9,7 +9,7 @@ import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.boc.service.PreferenceServiceImpl
 import com.android.ash.charactersheet.dac.dao.android.AndroidPreferenceDao
-import com.android.ash.charactersheet.dac.dao.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.KoinComponent
