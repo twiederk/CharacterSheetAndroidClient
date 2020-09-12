@@ -925,5 +925,6 @@
     <string name="release_notes_3_1_0">Release 3.1.0\n- Added premium version containing unlimited number of characters and remove of banner ad\n- Added promo codes for existing users\n\n</string>
     <string name="release_notes_3_1_1">Release 3.1.1\n- Added import of characters to premium version\n- Bug fix: App crashed by resuming it from background\n\n</string>
     <string name="release_notes_3_1_2">Release 3.1.2\n- Bug fix: Fixed crash in spell slots tab\n\n</string>
+    <string name="release_notes_3_1_3">Release 3.1.3\n- Bug fix: Fixed crash on app startup on Lenovo devices with Android 6\n- Bug fix: Fixed crash in known spells tab for sorcerers above level 20\n\n</string>
 
 </resources>
