@@ -21,7 +21,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 public class SqlCharacterDaoInstrumentedTest extends BaseCharacterDaoTest {
 
     @Override
-    public void setUp() throws Exception {
+    public void setUp() {
         final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         final DBHelper dbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
                 GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),

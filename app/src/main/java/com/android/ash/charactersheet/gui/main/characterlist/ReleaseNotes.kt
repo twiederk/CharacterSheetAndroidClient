@@ -31,7 +31,8 @@ class ReleaseNotes : KoinComponent {
                 .joinToString(separator = "") { it }
     }
 
-    private fun createReleaseNotesArray(resources: Resources): Array<String> = arrayOf( //
+    private fun createReleaseNotesArray(resources: Resources): Array<String> = arrayOf(
+            //
             resources.getString(R.string.release_notes_1_1_0),  //
             resources.getString(R.string.release_notes_1_2_0),  //
             resources.getString(R.string.release_notes_1_3_0),  //
@@ -89,7 +90,8 @@ class ReleaseNotes : KoinComponent {
             resources.getString(R.string.release_notes_3_1_1), //
             resources.getString(R.string.release_notes_3_1_2), //
             resources.getString(R.string.release_notes_3_1_3), //
-            resources.getString(R.string.release_notes_3_1_4) //
+            resources.getString(R.string.release_notes_3_1_4), //
+            resources.getString(R.string.release_notes_3_1_5), //
     )
 
 }

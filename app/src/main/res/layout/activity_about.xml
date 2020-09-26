@@ -68,6 +68,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:autoLink="web"
+        android:text="@string/about_join" />
+
+    <TextView
+        style="@style/AppTheme.ListItemText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:autoLink="email"
         android:text="@string/about_contact" />
 

@@ -2,8 +2,13 @@ package com.android.ash.charactersheet.boc.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.android.ash.charactersheet.dac.dao.dummy.DummyImageDao
+import com.android.ash.charactersheet.BuildConfig
+import com.android.ash.charactersheet.boc.model.GameSystemType
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase
 import com.d20charactersheet.framework.boc.service.ImageService
+import com.d20charactersheet.framework.dac.dao.sql.Database
+import com.d20charactersheet.framework.dac.dao.sql.SqlImageDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -17,7 +22,13 @@ class AndroidImageServiceInstrumentedTest {
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        imageService = AndroidImageServiceImpl(DummyImageDao(context))
+        val dbVersion = BuildConfig.VERSION_CODE
+        val dbHelper = DBHelper(context, GameSystemType.DNDV35.databaseName, dbVersion,
+                GameSystemType.DNDV35.createScripts, GameSystemType.DNDV35.updateScripts,
+                GameSystemType.DNDV35.images)
+        val sqliteDatabase: Database = SqliteDatabase(dbHelper.writableDatabase)
+
+        imageService = AndroidImageServiceImpl(SqlImageDao(sqliteDatabase))
     }
 
     @Test
@@ -26,7 +37,7 @@ class AndroidImageServiceInstrumentedTest {
         val image = imageService.getImage(ImageService.DEFAULT_CHARACTER_IMAGE_ID)
 
         // Assert
-        assertThat(image).isNotNull()
+        assertThat(image).isNotNull
     }
 
     @Test
@@ -35,7 +46,7 @@ class AndroidImageServiceInstrumentedTest {
         val thumbnail = imageService.getImage(ImageService.DEFAULT_THUMB_IMAGE_ID)
 
         // Assert
-        assertThat(thumbnail).isNotNull()
+        assertThat(thumbnail).isNotNull
     }
 
     @Test
@@ -44,7 +55,7 @@ class AndroidImageServiceInstrumentedTest {
         val bitmap = imageService.getBitmap(ImageService.DEFAULT_CHARACTER_IMAGE_ID)
 
         // Assert
-        assertThat(bitmap).isNotNull()
+        assertThat(bitmap).isNotNull
     }
 
     @Test
@@ -53,7 +64,7 @@ class AndroidImageServiceInstrumentedTest {
         val bitmap = imageService.getBitmap(-1)
 
         // Assert
-        assertThat(bitmap).isNotNull()
+        assertThat(bitmap).isNotNull
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -69,7 +80,7 @@ class AndroidImageServiceInstrumentedTest {
 
         // Assert
         val image = imageService.getImage(ImageService.DEFAULT_CHARACTER_IMAGE_ID)
-        assertThat(image).isNotNull()
+        assertThat(image).isNotNull
     }
 
     @Test
@@ -79,7 +90,7 @@ class AndroidImageServiceInstrumentedTest {
 
         // Assert
         val thumbnail = imageService.getImage(ImageService.DEFAULT_THUMB_IMAGE_ID)
-        assertThat(thumbnail).isNotNull()
+        assertThat(thumbnail).isNotNull
     }
 
 }

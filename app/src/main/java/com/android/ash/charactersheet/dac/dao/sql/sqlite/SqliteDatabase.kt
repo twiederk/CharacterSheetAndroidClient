@@ -14,7 +14,7 @@ class SqliteDatabase(private val db: SQLiteDatabase) : Database {
         return db.delete(tableName, whereClause, whereArgs)
     }
 
-    override fun insertOrThrow(tableName: String, nullColumnHack: Any?, contentValues: ContentValues): Long {
+    override fun insertOrThrow(tableName: String, contentValues: ContentValues): Long {
         return db.insertOrThrow(tableName, null, convertContentValues(contentValues))
     }
 

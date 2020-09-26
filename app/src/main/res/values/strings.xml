@@ -396,6 +396,7 @@
     <string name="about_title">Manual</string>
     <string name="about_manual">Manual: http://www.d20CharacterSheet.com/manual.html</string>
     <string name="about_homepage">Homepage: http://www.d20CharacterSheet.com</string>
+    <string name="about_join">You\'re welcome to join the open source project on GitHub: https://github.com/twiederk/d20Framework/</string>
     <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
     <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5</string>
     <string name="about_ogl">Open Gaming Licence</string>
@@ -869,6 +870,7 @@
 
     <!-- Release Notes -->
     <string name="release_notes_heading">Release Notes</string>
+    <string name="release_notes_join_project">You\'re welcome to join the open source project: https://github.com/twiederk/d20Framework/</string>
     <string name="release_notes_1_1_0">Release 1.1.0\n- Skills added\n\n</string>
     <string name="release_notes_1_2_0">Release 1.2.0\n- Saves added\n\n</string>
     <string name="release_notes_1_3_0">Release 1.3.0\n- Feats added\n\n</string>
@@ -927,5 +929,6 @@
     <string name="release_notes_3_1_2">Release 3.1.2\n- Bug fix: Fixed crash in spell slots tab\n\n</string>
     <string name="release_notes_3_1_3">Release 3.1.3\n- Bug fix: Fixed crash on app startup on Lenovo devices with Android 6\n- Bug fix: Fixed crash in known spells tab for sorcerers above level 20\n\n</string>
     <string name="release_notes_3_1_4">Release 3.1.4\n- Bug fix: Fixed crash on opening character sheet on Android 6\n- Use latest version of d20framework containing SQLite support\n\n</string>
+    <string name="release_notes_3_1_5">Release 3.1.5\n- Support Android 11 and requires at least Android 8\n- Added note to join open source project\n- Prepared app for new content of Pathfinder and DnD 5e\n- Bug fix: Fixed height of release notes dialog\n\n</string>
 
 </resources>

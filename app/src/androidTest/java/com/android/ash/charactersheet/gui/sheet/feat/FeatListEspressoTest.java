@@ -8,8 +8,6 @@ import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterFeat;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
-import com.d20charactersheet.framework.dac.dao.FeatDao;
-import com.d20charactersheet.framework.dac.dao.dummy.DummyFeatDao;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -22,14 +20,12 @@ import java.util.List;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35FeatStorage.FEAT;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class FeatListEspressoTest {
 
     private FeatModel featModel;
-    private List<Feat> feats;
     private FeatListAdapter generalFeatListAdapter;
 
     @BeforeClass
@@ -40,27 +36,40 @@ public class FeatListEspressoTest {
     @Before
     public void setUp() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        final FeatDao featDao = new DummyFeatDao(FEAT);
-        feats = featDao.getAllFeats();
-        Character character = createCharacter();
+        List<Feat> feats = createAllFeats();
+        Character character = createCharacter(feats);
         featModel = new FeatModel(feats, character.getCharacterFeats());
         generalFeatListAdapter = new FeatListAdapter(context, R.layout.listitem_feat, featModel, FeatType.GENERAL);
 
     }
 
-    private Character createCharacter() {
+    private List<Feat> createAllFeats() {
+        List<Feat> feats = new ArrayList<>();
+        feats.add(createFeat("Augment Summoning", FeatType.GENERAL));
+        feats.add(createFeat("Brew Potion", FeatType.ITEM_CREATION));
+        return feats;
+    }
+
+    private Feat createFeat(String name, FeatType featType) {
+        Feat feat = new Feat();
+        feat.setName(name);
+        feat.setFeatType(featType);
+        return feat;
+    }
+
+    private Character createCharacter(List<Feat> feats) {
         final Character character = new Character();
-        character.setCharacterFeats(createCharacterFeats());
+        character.setCharacterFeats(createCharacterFeats(feats));
         return character;
     }
 
-    private List<CharacterFeat> createCharacterFeats() {
+    private List<CharacterFeat> createCharacterFeats(List<Feat> feats) {
         final List<CharacterFeat> characterFeats = new ArrayList<>();
-        characterFeats.add(new CharacterFeat(getFeat()));
+        characterFeats.add(new CharacterFeat(getFeat(feats)));
         return characterFeats;
     }
 
-    private Feat getFeat() {
+    private Feat getFeat(List<Feat> feats) {
         for (final Feat feat : feats) {
             if (feat.getName().equals("Augment Summoning")) {
                 return feat;
@@ -73,7 +82,7 @@ public class FeatListEspressoTest {
     public void testGetAllGeneralFeats() {
         featModel.setShowAllFeats(true);
         final int numberOfFeats = generalFeatListAdapter.getCount();
-        assertEquals(92, numberOfFeats);
+        assertEquals(1, numberOfFeats);
     }
 
     @Test

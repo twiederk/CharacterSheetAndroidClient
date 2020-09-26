@@ -123,23 +123,6 @@ abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
         Logger.debug("createGameSystem");
         Logger.debug("gameSystemType: " + gameSystemType);
 
-        // final SkillDao skillDao = new DummySkillDao(SKILL);
-        // final FeatDao featDao = new DummyFeatDao(FEAT);
-        // final ItemDao itemDao = new DummyItemDao(WEAPON_FAMILY, WEAPON, ARMOR, GOOD);
-        // final ClassDao classDao = new DummyClassDao(CLASS, CLASS_SKILL, CLASS_ABILITY);
-        // final RaceDao raceDao = new DummyRaceDao(RACE, RACE_ABILITY);
-        // final AbilityDao abilityDao = new DummyAbilityDao(ABILITY, ABILITY_PROPERTY);
-        // final CharacterDao characterDao = new DummyCharacterDao(CHARACTER, CHARACTER_CLASS_LEVEL, CHARACTER_ABILITY,
-        // CHARACTER_SKILL, CHARACTER_FEAT, CHARACTER_WEAPON, CHARACTER_ARMOR, CHARACTER_GOOD, CHARACTER_NOTE,
-        // CHARACTER_ATTACK, CHARACTER_KNOWN_SPELL, CHARACTER_SPELL_SLOT, CHARACTER_SPELL_SLOT_ABILITY,
-        // CHARACTER_SPELL_SLOT_FEAT);
-        //
-        // final ImageDao imageDao = new DummyImageDao(activity);
-        // final SpelllistDao spelllistDao = new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL,
-        // KNOWN_SPELLS_TABLE,
-        // KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE, SPELLS_PER_DAY_LEVEL);
-        // final XpDao xpDao = new DummyXpDao(XP_TABLE, XP_LEVEL);
-
         final Database sqliteDatabase = new SqliteDatabase(database);
 
         final SkillDao skillDao = new SqlSkillDao(sqliteDatabase);

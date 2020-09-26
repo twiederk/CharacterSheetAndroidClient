@@ -38,8 +38,11 @@ public class AndroidImageServiceImpl implements AndroidImageService {
      */
     @Override
     public Bitmap getBitmap(final int imageId) {
-        byte[] imageData = imageDao.getImage(imageId);
-        if (imageData == null) {
+        byte[] imageData;
+        try {
+            imageData = imageDao.getImage(imageId);
+
+        } catch (Exception exception) {
             imageData = imageDao.getImage(DEFAULT_THUMB_IMAGE_ID);
         }
         return BitmapFactory.decodeByteArray(imageData, 0, imageData.length);

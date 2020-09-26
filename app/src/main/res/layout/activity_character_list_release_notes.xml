@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/AppTheme.ReleaseNotes"
-    android:background="@drawable/release_notes"
-    android:orientation="vertical" >
+    android:background="@drawable/release_notes">
 
     <!-- HEADING -->
-
     <TextView
+        android:id="@+id/release_notes_heading"
         style="@style/AppTheme.ListItemHeading"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/release_notes_heading" />
+        android:text="@string/release_notes_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/release_notes_join_project"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#555555"
+        android:autoLink="web"
+        android:text="@string/release_notes_join_project"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/release_notes_heading" />
 
     <ScrollView
+        android:id="@+id/release_notes_scroll_view"
         android:layout_width="fill_parent"
-        android:layout_height="100dip"
-        android:scrollbars="vertical" >
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/button_ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/release_notes_join_project">
 
         <!-- RELEASE NOTES -->
-
         <TextView
-            android:id="@+id/list_of_release_notes"
+            android:id="@+id/release_notes_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
     </ScrollView>
 
     <!-- OK BUTTON -->
@@ -32,6 +51,10 @@
         android:id="@+id/button_ok"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_ok" />
+        android:text="@string/button_ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/release_notes_scroll_view" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

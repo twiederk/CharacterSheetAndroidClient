@@ -48,16 +48,16 @@ class CharacterListLayout(private val characterListActivity: CharacterListActivi
     }
 
     private fun showReleaseNotes(releaseNotes: String) {
-        val releaseNotesView: View = characterListActivity.findViewById<View>(R.id.character_list_release_notes)
+        val releaseNotesView = characterListActivity.findViewById<View>(R.id.character_list_release_notes)
         releaseNotesView.visibility = View.VISIBLE
-        val releaseNotesTextView: TextView = characterListActivity.findViewById(R.id.list_of_release_notes)
+        val releaseNotesTextView: TextView = characterListActivity.findViewById(R.id.release_notes_list)
         releaseNotesTextView.text = releaseNotes
     }
 
     private fun setOkButton() {
         val okButton: Button = characterListActivity.findViewById(R.id.button_ok)
         okButton.setOnClickListener {
-            val releaseNotesView: View = characterListActivity.findViewById<View>(R.id.character_list_release_notes)
+            val releaseNotesView = characterListActivity.findViewById<View>(R.id.character_list_release_notes)
             releaseNotesView.visibility = View.INVISIBLE
         }
     }
