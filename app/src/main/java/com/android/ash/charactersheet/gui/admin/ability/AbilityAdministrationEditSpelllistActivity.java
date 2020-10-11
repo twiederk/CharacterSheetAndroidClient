@@ -52,7 +52,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
 
     private void setSpelllist() {
         final List<Spelllist> allSpelllists = gameSystem.getAllSpelllists();
-        Collections.sort(allSpelllists, new SpelllistComparator());
+        allSpelllists.sort(new SpelllistComparator());
         final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService, allSpelllists);
         final int position = getSpelllistPosition(allSpelllists);
         setSpinner(R.id.ability_administration_spelllist, adapter, position);
@@ -161,7 +161,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
 
     private void setKnownSpellsTable() {
         final List<KnownSpellsTable> allKnownSpellsTables = gameSystem.getAllKnownSpellsTables();
-        Collections.sort(allKnownSpellsTables, new KnownSpellsTableComparator());
+        allKnownSpellsTables.sort(new KnownSpellsTableComparator());
         final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 allKnownSpellsTables);
         final int position = getKnownSpellsTablePosition(allKnownSpellsTables);
@@ -181,7 +181,7 @@ public class AbilityAdministrationEditSpelllistActivity extends AbilityAdministr
 
     private void setSpellsPerDayTable() {
         final List<SpellsPerDayTable> allSpellsPerDayTables = gameSystem.getAllSpellsPerDayTables();
-        Collections.sort(allSpellsPerDayTables, new SpellsPerDayTableComparator());
+        allSpellsPerDayTables.sort(new SpellsPerDayTableComparator());
         final SpinnerAdapter adapter = new NameDisplayArrayAdapter<>(this, displayService,
                 allSpellsPerDayTables);
         final int position = getSpellsPerDayPosition(allSpellsPerDayTables);

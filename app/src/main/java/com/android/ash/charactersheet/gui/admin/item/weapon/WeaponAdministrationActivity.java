@@ -20,7 +20,6 @@ import com.d20charactersheet.framework.boc.model.WeaponType;
 import com.d20charactersheet.framework.boc.util.WeaponFamilyComparator;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -109,7 +108,7 @@ public abstract class WeaponAdministrationActivity extends ItemAdministrationAct
 
     private void setWeaponFamily() {
         final List<WeaponFamily> allWeaponFamilies = gameSystem.getAllWeaponFamilies();
-        Collections.sort(allWeaponFamilies, new WeaponFamilyComparator());
+        allWeaponFamilies.sort(new WeaponFamilyComparator());
         final ArrayAdapter<WeaponFamily> weaponFamilyAdapter = new SpinnerArrayAdapter<>(this,
                 displayService, allWeaponFamilies);
         final int selectedIndex = getWeaponFamilyIndex(weapon.getWeaponFamily(), allWeaponFamilies);

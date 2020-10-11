@@ -1,5 +1,6 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,9 +14,9 @@ import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.util.AbilityComparator;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
@@ -40,7 +41,11 @@ public class RaceAbilityPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.RACE_ABILITY, "RaceAbilityPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.RACE_ABILITY);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "RaceAbilityPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
     }
 
     private void setHeader() {
@@ -125,7 +130,7 @@ public class RaceAbilityPageFragment extends PageFragment {
 
     private List<ExpandableListItem> getRaceAbilities() {
         final List<Ability> abilities = character.getRace().getAbilities();
-        Collections.sort(abilities, new AbilityComparator());
+        abilities.sort(new AbilityComparator());
         final List<ExpandableListItem> racialAbilities = new ArrayList<>();
         for (final Ability ability : abilities) {
             final ExpandableListItem expandListView = new ExpandableListItem(ability);

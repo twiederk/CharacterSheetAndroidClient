@@ -27,7 +27,6 @@ import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -125,7 +124,7 @@ public abstract class SkillAdministrationActivity extends FormActivity<Skill> {
                 allSpellsPerDayTables);
         final List<CharacterClass> characterClasses = characterClassService.getAllCharacterClasses(allSkills,
                 allAbilities);
-        Collections.sort(characterClasses, new CharacterClassComparator());
+        characterClasses.sort(new CharacterClassComparator());
         return characterClasses;
     }
 

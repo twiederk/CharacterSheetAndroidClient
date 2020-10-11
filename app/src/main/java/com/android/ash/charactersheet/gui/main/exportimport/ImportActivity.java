@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.FileComparator;
@@ -46,13 +49,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
@@ -125,7 +125,7 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
 
     private void createFilesListView() {
         final List<File> files = getImportFiles();
-        Collections.sort(files, new FileComparator());
+        files.sort(new FileComparator());
         final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<>(files));
 
         final ListView listView = getListView();
@@ -194,7 +194,7 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
 
     private void displayImportReports(final List importReports) {
         setContentView(R.layout.activity_import_reports);
-        Collections.sort(importReports, new ImportReportComparator());
+        importReports.sort(new ImportReportComparator());
         final List<ImportMessage> importMessages = getImportMessages(importReports);
 
         final ImportMessageAdapter adapter = new ImportMessageAdapter(this, R.layout.listitem_importmessage,

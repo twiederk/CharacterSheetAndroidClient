@@ -17,9 +17,9 @@ class FeatAdministrationCreateActivityTest {
         assertThat(feat.featType).isEqualTo(FeatType.GENERAL)
         assertThat(feat.benefit).isEmpty()
         assertThat(feat.prerequisit).isEmpty()
-        assertThat(feat.isFighterBonus).isFalse()
-        assertThat(feat.isStack).isFalse()
-        assertThat(feat.isMultiple).isFalse()
+        assertThat(feat.isFighterBonus).isFalse
+        assertThat(feat.isStack).isFalse
+        assertThat(feat.isMultiple).isFalse
     }
 
 }

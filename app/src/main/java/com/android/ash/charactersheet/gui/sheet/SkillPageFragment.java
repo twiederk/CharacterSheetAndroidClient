@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -15,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.skill.CharacterSkillArrayAdapter;
@@ -28,11 +31,10 @@ import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.model.FavoriteCharacterSkill;
 import com.d20charactersheet.framework.boc.util.CharacterSkillComparator;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
@@ -249,7 +251,11 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.SKILL, "SkillPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.SKILL);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "SkillPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
         setHeader();
         setFavoriteSkills();
         setTrainedSkills();

@@ -1,10 +1,12 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 
 import com.android.ash.charactersheet.CharacterHolder;
@@ -13,8 +15,10 @@ import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.billing.Billing;
+import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
+import com.android.ash.charactersheet.gui.main.characterlist.CharacterListActivity;
 import com.android.ash.charactersheet.gui.util.AdViewConfiguration;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.billingclient.api.BillingClient;
@@ -26,6 +30,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import kotlin.Lazy;
@@ -38,6 +43,9 @@ import static org.koin.java.KoinJavaComponent.inject;
  */
 public class CharacterSheetActivity extends LogAppCompatActivity {
 
+    private static final String INSTANCE_STATE_CHARACTER_ID = "characterId";
+    private static final String INSTANCE_STATE_GAME_SYSTEM_ID = "gameSystemId";
+
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
     private final Lazy<PreferenceServiceHolder> preferencesServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
@@ -47,6 +55,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private GameSystem gameSystem;
     private PreferenceService preferenceService;
     private Character character;
+    private boolean reloadedFromBackground;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -55,6 +64,11 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         billing.getValue().startConnection(BillingClient.newBuilder(this));
 
         gameSystem = gameSystemHolder.getValue().getGameSystem();
+        if (gameSystem == null) {
+            reloadedFromBackground = true;
+            reloadGameSystem(savedInstanceState);
+            reloadCharacter(savedInstanceState);
+        }
 
         preferenceService = preferencesServiceHolder.getValue().getPreferenceService();
         character = characterHolder.getValue().getCharacter();
@@ -73,6 +87,30 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+    }
+
+    private void reloadGameSystem(Bundle savedInstanceState) {
+        GameSystemLoader gameSystemLoader = new GameSystemLoader();
+        gameSystemLoader.connectDatabases(this);
+        GameSystemType gameSystemType = getGameSystemType(savedInstanceState);
+        gameSystem = new GameSystemLoader().load(this, gameSystemType);
+
+    }
+
+    private GameSystemType getGameSystemType(Bundle savedInstanceState) {
+        int gameSystemId = savedInstanceState.getInt(INSTANCE_STATE_GAME_SYSTEM_ID);
+        for (GameSystemType gameSystemType : GameSystemType.values()) {
+            if (gameSystemType.ordinal() == gameSystemId) {
+                return gameSystemType;
+            }
+        }
+        throw new IllegalStateException("Can't determine game system with id: " + gameSystemId);
+    }
+
+    private void reloadCharacter(Bundle savedInstanceState) {
+        int characterId = savedInstanceState.getInt(CharacterSheetActivity.INSTANCE_STATE_CHARACTER_ID);
+        Character character = gameSystem.getCharacter(characterId);
+        characterHolder.getValue().setCharacter(character);
     }
 
     void logEventCharacter(Character character) {
@@ -127,5 +165,21 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         super.onResume();
         billing.getValue().startConnection(BillingClient.newBuilder(this));
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        savedInstanceState.putInt(INSTANCE_STATE_GAME_SYSTEM_ID, gameSystem.getId());
+        savedInstanceState.putInt(INSTANCE_STATE_CHARACTER_ID, character.getId());
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        if (KeyEvent.KEYCODE_BACK == keyCode && reloadedFromBackground) {
+            startActivity(new Intent(this, CharacterListActivity.class));
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
 }

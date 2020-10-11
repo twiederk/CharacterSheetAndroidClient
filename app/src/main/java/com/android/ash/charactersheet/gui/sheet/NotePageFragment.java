@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -11,6 +12,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.note.NoteArrayAdapter;
@@ -19,11 +22,10 @@ import com.android.ash.charactersheet.gui.sheet.note.NoteEditActivity;
 import com.d20charactersheet.framework.boc.model.Note;
 import com.d20charactersheet.framework.boc.util.NoteComparator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.Serializable;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
@@ -58,7 +60,11 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.NOTE, "NotePageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.NOTE);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "NotePageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
         adapter = createAdapter();
         listView.setAdapter(adapter);
         listView.setTextFilterEnabled(true);

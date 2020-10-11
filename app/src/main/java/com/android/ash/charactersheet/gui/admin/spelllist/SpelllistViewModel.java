@@ -38,7 +38,7 @@ class SpelllistViewModel extends ListModel<SpelllevelView> {
 
     private List<SpelllevelView> createViewObjects(final Spelllist spelllist, final int level) {
         final List<Spell> spells = new ArrayList<>(spelllist.getSpellsOfLevel(level));
-        Collections.sort(spells, new SpellComparator());
+        spells.sort(new SpellComparator());
         final List<SpelllevelView> viewObjects = new ArrayList<>(spells.size());
         for (final Spell spell : spells) {
             final SpelllevelView viewObject = new SpelllevelView(spelllist, spell, level);

@@ -13,7 +13,7 @@ class NoteCreateActivityTest {
         val note = NoteCreateActivity().createForm()
 
         // Assert
-        assertThat(note.date).isNotNull()
+        assertThat(note.date).isNotNull
         assertThat(note.text).isEmpty()
     }
 

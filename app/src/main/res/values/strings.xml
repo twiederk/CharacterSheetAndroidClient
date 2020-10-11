@@ -70,6 +70,7 @@
     <string name="character_list_wait_load_pathfinder">Load Pathfinder</string>
     <string name="character_list_wait_create_dndv35_database">Create DnD v.3.5 Database</string>
     <string name="character_list_wait_create_pathfinder_database">Create Pathfinder Database</string>
+    <string name="character_list_fab_button_description">Create Character</string>
     <string name="character_list_image_hint">Thumbnail of character</string>
     <string name="character_list_ad_unit_id">ca-app-pub-8129946526938446/7481006483</string>
 
@@ -153,6 +154,8 @@
     <string name="weaponattack_ammo">Ammunition</string>
     <string name="weaponattack_desc">Description</string>
     <string name="weaponattack_search_hint">Search</string>
+    <string name="weaponattack_fab_button_description">Create Attack</string>
+
 
     <!-- WeaponAttackCreateActivity -->
     <string name="weaponattack_create_title">Create Attack</string>
@@ -162,6 +165,7 @@
 
     <!-- AdministrationListActivity -->
     <string name="administration_list_menu_create">Create</string>
+    <string name="administration_list_fab_button_description">Create</string>
 
     <!-- SkillAdministrationListActivity -->
     <string name="skill_administration_list_title">Skill Administration</string>
@@ -270,6 +274,7 @@
 
     <!-- ItemAdministrationListActivity -->
     <string name="item_administration_list_magic">Magic Item</string>
+    <string name="item_administration_list_fab_button_description">Create Item</string>
     <string name="item_search_hint">Search</string>
 
     <!-- WeaponAdministrationListActivity -->
@@ -381,6 +386,7 @@
 
     <!-- NotePageFragment -->
     <string name="page_note_title">Notes</string>
+    <string name="page_note_fab_description">Notes</string>
     <string name="note_list_context_menu_delete_note">Delete Note</string>
 
     <!-- NoteActivity -->
@@ -930,5 +936,6 @@
     <string name="release_notes_3_1_3">Release 3.1.3\n- Bug fix: Fixed crash on app startup on Lenovo devices with Android 6\n- Bug fix: Fixed crash in known spells tab for sorcerers above level 20\n\n</string>
     <string name="release_notes_3_1_4">Release 3.1.4\n- Bug fix: Fixed crash on opening character sheet on Android 6\n- Use latest version of d20framework containing SQLite support\n\n</string>
     <string name="release_notes_3_1_5">Release 3.1.5\n- Support Android 11 and requires at least Android 8\n- Added note to join open source project\n- Prepared app for new content of Pathfinder and DnD 5e\n- Bug fix: Fixed height of release notes dialog\n\n</string>
+    <string name="release_notes_3_1_6">Release 3.1.6\n- Bug fix: Fixed the crash when the character sheet was retrieved from the backgroundn\n</string>
 
 </resources>

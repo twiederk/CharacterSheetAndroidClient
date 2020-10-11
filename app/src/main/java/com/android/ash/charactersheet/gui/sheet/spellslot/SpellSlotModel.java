@@ -77,7 +77,7 @@ public class SpellSlotModel extends ListModel<Object> {
     }
 
     private List<SpellSlotView> createSpellSlotViews(final LevelView levelView, final List<SpellSlot> spellSlots) {
-        Collections.sort(spellSlots, new SpellSlotComparator());
+        spellSlots.sort(new SpellSlotComparator());
         final List<SpellSlotView> spellSlotViews = new ArrayList<>();
         for (final SpellSlot spellSlot : spellSlots) {
             final SpellSlotView spellSlotView = new SpellSlotView(levelView, spellSlot);

@@ -164,24 +164,6 @@ class BillingRobolectricTest : KoinTest {
     }
 
     @Test
-    fun startBillingFlow_everythingIsFine_launchBillingFlow() {
-        // Arrange
-        val billingClient: BillingClient = mock()
-        whenever(billingClient.isReady).doReturn(true)
-        val skuDetailsList = mutableListOf<SkuDetails>(mock())
-
-        val underTest = Billing()
-        underTest.billingClient = billingClient
-        underTest.skuDetailsList = skuDetailsList
-
-        // Act
-        underTest.startBillingFlow(mock())
-
-        // Assert
-        verify(billingClient).launchBillingFlow(any(), any())
-    }
-
-    @Test
     fun startBillingFlow_billingClientIsNull_displayErrorMessage() {
         // Arrange
         val underTest = Billing()
@@ -427,7 +409,7 @@ class BillingRobolectricTest : KoinTest {
         val requiresPurchase = Billing().requiresPurchase(listOf())
 
         // Assert
-        assertThat(requiresPurchase).isFalse()
+        assertThat(requiresPurchase).isFalse
     }
 
     @Test
@@ -436,7 +418,7 @@ class BillingRobolectricTest : KoinTest {
         val requiresPurchase = Billing().requiresPurchase(listOf(Character().apply { id = Billing.DEFAULT_CHARACTER_ID }))
 
         // Assert
-        assertThat(requiresPurchase).isFalse()
+        assertThat(requiresPurchase).isFalse
     }
 
     @Test
@@ -445,7 +427,7 @@ class BillingRobolectricTest : KoinTest {
         val requiresPurchase = Billing().requiresPurchase(listOf(Character().apply { id = 1 }))
 
         // Assert
-        assertThat(requiresPurchase).isTrue()
+        assertThat(requiresPurchase).isTrue
     }
 
     @Test
@@ -457,7 +439,7 @@ class BillingRobolectricTest : KoinTest {
         )
 
         // Assert
-        assertThat(requiresPurchase).isTrue()
+        assertThat(requiresPurchase).isTrue
     }
 
     @Test
@@ -471,7 +453,7 @@ class BillingRobolectricTest : KoinTest {
         val requiresPurchase = underTest.requiresPurchase(listOf(Character().apply { id = 1 }))
 
         // Assert
-        assertThat(requiresPurchase).isFalse()
+        assertThat(requiresPurchase).isFalse
     }
 
     @Test
@@ -488,7 +470,7 @@ class BillingRobolectricTest : KoinTest {
         )
 
         // Assert
-        assertThat(requiresPurchase).isFalse()
+        assertThat(requiresPurchase).isFalse
     }
 
     @Test

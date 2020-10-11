@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.PreferenceServiceHolder
 import com.android.ash.charactersheet.appModule
-import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
@@ -81,7 +80,7 @@ class CharacterListGameSystemKoinTest : KoinTest {
         CharacterListGameSystem().onResumeGameSystem(characterListActivity, mock())
 
         // Assert
-        assertThat(gameSystemHolder.gameSystemType).isEqualTo(GameSystemType.DNDV35)
+        verify(preferenceServiceHolder.preferenceService)?.getInt(PreferenceService.GAME_SYSTEM_TYPE)
     }
 
     @Test
@@ -90,14 +89,18 @@ class CharacterListGameSystemKoinTest : KoinTest {
         val gameSystem: GameSystem = mock()
         whenever(gameSystem.isLoaded).doReturn(false)
         gameSystemHolder.gameSystem = gameSystem
+
+        val preferenceService: PreferenceService = mock()
+        whenever(preferenceService.getInt(PreferenceService.GAME_SYSTEM_TYPE)).doReturn(0)
+        whenever(preferenceServiceHolder.preferenceService).doReturn(preferenceService)
+
         val characterListActivity: CharacterListActivity = mock()
 
         // Act
         CharacterListGameSystem().onResumeGameSystem(characterListActivity, mock())
 
         // Assert
-        verify(characterListActivity).resources
-        verifyNoMoreInteractions(characterListActivity)
+        verify(preferenceServiceHolder.preferenceService)?.getInt(PreferenceService.GAME_SYSTEM_TYPE)
     }
 
     @Test

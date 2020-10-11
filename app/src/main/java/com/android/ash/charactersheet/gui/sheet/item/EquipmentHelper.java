@@ -7,7 +7,6 @@ import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.util.ItemGroupComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,7 +33,7 @@ public class EquipmentHelper {
      */
     public List<ExpandableListItem> getWeaponViews() {
         final List<ItemGroup> weapons = character.getEquipment().getWeapons();
-        Collections.sort(weapons, new ItemGroupComparator());
+        weapons.sort(new ItemGroupComparator());
         return createExpandListViews(weapons);
     }
 
@@ -45,7 +44,7 @@ public class EquipmentHelper {
      */
     public List<ExpandableListItem> getArmorViews() {
         final List<ItemGroup> armor = character.getEquipment().getArmor();
-        Collections.sort(armor, new ItemGroupComparator());
+        armor.sort(new ItemGroupComparator());
         return createExpandListViews(armor);
     }
 
@@ -56,7 +55,7 @@ public class EquipmentHelper {
      */
     public List<ExpandableListItem> getGoodViews() {
         final List<ItemGroup> goods = character.getEquipment().getGoods();
-        Collections.sort(goods, new ItemGroupComparator());
+        goods.sort(new ItemGroupComparator());
         return createExpandListViews(goods);
     }
 
@@ -92,7 +91,7 @@ public class EquipmentHelper {
             }
             itemGroups.add(itemGroup);
         }
-        Collections.sort(itemGroups, new ItemGroupComparator());
+        itemGroups.sort(new ItemGroupComparator());
         final List<ExpandableListItem> expandListViews = new ArrayList<>();
         for (final ItemGroup itemGroup : itemGroups) {
             final ExpandableListItem expandListView = new ExpandableListItem(itemGroup);

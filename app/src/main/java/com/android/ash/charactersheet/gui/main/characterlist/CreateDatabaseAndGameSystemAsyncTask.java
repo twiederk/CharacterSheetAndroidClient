@@ -1,11 +1,10 @@
 package com.android.ash.charactersheet.gui.main.characterlist;
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
+import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
@@ -18,8 +17,6 @@ import static org.koin.java.KoinJavaComponent.inject;
  */
 public class CreateDatabaseAndGameSystemAsyncTask extends AbstractAsyncTask {
 
-    private final DBHelper dndDBHelper;
-    private final DBHelper pathfinderDBHelper;
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
     /**
@@ -27,12 +24,10 @@ public class CreateDatabaseAndGameSystemAsyncTask extends AbstractAsyncTask {
      *
      * @param activity          The activity to display the wait animation.
      * @param callbackInterface Called if the game system is loaded.
+     * @param gameSystemType    The game system to load
      */
-    CreateDatabaseAndGameSystemAsyncTask(final Activity activity,
-                                         final GameSystemLoadable callbackInterface) {
-        super(activity, callbackInterface);
-        this.dndDBHelper = gameSystemHolder.getValue().getDndDbHelper();
-        this.pathfinderDBHelper = gameSystemHolder.getValue().getPathfinderDbHelper();
+    CreateDatabaseAndGameSystemAsyncTask(final Activity activity, final GameSystemLoadable callbackInterface, GameSystemType gameSystemType) {
+        super(activity, callbackInterface, gameSystemType);
     }
 
     @Override
@@ -44,29 +39,12 @@ public class CreateDatabaseAndGameSystemAsyncTask extends AbstractAsyncTask {
     @Override
     protected TaskResult doInBackground(final Object... params) {
         Logger.debug("doInBackground");
-        final SQLiteDatabase dndDatabase = dndDBHelper.getWritableDatabase();
         publishProgress(resources.getString(R.string.character_list_wait_create_pathfinder_database));
-
-        final SQLiteDatabase pathfinderDatabase = pathfinderDBHelper.getWritableDatabase();
         publishProgress(getLoadGameSystemText());
 
-        final SQLiteDatabase currentDatabase = getDatabase(dndDatabase, pathfinderDatabase);
-        final GameSystem gameSystem = createGameSystem(currentDatabase);
+        final GameSystem gameSystem = createGameSystem();
         gameSystemHolder.getValue().setGameSystem(gameSystem);
         return new TaskResult(true);
-    }
-
-    private SQLiteDatabase getDatabase(final SQLiteDatabase dndDatabase, final SQLiteDatabase pathfinderDatabase) {
-        switch (gameSystemType) {
-            case DNDV35:
-                return dndDatabase;
-
-            case PATHFINDER:
-                return pathfinderDatabase;
-
-            default:
-                throw new IllegalStateException("Can't get database of game system type: " + gameSystemType);
-        }
     }
 
 }

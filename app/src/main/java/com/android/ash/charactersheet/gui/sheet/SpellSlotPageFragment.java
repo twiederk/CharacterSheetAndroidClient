@@ -3,6 +3,7 @@ package com.android.ash.charactersheet.gui.sheet;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,8 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -30,14 +33,13 @@ import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.NonNull;
 
 /**
  * Displays a tab for each spell caster class of the character. Each tab displays the spell slots of the character for
@@ -66,7 +68,11 @@ public class SpellSlotPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.SPELL_SLOT, "SpellSlotPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.SPELL_SLOT);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "SpellSlotPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
         if (!character.getSpelllists().isEmpty() && (createForFirstTime || isSpellSlotsChanged())) {
             createLayout();
         }

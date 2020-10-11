@@ -39,7 +39,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val resources: Resources = mock()
         whenever(resources.getString(any())).doReturn("myReleaseNote\n")
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(58)
+        whenever(dbHelper.oldVersion).doReturn(59)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act
@@ -60,7 +60,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val showReleaseNotes = ReleaseNotes().isShowReleaseNotes()
 
         // Assert
-        assertThat(showReleaseNotes).isTrue()
+        assertThat(showReleaseNotes).isTrue
     }
 
     @Test
@@ -75,7 +75,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val showReleaseNotes = underTest.isShowReleaseNotes()
 
         // Assert
-        assertThat(showReleaseNotes).isFalse()
+        assertThat(showReleaseNotes).isFalse
     }
 
     @Test
@@ -88,7 +88,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val showReleaseNotes = ReleaseNotes().isShowReleaseNotes()
 
         // Assert
-        assertThat(showReleaseNotes).isFalse()
+        assertThat(showReleaseNotes).isFalse
     }
 
 }

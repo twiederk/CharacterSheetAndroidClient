@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.boc.model.GameSystemType;
 
 import java.util.Objects;
 
@@ -23,9 +24,10 @@ public class LoadGameSystemAsyncTask extends AbstractAsyncTask {
      *
      * @param activity          The activity to display the wait animation on.
      * @param callbackInterface Called if the game system is loaded
+     * @param gameSystemType    The game system to load
      */
-    public LoadGameSystemAsyncTask(final Activity activity, final GameSystemLoadable callbackInterface) {
-        super(activity, callbackInterface);
+    public LoadGameSystemAsyncTask(final Activity activity, final GameSystemLoadable callbackInterface, GameSystemType gameSystemType) {
+        super(activity, callbackInterface, gameSystemType);
     }
 
     @Override

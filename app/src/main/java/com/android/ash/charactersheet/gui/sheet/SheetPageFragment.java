@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +14,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -36,6 +40,7 @@ import com.d20charactersheet.framework.boc.model.Attribute;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.service.XpService;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -43,9 +48,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 
 /**
  * Displays the characters appearance, abilities, saves, money and combat values.
@@ -338,17 +340,13 @@ public class SheetPageFragment extends PageFragment {
      */
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_page_sheet_add_image:
-                jumpToImageGallery(RESULT_CODE_ADD_IMAGE);
-                break;
-
-            case R.id.menu_page_sheet_add_thumbnail:
-                jumpToImageGallery(RESULT_CODE_ADD_THUMBNAIL);
-                break;
-
-            default:
-                throw new IllegalStateException("Selected menu item is unknown (" + item.getItemId() + ")");
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_page_sheet_add_image) {
+            jumpToImageGallery(RESULT_CODE_ADD_IMAGE);
+        } else if (itemId == R.id.menu_page_sheet_add_thumbnail) {
+            jumpToImageGallery(RESULT_CODE_ADD_THUMBNAIL);
+        } else {
+            throw new IllegalStateException("Selected menu item is unknown (" + item.getItemId() + ")");
         }
         return super.onOptionsItemSelected(item);
     }
@@ -434,7 +432,11 @@ public class SheetPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.SHEET, "SheetPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.SHEET);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "SheetPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
         setCharacterName();
         setActivityBackground();
         setAppearance();

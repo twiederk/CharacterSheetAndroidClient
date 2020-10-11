@@ -2,6 +2,7 @@
 .gradle
 app/build
 build
+local.properties
 
 # project management
 ToDos.txt

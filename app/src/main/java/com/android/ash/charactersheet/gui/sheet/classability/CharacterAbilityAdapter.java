@@ -115,8 +115,7 @@ public class CharacterAbilityAdapter extends ListAdapter<ExpandableListItem> {
         levelTextView.setText(levelText);
 
         final TextView descriptionTextView = view.findViewById(R.id.ability_description);
-        final Spanned htmlDescription = Html.fromHtml(classAbilityListItem.getAbilityDescription(), null,
-                tableTagHandler);
+        final Spanned htmlDescription = Html.fromHtml(classAbilityListItem.getAbilityDescription(), Html.FROM_HTML_MODE_LEGACY, null, tableTagHandler);
         descriptionTextView.setText(htmlDescription);
     }
 }

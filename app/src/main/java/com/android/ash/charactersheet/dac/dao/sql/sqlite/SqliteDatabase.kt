@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.dac.dao.sql.sqlite
 import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
-import com.android.ash.charactersheet.gui.util.Logger.error
+import com.android.ash.charactersheet.gui.util.Logger
 import com.d20charactersheet.framework.dac.dao.sql.ContentValues
 import com.d20charactersheet.framework.dac.dao.sql.Database
 import com.d20charactersheet.framework.dac.dao.sql.QueryResult
@@ -26,7 +26,7 @@ class SqliteDatabase(private val db: SQLiteDatabase) : Database {
             cursor.moveToFirst()
             cursor.getInt(0)
         } catch (sqlException: SQLException) {
-            error("Can't get id of rowId: $rowId")
+            Logger.error("Can't get id of rowId: $rowId")
             throw sqlException
         } finally {
             cursor?.close()

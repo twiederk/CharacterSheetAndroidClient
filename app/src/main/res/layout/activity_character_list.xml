@@ -28,7 +28,8 @@
         android:layout_margin="16dp"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/character_list_fab_button_description" />
 
 
     <FrameLayout

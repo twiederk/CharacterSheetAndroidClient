@@ -10,7 +10,6 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.billing.Billing
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.android.ash.charactersheet.gui.admin.AdministrationMenuActivity
 import com.android.ash.charactersheet.gui.main.AboutActivity
 import com.android.ash.charactersheet.gui.main.BackupRestoreActivity
@@ -66,18 +65,17 @@ class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinCo
     }
 
     private fun switchGameSystem(): Boolean {
-        val dbHelper: DBHelper?
-        val gameSystemType = gameSystemHolder.gameSystemType
-        if (gameSystemType == GameSystemType.DNDV35) {
-            gameSystemHolder.gameSystemType = GameSystemType.PATHFINDER
-            dbHelper = gameSystemHolder.pathfinderDbHelper
-        } else {
-            gameSystemHolder.gameSystemType = GameSystemType.DNDV35
-            dbHelper = gameSystemHolder.dndDbHelper
-        }
-        SwitchGameSystemAsyncTask(activity, activity as GameSystemLoadable, dbHelper).execute()
+        val nextGameSystemType = nextGameSystemType(gameSystemHolder.gameSystemType)
+        SwitchGameSystemAsyncTask(activity, activity as GameSystemLoadable, nextGameSystemType).execute()
         return true
     }
+
+    private fun nextGameSystemType(currentGameSystemType: GameSystemType?): GameSystemType =
+            if (currentGameSystemType == GameSystemType.DNDV35) {
+                GameSystemType.PATHFINDER
+            } else {
+                GameSystemType.DNDV35
+            }
 
 
 }

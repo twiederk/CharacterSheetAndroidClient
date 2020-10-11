@@ -1,10 +1,13 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -18,13 +21,11 @@ import com.android.ash.charactersheet.gui.util.ExpandableListItem;
 import com.android.ash.charactersheet.gui.widget.ListAdapter;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 /**
  * Displays all abilities of an character gained by its classes. The abilities can be filtered by the level of the
@@ -45,7 +46,7 @@ public class ClassAbilityPageFragment extends PageFragment {
         for (final ClassLevel classLevel : character.getClassLevels()) {
             listItems.addAll(getListItems(classLevel));
         }
-        Collections.sort(listItems, new CharacterAbilityListComparator());
+        listItems.sort(new CharacterAbilityListComparator());
         model = new CharacterAbilityModel(character.getClassLevels(), listItems);
         model.filter();
 
@@ -55,7 +56,10 @@ public class ClassAbilityPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.CLASS_ABILITY, "ClassAbilityPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.CLASS_ABILITY);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "ClassAbilityPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
     }
 
     @Override

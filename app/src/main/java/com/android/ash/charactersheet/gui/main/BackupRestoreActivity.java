@@ -14,6 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.backuprestore.FileBackupAgent;
@@ -29,13 +32,10 @@ import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static org.koin.java.KoinJavaComponent.inject;
@@ -200,7 +200,7 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
 
     private void readBackupFilesAndShowInListView() {
         final List<File> files = fileBackupAgent.getBackupFiles();
-        Collections.sort(files, new FileComparator());
+        files.sort(new FileComparator());
         final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<>(files));
 
         final ListView listView = getListView();

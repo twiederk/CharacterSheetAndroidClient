@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
@@ -19,12 +21,10 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
@@ -81,7 +81,7 @@ public class ClassLevelCreateActivity extends LogAppCompatActivity implements Ad
         availableCharacterClasses = new ArrayList<>(gameSystem.getAllCharacterClasses());
         final List<CharacterClass> classesOfCharacter = getClassesOfCharacter();
         availableCharacterClasses.removeAll(classesOfCharacter);
-        Collections.sort(availableCharacterClasses, new CharacterClassComparator());
+        availableCharacterClasses.sort(new CharacterClassComparator());
         return availableCharacterClasses;
     }
 

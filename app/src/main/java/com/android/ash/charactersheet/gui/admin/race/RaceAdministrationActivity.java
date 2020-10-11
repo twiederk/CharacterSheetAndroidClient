@@ -23,7 +23,6 @@ import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -92,7 +91,7 @@ public abstract class RaceAdministrationActivity extends FormActivity<Race> {
     private List<CharacterClass> getCharacterClassesOfSpinner() {
         final List<CharacterClass> characterClasses = gameSystem.getAllCharacterClasses();
         characterClasses.add(ANY_CHARACTER_CLASS);
-        Collections.sort(characterClasses, new CharacterClassComparator());
+        characterClasses.sort(new CharacterClassComparator());
         return characterClasses;
     }
 
@@ -122,7 +121,7 @@ public abstract class RaceAdministrationActivity extends FormActivity<Race> {
     }
 
     private String getAbilitiesText() {
-        Collections.sort(abilities, new AbilityComparator());
+        abilities.sort(new AbilityComparator());
         final StringBuilder builder = new StringBuilder();
         builder.append(getResources().getString(R.string.race_administration_abilities));
         builder.append(":\n");

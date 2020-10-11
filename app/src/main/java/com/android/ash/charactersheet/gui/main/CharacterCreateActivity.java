@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
@@ -32,11 +34,9 @@ import com.d20charactersheet.framework.boc.util.CharacterClassComparator;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static org.koin.java.KoinJavaComponent.inject;
@@ -183,7 +183,7 @@ public class CharacterCreateActivity extends LogAppCompatActivity {
 
     private void setClazz() {
         final List<CharacterClass> allCharacterClasses = gameSystem.getAllCharacterClasses();
-        Collections.sort(allCharacterClasses, new CharacterClassComparator());
+        allCharacterClasses.sort(new CharacterClassComparator());
         final ArrayAdapter<CharacterClass> classArrayAdapter = new CharacterClassArrayAdapter(this,
                 gameSystem.getDisplayService(), new ArrayList<>(allCharacterClasses));
         classSpinner.setAdapter(classArrayAdapter);

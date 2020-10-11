@@ -5,6 +5,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
@@ -15,7 +17,6 @@ import com.d20charactersheet.framework.boc.service.SkillService;
 
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
@@ -55,7 +56,7 @@ public class SkillDescriptionActivity extends LogAppCompatActivity {
         setToolbar(skill);
 
         final TextView descriptionTextView = findViewById(R.id.skill_description);
-        final Spanned htmlDescription = Html.fromHtml(skill.getDescription(), null, new TableTagHander());
+        final Spanned htmlDescription = Html.fromHtml(skill.getDescription(), Html.FROM_HTML_MODE_LEGACY, null, new TableTagHander());
         descriptionTextView.setText(htmlDescription);
     }
 

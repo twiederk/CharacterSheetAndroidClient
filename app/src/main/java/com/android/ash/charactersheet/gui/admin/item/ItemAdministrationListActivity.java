@@ -15,7 +15,6 @@ import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.util.ItemComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public abstract class ItemAdministrationListActivity extends AdministrationListA
     @Override
     protected ArrayAdapter<Item> getAdapter() {
         final List<Item> items = new ArrayList<>(getAllItems());
-        Collections.sort(items, new ItemComparator());
+        items.sort(new ItemComparator());
         return new ItemAdministrationAdapter(this, displayService, R.layout.listitem_name,
                 equipmentFilter, items);
     }

@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.sheet.feat.CheckBoxFeatModelController;
@@ -22,13 +24,12 @@ import com.android.ash.charactersheet.gui.util.ExpandOnClickListener;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.CharacterFeat;
 import com.d20charactersheet.framework.boc.model.FeatType;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
-
-import androidx.annotation.NonNull;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
@@ -56,7 +57,11 @@ public class FeatPageFragment extends PageFragment implements Observer {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.FEAT, "FeatPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.FEAT);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "FeatPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
     }
 
     @Override

@@ -24,7 +24,6 @@ import com.d20charactersheet.framework.boc.util.SkillComparator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
@@ -228,7 +227,7 @@ class CharacterClassAdministrationHelper {
         final StringBuilder builder = new StringBuilder();
         builder.append(activity.getResources().getString(R.string.character_class_administration_skills_label));
         builder.append(":\n");
-        Collections.sort(skills, new SkillComparator());
+        skills.sort(new SkillComparator());
         for (final Iterator<Skill> iterator = skills.iterator(); iterator.hasNext();) {
             final Skill skill = iterator.next();
             builder.append(skill.getName());
@@ -246,7 +245,7 @@ class CharacterClassAdministrationHelper {
      * @return The text to display the abilities in the character class formular.
      */
     String getClassAbilityText() {
-        Collections.sort(classAbilities, new ClassAbilityLevelNameComparator());
+        classAbilities.sort(new ClassAbilityLevelNameComparator());
         final StringBuilder builder = new StringBuilder();
         builder.append(activity.getResources().getString(R.string.character_class_administration_abilities_label));
         builder.append(":\n");

@@ -7,7 +7,6 @@ import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.service.RuleService;
 import com.d20charactersheet.framework.boc.util.SpellComparator;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
@@ -41,7 +40,7 @@ class SpellSlotActivityModel extends Observable {
 
     private List<Spell> calculateSpells() {
         final List<Spell> spells = ruleService.getSpellSelection(character, spellSlot);
-        Collections.sort(spells, new SpellComparator());
+        spells.sort(new SpellComparator());
         spells.add(0, SpellSlot.EMPTY_SPELL);
         return spells;
     }

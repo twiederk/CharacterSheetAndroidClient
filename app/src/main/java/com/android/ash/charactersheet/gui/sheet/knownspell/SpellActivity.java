@@ -5,6 +5,8 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
@@ -19,7 +21,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
@@ -98,7 +99,7 @@ public class SpellActivity extends SlideActivity {
         if (text != null) {
             output.append(text);
         }
-        return Html.fromHtml(output.toString(), null, new TableTagHander());
+        return Html.fromHtml(output.toString(), Html.FROM_HTML_MODE_LEGACY, null, new TableTagHander());
     }
 
     private void logEventSpellDescription(Spell spell) {

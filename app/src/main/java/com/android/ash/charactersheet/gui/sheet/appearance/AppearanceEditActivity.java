@@ -16,7 +16,6 @@ import com.d20charactersheet.framework.boc.model.Sex;
 import com.d20charactersheet.framework.boc.model.XpTable;
 import com.d20charactersheet.framework.boc.util.RaceComparator;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,7 +47,7 @@ public class AppearanceEditActivity extends EditActivity {
 
     private List<Race> getSortedRaces() {
         final List<Race> races = gameSystem.getAllRaces();
-        Collections.sort(races, new RaceComparator());
+        races.sort(new RaceComparator());
         return races;
     }
 

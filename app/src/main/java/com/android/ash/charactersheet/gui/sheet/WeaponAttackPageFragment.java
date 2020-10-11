@@ -1,12 +1,15 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -20,8 +23,7 @@ import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
 import com.d20charactersheet.framework.boc.util.WeaponAttackComparator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.annotation.NonNull;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Displays all weapon attacks of a character. New weapon attacks can be created. Existing weapon attacks can be edited
@@ -66,7 +68,11 @@ public class WeaponAttackPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.WEAPON_ATTACK, "WeaponAttackPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.WEAPON_ATTACK);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "WeaponAttackPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
 
         for (final WeaponAttack weaponAttack : character.getWeaponAttacks()) {
             ruleService.calculateWeaponAttack(character, weaponAttack);

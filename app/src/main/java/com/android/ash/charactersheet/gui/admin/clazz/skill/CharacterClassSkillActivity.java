@@ -8,6 +8,8 @@ import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
@@ -18,11 +20,9 @@ import com.d20charactersheet.framework.boc.service.SkillService;
 import com.d20charactersheet.framework.boc.util.SkillComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
@@ -83,7 +83,7 @@ public class CharacterClassSkillActivity extends LogAppCompatActivity {
 
     private List<SkillModel> createSkillModels(final List<Skill> characterClassSkills) {
         final List<Skill> allSkills = gameSystem.getAllSkills();
-        Collections.sort(allSkills, new SkillComparator());
+        allSkills.sort(new SkillComparator());
         final List<SkillModel> skillModels = new ArrayList<>();
         for (final Skill skill : allSkills) {
             final SkillModel skillModel = new SkillModel(skill, characterClassSkills.contains(skill));

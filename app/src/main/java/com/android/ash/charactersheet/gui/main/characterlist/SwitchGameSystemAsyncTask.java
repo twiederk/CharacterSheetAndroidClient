@@ -1,9 +1,7 @@
 package com.android.ash.charactersheet.gui.main.characterlist;
 
-import android.database.sqlite.SQLiteDatabase;
-
 import com.android.ash.charactersheet.GameSystemHolder;
-import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
+import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
@@ -17,7 +15,6 @@ import static org.koin.java.KoinJavaComponent.inject;
  */
 public class SwitchGameSystemAsyncTask extends AbstractAsyncTask {
 
-    private final DBHelper dbHelper;
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
 
@@ -26,13 +23,10 @@ public class SwitchGameSystemAsyncTask extends AbstractAsyncTask {
      *
      * @param activity          The activity to display the wait animation.
      * @param callbackInterface Called if the game system is loaded.
-     * @param dbHelper          The helper to open the database.
+     * @param gameSystemType    The game system to load
      */
-    SwitchGameSystemAsyncTask(final AppCompatActivity activity,
-                              final GameSystemLoadable callbackInterface,
-                              final DBHelper dbHelper) {
-        super(activity, callbackInterface);
-        this.dbHelper = dbHelper;
+    SwitchGameSystemAsyncTask(final AppCompatActivity activity, final GameSystemLoadable callbackInterface, GameSystemType gameSystemType) {
+        super(activity, callbackInterface, gameSystemType);
     }
 
     @Override
@@ -45,9 +39,8 @@ public class SwitchGameSystemAsyncTask extends AbstractAsyncTask {
     @Override
     protected TaskResult doInBackground(final Object... params) {
         Logger.debug("doInBackground");
-        final SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        final GameSystem gameSystem = createGameSystem(database);
+        final GameSystem gameSystem = createGameSystem();
         gameSystemHolder.getValue().setGameSystem(gameSystem);
 
         return new TaskResult(true);

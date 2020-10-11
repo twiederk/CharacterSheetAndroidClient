@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +13,9 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -26,12 +30,10 @@ import com.android.ash.charactersheet.gui.util.Logger;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
@@ -53,7 +55,11 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.KNOWN_SPELL, "KnownSpellPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.KNOWN_SPELL);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "KnownSpellPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
     }
 
     @Override

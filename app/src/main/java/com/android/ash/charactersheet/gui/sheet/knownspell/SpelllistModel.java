@@ -63,7 +63,7 @@ public class SpelllistModel extends ListModel<Object> {
 
     private List<SpellItem> createSpellItems(final Spelllist spelllist, final LevelItem levelItem) {
         final List<Spell> spells = new ArrayList<>(spelllist.getSpellsOfLevel(levelItem.getLevel()));
-        Collections.sort(spells, new SpellComparator());
+        spells.sort(new SpellComparator());
         final List<SpellItem> spellItems = new ArrayList<>(spells.size());
         for (final Spell spell : spells) {
             final SpellItem spellItem = new SpellItem(spell, levelItem);

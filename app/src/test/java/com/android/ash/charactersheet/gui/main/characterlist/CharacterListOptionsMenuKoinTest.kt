@@ -50,7 +50,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
 
         // Assert
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
         verify(activity).startActivity(any())
     }
 
@@ -66,8 +66,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
 
         // Assert
-        assertThat(result).isTrue()
-        assertThat(gameSystemHolder.gameSystemType).isEqualTo(GameSystemType.PATHFINDER)
+        assertThat(result).isTrue
     }
 
     @Test
@@ -82,8 +81,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
 
         // Assert
-        assertThat(result).isTrue()
-        assertThat(gameSystemHolder.gameSystemType).isEqualTo(GameSystemType.DNDV35)
+        assertThat(result).isTrue
     }
 
     @Test
@@ -96,7 +94,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val result = CharacterListOptionsMenu(activity).openPurchaseDialog(purchaseDialog)
 
         // Assert
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
         verify(purchaseDialog).show(activity)
     }
 
@@ -114,7 +112,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val result = CharacterListOptionsMenu(activity).openImport(purchaseDialog)
 
         // Assert
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
         verify(purchaseDialog).show(activity)
     }
 
@@ -132,7 +130,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val result = CharacterListOptionsMenu(activity).openImport(purchaseDialog)
 
         // Assert
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
         verify(activity).startActivity(any())
     }
 

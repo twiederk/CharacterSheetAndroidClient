@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,6 +11,9 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -25,9 +29,7 @@ import com.android.ash.charactersheet.gui.util.ExpandOnClickListener;
 import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.util.MagicOnClickListener;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Displays equipment of the character. Weapons, armor and goods are displayed in separate tabs. Items can be touched to
@@ -87,7 +89,11 @@ public class EquipmentPageFragment extends PageFragment {
     @Override
     public void onResume() {
         super.onResume();
-        firebaseAnalytics.getValue().setCurrentScreen(requireActivity(), FBAnalytics.ScreenName.EQUIPMENT, "EquipmentPageFragment");
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, FBAnalytics.ScreenName.EQUIPMENT);
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "EquipmentPageFragment");
+        firebaseAnalytics.getValue().logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+
         equipmentListHelper = new EquipmentHelper(character);
 
         resumeLoad();
@@ -138,19 +144,13 @@ public class EquipmentPageFragment extends PageFragment {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.menu_page_equip_edit_weapons:
-                editWeapons();
-                break;
-            case R.id.menu_page_equip_edit_armor:
-                editArmor();
-                break;
-            case R.id.menu_page_equip_edit_goods:
-                editGoods();
-                break;
-
-            default:
-                break;
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_page_equip_edit_weapons) {
+            editWeapons();
+        } else if (itemId == R.id.menu_page_equip_edit_armor) {
+            editArmor();
+        } else if (itemId == R.id.menu_page_equip_edit_goods) {
+            editGoods();
         }
         return super.onOptionsItemSelected(item);
     }
