@@ -25,7 +25,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 61
-        versionName "3.1.6-SNAPSHOT"
+        versionName "3.1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
