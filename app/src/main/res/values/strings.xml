@@ -937,5 +937,6 @@
     <string name="release_notes_3_1_4">Release 3.1.4\n- Bug fix: Fixed crash on opening character sheet on Android 6\n- Use latest version of d20framework containing SQLite support\n\n</string>
     <string name="release_notes_3_1_5">Release 3.1.5\n- Support Android 11 and requires at least Android 8\n- Added note to join open source project\n- Prepared app for new content of Pathfinder and DnD 5e\n- Bug fix: Fixed height of release notes dialog\n\n</string>
     <string name="release_notes_3_1_6">Release 3.1.6\n- Bug fix: Fixed the crash when the character sheet was retrieved from the background\n\n</string>
+    <string name="release_notes_3_1_7">Release 3.1.7\n- Bug fix: Fixed access to external storage on Android 10+\n\n</string>
 
 </resources>
