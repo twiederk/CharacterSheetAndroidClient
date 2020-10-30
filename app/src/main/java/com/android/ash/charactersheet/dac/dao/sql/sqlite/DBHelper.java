@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.gui.util.Logger;
 
 import java.io.ByteArrayOutputStream;
@@ -39,32 +40,22 @@ public class DBHelper extends SQLiteOpenHelper {
     private int oldVersion;
 
     private final int[] createScripts;
-    private final int[][] updateScripts;
     private final int[] images;
+    private final DBUpdateScriptAdministration updateScriptAdministration;
 
     /**
      * Creates a helper to create, open and upgrade the database. Adds the helper to the list of all DBHelpers.
      *
-     * @param context
-     *            The context in which the database is running.
-     * @param name
-     *            The name of the database.
-     * @param dbVersion
-     *            The version of the database, for example 12.
-     * @param createScripts
-     *            The scripts to create the database.
-     * @param updateScripts
-     *            The scripts to update the database.
-     * @param images
-     *            The images of the default characters.
+     * @param context        The context in which the database is running.
+     * @param dbVersion      The version of the database, for example 12.
+     * @param gameSystemType The game system the database belongs to.
      */
-    public DBHelper(final Context context, final String name, final int dbVersion, final int[] createScripts,
-                    final int[][] updateScripts, final int[] images) {
-        super(context, name, null, dbVersion);
+    public DBHelper(final Context context, final int dbVersion, GameSystemType gameSystemType) {
+        super(context, gameSystemType.getDatabaseName(), null, dbVersion);
         this.context = context;
-        this.createScripts = createScripts;
-        this.updateScripts = updateScripts;
-        this.images = images;
+        this.createScripts = gameSystemType.getCreateScripts();
+        this.updateScriptAdministration = new DBUpdateScriptAdministration(gameSystemType.getUpdateScripts());
+        this.images = gameSystemType.getImages();
         DB_HELPERS.add(this);
     }
 
@@ -184,19 +175,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private void upgradeDatabase(final int oldVersion, final int newVersion) {
-        Logger.debug("upgradeDatabase(): oldVersion: " + oldVersion + ", newVersion: " + newVersion + ")");
-        if (oldVersion > updateScripts.length) {
-            throw new IllegalStateException("Can't update from " + oldVersion + " to " + newVersion);
-        }
+        Logger.debug("upgradeDatabase(): oldVersion: " + oldVersion + ", newVersion: " + newVersion);
 
-        for (int i = oldVersion - 1; i < updateScripts.length; i++) {
-            Logger.debug("upgradeDatabase(): i: " + i);
-            for (final int updateScript : updateScripts[i]) {
-                if (updateScript == 0) {
-                    Logger.warn("No update script for version " + (i + 1));
-                } else {
-                    upgradeDatabase(updateScript);
-                }
+        for (int currentVersion = oldVersion; currentVersion <= newVersion; currentVersion++) {
+            Logger.debug("upgradeDatabase(): currentVersion: " + currentVersion);
+            int updateScript = updateScriptAdministration.getUpdateScript(currentVersion);
+            if (updateScript == 0) {
+                Logger.debug("No update script for version " + currentVersion);
+            } else {
+                Logger.debug("Update from version " + currentVersion + " to " + (currentVersion + 1));
+                upgradeDatabase(updateScript);
             }
         }
     }

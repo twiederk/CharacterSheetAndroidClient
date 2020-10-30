@@ -25,12 +25,12 @@ class GameSystemLoader : KoinComponent {
 
     fun connectDatabases(context: Context) {
         val dbVersion = BuildConfig.VERSION_CODE
-        gameSystemHolder.dndDbHelper = DBHelper(context, GameSystemType.DNDV35.databaseName, dbVersion,
-                GameSystemType.DNDV35.createScripts, GameSystemType.DNDV35.updateScripts,
-                GameSystemType.DNDV35.images)
-        gameSystemHolder.pathfinderDbHelper = DBHelper(context, GameSystemType.PATHFINDER.databaseName, dbVersion,
-                GameSystemType.PATHFINDER.createScripts, GameSystemType.PATHFINDER.updateScripts,
-                GameSystemType.PATHFINDER.images)
+        gameSystemHolder.dndDbHelper = DBHelper(
+                context, dbVersion, GameSystemType.DNDV35
+        )
+        gameSystemHolder.pathfinderDbHelper = DBHelper(
+                context, dbVersion, GameSystemType.PATHFINDER
+        )
         preferencesServiceHolder.preferenceService = PreferenceServiceImpl(AndroidPreferenceDao(context))
     }
 

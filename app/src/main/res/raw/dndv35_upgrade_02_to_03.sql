@@ -1,3 +1,0 @@
-ALTER TABLE charakter ADD fort_misc_mod INTEGER NOT NULL DEFAULT 0;
-ALTER TABLE charakter ADD ref_misc_mod INTEGER NOT NULL DEFAULT 0;
-ALTER TABLE charakter ADD will_misc_mod INTEGER NOT NULL DEFAULT 0;

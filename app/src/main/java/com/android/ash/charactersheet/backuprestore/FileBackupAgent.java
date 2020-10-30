@@ -43,7 +43,7 @@ public class FileBackupAgent {
     }
 
     /**
-     * Backup of the database of the given game system to the download directory. Checks if the sd card is accessable.
+     * Backup of the database of the given game system to the download directory. Checks if the sd card is accessible.
      * Checks the download directory. Checks if enough free space is available. The filename is build by the name of the
      * database, the version name of the app and the current date and time.
      *

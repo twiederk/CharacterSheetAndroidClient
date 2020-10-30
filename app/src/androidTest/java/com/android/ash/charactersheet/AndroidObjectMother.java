@@ -49,9 +49,8 @@ public class AndroidObjectMother {
     private final GameSystem gameSystem;
 
     public AndroidObjectMother(final Context context) {
-        final DBHelper dndv35DbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
-                GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
-                GameSystemType.DNDV35.getImages());
+        final DBHelper dndv35DbHelper = new DBHelper(context, BuildConfig.VERSION_CODE,
+                GameSystemType.DNDV35);
         final SqliteDatabase db = new SqliteDatabase(dndv35DbHelper.getWritableDatabase());
 
         final SkillService skillService = new SkillServiceImpl(new SqlSkillDao(db));

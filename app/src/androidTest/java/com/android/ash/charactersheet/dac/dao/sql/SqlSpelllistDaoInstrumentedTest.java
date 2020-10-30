@@ -20,9 +20,8 @@ public class SqlSpelllistDaoInstrumentedTest extends BaseSpelllistDaoTest {
     @Before
     public void setUp() {
         final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        final DBHelper dbHelper = new DBHelper(context, GameSystemType.DNDV35.getDatabaseName(), BuildConfig.VERSION_CODE,
-                GameSystemType.DNDV35.getCreateScripts(), GameSystemType.DNDV35.getUpdateScripts(),
-                GameSystemType.DNDV35.getImages());
+        final DBHelper dbHelper = new DBHelper(context, BuildConfig.VERSION_CODE,
+                GameSystemType.DNDV35);
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
         final Database sqliteDatabase = new SqliteDatabase(db);
         spelllistDao = new SqlSpelllistDao(sqliteDatabase);

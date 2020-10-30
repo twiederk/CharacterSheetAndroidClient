@@ -23,9 +23,9 @@ class AndroidImageServiceInstrumentedTest {
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val dbVersion = BuildConfig.VERSION_CODE
-        val dbHelper = DBHelper(context, GameSystemType.DNDV35.databaseName, dbVersion,
-                GameSystemType.DNDV35.createScripts, GameSystemType.DNDV35.updateScripts,
-                GameSystemType.DNDV35.images)
+        val dbHelper = DBHelper(
+                context, dbVersion, GameSystemType.DNDV35
+        )
         val sqliteDatabase: Database = SqliteDatabase(dbHelper.writableDatabase)
 
         imageService = AndroidImageServiceImpl(SqlImageDao(sqliteDatabase))
