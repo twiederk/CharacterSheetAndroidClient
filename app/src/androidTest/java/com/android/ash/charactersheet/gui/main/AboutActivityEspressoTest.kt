@@ -38,6 +38,7 @@ class AboutActivityEspressoTest {
         onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Manual"))))
         onView(withId(R.id.app_version)).check(matches(withText(BuildConfig.VERSION_NAME)))
         onView(withId(R.id.about_manual)).check(matches(withText("Manual: http://www.d20CharacterSheet.com/manual.html")))
+        onView(withId(R.id.about_thanks)).check(matches(withText(R.string.about_thanks)))
         onView(withId(R.id.about_button_ogl)).check(matches(withText(R.string.about_ogl)))
     }
 

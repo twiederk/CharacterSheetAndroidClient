@@ -11,6 +11,8 @@ import android.graphics.BitmapFactory;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.gui.util.Logger;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,7 +97,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private void createDatabase() {
         try {
             for (final int createScript : createScripts) {
-                executeSqlScript(createScript);
+                executeSqlStatements(db, createScript);
             }
             initImageTable();
         } catch (final SQLException sqlException) {
@@ -106,27 +108,47 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    private void executeSqlScript(final int resourceId) throws IOException {
+    void executeSqlStatements(SQLiteDatabase database, final int resourceId) throws IOException {
         final String[] sqlScripts = getSqlScriptsFromRawResource(resourceId);
+        executeSqlStatements(database, sqlScripts);
+    }
+
+    void executeSqlStatements(final SQLiteDatabase database, final String scriptName) throws IOException {
+        String[] sqlStatements = getSqlScriptsFromClasspath(scriptName);
+        executeSqlStatements(database, sqlStatements);
+    }
+
+    @NotNull
+    private String[] getSqlScriptsFromRawResource(final int resourceId) throws IOException {
+        final InputStream inputStream = context.getResources().openRawResource(resourceId);
+        return getSqlScripts(inputStream);
+    }
+
+    @NotNull
+    private String[] getSqlScriptsFromClasspath(String scriptName) throws IOException {
+        final InputStream inputStream = this.getClass().getResourceAsStream(scriptName);
+        return getSqlScripts(inputStream);
+    }
+
+    private void executeSqlStatements(SQLiteDatabase database, String[] sqlStatements) {
         synchronized (DBHelper.DB_LOCK) {
-            for (String sqlScript : sqlScripts) {
-                if (sqlScript.trim().length() == 0) {
+            for (String sqlStatement : sqlStatements) {
+                if (sqlStatement.trim().length() == 0) {
                     continue;
                 }
-                // Logger.debug("sqlScripts[" + i + "]: " + sqlScripts[i]);
+//                Logger.debug("sqlStatement: " + sqlStatement);
                 try {
-                    db.execSQL(sqlScript);
+                    database.execSQL(sqlStatement);
                 } catch (final SQLException sqlException) {
-                    Logger.error("Can't execute statement: " + sqlScript, sqlException);
+                    Logger.error("Can't execute statement: " + sqlStatement, sqlException);
                 }
             }
         }
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private String[] getSqlScriptsFromRawResource(final int resourceId) throws IOException {
-        // read sql script from file
-        final InputStream inputStream = context.getResources().openRawResource(resourceId);
+    @NotNull
+    private String[] getSqlScripts(InputStream inputStream) throws IOException {
         final byte[] buffer = new byte[inputStream.available()];
         inputStream.read(buffer);
 
@@ -196,7 +218,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private void upgradeDatabase(final int upgradeScript) {
         try {
-            executeSqlScript(upgradeScript);
+            executeSqlStatements(db, upgradeScript);
         } catch (final IOException ioException) {
             Logger.error("Can't upgrade Database: " + ioException.getMessage(), ioException);
         }

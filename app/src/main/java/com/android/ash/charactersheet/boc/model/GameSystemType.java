@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.boc.model;
 
-import androidx.annotation.NonNull;
-
 import com.android.ash.charactersheet.R;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 /**
  * Enumeration of supported GameSystems.
@@ -143,6 +143,7 @@ public enum GameSystemType {
                 R.raw.pathfinder_crb_character, //
                 R.raw.pathfinder_apg_data, //
                 R.raw.pathfinder_apg_spell, //
+                R.raw.pathfinder_arg_data, //
         };
 
         static final Map<Integer, Integer> UPDATE_SCRIPTS = new HashMap<>();
@@ -155,6 +156,7 @@ public enum GameSystemType {
 
         static {
             UPDATE_SCRIPTS.put(59, R.raw.pathfinder_upgrade_59_to_60);
+            UPDATE_SCRIPTS.put(63, R.raw.pathfinder_upgrade_63_to_64);
         }
 
 

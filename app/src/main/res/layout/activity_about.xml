@@ -80,6 +80,7 @@
         android:text="@string/about_contact" />
 
     <TextView
+        android:id="@+id/about_thanks"
         style="@style/AppTheme.ListItemText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

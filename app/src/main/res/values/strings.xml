@@ -404,7 +404,7 @@
     <string name="about_homepage">Homepage: http://www.d20CharacterSheet.com</string>
     <string name="about_join">You\'re welcome to join the open source project on GitHub: https://github.com/twiederk/d20Framework/</string>
     <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
-    <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5</string>
+    <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5\nThanks to Michel Chartrand for entering the races of the Advanced Races Guide</string>
     <string name="about_ogl">Open Gaming Licence</string>
     <string name="about_copyright">Copyright &#169; 2009&#8211;2020 Torsten Wiederkehr\nAll rights reserved</string>
     <string name="about_image_hint">Icon of application</string>
@@ -939,5 +939,6 @@
     <string name="release_notes_3_1_6">Release 3.1.6\n- Bug fix: Fixed the crash when the character sheet was retrieved from the background\n\n</string>
     <string name="release_notes_3_1_7">Release 3.1.7\n- Bug fix: Fixed access to external storage on Android 10+\n\n</string>
     <string name="release_notes_3_2_0">Release 3.2.0\n- Support app bundles to save storage space.\n\n</string>
+    <string name="release_notes_3_3_0">Release 3.3.0\n- Added races of Advanced Race Guide to Pathfinder.\n\n</string>
 
 </resources>
