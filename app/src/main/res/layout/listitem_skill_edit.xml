@@ -8,7 +8,7 @@
 
         <TextView
             android:id="@+id/skill_name"
-            style="@style/AppTheme.ListItemHeading"
+            style="@style/AppTheme.SkillListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="2" />
@@ -20,6 +20,7 @@
             style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:padding="4dp"
             android:text="@string/skill_edit_rank" />
 
         <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
@@ -34,12 +35,21 @@
             style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:padding="4dp"
             android:text="@string/skill_edit_modifier" />
 
         <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
             android:id="@+id/skill_modifier"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <View
+            style="@style/AppTheme.HorizontalLine"
+            android:layout_span="2" />
     </TableRow>
 
 </TableLayout>

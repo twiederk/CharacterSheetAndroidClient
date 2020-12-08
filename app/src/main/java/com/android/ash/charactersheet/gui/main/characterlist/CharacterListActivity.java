@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.android.ash.charactersheet.billing.Billing;
-import com.android.ash.charactersheet.gui.main.characterlist.promocode.PromoCode;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.billingclient.api.BillingClient;
 import com.google.android.gms.ads.MobileAds;
@@ -27,7 +26,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements Abstr
     private final Lazy<Billing> billing = inject(Billing.class);
 
     private final CharacterListGameSystem characterListGameSystem = new CharacterListGameSystem();
-    protected final PromoCode promoCode = new PromoCode();
     private final CharacterListOptionsMenu optionsMenu = new CharacterListOptionsMenu(this);
     private final CharacterListContextMenu contextMenu = new CharacterListContextMenu();
     private final CharacterListLayout characterListLayout = new CharacterListLayout(this);
@@ -85,7 +83,6 @@ public class CharacterListActivity extends LogAppCompatActivity implements Abstr
     @Override
     public void onGameSystemLoaded() {
         characterListGameSystem.setUserProperties();
-        promoCode.execute(this);
         characterListLayout.layout();
         characterListLayout.resumeLayout();
     }

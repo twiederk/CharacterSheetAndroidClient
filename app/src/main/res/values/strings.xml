@@ -604,13 +604,6 @@
     <string name="purchase_dialog_restore_purchase_button">Restore Purchase</string>
     <string name="purchase_dialog_cancel_button">Cancel</string>
 
-    <!-- PromoCodeDialog -->
-    <string name="promo_dialog_explanation">d20 Character Sheet now contains advertisement. You as an existing customer can easily activate the advertisement free version. Just click the button below. Your promotion code will pop up ready to redeem.</string>
-    <string name="promo_dialog_activate_code_button">Activate advertisement free version</string>
-    <string name="promo_dialog_help">If you have any problems activating the advertisement free version don’t hesitate to contact me torsten.wiederkehr@gmail.com</string>
-    <string name="promo_dialog_done_button">Done</string>
-    <string name="promo_dialog_activation_error_message">Play Store app is not installed</string>
-
     <!-- Billing -->
     <string name="billing_no_connection">No connection established to Google Play. Please restart the app.</string>
     <string name="billing_no_connection_queryPurchases">Connection to Google Play is not ready (queryPurchases). Please restart the app.</string>
@@ -940,5 +933,6 @@
     <string name="release_notes_3_1_7">Release 3.1.7\n- Bug fix: Fixed access to external storage on Android 10+\n\n</string>
     <string name="release_notes_3_2_0">Release 3.2.0\n- Support app bundles to save storage space.\n\n</string>
     <string name="release_notes_3_3_0">Release 3.3.0\n- Added races of Advanced Race Guide to Pathfinder.\n\n</string>
+    <string name="release_notes_3_3_1">Release 3.3.1\n- Increased font size on skill tab to increase readability.\n\n</string>
 
 </resources>

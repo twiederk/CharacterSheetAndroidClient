@@ -151,22 +151,4 @@ class Billing(private val logger: Logger = Logger) : PurchasesUpdatedListener, S
     private fun hasOnlyDefaultCharacter(allCharacters: List<Character>) =
             (allCharacters.size == 1 && allCharacters[0].id == DEFAULT_CHARACTER_ID)
 
-
-/*
-    fun clearHistory() {
-        if (billingClient?.isReady == true) {
-            billingClient?.queryPurchases(SkuType.INAPP)?.purchasesList?.forEach {
-                val consumeParams = ConsumeParams.newBuilder().setPurchaseToken(it.purchaseToken).build()
-                billingClient?.consumeAsync(consumeParams) { billingResult, purchaseToken ->
-                    if (billingResult.responseCode == BillingResponseCode.OK) {
-                        logger.debug("onPurchases Updated consumeAsync, purchases token removed: $purchaseToken")
-                    } else {
-                        logger.debug("onPurchases some troubles happened: ${billingResult.responseCode}")
-                    }
-                }
-            }
-        }
-    }
-*/
-
 }

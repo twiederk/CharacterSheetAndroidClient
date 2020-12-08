@@ -9,7 +9,7 @@
 
         <TextView
             android:id="@+id/skill_name"
-            style="@style/AppTheme.ListItemHeading"
+            style="@style/AppTheme.SkillListItemHeading"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_span="2"
@@ -52,6 +52,14 @@
             android:layout_weight="1"
             android:focusable="false"
             android:gravity="end" />
+    </TableRow>
+
+    <TableRow>
+
+        <View
+            style="@style/AppTheme.HorizontalLine"
+            android:layout_weight="1"
+            android:layout_span="3" />
     </TableRow>
 
 </TableLayout>

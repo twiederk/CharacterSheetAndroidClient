@@ -9,6 +9,12 @@
         <item name="android:textSize">23sp</item>
         <item name="android:padding">4dp</item>
     </style>
+    #
+
+    <style name="AppTheme.SkillListItemHeading" parent="AppTheme">
+        <item name="android:textSize">23sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
 
     <style name="AppTheme.ListItemText" parent="AppTheme">
         <item name="android:textSize">18sp</item>

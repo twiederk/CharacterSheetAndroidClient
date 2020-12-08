@@ -96,6 +96,7 @@ class ReleaseNotes : KoinComponent {
             resources.getString(R.string.release_notes_3_1_7), //
             resources.getString(R.string.release_notes_3_2_0), //
             resources.getString(R.string.release_notes_3_3_0), //
+            resources.getString(R.string.release_notes_3_3_1), //
     )
 
 }
