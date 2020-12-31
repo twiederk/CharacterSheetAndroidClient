@@ -41,6 +41,8 @@ class SheetPageFragmentEspressoTest : KoinTest {
         whenever(ruleService.getGold(any())).doReturn(12.34F)
         whenever(ruleService.getSave(any(), any())).doReturn(1)
         whenever(ruleService.getArmorClass(any())).doReturn(10)
+        whenever(ruleService.calculateFlatFootedArmorClass(any())).doReturn(11)
+        whenever(ruleService.calculateTouchArmorClass(any())).doReturn(12)
         whenever(ruleService.getSpeed(any())).doReturn(20)
 
         val gameSystem: GameSystem = mock()
@@ -94,6 +96,8 @@ class SheetPageFragmentEspressoTest : KoinTest {
         onView(withId(R.id.save_will)).check(matches(withText("+1")))
         onView(withId(R.id.combat_hitpoints)).check(matches(withText("1 (2)")))
         onView(withId(R.id.combat_armorclass)).check(matches(withText("10")))
+        onView(withId(R.id.combat_flatfooted_armorclass)).check(matches(withText("11")))
+        onView(withId(R.id.combat_touch_armorclass)).check(matches(withText("12")))
         onView(withId(R.id.combat_speed)).check(matches(withText("20")))
         onView(withId(R.id.combat_initiative)).check(matches(withText("+1")))
         onView(withId(R.id.combat_baseattackbonus)).check(matches(withText("+1")))

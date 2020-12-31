@@ -52,6 +52,34 @@
                 android:layout_width="fill_parent" />
         </TableRow>
 
+        <!-- FLATFOOTED ARMOR CLASS -->
+
+        <TableRow style="@style/AppTheme.TableRowOdd">
+
+            <TextView
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/combat_flatfooted_armorclass_label" />
+
+            <TextView
+                android:id="@+id/combat_flatfooted_armorclass"
+                style="@style/AppTheme.TableCellNumber"
+                android:layout_width="fill_parent" />
+        </TableRow>
+
+        <!-- TOUCH ARMOR CLASS -->
+
+        <TableRow style="@style/AppTheme.TableRowEven">
+
+            <TextView
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/combat_touch_armorclass_label" />
+
+            <TextView
+                android:id="@+id/combat_touch_armorclass"
+                style="@style/AppTheme.TableCellNumber"
+                android:layout_width="fill_parent" />
+        </TableRow>
+
         <!-- SPEED -->
 
         <TableRow style="@style/AppTheme.TableRowOdd">

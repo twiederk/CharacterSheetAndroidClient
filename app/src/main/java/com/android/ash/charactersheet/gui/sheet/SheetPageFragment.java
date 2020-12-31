@@ -15,9 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
@@ -48,6 +45,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Displays the characters appearance, abilities, saves, money and combat values.
@@ -258,6 +258,14 @@ public class SheetPageFragment extends PageFragment {
         // armor class
         final TextView armorClassTextView = view.findViewById(R.id.combat_armorclass);
         armorClassTextView.setText(String.format(Locale.US, "%d", ruleService.getArmorClass(character)));
+
+        // flatfooted armor class
+        final TextView flatFootedArmorClassTextView = view.findViewById(R.id.combat_flatfooted_armorclass);
+        flatFootedArmorClassTextView.setText(String.format(Locale.US, "%d", ruleService.calculateFlatFootedArmorClass(character)));
+
+        // touch armor class
+        final TextView touchArmorClassTextView = view.findViewById(R.id.combat_touch_armorclass);
+        touchArmorClassTextView.setText(String.format(Locale.US, "%d", ruleService.calculateTouchArmorClass(character)));
 
         // speed
         final TextView speedTextView = view.findViewById(R.id.combat_speed);

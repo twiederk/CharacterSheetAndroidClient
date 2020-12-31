@@ -79,6 +79,8 @@
     <string name="combat_hitpoints_label">HP:</string>
     <string name="combat_max_hitpoints_label">max. HP:</string>
     <string name="combat_armorclass_label">AC:</string>
+    <string name="combat_flatfooted_armorclass_label">Flat-Footed:</string>
+    <string name="combat_touch_armorclass_label">Touch:</string>
     <string name="combat_speed_label">Speed:</string>
     <string name="combat_initiative_abbreviation_label">INI:</string>
     <string name="combat_baseattackbonus_label">BAB:</string>
@@ -934,5 +936,6 @@
     <string name="release_notes_3_2_0">Release 3.2.0\n- Support app bundles to save storage space.\n\n</string>
     <string name="release_notes_3_3_0">Release 3.3.0\n- Added races of Advanced Race Guide to Pathfinder.\n\n</string>
     <string name="release_notes_3_3_1">Release 3.3.1\n- Increased font size on skill tab to increase readability.\n\n</string>
+    <string name="release_notes_3_4_0">Release 3.3.1\n- Added flat footed and touch armor.\n\n</string>
 
 </resources>

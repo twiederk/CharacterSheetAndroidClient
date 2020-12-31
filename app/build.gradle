@@ -24,8 +24,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 65
-        versionName "3.3.1"
+        versionCode 66
+        versionName "3.4.0-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,9 +54,9 @@ dependencies {
     androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
     androidTestImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
     androidTestImplementation 'org.mockito:mockito-android:3.5.10'
-    androidTestImplementation 'com.d20charactersheet:framework:3.3.1:tests'
+    androidTestImplementation 'com.d20charactersheet:framework:3.4.0:tests'
 
-    api 'com.d20charactersheet:framework:3.3.1'
+    api 'com.d20charactersheet:framework:3.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
