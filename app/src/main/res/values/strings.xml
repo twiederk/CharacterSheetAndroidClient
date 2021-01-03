@@ -936,6 +936,6 @@
     <string name="release_notes_3_2_0">Release 3.2.0\n- Support app bundles to save storage space.\n\n</string>
     <string name="release_notes_3_3_0">Release 3.3.0\n- Added races of Advanced Race Guide to Pathfinder.\n\n</string>
     <string name="release_notes_3_3_1">Release 3.3.1\n- Increased font size on skill tab to increase readability.\n\n</string>
-    <string name="release_notes_3_4_0">Release 3.3.1\n- Added flat footed and touch armor.\n\n</string>
+    <string name="release_notes_3_4_0">Release 3.4.0\n- Added flat footed and touch armor.\n\n</string>
 
 </resources>
