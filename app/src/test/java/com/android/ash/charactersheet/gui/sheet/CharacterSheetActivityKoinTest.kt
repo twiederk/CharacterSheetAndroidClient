@@ -25,7 +25,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
-class CharacterSheetActivityTest : KoinTest {
+class CharacterSheetActivityKoinTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 

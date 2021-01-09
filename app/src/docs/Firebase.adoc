@@ -159,6 +159,14 @@ Examples: `spell_slot_assign` or `character_open`
 |
 |===
 
+.Character Creator Screen Views
+|===
+|Screen |Class|Name
+|Character Creator|CharacterCreatorActivity|
+|Select race and class|RaceAndClassFragment|race_and_class_fragment
+|Roll ability scores|AbilityScoresFragment|ability_scores_fragment
+|===
+
 .Sheet Screen Views
 |===
 |Screen |Class|Name

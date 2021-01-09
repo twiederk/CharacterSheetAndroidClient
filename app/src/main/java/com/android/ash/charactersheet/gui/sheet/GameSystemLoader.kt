@@ -62,6 +62,8 @@ class GameSystemLoader : KoinComponent {
         val spelllistService: SpelllistService = SpelllistServiceImpl(spelllistDao)
         val xpService: XpService = XpServiceImpl(xpDao)
         val exportImportService: ExportImportService = ExportImportServiceImpl()
+        val bodyService = BodyService()
+        val characterCreatorService: CharacterCreatorService = CharacterCreatorServiceImpl()
         val ruleService: RuleService = getRuleService(gameSystemType)
         val gameSystem: GameSystem = GameSystemCacheImpl(gameSystemType.id, gameSystemType.getName())
 
@@ -77,6 +79,8 @@ class GameSystemLoader : KoinComponent {
         gameSystem.spelllistService = spelllistService
         gameSystem.xpService = xpService
         gameSystem.exportImportService = exportImportService
+        gameSystem.bodyService = bodyService
+        gameSystem.characterCreatorService = characterCreatorService
         gameSystem.ruleService = ruleService
         gameSystem.load()
 

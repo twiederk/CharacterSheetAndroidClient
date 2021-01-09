@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.billing.Billing
-import com.android.ash.charactersheet.gui.main.CharacterCreateActivity
+import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreateActivity
 import org.koin.java.KoinJavaComponent.inject
 
 class PurchaseListener(

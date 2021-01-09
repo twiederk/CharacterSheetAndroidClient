@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/RaceAndClassFragment">
+
+    <fragment
+        android:id="@+id/RaceAndClassFragment"
+        android:name="com.android.ash.charactersheet.gui.main.charactercreator.RaceAndClassFragment"
+        android:label="@string/race_and_class_nav_graph_label"
+        tools:layout="@layout/fragment_race_and_class">
+
+        <action
+            android:id="@+id/action_RaceAndClassFragment_to_AbilityScoresFragment"
+            app:destination="@id/AbilityScoresFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/AbilityScoresFragment"
+        android:name="com.android.ash.charactersheet.gui.main.charactercreator.AbilityScoresFragment"
+        android:label="@string/ability_scores_nav_graph_label"
+        tools:layout="@layout/fragment_ability_scores">
+
+        <action
+            android:id="@+id/action_AbilityScoresFragment_to_RaceAndClassFragment"
+            app:popUpTo="@id/RaceAndClassFragment" />
+    </fragment>
+</navigation>

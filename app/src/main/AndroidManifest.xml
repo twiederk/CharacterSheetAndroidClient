@@ -93,8 +93,7 @@
 
         <!-- CharacterCreateActivity -->
         <activity
-            android:name=".gui.main.CharacterCreateActivity"
-            android:theme="@style/AppTheme.Dialog"
+            android:name=".gui.main.charactercreator.CharacterCreateActivity"
             android:excludeFromRecents="true"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 

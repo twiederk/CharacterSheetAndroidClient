@@ -1,13 +1,9 @@
-package com.android.ash.charactersheet.gui.main
+package com.android.ash.charactersheet.gui.main.charactercreator
 
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.android.ash.charactersheet.appModule
-import com.d20charactersheet.framework.boc.model.Character
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.ClassLevel
-import com.d20charactersheet.framework.boc.model.Race
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
@@ -27,7 +23,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
 @MediumTest
-class CharacterCreateActivityRobolectricTest : KoinTest {
+class RaceAndClassFragmentRobotronicTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
@@ -46,22 +42,18 @@ class CharacterCreateActivityRobolectricTest : KoinTest {
     }
 
     @Test
-    fun logEventCharacterCreate_createCharacter_logsCharacterCreateEvent() {
-        // Arrange
-        val character = Character().apply {
-            race = Race().apply { name = "myRace" }
-            classLevels = listOf(ClassLevel(CharacterClass().apply { name = "myClass"; classAbilities = listOf() }))
-        }
+    fun onResume_screenViewIsLoggedInFirebase() {
 
-        // Act
-        CharacterCreateActivity().logEventCharacterCreate(character)
+        // act
+        RaceAndClassFragment().onResume()
 
         // Assert
         argumentCaptor<Bundle> {
-            verify(firebaseAnalytics).logEvent(eq("character_create"), capture())
-            assertThat(firstValue.getString("race_name")).isEqualTo("myRace")
-            assertThat(firstValue.getString("class_name")).isEqualTo("myClass")
+            verify(firebaseAnalytics).logEvent(eq(FirebaseAnalytics.Event.SCREEN_VIEW), capture())
+            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_NAME)).isEqualTo("race_and_class_fragment")
+            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_CLASS)).isEqualTo("RaceAndClassFragment")
         }
+
     }
 
 }

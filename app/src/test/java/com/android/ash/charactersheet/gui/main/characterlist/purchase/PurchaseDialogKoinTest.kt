@@ -19,7 +19,7 @@ import org.koin.test.inject
 import org.koin.test.mock.declareMock
 
 
-class PurchaseDialogTest : KoinTest {
+class PurchaseDialogKoinTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
     private val billing: Billing by inject()

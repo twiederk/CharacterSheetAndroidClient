@@ -22,7 +22,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class CharacterListLayoutTest : KoinTest {
+class CharacterListLayoutKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
 

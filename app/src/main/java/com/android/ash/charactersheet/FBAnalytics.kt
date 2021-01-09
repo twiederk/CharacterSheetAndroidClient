@@ -20,7 +20,6 @@ object FBAnalytics {
         const val GOOD_EDIT = "good_edit"
         const val SPELL_SLOT_ASSIGN = "spell_slot_assign"
         const val DIE_ROLL = "die_roll"
-        const val PROMO_CODE_ACTIVATE = "promo_code_activate"
         const val PURCHASE_DIALOG_SHOW = "purchase_dialog_show"
         const val PURCHASE_PERFORM = "purchase_perform"
         const val PURCHASE_CANCEL = "purchase_cancel"
@@ -47,6 +46,8 @@ object FBAnalytics {
         const val NOTE = "note_fragment"
         const val KNOWN_SPELL = "known_spell_fragment"
         const val SPELL_SLOT = "spell_slot_fragment"
+        const val RACE_AND_CLASS = "race_and_class_fragment"
+        const val ABILITY_SCORES = "ability_scores_fragment"
     }
 
 }

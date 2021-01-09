@@ -87,7 +87,6 @@
     <string name="combat_cmb_label">CMB/Grapple:</string>
     <string name="combat_cmd_label">CMD:</string>
     <string name="combat_initiative_label">Initiative:</string>
-    <string name="create_title">Create Character</string>
     <string name="create_name_label">Name</string>
     <string name="create_player_label">Player</string>
     <string name="create_race_label">Race</string>
@@ -869,6 +868,20 @@
     <string name="spell_source_divine">Divine</string>
     <string name="spell_source_arcane">Arcane</string>
 
+    <!-- CharacterCreateActivity -->
+    <string name="character_create_title">Create Character</string>
+
+    <!-- RaceAndClassFragment -->
+    <string name="race_and_class_subtitle">Race and Class</string>
+    <string name="race_and_class_navigate_next_button">Ability Scores &gt;</string>
+    <string name="race_and_class_nav_graph_label">RaceAndClassFragment</string>
+
+    <!-- AbilityScoresFragment -->
+    <string name="ability_scores_subtitle">Ability Scores</string>
+    <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
+    <string name="ability_scores_navigate_previous_button">&lt; Race and Class</string>
+    <string name="ability_scores_nav_graph_label">AbilityScoresFragment</string>
+
     <!-- Release Notes -->
     <string name="release_notes_heading">Release Notes</string>
     <string name="release_notes_join_project">You\'re welcome to join the open source project: https://github.com/twiederk/d20Framework/</string>
@@ -937,5 +950,6 @@
     <string name="release_notes_3_3_0">Release 3.3.0\n- Added races of Advanced Race Guide to Pathfinder.\n\n</string>
     <string name="release_notes_3_3_1">Release 3.3.1\n- Increased font size on skill tab to increase readability.\n\n</string>
     <string name="release_notes_3_4_0">Release 3.4.0\n- Added flat footed and touch armor.\n\n</string>
+    <string name="release_notes_3_5_0">Release 3.5.0\n- Added screen for rolling the ability scores when creating characters.\n\n</string>
 
 </resources>
