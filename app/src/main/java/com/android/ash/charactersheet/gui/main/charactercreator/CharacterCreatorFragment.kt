@@ -20,7 +20,7 @@ abstract class CharacterCreatorFragment : Fragment(), KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     protected val characterCreator: CharacterCreator by inject()
-    private val firebaseAnalytics: FirebaseAnalytics by inject()
+    protected val firebaseAnalytics: FirebaseAnalytics by inject()
 
     private lateinit var messageManager: MessageManager
 

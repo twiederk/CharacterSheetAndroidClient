@@ -129,6 +129,11 @@ Examples: `spell_slot_assign` or `character_open`
 |
 |PurchaseDialog.restorePurchase
 
+|Roll dice for ability scores using standard method
+|standard_method_dice_roll
+|
+|AbilityScoresFragment.rollDice
+
 |===
 
 .Main Screen Views

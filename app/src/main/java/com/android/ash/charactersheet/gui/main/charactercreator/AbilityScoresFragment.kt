@@ -43,7 +43,7 @@ class AbilityScoresFragment : CharacterCreatorFragment() {
         characterData.charisma = view?.findViewById<EditText>(R.id.ability_scores_cha)?.text.toString().toInt()
     }
 
-    fun fillAbilityScores() {
+    internal fun fillAbilityScores() {
         val characterData = characterCreator.characterData
         view?.findViewById<EditText>(R.id.ability_scores_str)?.setText(characterData.strength.toString())
         view?.findViewById<EditText>(R.id.ability_scores_dex)?.setText(characterData.dexterity.toString())
@@ -53,7 +53,13 @@ class AbilityScoresFragment : CharacterCreatorFragment() {
         view?.findViewById<EditText>(R.id.ability_scores_cha)?.setText(characterData.charisma.toString())
     }
 
-    private fun rollDice() {
+    internal fun rollDice() {
+        firebaseAnalytics.logEvent(FBAnalytics.Event.STANDARD_METHOD_DICE_ROLL, null)
+        rollDiceAndUpdateCharacterData()
+        fillAbilityScores()
+    }
+
+    private fun rollDiceAndUpdateCharacterData() {
         val characterData = characterCreator.characterData
         gameSystem?.characterCreatorService?.let {
             characterData.strength = it.rollAttributeWithStandardMethod()
@@ -63,7 +69,6 @@ class AbilityScoresFragment : CharacterCreatorFragment() {
             characterData.wisdom = it.rollAttributeWithStandardMethod()
             characterData.charisma = it.rollAttributeWithStandardMethod()
         }
-        fillAbilityScores()
     }
 
 }

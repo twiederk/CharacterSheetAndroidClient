@@ -24,6 +24,7 @@ object FBAnalytics {
         const val PURCHASE_PERFORM = "purchase_perform"
         const val PURCHASE_CANCEL = "purchase_cancel"
         const val PURCHASE_RESTORE = "purchase_restore"
+        const val STANDARD_METHOD_DICE_ROLL = "standard_method_dice_roll"
     }
 
     object Param {
