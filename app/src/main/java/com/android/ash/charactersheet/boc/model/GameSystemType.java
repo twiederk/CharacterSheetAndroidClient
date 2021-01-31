@@ -1,44 +1,99 @@
 package com.android.ash.charactersheet.boc.model;
 
 import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.ClasspathScriptResource;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.RawScriptResource;
+import com.android.ash.charactersheet.dac.dao.sql.sqlite.ScriptResource;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
 
 /**
  * Enumeration of supported GameSystems.
  */
 public enum GameSystemType {
 
-    /** Dungeons & Dragons v.3.5 */
-    DNDV35(DnDv35.ID, DnDv35.NAME, DnDv35.DATABASE_NAME, DnDv35.CREATE_SCRIPTS, DnDv35.UPDATE_SCRIPTS, DnDv35.IMAGES),
+    DNDV35(1, //
+            "DnD v.3.5", //
+            "dndv35_db",
+            Arrays.asList(
+                    new RawScriptResource(R.raw.create_database), //
+                    new RawScriptResource(R.raw.dndv35_phb_data), //
+                    new RawScriptResource(R.raw.dndv35_phb_spell), //
+                    new RawScriptResource(R.raw.dndv35_phb_character) //
+            ), //
+            createUpdateScriptMap(new int[]{59},
+                    new ScriptResource[]{
+                            new RawScriptResource(R.raw.dndv35_upgrade_59_to_60)
+                    })
+    ),
 
-    /** Pathfinder */
-    PATHFINDER(Pathfinder.ID, Pathfinder.NAME, Pathfinder.DATABASE_NAME, Pathfinder.CREATE_SCRIPTS,
-            Pathfinder.UPDATE_SCRIPTS, Pathfinder.IMAGES);
+    PATHFINDER(2, //
+            "Pathfinder", //
+            "pathfinder_db", //
+            Arrays.asList( //
+                    new RawScriptResource(R.raw.create_database), //
+                    new RawScriptResource(R.raw.pathfinder_crb_data), //
+                    new RawScriptResource(R.raw.pathfinder_crb_spell), //
+                    new RawScriptResource(R.raw.pathfinder_crb_character), //
+                    new RawScriptResource(R.raw.pathfinder_apg_data), //
+                    new RawScriptResource(R.raw.pathfinder_apg_spell), //
+                    new RawScriptResource(R.raw.pathfinder_arg_data) //
+            ), //
+            createUpdateScriptMap(
+                    new int[]{59, 63},
+                    new ScriptResource[]{
+                            new RawScriptResource(R.raw.dndv35_upgrade_59_to_60), //
+                            new RawScriptResource(R.raw.pathfinder_upgrade_63_to_64) //
+                    })
+    ),
+
+
+    DND5E(3, //
+            "DnD 5e", //
+            "dnd5e_db", //
+            Arrays.asList( //
+                    new ClasspathScriptResource("/sql/create_database.sql"), //
+                    new ClasspathScriptResource("/sql/dnd5e_phb_data.sql"), //
+                    new RawScriptResource(R.raw.dnd5e_phb_character) //
+            ),
+            new HashMap<>()
+    );
+
+    private static Map<Integer, ScriptResource> createUpdateScriptMap(final int[] key, final ScriptResource[] value) {
+        Map<Integer, ScriptResource> updateScriptMap = new HashMap<>();
+        for (int i = 0; i < key.length; i++) {
+            updateScriptMap.put(key[i], value[i]);
+        }
+        return updateScriptMap;
+    }
 
     private final int id;
     private final String name;
     private final String databaseName;
-    private final int[] createScripts;
-    private final Map<Integer, Integer> updateScripts;
+    private final List<ScriptResource> createScriptResources;
+    private final Map<Integer, ScriptResource> updateScriptResources;
     private final int[] images;
 
-    GameSystemType(final int id, final String name, final String databaseName, final int[] createScripts,
-                   final Map<Integer, Integer> updateScripts, final int[] images) {
+    GameSystemType(final int id, final String name, final String databaseName,
+                   List<ScriptResource> createScriptResources, Map<Integer, ScriptResource> updateScriptResources) {
         this.id = id;
         this.name = name;
         this.databaseName = databaseName;
-        this.createScripts = createScripts;
-        this.updateScripts = updateScripts;
-        this.images = images;
+        this.createScriptResources = createScriptResources;
+        this.updateScriptResources = updateScriptResources;
+        this.images = new int[]{ //
+                // image resource id, face resource id
+                R.drawable.char_default, R.drawable.char_default_face, // Default
+                R.drawable.char_belvador, R.drawable.char_belvador_face // Belvador
+        };
     }
 
     /**
      * Returns the id of the game system.
-     * 
+     *
      * @return The id of the game system.
      */
     public int getId() {
@@ -47,7 +102,7 @@ public enum GameSystemType {
 
     /**
      * Returns the name of the game system.
-     * 
+     *
      * @return The name of the game system.
      */
     public String getName() {
@@ -56,7 +111,7 @@ public enum GameSystemType {
 
     /**
      * Returns the name of the database used by the game system.
-     * 
+     *
      * @return The name of the database used by the game system.
      */
     public String getDatabaseName() {
@@ -64,101 +119,30 @@ public enum GameSystemType {
     }
 
     /**
-     * Returns the resource ids of scripts to create and fill the database of the game system. The scripts will be
-     * executed in the given order.
-     * 
-     * @return The resource ids of scripts to create and fill the database of the game system.
-     */
-    public int[] getCreateScripts() {
-        return createScripts;
-    }
-
-    /**
-     * Returns the resource ids of scripts to update the database of the game system.
-     *
-     * @return The resource ids of scripts to update the database of the game system.
-     */
-    public Map<Integer, Integer> getUpdateScripts() {
-        return updateScripts;
-    }
-
-    /**
      * Returns the resource ids of the images used by the game system.
-     * 
+     *
      * @return The resource ids of the images used by the game system.
      */
     public int[] getImages() {
         return images;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return name;
+    /**
+     * Returns list of scripts to create database and fill with data.
+     *
+     * @return list of scripts to create database and fill with data.
+     */
+    public List<ScriptResource> getCreateScriptResources() {
+        return createScriptResources;
     }
 
-    private static class DnDv35 {
-
-        static final int ID = 1;
-
-        static final String NAME = "Dungeons & Dragons v.3.5";
-
-        static final String DATABASE_NAME = "dndv35_db";
-
-        static final int[] CREATE_SCRIPTS = { //
-                // scripts
-                R.raw.create_database, //
-                R.raw.dndv35_phb_data, //
-                R.raw.dndv35_phb_spell, //
-                R.raw.dndv35_phb_character, //
-        };
-
-        static final Map<Integer, Integer> UPDATE_SCRIPTS = new HashMap<>();
-
-        static final int[] IMAGES = { //
-                // image resource id, face resource id
-                R.drawable.char_default, R.drawable.char_default_face, // Default
-                R.drawable.char_belvador, R.drawable.char_belvador_face, // Belvador
-        };
-
-        static {
-            UPDATE_SCRIPTS.put(59, R.raw.dndv35_upgrade_59_to_60);
-        }
-
+    /**
+     * Returns version and script to update to this version
+     *
+     * @return Map containing versions with according update script
+     */
+    public Map<Integer, ? extends ScriptResource> getUpdateScriptResources() {
+        return updateScriptResources;
     }
 
-    private static class Pathfinder {
-
-        static final int ID = 2;
-
-        static final String NAME = "Pathfinder";
-
-        static final String DATABASE_NAME = "pathfinder_db";
-
-        static final int[] CREATE_SCRIPTS = { //
-                // create scripts
-                R.raw.create_database, //
-                R.raw.pathfinder_crb_data, //
-                R.raw.pathfinder_crb_spell, //
-                R.raw.pathfinder_crb_character, //
-                R.raw.pathfinder_apg_data, //
-                R.raw.pathfinder_apg_spell, //
-                R.raw.pathfinder_arg_data, //
-        };
-
-        static final Map<Integer, Integer> UPDATE_SCRIPTS = new HashMap<>();
-
-        static final int[] IMAGES = { //
-                // image resource id, face resource id
-                R.drawable.char_default, R.drawable.char_default_face, // Default
-                R.drawable.char_belvador, R.drawable.char_belvador_face // Belvador
-        };
-
-        static {
-            UPDATE_SCRIPTS.put(59, R.raw.pathfinder_upgrade_59_to_60);
-            UPDATE_SCRIPTS.put(63, R.raw.pathfinder_upgrade_63_to_64);
-        }
-
-
-    }
 }

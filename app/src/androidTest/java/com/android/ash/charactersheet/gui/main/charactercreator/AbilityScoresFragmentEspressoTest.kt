@@ -13,7 +13,6 @@ import com.android.ash.charactersheet.R
 import com.d20charactersheet.framework.boc.model.Die
 import com.d20charactersheet.framework.boc.service.CharacterCreatorServiceImpl
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -28,7 +27,6 @@ class AbilityScoresFragmentEspressoTest : KoinTest {
 
     private val characterCreator: CharacterCreator by inject()
     private val gameSystemHolder: GameSystemHolder by inject()
-    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     @After
     fun tearDown() {

@@ -25,6 +25,7 @@ object FBAnalytics {
         const val PURCHASE_CANCEL = "purchase_cancel"
         const val PURCHASE_RESTORE = "purchase_restore"
         const val STANDARD_METHOD_DICE_ROLL = "standard_method_dice_roll"
+        const val GAME_SYSTEM_SELECT = "game_system_select"
     }
 
     object Param {
@@ -34,6 +35,7 @@ object FBAnalytics {
         const val WEAPON_NAME = "weapon_name"
         const val SPELL_NAME = "spell_name"
         const val DIE_ROLL_NAME = "die_roll_name"
+        const val GAME_SYSTEM_NAME = "game_system_name"
     }
 
     object ScreenName {

@@ -52,17 +52,6 @@ object Logger {
     }
 
     /**
-     * Logs message and exception with warn level.
-     *
-     * @param message The message to log.
-     * @param exception The exception to log.
-     */
-    @JvmStatic
-    fun warn(message: String, exception: Exception?) {
-        Log.w(LOG_TAG, message, exception)
-    }
-
-    /**
      * Logs a message with error level.
      *
      * @param message The message to log.

@@ -54,13 +54,14 @@ abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
     }
 
     String getLoadGameSystemText() {
-        String text;
-        if (GameSystemType.DNDV35.equals(gameSystemType)) {
-            text = resources.getString(R.string.character_list_wait_load_dndv35);
-        } else {
-            text = resources.getString(R.string.character_list_wait_load_pathfinder);
+        switch (gameSystemType) {
+            case PATHFINDER:
+                return resources.getString(R.string.character_list_wait_load_pathfinder);
+            case DND5E:
+                return resources.getString(R.string.character_list_wait_load_dnd5e);
+            default:
+                return resources.getString(R.string.character_list_wait_load_dndv35);
         }
-        return text;
     }
 
     GameSystem createGameSystem() {

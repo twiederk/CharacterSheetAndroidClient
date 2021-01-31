@@ -1,0 +1,2 @@
+Name: noSql
+Pattern: !file[CharacterSheetAndroidClient.app]:src/main/res/raw/*

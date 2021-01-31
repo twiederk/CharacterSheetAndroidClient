@@ -134,6 +134,11 @@ Examples: `spell_slot_assign` or `character_open`
 |
 |AbilityScoresFragment.rollDice
 
+|Select a game system from game system selector
+|game_system_select
+|game_system_name
+|GameSystemSelector.switchGameSystem
+
 |===
 
 .Main Screen Views

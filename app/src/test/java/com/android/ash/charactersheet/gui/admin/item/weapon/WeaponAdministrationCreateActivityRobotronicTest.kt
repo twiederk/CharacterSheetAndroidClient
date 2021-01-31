@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.item.weapon
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.boc.service.ItemService
 import com.nhaarman.mockitokotlin2.doReturn
@@ -7,9 +9,14 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 
-class WeaponAdministrationCreateActivityTest {
+@RunWith(AndroidJUnit4::class)
+@Config(manifest = Config.NONE)
+@MediumTest
+class WeaponAdministrationCreateActivityRobotronicTest {
 
     @Test
     fun createForm() {

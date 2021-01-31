@@ -10,7 +10,22 @@
     <item
         android:id="@+id/menu_activity_character_list_switch_game_system"
         android:icon="@drawable/icon_d20_logo"
-        android:title="@string/character_list_menu_switch_game_system" />
+        android:title="@string/character_list_menu_switch_game_system">
+        <menu>
+            <item
+                android:id="@+id/menu_activity_character_list_switch_dndv35"
+                android:icon="@android:drawable/ic_menu_set_as"
+                android:title="@string/character_list_menu_switch_dndv35" />
+            <item
+                android:id="@+id/menu_activity_character_list_switch_dnd5e"
+                android:icon="@android:drawable/ic_menu_set_as"
+                android:title="@string/character_list_menu_switch_dnd5e" />
+            <item
+                android:id="@+id/menu_activity_character_list_switch_pathfinder"
+                android:icon="@android:drawable/ic_menu_set_as"
+                android:title="@string/character_list_menu_switch_pathfinder" />
+        </menu>
+    </item>
     <item
         android:id="@+id/menu_activity_character_list_export"
         android:icon="@android:drawable/ic_menu_set_as"

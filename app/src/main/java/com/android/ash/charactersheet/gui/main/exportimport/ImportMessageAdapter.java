@@ -43,19 +43,16 @@ public class ImportMessageAdapter extends ListAdapter<ImportMessage> {
         int messageTextViewId;
         int hiddenTextViewId;
         switch (type) {
-        case SUCCESS:
-        case FAILURE:
-            messageTextViewId = R.id.importmessage_heading;
-            hiddenTextViewId = R.id.importmessage_text;
-            break;
-        case WARNING:
-        case ERROR:
-            messageTextViewId = R.id.importmessage_text;
-            hiddenTextViewId = R.id.importmessage_heading;
-            break;
-        default:
-            messageTextViewId = R.id.importmessage_text;
-            hiddenTextViewId = R.id.importmessage_heading;
+            case SUCCESS:
+            case FAILURE:
+                messageTextViewId = R.id.importmessage_heading;
+                hiddenTextViewId = R.id.importmessage_text;
+                break;
+            case WARNING:
+            case ERROR:
+            default:
+                messageTextViewId = R.id.importmessage_text;
+                hiddenTextViewId = R.id.importmessage_heading;
         }
         final View hiddenTextView = view.findViewById(hiddenTextViewId);
         hiddenTextView.setVisibility(View.GONE);
@@ -67,16 +64,14 @@ public class ImportMessageAdapter extends ListAdapter<ImportMessage> {
 
     private int getColor(final Type type) {
         switch (type) {
-        case SUCCESS:
-            return Color.GREEN;
-        case FAILURE:
-            return Color.RED;
-        case WARNING:
-            return Color.YELLOW;
-        case ERROR:
-            return Color.RED;
-        default:
-            return Color.GREEN;
+            case WARNING:
+                return Color.YELLOW;
+            case ERROR:
+            case FAILURE:
+                return Color.RED;
+            case SUCCESS:
+            default:
+                return Color.GREEN;
         }
     }
 

@@ -3,11 +3,11 @@ package com.android.ash.charactersheet.gui.sheet
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
+import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
@@ -17,11 +17,12 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import org.hamcrest.Matchers.not
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class SheetPageFragmentEspressoTest : KoinTest {
+class DnD5eSheetPageFragmentEspressoTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val characterHolder: CharacterHolder by inject()
@@ -40,6 +41,7 @@ class SheetPageFragmentEspressoTest : KoinTest {
         val ruleService: RuleService = mock()
         whenever(ruleService.getGold(any())).doReturn(12.34F)
         whenever(ruleService.getSave(any(), any())).doReturn(1)
+        whenever(ruleService.calculateProficiencyBonus(any())).doReturn(1)
         whenever(ruleService.getArmorClass(any())).doReturn(10)
         whenever(ruleService.calculateFlatFootedArmorClass(any())).doReturn(11)
         whenever(ruleService.calculateTouchArmorClass(any())).doReturn(12)
@@ -51,6 +53,8 @@ class SheetPageFragmentEspressoTest : KoinTest {
         whenever(gameSystem.ruleService).doReturn(ruleService)
 
         gameSystemHolder.gameSystem = gameSystem
+        gameSystemHolder.gameSystemType = GameSystemType.DND5E
+
         characterHolder.character = Character().apply {
             name = "myCharacter"
             player = "myPlayer"
@@ -91,18 +95,17 @@ class SheetPageFragmentEspressoTest : KoinTest {
         onView(withId(R.id.attribute_wis_mod)).check(matches(withText("+1")))
         onView(withId(R.id.attribute_cha_value)).check(matches(withText("15")))
         onView(withId(R.id.attribute_cha_mod)).check(matches(withText("+1")))
-        onView(withId(R.id.save_fortitude)).check(matches(withText("+1")))
-        onView(withId(R.id.save_reflex)).check(matches(withText("+1")))
-        onView(withId(R.id.save_will)).check(matches(withText("+1")))
+        onView(withId(R.id.saving_throw_include)).check(matches(not(isDisplayed())))
         onView(withId(R.id.combat_hitpoints)).check(matches(withText("1 (2)")))
+        onView(withId(R.id.combat_proficiency_bonus)).check(matches(withText("+1")))
         onView(withId(R.id.combat_armorclass)).check(matches(withText("10")))
         onView(withId(R.id.combat_flatfooted_armorclass)).check(matches(withText("11")))
         onView(withId(R.id.combat_touch_armorclass)).check(matches(withText("12")))
         onView(withId(R.id.combat_speed)).check(matches(withText("20")))
         onView(withId(R.id.combat_initiative)).check(matches(withText("+1")))
-        onView(withId(R.id.combat_baseattackbonus)).check(matches(withText("+1")))
-        onView(withId(R.id.combat_cmb)).check(matches(withText("+1")))
-        onView(withId(R.id.combat_cmd)).check(matches(withText("+1")))
+        onView(withId(R.id.combat_baseattackbonus_row)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.combat_cmb_row)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.combat_cmd_row)).check(matches(not(isDisplayed())))
     }
 
 }

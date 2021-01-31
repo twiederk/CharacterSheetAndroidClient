@@ -36,7 +36,9 @@ class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinCo
         R.id.menu_activity_character_list_about -> callActivity(AboutActivity::class.java)
         R.id.menu_activity_character_list_administration -> callActivity(AdministrationMenuActivity::class.java)
         R.id.menu_activity_character_list_preference -> callActivity(PreferencesActivity::class.java)
-        R.id.menu_activity_character_list_switch_game_system -> switchGameSystem()
+        R.id.menu_activity_character_list_switch_dndv35 -> switchGameSystem(GameSystemType.DNDV35)
+        R.id.menu_activity_character_list_switch_pathfinder -> switchGameSystem(GameSystemType.PATHFINDER)
+        R.id.menu_activity_character_list_switch_dnd5e -> switchGameSystem(GameSystemType.DND5E)
         R.id.menu_activity_character_list_backup_restore -> callActivity(BackupRestoreActivity::class.java)
         R.id.menu_activity_character_list_export -> callActivity(ExportMenuActivity::class.java)
         R.id.menu_activity_character_list_import -> openImport()
@@ -64,18 +66,11 @@ class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinCo
         return true
     }
 
-    private fun switchGameSystem(): Boolean {
-        val nextGameSystemType = nextGameSystemType(gameSystemHolder.gameSystemType)
-        SwitchGameSystemAsyncTask(activity, activity as GameSystemLoadable, nextGameSystemType).execute()
+    private fun switchGameSystem(gameSystemType: GameSystemType): Boolean {
+        if (gameSystemHolder.gameSystemType != gameSystemType) {
+            SwitchGameSystemAsyncTask(activity, activity as GameSystemLoadable, gameSystemType).execute()
+        }
         return true
     }
-
-    private fun nextGameSystemType(currentGameSystemType: GameSystemType?): GameSystemType =
-            if (currentGameSystemType == GameSystemType.DNDV35) {
-                GameSystemType.PATHFINDER
-            } else {
-                GameSystemType.DNDV35
-            }
-
 
 }

@@ -112,7 +112,7 @@
         <item name="android:background">#AA000000</item>
     </style>
 
-    <style name="AppTheme.ReleaseNotes">
+    <style name="AppTheme.CharacterListDialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginTop">25dp</item>

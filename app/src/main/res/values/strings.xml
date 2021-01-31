@@ -59,6 +59,9 @@
     <string name="character_list_delete">Delete</string>
     <string name="character_list_menu_about">Manual</string>
     <string name="character_list_menu_switch_game_system">Switch Game System</string>
+    <string name="character_list_menu_switch_dndv35">DnD v.3.5</string>
+    <string name="character_list_menu_switch_pathfinder">Pathfinder</string>
+    <string name="character_list_menu_switch_dnd5e">DnD 5e</string>
     <string name="character_list_menu_administration">Administration</string>
     <string name="character_list_menu_preferences">Preferences</string>
     <string name="character_list_menu_export">Export</string>
@@ -67,9 +70,10 @@
     <string name="character_list_menu_purchase">Purchase Premium Version</string>
     <string name="character_list_wait_load_game_system">Load Game System</string>
     <string name="character_list_wait_load_dndv35">Load DnD v.3.5</string>
+    <string name="character_list_wait_load_dnd5e">Load DnD 5e</string>
     <string name="character_list_wait_load_pathfinder">Load Pathfinder</string>
-    <string name="character_list_wait_create_dndv35_database">Create DnD v.3.5 Database</string>
-    <string name="character_list_wait_create_pathfinder_database">Create Pathfinder Database</string>
+    <string name="character_list_wait_create_databases">Create Databases</string>
+    <string name="character_list_wait_load_game_systems">Load Game Systems</string>
     <string name="character_list_fab_button_description">Create Character</string>
     <string name="character_list_image_hint">Thumbnail of character</string>
     <string name="character_list_ad_unit_id">ca-app-pub-8129946526938446/7481006483</string>
@@ -79,6 +83,7 @@
     <string name="combat_hitpoints_label">HP:</string>
     <string name="combat_max_hitpoints_label">max. HP:</string>
     <string name="combat_armorclass_label">AC:</string>
+    <string name="combat_proficiency_bonus_label">Proficiency bonus:</string>
     <string name="combat_flatfooted_armorclass_label">Flat-Footed:</string>
     <string name="combat_touch_armorclass_label">Touch:</string>
     <string name="combat_speed_label">Speed:</string>
@@ -393,6 +398,9 @@
     <!-- NoteActivity -->
     <string name="note_content_description">Note content</string>
 
+    <!-- ComingSoonPageFragment -->
+    <string name="page_coming_soon_label">Coming Soon</string>
+
     <!-- ClassAbilityPageFragment -->
     <string name="page_class_ability_title">Class Abilities</string>
     <string name="character_class_ability_list_show_all_abilities">Show all abilities</string>
@@ -461,6 +469,7 @@
     <string-array name="game_system_array">
         <item>DnD v.3.5</item>
         <item>Pathfinder</item>
+        <item>DnD 5e</item>
     </string-array>
 
     <!-- KnownSpellPageFragment -->
@@ -496,7 +505,7 @@
     <string name="export_menu_character_button">Export Characters</string>
     <string name="export_menu_equipment_button">Export Equipment</string>
 
-    <!-- AbstraceExportActivity -->
+    <!-- AbstractExportActivity -->
     <string name="export_export_directory">Export Directory:</string>
     <string name="export_export_button">Export</string>
     <string name="export_message_export_succeed">Export succeeded</string>
@@ -882,6 +891,13 @@
     <string name="ability_scores_navigate_previous_button">&lt; Race and Class</string>
     <string name="ability_scores_nav_graph_label">AbilityScoresFragment</string>
 
+    <!-- GameSystemSelector -->
+    <string name="game_system_selector_heading">Select your game system</string>
+    <string name="game_system_selector_dndv35">DnD v.3.5</string>
+    <string name="game_system_selector_dndv5e">DnD 5e</string>
+    <string name="game_system_selector_pathfinder">Pathfinder</string>
+    <string name="game_system_selector_explain_text">You can switch between the game systems later on, by using the menu option \'switch game system\'.</string>
+
     <!-- Release Notes -->
     <string name="release_notes_heading">Release Notes</string>
     <string name="release_notes_join_project">You\'re welcome to join the open source project: https://github.com/twiederk/d20Framework/</string>
@@ -952,5 +968,6 @@
     <string name="release_notes_3_4_0">Release 3.4.0\n- Added flat footed and touch armor.\n\n</string>
     <string name="release_notes_3_5_0">Release 3.5.0\n- Added screen for rolling the ability scores when creating characters.\n\n</string>
     <string name="release_notes_3_5_1">Release 3.5.1\n- Added analysis for the use of the character creator.\n\n</string>
+    <string name="release_notes_4_0_0">Release 4.0.0\n- Added Dungeons &amp; Dragons 5th edition. Starting with the tabs \'sheet\', \'race abilities\' and \'notes\'. More tabs are coming soon.\n\n</string>
 
 </resources>

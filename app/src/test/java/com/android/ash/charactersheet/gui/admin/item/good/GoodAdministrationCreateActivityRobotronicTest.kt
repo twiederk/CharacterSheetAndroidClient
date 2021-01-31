@@ -1,12 +1,19 @@
 package com.android.ash.charactersheet.gui.admin.item.good
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.d20charactersheet.framework.boc.model.Good
 import com.d20charactersheet.framework.boc.model.GoodType
 import com.d20charactersheet.framework.boc.model.QualityType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
-class GoodAdministrationCreateActivityTest {
+@RunWith(AndroidJUnit4::class)
+@Config(manifest = Config.NONE)
+@MediumTest
+class GoodAdministrationCreateActivityRobotronicTest {
 
     @Test
     fun createForm() {

@@ -36,6 +36,7 @@ class BackupRestoreActivityEspressoTest {
         onView(withId(R.id.backup_restore_backup_to_cloud_button)).check(matches(withText("Backup to Cloud")))
         onView(withId(R.id.backup_restore_backup_directory)).check(matches(withText(startsWith("Backup Directory:"))))
         onView(withId(R.id.backup_restore_backup_dndv35)).check(matches(isNotChecked()))
+        onView(withId(R.id.backup_restore_backup_dnd5e)).check(matches(isNotChecked()))
         onView(withId(R.id.backup_restore_backup_pathfinder)).check(matches(isNotChecked()))
         onView(withId(R.id.backup_restore_backup_to_file_button)).check(matches(withText("Backup to File")))
         onView(withId(R.id.backup_restore_restore_directory)).check(matches(withText(startsWith("Restore Directory:"))))

@@ -6,6 +6,8 @@ import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreator
+import com.android.ash.charactersheet.gui.sheet.FragmentPagerFactory
+import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -17,6 +19,7 @@ class GameSystemHolder {
     var gameSystemType: GameSystemType? = null
     var dndDbHelper: DBHelper? = null
     var pathfinderDbHelper: DBHelper? = null
+    var dnd5eDbHelper: DBHelper? = null
 }
 
 class PreferenceServiceHolder {
@@ -36,5 +39,7 @@ val appModule = module {
     single { Billing() }
     single { MessageDisplay(androidContext()) }
     single { CharacterCreator() }
+    single { SheetPanelFactory() }
+    single { FragmentPagerFactory() }
 }
 // end::koinConfiguration[]

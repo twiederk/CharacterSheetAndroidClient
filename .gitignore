@@ -9,3 +9,5 @@ ToDos.txt
 misc
 /app/app.iml
 /app/CharacterSheetAndroidClient-app.iml
+/app/src/test/cmd/local.settings
+/app/src/test/cmd/*.pwd

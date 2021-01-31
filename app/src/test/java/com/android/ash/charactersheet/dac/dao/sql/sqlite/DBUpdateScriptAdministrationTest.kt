@@ -10,25 +10,27 @@ class DBUpdateScriptAdministrationTest {
     @Test
     fun getUpdateScript_noUpdateRequired_returnNoUpdateScript() {
         // arrange
-        val underTest = DBUpdateScriptAdministration(GameSystemType.DNDV35.updateScripts)
+        val underTest = DBUpdateScriptAdministration(GameSystemType.DNDV35.updateScriptResources)
 
         // act
-        val updateScript = underTest.getUpdateScript(1)
+        val scriptResource = underTest.getUpdateScript(1)
 
         // assert
-        assertThat(updateScript).isEqualTo(DBUpdateScriptAdministration.NO_UPDATE_SCRIPT)
+        assertThat(scriptResource).isNull()
     }
 
     @Test
     fun getUpdateScript_requestUpdateFrom59To60_returnScript59To60() {
         // arrange
-        val underTest = DBUpdateScriptAdministration(GameSystemType.DNDV35.updateScripts)
+        val underTest = DBUpdateScriptAdministration(GameSystemType.DNDV35.updateScriptResources)
 
         // act
-        val updateScript = underTest.getUpdateScript(59)
+        val scriptResource = underTest.getUpdateScript(59)
 
         // assert
-        assertThat(updateScript).isEqualTo(R.raw.dndv35_upgrade_59_to_60)
+        assertThat(scriptResource).isInstanceOf(RawScriptResource::class.java)
+        val rawScriptResource = scriptResource as RawScriptResource
+        assertThat(rawScriptResource.resourceId).isEqualTo(R.raw.dndv35_upgrade_59_to_60)
     }
 
 }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/character_list_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,10 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
+        android:contentDescription="@string/character_list_fab_button_description"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="@string/character_list_fab_button_description" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
     <FrameLayout
@@ -49,6 +50,10 @@
         <include
             android:id="@+id/character_list_release_notes"
             layout="@layout/activity_character_list_release_notes" />
+
+        <include
+            android:id="@+id/character_list_game_system_selector"
+            layout="@layout/activity_character_list_game_system_selector" />
     </FrameLayout>
 
     <com.google.android.gms.ads.AdView

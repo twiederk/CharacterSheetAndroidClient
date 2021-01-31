@@ -33,13 +33,13 @@ public class CreateDatabaseAndGameSystemAsyncTask extends AbstractAsyncTask {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        waitAnimation.setText(resources.getString(R.string.character_list_wait_create_dndv35_database));
+        waitAnimation.setText(resources.getString(R.string.character_list_wait_create_databases));
     }
 
     @Override
     protected TaskResult doInBackground(final Object... params) {
         Logger.debug("doInBackground");
-        publishProgress(resources.getString(R.string.character_list_wait_create_pathfinder_database));
+        publishProgress(resources.getString(R.string.character_list_wait_load_game_systems));
         publishProgress(getLoadGameSystemText());
 
         final GameSystem gameSystem = createGameSystem();

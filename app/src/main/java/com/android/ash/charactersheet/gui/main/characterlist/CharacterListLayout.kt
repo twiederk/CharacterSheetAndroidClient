@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import com.android.ash.charactersheet.GameSystemHolder
@@ -18,15 +15,16 @@ class CharacterListLayout(private val characterListActivity: CharacterListActivi
 
     private val gameSystemHolder: GameSystemHolder by inject()
 
-    private val releaseNotes = ReleaseNotes()
+    private val gameSystemSelector = GameSystemSelector(characterListActivity)
+    private val releaseNotes = ReleaseNotes(characterListActivity)
     private val characterList = CharacterList(characterListActivity)
 
 
     fun layout() {
         characterListActivity.setContentView(R.layout.activity_character_list)
         setToolbar()
-        setReleaseNotes()
-        setOkButton()
+        releaseNotes.show()
+        gameSystemSelector.show(characterListActivity.findViewById(R.id.character_list_view))
         setFavoriteActionButton()
     }
 
@@ -38,29 +36,9 @@ class CharacterListLayout(private val characterListActivity: CharacterListActivi
     }
 
     private fun createTitle(): String {
-        return characterListActivity.resources.getString(R.string.character_list_title) + " - " + gameSystemHolder.gameSystem?.ruleService?.name
+        return characterListActivity.resources.getString(R.string.character_list_title) + " - " + gameSystemHolder.gameSystemType?.getName()
     }
 
-    private fun setReleaseNotes() {
-        if (releaseNotes.isShowReleaseNotes()) {
-            showReleaseNotes(releaseNotes.getReleaseNotes(characterListActivity.resources))
-        }
-    }
-
-    private fun showReleaseNotes(releaseNotes: String) {
-        val releaseNotesView = characterListActivity.findViewById<View>(R.id.character_list_release_notes)
-        releaseNotesView.visibility = View.VISIBLE
-        val releaseNotesTextView: TextView = characterListActivity.findViewById(R.id.release_notes_list)
-        releaseNotesTextView.text = releaseNotes
-    }
-
-    private fun setOkButton() {
-        val okButton: Button = characterListActivity.findViewById(R.id.button_ok)
-        okButton.setOnClickListener {
-            val releaseNotesView = characterListActivity.findViewById<View>(R.id.character_list_release_notes)
-            releaseNotesView.visibility = View.INVISIBLE
-        }
-    }
 
     private fun setFavoriteActionButton() {
         val favoriteActionButton: FloatingActionButton = characterListActivity.findViewById(R.id.favorite_action_button)

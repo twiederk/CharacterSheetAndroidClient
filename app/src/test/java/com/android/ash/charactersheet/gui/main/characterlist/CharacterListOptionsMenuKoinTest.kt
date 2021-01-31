@@ -6,7 +6,6 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.billing.Billing
-import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseDialog
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.nhaarman.mockitokotlin2.*
@@ -55,12 +54,11 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
     }
 
     @Test
-    fun onOptionsItemSelected_switchGameSystemFromDnDv35ToPathfinder_executeSwitchGameSystemAsyncTask() {
+    fun onOptionsItemSelected_switchGameSystemToPathfinder_executeSwitchGameSystemAsyncTask() {
         // Arrange
         val activity: CharacterListActivity = mock()
         val menuItem: MenuItem = mock()
-        whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_game_system)
-        gameSystemHolder.gameSystemType = GameSystemType.DNDV35
+        whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_pathfinder)
 
         // Act
         val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
@@ -70,12 +68,25 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
     }
 
     @Test
-    fun onOptionsItemSelected_switchGameSystemFromPathfinderToDnDv35_executeSwitchGameSystemAsyncTask() {
+    fun onOptionsItemSelected_switchGameSystemToDnDv35_executeSwitchGameSystemAsyncTask() {
         // Arrange
         val activity: CharacterListActivity = mock()
         val menuItem: MenuItem = mock()
-        whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_game_system)
-        gameSystemHolder.gameSystemType = GameSystemType.PATHFINDER
+        whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_dndv35)
+
+        // Act
+        val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
+
+        // Assert
+        assertThat(result).isTrue
+    }
+
+    @Test
+    fun onOptionsItemSelected_switchGameSystemToDnD5e_executeSwitchGameSystemAsyncTask() {
+        // Arrange
+        val activity: CharacterListActivity = mock()
+        val menuItem: MenuItem = mock()
+        whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_dnd5e)
 
         // Act
         val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)

@@ -55,6 +55,7 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
     private static final int PERMISSION_EXTERNAL_STORAGE = 100;
 
     private CheckBox dndv35Checkbox;
+    private CheckBox dnd5eCheckbox;
     private CheckBox pathfinderCheckbox;
 
     private BackupManager backupManager;
@@ -112,6 +113,9 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
         dndv35Checkbox = findViewById(R.id.backup_restore_backup_dndv35);
         dndv35Checkbox.setText(GameSystemType.DNDV35.getName());
 
+        dnd5eCheckbox = findViewById(R.id.backup_restore_backup_dnd5e);
+        dnd5eCheckbox.setText(GameSystemType.DND5E.getName());
+
         pathfinderCheckbox = findViewById(R.id.backup_restore_backup_pathfinder);
         pathfinderCheckbox.setText(GameSystemType.PATHFINDER.getName());
 
@@ -126,6 +130,7 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
         Logger.debug("backupToFile()");
         final List<String> messages = new ArrayList<>(GameSystemType.values().length);
         backupToFile(GameSystemType.DNDV35, dndv35Checkbox, messages);
+        backupToFile(GameSystemType.DND5E, dnd5eCheckbox, messages);
         backupToFile(GameSystemType.PATHFINDER, pathfinderCheckbox, messages);
         Toast.makeText(this, getMessage(messages), Toast.LENGTH_LONG).show();
     }
@@ -191,6 +196,7 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 readBackupFilesAndShowInListView();

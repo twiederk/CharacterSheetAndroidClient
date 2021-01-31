@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <!-- PROFICIENCY BONUS -->
+
+    <TableRow
+        android:id="@+id/combat_proficiency_bonus_row"
+        style="@style/AppTheme.TableRowEven">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_proficiency_bonus_label" />
+
+        <TextView
+            android:id="@+id/combat_proficiency_bonus"
+            style="@style/AppTheme.TableCellNumber"
+            android:layout_width="fill_parent" />
+    </TableRow>
+
+    <!-- HIP POINTS (HP) -->
+
+    <TableRow style="@style/AppTheme.TableRowOdd">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_hitpoints_label" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ProgressBar
+                android:id="@+id/combat_hitpoints_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:progressDrawable="@android:drawable/progress_horizontal" />
+
+            <TextView
+                android:id="@+id/combat_hitpoints"
+                style="@style/AppTheme.TableCellString"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent" />
+        </FrameLayout>
+    </TableRow>
+
+    <!-- ARMOR CLASS (AC) -->
+
+    <TableRow style="@style/AppTheme.TableRowEven">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_armorclass_label" />
+
+        <TextView
+            android:id="@+id/combat_armorclass"
+            style="@style/AppTheme.TableCellNumber"
+            android:layout_width="fill_parent" />
+    </TableRow>
+
+    <!-- FLATFOOTED ARMOR CLASS -->
+
+    <TableRow style="@style/AppTheme.TableRowOdd">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_flatfooted_armorclass_label" />
+
+        <TextView
+            android:id="@+id/combat_flatfooted_armorclass"
+            style="@style/AppTheme.TableCellNumber"
+            android:layout_width="fill_parent" />
+    </TableRow>
+
+    <!-- TOUCH ARMOR CLASS -->
+
+    <TableRow style="@style/AppTheme.TableRowEven">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_touch_armorclass_label" />
+
+        <TextView
+            android:id="@+id/combat_touch_armorclass"
+            style="@style/AppTheme.TableCellNumber"
+            android:layout_width="fill_parent" />
+    </TableRow>
+
+    <!-- SPEED -->
+
+    <TableRow style="@style/AppTheme.TableRowOdd">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_speed_label" />
+
+        <TextView
+            android:id="@+id/combat_speed"
+            style="@style/AppTheme.TableCellNumber"
+            android:layout_width="fill_parent" />
+    </TableRow>
+
+    <!-- INITIATIVE (INI) -->
+
+    <TableRow style="@style/AppTheme.TableRowEven">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_initiative_abbreviation_label" />
+
+        <Button
+            android:id="@+id/combat_initiative"
+            style="@style/AppTheme.ButtonDieRoll" />
+    </TableRow>
+
+    <!-- BASE ATTACK BONUS (BAB) -->
+
+    <TableRow
+        android:id="@+id/combat_baseattackbonus_row"
+        style="@style/AppTheme.TableRowOdd">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_baseattackbonus_label" />
+
+        <Button
+            android:id="@+id/combat_baseattackbonus"
+            style="@style/AppTheme.ButtonDieRoll" />
+    </TableRow>
+
+    <!-- CMB -->
+
+    <TableRow
+        android:id="@+id/combat_cmb_row"
+        style="@style/AppTheme.TableRowEven">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_cmb_label" />
+
+        <Button
+            android:id="@+id/combat_cmb"
+            style="@style/AppTheme.ButtonDieRoll" />
+    </TableRow>
+
+    <!-- CMD -->
+
+    <TableRow
+        android:id="@+id/combat_cmd_row"
+        style="@style/AppTheme.TableRowOdd">
+
+        <TextView
+            style="@style/AppTheme.TableCellString"
+            android:text="@string/combat_cmd_label" />
+
+        <Button
+            android:id="@+id/combat_cmd"
+            style="@style/AppTheme.ButtonDieRoll" />
+    </TableRow>
+</TableLayout>
+

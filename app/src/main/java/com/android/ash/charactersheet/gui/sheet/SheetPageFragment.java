@@ -21,21 +21,13 @@ import com.android.ash.charactersheet.boc.service.PreferenceService;
 import com.android.ash.charactersheet.gui.sheet.appearance.AppearanceEditActivity;
 import com.android.ash.charactersheet.gui.sheet.attribute.AttributeRollOnClickListener;
 import com.android.ash.charactersheet.gui.sheet.attribute.AttributesEditActivity;
-import com.android.ash.charactersheet.gui.sheet.combat.BaseAttackBonusRollOnClickListener;
-import com.android.ash.charactersheet.gui.sheet.combat.CombatEditActivity;
-import com.android.ash.charactersheet.gui.sheet.combat.CombatManeuverBonusRollOnClickListener;
-import com.android.ash.charactersheet.gui.sheet.combat.CombatManeuverDefenceRollOnClickListener;
-import com.android.ash.charactersheet.gui.sheet.combat.InitiativeRollOnClickListener;
 import com.android.ash.charactersheet.gui.sheet.money.MoneyEditActivity;
-import com.android.ash.charactersheet.gui.sheet.save.SaveEditActivity;
-import com.android.ash.charactersheet.gui.sheet.save.SaveRollOnClickListener;
 import com.android.ash.charactersheet.gui.util.HideOnClickListener;
 import com.android.ash.charactersheet.gui.util.IntentOnClickListener;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView;
 import com.d20charactersheet.framework.boc.model.Attribute;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
-import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.service.XpService;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -48,6 +40,9 @@ import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays the characters appearance, abilities, saves, money and combat values.
@@ -57,6 +52,8 @@ public class SheetPageFragment extends PageFragment {
     private static final int RESULT_CODE_ADD_IMAGE = 100;
     private static final int RESULT_CODE_ADD_THUMBNAIL = 300;
     private static final String COLON = ": ";
+
+    private final Lazy<SheetPanelFactory> sheetPanelFactoryLazy = inject(SheetPanelFactory.class);
 
     @Override
     protected int getLayoutId() {
@@ -75,9 +72,9 @@ public class SheetPageFragment extends PageFragment {
 
         setAttributeOnClickListener();
 
-        setCombatOnClickListener();
+        sheetPanelFactoryLazy.getValue().createCombatPanel().setOnClickListener(view);
 
-        setSaveOnClickListener();
+        sheetPanelFactoryLazy.getValue().createSavePanel().setOnClickListener(view);
 
         final View moneyView = view.findViewById(R.id.money_include);
         moneyView.setOnClickListener(new IntentOnClickListener(new Intent(getActivity(), MoneyEditActivity.class)));
@@ -104,44 +101,6 @@ public class SheetPageFragment extends PageFragment {
         final Button button = view.findViewById(resourceId);
         button.setOnClickListener(new AttributeRollOnClickListener(character, attribute, displayService, ruleService,
                 getDieRollView()));
-    }
-
-    private void setSaveOnClickListener() {
-        final View savingThrowView = view.findViewById(R.id.saving_throw_include);
-        savingThrowView
-                .setOnClickListener(new IntentOnClickListener(new Intent(getActivity(), SaveEditActivity.class)));
-
-        setSaveOnClickListener(R.id.save_fortitude, Save.FORTITUDE);
-        setSaveOnClickListener(R.id.save_reflex, Save.REFLEX);
-        setSaveOnClickListener(R.id.save_will, Save.WILL);
-    }
-
-    private void setSaveOnClickListener(final int resourceId, final Save save) {
-        final Button button = view.findViewById(resourceId);
-        button.setOnClickListener(new SaveRollOnClickListener(character, save, displayService, ruleService,
-                getDieRollView()));
-    }
-
-    private void setCombatOnClickListener() {
-        final View combatView = view.findViewById(R.id.combat_include);
-        combatView.setOnClickListener(new IntentOnClickListener(new Intent(getActivity(), CombatEditActivity.class)));
-
-        final Button initiativeButton = view.findViewById(R.id.combat_initiative);
-        initiativeButton.setOnClickListener(new InitiativeRollOnClickListener(character, displayService, ruleService,
-                getDieRollView()));
-
-        final Button baseAttackBonusButton = view.findViewById(R.id.combat_baseattackbonus);
-        baseAttackBonusButton.setOnClickListener(new BaseAttackBonusRollOnClickListener(character, displayService,
-                ruleService, getDieRollView()));
-
-        final Button cmbButton = view.findViewById(R.id.combat_cmb);
-        cmbButton.setOnClickListener(new CombatManeuverBonusRollOnClickListener(character, displayService, ruleService,
-                getDieRollView()));
-
-        final Button cmdButton = view.findViewById(R.id.combat_cmd);
-        cmdButton.setOnClickListener(new CombatManeuverDefenceRollOnClickListener(character, displayService,
-                ruleService, getDieRollView()));
-
     }
 
     private DieRollView getDieRollView() {
@@ -247,74 +206,6 @@ public class SheetPageFragment extends PageFragment {
         final String modifier = displayService.getDisplayModifier(ruleService.getModifier(attributeValue));
         final TextView modifierTextView = view.findViewById(idAttributeMod);
         modifierTextView.setText(modifier);
-    }
-
-    private void setCombat() {
-        // hit points
-        final TextView hitPointsTextView = view.findViewById(R.id.combat_hitpoints);
-        hitPointsTextView.setText(buildHitPointsText());
-        setHitPointsProgressBar();
-
-        // armor class
-        final TextView armorClassTextView = view.findViewById(R.id.combat_armorclass);
-        armorClassTextView.setText(String.format(Locale.US, "%d", ruleService.getArmorClass(character)));
-
-        // flatfooted armor class
-        final TextView flatFootedArmorClassTextView = view.findViewById(R.id.combat_flatfooted_armorclass);
-        flatFootedArmorClassTextView.setText(String.format(Locale.US, "%d", ruleService.calculateFlatFootedArmorClass(character)));
-
-        // touch armor class
-        final TextView touchArmorClassTextView = view.findViewById(R.id.combat_touch_armorclass);
-        touchArmorClassTextView.setText(String.format(Locale.US, "%d", ruleService.calculateTouchArmorClass(character)));
-
-        // speed
-        final TextView speedTextView = view.findViewById(R.id.combat_speed);
-        speedTextView.setText(String.format(Locale.US, "%d", ruleService.getSpeed(character)));
-
-        // initiative
-        final TextView initiativeTextView = view.findViewById(R.id.combat_initiative);
-        initiativeTextView.setText(displayService.getDisplayModifier(ruleService.getInitative(character)));
-
-        // base attack bonus
-        final TextView baseAttackBonusTextView = view.findViewById(R.id.combat_baseattackbonus);
-        baseAttackBonusTextView.setText(displayService.getDisplayModifier(ruleService.getBaseAttackBonus(character)));
-
-        // cmb
-        final TextView cmbTextView = view.findViewById(R.id.combat_cmb);
-        cmbTextView.setText(displayService.getDisplayModifier(ruleService.getCombatManeuverBonus(character)));
-
-        // cmd
-        final TextView cmdTextView = view.findViewById(R.id.combat_cmd);
-        cmdTextView.setText(displayService.getDisplayModifier(ruleService.getCombatManeuverDefence(character)));
-
-    }
-
-    @NonNull
-    private String buildHitPointsText() {
-        return character.getHitPoints() + " (" + character.getMaxHitPoints() + ")";
-    }
-
-    private void setHitPointsProgressBar() {
-        final ProgressBar hitPointsProgressBar = view.findViewById(R.id.combat_hitpoints_progress);
-        hitPointsProgressBar.setMax(character.getMaxHitPoints());
-        hitPointsProgressBar.setProgress(character.getHitPoints());
-    }
-
-    private void setSave() {
-        // fortitude
-        final TextView fortitudeTextView = view.findViewById(R.id.save_fortitude);
-        int savingThrow = ruleService.getSave(character, Save.FORTITUDE);
-        fortitudeTextView.setText(displayService.getDisplayModifier(savingThrow));
-
-        // reflex
-        final TextView reflexTextView = view.findViewById(R.id.save_reflex);
-        savingThrow = ruleService.getSave(character, Save.REFLEX);
-        reflexTextView.setText(displayService.getDisplayModifier(savingThrow));
-
-        // will
-        final TextView willTextView = view.findViewById(R.id.save_will);
-        savingThrow = ruleService.getSave(character, Save.WILL);
-        willTextView.setText(displayService.getDisplayModifier(savingThrow));
     }
 
     private void setMoney() {
@@ -449,8 +340,8 @@ public class SheetPageFragment extends PageFragment {
         setActivityBackground();
         setAppearance();
         setAttribute();
-        setCombat();
-        setSave();
+        sheetPanelFactoryLazy.getValue().createCombatPanel().setCombat(view);
+        sheetPanelFactoryLazy.getValue().createSavePanel().setSave(view);
         setMoney();
     }
 

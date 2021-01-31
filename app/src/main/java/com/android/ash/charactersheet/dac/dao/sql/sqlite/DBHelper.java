@@ -39,9 +39,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
 
     private boolean upgrade;
+    private boolean create;
     private int oldVersion;
 
-    private final int[] createScripts;
+    private final List<ScriptResource> createScriptResources;
     private final int[] images;
     private final DBUpdateScriptAdministration updateScriptAdministration;
 
@@ -55,8 +56,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(final Context context, final int dbVersion, GameSystemType gameSystemType) {
         super(context, gameSystemType.getDatabaseName(), null, dbVersion);
         this.context = context;
-        this.createScripts = gameSystemType.getCreateScripts();
-        this.updateScriptAdministration = new DBUpdateScriptAdministration(gameSystemType.getUpdateScripts());
+        this.createScriptResources = gameSystemType.getCreateScriptResources();
+        this.updateScriptAdministration = new DBUpdateScriptAdministration(gameSystemType.getUpdateScriptResources());
         this.images = gameSystemType.getImages();
         DB_HELPERS.add(this);
     }
@@ -91,13 +92,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(final SQLiteDatabase db) {
         this.db = db;
+        create = true;
         createDatabase();
     }
 
     private void createDatabase() {
         try {
-            for (final int createScript : createScripts) {
-                executeSqlStatements(db, createScript);
+            for (final ScriptResource createScriptResource : createScriptResources) {
+                executeSqlStatements(db, createScriptResource);
             }
             initImageTable();
         } catch (final SQLException sqlException) {
@@ -108,20 +110,20 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    void executeSqlStatements(SQLiteDatabase database, final int resourceId) throws IOException {
-        final String[] sqlScripts = getSqlScriptsFromRawResource(resourceId);
+    void executeSqlStatements(SQLiteDatabase database, final ScriptResource scriptResource) throws IOException {
+        final String[] sqlScripts = getSqlScriptsFromRawResource(scriptResource);
         executeSqlStatements(database, sqlScripts);
+    }
+
+    @NotNull
+    private String[] getSqlScriptsFromRawResource(final ScriptResource scriptResource) throws IOException {
+        final InputStream inputStream = scriptResource.load(context.getResources());
+        return getSqlScripts(inputStream);
     }
 
     void executeSqlStatements(final SQLiteDatabase database, final String scriptName) throws IOException {
         String[] sqlStatements = getSqlScriptsFromClasspath(scriptName);
         executeSqlStatements(database, sqlStatements);
-    }
-
-    @NotNull
-    private String[] getSqlScriptsFromRawResource(final int resourceId) throws IOException {
-        final InputStream inputStream = context.getResources().openRawResource(resourceId);
-        return getSqlScripts(inputStream);
     }
 
     @NotNull
@@ -201,8 +203,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         for (int currentVersion = oldVersion; currentVersion <= newVersion; currentVersion++) {
             Logger.debug("upgradeDatabase(): currentVersion: " + currentVersion);
-            int updateScript = updateScriptAdministration.getUpdateScript(currentVersion);
-            if (updateScript == 0) {
+            ScriptResource updateScript = updateScriptAdministration.getUpdateScript(currentVersion);
+            if (updateScript == null) {
                 Logger.debug("No update script for version " + currentVersion);
             } else {
                 Logger.debug("Update from version " + currentVersion + " to " + (currentVersion + 1));
@@ -216,7 +218,7 @@ public class DBHelper extends SQLiteOpenHelper {
         upgrade = true;
     }
 
-    private void upgradeDatabase(final int upgradeScript) {
+    private void upgradeDatabase(final ScriptResource upgradeScript) {
         try {
             executeSqlStatements(db, upgradeScript);
         } catch (final IOException ioException) {
@@ -231,6 +233,15 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public boolean isUpgrade() {
         return upgrade;
+    }
+
+    /**
+     * Returns true, if the database was created.
+     *
+     * @return True, if the database was created.
+     */
+    public boolean isCreate() {
+        return create;
     }
 
     /**

@@ -1,18 +1,28 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
 import android.content.res.Resources
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class ReleaseNotes : KoinComponent {
+class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
 
-
     private var showedReleaseNotes = false
+
+    fun show() {
+        if (isShowReleaseNotes()) {
+            showReleaseNotes(getReleaseNotes())
+            setOkButton()
+        }
+    }
 
     fun isShowReleaseNotes(): Boolean {
         val dbHelper: DBHelper? = gameSystemHolder.dndDbHelper
@@ -23,9 +33,25 @@ class ReleaseNotes : KoinComponent {
         return false
     }
 
-    fun getReleaseNotes(resources: Resources): String {
+    private fun showReleaseNotes(releaseNotes: String) {
+        val releaseNotesView = activity.findViewById<View>(R.id.character_list_release_notes)
+        releaseNotesView.visibility = View.VISIBLE
+        val releaseNotesTextView: TextView = activity.findViewById(R.id.release_notes_list)
+        releaseNotesTextView.text = releaseNotes
+    }
+
+    private fun setOkButton() {
+        val okButton: Button = activity.findViewById(R.id.button_ok)
+        okButton.setOnClickListener {
+            val releaseNotesView = activity.findViewById<View>(R.id.character_list_release_notes)
+            releaseNotesView.visibility = View.INVISIBLE
+        }
+    }
+
+
+    internal fun getReleaseNotes(): String {
         val dbHelper: DBHelper? = gameSystemHolder.dndDbHelper
-        val releaseNotes = createReleaseNotesArray(resources)
+        val releaseNotes = createReleaseNotesArray(activity.resources)
         return releaseNotes
                 .filterIndexed { index, _ -> index >= dbHelper?.oldVersion?.minus(1) ?: index }
                 .joinToString(separator = "") { it }
@@ -100,6 +126,8 @@ class ReleaseNotes : KoinComponent {
             resources.getString(R.string.release_notes_3_4_0), //
             resources.getString(R.string.release_notes_3_5_0), //
             resources.getString(R.string.release_notes_3_5_1), //
+            resources.getString(R.string.release_notes_4_0_0), //
     )
+
 
 }

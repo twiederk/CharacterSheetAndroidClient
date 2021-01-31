@@ -8,7 +8,7 @@ import com.android.ash.charactersheet.dac.dao.PreferenceDao;
 import java.util.Arrays;
 
 /**
- * Handles preferences. Checks if preference exists and if correct type of preferenc value is stored.
+ * Handles preferences. Checks if preference exists and if correct type of preference value is stored.
  */
 public class PreferenceServiceImpl implements PreferenceService {
 

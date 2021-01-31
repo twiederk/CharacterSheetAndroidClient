@@ -6,6 +6,8 @@ import com.android.ash.charactersheet.PreferenceServiceHolder
 import com.android.ash.charactersheet.billing.Billing
 import com.android.ash.charactersheet.billing.MessageDisplay
 import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreator
+import com.android.ash.charactersheet.gui.sheet.FragmentPagerFactory
+import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -21,6 +23,8 @@ class KoinConfigurationInstrumentedTest : KoinTest {
     private val billing: Billing by inject()
     private val messageDisplay: MessageDisplay by inject()
     private val characterCreator: CharacterCreator by inject()
+    private val sheetPanelFactory: SheetPanelFactory by inject()
+    private val fragmentPagerFactory: FragmentPagerFactory by inject()
 
     @Test
     fun koinConfiguration() {
@@ -31,6 +35,8 @@ class KoinConfigurationInstrumentedTest : KoinTest {
         assertThat(billing).isNotNull
         assertThat(messageDisplay).isNotNull
         assertThat(characterCreator).isNotNull
+        assertThat(sheetPanelFactory).isNotNull
+        assertThat(fragmentPagerFactory).isNotNull
     }
 
 }

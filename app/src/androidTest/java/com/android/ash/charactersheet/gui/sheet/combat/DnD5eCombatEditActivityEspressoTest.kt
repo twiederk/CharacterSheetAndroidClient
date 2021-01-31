@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
+import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.DisplayService
@@ -17,15 +18,14 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.endsWith
+import org.hamcrest.Matchers.*
 import org.hamcrest.core.Is
 import org.junit.After
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class CombatEditActivityEspressoTest : KoinTest {
+class DnD5eCombatEditActivityEspressoTest : KoinTest {
 
     private val gameSystemHolder by inject<GameSystemHolder>()
     private val characterHolder by inject<CharacterHolder>()
@@ -49,13 +49,13 @@ class CombatEditActivityEspressoTest : KoinTest {
         whenever(gameSystem.displayService).doReturn(displayService)
         whenever(gameSystem.ruleService).doReturn(mock())
 
+        gameSystemHolder.gameSystemType = GameSystemType.DND5E
+
         characterHolder.character = Character().apply {
             hitPoints = 1
             maxHitPoints = 2
             armorClass = 3
             initiativeModifier = 4
-            cmbModifier = 5
-            cmdModifier = 6
         }
 
         scenario = ActivityScenario.launch(CombatEditActivity::class.java)
@@ -73,10 +73,8 @@ class CombatEditActivityEspressoTest : KoinTest {
         onView(allOf(withParent(withId(R.id.combat_armorclass)), withClassName(endsWith("TextView")))).check(matches(withText("3")))
         onView(withId(R.id.combat_initiative_formular)).check(matches(withText("myFormular")))
         onView(allOf(withParent(withId(R.id.combat_initiative)), withClassName(endsWith("TextView")))).check(matches(withText("4")))
-        onView(withId(R.id.combat_cmb_formular)).check(matches(withText("myFormular")))
-        onView(allOf(withParent(withId(R.id.combat_cmb)), withClassName(endsWith("TextView")))).check(matches(withText("5")))
-        onView(withId(R.id.combat_cmd_formular)).check(matches(withText("myFormular")))
-        onView(allOf(withParent(withId(R.id.combat_cmd)), withClassName(endsWith("TextView")))).check(matches(withText("6")))
+        onView(withId(R.id.combat_cmb_row)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.combat_cmd_row)).check(matches(not(isDisplayed())))
     }
 
 }

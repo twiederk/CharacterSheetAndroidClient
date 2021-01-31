@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.ash.charactersheet.R;
-
 import androidx.core.content.ContextCompat;
+
+import com.android.ash.charactersheet.R;
 
 /**
  * View to display the result of a die roll. Displays a title at top and an optional subtitle at the button. In the
@@ -160,14 +160,13 @@ public class DieRollView extends RelativeLayout {
 
     private int getDieImages(final int color) {
         switch (color) {
-        case Color.BLUE:
-            return 0;
-        case Color.RED:
-            return 1;
-        case Color.WHITE:
-            return 2;
-        default:
-            return 0;
+            case Color.RED:
+                return 1;
+            case Color.WHITE:
+                return 2;
+            case Color.BLUE:
+            default:
+                return 0;
         }
     }
 

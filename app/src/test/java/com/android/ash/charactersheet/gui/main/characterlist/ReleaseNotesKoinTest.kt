@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
 import android.content.res.Resources
+import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
@@ -38,12 +39,14 @@ class ReleaseNotesKoinTest : KoinTest {
         // Arrange
         val resources: Resources = mock()
         whenever(resources.getString(any())).doReturn("myReleaseNote\n")
+        val activity: AppCompatActivity = mock()
+        whenever(activity.resources).thenReturn(resources)
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(66)
+        whenever(dbHelper.oldVersion).doReturn(67)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act
-        val releaseNotes = ReleaseNotes().getReleaseNotes(resources)
+        val releaseNotes = ReleaseNotes(activity).getReleaseNotes()
 
         // Assert
         assertThat(releaseNotes).isEqualTo("myReleaseNote\nmyReleaseNote\n")
@@ -57,7 +60,7 @@ class ReleaseNotesKoinTest : KoinTest {
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act
-        val showReleaseNotes = ReleaseNotes().isShowReleaseNotes()
+        val showReleaseNotes = ReleaseNotes(mock()).isShowReleaseNotes()
 
         // Assert
         assertThat(showReleaseNotes).isTrue
@@ -68,7 +71,7 @@ class ReleaseNotesKoinTest : KoinTest {
         // Arrange
         val dbHelper: DBHelper = mock()
         whenever(dbHelper.isUpgrade).doReturn(true)
-        val underTest = ReleaseNotes()
+        val underTest = ReleaseNotes(mock())
         underTest.isShowReleaseNotes()
 
         // Act
@@ -85,7 +88,7 @@ class ReleaseNotesKoinTest : KoinTest {
         whenever(dbHelper.isUpgrade).doReturn(false)
 
         // Act
-        val showReleaseNotes = ReleaseNotes().isShowReleaseNotes()
+        val showReleaseNotes = ReleaseNotes(mock()).isShowReleaseNotes()
 
         // Assert
         assertThat(showReleaseNotes).isFalse

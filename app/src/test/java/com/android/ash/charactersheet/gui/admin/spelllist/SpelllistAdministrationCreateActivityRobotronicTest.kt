@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.spelllist
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.d20charactersheet.framework.boc.model.Spelllist
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.nhaarman.mockitokotlin2.doReturn
@@ -7,8 +9,13 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
-class SpelllistAdministrationCreateActivityTest {
+@RunWith(AndroidJUnit4::class)
+@Config(manifest = Config.NONE)
+@MediumTest
+class SpelllistAdministrationCreateActivityRobotronicTest {
 
     @Test
     fun createForm() {

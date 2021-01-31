@@ -9,6 +9,11 @@ import android.view.Display;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
@@ -30,9 +35,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 import kotlin.Lazy;
 
 import static org.koin.java.KoinJavaComponent.inject;
@@ -51,6 +53,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
     private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
     private final Lazy<Billing> billing = inject(Billing.class);
+    private final Lazy<FragmentPagerFactory> fragmentPagerFactory = inject(FragmentPagerFactory.class);
 
     private GameSystem gameSystem;
     private PreferenceService preferenceService;
@@ -80,7 +83,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
         setBackground();
         new AdViewConfiguration().setAdView(this);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), getResources());
+        FragmentStatePagerAdapter sectionsPagerAdapter = fragmentPagerFactory.getValue().createSectionsPagerAdapter(getSupportFragmentManager(), getResources());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
 

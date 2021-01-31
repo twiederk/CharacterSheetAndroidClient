@@ -1,12 +1,14 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
 import android.content.res.Resources
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.appModule
+import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.d20charactersheet.framework.boc.service.DnDv35RuleServiceImpl
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,6 +50,7 @@ class CharacterListLayoutKoinTest : KoinTest {
         whenever(characterListActivity.supportActionBar).doReturn(actionBar)
         whenever(characterListActivity.findViewById<Button>(R.id.button_ok)).doReturn(mock())
         whenever(characterListActivity.findViewById<FloatingActionButton>(R.id.favorite_action_button)).doReturn(mock())
+        whenever(characterListActivity.findViewById<View>(R.id.character_list_view)).doReturn(mock())
         whenever(characterListActivity.theme).doReturn(mock())
         val resources: Resources = mock()
         whenever(resources.getString(R.string.character_list_title)).doReturn("Character List")
@@ -55,6 +58,7 @@ class CharacterListLayoutKoinTest : KoinTest {
         val gameSystem: GameSystem = mock()
         whenever(gameSystem.ruleService).doReturn(DnDv35RuleServiceImpl())
         gameSystemHolder.gameSystem = gameSystem
+        gameSystemHolder.gameSystemType = GameSystemType.DNDV35
 
         // Act
         CharacterListLayout(characterListActivity).layout()

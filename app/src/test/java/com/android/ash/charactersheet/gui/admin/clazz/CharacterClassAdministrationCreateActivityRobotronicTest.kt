@@ -1,11 +1,18 @@
 package com.android.ash.charactersheet.gui.admin.clazz
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 import java.util.*
 
-class CharacterClassAdministrationCreateActivityTest {
+@RunWith(AndroidJUnit4::class)
+@Config(manifest = Config.NONE)
+@MediumTest
+class CharacterClassAdministrationCreateActivityRobotronicTest {
 
     @Test
     fun createForm() {

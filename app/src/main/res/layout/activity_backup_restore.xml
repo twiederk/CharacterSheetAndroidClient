@@ -44,6 +44,13 @@
         android:layout_margin="8dp" />
 
     <CheckBox
+        android:id="@+id/backup_restore_backup_dnd5e"
+        style="@style/AppTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <CheckBox
         android:id="@+id/backup_restore_backup_pathfinder"
         style="@style/AppTheme"
         android:layout_width="wrap_content"

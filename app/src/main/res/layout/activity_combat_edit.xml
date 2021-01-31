@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/combat_edit_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -54,7 +55,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/combat_armorclass_formular"
@@ -81,7 +82,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/combat_initiative_formular"
@@ -99,7 +100,7 @@
 
         <!-- CMB MODIFIER -->
 
-        <TableRow>
+        <TableRow android:id="@+id/combat_cmb_row">
 
             <TextView
                 style="@style/AppTheme.TableCellString"
@@ -108,7 +109,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/combat_cmb_formular"
@@ -126,7 +127,7 @@
 
         <!-- CMD MODIFIER -->
 
-        <TableRow>
+        <TableRow android:id="@+id/combat_cmd_row">
 
             <TextView
                 style="@style/AppTheme.TableCellString"
@@ -135,7 +136,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/combat_cmd_formular"

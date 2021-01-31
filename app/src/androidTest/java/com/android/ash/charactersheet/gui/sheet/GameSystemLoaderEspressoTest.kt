@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.PreferenceServiceHolder
-import com.android.ash.charactersheet.boc.model.GameSystemType
+import com.android.ash.charactersheet.boc.model.GameSystemType.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.koin.test.KoinTest
@@ -25,8 +25,9 @@ class GameSystemLoaderEspressoTest : KoinTest {
         GameSystemLoader().connectDatabases(context)
 
         // assert
-        assertThat(gameSystemHolder.dndDbHelper).isNotNull
-        assertThat(gameSystemHolder.pathfinderDbHelper).isNotNull
+        assertThat(gameSystemHolder.dndDbHelper?.databaseName).isEqualTo(DNDV35.databaseName)
+        assertThat(gameSystemHolder.pathfinderDbHelper?.databaseName).isEqualTo(PATHFINDER.databaseName)
+        assertThat(gameSystemHolder.dnd5eDbHelper?.databaseName).isEqualTo(DND5E.databaseName)
         assertThat(preferencesServiceHolder.preferenceService).isNotNull
     }
 
@@ -39,12 +40,12 @@ class GameSystemLoaderEspressoTest : KoinTest {
         underTest.connectDatabases(context)
 
         // Act
-        val gameSystem = underTest.load(context, GameSystemType.PATHFINDER)
+        val gameSystem = underTest.load(context, PATHFINDER)
 
         // Assert
         assertThat(gameSystem.isLoaded).isTrue
         assertThat(gameSystem.name).isEqualTo("Pathfinder")
-        assertThat(gameSystemHolder.gameSystemType).isEqualTo(GameSystemType.PATHFINDER)
+        assertThat(gameSystemHolder.gameSystemType).isEqualTo(PATHFINDER)
     }
 
 }

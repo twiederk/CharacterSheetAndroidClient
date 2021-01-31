@@ -11,6 +11,9 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.ItemFilter;
 import com.android.ash.charactersheet.gui.util.Logger;
@@ -23,9 +26,6 @@ import com.d20charactersheet.framework.boc.service.ExportImportService;
 
 import java.io.File;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
 
@@ -154,6 +154,7 @@ public class ExportEquipmentActivity extends AbstractExportActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 exportEquipment();

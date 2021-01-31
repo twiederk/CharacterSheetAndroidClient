@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet
 
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
 import com.android.ash.charactersheet.BuildConfig
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.PreferenceServiceHolder
 import com.android.ash.charactersheet.boc.model.GameSystemType
+import com.android.ash.charactersheet.boc.model.GameSystemType.*
 import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl
 import com.android.ash.charactersheet.boc.service.AndroidImageServiceImpl
 import com.android.ash.charactersheet.boc.service.PreferenceServiceImpl
@@ -26,10 +26,13 @@ class GameSystemLoader : KoinComponent {
     fun connectDatabases(context: Context) {
         val dbVersion = BuildConfig.VERSION_CODE
         gameSystemHolder.dndDbHelper = DBHelper(
-                context, dbVersion, GameSystemType.DNDV35
+                context, dbVersion, DNDV35
         )
         gameSystemHolder.pathfinderDbHelper = DBHelper(
-                context, dbVersion, GameSystemType.PATHFINDER
+                context, dbVersion, PATHFINDER
+        )
+        gameSystemHolder.dnd5eDbHelper = DBHelper(
+                context, dbVersion, DND5E
         )
         preferencesServiceHolder.preferenceService = PreferenceServiceImpl(AndroidPreferenceDao(context))
     }
@@ -89,18 +92,19 @@ class GameSystemLoader : KoinComponent {
     }
 
     private fun getDatabase(gameSystemType: GameSystemType): Database {
-        var database: SQLiteDatabase? = gameSystemHolder.pathfinderDbHelper?.writableDatabase
-        if (GameSystemType.DNDV35 == gameSystemType) {
-            database = gameSystemHolder.dndDbHelper?.writableDatabase
+        val database = when (gameSystemType) {
+            DNDV35 -> gameSystemHolder.dndDbHelper?.writableDatabase
+            PATHFINDER -> gameSystemHolder.pathfinderDbHelper?.writableDatabase
+            DND5E -> gameSystemHolder.dnd5eDbHelper?.writableDatabase
         }
         return SqliteDatabase(database!!)
     }
 
-    private fun getRuleService(gameSystemType: GameSystemType): RuleService =
-            if (gameSystemType == GameSystemType.DNDV35) {
-                DnDv35RuleServiceImpl()
-            } else {
-                PathfinderRuleServiceImpl()
+    internal fun getRuleService(gameSystemType: GameSystemType): RuleService =
+            when (gameSystemType) {
+                DNDV35 -> DnDv35RuleServiceImpl()
+                PATHFINDER -> PathfinderRuleServiceImpl()
+                DND5E -> DnD5eRuleServiceImpl()
             }
 
 }

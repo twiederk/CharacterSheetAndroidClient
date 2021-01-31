@@ -5,6 +5,8 @@ import android.content.pm.PackageManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.Logger;
 import com.android.ash.charactersheet.gui.widget.ListModel;
@@ -13,8 +15,6 @@ import com.d20charactersheet.framework.boc.service.ExportImportService;
 
 import java.io.File;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
 
@@ -91,6 +91,7 @@ public class ExportCharacterActivity extends AbstractExportActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 exportCharacters();

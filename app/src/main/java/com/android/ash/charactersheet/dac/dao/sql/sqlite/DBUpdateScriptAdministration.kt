@@ -1,12 +1,8 @@
 package com.android.ash.charactersheet.dac.dao.sql.sqlite
 
-class DBUpdateScriptAdministration(private val updateScripts: Map<Int, Int>) {
+class DBUpdateScriptAdministration(private val updateScripts: Map<Int, ScriptResource>) {
 
-    fun getUpdateScript(oldVersion: Int): Int = updateScripts.getOrDefault(oldVersion, NO_UPDATE_SCRIPT)
-
-    companion object {
-        const val NO_UPDATE_SCRIPT = 0
-    }
+    fun getUpdateScript(oldVersion: Int): ScriptResource? = updateScripts[oldVersion]
 
 }
 

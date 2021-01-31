@@ -1,12 +1,19 @@
 package com.android.ash.charactersheet.gui.admin.item.armor
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.d20charactersheet.framework.boc.model.Armor
 import com.d20charactersheet.framework.boc.model.ArmorType
 import com.d20charactersheet.framework.boc.model.QualityType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
-class ArmorAdministrationCreateActivityTest {
+@RunWith(AndroidJUnit4::class)
+@Config(manifest = Config.NONE)
+@MediumTest
+class ArmorAdministrationCreateActivityRobotronicTest {
 
     @Test
     fun createForm() {
