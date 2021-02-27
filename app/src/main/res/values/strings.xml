@@ -969,5 +969,6 @@
     <string name="release_notes_3_5_0">Release 3.5.0\n- Added screen for rolling the ability scores when creating characters.\n\n</string>
     <string name="release_notes_3_5_1">Release 3.5.1\n- Added analysis for the use of the character creator.\n\n</string>
     <string name="release_notes_4_0_0">Release 4.0.0\n- Added Dungeons &amp; Dragons 5th edition. Starting with the tabs \'sheet\', \'race abilities\' and \'notes\'. More tabs are coming soon.\n\n</string>
+    <string name="release_notes_4_1_0">Release 4.1.0\n- Added class abilities to Dungeons &amp; Dragons 5th edition.\n\n</string>
 
 </resources>

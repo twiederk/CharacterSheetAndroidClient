@@ -42,7 +42,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val activity: AppCompatActivity = mock()
         whenever(activity.resources).thenReturn(resources)
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(67)
+        whenever(dbHelper.oldVersion).doReturn(68)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act
@@ -53,11 +53,39 @@ class ReleaseNotesKoinTest : KoinTest {
     }
 
     @Test
-    fun isShowReleaseNotes_isUpgradeAndNotShown_showReleaseNotesTrue() {
+    fun isShowReleaseNotes_isUpgradeInDnDv35DatabaseAndNotShown_showReleaseNotesTrue() {
         // Arrange
         val dbHelper: DBHelper = mock()
         whenever(dbHelper.isUpgrade).doReturn(true)
         gameSystemHolder.dndDbHelper = dbHelper
+
+        // Act
+        val showReleaseNotes = ReleaseNotes(mock()).isShowReleaseNotes()
+
+        // Assert
+        assertThat(showReleaseNotes).isTrue
+    }
+
+    @Test
+    fun isShowReleaseNotes_isUpgradeInDnD5eDatabaseAndNotShown_showReleaseNotesTrue() {
+        // Arrange
+        val dbHelper: DBHelper = mock()
+        whenever(dbHelper.isUpgrade).doReturn(true)
+        gameSystemHolder.dnd5eDbHelper = dbHelper
+
+        // Act
+        val showReleaseNotes = ReleaseNotes(mock()).isShowReleaseNotes()
+
+        // Assert
+        assertThat(showReleaseNotes).isTrue
+    }
+
+    @Test
+    fun isShowReleaseNotes_isUpgradeInPathfinderDatabaseAndNotShown_showReleaseNotesTrue() {
+        // Arrange
+        val dbHelper: DBHelper = mock()
+        whenever(dbHelper.isUpgrade).doReturn(true)
+        gameSystemHolder.pathfinderDbHelper = dbHelper
 
         // Act
         val showReleaseNotes = ReleaseNotes(mock()).isShowReleaseNotes()

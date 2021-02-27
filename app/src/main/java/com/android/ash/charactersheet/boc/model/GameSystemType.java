@@ -45,7 +45,7 @@ public enum GameSystemType {
             createUpdateScriptMap(
                     new int[]{59, 63},
                     new ScriptResource[]{
-                            new RawScriptResource(R.raw.dndv35_upgrade_59_to_60), //
+                            new RawScriptResource(R.raw.pathfinder_upgrade_59_to_60), //
                             new RawScriptResource(R.raw.pathfinder_upgrade_63_to_64) //
                     })
     ),
@@ -58,8 +58,12 @@ public enum GameSystemType {
                     new ClasspathScriptResource("/sql/create_database.sql"), //
                     new ClasspathScriptResource("/sql/dnd5e_phb_data.sql"), //
                     new RawScriptResource(R.raw.dnd5e_phb_character) //
-            ),
-            new HashMap<>()
+            ), //
+            createUpdateScriptMap(
+                    new int[]{69},
+                    new ScriptResource[]{
+                            new RawScriptResource(R.raw.dnd5e_upgrade_69_to_70), //
+                    })
     );
 
     private static Map<Integer, ScriptResource> createUpdateScriptMap(final int[] key, final ScriptResource[] value) {
