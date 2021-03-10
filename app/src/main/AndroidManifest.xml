@@ -431,6 +431,10 @@
             android:theme="@style/AppTheme.Dialog"
             android:excludeFromRecents="true"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <!-- Activity for createComposeRule -->
+        <activity android:name="androidx.activity.ComponentActivity" />
+
     </application>
 
 </manifest>

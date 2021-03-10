@@ -1,0 +1,13 @@
+@startuml
+
+
+class CharacterCreatorViewModel
+class AbilityScoresScreen
+class AttributeRow
+
+CharacterCreatorViewModel --> AbilityScoresScreen : attributeDataRows
+AbilityScoresScreen --> CharacterCreatorViewModel : onRollDice \n onNavigateToRaceAndClassFragment \n onCreateCharacter
+AbilityScoresScreen --> AttributeRow: attributeDataRow
+AttributeRow --> CharacterCreatorViewModel: onIncrease \n onDecrease
+
+@enduml

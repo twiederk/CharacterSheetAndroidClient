@@ -13,16 +13,17 @@
 
         <action
             android:id="@+id/action_RaceAndClassFragment_to_AbilityScoresFragment"
-            app:destination="@id/AbilityScoresFragment" />
+            app:destination="@id/AbilityScoresComposeFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/AbilityScoresFragment"
-        android:name="com.android.ash.charactersheet.gui.main.charactercreator.AbilityScoresFragment"
-        android:label="@string/ability_scores_nav_graph_label"
-        tools:layout="@layout/fragment_ability_scores">
+        android:id="@+id/AbilityScoresComposeFragment"
+        android:name="com.android.ash.charactersheet.gui.main.charactercreator.AbilityScoresComposeFragment"
+        android:label="@string/ability_scores_compose_nav_graph_label">
 
         <action
-            android:id="@+id/action_AbilityScoresFragment_to_RaceAndClassFragment"
+            android:id="@+id/action_AbilityScoresComposeFragment_to_AbilityScoresFragment"
             app:popUpTo="@id/RaceAndClassFragment" />
     </fragment>
+
 </navigation>

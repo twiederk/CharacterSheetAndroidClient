@@ -121,16 +121,17 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
             resources.getString(R.string.release_notes_3_1_3), //
             resources.getString(R.string.release_notes_3_1_4), //
             resources.getString(R.string.release_notes_3_1_5), //
-            resources.getString(R.string.release_notes_3_1_6), //
-            resources.getString(R.string.release_notes_3_1_7), //
-            resources.getString(R.string.release_notes_3_2_0), //
-            resources.getString(R.string.release_notes_3_3_0), //
-            resources.getString(R.string.release_notes_3_3_1), //
-            resources.getString(R.string.release_notes_3_4_0), //
-            resources.getString(R.string.release_notes_3_5_0), //
-            resources.getString(R.string.release_notes_3_5_1), //
-            resources.getString(R.string.release_notes_4_0_0), //
-            resources.getString(R.string.release_notes_4_1_0), //
+        resources.getString(R.string.release_notes_3_1_6), //
+        resources.getString(R.string.release_notes_3_1_7), //
+        resources.getString(R.string.release_notes_3_2_0), //
+        resources.getString(R.string.release_notes_3_3_0), //
+        resources.getString(R.string.release_notes_3_3_1), //
+        resources.getString(R.string.release_notes_3_4_0), //
+        resources.getString(R.string.release_notes_3_5_0), //
+        resources.getString(R.string.release_notes_3_5_1), //
+        resources.getString(R.string.release_notes_4_0_0), //
+        resources.getString(R.string.release_notes_4_1_0), //
+        resources.getString(R.string.release_notes_4_2_0), //
     )
 
 

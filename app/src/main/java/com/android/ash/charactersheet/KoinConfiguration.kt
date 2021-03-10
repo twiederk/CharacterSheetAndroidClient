@@ -6,6 +6,7 @@ import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreator
+import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreatorViewModel
 import com.android.ash.charactersheet.gui.sheet.FragmentPagerFactory
 import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
 import com.d20charactersheet.framework.boc.model.Character
@@ -41,5 +42,6 @@ val appModule = module {
     single { CharacterCreator() }
     single { SheetPanelFactory() }
     single { FragmentPagerFactory() }
+    single { CharacterCreatorViewModel() }
 }
 // end::koinConfiguration[]

@@ -5,7 +5,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.ash.charactersheet.*
@@ -24,7 +25,7 @@ import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class CharacterCreatorEspressoTest : KoinTest {
+class RaceAndClassEspressoTest : KoinTest {
 
     private val gameSystemHolder by inject<GameSystemHolder>()
     private val preferencesServiceHolder by inject<PreferenceServiceHolder>()
@@ -37,7 +38,7 @@ class CharacterCreatorEspressoTest : KoinTest {
     }
 
     @Test
-    fun openCharacterCreator_displayRaceAndClassFragment() {
+    fun display() {
 
         // Arrange
         val gameSystem: GameSystem = mock()
@@ -60,12 +61,12 @@ class CharacterCreatorEspressoTest : KoinTest {
         onView(withId(R.id.create_sex)).check(matches(withSpinnerText("MALE")))
         onView(withId(R.id.create_alignment)).check(matches(withSpinnerText("LAWFUL_GOOD")))
         onView(withId(R.id.create_class)).check(matches(withSpinnerText("myClass")))
-        onView(withId(R.id.create_button)).check(matches(withText("Create")))
+        onView(withId(R.id.create_button)).check(matches(withText("Create Character")))
         onView(withId(R.id.race_and_class_navigate_next_button)).check(matches(withText("Ability Scores >")))
     }
 
     @Test
-    fun navigate_fromRaceAndClassToAbilityScores() {
+    fun navigate_ToAbilityScores() {
 
         // Arrange
         val gameSystem: GameSystem = mock()
@@ -83,11 +84,10 @@ class CharacterCreatorEspressoTest : KoinTest {
         // Assert
         onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Character"))))
         onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarSubtitle(Is.`is`("Ability Scores"))))
-        onView(withId(R.id.ability_scores_navigate_previous_button)).check(matches(withText("< Race and Class")))
     }
 
     @Test
-    fun createCharacter_onRaceAndClassFragment_createNewCharacter() {
+    fun createCharacter() {
 
         // Arrange
         val preferenceService: PreferenceService = mock()
@@ -116,41 +116,6 @@ class CharacterCreatorEspressoTest : KoinTest {
 
         // Assert
         onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("myName"))))
-    }
-
-    @Test
-    fun createCharacter_onAbilityScoresFragment_createNewCharacter() {
-
-        // Arrange
-        val preferenceService: PreferenceService = mock()
-        whenever(preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND)).doReturn(false)
-        whenever(preferenceService.getInt(PreferenceService.BACKGROUND_COLOR)).doReturn(Color.YELLOW)
-        preferencesServiceHolder.preferenceService = preferenceService
-
-        val gameSystem: GameSystem = mock()
-        whenever(gameSystem.displayService).doReturn(mock())
-        whenever(gameSystem.xpService).doReturn(mock())
-        whenever(gameSystem.ruleService).doReturn(mock())
-        whenever(gameSystem.characterService).doReturn(mock())
-        whenever(gameSystem.allRaces).doReturn(listOf(Race().apply { name = "myRace" }))
-        whenever(gameSystem.allCharacterClasses).doReturn(listOf(CharacterClass().apply { name = "myClass"; classAbilities = listOf() }))
-        whenever(gameSystem.allXpTables).doReturn(listOf(XpTable()))
-        gameSystemHolder.gameSystem = gameSystem
-
-        scenario = ActivityScenario.launch(CharacterCreateActivity::class.java)
-        scenario.moveToState(Lifecycle.State.RESUMED)
-
-        onView(withId(R.id.create_name)).perform(typeText("myName"))
-        onView(withId(R.id.create_player)).perform(typeText("myPlayer"))
-        onView(withId(R.id.race_and_class_navigate_next_button)).perform(click())
-        onView(withId(R.id.ability_scores_str)).perform(replaceText("18"))
-
-        // Act
-        onView(withId(R.id.create_button)).perform(click())
-
-        // Assert
-        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("myName"))))
-        onView(withId(R.id.attribute_str_value)).check(matches(withText("18")))
     }
 
 }

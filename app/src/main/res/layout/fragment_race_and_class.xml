@@ -155,7 +155,7 @@
             android:id="@+id/create_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_button_label"
+            android:text="@string/character_create_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/race_and_class_navigate_next_button" />
 

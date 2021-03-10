@@ -12,39 +12,35 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 
-class CharacterCreator(val characterData: CharacterData = CharacterData()) : KoinComponent {
+class CharacterCreator : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val characterHolder: CharacterHolder by inject()
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
-
-    fun createCharacter(): Character {
-        val character = createCharacterInternal()
+    fun createCharacter(characterCreatorViewModel: CharacterCreatorViewModel): Character {
+        val character = createCharacterInternal(characterCreatorViewModel)
         storeCharacter(character)
         logEventCharacterCreate(character)
         return character
     }
 
-    private fun createCharacterInternal(): Character {
-        return Character().apply {
-            name = characterData.name
-            player = characterData.player
-            race = characterData.race
-            classLevels = listOf(ClassLevel(characterData.clazz, 1))
-            sex = characterData.sex
-            alignment = characterData.alignment
-            xpTable = gameSystemHolder.gameSystem?.allXpTables?.get(0)
-            strength = characterData.strength
-            dexterity = characterData.dexterity
-            constitution = characterData.constitution
-            intelligence = characterData.intelligence
-            wisdom = characterData.wisdom
-            charisma = characterData.charisma
-            imageId = ImageService.DEFAULT_CHARACTER_IMAGE_ID
-            thumbImageId = ImageService.DEFAULT_THUMB_IMAGE_ID
-        }
-
+    private fun createCharacterInternal(characterCreatorViewModel: CharacterCreatorViewModel) = Character().apply {
+        name = characterCreatorViewModel.name
+        player = characterCreatorViewModel.player
+        race = characterCreatorViewModel.race
+        classLevels = listOf(ClassLevel(characterCreatorViewModel.clazz, 1))
+        sex = characterCreatorViewModel.sex
+        alignment = characterCreatorViewModel.alignment
+        xpTable = gameSystemHolder.gameSystem?.allXpTables?.get(0)
+        strength = characterCreatorViewModel.strength
+        dexterity = characterCreatorViewModel.dexterity
+        constitution = characterCreatorViewModel.constitution
+        intelligence = characterCreatorViewModel.intelligence
+        wisdom = characterCreatorViewModel.wisdom
+        charisma = characterCreatorViewModel.charisma
+        imageId = ImageService.DEFAULT_CHARACTER_IMAGE_ID
+        thumbImageId = ImageService.DEFAULT_THUMB_IMAGE_ID
     }
 
     private fun storeCharacter(character: Character) {

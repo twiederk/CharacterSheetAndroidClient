@@ -879,17 +879,19 @@
 
     <!-- CharacterCreateActivity -->
     <string name="character_create_title">Create Character</string>
+    <string name="character_create_button">Create Character</string>
 
     <!-- RaceAndClassFragment -->
     <string name="race_and_class_subtitle">Race and Class</string>
     <string name="race_and_class_navigate_next_button">Ability Scores &gt;</string>
     <string name="race_and_class_nav_graph_label">RaceAndClassFragment</string>
 
-    <!-- AbilityScoresFragment -->
+    <!-- AbilityScoresComposeFragment -->
     <string name="ability_scores_subtitle">Ability Scores</string>
     <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
     <string name="ability_scores_navigate_previous_button">&lt; Race and Class</string>
     <string name="ability_scores_nav_graph_label">AbilityScoresFragment</string>
+    <string name="ability_scores_compose_nav_graph_label">AbilityScoresComposeFragment</string>
 
     <!-- GameSystemSelector -->
     <string name="game_system_selector_heading">Select your game system</string>
@@ -970,5 +972,6 @@
     <string name="release_notes_3_5_1">Release 3.5.1\n- Added analysis for the use of the character creator.\n\n</string>
     <string name="release_notes_4_0_0">Release 4.0.0\n- Added Dungeons &amp; Dragons 5th edition. Starting with the tabs \'sheet\', \'race abilities\' and \'notes\'. More tabs are coming soon.\n\n</string>
     <string name="release_notes_4_1_0">Release 4.1.0\n- Added class abilities to Dungeons &amp; Dragons 5th edition.\n\n</string>
+    <string name="release_notes_4_2_0">Release 4.2.0\n- Added feats of Dungeons &amp; Dragons 5th edition.\n- Added ability modifier display to character creation ability screen.\n- Use of the latest GUI technology (Jetpack Compose) in character creation ability screen.\n\n</string>
 
 </resources>

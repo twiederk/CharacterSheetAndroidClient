@@ -46,7 +46,7 @@ class CharacterCreatorRobotronicTest : KoinTest {
     @Test
     fun createCharacter_everythingIsFine_createCharacterEventIsLoggedInFirebase() {
         // arrange
-        val characterData = CharacterData().apply {
+        val characterCreatorViewModel = CharacterCreatorViewModel().apply {
             race = Race().apply { name = "myRace" }
             clazz = CharacterClass().apply {
                 name = "myClass"
@@ -55,7 +55,7 @@ class CharacterCreatorRobotronicTest : KoinTest {
         }
 
         // act
-        CharacterCreator(characterData).createCharacter()
+        CharacterCreator().createCharacter(characterCreatorViewModel)
 
         // Assert
         argumentCaptor<Bundle> {

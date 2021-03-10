@@ -20,7 +20,7 @@ import org.koin.test.inject
 class RaceAndClassFragmentEspressoTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
-    private val characterCreator: CharacterCreator by inject()
+    private val characterCreatorViewModel: CharacterCreatorViewModel by inject()
 
     @Test
     fun updateCharacterData_readDataFromGuiComponents_characterDataContainsDataFromGuiComponents() {
@@ -42,13 +42,12 @@ class RaceAndClassFragmentEspressoTest : KoinTest {
         scenario.onFragment { fragment -> fragment.updateCharacterData() }
 
         // assert
-        val characterData = characterCreator.characterData
-        assertThat(characterData.name).isEqualTo("myName")
-        assertThat(characterData.player).isEqualTo("myPlayer")
-        assertThat(characterData.race?.name).isEqualTo("myRace")
-        assertThat(characterData.sex).isEqualTo(Sex.MALE)
-        assertThat(characterData.clazz?.name).isEqualTo("myClass")
-        assertThat(characterData.alignment).isEqualTo(Alignment.LAWFUL_GOOD)
+        assertThat(characterCreatorViewModel.name).isEqualTo("myName")
+        assertThat(characterCreatorViewModel.player).isEqualTo("myPlayer")
+        assertThat(characterCreatorViewModel.race?.name).isEqualTo("myRace")
+        assertThat(characterCreatorViewModel.sex).isEqualTo(Sex.MALE)
+        assertThat(characterCreatorViewModel.clazz?.name).isEqualTo("myClass")
+        assertThat(characterCreatorViewModel.alignment).isEqualTo(Alignment.LAWFUL_GOOD)
     }
 
 }

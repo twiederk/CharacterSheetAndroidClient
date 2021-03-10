@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.main.charactercreator
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.appModule
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.nhaarman.mockitokotlin2.argumentCaptor
@@ -46,25 +45,15 @@ class AbilityScoresFragmentRobotronicTest : KoinTest {
     fun onResume_screenViewIsLoggedInFirebase() {
 
         // act
-        AbilityScoresFragment().onResume()
+        AbilityScoresComposeFragment().onResume()
 
         // assert
         argumentCaptor<Bundle> {
             verify(firebaseAnalytics).logEvent(eq(FirebaseAnalytics.Event.SCREEN_VIEW), capture())
             assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_NAME)).isEqualTo("ability_scores_fragment")
-            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_CLASS)).isEqualTo("AbilityScoresFragment")
+            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_CLASS)).isEqualTo("AbilityScoresComposeFragment")
         }
 
-    }
-
-    @Test
-    fun onRollDice_rollDiceIsLoggedInFirebase() {
-
-        // act
-        AbilityScoresFragment().rollDice()
-
-        // assert
-        verify(firebaseAnalytics).logEvent(FBAnalytics.Event.STANDARD_METHOD_DICE_ROLL, null)
     }
 
 }

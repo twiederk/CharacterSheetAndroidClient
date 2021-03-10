@@ -1,0 +1,13 @@
+= d20 Character Sheet - Android App
+Torsten Wiederkehr <torsten.wiederkehr@gmail.com>
+v1.0.0, 2020-06-13
+// Settings:
+:icons: font
+:toc: left
+
+== Jetpack Compose
+
+[plantuml]
+----
+include::diagrams/jetpack-compose.puml[]
+----

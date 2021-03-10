@@ -42,7 +42,7 @@ class CharacterCreatorKoinTest : KoinTest {
     @Test
     fun createCharacter_everythingIsFine_createNewCharacter() {
         // arrange
-        val characterData = CharacterData().apply {
+        val characterCreatorViewModel = CharacterCreatorViewModel().apply {
             name = "myName"
             player = "myPlayer"
             race = Race().apply { name = "myRace" }
@@ -59,7 +59,7 @@ class CharacterCreatorKoinTest : KoinTest {
         whenever(gameSystemHolder.gameSystem).thenReturn(gameSystem)
 
         // act
-        val character = CharacterCreator(characterData).createCharacter()
+        val character = CharacterCreator().createCharacter(characterCreatorViewModel)
 
         // assert
         assertThat(character).isNotNull
