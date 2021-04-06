@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -26,8 +28,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.Serializable;
 import java.util.List;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays the notes of the character as a list. The notes are displayed with date and text. The option menu offers the
@@ -96,12 +96,15 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
 
     @Override
     public boolean onContextItemSelected(@NonNull final MenuItem menuItem) {
-
-        final Note note = getNote(menuItem);
-        if (menuItem.getItemId() == CONTEXT_MENU_NOTE_DELETE) {
-            return deleteNote(note);
+        try {
+            final Note note = getNote(menuItem);
+            if (menuItem.getItemId() == CONTEXT_MENU_NOTE_DELETE) {
+                return deleteNote(note);
+            }
+            return super.onContextItemSelected(menuItem);
+        } catch (Exception exception) {
+            return super.onContextItemSelected(menuItem);
         }
-        return super.onContextItemSelected(menuItem);
     }
 
     private Note getNote(final MenuItem menuItem) {
