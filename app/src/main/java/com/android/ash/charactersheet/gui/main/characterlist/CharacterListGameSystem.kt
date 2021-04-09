@@ -9,10 +9,12 @@ import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.gui.sheet.GameSystemLoader
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
 
+@KoinApiExtension
 class CharacterListGameSystem : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

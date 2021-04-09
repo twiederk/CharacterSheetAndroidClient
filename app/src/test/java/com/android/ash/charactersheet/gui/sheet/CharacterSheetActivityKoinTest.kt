@@ -12,15 +12,16 @@ import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
+import org.koin.test.KoinTestRule
 import org.koin.test.inject
+import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
+import org.mockito.Mockito
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -29,18 +30,19 @@ class CharacterSheetActivityKoinTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
-    @Before
-    fun before() {
-        startKoin {
-            modules(appModule)
-        }
-        declareMock<FirebaseAnalytics>()
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
     }
 
+    @get:Rule
+    val koinTestRule = KoinTestRule.create {
+        modules(appModule)
+    }
 
-    @After
-    fun after() {
-        stopKoin()
+    @Before
+    fun before() {
+        declareMock<FirebaseAnalytics>()
     }
 
     @Test
@@ -49,8 +51,9 @@ class CharacterSheetActivityKoinTest : KoinTest {
         val character = Character().apply {
             race = Race().apply { name = "myRace" }
             classLevels = listOf(
-                    ClassLevel(CharacterClass().apply { name = "myFirstClass"; classAbilities = listOf() }, 1),
-                    ClassLevel(CharacterClass().apply { name = "mySecondClass"; classAbilities = listOf() }, 2))
+                ClassLevel(CharacterClass().apply { name = "myFirstClass"; classAbilities = listOf() }, 1),
+                ClassLevel(CharacterClass().apply { name = "mySecondClass"; classAbilities = listOf() }, 2)
+            )
         }
 
         // Act

@@ -4,14 +4,18 @@ import android.os.Bundle
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
+import com.d20charactersheet.framework.boc.model.Alignment
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.model.ClassLevel
+import com.d20charactersheet.framework.boc.model.Sex
 import com.d20charactersheet.framework.boc.service.ImageService
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import java.util.*
 
-
+@KoinApiExtension
 class CharacterCreator : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
@@ -26,13 +30,15 @@ class CharacterCreator : KoinComponent {
     }
 
     private fun createCharacterInternal(characterCreatorViewModel: CharacterCreatorViewModel) = Character().apply {
+        val gameSystem = gameSystemHolder.gameSystem
         name = characterCreatorViewModel.name
         player = characterCreatorViewModel.player
-        race = characterCreatorViewModel.race
-        classLevels = listOf(ClassLevel(characterCreatorViewModel.clazz, 1))
-        sex = characterCreatorViewModel.sex
-        alignment = characterCreatorViewModel.alignment
-        xpTable = gameSystemHolder.gameSystem?.allXpTables?.get(0)
+        race = gameSystem?.raceService?.findRaceByName(characterCreatorViewModel.race, gameSystem.allRaces)
+        val clazz = gameSystem?.characterClassService?.findClassByName(characterCreatorViewModel.clazz, gameSystem.allCharacterClasses)
+        classLevels = listOf(ClassLevel(clazz, 1))
+        sex = Sex.valueOf(characterCreatorViewModel.sex.toUpperCase(Locale.ROOT))
+        alignment = Alignment.valueOf(characterCreatorViewModel.alignment.toUpperCase(Locale.ROOT).replace(" ", "_"))
+        xpTable = gameSystem?.allXpTables?.get(0)
         strength = characterCreatorViewModel.strength
         dexterity = characterCreatorViewModel.dexterity
         constitution = characterCreatorViewModel.constitution

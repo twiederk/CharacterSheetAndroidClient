@@ -415,7 +415,7 @@
     <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
     <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5\nThanks to Michel Chartrand for entering the races of the Advanced Races Guide</string>
     <string name="about_ogl">Open Gaming Licence</string>
-    <string name="about_copyright">Copyright &#169; 2009&#8211;2020 Torsten Wiederkehr\nAll rights reserved</string>
+    <string name="about_copyright">Copyright &#169; 2009&#8211;2021 Torsten Wiederkehr\nAll rights reserved</string>
     <string name="about_image_hint">Icon of application</string>
 
     <!-- OpenGamingLicenceActivity -->
@@ -882,12 +882,12 @@
     <string name="character_create_button">Create Character</string>
 
     <!-- RaceAndClassFragment -->
-    <string name="race_and_class_subtitle">Race and Class</string>
+    <string name="race_and_class_title">Race and Class</string>
     <string name="race_and_class_navigate_next_button">Ability Scores &gt;</string>
     <string name="race_and_class_nav_graph_label">RaceAndClassFragment</string>
 
     <!-- AbilityScoresComposeFragment -->
-    <string name="ability_scores_subtitle">Ability Scores</string>
+    <string name="ability_scores_title">Ability Scores</string>
     <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
     <string name="ability_scores_navigate_previous_button">&lt; Race and Class</string>
     <string name="ability_scores_nav_graph_label">AbilityScoresFragment</string>
@@ -973,5 +973,6 @@
     <string name="release_notes_4_0_0">Release 4.0.0\n- Added Dungeons &amp; Dragons 5th edition. Starting with the tabs \'sheet\', \'race abilities\' and \'notes\'. More tabs are coming soon.\n\n</string>
     <string name="release_notes_4_1_0">Release 4.1.0\n- Added class abilities to Dungeons &amp; Dragons 5th edition.\n\n</string>
     <string name="release_notes_4_2_0">Release 4.2.0\n- Added feats of Dungeons &amp; Dragons 5th edition.\n- Added ability modifier display to character creation ability screen.\n- Use of the latest GUI technology (Jetpack Compose) in character creation ability screen.\n\n</string>
+    <string name="release_notes_4_3_0">Release 4.3.0\n- Added weapons, armor and goods of Dungeons &amp; Dragons 5th edition.\n- Use of the latest GUI technology (Jetpack Compose) in character creation race and class screen.\n\n</string>
 
 </resources>

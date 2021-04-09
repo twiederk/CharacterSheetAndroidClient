@@ -1,5 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.feat;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static com.android.ash.charactersheet.gui.sheet.FeatPageFragment.RESULT_CODE_CATEGORY;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.view.ContextMenu;
@@ -12,13 +15,10 @@ import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
-import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.Logger;
-
 import androidx.fragment.app.Fragment;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static com.android.ash.charactersheet.gui.sheet.FeatPageFragment.RESULT_CODE_CATEGORY;
+import com.android.ash.charactersheet.R;
+import com.android.ash.charactersheet.gui.util.Logger;
 
 /**
  * The context menu of the feat list. Offers add and remove feat and edit of feat category.
@@ -111,7 +111,7 @@ public class FeatContextMenu implements OnCreateContextMenuListener, OnMenuItemC
         default:
             break;
         }
-        return false;
+        return true;
     }
 
     private void editFeat() {

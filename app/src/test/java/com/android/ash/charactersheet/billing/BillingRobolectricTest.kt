@@ -14,15 +14,16 @@ import com.android.billingclient.api.SkuDetails
 import com.d20charactersheet.framework.boc.model.Character
 import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
+import org.koin.test.KoinTestRule
 import org.koin.test.inject
+import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
+import org.mockito.Mockito
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -32,18 +33,20 @@ class BillingRobolectricTest : KoinTest {
 
     private val messageDisplay: MessageDisplay by inject()
 
-    @Before
-    fun before() {
-        startKoin {
-            modules(appModule)
-        }
-        declareMock<MessageDisplay>()
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
+    }
+
+    @get:Rule
+    val koinTestRule = KoinTestRule.create {
+        modules(appModule)
     }
 
 
-    @After
-    fun after() {
-        stopKoin()
+    @Before
+    fun before() {
+        declareMock<MessageDisplay>()
     }
 
     @Test
@@ -433,7 +436,8 @@ class BillingRobolectricTest : KoinTest {
     @Test
     fun requiresPurchase_oneCharacterAndDefaultCharacter_purchaseRequired() {
         // Act
-        val requiresPurchase = Billing().requiresPurchase(listOf(
+        val requiresPurchase = Billing().requiresPurchase(
+            listOf(
                 Character().apply { id = Billing.DEFAULT_CHARACTER_ID },
                 Character().apply { id = 1 })
         )
@@ -464,7 +468,8 @@ class BillingRobolectricTest : KoinTest {
         }
 
         // Act
-        val requiresPurchase = underTest.requiresPurchase(listOf(
+        val requiresPurchase = underTest.requiresPurchase(
+            listOf(
                 Character().apply { id = Billing.DEFAULT_CHARACTER_ID },
                 Character().apply { id = 1 })
         )

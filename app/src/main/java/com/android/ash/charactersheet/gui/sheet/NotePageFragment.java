@@ -96,15 +96,11 @@ public class NotePageFragment extends PageFragment implements OnItemClickListene
 
     @Override
     public boolean onContextItemSelected(@NonNull final MenuItem menuItem) {
-        try {
-            final Note note = getNote(menuItem);
-            if (menuItem.getItemId() == CONTEXT_MENU_NOTE_DELETE) {
-                return deleteNote(note);
-            }
-            return super.onContextItemSelected(menuItem);
-        } catch (Exception exception) {
-            return super.onContextItemSelected(menuItem);
+        final Note note = getNote(menuItem);
+        if (menuItem.getItemId() == CONTEXT_MENU_NOTE_DELETE) {
+            return deleteNote(note);
         }
+        return super.onContextItemSelected(menuItem);
     }
 
     private Note getNote(final MenuItem menuItem) {

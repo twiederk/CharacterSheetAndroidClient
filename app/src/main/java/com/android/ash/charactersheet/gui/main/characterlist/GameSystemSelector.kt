@@ -11,9 +11,11 @@ import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class GameSystemSelector(val activity: AppCompatActivity) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

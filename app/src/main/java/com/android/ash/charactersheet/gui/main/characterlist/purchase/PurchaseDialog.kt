@@ -8,9 +8,11 @@ import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.billing.Billing
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class PurchaseDialog(private val alertDialogBuilder: AlertDialog.Builder) : KoinComponent {
 
     private val billing: Billing by inject()

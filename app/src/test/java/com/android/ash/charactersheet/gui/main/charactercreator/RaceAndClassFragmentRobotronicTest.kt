@@ -45,7 +45,7 @@ class RaceAndClassFragmentRobotronicTest : KoinTest {
     fun onResume_screenViewIsLoggedInFirebase() {
 
         // act
-        RaceAndClassFragment().onResume()
+        RaceAndClassComposeFragment().onResume()
 
         // Assert
         argumentCaptor<Bundle> {

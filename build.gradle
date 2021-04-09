@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        composeVersion = '1.0.0-beta03'
+        composeVersion = '1.0.0-beta04'
         coreTestingVersion = '2.1.0'
         espressoVersion = '3.3.0'
         junitVersion = '4.13.1'
-        koinVersion = '2.0.1'
-        kotlinVersion = '1.4.31'
-        navigationVersion = '2.3.4'
+        koinVersion = '2.2.2'
+        kotlinVersion = '1.4.32'
+        navigationVersion = '2.3.5'
         testExtJunit = '1.1.2-rc02'
         truthVersion = '1.0.1'
         uiAutomatorVersion = '2.2.0'
@@ -19,7 +19,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha12'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha14'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.12'
         classpath 'com.google.gms:google-services:4.3.5'

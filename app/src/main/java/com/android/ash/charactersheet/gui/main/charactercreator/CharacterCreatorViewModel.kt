@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
 import com.d20charactersheet.framework.boc.model.Alignment
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Sex
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class CharacterCreatorViewModel : ViewModel(), KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
@@ -24,12 +24,17 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     private val ruleService = gameSystemHolder.gameSystem?.ruleService
     private val displayService = gameSystemHolder.gameSystem?.displayService
 
-    var name = ""
-    var player = ""
-    var race: Race? = null
-    var clazz: CharacterClass? = null
-    var sex = Sex.MALE
-    var alignment = Alignment.LAWFUL_GOOD
+    var raceList: List<String> = gameSystemHolder.gameSystem?.allRaces?.map { it.name }?.toList()?.sorted() ?: listOf()
+    var classList: List<String> = gameSystemHolder.gameSystem?.allCharacterClasses?.map { it.name }?.toList()?.sorted() ?: listOf()
+    val sexList: List<String> = (Sex.values().map { displayService?.getDisplaySex(it) }.toList()) as List<String>
+    val alignmentList: List<String> = (Alignment.values().map { displayService?.getDisplayAlignment(it) }.toList()) as List<String>
+
+    var name by mutableStateOf("")
+    var player by mutableStateOf("")
+    var race by mutableStateOf(raceList[0])
+    var clazz by mutableStateOf(classList[0])
+    var sex by mutableStateOf(sexList[0])
+    var alignment by mutableStateOf(alignmentList[0])
 
     var strength by mutableStateOf(10)
     var dexterity by mutableStateOf(10)
@@ -164,4 +169,51 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
         characterCreator.createCharacter(this)
     }
 
+    fun onChangeName(name: String) {
+        this.name = name
+    }
+
+    fun onChangePlayer(player: String) {
+        this.player = player
+    }
+
+    fun onRaceChange(race: String) {
+        this.race = race
+    }
+
+    fun onClassNameChange(className: String) {
+        this.clazz = className
+    }
+
+    fun onSexChange(sex: String) {
+        this.sex = sex
+    }
+
+    fun onAlignmentChange(alignment: String) {
+        this.alignment = alignment
+    }
+
+    fun reset() {
+        raceList = gameSystemHolder.gameSystem?.allRaces?.map { it.name }?.toList()?.sorted() ?: listOf()
+        classList = gameSystemHolder.gameSystem?.allCharacterClasses?.map { it.name }?.toList()?.sorted() ?: listOf()
+
+        name = ""
+        player = ""
+        race = raceList[0]
+        clazz = classList[0]
+        sex = sexList[0]
+        alignment = alignmentList[0]
+        strength = 10
+        strengthModifier = "0"
+        dexterity = 10
+        dexterityModifier = "0"
+        constitution = 10
+        constitutionModifier = "0"
+        intelligence = 10
+        intelligenceModifier = "0"
+        wisdom = 10
+        wisdomModifier = "0"
+        charisma = 10
+        charismaModifier = "0"
+    }
 }

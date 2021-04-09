@@ -19,6 +19,7 @@ The app is developed using TDD.
 |unit test with Robolectric         |/app/src/test        |*RobolectricTest     |@MediumTest
 |instrumented test with Espresso    |/app/src/androidTest |*EspressoTest        |@LargeTest
 |instrumented test without Espresso |/app/src/androidTest |*InstrumentedTest    |@SmallTest
+|instrumented test with Compose     |/app/src/androidTest |*ComposeTest         |@SmallTest
 |===
 
 

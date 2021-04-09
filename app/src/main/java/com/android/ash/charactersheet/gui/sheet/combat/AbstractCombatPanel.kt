@@ -8,8 +8,8 @@ import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.d20charactersheet.framework.boc.model.Character
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 abstract class AbstractCombatPanel : KoinComponent, CombatPanel {
 

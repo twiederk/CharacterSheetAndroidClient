@@ -7,9 +7,11 @@ import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.*
 import com.android.billingclient.api.Purchase.PurchaseState
 import com.d20charactersheet.framework.boc.model.Character
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class Billing(private val logger: Logger = Logger) : PurchasesUpdatedListener, SkuDetailsResponseListener, BillingClientStateListener, AcknowledgePurchaseResponseListener, KoinComponent {
 
     companion object {
@@ -146,9 +148,9 @@ class Billing(private val logger: Logger = Logger) : PurchasesUpdatedListener, S
     private fun hasPremiumVersion() = premiumVersion.purchaseState == PurchaseState.PURCHASED
 
     private fun hasNoCharacters(allCharacters: List<Character>) =
-            allCharacters.isEmpty()
+        allCharacters.isEmpty()
 
     private fun hasOnlyDefaultCharacter(allCharacters: List<Character>) =
-            (allCharacters.size == 1 && allCharacters[0].id == DEFAULT_CHARACTER_ID)
+        (allCharacters.size == 1 && allCharacters[0].id == DEFAULT_CHARACTER_ID)
 
 }

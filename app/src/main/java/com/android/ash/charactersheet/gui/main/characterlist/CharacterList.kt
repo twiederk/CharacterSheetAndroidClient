@@ -12,10 +12,11 @@ import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity
 import com.android.ash.charactersheet.gui.util.Logger.debug
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.util.CharacterComparator
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-
+@KoinApiExtension
 class CharacterList(private val characterListActivity: CharacterListActivity) : AdapterView.OnItemClickListener, KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

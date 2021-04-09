@@ -23,6 +23,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.Matchers.not
 import org.hamcrest.core.Is
 import org.junit.After
+import org.junit.Ignore
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
@@ -117,6 +118,7 @@ class CharacterListActivityEspressoTest : KoinTest {
     }
 
     @Test
+    @Ignore("Character creator uses Jetpack Compose")
     fun fab_onClick_callCharacterCreateActivity() {
 
         // Arrange

@@ -8,9 +8,11 @@ import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseDi
 import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseListener
 import com.android.ash.charactersheet.gui.util.AdViewConfiguration
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class CharacterListLayout(private val characterListActivity: CharacterListActivity) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

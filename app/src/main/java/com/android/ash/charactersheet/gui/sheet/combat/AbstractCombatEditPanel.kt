@@ -9,9 +9,11 @@ import com.android.ash.charactersheet.gui.widget.numberview.PositiveNumberViewCo
 import com.android.ash.charactersheet.gui.widget.numberview.SimpleNumberViewController
 import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
 import com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 abstract class AbstractCombatEditPanel : CombatEditPanel, KoinComponent {
 
     protected val gameSystemHolder: GameSystemHolder by inject()
@@ -37,15 +39,15 @@ abstract class AbstractCombatEditPanel : CombatEditPanel, KoinComponent {
         armorClassNumberView.controller = armorClassController
         val dexterityModifier = ruleService?.getModifier(character?.dexterity ?: 0)
         armorClassFormularTextView.text = displayService?.getDisplayArmourClassFormular(dexterityModifier
-                ?: 0)
+            ?: 0)
 
         val initiativeNumberView = view.findViewById<StepNumberView>(R.id.combat_initiative)
         val initiativeFormularTextView = view.findViewById<TextView>(R.id.combat_initiative_formular)
         val initiativeModifierController = SimpleNumberViewController(character?.initiativeModifier
-                ?: 0)
+            ?: 0)
         initiativeNumberView.controller = initiativeModifierController
         initiativeFormularTextView.text = displayService?.getDisplaySimpleFormular(dexterityModifier
-                ?: 0)
+            ?: 0)
 
     }
 

@@ -5,9 +5,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class FragmentPagerFactory : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

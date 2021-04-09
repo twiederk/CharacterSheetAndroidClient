@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/RaceAndClassFragment">
+    app:startDestination="@id/RaceAndClassComposeFragment">
 
     <fragment
-        android:id="@+id/RaceAndClassFragment"
-        android:name="com.android.ash.charactersheet.gui.main.charactercreator.RaceAndClassFragment"
-        android:label="@string/race_and_class_nav_graph_label"
-        tools:layout="@layout/fragment_race_and_class">
+        android:id="@+id/RaceAndClassComposeFragment"
+        android:name="com.android.ash.charactersheet.gui.main.charactercreator.RaceAndClassComposeFragment"
+        android:label="@string/race_and_class_nav_graph_label">
 
         <action
             android:id="@+id/action_RaceAndClassFragment_to_AbilityScoresFragment"
@@ -23,7 +21,7 @@
 
         <action
             android:id="@+id/action_AbilityScoresComposeFragment_to_AbilityScoresFragment"
-            app:popUpTo="@id/RaceAndClassFragment" />
+            app:popUpTo="@id/RaceAndClassComposeFragment" />
     </fragment>
 
 </navigation>

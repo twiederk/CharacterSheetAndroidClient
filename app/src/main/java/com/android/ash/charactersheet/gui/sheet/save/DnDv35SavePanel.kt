@@ -10,9 +10,11 @@ import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.gui.util.IntentOnClickListener
 import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView
 import com.d20charactersheet.framework.boc.model.Save
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class DnDv35SavePanel : SavePanel, KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

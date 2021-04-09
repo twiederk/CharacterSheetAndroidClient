@@ -3,10 +3,11 @@ package com.android.ash.charactersheet.gui.main.charactercreator
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl
-import com.d20charactersheet.framework.boc.model.Alignment
+import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.Die
-import com.d20charactersheet.framework.boc.model.Sex
+import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.service.CharacterCreatorServiceImpl
+import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.DnD5eRuleServiceImpl
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -34,6 +35,16 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         }
         declareMock<FirebaseAnalytics>()
         declareMock<CharacterCreator>()
+
+        val gameSystem: GameSystem = mock()
+        whenever(gameSystem.allRaces).thenReturn(mutableListOf(Race().apply { name = "myRace" }, Race().apply { name = "anotherRace" }))
+        whenever(gameSystem.allCharacterClasses).thenReturn(listOf(CharacterClass().apply { name = "myClass" }, CharacterClass().apply { name = "anotherClass" }))
+        val displayService: DisplayService = mock()
+        whenever(displayService.getDisplaySex(any())).thenReturn("Male")
+        whenever(displayService.getDisplayAlignment(any())).thenReturn("Lawful Good")
+        whenever(gameSystem.displayService).thenReturn(displayService)
+
+        gameSystemHolder.gameSystem = gameSystem
     }
 
     @After
@@ -50,8 +61,12 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         // assert
         assertThat(characterCreatorViewModel.name).isEqualTo("")
         assertThat(characterCreatorViewModel.player).isEqualTo("")
-        assertThat(characterCreatorViewModel.sex).isEqualTo(Sex.MALE)
-        assertThat(characterCreatorViewModel.alignment).isEqualTo(Alignment.LAWFUL_GOOD)
+        assertThat(characterCreatorViewModel.race).isEqualTo("anotherRace")
+        assertThat(characterCreatorViewModel.raceList).containsExactly("anotherRace", "myRace")
+        assertThat(characterCreatorViewModel.clazz).isEqualTo("anotherClass")
+        assertThat(characterCreatorViewModel.classList).containsExactly("anotherClass", "myClass")
+        assertThat(characterCreatorViewModel.sex).isEqualTo("Male")
+        assertThat(characterCreatorViewModel.alignment).isEqualTo("Lawful Good")
         assertThat(characterCreatorViewModel.strength).isEqualTo(10)
         assertThat(characterCreatorViewModel.dexterity).isEqualTo(10)
         assertThat(characterCreatorViewModel.constitution).isEqualTo(10)
@@ -383,10 +398,10 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         // arrange
         Die.setRandom(Random(1))
 
-        val gameSystem: GameSystem = mock()
-        whenever(gameSystem.characterCreatorService).thenReturn(CharacterCreatorServiceImpl())
-        whenever(gameSystem.ruleService).thenReturn(DnD5eRuleServiceImpl())
-        whenever(gameSystem.displayService).thenReturn(AndroidDisplayServiceImpl(null))
+        val gameSystem = gameSystemHolder.gameSystem
+        whenever(gameSystem?.characterCreatorService).thenReturn(CharacterCreatorServiceImpl())
+        whenever(gameSystem?.ruleService).thenReturn(DnD5eRuleServiceImpl())
+        whenever(gameSystem?.displayService).thenReturn(AndroidDisplayServiceImpl(mock()))
         gameSystemHolder.gameSystem = gameSystem
 
         val underTest = CharacterCreatorViewModel()
@@ -413,7 +428,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     }
 
     @Test
-    fun onCreateCharacter() {
+    fun onCreateCharacter_everythingIsFine_createNewCharacter() {
 
         // act
         CharacterCreatorViewModel().onCreateCharacter()
@@ -422,4 +437,43 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         verify(characterCreator, only()).createCharacter(any())
     }
 
+    @Test
+    fun reset_resetProperties_allPropertiesAreReset() {
+        // arrange
+        val underTest = CharacterCreatorViewModel()
+        underTest.raceList = listOf("firstRace", "secondRace")
+        underTest.classList = listOf("firstClass", "secondClass")
+
+        underTest.name = "myName"
+        underTest.player = "myPlayer"
+        underTest.race = underTest.raceList[1]
+        underTest.clazz = underTest.classList[1]
+        underTest.sex = "Female"
+        underTest.alignment = "Neutral"
+        underTest.onRollDice()
+
+        // act
+        underTest.reset()
+
+        // assert
+        assertThat(underTest.name).isEqualTo("")
+        assertThat(underTest.player).isEqualTo("")
+        assertThat(underTest.race).isEqualTo("anotherRace")
+        assertThat(underTest.clazz).isEqualTo("anotherClass")
+        assertThat(underTest.sex).isEqualTo("Male")
+        assertThat(underTest.alignment).isEqualTo("Lawful Good")
+        assertThat(underTest.strength).isEqualTo(10)
+        assertThat(underTest.strengthModifier).isEqualTo("0")
+        assertThat(underTest.dexterity).isEqualTo(10)
+        assertThat(underTest.dexterityModifier).isEqualTo("0")
+        assertThat(underTest.constitution).isEqualTo(10)
+        assertThat(underTest.constitutionModifier).isEqualTo("0")
+        assertThat(underTest.intelligence).isEqualTo(10)
+        assertThat(underTest.intelligenceModifier).isEqualTo("0")
+        assertThat(underTest.wisdom).isEqualTo(10)
+        assertThat(underTest.wisdomModifier).isEqualTo("0")
+        assertThat(underTest.charisma).isEqualTo(10)
+        assertThat(underTest.charismaModifier).isEqualTo("0")
+
+    }
 }

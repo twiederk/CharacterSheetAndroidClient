@@ -7,12 +7,8 @@ import androidx.compose.ui.test.onNodeWithText
 import com.android.ash.charactersheet.R
 import org.junit.Rule
 import org.junit.Test
-import org.koin.test.KoinTest
-import org.koin.test.inject
 
-class AbilityScoresComposeFragmentEspressoTest : KoinTest {
-
-    private val characterCreatorViewModel: CharacterCreatorViewModel by inject()
+class AbilityScoresComposeTest {
 
     @Rule
     @JvmField
@@ -56,50 +52,50 @@ class AbilityScoresComposeFragmentEspressoTest : KoinTest {
         composeTestRule.setContent {
             MaterialTheme {
                 AbilityScoresScreen(
-                    onRollDice = { characterCreatorViewModel.onRollDice() },
+                    onRollDice = { },
                     onNavigateToRaceAndClassFragment = { },
                     onCreateCharacter = { },
                     AttributeRowData(
                         attributeLabel = R.string.attribute_strength,
-                        attributeValue = characterCreatorViewModel.strength,
-                        attributeModifier = characterCreatorViewModel.strengthModifier,
-                        onIncrease = { characterCreatorViewModel.onIncreaseStrength() },
-                        onDecrease = { characterCreatorViewModel.onDecreaseStrength() }
+                        attributeValue = 10,
+                        attributeModifier = "0",
+                        onIncrease = { },
+                        onDecrease = { }
                     ),
                     AttributeRowData(
                         attributeLabel = R.string.attribute_dexterity,
-                        attributeValue = characterCreatorViewModel.dexterity,
-                        attributeModifier = characterCreatorViewModel.dexterityModifier,
-                        onIncrease = { characterCreatorViewModel.onIncreaseDexterity() },
-                        onDecrease = { characterCreatorViewModel.onDecreaseDexterity() }
+                        attributeValue = 12,
+                        attributeModifier = "+1",
+                        onIncrease = { },
+                        onDecrease = { }
                     ),
                     AttributeRowData(
                         attributeLabel = R.string.attribute_constitution,
-                        attributeValue = characterCreatorViewModel.constitution,
-                        attributeModifier = characterCreatorViewModel.constitutionModifier,
-                        onIncrease = { characterCreatorViewModel.onIncreaseConstitution() },
-                        onDecrease = { characterCreatorViewModel.onDecreaseConstitution() }
+                        attributeValue = 14,
+                        attributeModifier = "+2",
+                        onIncrease = { },
+                        onDecrease = { }
                     ),
                     AttributeRowData(
                         attributeLabel = R.string.attribute_intelligence,
-                        attributeValue = characterCreatorViewModel.intelligence,
-                        attributeModifier = characterCreatorViewModel.intelligenceModifier,
-                        onIncrease = { characterCreatorViewModel.onIncreaseIntelligence() },
-                        onDecrease = { characterCreatorViewModel.onDecreaseIntelligence() }
+                        attributeValue = 16,
+                        attributeModifier = "+3",
+                        onIncrease = { },
+                        onDecrease = { }
                     ),
                     AttributeRowData(
                         attributeLabel = R.string.attribute_wisdom,
-                        attributeValue = characterCreatorViewModel.wisdom,
-                        attributeModifier = characterCreatorViewModel.wisdomModifier,
-                        onIncrease = { characterCreatorViewModel.onIncreaseWisdom() },
-                        onDecrease = { characterCreatorViewModel.onDecreaseWisdom() }
+                        attributeValue = 18,
+                        attributeModifier = "+4",
+                        onIncrease = { },
+                        onDecrease = { }
                     ),
                     AttributeRowData(
                         attributeLabel = R.string.attribute_charisma,
-                        attributeValue = characterCreatorViewModel.charisma,
-                        attributeModifier = characterCreatorViewModel.charismaModifier,
-                        onIncrease = { characterCreatorViewModel.onIncreaseCharisma() },
-                        onDecrease = { characterCreatorViewModel.onDecreaseCharisma() }
+                        attributeValue = 20,
+                        attributeModifier = "+5",
+                        onIncrease = { },
+                        onDecrease = { }
                     )
                 )
             }
@@ -107,12 +103,31 @@ class AbilityScoresComposeFragmentEspressoTest : KoinTest {
 
         // assert
         composeTestRule.onNodeWithText("Roll Dice (4d6)").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("Strength").assertIsDisplayed()
+        composeTestRule.onNodeWithText("10").assertIsDisplayed()
+        composeTestRule.onNodeWithText("0").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("Dexterity").assertIsDisplayed()
+        composeTestRule.onNodeWithText("12").assertIsDisplayed()
+        composeTestRule.onNodeWithText("+1").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("Constitution").assertIsDisplayed()
+        composeTestRule.onNodeWithText("14").assertIsDisplayed()
+        composeTestRule.onNodeWithText("+2").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("Intelligence").assertIsDisplayed()
+        composeTestRule.onNodeWithText("16").assertIsDisplayed()
+        composeTestRule.onNodeWithText("+3").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("Wisdom").assertIsDisplayed()
+        composeTestRule.onNodeWithText("18").assertIsDisplayed()
+        composeTestRule.onNodeWithText("+4").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("Charisma").assertIsDisplayed()
+        composeTestRule.onNodeWithText("20").assertIsDisplayed()
+        composeTestRule.onNodeWithText("+5").assertIsDisplayed()
+
         composeTestRule.onNodeWithText("< Race and Class").assertIsDisplayed()
         composeTestRule.onNodeWithText("Create Character").assertIsDisplayed()
     }

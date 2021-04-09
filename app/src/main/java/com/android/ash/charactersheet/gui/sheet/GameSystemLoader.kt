@@ -15,9 +15,11 @@ import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.*
 import com.d20charactersheet.framework.dac.dao.sql.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+@KoinApiExtension
 class GameSystemLoader : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
@@ -26,13 +28,13 @@ class GameSystemLoader : KoinComponent {
     fun connectDatabases(context: Context) {
         val dbVersion = BuildConfig.VERSION_CODE
         gameSystemHolder.dndDbHelper = DBHelper(
-                context, dbVersion, DNDV35
+            context, dbVersion, DNDV35
         )
         gameSystemHolder.pathfinderDbHelper = DBHelper(
-                context, dbVersion, PATHFINDER
+            context, dbVersion, PATHFINDER
         )
         gameSystemHolder.dnd5eDbHelper = DBHelper(
-                context, dbVersion, DND5E
+            context, dbVersion, DND5E
         )
         preferencesServiceHolder.preferenceService = PreferenceServiceImpl(AndroidPreferenceDao(context))
     }
@@ -101,10 +103,10 @@ class GameSystemLoader : KoinComponent {
     }
 
     internal fun getRuleService(gameSystemType: GameSystemType): RuleService =
-            when (gameSystemType) {
-                DNDV35 -> DnDv35RuleServiceImpl()
-                PATHFINDER -> PathfinderRuleServiceImpl()
-                DND5E -> DnD5eRuleServiceImpl()
-            }
+        when (gameSystemType) {
+            DNDV35 -> DnDv35RuleServiceImpl()
+            PATHFINDER -> PathfinderRuleServiceImpl()
+            DND5E -> DnD5eRuleServiceImpl()
+        }
 
 }

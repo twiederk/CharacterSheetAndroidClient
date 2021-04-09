@@ -1,10 +1,9 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,42 +19,64 @@ fun AbilityScoresScreen(
     onCreateCharacter: () -> Unit,
     vararg attributes: AttributeRowData
 ) {
-    Surface {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row {
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    onClick = onRollDice
-                ) {
-                    Text(stringResource(R.string.ability_scores_roll_dice))
+    Surface(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxHeight()) {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = { Text(stringResource(id = R.string.ability_scores_title)) }
+                    )
+                },
+
+                content = {
+                    Column(
+                        modifier = Modifier
+                            .verticalScroll(rememberScrollState())
+                            .padding(bottom = 50.dp)
+                    ) {
+                        Button(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            onClick = onRollDice
+                        ) {
+                            Text(stringResource(R.string.ability_scores_roll_dice))
+                        }
+                        for (attributeRowData in attributes) {
+                            AttributeRow(attributeRowData)
+                        }
+                    }
+                },
+
+                bottomBar = {
+                    Surface(
+                        elevation = 3.dp,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Button(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(8.dp),
+                                onClick = onNavigateToRaceAndClassFragment
+                            ) {
+                                Text(stringResource(R.string.ability_scores_navigate_previous_button))
+                            }
+                            Button(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(8.dp), onClick = onCreateCharacter
+                            ) {
+                                Text(stringResource(R.string.character_create_button))
+                            }
+                        }
+                    }
                 }
-            }
-            for (attributeRowData in attributes) {
-                AttributeRow(attributeRowData)
-            }
-            Row {
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    onClick = onNavigateToRaceAndClassFragment
-                ) {
-                    Text(stringResource(R.string.ability_scores_navigate_previous_button))
-                }
-            }
-            Row {
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp), onClick = onCreateCharacter
-                ) {
-                    Text(stringResource(R.string.character_create_button))
-                }
-            }
+
+            )
         }
     }
 }
