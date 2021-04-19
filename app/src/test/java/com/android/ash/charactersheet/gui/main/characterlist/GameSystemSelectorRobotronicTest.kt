@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
-import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.android.ash.charactersheet.GameSystemHolder
@@ -10,12 +9,15 @@ import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -24,6 +26,7 @@ import org.koin.test.mock.declareMock
 import org.robolectric.annotation.Config
 
 
+@KoinApiExtension
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
 @MediumTest
@@ -103,11 +106,7 @@ class GameSystemSelectorRobotronicTest : KoinTest {
         // assert
         assertThat(underTest.gameSystemSelected).isTrue
         verify(preferenceServiceHolder.preferenceService)?.setInt(PreferenceService.GAME_SYSTEM_TYPE, GameSystemType.DNDV35.ordinal)
-        argumentCaptor<Bundle> {
-            verify(firebaseAnalytics).logEvent(eq("game_system_select"), capture())
-            assertThat(firstValue.getString("game_system_name")).isEqualTo(GameSystemType.DNDV35.getName())
-        }
-
+        verify(firebaseAnalytics).logEvent("game_system_select_dndv35", null)
     }
 
 }

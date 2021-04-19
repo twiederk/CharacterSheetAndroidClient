@@ -173,7 +173,8 @@ Examples: `spell_slot_assign` or `character_open`
 |===
 |Screen |Class|Name
 |Character Creator|CharacterCreatorActivity|
-|Select race and class|RaceAndClassFragment|race_and_class_fragment
+|Select race|RaceFragment|race_fragment
+|Select class|ClassFragment|class_fragment
 |Roll ability scores|AbilityScoresFragment|ability_scores_fragment
 |===
 

@@ -15,35 +15,40 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.ash.charactersheet.R
+import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
+
+
+//gender: String,
+//genderList: List<String>,
+//onGenderChange: (String) -> Unit,
 
 @Composable
-fun RaceAndClassScreen(
+fun ClassScreen(
     name: String,
     player: String,
-    race: String,
-    raceList: List<String>,
     clazz: String,
     classList: List<String>,
-    sex: String,
-    sexList: List<String>,
+    gender: String,
+    genderList: List<String>,
     alignment: String,
     alignmentList: List<String>,
-
     onChangeName: (String) -> Unit,
     onChangePlayer: (String) -> Unit,
-    onRaceChange: (String) -> Unit,
-    onSexChange: (String) -> Unit,
+
+    onGenderChange: (String) -> Unit,
     onAlignmentChange: (String) -> Unit,
     onClassChange: (String) -> Unit,
-    onNavigateToRaceAndClassFragment: () -> Unit,
+    onNavigateToPrevious: () -> Unit,
+    onNavigateToNext: () -> Unit,
     onCreateCharacter: () -> Unit
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxHeight()) {
             Scaffold(
                 topBar = {
-                    TopAppBar(
-                        title = { Text(stringResource(id = R.string.race_and_class_title)) }
+                    TopBarTitle(
+                        title = stringResource(R.string.class_title),
+                        progress = 2
                     )
                 },
 
@@ -74,13 +79,6 @@ fun RaceAndClassScreen(
                         )
 
                         StringDropdownMenu(
-                            labelResourceId = R.string.create_race_label,
-                            name = race,
-                            nameList = raceList,
-                            onNameChange = onRaceChange
-                        )
-
-                        StringDropdownMenu(
                             labelResourceId = R.string.create_class_label,
                             name = clazz,
                             nameList = classList,
@@ -88,12 +86,11 @@ fun RaceAndClassScreen(
                         )
 
                         StringDropdownMenu(
-                            labelResourceId = R.string.create_sex_label,
-                            name = sex,
-                            nameList = sexList,
-                            onNameChange = onSexChange
+                            labelResourceId = R.string.create_gender_label,
+                            name = gender,
+                            nameList = genderList,
+                            onNameChange = onGenderChange
                         )
-
                         StringDropdownMenu(
                             labelResourceId = R.string.create_alignment_label,
                             name = alignment,
@@ -104,32 +101,14 @@ fun RaceAndClassScreen(
                 },
 
                 bottomBar = {
-                    Surface(
-                        elevation = 3.dp,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        ) {
-                            Button(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(8.dp),
-                                onClick = onNavigateToRaceAndClassFragment
-                            ) {
-                                Text(stringResource(R.string.race_and_class_navigate_next_button))
-                            }
-
-                            Button(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(8.dp), onClick = onCreateCharacter
-                            ) {
-                                Text(stringResource(R.string.character_create_button))
-                            }
-                        }
-                    }
+                    BottomBarNavigation(
+                        showPrevious = true,
+                        showNext = true,
+                        showCreate = true,
+                        onNavigateToPrevious = onNavigateToPrevious,
+                        onNavigateToNext = onNavigateToNext,
+                        onCreateCharacter = onCreateCharacter
+                    )
                 }
             )
         }
@@ -138,28 +117,25 @@ fun RaceAndClassScreen(
 
 @Preview
 @Composable
-fun RaceAndClassScreenPreview() {
-    MaterialTheme {
-        RaceAndClassScreen(
+fun ClassScreenPreview() {
+    D20CharacterSheetTheme {
+        ClassScreen(
             name = "myName",
             player = "myPlayer",
-            race = "Human",
-            raceList = listOf("Human", "Dwarf"),
-            sexList = listOf("Male", "Female"),
-            sex = "Male",
-            alignmentList = listOf("Lawfull Good", "Neutral Good"),
-            alignment = "Lafull Good",
             clazz = "Fighter",
             classList = listOf("Fighter", "Wizard"),
+            gender = "Male",
+            genderList = listOf("Male, Female"),
+            alignment = "Lawful Good",
+            alignmentList = listOf("Lawful Good", "Neutral Good"),
             onChangeName = {},
             onChangePlayer = {},
-            onRaceChange = {},
-            onSexChange = {},
+            onGenderChange = {},
             onAlignmentChange = {},
             onClassChange = {},
-            onNavigateToRaceAndClassFragment = {},
-            onCreateCharacter = {}
-        )
+            onNavigateToPrevious = {},
+            onNavigateToNext = {}
+        ) {}
     }
 }
 

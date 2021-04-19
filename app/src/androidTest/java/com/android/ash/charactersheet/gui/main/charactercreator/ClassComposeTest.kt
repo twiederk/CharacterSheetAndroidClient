@@ -1,101 +1,92 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Rule
 import org.junit.Test
 
-class RaceAndClassComposeTest {
+class ClassComposeTest {
 
     @Rule
     @JvmField
     val composeTestRule = createComposeRule()
 
     @Test
-    fun display_raceAndClassScreen() {
+    fun display_classScreen() {
 
         // Act
         composeTestRule.setContent {
-            MaterialTheme {
-                RaceAndClassScreen(
+            D20CharacterSheetTheme {
+                ClassScreen(
                     name = "myName",
                     player = "myPlayer",
-                    race = "myRace",
-                    raceList = listOf("myRace"),
                     clazz = "myClass",
                     classList = listOf("myClass"),
-                    sex = "mySex",
-                    sexList = listOf("mySex"),
+                    gender = "myGender",
+                    genderList = listOf("myGender"),
                     alignment = "myAlignment",
                     alignmentList = listOf("myAlignment"),
-
                     onChangeName = { },
                     onChangePlayer = { },
-                    onRaceChange = { },
-                    onSexChange = { },
+                    onGenderChange = { },
                     onAlignmentChange = { },
                     onClassChange = { },
-                    onNavigateToRaceAndClassFragment = { },
-                    onCreateCharacter = { }
-                )
+                    onNavigateToPrevious = { },
+                    onNavigateToNext = { }
+                ) { }
             }
         }
 
         // assert
-        composeTestRule.onNodeWithText("Race and Class").assertIsDisplayed()
-
         composeTestRule.onNodeWithText("myName").assertIsDisplayed()
-        composeTestRule.onNodeWithText("myRace").assertIsDisplayed()
         composeTestRule.onNodeWithText("myClass").assertIsDisplayed()
-        composeTestRule.onNodeWithText("mySex").assertIsDisplayed()
+        composeTestRule.onNodeWithText("myGender").assertIsDisplayed()
         composeTestRule.onNodeWithText("myAlignment").assertIsDisplayed()
 
-        composeTestRule.onNodeWithText("Ability Scores >").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Create Character").assertIsDisplayed()
+        composeTestRule.onNodeWithText("NEXT").assertIsDisplayed()
+        composeTestRule.onNodeWithText("PREVIOUS").assertIsDisplayed()
+        composeTestRule.onNodeWithText("CREATE CHARACTER").assertIsDisplayed()
     }
 
     @Test
     fun navigate_ToAbilityScores() {
 
         // Arrange
-        val onNavigateToRaceAndClassFragment = mock<() -> Unit>()
+        val onNavigateToNext = mock<() -> Unit>()
 
         composeTestRule.setContent {
-            MaterialTheme {
-                RaceAndClassScreen(
+            D20CharacterSheetTheme {
+                ClassScreen(
                     name = "myName",
                     player = "myPlayer",
-                    race = "myRace",
-                    raceList = listOf("myRace"),
                     clazz = "myClass",
                     classList = listOf("myClass"),
-                    sex = "mySex",
-                    sexList = listOf("mySex"),
+                    gender = "Male",
+                    genderList = listOf("Male", "Female"),
                     alignment = "myAlignment",
                     alignmentList = listOf("myAlignment"),
-
                     onChangeName = { },
                     onChangePlayer = { },
-                    onRaceChange = { },
-                    onSexChange = { },
+                    onGenderChange = { },
                     onAlignmentChange = { },
                     onClassChange = { },
-                    onNavigateToRaceAndClassFragment = onNavigateToRaceAndClassFragment,
+                    onNavigateToPrevious = { },
+                    onNavigateToNext = onNavigateToNext,
                     onCreateCharacter = { }
                 )
             }
         }
 
         // act
-        composeTestRule.onNodeWithText("Ability Scores >").performClick()
+        composeTestRule.onNodeWithText("NEXT").performClick()
 
         // assert
-        verify(onNavigateToRaceAndClassFragment).invoke()
+        verify(onNavigateToNext).invoke()
     }
 
     @Test
@@ -105,33 +96,30 @@ class RaceAndClassComposeTest {
         val onCreateCharacter = mock<() -> Unit>()
 
         composeTestRule.setContent {
-            MaterialTheme {
-                RaceAndClassScreen(
+            D20CharacterSheetTheme {
+                ClassScreen(
                     name = "myName",
                     player = "myPlayer",
-                    race = "myRace",
-                    raceList = listOf("myRace"),
                     clazz = "myClass",
                     classList = listOf("myClass"),
-                    sex = "mySex",
-                    sexList = listOf("mySex"),
+                    gender = "Male",
+                    genderList = listOf("Male", "Female"),
                     alignment = "myAlignment",
                     alignmentList = listOf("myAlignment"),
-
                     onChangeName = { },
                     onChangePlayer = { },
-                    onRaceChange = { },
-                    onSexChange = { },
+                    onGenderChange = { },
                     onAlignmentChange = { },
                     onClassChange = { },
-                    onNavigateToRaceAndClassFragment = { },
+                    onNavigateToPrevious = { },
+                    onNavigateToNext = { },
                     onCreateCharacter = onCreateCharacter
                 )
             }
         }
 
         // act
-        composeTestRule.onNodeWithText("Create Character").performClick()
+        composeTestRule.onNodeWithText("CREATE CHARACTER").performClick()
 
         // assert
         verify(onCreateCharacter).invoke()

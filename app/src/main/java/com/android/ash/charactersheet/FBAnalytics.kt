@@ -25,7 +25,9 @@ object FBAnalytics {
         const val PURCHASE_CANCEL = "purchase_cancel"
         const val PURCHASE_RESTORE = "purchase_restore"
         const val STANDARD_METHOD_DICE_ROLL = "standard_method_dice_roll"
-        const val GAME_SYSTEM_SELECT = "game_system_select"
+        const val GAME_SYSTEM_SELECT_DNDV35 = "game_system_select_dndv35"
+        const val GAME_SYSTEM_SELECT_DND5E = "game_system_select_dnd5e"
+        const val GAME_SYSTEM_SELECT_PATHFINDER = "game_system_select_pathfinder"
     }
 
     object Param {
@@ -35,7 +37,6 @@ object FBAnalytics {
         const val WEAPON_NAME = "weapon_name"
         const val SPELL_NAME = "spell_name"
         const val DIE_ROLL_NAME = "die_roll_name"
-        const val GAME_SYSTEM_NAME = "game_system_name"
     }
 
     object ScreenName {
@@ -49,7 +50,8 @@ object FBAnalytics {
         const val NOTE = "note_fragment"
         const val KNOWN_SPELL = "known_spell_fragment"
         const val SPELL_SLOT = "spell_slot_fragment"
-        const val RACE_AND_CLASS = "race_and_class_fragment"
+        const val RACE = "race_fragment"
+        const val CLASS = "class_fragment"
         const val ABILITY_SCORES = "ability_scores_fragment"
     }
 

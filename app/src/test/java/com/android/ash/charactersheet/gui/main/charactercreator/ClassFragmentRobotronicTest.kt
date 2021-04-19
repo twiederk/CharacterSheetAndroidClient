@@ -13,6 +13,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -23,7 +24,7 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
 @MediumTest
-class RaceAndClassFragmentRobotronicTest : KoinTest {
+class ClassFragmentRobotronicTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
@@ -41,17 +42,18 @@ class RaceAndClassFragmentRobotronicTest : KoinTest {
         stopKoin()
     }
 
+    @KoinApiExtension
     @Test
     fun onResume_screenViewIsLoggedInFirebase() {
 
         // act
-        RaceAndClassComposeFragment().onResume()
+        ClassComposeFragment().onResume()
 
         // Assert
         argumentCaptor<Bundle> {
             verify(firebaseAnalytics).logEvent(eq(FirebaseAnalytics.Event.SCREEN_VIEW), capture())
-            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_NAME)).isEqualTo("race_and_class_fragment")
-            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_CLASS)).isEqualTo("RaceAndClassFragment")
+            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_NAME)).isEqualTo("class_fragment")
+            assertThat(firstValue.getString(FirebaseAnalytics.Param.SCREEN_CLASS)).isEqualTo("ClassComposeFragment")
         }
 
     }

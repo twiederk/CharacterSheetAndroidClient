@@ -2,15 +2,28 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/RaceAndClassComposeFragment">
+    app:startDestination="@id/RaceComposeFragment">
 
     <fragment
-        android:id="@+id/RaceAndClassComposeFragment"
-        android:name="com.android.ash.charactersheet.gui.main.charactercreator.RaceAndClassComposeFragment"
-        android:label="@string/race_and_class_nav_graph_label">
+        android:id="@+id/RaceComposeFragment"
+        android:name="com.android.ash.charactersheet.gui.main.charactercreator.RaceComposeFragment"
+        android:label="@string/race_nav_graph_label">
 
         <action
-            android:id="@+id/action_RaceAndClassFragment_to_AbilityScoresFragment"
+            android:id="@+id/action_RaceFragment_to_ClassFragment"
+            app:destination="@id/ClassComposeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ClassComposeFragment"
+        android:name="com.android.ash.charactersheet.gui.main.charactercreator.ClassComposeFragment"
+        android:label="@string/class_nav_graph_label">
+
+        <action
+            android:id="@+id/action_ClassFragment_to_RaceFragment"
+            app:popUpTo="@id/RaceComposeFragment" />
+        <action
+            android:id="@+id/action_ClassFragment_to_AbilityScoresFragment"
             app:destination="@id/AbilityScoresComposeFragment" />
     </fragment>
 
@@ -21,7 +34,7 @@
 
         <action
             android:id="@+id/action_AbilityScoresComposeFragment_to_AbilityScoresFragment"
-            app:popUpTo="@id/RaceAndClassComposeFragment" />
+            app:popUpTo="@id/ClassComposeFragment" />
     </fragment>
 
 </navigation>

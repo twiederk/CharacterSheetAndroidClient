@@ -18,6 +18,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -25,6 +26,7 @@ import org.koin.test.inject
 import org.koin.test.mock.declareMock
 import org.robolectric.annotation.Config
 
+@KoinApiExtension
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
 @MediumTest
@@ -69,9 +71,9 @@ class CharacterCreatorRobotronicTest : KoinTest {
         whenever(gameSystem.allXpTables).thenReturn(listOf(XpTable().apply { name = "myXpTable" }))
         gameSystemHolder.gameSystem = gameSystem
 
-        characterCreatorViewModel.race = "myRace"
+        characterCreatorViewModel.race = Race().apply { name = "myRace" }
         characterCreatorViewModel.clazz = "myClass"
-        characterCreatorViewModel.sex = "Male"
+        characterCreatorViewModel.gender = "Male"
         characterCreatorViewModel.alignment = "Lawful Good"
 
         // act

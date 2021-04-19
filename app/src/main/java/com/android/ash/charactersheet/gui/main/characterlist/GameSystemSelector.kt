@@ -1,6 +1,5 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
-import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -58,9 +57,15 @@ class GameSystemSelector(val activity: AppCompatActivity) : KoinComponent {
     }
 
     private fun logEventGameSystemSelect(gameSystemType: GameSystemType) {
-        val bundle = Bundle()
-        bundle.putString(FBAnalytics.Param.GAME_SYSTEM_NAME, gameSystemType.getName())
-        firebaseAnalytics.logEvent(FBAnalytics.Event.GAME_SYSTEM_SELECT, bundle)
+        val gameSystemSelection = getFirebaseEventName(gameSystemType)
+        firebaseAnalytics.logEvent(gameSystemSelection, null)
     }
+
+    private fun getFirebaseEventName(gameSystemType: GameSystemType) =
+        when (gameSystemType) {
+            GameSystemType.DNDV35 -> FBAnalytics.Event.GAME_SYSTEM_SELECT_DNDV35
+            GameSystemType.DND5E -> FBAnalytics.Event.GAME_SYSTEM_SELECT_DND5E
+            GameSystemType.PATHFINDER -> FBAnalytics.Event.GAME_SYSTEM_SELECT_PATHFINDER
+        }
 
 }

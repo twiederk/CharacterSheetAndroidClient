@@ -1,10 +1,10 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import com.android.ash.charactersheet.R
+import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,10 +19,10 @@ class AbilityScoresComposeTest {
 
         // act
         composeTestRule.setContent {
-            MaterialTheme {
+            D20CharacterSheetTheme {
                 AbilityScoresScreen(
                     onRollDice = { },
-                    onNavigateToRaceAndClassFragment = { },
+                    onNavigateToPrevious = { },
                     onCreateCharacter = { },
                     AttributeRowData(
                         attributeLabel = R.string.attribute_strength,
@@ -41,8 +41,8 @@ class AbilityScoresComposeTest {
         composeTestRule.onNodeWithText("10").assertIsDisplayed()
         composeTestRule.onNodeWithText("-").assertIsDisplayed()
         composeTestRule.onNodeWithText("0").assertIsDisplayed()
-        composeTestRule.onNodeWithText("< Race and Class").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Create Character").assertIsDisplayed()
+        composeTestRule.onNodeWithText("PREVIOUS").assertIsDisplayed()
+        composeTestRule.onNodeWithText("CREATE CHARACTER").assertIsDisplayed()
     }
 
     @Test
@@ -50,10 +50,10 @@ class AbilityScoresComposeTest {
 
         // act
         composeTestRule.setContent {
-            MaterialTheme {
+            D20CharacterSheetTheme {
                 AbilityScoresScreen(
                     onRollDice = { },
-                    onNavigateToRaceAndClassFragment = { },
+                    onNavigateToPrevious = { },
                     onCreateCharacter = { },
                     AttributeRowData(
                         attributeLabel = R.string.attribute_strength,
@@ -128,8 +128,8 @@ class AbilityScoresComposeTest {
         composeTestRule.onNodeWithText("20").assertIsDisplayed()
         composeTestRule.onNodeWithText("+5").assertIsDisplayed()
 
-        composeTestRule.onNodeWithText("< Race and Class").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Create Character").assertIsDisplayed()
+        composeTestRule.onNodeWithText("PREVIOUS").assertIsDisplayed()
+        composeTestRule.onNodeWithText("CREATE CHARACTER").assertIsDisplayed()
     }
 
 }

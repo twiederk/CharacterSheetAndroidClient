@@ -1,5 +1,8 @@
 package com.android.ash.charactersheet.dac.dao.sql.sqlite;
 
+import static com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_IMAGE;
+import static com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_IMAGE;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
@@ -19,9 +22,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_IMAGE;
-import static com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_IMAGE;
-
 /**
  * Provides access to the SQLite 3 database of the Android platform. Creates the whole database by running a single
  * script.
@@ -38,6 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final Context context;
     private SQLiteDatabase db;
 
+    private final String databaseName;
     private boolean upgrade;
     private boolean create;
     private int oldVersion;
@@ -57,8 +58,9 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, gameSystemType.getDatabaseName(), null, dbVersion);
         this.context = context;
         this.createScriptResources = gameSystemType.getCreateScriptResources();
-        this.updateScriptAdministration = new DBUpdateScriptAdministration(gameSystemType.getUpdateScriptResources());
+        this.updateScriptAdministration = new DBUpdateScriptAdministration(gameSystemType.getUpdateScriptResources(), gameSystemType.getUpdateImageResources());
         this.images = gameSystemType.getImages();
+        this.databaseName = gameSystemType.getDatabaseName();
         DB_HELPERS.add(this);
     }
 
@@ -91,6 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(final SQLiteDatabase db) {
+        Logger.debug("onCreate: " + databaseName);
         this.db = db;
         create = true;
         createDatabase();
@@ -175,8 +178,12 @@ public class DBHelper extends SQLiteOpenHelper {
         final ContentValues values = new ContentValues();
         values.put("id", imageId);
         values.put(COLUMN_IMAGE, bitmapData);
-        synchronized (DBHelper.DB_LOCK) {
-            db.insertOrThrow(TABLE_IMAGE, null, values);
+        try {
+            synchronized (DBHelper.DB_LOCK) {
+                db.insertOrThrow(TABLE_IMAGE, null, values);
+            }
+        } catch (final SQLException sqlException) {
+            Logger.error("Can't insert image: " + imageId, sqlException);
         }
     }
 
@@ -193,14 +200,14 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+        Logger.debug("onUpgrade: " + databaseName);
         this.db = db;
         upgradeDatabase(oldVersion, newVersion);
+        upgradeImages(oldVersion, newVersion);
         configureApplication(oldVersion);
     }
 
     private void upgradeDatabase(final int oldVersion, final int newVersion) {
-        Logger.debug("upgradeDatabase(): oldVersion: " + oldVersion + ", newVersion: " + newVersion);
-
         for (int currentVersion = oldVersion; currentVersion <= newVersion; currentVersion++) {
             Logger.debug("upgradeDatabase(): currentVersion: " + currentVersion);
             ScriptResource updateScript = updateScriptAdministration.getUpdateScript(currentVersion);
@@ -213,11 +220,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    private void configureApplication(final int oldVersion) {
-        this.oldVersion = oldVersion;
-        upgrade = true;
-    }
-
     private void upgradeDatabase(final ScriptResource upgradeScript) {
         try {
             executeSqlStatements(db, upgradeScript);
@@ -225,6 +227,33 @@ public class DBHelper extends SQLiteOpenHelper {
             Logger.error("Can't upgrade Database: " + ioException.getMessage(), ioException);
         }
     }
+
+    private void upgradeImages(int oldVersion, int newVersion) {
+        for (int currentVersion = oldVersion; currentVersion <= newVersion; currentVersion++) {
+            Logger.debug("upgradeImages(): currentVersion: " + currentVersion);
+            ImageResources imageResources = updateScriptAdministration.getUpdateImage(currentVersion);
+            if (imageResources == null) {
+                Logger.debug("No update image for version " + currentVersion);
+            } else {
+                Logger.debug("Update images from version " + currentVersion + " to " + (currentVersion + 1));
+                upgradeImages(imageResources);
+            }
+        }
+    }
+
+    private void upgradeImages(ImageResources imageResources) {
+        for (ImageResource imageResource : imageResources.getImageResources()) {
+            final Bitmap bitmap = getBitmap(imageResource.getResourceId());
+            insertImageAsBlob(imageResource.getId(), bitmap);
+        }
+    }
+
+
+    private void configureApplication(final int oldVersion) {
+        this.oldVersion = oldVersion;
+        upgrade = true;
+    }
+
 
     /**
      * Returns true, if the database was upgraded.

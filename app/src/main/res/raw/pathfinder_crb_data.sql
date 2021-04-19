@@ -108,13 +108,13 @@ INSERT INTO xp_level VALUES (59, 3, 19, 1700000);
 INSERT INTO xp_level VALUES (60, 3, 20, 2400000);
 
 
-INSERT INTO race VALUES (1, 'Dwarf', 4, 20, -1 );
-INSERT INTO race VALUES (2, 'Elf', 4, 30, -1 );
-INSERT INTO race VALUES (3, 'Gnome', 3, 20, -1 );
-INSERT INTO race VALUES (4, 'Half-Elf', 4, 30, -1 );
-INSERT INTO race VALUES (5, 'Half-Orc', 4, 30, -1 );
-INSERT INTO race VALUES (6, 'Halfling', 3, 20, -1 );
-INSERT INTO race VALUES (7, 'Human', 4, 30, -1 );
+INSERT INTO race VALUES (1, 'Dwarf', 4, 20, -1, 7 );
+INSERT INTO race VALUES (2, 'Elf', 4, 30, -1, 10 );
+INSERT INTO race VALUES (3, 'Gnome', 3, 20, -1, 15 );
+INSERT INTO race VALUES (4, 'Half-Elf', 4, 30, -1, 16 );
+INSERT INTO race VALUES (5, 'Half-Orc', 4, 30, -1, 29 );
+INSERT INTO race VALUES (6, 'Halfling', 3, 20, -1, 14 );
+INSERT INTO race VALUES (7, 'Human', 4, 30, -1, 23 );
 
 
 INSERT INTO ability_type VALUES (0, 'Natural');
@@ -123,32 +123,32 @@ INSERT INTO ability_type VALUES (2, 'Spell-like');
 INSERT INTO ability_type VALUES (3, 'Supernatural');
 
 
-INSERT INTO ability VALUES ( 1, '+2 Constitution, +2 Wisdom, -2 Charisma', 'Dwarves are both tough and wise, but also a bit gruff.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 1, 'Ability Score Increase (Con +2, Wis +2, Cha -2)', 'Constitution +2, Wisdom +2, Charisma -2.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 2, 'Darkvision', 'Character can see in the dark up to 60 feet. If she already has darkvision, the range increases by 30 feet.', 1, 'Ability' );
 INSERT INTO ability VALUES ( 3, 'Defensive Training Dwarves', 'Dwarves get a +4 dodge bonus to AC against monsters of the giant subtype.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 4, 'Greed', 'Dwarves receive a +2 racial bonus on Appraise skill checks made to determine the price of nonmagical goods that contain precious metals or gemstones.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 5, 'Hatred Dwarves', 'Dwarves receive a +1 bonus on attack rolls against humanoid creatures of the orc and goblinoid subtypes due to special training against these hated foes.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 6, 'Hardy', 'Dwarves receive a +2 racial bonus on saving throws against poison, spells, and spell-like abilities.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 7, 'Stability', 'Dwarves receive a +4 racial bonus to their Combat Maneuver Defense when resisting a bull rush or trip attempt while standing on the ground.', 0, 'Ability' );
-INSERT INTO ability VALUES ( 8, '+2 Dexterity, +2 Intelligence, -2 Constitution', 'Elves are nimble, both in body and mind, but their form is frail.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 8, 'Ability Score Increase (Dex +2, Int +2, Con -2)', 'Dexterity +2, Intelligence +2, Constitution -2.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 9, 'Low-Light Vision', 'Characters can see twice as far as humans in conditions of dim light. See Additional Rules.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 10, 'Elven Immunities', 'Characters are immune to magic sleep effects and get a +2 racial saving throw bonus against enchantment spells and effects.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 11, 'Elven Magic', 'Elves receive a +2 racial bonus on caster level checks made to overcome spell resistance. In addition, elves receive a +2 racial bonus on Spellcraft skill checks made to identify the properties of magic items.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 12, 'Keen Senses', 'Characters receive a +2 racial bonus on Perception skill checks.', 0, 'Ability' );
-INSERT INTO ability VALUES ( 13, '+2 Constitution, +2 Charisma, -2 Strength', 'Gnomes are physically weak but surprisingly hardy, and their attitude makes them naturally agreeable.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 13, 'Ability Score Increase (Con +2, Cha +2, Str -2)', 'Constitution +2, Charisma +2, Strength -2.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 15, 'Defensive Training Gnomes', 'Gnomes get a +4 dodge bonus to AC against monsters of the giant type.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 16, 'Gnome Magic', 'Gnomes add +1 to the DC of any saving throws against illusion spells that they cast. Gnomes with a Charisma of 11 or higher also gain the following spell-like abilities: 1/day-dancing lights, ghost sound, prestidigitation, and speak with animals. The caster level for these effects is equal to the gnome''''s level. The DC for these spells is equal to 10 + the spell''''s level + the gnome''''s Charisma modifier.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 17, 'Hatred Gnomes', 'Gnomes receive a +1 bonus on attack rolls against humanoid creatures of the reptilian and goblinoid subtypes due to special training against these hated foes.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 18, 'Illusion Resistance', 'Gnomes get a +2 racial saving throw bonus against illusion spells or effects.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 20, 'Obsessive', 'Gnomes receive a +2 racial bonus on a Craft or Profession skill of their choice.', 0, 'Ability' );
-INSERT INTO ability VALUES ( 21, '+2 to One Ability Score', 'Characters get a +2 bonus to one ability score of their choice at creation to represent their varied nature.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 21, 'Ability Score Increase (One Ability Score +2)', 'One Ability Score +2.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 23, 'Adaptability', 'Half-elves receive Skill Focus as a bonus feat at 1st level.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 24, 'Elf Blood', 'Half-elves count as both elves and humans for any effect related to race.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 27, 'Multitalented', 'Half-elves choose two favored classes at first level and gain +1 hit point or +1 skill point whenever they take a level in either one of those classes. See Classes for more information about favored classes.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 30, 'Intimidating', 'Half-orcs receive a +2 racial bonus on Intimidate skill checks due to their fearsome nature.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 31, 'Orc Blood', 'Half-orcs count as both humans and orcs for any effect related to race.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 32, 'Orc Ferocity', 'Once per day, when a half-orc is brought below 0 hit points but not killed, he can fight on for one more round as if disabled. At the end of his next turn, unless brought to above 0 hit points, he immediately falls unconscious and begins dying.', 0, 'Ability' );
-INSERT INTO ability VALUES ( 33, '+2 Dexterity, +2 Charisma, -2 Strength', 'Halflings are nimble and strong-willed, but their small stature makes them weaker than other races.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 33, 'Ability Score Increase (Dex +2, Cha +2, Str -2)', 'Dexterity +2, Charisma +2, Strength -2.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 34, 'Fearless', 'Halflings receive a +2 racial bonus on all saving throws against fear. This bonus stacks with the bonus granted by halfling luck.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 35, 'Halfling Luck', 'Halflings receive a +1 racial bonus on all saving throws.', 0, 'Ability' );
 INSERT INTO ability VALUES ( 37, 'Sure-Footed', 'Halflings receive a +2 racial bonus on Acrobatics and Climb skill checks.', 0, 'Ability' );
@@ -585,7 +585,7 @@ INSERT INTO ability VALUES ( 513, 'Spells - Plant Domain', 'You find solace in t
 INSERT INTO ability VALUES ( 515, 'Spells - Protection Domain', 'Your faith is your greatest source of protection, and you can use that faith to defend others. In addition, you receive a +1 resistance bonus on saving throws. This bonus increases by 1 for every 5 levels you possess. ', 0, 'SpelllistAbility' );
 INSERT INTO ability VALUES ( 517, 'Spells - Repose Domain', 'You see death not as something to be feared, but as a final rest and reward for a life well spent. The taint of undeath is a mockery of what you hold dear.', 0, 'SpelllistAbility' );
 INSERT INTO ability VALUES ( 519, 'Spells - Rune Domain', 'In strange and eldritch runes you find potent magic. You gain Scribe Scroll as a bonus feat.', 0, 'SpelllistAbility' );
-INSERT INTO ability VALUES ( 521, 'Spells - Strength Domain', 'In strength and brawn there is truth�your faith gives you incredible might and power. ', 0, 'SpelllistAbility' );
+INSERT INTO ability VALUES ( 521, 'Spells - Strength Domain', 'In strength and brawn there is truth—your faith gives you incredible might and power. ', 0, 'SpelllistAbility' );
 INSERT INTO ability VALUES ( 523, 'Spells - Sun Domain', 'You see truth in the pure and burning light of the sun, and can call upon its blessing or wrath to work great deeds.', 0, 'SpelllistAbility' );
 INSERT INTO ability VALUES ( 525, 'Spells - Travel Domain', 'You are an explorer and find enlightenment in the simple joy of travel, be it by foot or conveyance or magic. Increase your base speed by 10 feet.', 0, 'SpelllistAbility' );
 INSERT INTO ability VALUES ( 527, 'Spells - Trickery Domain', 'You are a master of illusions and deceptions. Bluff, Disguise, and Stealth are class skills.', 0, 'SpelllistAbility' );

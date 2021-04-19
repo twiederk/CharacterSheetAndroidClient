@@ -1,12 +1,15 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
+import android.graphics.Bitmap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
+import com.android.ash.charactersheet.boc.service.AndroidImageService
 import com.d20charactersheet.framework.boc.model.Alignment
+import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Sex
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.component.KoinApiExtension
@@ -24,16 +27,16 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     private val ruleService = gameSystemHolder.gameSystem?.ruleService
     private val displayService = gameSystemHolder.gameSystem?.displayService
 
-    var raceList: List<String> = gameSystemHolder.gameSystem?.allRaces?.map { it.name }?.toList()?.sorted() ?: listOf()
+    var raceList: List<Race> = gameSystemHolder.gameSystem?.allRaces?.sortedWith(compareBy { it.name }) ?: listOf()
     var classList: List<String> = gameSystemHolder.gameSystem?.allCharacterClasses?.map { it.name }?.toList()?.sorted() ?: listOf()
-    val sexList: List<String> = (Sex.values().map { displayService?.getDisplaySex(it) }.toList()) as List<String>
+    val genderList: List<String> = (Sex.values().map { displayService?.getDisplaySex(it) }.toList()) as List<String>
     val alignmentList: List<String> = (Alignment.values().map { displayService?.getDisplayAlignment(it) }.toList()) as List<String>
 
     var name by mutableStateOf("")
     var player by mutableStateOf("")
     var race by mutableStateOf(raceList[0])
     var clazz by mutableStateOf(classList[0])
-    var sex by mutableStateOf(sexList[0])
+    var gender by mutableStateOf(genderList[0])
     var alignment by mutableStateOf(alignmentList[0])
 
     var strength by mutableStateOf(10)
@@ -49,7 +52,6 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     var intelligenceModifier by mutableStateOf("0")
     var wisdomModifier by mutableStateOf("0")
     var charismaModifier by mutableStateOf("0")
-
 
     fun onRollDice() {
         firebaseAnalytics.logEvent(FBAnalytics.Event.STANDARD_METHOD_DICE_ROLL, null)
@@ -177,7 +179,7 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
         this.player = player
     }
 
-    fun onRaceChange(race: String) {
+    fun onRaceChange(race: Race) {
         this.race = race
     }
 
@@ -185,8 +187,8 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
         this.clazz = className
     }
 
-    fun onSexChange(sex: String) {
-        this.sex = sex
+    fun onGenderChange(gender: String) {
+        this.gender = gender
     }
 
     fun onAlignmentChange(alignment: String) {
@@ -194,14 +196,14 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     }
 
     fun reset() {
-        raceList = gameSystemHolder.gameSystem?.allRaces?.map { it.name }?.toList()?.sorted() ?: listOf()
+        raceList = gameSystemHolder.gameSystem?.allRaces?.sortedWith(compareBy { it.name }) ?: listOf()
         classList = gameSystemHolder.gameSystem?.allCharacterClasses?.map { it.name }?.toList()?.sorted() ?: listOf()
 
         name = ""
         player = ""
         race = raceList[0]
         clazz = classList[0]
-        sex = sexList[0]
+        gender = genderList[0]
         alignment = alignmentList[0]
         strength = 10
         strengthModifier = "0"
@@ -215,5 +217,10 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
         wisdomModifier = "0"
         charisma = 10
         charismaModifier = "0"
+    }
+
+    fun getBitmap(imageId: Int): Bitmap {
+        val imageService = gameSystemHolder.gameSystem?.imageService as AndroidImageService
+        return imageService.getBitmap(imageId)
     }
 }

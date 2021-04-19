@@ -6,7 +6,7 @@ class AbilityScoresScreen
 class AttributeRow
 
 CharacterCreatorViewModel --> AbilityScoresScreen : attributeDataRows
-AbilityScoresScreen --> CharacterCreatorViewModel : onRollDice \n onNavigateToRaceAndClassFragment \n onCreateCharacter
+AbilityScoresScreen --> CharacterCreatorViewModel : onRollDice \n onNavigateToClassFragment \n onCreateCharacter
 AbilityScoresScreen --> AttributeRow: attributeDataRow
 AttributeRow --> CharacterCreatorViewModel: onIncrease \n onDecrease
 

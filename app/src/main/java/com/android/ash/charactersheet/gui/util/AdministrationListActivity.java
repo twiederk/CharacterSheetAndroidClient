@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.util;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.service.DisplayService;
@@ -16,10 +20,7 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 
 /**
@@ -91,7 +92,7 @@ public abstract class AdministrationListActivity<T> extends LogAppCompatActivity
     protected abstract Intent getEditIntent(T item);
 
     protected ListView getListView() {
-        return (ListView) findViewById(android.R.id.list);
+        return findViewById(android.R.id.list);
     }
 
 }

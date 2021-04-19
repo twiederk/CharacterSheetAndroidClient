@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.koin.core.component.KoinApiExtension
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.koin.test.inject
@@ -39,6 +40,7 @@ class CharacterCreatorKoinTest : KoinTest {
         declareMock<FirebaseAnalytics>()
     }
 
+    @KoinApiExtension
     @Test
     fun createCharacter_everythingIsFine_createNewCharacter() {
         // arrange
@@ -73,9 +75,9 @@ class CharacterCreatorKoinTest : KoinTest {
         val characterCreatorViewModel = CharacterCreatorViewModel().apply {
             name = "myName"
             player = "myPlayer"
-            race = "myRace"
+            race = Race().apply { name = "myRace" }
             this.clazz = "myClass"
-            sex = "Male"
+            gender = "Male"
             alignment = "Lawful Good"
         }
 

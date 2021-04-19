@@ -3,6 +3,7 @@ package com.android.ash.charactersheet.gui.main.charactercreator
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl
+import com.android.ash.charactersheet.boc.service.AndroidImageService
 import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.Die
 import com.d20charactersheet.framework.boc.model.Race
@@ -15,24 +16,36 @@ import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
-import org.koin.core.context.startKoin
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
+import org.koin.test.KoinTestRule
 import org.koin.test.inject
+import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
+import org.mockito.Mockito
 import java.util.*
 
+@KoinApiExtension
 class CharacterCreatorViewModelKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val characterCreator: CharacterCreator by inject()
 
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
+    }
+
+    @get:Rule
+    val koinTestRule = KoinTestRule.create {
+        modules(appModule)
+    }
+
     @Before
     fun before() {
-        startKoin {
-            modules(appModule)
-        }
         declareMock<FirebaseAnalytics>()
         declareMock<CharacterCreator>()
 
@@ -61,11 +74,11 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         // assert
         assertThat(characterCreatorViewModel.name).isEqualTo("")
         assertThat(characterCreatorViewModel.player).isEqualTo("")
-        assertThat(characterCreatorViewModel.race).isEqualTo("anotherRace")
-        assertThat(characterCreatorViewModel.raceList).containsExactly("anotherRace", "myRace")
+        assertThat(characterCreatorViewModel.race.name).isEqualTo("anotherRace")
+        assertThat(characterCreatorViewModel.raceList).containsExactly(Race().apply { name = "anotherRace" }, Race().apply { name = "myRace" })
         assertThat(characterCreatorViewModel.clazz).isEqualTo("anotherClass")
         assertThat(characterCreatorViewModel.classList).containsExactly("anotherClass", "myClass")
-        assertThat(characterCreatorViewModel.sex).isEqualTo("Male")
+        assertThat(characterCreatorViewModel.gender).isEqualTo("Male")
         assertThat(characterCreatorViewModel.alignment).isEqualTo("Lawful Good")
         assertThat(characterCreatorViewModel.strength).isEqualTo(10)
         assertThat(characterCreatorViewModel.dexterity).isEqualTo(10)
@@ -441,14 +454,14 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     fun reset_resetProperties_allPropertiesAreReset() {
         // arrange
         val underTest = CharacterCreatorViewModel()
-        underTest.raceList = listOf("firstRace", "secondRace")
+        underTest.raceList = listOf(Race().apply { name = "firstRace" }, Race().apply { name = "secondRace" })
         underTest.classList = listOf("firstClass", "secondClass")
 
         underTest.name = "myName"
         underTest.player = "myPlayer"
         underTest.race = underTest.raceList[1]
         underTest.clazz = underTest.classList[1]
-        underTest.sex = "Female"
+        underTest.gender = "Female"
         underTest.alignment = "Neutral"
         underTest.onRollDice()
 
@@ -458,9 +471,9 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         // assert
         assertThat(underTest.name).isEqualTo("")
         assertThat(underTest.player).isEqualTo("")
-        assertThat(underTest.race).isEqualTo("anotherRace")
+        assertThat(underTest.race.name).isEqualTo("anotherRace")
         assertThat(underTest.clazz).isEqualTo("anotherClass")
-        assertThat(underTest.sex).isEqualTo("Male")
+        assertThat(underTest.gender).isEqualTo("Male")
         assertThat(underTest.alignment).isEqualTo("Lawful Good")
         assertThat(underTest.strength).isEqualTo(10)
         assertThat(underTest.strengthModifier).isEqualTo("0")
@@ -476,4 +489,21 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         assertThat(underTest.charismaModifier).isEqualTo("0")
 
     }
+
+    @Test
+    fun getBitmap_bitmapExists_returnBitmap() {
+        // arrange
+        val imageService: AndroidImageService = mock()
+        whenever(imageService.getBitmap(any())).thenReturn(mock())
+        whenever(gameSystemHolder.gameSystem?.imageService).thenReturn(imageService)
+
+        val underTest = CharacterCreatorViewModel()
+
+        // act
+        val bitmap = underTest.getBitmap(1)
+
+        // assert
+        assertThat(bitmap).isNotNull
+    }
+
 }

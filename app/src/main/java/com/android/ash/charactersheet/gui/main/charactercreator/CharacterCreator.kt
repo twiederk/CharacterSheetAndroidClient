@@ -33,10 +33,10 @@ class CharacterCreator : KoinComponent {
         val gameSystem = gameSystemHolder.gameSystem
         name = characterCreatorViewModel.name
         player = characterCreatorViewModel.player
-        race = gameSystem?.raceService?.findRaceByName(characterCreatorViewModel.race, gameSystem.allRaces)
+        race = characterCreatorViewModel.race
         val clazz = gameSystem?.characterClassService?.findClassByName(characterCreatorViewModel.clazz, gameSystem.allCharacterClasses)
         classLevels = listOf(ClassLevel(clazz, 1))
-        sex = Sex.valueOf(characterCreatorViewModel.sex.toUpperCase(Locale.ROOT))
+        sex = Sex.valueOf(characterCreatorViewModel.gender.toUpperCase(Locale.ROOT))
         alignment = Alignment.valueOf(characterCreatorViewModel.alignment.toUpperCase(Locale.ROOT).replace(" ", "_"))
         xpTable = gameSystem?.allXpTables?.get(0)
         strength = characterCreatorViewModel.strength

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.navigation.fragment.findNavController
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.R
+import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
+import org.koin.core.component.KoinApiExtension
 
+@KoinApiExtension
 class AbilityScoresComposeFragment : AbstractCharacterCreatorComposeFragment() {
 
     override fun onResume() {
@@ -30,10 +32,10 @@ class AbilityScoresComposeFragment : AbstractCharacterCreatorComposeFragment() {
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             setContent {
-                MaterialTheme {
+                D20CharacterSheetTheme {
                     AbilityScoresScreen(
                         onRollDice = { characterCreatorViewModel.onRollDice() },
-                        onNavigateToRaceAndClassFragment = { findNavController().navigate(R.id.action_AbilityScoresComposeFragment_to_AbilityScoresFragment) },
+                        onNavigateToPrevious = { findNavController().navigate(R.id.action_AbilityScoresComposeFragment_to_AbilityScoresFragment) },
                         onCreateCharacter = { createCharacter() },
                         AttributeRowData(
                             attributeLabel = R.string.attribute_strength,

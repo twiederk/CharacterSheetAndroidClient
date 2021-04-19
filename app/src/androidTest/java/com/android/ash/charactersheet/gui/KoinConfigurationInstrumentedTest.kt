@@ -11,9 +11,11 @@ import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.koin.core.component.KoinApiExtension
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
+@KoinApiExtension
 class KoinConfigurationInstrumentedTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()

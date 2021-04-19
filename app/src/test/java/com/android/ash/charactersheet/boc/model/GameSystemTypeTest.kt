@@ -1,7 +1,6 @@
 package com.android.ash.charactersheet.boc.model
 
 import com.android.ash.charactersheet.R
-import com.android.ash.charactersheet.dac.dao.sql.sqlite.ClasspathScriptResource
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.RawScriptResource
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -32,8 +31,8 @@ class GameSystemTypeTest {
         assertThat(dnd5e.getName()).isEqualTo("DnD 5e")
         assertThat(dnd5e.databaseName).isEqualTo("dnd5e_db")
 
-        assertThat((dnd5e.createScriptResources[0] as ClasspathScriptResource).scriptName).isEqualTo("/sql/create_database.sql")
-        assertThat((dnd5e.createScriptResources[1] as ClasspathScriptResource).scriptName).isEqualTo("/sql/dnd5e_phb_data.sql")
+        assertThat((dnd5e.createScriptResources[0] as RawScriptResource).resourceId).isEqualTo(R.raw.create_database)
+        assertThat((dnd5e.createScriptResources[1] as RawScriptResource).resourceId).isEqualTo(R.raw.dnd5e_phb_data)
         assertThat((dnd5e.createScriptResources[2] as RawScriptResource).resourceId).isEqualTo(R.raw.dnd5e_phb_character)
     }
 

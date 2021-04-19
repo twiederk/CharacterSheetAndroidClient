@@ -46,7 +46,7 @@ class CharacterSheetActivityKoinTest : KoinTest {
     }
 
     @Test
-    fun logEventCharacter_character_logsCharacterRaceAndClassLevels() {
+    fun logEventCharacter_character_logsCharacterClassLevels() {
         // Arrange
         val character = Character().apply {
             race = Race().apply { name = "myRace" }

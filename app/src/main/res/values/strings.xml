@@ -95,7 +95,7 @@
     <string name="create_name_label">Name</string>
     <string name="create_player_label">Player</string>
     <string name="create_race_label">Race</string>
-    <string name="create_sex_label">Sex</string>
+    <string name="create_gender_label">Gender</string>
     <string name="create_alignment_label">Align</string>
     <string name="create_class_label">Class</string>
     <string name="create_button_label">Create</string>
@@ -878,19 +878,25 @@
     <string name="spell_source_arcane">Arcane</string>
 
     <!-- CharacterCreateActivity -->
-    <string name="character_create_title">Create Character</string>
-    <string name="character_create_button">Create Character</string>
+    <string name="character_creator_previous_button">PREVIOUS</string>
+    <string name="character_creator_next_button">NEXT</string>
+    <string name="character_creator_create_button">CREATE CHARACTER</string>
 
-    <!-- RaceAndClassFragment -->
-    <string name="race_and_class_title">Race and Class</string>
-    <string name="race_and_class_navigate_next_button">Ability Scores &gt;</string>
-    <string name="race_and_class_nav_graph_label">RaceAndClassFragment</string>
+    <!-- RaceComposeFragment -->
+    <string name="race_title">Race (step 1 of 3)</string>
+    <string name="race_navigate_next_button">Class &gt;</string>
+    <string name="race_nav_graph_label">RaceFragment</string>
+
+    <!-- ClassComposeFragment -->
+    <string name="class_title">"Class (step 2 of 3)"</string>
+    <string name="class_navigate_previous_button">&lt; Race</string>
+    <string name="class_navigate_next_button">Ability Scores &gt;</string>
+    <string name="class_nav_graph_label">ClassFragment</string>
 
     <!-- AbilityScoresComposeFragment -->
-    <string name="ability_scores_title">Ability Scores</string>
+    <string name="ability_scores_title">Ability Scores (step 3 of 3)</string>
     <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
-    <string name="ability_scores_navigate_previous_button">&lt; Race and Class</string>
-    <string name="ability_scores_nav_graph_label">AbilityScoresFragment</string>
+    <string name="ability_scores_navigate_previous_button">&lt; Class</string>
     <string name="ability_scores_compose_nav_graph_label">AbilityScoresComposeFragment</string>
 
     <!-- GameSystemSelector -->
@@ -974,5 +980,6 @@
     <string name="release_notes_4_1_0">Release 4.1.0\n- Added class abilities to Dungeons &amp; Dragons 5th edition.\n\n</string>
     <string name="release_notes_4_2_0">Release 4.2.0\n- Added feats of Dungeons &amp; Dragons 5th edition.\n- Added ability modifier display to character creation ability screen.\n- Use of the latest GUI technology (Jetpack Compose) in character creation ability screen.\n\n</string>
     <string name="release_notes_4_3_0">Release 4.3.0\n- Added weapons, armor and goods of Dungeons &amp; Dragons 5th edition.\n- Use of the latest GUI technology (Jetpack Compose) in character creation race and class screen.\n\n</string>
+    <string name="release_notes_4_4_0">Release 4.4.0\n- Added screen for race selection to character creation.\n\n</string>
 
 </resources>

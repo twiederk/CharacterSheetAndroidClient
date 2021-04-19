@@ -28,4 +28,8 @@
     <color name="cast_spell">#839098</color>
     <color name="empty_spell">#000000</color>
 
+    <!-- Material Design -->
+    <color name="secondary">#1763dd</color>
+
+
 </resources>
