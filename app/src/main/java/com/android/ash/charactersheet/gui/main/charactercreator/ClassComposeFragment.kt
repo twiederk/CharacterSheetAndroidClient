@@ -46,10 +46,11 @@ class ClassComposeFragment : AbstractCharacterCreatorComposeFragment() {
                         onChangePlayer = { characterCreatorViewModel.onChangePlayer(it) },
                         onGenderChange = { characterCreatorViewModel.onGenderChange(it) },
                         onAlignmentChange = { characterCreatorViewModel.onAlignmentChange(it) },
-                        onClassChange = { characterCreatorViewModel.onClassNameChange(it) },
+                        onClassChange = { characterCreatorViewModel.onClassChange(it) },
                         onNavigateToPrevious = { findNavController().navigate(R.id.action_ClassFragment_to_RaceFragment) },
-                        onNavigateToNext = { findNavController().navigate(R.id.action_ClassFragment_to_AbilityScoresFragment) }
-                    ) { createCharacter() }
+                        onNavigateToNext = { findNavController().navigate(R.id.action_ClassFragment_to_AbilityScoresFragment) },
+                        onCreateCharacter = { createCharacter() }
+                    )
                 }
             }
         }

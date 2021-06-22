@@ -4,19 +4,17 @@ import android.os.Bundle
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
-import com.d20charactersheet.framework.boc.model.Alignment
 import com.d20charactersheet.framework.boc.model.Character
-import com.d20charactersheet.framework.boc.model.ClassLevel
-import com.d20charactersheet.framework.boc.model.Sex
-import com.d20charactersheet.framework.boc.service.ImageService
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.*
 
 @KoinApiExtension
-class CharacterCreator : KoinComponent {
+class CharacterCreator(
+    private val characterCreatorAppearance: CharacterCreatorAppearance = CharacterCreatorAppearance(),
+    private val characterCreatorEquipment: CharacterCreatorEquipment = CharacterCreatorEquipment()
+) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val characterHolder: CharacterHolder by inject()
@@ -29,29 +27,26 @@ class CharacterCreator : KoinComponent {
         return character
     }
 
-    private fun createCharacterInternal(characterCreatorViewModel: CharacterCreatorViewModel) = Character().apply {
-        val gameSystem = gameSystemHolder.gameSystem
-        name = characterCreatorViewModel.name
-        player = characterCreatorViewModel.player
-        race = characterCreatorViewModel.race
-        val clazz = gameSystem?.characterClassService?.findClassByName(characterCreatorViewModel.clazz, gameSystem.allCharacterClasses)
-        classLevels = listOf(ClassLevel(clazz, 1))
-        sex = Sex.valueOf(characterCreatorViewModel.gender.toUpperCase(Locale.ROOT))
-        alignment = Alignment.valueOf(characterCreatorViewModel.alignment.toUpperCase(Locale.ROOT).replace(" ", "_"))
-        xpTable = gameSystem?.allXpTables?.get(0)
-        strength = characterCreatorViewModel.strength
-        dexterity = characterCreatorViewModel.dexterity
-        constitution = characterCreatorViewModel.constitution
-        intelligence = characterCreatorViewModel.intelligence
-        wisdom = characterCreatorViewModel.wisdom
-        charisma = characterCreatorViewModel.charisma
-        imageId = ImageService.DEFAULT_CHARACTER_IMAGE_ID
-        thumbImageId = ImageService.DEFAULT_THUMB_IMAGE_ID
+    private fun createCharacterInternal(characterCreatorViewModel: CharacterCreatorViewModel): Character {
+        val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
+        val character =
+            characterCreatorAppearance.fillAppearance(characterCreatorViewModel, gameSystem)
+        characterCreatorEquipment.fillEquipment(character, characterCreatorViewModel)
+        return character
     }
 
     private fun storeCharacter(character: Character) {
-        val gameSystem = gameSystemHolder.gameSystem
-        gameSystem?.characterService?.createCharacter(character, gameSystem.allSkills)
+        val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
+        gameSystem.characterService.createCharacter(character, gameSystem.allSkills)
+        val weapons = character.equipment.weapons
+        val armor = character.equipment.armor
+        val goods = character.equipment.goods
+        character.equipment.weapons = emptyList()
+        character.equipment.armor = emptyList()
+        character.equipment.goods = emptyList()
+        gameSystem.characterService.updateWeapons(character, weapons)
+        gameSystem.characterService.updateArmor(character, armor)
+        gameSystem.characterService.updateGoods(character, goods)
         characterHolder.character = character
     }
 

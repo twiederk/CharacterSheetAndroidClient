@@ -28,6 +28,7 @@ object FBAnalytics {
         const val GAME_SYSTEM_SELECT_DNDV35 = "game_system_select_dndv35"
         const val GAME_SYSTEM_SELECT_DND5E = "game_system_select_dnd5e"
         const val GAME_SYSTEM_SELECT_PATHFINDER = "game_system_select_pathfinder"
+        const val EQUIPMENT_SELECTION = "equipment_selection"
     }
 
     object Param {

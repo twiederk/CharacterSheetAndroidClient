@@ -116,113 +116,6 @@ fun RaceScreenPreview() {
 }
 
 
-@Composable
-fun TopBarTitle(
-    title: String,
-    progress: Int
-) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        TopAppBar(
-            title = { Text(title) }
-        )
-        LinearProgressIndicator(
-            progress = progress / 3f,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp),
-        )
-    }
-}
-
-@Preview
-@Composable
-fun TopBarTitlePreview() {
-    D20CharacterSheetTheme {
-        TopBarTitle(
-            title = "myTitle",
-            progress = 1
-        )
-    }
-}
-
-@Composable
-fun BottomBarNavigation(
-    showPrevious: Boolean = false,
-    showNext: Boolean = false,
-    showCreate: Boolean = false,
-
-    onNavigateToPrevious: () -> Unit = { },
-    onNavigateToNext: () -> Unit = { },
-    onCreateCharacter: () -> Unit = { }
-) {
-    Surface(
-        elevation = 3.dp,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                if (showPrevious) {
-                    OutlinedButton(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(8.dp),
-                        onClick = onNavigateToPrevious
-                    ) {
-                        Text(stringResource(R.string.character_creator_previous_button))
-                    }
-                }
-                if (showNext) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(8.dp),
-                        onClick = onNavigateToNext
-                    ) {
-                        Text(stringResource(R.string.character_creator_next_button))
-                    }
-                }
-            }
-            if (showCreate) {
-                if (!showNext) {
-                    Button(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
-                        onClick = onCreateCharacter
-                    ) {
-                        Text(stringResource(R.string.character_creator_create_button))
-                    }
-                } else {
-                    OutlinedButton(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth(),
-                        onClick = onCreateCharacter
-                    ) {
-                        Text(stringResource(R.string.character_creator_create_button))
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun BottomBarNavigationPreview() {
-    D20CharacterSheetTheme {
-        BottomBarNavigation(
-            showPrevious = true,
-            showNext = true,
-            showCreate = false,
-            onNavigateToPrevious = { },
-            onNavigateToNext = { }
-        ) { }
-    }
-}
 
 @Composable
 fun RaceList(
@@ -238,13 +131,6 @@ fun RaceList(
             Divider(color = Color.Black)
         }
     }
-
-//    LazyColumn(modifier = modifier) {
-//        items(items = raceList) { race ->
-//            RaceCard(assetId = R.drawable.race_dwarf, race = race)
-//            Divider(color = Color.Black)
-//        }
-//    }
 }
 
 @Composable

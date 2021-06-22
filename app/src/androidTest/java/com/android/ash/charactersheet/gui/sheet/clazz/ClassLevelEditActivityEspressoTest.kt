@@ -13,7 +13,6 @@ import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.ClassLevel
-import com.nhaarman.mockitokotlin2.mock
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.endsWith
 import org.hamcrest.core.Is
@@ -21,6 +20,7 @@ import org.junit.After
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.mock
 
 class ClassLevelEditActivityEspressoTest : KoinTest {
 

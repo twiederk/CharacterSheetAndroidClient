@@ -2,6 +2,8 @@ package com.android.ash.charactersheet.dac.dao.sql;
 
 import android.content.Context;
 
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.android.ash.charactersheet.BuildConfig;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
@@ -19,8 +21,6 @@ import org.junit.Before;
 
 import java.util.List;
 
-import androidx.test.platform.app.InstrumentationRegistry;
-
 public class SqlClassDaoInstrumentedTest extends BaseClassDaoTest {
 
 
@@ -33,14 +33,14 @@ public class SqlClassDaoInstrumentedTest extends BaseClassDaoTest {
 
         skillDao = new SqlSkillDao(sqliteDatabase);
         abilityDao = new SqlAbilityDao(sqliteDatabase);
-        characterClassDao = new SqlClassDao(sqliteDatabase);
+        classDao = new SqlClassDao(sqliteDatabase);
         spelllistDao = new SqlSpelllistDao(sqliteDatabase);
 
         final List<Spelllist> allSpelllists = spelllistDao.getAllSpelllists(spelllistDao.getAllSpells());
         final List<KnownSpellsTable> allKnownSpellsTables = spelllistDao.getAllKnownSpellsTables();
         final List<SpellsPerDayTable> allSpellsPerDayTables = spelllistDao.getAllSpellsPerDayTables();
 
-        allCharacterClasses = characterClassDao.getAllCharacterClasses(skillDao.getAllSkills(),
+        allCharacterClasses = classDao.getAllCharacterClasses(skillDao.getAllSkills(),
                 abilityDao.getAllAbilities(allSpelllists, allKnownSpellsTables, allSpellsPerDayTables));
     }
 

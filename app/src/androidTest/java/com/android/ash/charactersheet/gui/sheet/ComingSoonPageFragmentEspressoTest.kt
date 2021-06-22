@@ -7,10 +7,10 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.nhaarman.mockitokotlin2.mock
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.mock
 
 class ComingSoonPageFragmentEspressoTest : KoinTest {
 

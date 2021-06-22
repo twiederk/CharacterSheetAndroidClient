@@ -1,9 +1,9 @@
 package com.android.ash.charactersheet.gui.main.characterlist
 
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class GameSystemSelectorOnClickListenerTest {
 

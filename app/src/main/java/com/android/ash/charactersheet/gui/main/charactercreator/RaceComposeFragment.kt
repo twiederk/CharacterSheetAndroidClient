@@ -25,7 +25,7 @@ class RaceComposeFragment : AbstractCharacterCreatorComposeFragment() {
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
-            id = R.id.AbilityScoresComposeFragment
+            id = R.id.RaceComposeFragment
 
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

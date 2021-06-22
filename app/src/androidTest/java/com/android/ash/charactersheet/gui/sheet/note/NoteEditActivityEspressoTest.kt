@@ -13,12 +13,12 @@ import com.android.ash.charactersheet.*
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.model.Note
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.nhaarman.mockitokotlin2.mock
 import org.hamcrest.core.Is
 import org.junit.After
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.mock
 import java.text.SimpleDateFormat
 
 class NoteEditActivityEspressoTest : KoinTest {

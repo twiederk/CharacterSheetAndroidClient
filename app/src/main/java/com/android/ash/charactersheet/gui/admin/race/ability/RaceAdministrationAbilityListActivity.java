@@ -1,5 +1,8 @@
 package com.android.ash.charactersheet.gui.admin.race.ability;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
@@ -27,11 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays all abilities with checkboxes. By checking a ability it is associated with the race.
@@ -92,7 +93,7 @@ public class RaceAdministrationAbilityListActivity extends LogAppCompatActivity 
     }
 
     private ListView getListView() {
-        return (ListView) findViewById(android.R.id.list);
+        return findViewById(android.R.id.list);
     }
 
     @Override

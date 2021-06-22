@@ -1,33 +1,27 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
-
-
-//gender: String,
-//genderList: List<String>,
-//onGenderChange: (String) -> Unit,
+import com.d20charactersheet.framework.boc.model.CharacterClass
 
 @Composable
 fun ClassScreen(
     name: String,
     player: String,
-    clazz: String,
-    classList: List<String>,
+    clazz: CharacterClass,
+    classList: List<CharacterClass>,
     gender: String,
     genderList: List<String>,
     alignment: String,
@@ -37,7 +31,7 @@ fun ClassScreen(
 
     onGenderChange: (String) -> Unit,
     onAlignmentChange: (String) -> Unit,
-    onClassChange: (String) -> Unit,
+    onClassChange: (CharacterClass) -> Unit,
     onNavigateToPrevious: () -> Unit,
     onNavigateToNext: () -> Unit,
     onCreateCharacter: () -> Unit
@@ -78,11 +72,11 @@ fun ClassScreen(
                                 .padding(8.dp)
                         )
 
-                        StringDropdownMenu(
+                        ClassDropdownMenu(
                             labelResourceId = R.string.create_class_label,
-                            name = clazz,
-                            nameList = classList,
-                            onNameChange = onClassChange
+                            clazz = clazz,
+                            classList = classList,
+                            onClassChange = onClassChange
                         )
 
                         StringDropdownMenu(
@@ -122,8 +116,10 @@ fun ClassScreenPreview() {
         ClassScreen(
             name = "myName",
             player = "myPlayer",
-            clazz = "Fighter",
-            classList = listOf("Fighter", "Wizard"),
+            clazz = CharacterClass().apply { id = 1; name = "Fighter" },
+            classList = listOf(
+                CharacterClass().apply { id = 1; name = "Fighter" },
+                CharacterClass().apply { id = 2; name = "Wizard" }),
             gender = "Male",
             genderList = listOf("Male, Female"),
             alignment = "Lawful Good",
@@ -137,57 +133,5 @@ fun ClassScreenPreview() {
             onNavigateToNext = {}
         ) {}
     }
-}
-
-
-@Composable
-fun StringDropdownMenu(
-    labelResourceId: Int,
-    name: String,
-    nameList: List<String>,
-    onNameChange: (String) -> Unit
-) {
-    val isOpen = remember { mutableStateOf(false) }
-
-    Box {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            OutlinedTextField(
-                value = name,
-                onValueChange = { },
-                label = { Text(stringResource(labelResourceId)) },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            DropdownMenu(
-                expanded = isOpen.value,
-                onDismissRequest = { isOpen.value = false }
-            ) {
-                nameList.forEach {
-                    DropdownMenuItem(
-                        onClick = {
-                            isOpen.value = false
-                            onNameChange(it)
-                        }
-                    ) {
-                        Text(it)
-                    }
-                }
-            }
-        }
-        Spacer(
-            modifier = Modifier
-                .matchParentSize()
-                .background(Color.Transparent)
-                .padding(10.dp)
-                .clickable(
-                    onClick = { isOpen.value = true }
-                )
-        )
-    }
-
 }
 

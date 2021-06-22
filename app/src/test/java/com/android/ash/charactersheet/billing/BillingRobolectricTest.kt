@@ -12,7 +12,6 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.Purchase.PurchaseState
 import com.android.billingclient.api.SkuDetails
 import com.d20charactersheet.framework.boc.model.Character
-import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -24,6 +23,7 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
+import org.mockito.kotlin.*
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -314,7 +314,10 @@ class BillingRobolectricTest : KoinTest {
 
         // Assert
         verifyZeroInteractions(billingClient)
-        verify(messageDisplay).display(R.string.billing_purchasesUpdated_error, BillingResponseCode.ERROR)
+        verify(messageDisplay).display(
+            R.string.billing_purchasesUpdated_error,
+            BillingResponseCode.ERROR
+        )
     }
 
     @Test
@@ -362,7 +365,7 @@ class BillingRobolectricTest : KoinTest {
     fun queryPurchases_purchased_productPurchaseStateIsPurchased() {
         // Arrange
         val purchase: Purchase = mock()
-        whenever(purchase.sku).doReturn("premium_version")
+        whenever(purchase.skus).doReturn(ArrayList<String>().also { it.add("premium_version") })
         whenever(purchase.purchaseState).doReturn(PurchaseState.PURCHASED)
         val purchaseResult = Purchase.PurchasesResult(BillingResult(), listOf(purchase))
 
@@ -418,7 +421,9 @@ class BillingRobolectricTest : KoinTest {
     @Test
     fun requiresPurchase_defaultCharacter_purchaseNotRequired() {
         // Act
-        val requiresPurchase = Billing().requiresPurchase(listOf(Character().apply { id = Billing.DEFAULT_CHARACTER_ID }))
+        val requiresPurchase = Billing().requiresPurchase(listOf(Character().apply {
+            id = Billing.DEFAULT_CHARACTER_ID
+        }))
 
         // Assert
         assertThat(requiresPurchase).isFalse
@@ -501,7 +506,10 @@ class BillingRobolectricTest : KoinTest {
         Billing().onAcknowledgePurchaseResponse(billingResult)
 
         // Assert
-        verify(messageDisplay).display(R.string.billing_onAcknowledgePurchaseResponse_error, BillingResponseCode.ERROR)
+        verify(messageDisplay).display(
+            R.string.billing_onAcknowledgePurchaseResponse_error,
+            BillingResponseCode.ERROR
+        )
     }
 
 }

@@ -6,7 +6,6 @@ import com.android.ash.charactersheet.appModule
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.boc.service.*
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -18,7 +17,9 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
+import org.mockito.kotlin.*
 
+@KoinApiExtension
 class CharacterCreatorKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
@@ -40,7 +41,6 @@ class CharacterCreatorKoinTest : KoinTest {
         declareMock<FirebaseAnalytics>()
     }
 
-    @KoinApiExtension
     @Test
     fun createCharacter_everythingIsFine_createNewCharacter() {
         // arrange
@@ -58,8 +58,16 @@ class CharacterCreatorKoinTest : KoinTest {
         val allClasses = listOf(myClass)
         whenever(gameSystem.allCharacterClasses).thenReturn(allClasses)
         val characterClassService: CharacterClassService = mock()
-        whenever(characterClassService.findClassByName(myClass.name, allClasses)).thenReturn(myClass)
+        whenever(
+            characterClassService.findClassByName(
+                myClass.name,
+                allClasses
+            )
+        ).thenReturn(myClass)
+        whenever(characterClassService.getStarterPack(any(), any())).thenReturn(mock())
         whenever(gameSystem.characterClassService).thenReturn(characterClassService)
+
+        whenever(gameSystem.itemService).thenReturn(mock())
 
         val displayService: DisplayService = mock()
         whenever(displayService.getDisplaySex(any())).thenReturn("Male")
@@ -76,9 +84,23 @@ class CharacterCreatorKoinTest : KoinTest {
             name = "myName"
             player = "myPlayer"
             race = Race().apply { name = "myRace" }
-            this.clazz = "myClass"
+            this.clazz = CharacterClass().apply { name = "myClass" }
             gender = "Male"
             alignment = "Lawful Good"
+            starterPackBoxViewModels = listOf(
+                StarterPackBoxViewModel(
+                    createStarterBox(Weapon().apply { id = 1; name = "myWeapon" })
+                ),
+                StarterPackBoxViewModel(
+                    createStarterBox(Armor().apply { id = 1; name = "myArmor" })
+                ),
+                StarterPackBoxViewModel(
+                    createStarterBox(Good().apply { id = 1; name = "myGood" })
+                ),
+                StarterPackBoxViewModel(
+                    createStarterBoxEquipmentPack()
+                )
+            )
         }
 
         // act
@@ -105,7 +127,55 @@ class CharacterCreatorKoinTest : KoinTest {
         assertThat(character.thumbImageId).isEqualTo(1)
 
         verify(characterService).createCharacter(eq(character), any())
+
+        val weapons = argumentCaptor<List<ItemGroup>>()
+        verify(characterService).updateWeapons(eq(character), weapons.capture())
+        assertThat(weapons.firstValue).hasSize(1)
+        assertThat(weapons.firstValue[0].item).isEqualTo(Weapon().apply {
+            id = 1; name = "myWeapon"
+        })
+
+        val armor = argumentCaptor<List<ItemGroup>>()
+        verify(characterService).updateArmor(eq(character), armor.capture())
+        assertThat(armor.firstValue).hasSize(1)
+        assertThat(armor.firstValue[0].item).isEqualTo(Armor().apply { id = 1; name = "myArmor" })
+
+        val goods = argumentCaptor<List<ItemGroup>>()
+        verify(characterService).updateGoods(eq(character), goods.capture())
+        assertThat(goods.firstValue).hasSize(2)
+        assertThat(goods.firstValue[0].item).isEqualTo(Good().apply { id = 1; name = "myGood" })
+        assertThat(goods.firstValue[1].item).isEqualTo(Good().apply { id = 2; name = "myPackGood" })
+
         verify(characterHolder).character = character
     }
+
+    private fun createStarterBoxEquipmentPack(): StarterPackBox =
+        StarterPackBox(id = 1, name = "Equipment").also {
+            it.add(
+                StarterPackBoxPackOption(
+                    EquipmentPack(
+                        id = 1,
+                        name = "myPack",
+                        itemGroups = mutableListOf(
+                            ItemGroup().apply {
+                                item = Good().apply { id = 2; name = "myPackGood" }
+                            }
+                        )
+                    ))
+            )
+        }
+
+
+    private fun createStarterBox(item: Item): StarterPackBox =
+        StarterPackBox(id = 1, name = "StarterPackBoxItem").also {
+            it.add(
+                StarterPackBoxItemOption().apply {
+                    add(ItemGroup().apply {
+                        this.item = item
+                        number = 1
+                    })
+                }
+            )
+        }
 
 }

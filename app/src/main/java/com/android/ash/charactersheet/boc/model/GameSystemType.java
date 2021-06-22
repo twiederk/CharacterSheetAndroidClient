@@ -25,10 +25,11 @@ public enum GameSystemType {
                     new RawScriptResource(R.raw.dndv35_phb_spell), //
                     new RawScriptResource(R.raw.dndv35_phb_character) //
             ), //
-            createUpdateScriptMap(new int[]{59, 72},
+            createUpdateScriptMap(new int[]{59, 72, 73},
                     new ScriptResource[]{
                             new RawScriptResource(R.raw.dndv35_upgrade_59_to_60),
-                            new RawScriptResource(R.raw.dndv35_upgrade_72_to_73)
+                            new RawScriptResource(R.raw.dndv35_upgrade_72_to_73),
+                            new RawScriptResource(R.raw.dndv35_upgrade_73_to_74)
                     }),
             createUpdateImageMap(new int[]{72},
                     new ImageResources[]{
@@ -86,11 +87,12 @@ public enum GameSystemType {
                     new RawScriptResource(R.raw.pathfinder_arg_data) //
             ), //
             createUpdateScriptMap(
-                    new int[]{59, 63, 72},
+                    new int[]{59, 63, 72, 73},
                     new ScriptResource[]{
                             new RawScriptResource(R.raw.pathfinder_upgrade_59_to_60), //
                             new RawScriptResource(R.raw.pathfinder_upgrade_63_to_64), //
-                            new RawScriptResource(R.raw.pathfinder_upgrade_72_to_73) //
+                            new RawScriptResource(R.raw.pathfinder_upgrade_72_to_73), //
+                            new RawScriptResource(R.raw.pathfinder_upgrade_73_to_74) //
                     }),
             createUpdateImageMap(new int[]{72},
                     new ImageResources[]{
@@ -146,12 +148,13 @@ public enum GameSystemType {
                     new RawScriptResource(R.raw.dnd5e_phb_character) //
             ), //
             createUpdateScriptMap(
-                    new int[]{69, 70, 71, 72},
+                    new int[]{69, 70, 71, 72, 73},
                     new ScriptResource[]{
                             new RawScriptResource(R.raw.dnd5e_upgrade_69_to_70), //
                             new RawScriptResource(R.raw.dnd5e_upgrade_70_to_71), //
                             new RawScriptResource(R.raw.dnd5e_upgrade_71_to_72), //
                             new RawScriptResource(R.raw.dnd5e_upgrade_72_to_73), //
+                            new RawScriptResource(R.raw.dnd5e_upgrade_73_to_74), //
                     }),
             createUpdateImageMap(new int[]{72},
                     new ImageResources[]{

@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -17,6 +13,10 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class ReleaseNotesKoinTest : KoinTest {
 
@@ -42,7 +42,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val activity: AppCompatActivity = mock()
         whenever(activity.resources).thenReturn(resources)
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(71)
+        whenever(dbHelper.oldVersion).doReturn(72)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act

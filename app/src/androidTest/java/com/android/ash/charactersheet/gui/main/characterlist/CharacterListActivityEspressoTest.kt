@@ -18,8 +18,6 @@ import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.Matchers.not
 import org.hamcrest.core.Is
 import org.junit.After
@@ -27,6 +25,8 @@ import org.junit.Ignore
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class CharacterListActivityEspressoTest : KoinTest {
 

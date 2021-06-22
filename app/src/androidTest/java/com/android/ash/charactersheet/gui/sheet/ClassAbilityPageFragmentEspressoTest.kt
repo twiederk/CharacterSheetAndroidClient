@@ -8,11 +8,11 @@ import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.d20charactersheet.framework.boc.model.*
-import com.nhaarman.mockitokotlin2.mock
 import org.hamcrest.Matchers.not
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.mock
 
 class ClassAbilityPageFragmentEspressoTest : KoinTest {
 

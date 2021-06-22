@@ -35,7 +35,8 @@ class AbilityScoresComposeFragment : AbstractCharacterCreatorComposeFragment() {
                 D20CharacterSheetTheme {
                     AbilityScoresScreen(
                         onRollDice = { characterCreatorViewModel.onRollDice() },
-                        onNavigateToPrevious = { findNavController().navigate(R.id.action_AbilityScoresComposeFragment_to_AbilityScoresFragment) },
+                        onNavigateToPrevious = { findNavController().navigate(R.id.action_AbilityScoresFragment_to_ClassFragment) },
+                        onNavigateToNext = { findNavController().navigate(R.id.action_AbilityScoresFragment_to_EquipmentFragment) },
                         onCreateCharacter = { createCharacter() },
                         AttributeRowData(
                             attributeLabel = R.string.attribute_strength,

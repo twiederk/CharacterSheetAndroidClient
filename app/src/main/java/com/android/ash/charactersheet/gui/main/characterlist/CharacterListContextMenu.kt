@@ -37,13 +37,13 @@ class CharacterListContextMenu : KoinComponent {
         return true
     }
 
-    private fun getCharacter(menuItem: MenuItem, listView: ListView): Character? {
+    private fun getCharacter(menuItem: MenuItem, listView: ListView): Character {
         val menuInfo = menuItem.menuInfo as AdapterView.AdapterContextMenuInfo
         val adapter = listView.adapter as CharacterArrayAdapter
-        return adapter.getItem(menuInfo.position)
+        return checkNotNull(adapter.getItem(menuInfo.position))
     }
 
-    private fun deleteCharacter(character: Character?, listView: ListView) {
+    private fun deleteCharacter(character: Character, listView: ListView) {
         Logger.debug("deleteCharacter")
         Logger.debug("character: $character")
         logEventCharacterDelete(character)

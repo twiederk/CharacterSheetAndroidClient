@@ -4,11 +4,11 @@ import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class LoadGameSystemAsyncTaskTest {
 

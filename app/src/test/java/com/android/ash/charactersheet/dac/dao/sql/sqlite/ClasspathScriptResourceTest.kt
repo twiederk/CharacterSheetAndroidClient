@@ -1,8 +1,8 @@
 package com.android.ash.charactersheet.dac.dao.sql.sqlite
 
-import com.nhaarman.mockitokotlin2.mock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.mockito.kotlin.mock
 
 class ClasspathScriptResourceTest {
 

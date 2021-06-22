@@ -1,11 +1,16 @@
 package com.android.ash.charactersheet.gui.admin.spelllist;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
@@ -18,11 +23,7 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays a spell list with name, short name and spell assignments. Allows to create a new spell assignment.
@@ -78,7 +79,7 @@ public abstract class SpelllistAdministrationActivity extends FormActivity<Spell
     }
 
     private ListView getListView() {
-        return (ListView) findViewById(android.R.id.list);
+        return findViewById(android.R.id.list);
     }
 
     @Override

@@ -73,8 +73,10 @@ class Billing(private val logger: Logger = Logger) : PurchasesUpdatedListener, S
         logger.debug("queryPurchases")
         if (billingClient?.isReady == true) {
             billingClient?.queryPurchases(SkuType.INAPP)?.purchasesList?.forEach {
-                if (it.sku == premiumVersion.sku) {
-                    premiumVersion.purchaseState = it.purchaseState
+                for (sku in it.skus) {
+                    if (sku == premiumVersion.sku) {
+                        premiumVersion.purchaseState = it.purchaseState
+                    }
                 }
             }
         } else {

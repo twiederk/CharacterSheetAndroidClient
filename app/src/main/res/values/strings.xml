@@ -94,7 +94,6 @@
     <string name="combat_initiative_label">Initiative:</string>
     <string name="create_name_label">Name</string>
     <string name="create_player_label">Player</string>
-    <string name="create_race_label">Race</string>
     <string name="create_gender_label">Gender</string>
     <string name="create_alignment_label">Align</string>
     <string name="create_class_label">Class</string>
@@ -883,21 +882,23 @@
     <string name="character_creator_create_button">CREATE CHARACTER</string>
 
     <!-- RaceComposeFragment -->
-    <string name="race_title">Race (step 1 of 3)</string>
-    <string name="race_navigate_next_button">Class &gt;</string>
+    <string name="race_title">Race (step 1 of 4)</string>
     <string name="race_nav_graph_label">RaceFragment</string>
 
     <!-- ClassComposeFragment -->
-    <string name="class_title">"Class (step 2 of 3)"</string>
-    <string name="class_navigate_previous_button">&lt; Race</string>
-    <string name="class_navigate_next_button">Ability Scores &gt;</string>
+    <string name="class_title">"Class (step 2 of 4)"</string>
     <string name="class_nav_graph_label">ClassFragment</string>
 
     <!-- AbilityScoresComposeFragment -->
-    <string name="ability_scores_title">Ability Scores (step 3 of 3)</string>
+    <string name="ability_scores_title">Ability Scores (step 3 of 4)</string>
     <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
-    <string name="ability_scores_navigate_previous_button">&lt; Class</string>
     <string name="ability_scores_compose_nav_graph_label">AbilityScoresComposeFragment</string>
+
+    <!-- EquipmentComposeFragment -->
+    <string name="equipment_title">"Equipment (step 4 of 4)"</string>
+    <string name="equipment_missing_message">"The starting equipment for this class is missing. If you have suggestions for the starting equipment, please send them to torsten.wiederkehr@gmail.com."</string>
+    <string name="equipment_compose_nav_graph_label">EquipmentComposeFragment</string>
+
 
     <!-- GameSystemSelector -->
     <string name="game_system_selector_heading">Select your game system</string>
@@ -981,5 +982,6 @@
     <string name="release_notes_4_2_0">Release 4.2.0\n- Added feats of Dungeons &amp; Dragons 5th edition.\n- Added ability modifier display to character creation ability screen.\n- Use of the latest GUI technology (Jetpack Compose) in character creation ability screen.\n\n</string>
     <string name="release_notes_4_3_0">Release 4.3.0\n- Added weapons, armor and goods of Dungeons &amp; Dragons 5th edition.\n- Use of the latest GUI technology (Jetpack Compose) in character creation race and class screen.\n\n</string>
     <string name="release_notes_4_4_0">Release 4.4.0\n- Added screen for race selection to character creation.\n\n</string>
+    <string name="release_notes_4_5_0">Release 4.5.0\n- Added screen for equipment selection to character creation.\n\n</string>
 
 </resources>

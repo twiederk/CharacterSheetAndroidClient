@@ -8,8 +8,6 @@ class RaceScreenTest {
 
     @Test
     fun getAbilityScoreIncrease_noAbilities_returnEmptyString() {
-        // arrange
-
         // act
         val result: String = getAbilityScoreIncrease(listOf())
 

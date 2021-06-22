@@ -20,6 +20,7 @@ import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
 fun AbilityScoresScreen(
     onRollDice: () -> Unit,
     onNavigateToPrevious: () -> Unit,
+    onNavigateToNext: () -> Unit,
     onCreateCharacter: () -> Unit,
     vararg attributes: AttributeRowData
 ) {
@@ -56,9 +57,10 @@ fun AbilityScoresScreen(
                 bottomBar = {
                     BottomBarNavigation(
                         showPrevious = true,
-                        showNext = false,
+                        showNext = true,
                         showCreate = true,
                         onNavigateToPrevious = onNavigateToPrevious,
+                        onNavigateToNext = onNavigateToNext,
                         onCreateCharacter = onCreateCharacter
                     )
                 }
@@ -74,6 +76,7 @@ fun AbilityScoresScreenPreview() {
         AbilityScoresScreen(
             onRollDice = { },
             onNavigateToPrevious = { },
+            onNavigateToNext = { },
             onCreateCharacter = { },
             AttributeRowData(
                 attributeLabel = R.string.attribute_strength,

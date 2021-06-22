@@ -4,9 +4,6 @@ import android.content.res.Resources
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -15,6 +12,9 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class FragmentPagerFactoryKoinTest : KoinTest {
 

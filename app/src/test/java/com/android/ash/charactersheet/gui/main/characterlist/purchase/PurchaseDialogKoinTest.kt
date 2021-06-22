@@ -8,7 +8,6 @@ import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.billing.Billing
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -17,6 +16,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
+import org.mockito.kotlin.*
 
 
 class PurchaseDialogKoinTest : KoinTest {

@@ -5,10 +5,11 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
+import com.d20charactersheet.framework.boc.model.CharacterClass
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class ClassComposeTest {
 
@@ -25,8 +26,8 @@ class ClassComposeTest {
                 ClassScreen(
                     name = "myName",
                     player = "myPlayer",
-                    clazz = "myClass",
-                    classList = listOf("myClass"),
+                    clazz = CharacterClass().apply { name = "myClass" },
+                    classList = listOf(CharacterClass().apply { name = "myClass" }),
                     gender = "myGender",
                     genderList = listOf("myGender"),
                     alignment = "myAlignment",
@@ -54,7 +55,7 @@ class ClassComposeTest {
     }
 
     @Test
-    fun navigate_ToAbilityScores() {
+    fun navigate_toNextScreen() {
 
         // Arrange
         val onNavigateToNext = mock<() -> Unit>()
@@ -64,8 +65,8 @@ class ClassComposeTest {
                 ClassScreen(
                     name = "myName",
                     player = "myPlayer",
-                    clazz = "myClass",
-                    classList = listOf("myClass"),
+                    clazz = CharacterClass().apply { name = "myClass" },
+                    classList = listOf(CharacterClass().apply { name = "myClass" }),
                     gender = "Male",
                     genderList = listOf("Male", "Female"),
                     alignment = "myAlignment",
@@ -90,6 +91,42 @@ class ClassComposeTest {
     }
 
     @Test
+    fun navigate_toPreviousScreen() {
+
+        // Arrange
+        val onNavigateToPrevious = mock<() -> Unit>()
+
+        composeTestRule.setContent {
+            D20CharacterSheetTheme {
+                ClassScreen(
+                    name = "myName",
+                    player = "myPlayer",
+                    clazz = CharacterClass().apply { name = "myClass" },
+                    classList = listOf(CharacterClass().apply { name = "myClass" }),
+                    gender = "Male",
+                    genderList = listOf("Male", "Female"),
+                    alignment = "myAlignment",
+                    alignmentList = listOf("myAlignment"),
+                    onChangeName = { },
+                    onChangePlayer = { },
+                    onGenderChange = { },
+                    onAlignmentChange = { },
+                    onClassChange = { },
+                    onNavigateToPrevious = onNavigateToPrevious,
+                    onNavigateToNext = { },
+                    onCreateCharacter = { }
+                )
+            }
+        }
+
+        // act
+        composeTestRule.onNodeWithText("PREVIOUS").performClick()
+
+        // assert
+        verify(onNavigateToPrevious).invoke()
+    }
+
+    @Test
     fun createCharacter() {
 
         // Arrange
@@ -100,8 +137,8 @@ class ClassComposeTest {
                 ClassScreen(
                     name = "myName",
                     player = "myPlayer",
-                    clazz = "myClass",
-                    classList = listOf("myClass"),
+                    clazz = CharacterClass().apply { name = "myClass" },
+                    classList = listOf(CharacterClass().apply { name = "myClass" }),
                     gender = "Male",
                     genderList = listOf("Male", "Female"),
                     alignment = "myAlignment",

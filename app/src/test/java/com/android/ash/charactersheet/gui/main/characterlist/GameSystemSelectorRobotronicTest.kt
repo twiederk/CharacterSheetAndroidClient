@@ -9,9 +9,6 @@ import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -23,6 +20,9 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.annotation.Config
 
 

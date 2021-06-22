@@ -3,10 +3,13 @@ package com.android.ash.charactersheet.gui.main.charactercreator
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class AbilityScoresComposeTest {
 
@@ -23,6 +26,7 @@ class AbilityScoresComposeTest {
                 AbilityScoresScreen(
                     onRollDice = { },
                     onNavigateToPrevious = { },
+                    onNavigateToNext = { },
                     onCreateCharacter = { },
                     AttributeRowData(
                         attributeLabel = R.string.attribute_strength,
@@ -54,6 +58,7 @@ class AbilityScoresComposeTest {
                 AbilityScoresScreen(
                     onRollDice = { },
                     onNavigateToPrevious = { },
+                    onNavigateToNext = { },
                     onCreateCharacter = { },
                     AttributeRowData(
                         attributeLabel = R.string.attribute_strength,
@@ -129,7 +134,98 @@ class AbilityScoresComposeTest {
         composeTestRule.onNodeWithText("+5").assertIsDisplayed()
 
         composeTestRule.onNodeWithText("PREVIOUS").assertIsDisplayed()
+        composeTestRule.onNodeWithText("NEXT").assertIsDisplayed()
         composeTestRule.onNodeWithText("CREATE CHARACTER").assertIsDisplayed()
+    }
+
+    @Test
+    fun navigate_toPreviousScreen() {
+
+        // Arrange
+        val onNavigateToPrevious = mock<() -> Unit>()
+
+        // act
+        composeTestRule.setContent {
+            D20CharacterSheetTheme {
+                AbilityScoresScreen(
+                    onRollDice = { },
+                    onNavigateToPrevious = onNavigateToPrevious,
+                    onNavigateToNext = { },
+                    onCreateCharacter = { },
+                    AttributeRowData(
+                        attributeLabel = R.string.attribute_strength,
+                        attributeValue = 10,
+                        attributeModifier = "0",
+                        onIncrease = {},
+                        onDecrease = {}
+                    ))
+            }
+        }
+        // act
+        composeTestRule.onNodeWithText("PREVIOUS").performClick()
+
+        // assert
+        verify(onNavigateToPrevious).invoke()
+    }
+
+    @Test
+    fun navigate_toNextScreen() {
+
+        // Arrange
+        val onNavigateToNext = mock<() -> Unit>()
+
+        // act
+        composeTestRule.setContent {
+            D20CharacterSheetTheme {
+                AbilityScoresScreen(
+                    onRollDice = { },
+                    onNavigateToPrevious = { },
+                    onNavigateToNext = onNavigateToNext,
+                    onCreateCharacter = { },
+                    AttributeRowData(
+                        attributeLabel = R.string.attribute_strength,
+                        attributeValue = 10,
+                        attributeModifier = "0",
+                        onIncrease = {},
+                        onDecrease = {}
+                    ))
+            }
+        }
+        // act
+        composeTestRule.onNodeWithText("NEXT").performClick()
+
+        // assert
+        verify(onNavigateToNext).invoke()
+    }
+
+    @Test
+    fun createCharacter() {
+
+        // Arrange
+        val onCreateCharacter = mock<() -> Unit>()
+
+        composeTestRule.setContent {
+            D20CharacterSheetTheme {
+                AbilityScoresScreen(
+                    onRollDice = { },
+                    onNavigateToPrevious = { },
+                    onNavigateToNext = { },
+                    onCreateCharacter = onCreateCharacter,
+                    AttributeRowData(
+                        attributeLabel = R.string.attribute_strength,
+                        attributeValue = 10,
+                        attributeModifier = "0",
+                        onIncrease = {},
+                        onDecrease = {}
+                    ))
+            }
+        }
+
+        // act
+        composeTestRule.onNodeWithText("CREATE CHARACTER").performClick()
+
+        // assert
+        verify(onCreateCharacter).invoke()
     }
 
 }

@@ -9,10 +9,10 @@ import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
 import com.d20charactersheet.framework.boc.model.Ability
 import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Size
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class RaceComposeTest {
 
@@ -66,21 +66,11 @@ class RaceComposeTest {
         }
 
         // assert
-//        composeTestRule.onNodeWithText("firstRace").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("Strength +2").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("MEDIUM").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("20").assertIsDisplayed()
-//
-//        composeTestRule.onNodeWithText("secondRace").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("Dexterity +2, Constitution -2").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("SMALL").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("30").assertIsDisplayed()
-
         composeTestRule.onNodeWithText("NEXT").assertIsDisplayed()
     }
 
     @Test
-    fun navigate_ToAbilityScores() {
+    fun navigate_toNextScreen() {
 
         // Arrange
         val raceList = listOf(

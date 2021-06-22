@@ -10,16 +10,15 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.service.GameSystem
-
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.Matchers.*
 import org.hamcrest.core.Is
 import org.junit.After
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class ArmorAdministrationCreateActivityEspressoTest : KoinTest {
 

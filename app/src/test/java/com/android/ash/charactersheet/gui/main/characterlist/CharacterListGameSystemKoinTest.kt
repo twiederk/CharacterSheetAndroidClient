@@ -9,7 +9,6 @@ import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -20,6 +19,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
+import org.mockito.kotlin.*
 
 @KoinApiExtension
 class CharacterListGameSystemKoinTest : KoinTest {

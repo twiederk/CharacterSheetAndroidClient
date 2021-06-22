@@ -16,7 +16,6 @@ import com.d20charactersheet.framework.boc.model.ClassLevel
 import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions
 import org.junit.After
 import org.junit.Before
@@ -27,6 +26,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
+import org.mockito.kotlin.*
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)

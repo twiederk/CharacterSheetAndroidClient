@@ -1,18 +1,13 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
+import android.content.res.Resources
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl
 import com.android.ash.charactersheet.boc.service.AndroidImageService
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Die
-import com.d20charactersheet.framework.boc.model.Race
-import com.d20charactersheet.framework.boc.service.CharacterCreatorServiceImpl
-import com.d20charactersheet.framework.boc.service.DisplayService
-import com.d20charactersheet.framework.boc.service.DnD5eRuleServiceImpl
-import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.boc.service.*
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -26,6 +21,7 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
+import org.mockito.kotlin.*
 import java.util.*
 
 @KoinApiExtension
@@ -50,12 +46,67 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         declareMock<CharacterCreator>()
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allRaces).thenReturn(mutableListOf(Race().apply { name = "myRace" }, Race().apply { name = "anotherRace" }))
-        whenever(gameSystem.allCharacterClasses).thenReturn(listOf(CharacterClass().apply { name = "myClass" }, CharacterClass().apply { name = "anotherClass" }))
+        whenever(gameSystem.allRaces).thenReturn(
+            mutableListOf(
+                Race().apply { name = "myRace" },
+                Race().apply { name = "anotherRace" })
+        )
+        whenever(gameSystem.allCharacterClasses).thenReturn(
+            mutableListOf(
+                CharacterClass().apply { name = "myClass" },
+                CharacterClass().apply { name = "anotherClass" })
+        )
+        whenever(gameSystem.allWeapons).thenReturn(
+            listOf(
+                Weapon().apply { name = "myWeapon" },
+                Weapon().apply { name = "anotherWeapon" })
+        )
+        whenever(gameSystem.allArmor).thenReturn(
+            listOf(
+                Armor().apply { name = "myArmor" },
+                Armor().apply { name = "anotherArmor" })
+        )
+        whenever(gameSystem.allGoods).thenReturn(
+            listOf(
+                Good().apply { name = "myGood" },
+                Good().apply { name = "anotherGood" })
+        )
+        whenever(gameSystem.allEquipmentPacks).thenReturn(
+            listOf(
+                EquipmentPack(
+                    id = 1,
+                    name = "myPack",
+                    itemGroups = mutableListOf()
+                ), EquipmentPack(
+                    id = 2,
+                    name = "anotherPack",
+                    itemGroups = mutableListOf()
+                )
+            )
+        )
+
+        val characterClassService: CharacterClassService = mock()
+        whenever(characterClassService.getStarterPack(any(), any())).thenReturn(
+            StarterPack().also { starterPack ->
+                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
+                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
+                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
+                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
+            }
+        )
+
+        val itemService: ItemService = mock()
+
         val displayService: DisplayService = mock()
         whenever(displayService.getDisplaySex(any())).thenReturn("Male")
         whenever(displayService.getDisplayAlignment(any())).thenReturn("Lawful Good")
+
         whenever(gameSystem.displayService).thenReturn(displayService)
+        whenever(gameSystem.characterClassService).thenReturn(characterClassService)
+        whenever(gameSystem.itemService).thenReturn(itemService)
+        whenever(gameSystem.ruleService).thenReturn(mock())
+        whenever(gameSystem.characterCreatorService).thenReturn(mock())
+
 
         gameSystemHolder.gameSystem = gameSystem
     }
@@ -75,9 +126,15 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         assertThat(characterCreatorViewModel.name).isEqualTo("")
         assertThat(characterCreatorViewModel.player).isEqualTo("")
         assertThat(characterCreatorViewModel.race.name).isEqualTo("anotherRace")
-        assertThat(characterCreatorViewModel.raceList).containsExactly(Race().apply { name = "anotherRace" }, Race().apply { name = "myRace" })
-        assertThat(characterCreatorViewModel.clazz).isEqualTo("anotherClass")
-        assertThat(characterCreatorViewModel.classList).containsExactly("anotherClass", "myClass")
+        assertThat(characterCreatorViewModel.raceList).containsExactly(
+            Race().apply { name = "anotherRace" },
+            Race().apply { name = "myRace" }
+        )
+        assertThat(characterCreatorViewModel.clazz.name).isEqualTo("anotherClass")
+        assertThat(characterCreatorViewModel.classList).containsExactly(
+            CharacterClass().apply { name = "anotherClass" },
+            CharacterClass().apply { name = "myClass" }
+        )
         assertThat(characterCreatorViewModel.gender).isEqualTo("Male")
         assertThat(characterCreatorViewModel.alignment).isEqualTo("Lawful Good")
         assertThat(characterCreatorViewModel.strength).isEqualTo(10)
@@ -86,6 +143,8 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         assertThat(characterCreatorViewModel.intelligence).isEqualTo(10)
         assertThat(characterCreatorViewModel.wisdom).isEqualTo(10)
         assertThat(characterCreatorViewModel.charisma).isEqualTo(10)
+
+        assertThat(characterCreatorViewModel.starterPackBoxViewModels).hasSize(4)
     }
 
     @Test
@@ -411,10 +470,12 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         // arrange
         Die.setRandom(Random(1))
 
-        val gameSystem = gameSystemHolder.gameSystem
-        whenever(gameSystem?.characterCreatorService).thenReturn(CharacterCreatorServiceImpl())
-        whenever(gameSystem?.ruleService).thenReturn(DnD5eRuleServiceImpl())
-        whenever(gameSystem?.displayService).thenReturn(AndroidDisplayServiceImpl(mock()))
+        val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
+        whenever(gameSystem.characterCreatorService).thenReturn(CharacterCreatorServiceImpl())
+        whenever(gameSystem.ruleService).thenReturn(DnD5eRuleServiceImpl())
+        val resources: Resources = mock()
+        whenever(resources.getString(any())).thenReturn("")
+        whenever(gameSystem.displayService).thenReturn(AndroidDisplayServiceImpl(resources))
         gameSystemHolder.gameSystem = gameSystem
 
         val underTest = CharacterCreatorViewModel()
@@ -454,15 +515,21 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     fun reset_resetProperties_allPropertiesAreReset() {
         // arrange
         val underTest = CharacterCreatorViewModel()
-        underTest.raceList = listOf(Race().apply { name = "firstRace" }, Race().apply { name = "secondRace" })
-        underTest.classList = listOf("firstClass", "secondClass")
-
+        underTest.raceList =
+            listOf(Race().apply { name = "firstRace" }, Race().apply { name = "secondRace" })
+        underTest.classList =
+            listOf(
+                CharacterClass().apply { name = "firstClass" },
+                CharacterClass().apply { name = "secondClass" }
+            )
         underTest.name = "myName"
         underTest.player = "myPlayer"
         underTest.race = underTest.raceList[1]
         underTest.clazz = underTest.classList[1]
         underTest.gender = "Female"
         underTest.alignment = "Neutral"
+        underTest.starterPackBoxViewModels =
+            listOf(StarterPackBoxViewModel(StarterPackBox().also { it.add(StarterPackBoxItemOption()) }))
         underTest.onRollDice()
 
         // act
@@ -472,7 +539,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         assertThat(underTest.name).isEqualTo("")
         assertThat(underTest.player).isEqualTo("")
         assertThat(underTest.race.name).isEqualTo("anotherRace")
-        assertThat(underTest.clazz).isEqualTo("anotherClass")
+        assertThat(underTest.clazz.name).isEqualTo("anotherClass")
         assertThat(underTest.gender).isEqualTo("Male")
         assertThat(underTest.alignment).isEqualTo("Lawful Good")
         assertThat(underTest.strength).isEqualTo(10)
@@ -487,6 +554,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         assertThat(underTest.wisdomModifier).isEqualTo("0")
         assertThat(underTest.charisma).isEqualTo(10)
         assertThat(underTest.charismaModifier).isEqualTo("0")
+        assertThat(underTest.starterPackBoxViewModels).hasSize(4)
 
     }
 

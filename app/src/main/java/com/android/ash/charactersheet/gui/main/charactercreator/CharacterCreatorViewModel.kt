@@ -8,9 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.boc.service.AndroidImageService
-import com.d20charactersheet.framework.boc.model.Alignment
-import com.d20charactersheet.framework.boc.model.Race
-import com.d20charactersheet.framework.boc.model.Sex
+import com.d20charactersheet.framework.boc.model.*
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -23,14 +21,19 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     private val characterCreator: CharacterCreator by inject()
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
-    private val characterCreatorService = gameSystemHolder.gameSystem?.characterCreatorService
-    private val ruleService = gameSystemHolder.gameSystem?.ruleService
-    private val displayService = gameSystemHolder.gameSystem?.displayService
+    private var gameSystem = checkNotNull(gameSystemHolder.gameSystem)
 
-    var raceList: List<Race> = gameSystemHolder.gameSystem?.allRaces?.sortedWith(compareBy { it.name }) ?: listOf()
-    var classList: List<String> = gameSystemHolder.gameSystem?.allCharacterClasses?.map { it.name }?.toList()?.sorted() ?: listOf()
-    val genderList: List<String> = (Sex.values().map { displayService?.getDisplaySex(it) }.toList()) as List<String>
-    val alignmentList: List<String> = (Alignment.values().map { displayService?.getDisplayAlignment(it) }.toList()) as List<String>
+    private var characterCreatorService = gameSystem.characterCreatorService
+    private var characterClassService = gameSystem.characterClassService
+    private var ruleService = gameSystem.ruleService
+    private var displayService = gameSystem.displayService
+
+    var raceList: List<Race> = gameSystem.allRaces.sortedBy { it.name }
+    var classList: List<CharacterClass> = gameSystem.allCharacterClasses.sortedBy { it.name }
+    val genderList: List<String> =
+        (Sex.values().map { checkNotNull(displayService.getDisplaySex(it)) }.toList())
+    val alignmentList: List<String> =
+        (Alignment.values().map { checkNotNull(displayService.getDisplayAlignment(it)) }.toList())
 
     var name by mutableStateOf("")
     var player by mutableStateOf("")
@@ -53,32 +56,59 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     var wisdomModifier by mutableStateOf("0")
     var charismaModifier by mutableStateOf("0")
 
+    var starterPackBoxViewModels: List<StarterPackBoxViewModel> =
+        getStarterPackViewModelsOfClass(clazz.id)
+
+    private fun getStarterPackViewModelsOfClass(classId: Int): List<StarterPackBoxViewModel> {
+        val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
+        val starterPack = checkNotNull(
+            characterClassService.getStarterPack(
+                CharacterClass().apply { id = classId },
+                StarterPackData(
+                    gameSystem.itemService,
+                    gameSystem.allWeapons,
+                    gameSystem.allArmor,
+                    gameSystem.allGoods,
+                    gameSystem.allEquipmentPacks
+                )
+            )
+        )
+
+        starterPack.starterPackBoxes.sortBy { it.id }
+        starterPack.starterPackBoxes.forEach { starterPackBox ->
+            starterPackBox.options.sortBy { it.getTitle() }
+        }
+
+        return starterPack.starterPackBoxes.map { StarterPackBoxViewModel(it) }.toList()
+    }
+
+
     fun onRollDice() {
         firebaseAnalytics.logEvent(FBAnalytics.Event.STANDARD_METHOD_DICE_ROLL, null)
 
-        strength = characterCreatorService?.rollAttributeWithStandardMethod() ?: 20
+        strength = characterCreatorService.rollAttributeWithStandardMethod()
         strengthModifier = getDisplayModifier(strength)
 
-        dexterity = gameSystemHolder.gameSystem?.characterCreatorService?.rollAttributeWithStandardMethod() ?: 20
+        dexterity = gameSystem.characterCreatorService.rollAttributeWithStandardMethod()
         dexterityModifier = getDisplayModifier(dexterity)
 
-        constitution = gameSystemHolder.gameSystem?.characterCreatorService?.rollAttributeWithStandardMethod() ?: 20
+        constitution = gameSystem.characterCreatorService.rollAttributeWithStandardMethod()
         constitutionModifier = getDisplayModifier(constitution)
 
-        intelligence = gameSystemHolder.gameSystem?.characterCreatorService?.rollAttributeWithStandardMethod() ?: 20
+        intelligence = gameSystem.characterCreatorService.rollAttributeWithStandardMethod()
         intelligenceModifier = getDisplayModifier(intelligence)
 
-        wisdom = gameSystemHolder.gameSystem?.characterCreatorService?.rollAttributeWithStandardMethod() ?: 20
+        wisdom = gameSystem.characterCreatorService.rollAttributeWithStandardMethod()
         wisdomModifier = getDisplayModifier(wisdom)
 
-        charisma = gameSystemHolder.gameSystem?.characterCreatorService?.rollAttributeWithStandardMethod() ?: 20
+        charisma = gameSystem.characterCreatorService.rollAttributeWithStandardMethod()
         charismaModifier = getDisplayModifier(charisma)
 
     }
 
     private fun getDisplayModifier(abilityValue: Int): String {
-        val attributeModifier = ruleService?.getModifier(abilityValue) ?: 0
-        return displayService?.getDisplayModifier(attributeModifier) ?: "0"
+        val attributeModifier = ruleService.getModifier(abilityValue)
+        return displayService.getDisplayModifier(attributeModifier) ?: "0"
     }
 
     fun onIncreaseStrength() {
@@ -183,8 +213,9 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
         this.race = race
     }
 
-    fun onClassNameChange(className: String) {
-        this.clazz = className
+    fun onClassChange(clazz: CharacterClass) {
+        this.clazz = clazz
+        this.starterPackBoxViewModels = getStarterPackViewModelsOfClass(clazz.id)
     }
 
     fun onGenderChange(gender: String) {
@@ -196,8 +227,15 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
     }
 
     fun reset() {
-        raceList = gameSystemHolder.gameSystem?.allRaces?.sortedWith(compareBy { it.name }) ?: listOf()
-        classList = gameSystemHolder.gameSystem?.allCharacterClasses?.map { it.name }?.toList()?.sorted() ?: listOf()
+        gameSystem = checkNotNull(gameSystemHolder.gameSystem)
+
+        characterCreatorService = gameSystem.characterCreatorService
+        characterClassService = gameSystem.characterClassService
+        ruleService = gameSystem.ruleService
+        displayService = gameSystem.displayService
+
+        raceList = gameSystem.allRaces.sortedBy { it.name }
+        classList = gameSystem.allCharacterClasses.sortedBy { it.name }
 
         name = ""
         player = ""
@@ -217,10 +255,12 @@ class CharacterCreatorViewModel : ViewModel(), KoinComponent {
         wisdomModifier = "0"
         charisma = 10
         charismaModifier = "0"
+
+        starterPackBoxViewModels = getStarterPackViewModelsOfClass(clazz.id)
     }
 
     fun getBitmap(imageId: Int): Bitmap {
-        val imageService = gameSystemHolder.gameSystem?.imageService as AndroidImageService
+        val imageService = gameSystem.imageService as AndroidImageService
         return imageService.getBitmap(imageId)
     }
 }

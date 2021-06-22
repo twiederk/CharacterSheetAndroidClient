@@ -8,8 +8,6 @@ import com.android.ash.charactersheet.gui.widget.numberview.SimpleNumberViewCont
 import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
 import com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
 import com.d20charactersheet.framework.boc.model.Character
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -18,6 +16,8 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class CombatEditPanelKoinTest : KoinTest {
 

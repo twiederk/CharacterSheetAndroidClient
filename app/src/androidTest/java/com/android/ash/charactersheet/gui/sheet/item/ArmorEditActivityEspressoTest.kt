@@ -13,16 +13,16 @@ import com.d20charactersheet.framework.boc.model.Equipment
 import com.d20charactersheet.framework.boc.model.ItemGroup
 import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.Matchers
 import org.hamcrest.core.Is
 import org.junit.After
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class ArmorEditActivityEspressoTest : KoinTest {
 

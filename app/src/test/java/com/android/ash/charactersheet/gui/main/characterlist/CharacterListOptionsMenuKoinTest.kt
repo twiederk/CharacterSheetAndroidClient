@@ -8,7 +8,6 @@ import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.billing.Billing
 import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseDialog
 import com.d20charactersheet.framework.boc.service.GameSystem
-import com.nhaarman.mockitokotlin2.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -18,6 +17,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
+import org.mockito.kotlin.*
 
 class CharacterListOptionsMenuKoinTest : KoinTest {
 

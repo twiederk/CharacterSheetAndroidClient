@@ -8,9 +8,6 @@ import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.ClassLevel
 import com.d20charactersheet.framework.boc.model.Race
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -22,6 +19,9 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.verify
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
