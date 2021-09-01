@@ -1,9 +1,7 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
 import com.d20charactersheet.framework.boc.model.*
-import org.koin.core.component.KoinApiExtension
 
-@KoinApiExtension
 class CharacterCreatorEquipment {
 
     fun fillEquipment(character: Character, characterCreatorViewModel: CharacterCreatorViewModel) {

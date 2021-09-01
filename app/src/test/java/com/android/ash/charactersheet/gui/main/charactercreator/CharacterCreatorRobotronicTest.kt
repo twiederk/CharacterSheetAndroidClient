@@ -17,7 +17,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -28,7 +27,6 @@ import org.mockito.Mockito
 import org.mockito.kotlin.*
 import org.robolectric.annotation.Config
 
-@KoinApiExtension
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
 @MediumTest

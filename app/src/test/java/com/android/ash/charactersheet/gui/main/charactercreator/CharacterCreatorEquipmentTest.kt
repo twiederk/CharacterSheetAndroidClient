@@ -4,11 +4,9 @@ import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.koin.core.component.KoinApiExtension
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-@KoinApiExtension
 class CharacterCreatorEquipmentTest {
 
     private val characterCreatorViewModel: CharacterCreatorViewModel = mock()

@@ -9,11 +9,9 @@ import com.android.ash.charactersheet.gui.widget.numberview.PositiveNumberViewCo
 import com.android.ash.charactersheet.gui.widget.numberview.SimpleNumberViewController
 import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
 import com.android.ash.charactersheet.gui.widget.numberview.SumNumberView
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 abstract class AbstractCombatEditPanel : CombatEditPanel, KoinComponent {
 
     protected val gameSystemHolder: GameSystemHolder by inject()

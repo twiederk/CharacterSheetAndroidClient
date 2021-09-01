@@ -10,8 +10,8 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.service.AndroidImageServiceImpl
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity
-import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.dsl.createCharacter
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -73,7 +73,7 @@ class CharacterListRobolectricTest : KoinTest {
     fun onItemClick_characterClicked_openCharacter() {
         // Arrange
         val activity: CharacterListActivity = mock()
-        val character = Character().apply { id = 1 }
+        val character = createCharacter { id = 1 }
         val adapter: AdapterView<*> = mock()
         whenever(adapter.getItemAtPosition(0)).doReturn(character)
 

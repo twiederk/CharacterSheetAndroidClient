@@ -7,11 +7,9 @@ import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.*
 import com.android.billingclient.api.Purchase.PurchaseState
 import com.d20charactersheet.framework.boc.model.Character
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class Billing(private val logger: Logger = Logger) : PurchasesUpdatedListener, SkuDetailsResponseListener, BillingClientStateListener, AcknowledgePurchaseResponseListener, KoinComponent {
 
     companion object {

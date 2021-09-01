@@ -9,9 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.gui.theme.D20CharacterSheetTheme
-import org.koin.core.component.KoinApiExtension
 
-@KoinApiExtension
 class EquipmentComposeFragment : AbstractCharacterCreatorComposeFragment() {
 
     override fun onResume() {

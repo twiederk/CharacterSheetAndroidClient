@@ -13,7 +13,7 @@ class DnD5eCombatPanel : AbstractCombatPanel() {
         super.setCombat(view)
 
         val ruleService = gameSystemHolder.gameSystem?.ruleService
-        val character = characterHolder.character
+        val character = checkNotNull(characterHolder.character)
 
         // proficiency bonus
         val proficiencyBonus = ruleService?.calculateProficiencyBonus(character)

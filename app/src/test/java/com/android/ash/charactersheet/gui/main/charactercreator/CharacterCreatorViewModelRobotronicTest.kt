@@ -12,7 +12,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -23,7 +22,6 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-@KoinApiExtension
 class CharacterCreatorViewModelRobotronicTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()

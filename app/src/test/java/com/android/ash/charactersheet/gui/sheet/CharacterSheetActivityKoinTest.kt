@@ -3,10 +3,7 @@ package com.android.ash.charactersheet.gui.sheet
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.ash.charactersheet.appModule
-import com.d20charactersheet.framework.boc.model.Character
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.ClassLevel
-import com.d20charactersheet.framework.boc.model.Race
+import com.d20charactersheet.framework.dsl.createCharacter
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -48,12 +45,14 @@ class CharacterSheetActivityKoinTest : KoinTest {
     @Test
     fun logEventCharacter_character_logsCharacterClassLevels() {
         // Arrange
-        val character = Character().apply {
-            race = Race().apply { name = "myRace" }
-            classLevels = listOf(
-                ClassLevel(CharacterClass().apply { name = "myFirstClass"; classAbilities = listOf() }, 1),
-                ClassLevel(CharacterClass().apply { name = "mySecondClass"; classAbilities = listOf() }, 2)
-            )
+        val character = createCharacter {
+            race {
+                racename = "myRace"
+            }
+            classLevels {
+                classLevel { classname = "myFirstClass"; level = 1 }
+                classLevel { classname = "mySecondClass"; level = 2 }
+            }
         }
 
         // Act

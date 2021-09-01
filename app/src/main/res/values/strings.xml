@@ -983,5 +983,6 @@
     <string name="release_notes_4_3_0">Release 4.3.0\n- Added weapons, armor and goods of Dungeons &amp; Dragons 5th edition.\n- Use of the latest GUI technology (Jetpack Compose) in character creation race and class screen.\n\n</string>
     <string name="release_notes_4_4_0">Release 4.4.0\n- Added screen for race selection to character creation.\n\n</string>
     <string name="release_notes_4_5_0">Release 4.5.0\n- Added screen for equipment selection to character creation.\n\n</string>
+    <string name="release_notes_4_6_0">Release 4.6.0\n- Added attacks tab to Dungeons &amp; Dragons 5th edition.\n\n</string>
 
 </resources>

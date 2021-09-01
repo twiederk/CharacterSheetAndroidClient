@@ -12,10 +12,9 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.PreferenceServiceHolder
 import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.withToolbarTitle
-import com.d20charactersheet.framework.boc.model.Character
-import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Sex
 import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.dsl.createCharacter
 import org.hamcrest.core.Is
 import org.junit.After
 import org.junit.Test
@@ -43,7 +42,9 @@ class CharacterSheetActivityEspressoTest : KoinTest {
 
         // Arrange
         val preferenceService: PreferenceService = mock()
-        whenever(preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND)).doReturn(false)
+        whenever(preferenceService.getBoolean(PreferenceService.SHOW_IMAGE_AS_BACKGROUND)).doReturn(
+            false
+        )
         whenever(preferenceService.getInt(PreferenceService.BACKGROUND_COLOR)).doReturn(Color.YELLOW)
         preferencesServiceHolder.preferenceService = preferenceService
 
@@ -53,12 +54,11 @@ class CharacterSheetActivityEspressoTest : KoinTest {
         whenever(gameSystem.ruleService).doReturn(mock())
         gameSystemHolder.gameSystem = gameSystem
 
-        val character = Character().apply {
+        characterHolder.character = createCharacter {
             name = "myCharacter"
-            race = Race().apply { name = "myRace" }
             sex = Sex.MALE
+            race { racename = "myRace" }
         }
-        characterHolder.character = character
 
         scenario = ActivityScenario.launch(CharacterSheetActivity::class.java)
 

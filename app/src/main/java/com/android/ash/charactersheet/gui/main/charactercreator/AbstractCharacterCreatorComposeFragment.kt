@@ -7,11 +7,9 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.gui.sheet.CharacterSheetActivity
 import com.android.ash.charactersheet.gui.util.MessageManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 abstract class AbstractCharacterCreatorComposeFragment : Fragment(), KoinComponent {
 
     protected val characterCreatorViewModel: CharacterCreatorViewModel by inject()

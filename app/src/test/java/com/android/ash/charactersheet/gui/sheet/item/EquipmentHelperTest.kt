@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.gui.sheet.item
 
 import com.android.ash.charactersheet.gui.util.ExpandableListItem
-import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.model.Good
 import com.d20charactersheet.framework.boc.model.Item
 import com.d20charactersheet.framework.boc.model.ItemGroup
 import com.d20charactersheet.framework.boc.service.ItemService
+import com.d20charactersheet.framework.dsl.createCharacter
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.fail
 import org.junit.Test
@@ -17,11 +17,16 @@ class EquipmentHelperTest {
     @Test
     fun testGetAllGoods() {
         // Arrange
-        val goods = createGoodsAndFillBackpack()
-        val character = Character().apply { equipment.goods = goods }
+        val character = createCharacter {
+            equipment {
+                this.goods = createGoodsAndFillBackpack()
+            }
+        }
+
         val equipmentHelper = EquipmentHelper(character)
         val itemService = Mockito.mock(ItemService::class.java)
-        Mockito.`when`(itemService.allGoods).thenReturn(listOf(
+        Mockito.`when`(itemService.allGoods).thenReturn(
+            listOf(
                 createGood(0, "Backpack"),  //
                 createGood(68, "Waterskin"),  //
                 createGood(51, "Trail Rations (per Day)"),  //
@@ -29,10 +34,14 @@ class EquipmentHelperTest {
                 createGood(22, "Flint and Steel"),  //
                 createGood(10, "Candle"),  //
                 createGood(65, "Torch") //
-        ))
+            )
+        )
 
         // Act
-        val allGoods = equipmentHelper.createItemGroups(ArrayList<Item>(itemService.allGoods), character.equipment.goods)
+        val allGoods = equipmentHelper.createItemGroups(
+            ArrayList<Item>(itemService.allGoods),
+            character.equipment.goods
+        )
 
         // Assert
         assertThat(allGoods).hasSize(7)
@@ -45,14 +54,14 @@ class EquipmentHelperTest {
         assertItem(allGoods, "Torch", 0)
     }
 
-    private fun createGoodsAndFillBackpack(): List<ItemGroup> {
+    private fun createGoodsAndFillBackpack(): MutableList<ItemGroup> {
         val backpack = createGood(0, "Backpack")
         val waterSkin = createGood(68, "Waterskin")
         val trailRation = createGood(51, "Trail Rations (per Day)")
         val bedroll = createGood(3, "Bedroll")
         val flintAndSteel = createGood(22, "Flint and Steel")
         val candle = createGood(10, "Candle")
-        val goods: MutableList<ItemGroup> = LinkedList()
+        val goods = mutableListOf<ItemGroup>()
         goods.add(createItemGroup(backpack, 1))
         goods.add(createItemGroup(waterSkin, 1))
         goods.add(createItemGroup(trailRation, 10))
@@ -62,9 +71,11 @@ class EquipmentHelperTest {
         return goods
     }
 
-    private fun createItemGroup(good: Good, number: Int): ItemGroup = ItemGroup().apply { item = good; this.number = number }
+    private fun createItemGroup(good: Good, number: Int): ItemGroup =
+        ItemGroup().apply { item = good; this.number = number }
 
-    private fun createGood(id: Int, name: String): Good = Good().apply { this.id = id; this.name = name }
+    private fun createGood(id: Int, name: String): Good =
+        Good().apply { this.id = id; this.name = name }
 
     private fun assertItem(expandListViews: List<ExpandableListItem>, name: String, number: Int) {
         for (expandListView in expandListViews) {

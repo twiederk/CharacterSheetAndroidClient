@@ -18,7 +18,7 @@ abstract class AbstractCombatPanel : KoinComponent, CombatPanel {
 
     override fun setCombat(view: View) {
         val ruleService = gameSystemHolder.gameSystem?.ruleService
-        val character = characterHolder.character
+        val character = checkNotNull(characterHolder.character)
 
         // hit points
         val hitPointsTextView: TextView = view.findViewById(R.id.combat_hitpoints)

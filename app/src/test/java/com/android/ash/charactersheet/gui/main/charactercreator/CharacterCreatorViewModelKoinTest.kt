@@ -13,7 +13,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
@@ -24,7 +23,6 @@ import org.mockito.Mockito
 import org.mockito.kotlin.*
 import java.util.*
 
-@KoinApiExtension
 class CharacterCreatorViewModelKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()

@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
@@ -40,8 +39,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 74
-        versionName "4.5.0"
+        versionCode 75
+        versionName "4.6.0-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,19 +49,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    asciidoctor {
-        sourceDir = file('src/docs')
-        sources {
-            include '*.adoc'
-        }
-        outputDir = file('build/docs')
-    }
 }
 
 dependencies {
 
     // App
-    api 'com.d20charactersheet:framework:4.5.0'
+    api 'com.d20charactersheet:framework:4.6.0'
     implementation "androidx.core:core-ktx:1.6.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
@@ -70,8 +62,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
-    implementation "org.koin:koin-android:$rootProject.koinVersion"
-    implementation "org.koin:koin-android-viewmodel:$rootProject.koinVersion"
+    implementation "io.insert-koin:koin-core:$rootProject.koinVersion"
+    implementation "io.insert-koin:koin-android:$rootProject.koinVersion"
     implementation 'com.google.firebase:firebase-analytics:19.0.1'
     implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
     implementation 'com.android.billingclient:billing-ktx:4.0.0'
@@ -92,19 +84,20 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.3'
     androidTestImplementation 'androidx.test:rules:1.4.0'
     debugImplementation('androidx.fragment:fragment-testing:1.3.6') { exclude group: 'androidx.test', module: 'core' }
-    debugImplementation 'org.assertj:assertj-core:3.19.0'
-    androidTestImplementation("org.koin:koin-test:$rootProject.koinVersion") { exclude group: 'org.mockito' }
+    debugImplementation "org.assertj:assertj-core:$rootProject.assertJVersion"
+    androidTestImplementation("io.insert-koin:koin-test:$rootProject.koinVersion") { exclude group: 'org.mockito' }
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockitoVersion"
     androidTestImplementation 'org.mockito:mockito-android:3.5.10'
-    androidTestImplementation 'com.d20charactersheet:framework:4.5.0:tests'
+    androidTestImplementation 'com.d20charactersheet:framework:4.6.0:tests'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.composeVersion"
 
     // Unit Testing
     testImplementation 'com.android.support.test:runner:1.0.2'
-    testImplementation 'org.assertj:assertj-core:3.19.0'
+    testImplementation "org.assertj:assertj-core:$rootProject.assertJVersion"
     testImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockitoVersion"
     testImplementation 'org.mockito:mockito-core:3.9.0'
-    testImplementation "org.koin:koin-test:$rootProject.koinVersion"
+    testImplementation "io.insert-koin:koin-test:$rootProject.koinVersion"
+    testImplementation "io.insert-koin:koin-test-junit4:$rootProject.koinVersion"
     testImplementation "androidx.test.ext:junit-ktx:1.1.3"
     testImplementation "androidx.test:core-ktx:1.4.0"
     testImplementation 'org.robolectric:robolectric:4.4'

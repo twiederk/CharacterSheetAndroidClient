@@ -18,6 +18,11 @@ INSERT INTO charakter_weapon VALUES ( 2, 1, 13, 1 );
 INSERT INTO charakter_weapon VALUES ( 3, 1, 46, 1 );
 
 
+INSERT INTO charakter_weapon_attack VALUES ( 1, 1, 'Quarterstaff', 'My good old quarterstaff', 4, 9, 0, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 2, 1, 'Crossbow, light', '', 3, 13, 20, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 3, 1, 'Silver Dagger', 'Use against lycanthropes', 3, 2, 0, 0, 0 );
+
+
 INSERT INTO charakter_good VALUES ( 1, 1, 10, 1 );
 INSERT INTO charakter_good VALUES ( 2, 1, 94, 1 );
 INSERT INTO charakter_good VALUES ( 3, 1, 76, 10 );

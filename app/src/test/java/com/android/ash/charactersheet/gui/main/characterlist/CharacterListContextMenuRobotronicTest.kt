@@ -11,10 +11,8 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.appModule
 import com.d20charactersheet.framework.boc.model.Character
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.ClassLevel
-import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.dsl.createCharacter
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions
 import org.junit.After
@@ -57,10 +55,17 @@ class CharacterListContextMenuRobotronicTest : KoinTest {
         val gameSystem: GameSystem = mock()
         gameSystemHolder.gameSystem = gameSystem
 
-        val character = Character().apply {
-            race = Race().apply { name = "myRace" }
-            classLevels = listOf(ClassLevel(CharacterClass().apply { name = "myClass"; classAbilities = listOf() }))
+        val character = createCharacter {
+            race {
+                racename = "myRace"
+            }
+            classLevels {
+                classLevel {
+                    classname = "myClass"
+                }
+            }
         }
+
         val listView: ListView = mock()
         val adapter: CharacterArrayAdapter = mock()
         whenever(adapter.getItem(any())).doReturn(character)
@@ -98,7 +103,12 @@ class CharacterListContextMenuRobotronicTest : KoinTest {
 
         // Assert
         verify(menu).setHeaderTitle("myCharacter")
-        verify(menu).add(0, CharacterList.CONTEXT_MENU_DELETE_CHARACTER, 0, R.string.character_list_delete)
+        verify(menu).add(
+            0,
+            CharacterList.CONTEXT_MENU_DELETE_CHARACTER,
+            0,
+            R.string.character_list_delete
+        )
     }
 
 }

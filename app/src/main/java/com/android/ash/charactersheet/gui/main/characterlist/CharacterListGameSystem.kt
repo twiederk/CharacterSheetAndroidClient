@@ -9,17 +9,14 @@ import com.android.ash.charactersheet.boc.service.PreferenceService
 import com.android.ash.charactersheet.gui.sheet.GameSystemLoader
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.java.KoinJavaComponent
 
-@KoinApiExtension
 class CharacterListGameSystem : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val preferenceServiceHolder: PreferenceServiceHolder by inject()
-    private val firebaseAnalytics = KoinJavaComponent.inject(FirebaseAnalytics::class.java)
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     fun onCreateGameSystem(context: Context) {
         if (gameSystemHolder.gameSystem == null) {
@@ -53,9 +50,12 @@ class CharacterListGameSystem : KoinComponent {
 
     fun setUserProperties() {
         val gameSystemName: String? = gameSystemHolder.gameSystem?.name
-        firebaseAnalytics.value.setUserProperty(FBAnalytics.UserProperty.GAME_SYSTEM, gameSystemName)
+        firebaseAnalytics.setUserProperty(FBAnalytics.UserProperty.GAME_SYSTEM, gameSystemName)
         val numberOfCharacters: Int? = gameSystemHolder.gameSystem?.allCharacters?.size
-        firebaseAnalytics.value.setUserProperty(FBAnalytics.UserProperty.CHARACTER_COUNT, numberOfCharacters.toString())
+        firebaseAnalytics.setUserProperty(
+            FBAnalytics.UserProperty.CHARACTER_COUNT,
+            numberOfCharacters.toString()
+        )
     }
 
     fun onDestroy() {

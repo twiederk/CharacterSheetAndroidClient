@@ -15,11 +15,9 @@ import com.android.ash.charactersheet.dac.dao.sql.sqlite.SqliteDatabase
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.*
 import com.d20charactersheet.framework.dac.dao.sql.*
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class GameSystemLoader : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

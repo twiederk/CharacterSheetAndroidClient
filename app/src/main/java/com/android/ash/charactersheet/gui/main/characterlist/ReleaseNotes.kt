@@ -8,11 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
@@ -137,6 +135,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
         resources.getString(R.string.release_notes_4_3_0), //
         resources.getString(R.string.release_notes_4_4_0), //
         resources.getString(R.string.release_notes_4_5_0), //
+        resources.getString(R.string.release_notes_4_6_0), //
     )
 
 

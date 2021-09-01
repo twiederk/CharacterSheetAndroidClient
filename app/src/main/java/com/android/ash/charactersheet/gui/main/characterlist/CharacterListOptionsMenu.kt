@@ -18,11 +18,9 @@ import com.android.ash.charactersheet.gui.main.characterlist.AbstractAsyncTask.G
 import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseDialog
 import com.android.ash.charactersheet.gui.main.exportimport.ExportMenuActivity
 import com.android.ash.charactersheet.gui.main.exportimport.ImportActivity
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

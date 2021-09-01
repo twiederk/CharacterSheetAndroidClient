@@ -10,7 +10,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -42,7 +41,6 @@ class ClassFragmentRobotronicTest : KoinTest {
         stopKoin()
     }
 
-    @KoinApiExtension
     @Test
     fun onResume_screenViewIsLoggedInFirebase() {
 

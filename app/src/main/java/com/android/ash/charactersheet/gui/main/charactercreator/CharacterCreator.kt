@@ -6,11 +6,9 @@ import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
 import com.d20charactersheet.framework.boc.model.Character
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class CharacterCreator(
     private val characterCreatorAppearance: CharacterCreatorAppearance = CharacterCreatorAppearance(),
     private val characterCreatorEquipment: CharacterCreatorEquipment = CharacterCreatorEquipment()

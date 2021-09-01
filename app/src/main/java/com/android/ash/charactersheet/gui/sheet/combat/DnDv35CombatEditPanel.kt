@@ -13,35 +13,33 @@ class DnDv35CombatEditPanel : AbstractCombatEditPanel() {
         val ruleService = gameSystemHolder.gameSystem?.ruleService
         val displayService = gameSystemHolder.gameSystem?.displayService
 
-        val character = characterHolder.character
+        val character = checkNotNull(characterHolder.character)
 
         val cmbNumberView = view.findViewById<StepNumberView>(R.id.combat_cmb)
         val cmbFormularTextView = view.findViewById<TextView>(R.id.combat_cmb_formular)
-        val cmbController = SimpleNumberViewController(character?.cmbModifier ?: 0)
+        val cmbController = SimpleNumberViewController(character.cmbModifier)
         cmbNumberView.controller = cmbController
-        val cmb = (ruleService?.getCombatManeuverBonus(character) ?: 0) - (character?.cmbModifier
-                ?: 0)
+        val cmb = (ruleService?.getCombatManeuverBonus(character) ?: 0) - character.cmbModifier
         cmbFormularTextView.text = displayService?.getDisplaySimpleFormular(cmb)
 
         val cmdNumberView = view.findViewById<StepNumberView>(R.id.combat_cmd)
         val cmdFormularTextView = view.findViewById<TextView>(R.id.combat_cmd_formular)
-        val cmdController = SimpleNumberViewController(character?.cmdModifier ?: 0)
+        val cmdController = SimpleNumberViewController(character.cmdModifier)
         cmdNumberView.controller = cmdController
-        val cmd = (ruleService?.getCombatManeuverDefence(character) ?: 0) - (character?.cmdModifier
-                ?: 0)
+        val cmd = (ruleService?.getCombatManeuverDefence(character) ?: 0) - character.cmdModifier
         cmdFormularTextView.text = displayService?.getDisplaySimpleFormular(cmd)
     }
 
     override fun saveData(view: View) {
         super.saveData(view)
 
-        val character = characterHolder.character
+        val character = checkNotNull(characterHolder.character)
 
         val cmbNumberView: StepNumberView = view.findViewById(R.id.combat_cmb)
-        character?.cmbModifier = cmbNumberView.controller.number as Int
+        character.cmbModifier = cmbNumberView.controller.number as Int
 
         val cmdNumberView: StepNumberView = view.findViewById(R.id.combat_cmd)
-        character?.cmdModifier = cmdNumberView.controller.number as Int
+        character.cmdModifier = cmdNumberView.controller.number as Int
     }
 
 }

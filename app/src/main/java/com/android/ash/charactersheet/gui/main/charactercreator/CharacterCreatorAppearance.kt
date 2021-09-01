@@ -6,10 +6,8 @@ import com.d20charactersheet.framework.boc.model.ClassLevel
 import com.d20charactersheet.framework.boc.model.Sex
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.boc.service.ImageService
-import org.koin.core.component.KoinApiExtension
 import java.util.*
 
-@KoinApiExtension
 class CharacterCreatorAppearance {
 
     fun fillAppearance(

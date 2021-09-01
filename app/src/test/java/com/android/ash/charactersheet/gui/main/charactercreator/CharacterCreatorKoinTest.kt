@@ -10,7 +10,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.core.component.KoinApiExtension
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.koin.test.inject
@@ -19,7 +18,6 @@ import org.koin.test.mock.declareMock
 import org.mockito.Mockito
 import org.mockito.kotlin.*
 
-@KoinApiExtension
 class CharacterCreatorKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()

@@ -6,11 +6,9 @@ import com.android.ash.charactersheet.FBAnalytics
 import com.d20charactersheet.framework.boc.model.StarterPackBox
 import com.d20charactersheet.framework.boc.model.StarterPackBoxOption
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
 class StarterPackBoxViewModel(val starterPackBox: StarterPackBox) : KoinComponent {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()

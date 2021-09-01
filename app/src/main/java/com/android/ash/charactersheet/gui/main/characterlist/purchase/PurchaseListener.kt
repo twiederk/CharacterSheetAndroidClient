@@ -6,14 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.billing.Billing
 import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreateActivity
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class PurchaseListener(
-        private val activity: AppCompatActivity,
-        private val purchaseDialog: PurchaseDialog) : View.OnClickListener {
+    private val activity: AppCompatActivity,
+    private val purchaseDialog: PurchaseDialog
+) : KoinComponent, View.OnClickListener {
 
-    private val billing by inject(Billing::class.java)
-    private val gameSystemHolder by inject(GameSystemHolder::class.java)
+    private val billing: Billing by inject()
+    private val gameSystemHolder: GameSystemHolder by inject()
 
     override fun onClick(view: View?) {
         if (billing.requiresPurchase(gameSystemHolder.gameSystem!!.allCharacters)) {
