@@ -1,5 +1,6 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
+import androidx.compose.runtime.mutableStateOf
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
@@ -21,6 +22,7 @@ import org.mockito.kotlin.*
 class CharacterCreatorKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
     private val characterHolder: CharacterHolder by inject()
 
     @get:Rule
@@ -78,16 +80,63 @@ class CharacterCreatorKoinTest : KoinTest {
 
         gameSystemHolder.gameSystem = gameSystem
 
-        val characterCreatorViewModel = CharacterCreatorViewModel().apply {
-            name = "myName"
-            player = "myPlayer"
-            race = Race().apply { name = "myRace" }
-            this.clazz = CharacterClass().apply { name = "myClass" }
-            gender = "Male"
-            alignment = "Lawful Good"
-            starterPackBoxViewModels = listOf(
+        val raceScreenViewModel = createRaceScreenViewModel()
+        val classScreenViewModel = createClassScreenViewModel()
+        val characterCreatorViewModel = AbilityScoresScreenViewModel(
+            gameSystemHolder,
+            firebaseAnalytics
+        )
+        val equipmentScreenViewModel = createEquipmentScreenViewModel()
+
+        // act
+        val character = CharacterCreator().createCharacter(
+            raceScreenViewModel,
+            classScreenViewModel,
+            characterCreatorViewModel,
+            equipmentScreenViewModel
+        )
+
+        // assert
+        assertThat(character).isNotNull
+        assertAppearance(character)
+        assertWeaponAttacks(character, characterService)
+        verify(characterService).createCharacter(eq(character), any())
+        assertEquipment(characterService, character)
+        verify(characterHolder).character = character
+    }
+
+    private fun createClassScreenViewModel(): ClassScreenViewModel {
+        val classScreenViewModel = ClassScreenViewModel(gameSystemHolder).apply {
+            name.value = "myName"
+            player.value = "myPlayer"
+            this.clazz.value = CharacterClass().apply { name = "myClass" }
+            gender.value = "Male"
+            alignment.value = "Lawful Good"
+        }
+        return classScreenViewModel
+    }
+
+    private fun createRaceScreenViewModel(): RaceScreenViewModel {
+        val raceScreenViewModel = RaceScreenViewModel(gameSystemHolder).apply {
+            race = mutableStateOf(Race().apply { name = "myRace" })
+        }
+        return raceScreenViewModel
+    }
+
+    private fun createEquipmentScreenViewModel(): EquipmentScreenViewModel {
+        val equipmentScreenViewModel = EquipmentScreenViewModel(gameSystemHolder).apply {
+            starterPackBoxViewModels.value = listOf(
                 StarterPackBoxViewModel(
-                    createStarterBox(Weapon().apply { id = 1; name = "myWeapon" })
+                    createStarterBox(Weapon().apply {
+                        id = 1; name = "myFirstWeapon"; weaponEncumbrance =
+                        WeaponEncumbrance.ONE_HANDED
+                    })
+                ),
+                StarterPackBoxViewModel(
+                    createStarterBox(Weapon().apply {
+                        id = 2; name = "mySecondWeapon"; weaponEncumbrance =
+                        WeaponEncumbrance.TWO_HANDED
+                    })
                 ),
                 StarterPackBoxViewModel(
                     createStarterBox(Armor().apply { id = 1; name = "myArmor" })
@@ -100,12 +149,22 @@ class CharacterCreatorKoinTest : KoinTest {
                 )
             )
         }
+        return equipmentScreenViewModel
+    }
 
-        // act
-        val character = CharacterCreator().createCharacter(characterCreatorViewModel)
 
-        // assert
-        assertThat(character).isNotNull
+    private fun assertWeaponAttacks(character: Character, characterService: CharacterService) {
+        val weaponAttack = argumentCaptor<WeaponAttack>()
+        verify(characterService, times(2)).createWeaponAttack(eq(character), weaponAttack.capture())
+
+        assertThat(weaponAttack.firstValue.name).isEqualTo("myFirstWeapon")
+        assertThat(weaponAttack.firstValue.attackWield).isEqualTo(AttackWield.ONE_HAND)
+        assertThat(weaponAttack.secondValue.name).isEqualTo("mySecondWeapon")
+        assertThat(weaponAttack.secondValue.attackWield).isEqualTo(AttackWield.TWO_HANDED)
+
+    }
+
+    private fun assertAppearance(character: Character) {
         assertThat(character.name).isEqualTo("myName")
         assertThat(character.player).isEqualTo("myPlayer")
         assertThat(character.race.name).isEqualTo("myRace")
@@ -123,14 +182,20 @@ class CharacterCreatorKoinTest : KoinTest {
         assertThat(character.charisma).isEqualTo(10)
         assertThat(character.imageId).isEqualTo(0)
         assertThat(character.thumbImageId).isEqualTo(1)
+    }
 
-        verify(characterService).createCharacter(eq(character), any())
-
+    private fun assertEquipment(
+        characterService: CharacterService,
+        character: Character
+    ) {
         val weapons = argumentCaptor<List<ItemGroup>>()
         verify(characterService).updateWeapons(eq(character), weapons.capture())
-        assertThat(weapons.firstValue).hasSize(1)
+        assertThat(weapons.firstValue).hasSize(2)
         assertThat(weapons.firstValue[0].item).isEqualTo(Weapon().apply {
-            id = 1; name = "myWeapon"
+            id = 1; name = "myFirstWeapon"
+        })
+        assertThat(weapons.firstValue[1].item).isEqualTo(Weapon().apply {
+            id = 2; name = "mySecondWeapon"
         })
 
         val armor = argumentCaptor<List<ItemGroup>>()
@@ -143,8 +208,6 @@ class CharacterCreatorKoinTest : KoinTest {
         assertThat(goods.firstValue).hasSize(2)
         assertThat(goods.firstValue[0].item).isEqualTo(Good().apply { id = 1; name = "myGood" })
         assertThat(goods.firstValue[1].item).isEqualTo(Good().apply { id = 2; name = "myPackGood" })
-
-        verify(characterHolder).character = character
     }
 
     private fun createStarterBoxEquipmentPack(): StarterPackBox =

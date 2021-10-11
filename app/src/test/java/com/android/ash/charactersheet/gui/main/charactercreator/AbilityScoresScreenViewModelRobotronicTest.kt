@@ -22,7 +22,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-class CharacterCreatorViewModelRobotronicTest : KoinTest {
+class AbilityScoresScreenViewModelRobotronicTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
     private val gameSystemHolder: GameSystemHolder by inject()
@@ -69,7 +69,7 @@ class CharacterCreatorViewModelRobotronicTest : KoinTest {
         gameSystemHolder.gameSystem = gameSystem
 
         // act
-        CharacterCreatorViewModel().onRollDice()
+        AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics).onRollDice()
 
         // assert
         verify(firebaseAnalytics).logEvent(FBAnalytics.Event.STANDARD_METHOD_DICE_ROLL, null)

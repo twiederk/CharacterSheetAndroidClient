@@ -5,47 +5,89 @@ import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
 import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.service.CharacterService
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class CharacterCreator(
     private val characterCreatorAppearance: CharacterCreatorAppearance = CharacterCreatorAppearance(),
-    private val characterCreatorEquipment: CharacterCreatorEquipment = CharacterCreatorEquipment()
+    private val characterCreatorEquipment: CharacterCreatorEquipment = CharacterCreatorEquipment(),
+    private val characterCreatorWeaponAttack: CharacterCreatorWeaponAttack = CharacterCreatorWeaponAttack()
 ) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val characterHolder: CharacterHolder by inject()
     private val firebaseAnalytics: FirebaseAnalytics by inject()
 
-    fun createCharacter(characterCreatorViewModel: CharacterCreatorViewModel): Character {
-        val character = createCharacterInternal(characterCreatorViewModel)
+    fun createCharacter(
+        raceScreenViewModel: RaceScreenViewModel,
+        classScreenViewModel: ClassScreenViewModel,
+        abilityScoresScreenViewModel: AbilityScoresScreenViewModel,
+        equipmentScreenViewModel: EquipmentScreenViewModel
+    ): Character {
+        val character = createCharacterInternal(
+            abilityScoresScreenViewModel,
+            classScreenViewModel,
+            raceScreenViewModel,
+            equipmentScreenViewModel
+        )
         storeCharacter(character)
         logEventCharacterCreate(character)
         return character
     }
 
-    private fun createCharacterInternal(characterCreatorViewModel: CharacterCreatorViewModel): Character {
+    private fun createCharacterInternal(
+        abilityScoresScreenViewModel: AbilityScoresScreenViewModel,
+        classScreenViewModel: ClassScreenViewModel,
+        raceScreenViewModel: RaceScreenViewModel,
+        equipmentScreenViewModel: EquipmentScreenViewModel
+    ): Character {
         val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
         val character =
-            characterCreatorAppearance.fillAppearance(characterCreatorViewModel, gameSystem)
-        characterCreatorEquipment.fillEquipment(character, characterCreatorViewModel)
+            characterCreatorAppearance.fillAppearance(
+                raceScreenViewModel,
+                classScreenViewModel,
+                abilityScoresScreenViewModel,
+                gameSystem
+            )
+        characterCreatorEquipment.fillEquipment(
+            character,
+            equipmentScreenViewModel
+        )
+        characterCreatorWeaponAttack.fillWeaponAttacks(
+            character,
+            equipmentScreenViewModel
+        )
         return character
     }
 
     private fun storeCharacter(character: Character) {
         val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
         gameSystem.characterService.createCharacter(character, gameSystem.allSkills)
+        storeWeaponAttack(character, gameSystem.characterService)
+        storeEquipment(character, gameSystem.characterService)
+        characterHolder.character = character
+    }
+
+    private fun storeWeaponAttack(character: Character, characterService: CharacterService) {
+        val weaponAttacks = character.weaponAttacks
+        character.weaponAttacks = mutableListOf()
+        for (weaponAttack in weaponAttacks) {
+            characterService.createWeaponAttack(character, weaponAttack)
+        }
+    }
+
+    private fun storeEquipment(character: Character, characterService: CharacterService) {
         val weapons = character.equipment.weapons
         val armor = character.equipment.armor
         val goods = character.equipment.goods
         character.equipment.weapons = emptyList()
         character.equipment.armor = emptyList()
         character.equipment.goods = emptyList()
-        gameSystem.characterService.updateWeapons(character, weapons)
-        gameSystem.characterService.updateArmor(character, armor)
-        gameSystem.characterService.updateGoods(character, goods)
-        characterHolder.character = character
+        characterService.updateWeapons(character, weapons)
+        characterService.updateArmor(character, armor)
+        characterService.updateGoods(character, goods)
     }
 
     private fun logEventCharacterCreate(character: Character) {

@@ -4,9 +4,10 @@ import android.content.res.Resources
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl
-import com.android.ash.charactersheet.boc.service.AndroidImageService
-import com.d20charactersheet.framework.boc.model.*
-import com.d20charactersheet.framework.boc.service.*
+import com.d20charactersheet.framework.boc.model.Die
+import com.d20charactersheet.framework.boc.service.CharacterCreatorServiceImpl
+import com.d20charactersheet.framework.boc.service.DnD5eRuleServiceImpl
+import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -20,13 +21,15 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import java.util.*
 
-class CharacterCreatorViewModelKoinTest : KoinTest {
+class AbilityScoresScreenViewModelKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
-    private val characterCreator: CharacterCreator by inject()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
@@ -41,70 +44,11 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Before
     fun before() {
         declareMock<FirebaseAnalytics>()
-        declareMock<CharacterCreator>()
 
         val gameSystem: GameSystem = mock()
-        whenever(gameSystem.allRaces).thenReturn(
-            mutableListOf(
-                Race().apply { name = "myRace" },
-                Race().apply { name = "anotherRace" })
-        )
-        whenever(gameSystem.allCharacterClasses).thenReturn(
-            mutableListOf(
-                CharacterClass().apply { name = "myClass" },
-                CharacterClass().apply { name = "anotherClass" })
-        )
-        whenever(gameSystem.allWeapons).thenReturn(
-            listOf(
-                Weapon().apply { name = "myWeapon" },
-                Weapon().apply { name = "anotherWeapon" })
-        )
-        whenever(gameSystem.allArmor).thenReturn(
-            listOf(
-                Armor().apply { name = "myArmor" },
-                Armor().apply { name = "anotherArmor" })
-        )
-        whenever(gameSystem.allGoods).thenReturn(
-            listOf(
-                Good().apply { name = "myGood" },
-                Good().apply { name = "anotherGood" })
-        )
-        whenever(gameSystem.allEquipmentPacks).thenReturn(
-            listOf(
-                EquipmentPack(
-                    id = 1,
-                    name = "myPack",
-                    itemGroups = mutableListOf()
-                ), EquipmentPack(
-                    id = 2,
-                    name = "anotherPack",
-                    itemGroups = mutableListOf()
-                )
-            )
-        )
-
-        val characterClassService: CharacterClassService = mock()
-        whenever(characterClassService.getStarterPack(any(), any())).thenReturn(
-            StarterPack().also { starterPack ->
-                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
-                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
-                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
-                starterPack.add(StarterPackBox().also { it.add(StarterPackBoxItemOption()) })
-            }
-        )
-
-        val itemService: ItemService = mock()
-
-        val displayService: DisplayService = mock()
-        whenever(displayService.getDisplaySex(any())).thenReturn("Male")
-        whenever(displayService.getDisplayAlignment(any())).thenReturn("Lawful Good")
-
-        whenever(gameSystem.displayService).thenReturn(displayService)
-        whenever(gameSystem.characterClassService).thenReturn(characterClassService)
-        whenever(gameSystem.itemService).thenReturn(itemService)
+        whenever(gameSystem.displayService).thenReturn(mock())
         whenever(gameSystem.ruleService).thenReturn(mock())
         whenever(gameSystem.characterCreatorService).thenReturn(mock())
-
 
         gameSystemHolder.gameSystem = gameSystem
     }
@@ -118,37 +62,24 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     fun constructor_initCharacter_characterWithDefaultValue() {
 
         // act
-        val characterCreatorViewModel = CharacterCreatorViewModel()
+        val characterCreatorViewModel = AbilityScoresScreenViewModel(
+            gameSystemHolder,
+            firebaseAnalytics
+        )
 
         // assert
-        assertThat(characterCreatorViewModel.name).isEqualTo("")
-        assertThat(characterCreatorViewModel.player).isEqualTo("")
-        assertThat(characterCreatorViewModel.race.name).isEqualTo("anotherRace")
-        assertThat(characterCreatorViewModel.raceList).containsExactly(
-            Race().apply { name = "anotherRace" },
-            Race().apply { name = "myRace" }
-        )
-        assertThat(characterCreatorViewModel.clazz.name).isEqualTo("anotherClass")
-        assertThat(characterCreatorViewModel.classList).containsExactly(
-            CharacterClass().apply { name = "anotherClass" },
-            CharacterClass().apply { name = "myClass" }
-        )
-        assertThat(characterCreatorViewModel.gender).isEqualTo("Male")
-        assertThat(characterCreatorViewModel.alignment).isEqualTo("Lawful Good")
         assertThat(characterCreatorViewModel.strength).isEqualTo(10)
         assertThat(characterCreatorViewModel.dexterity).isEqualTo(10)
         assertThat(characterCreatorViewModel.constitution).isEqualTo(10)
         assertThat(characterCreatorViewModel.intelligence).isEqualTo(10)
         assertThat(characterCreatorViewModel.wisdom).isEqualTo(10)
         assertThat(characterCreatorViewModel.charisma).isEqualTo(10)
-
-        assertThat(characterCreatorViewModel.starterPackBoxViewModels).hasSize(4)
     }
 
     @Test
     fun onIncreaseStrength_validValue_increaseStrength() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.strength = 10
 
         // act
@@ -161,7 +92,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseStrength_invalidValue_strengthStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.strength = 30
 
         // act
@@ -175,7 +106,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseStrength_validValue_increaseStrength() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.strength = 10
 
         // act
@@ -188,7 +119,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseStrength_invalidValue_strengthStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.strength = 1
 
         // act
@@ -201,7 +132,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseDexterity_validValue_increaseDexterity() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.dexterity = 10
 
         // act
@@ -214,7 +145,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseDexterity_invalidValue_dexterityStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.dexterity = 30
 
         // act
@@ -228,7 +159,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseDexterity_validValue_increaseDexterity() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.dexterity = 10
 
         // act
@@ -241,7 +172,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseDexterity_invalidValue_dexterityStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.dexterity = 1
 
         // act
@@ -254,7 +185,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseConstitution_validValue_increaseConstitution() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.constitution = 10
 
         // act
@@ -267,7 +198,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseConstitution_invalidValue_constitutionStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.constitution = 30
 
         // act
@@ -281,7 +212,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseConstitution_validValue_increaseConstitution() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.constitution = 10
 
         // act
@@ -294,7 +225,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseConstitution_invalidValue_constitutionStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.constitution = 1
 
         // act
@@ -307,7 +238,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseIntelligence_validValue_increaseIntelligence() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.intelligence = 10
 
         // act
@@ -320,7 +251,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseIntelligence_invalidValue_intelligenceStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.intelligence = 30
 
         // act
@@ -334,7 +265,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseIntelligence_validValue_increaseIntelligence() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.intelligence = 10
 
         // act
@@ -347,7 +278,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseIntelligence_invalidValue_intelligenceStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.intelligence = 1
 
         // act
@@ -360,7 +291,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseWisdom_validValue_increaseWisdom() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.wisdom = 10
 
         // act
@@ -373,7 +304,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseWisdom_invalidValue_wisdomStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.wisdom = 30
 
         // act
@@ -387,7 +318,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseWisdom_validValue_increaseWisdom() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.wisdom = 10
 
         // act
@@ -400,7 +331,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseWisdom_invalidValue_wisdomStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.wisdom = 1
 
         // act
@@ -413,7 +344,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseCharisma_validValue_increaseCharisma() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.charisma = 10
 
         // act
@@ -426,7 +357,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onIncreaseCharisma_invalidValue_charismaStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.charisma = 30
 
         // act
@@ -440,7 +371,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseCharisma_validValue_increaseCharisma() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.charisma = 10
 
         // act
@@ -453,7 +384,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     @Test
     fun onDecreaseCharisma_invalidValue_charismaStaysUnchanged() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.charisma = 1
 
         // act
@@ -476,7 +407,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         whenever(gameSystem.displayService).thenReturn(AndroidDisplayServiceImpl(resources))
         gameSystemHolder.gameSystem = gameSystem
 
-        val underTest = CharacterCreatorViewModel()
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
 
         // act
         underTest.onRollDice()
@@ -500,46 +431,15 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
     }
 
     @Test
-    fun onCreateCharacter_everythingIsFine_createNewCharacter() {
-
-        // act
-        CharacterCreatorViewModel().onCreateCharacter()
-
-        // assert
-        verify(characterCreator, only()).createCharacter(any())
-    }
-
-    @Test
     fun reset_resetProperties_allPropertiesAreReset() {
         // arrange
-        val underTest = CharacterCreatorViewModel()
-        underTest.raceList =
-            listOf(Race().apply { name = "firstRace" }, Race().apply { name = "secondRace" })
-        underTest.classList =
-            listOf(
-                CharacterClass().apply { name = "firstClass" },
-                CharacterClass().apply { name = "secondClass" }
-            )
-        underTest.name = "myName"
-        underTest.player = "myPlayer"
-        underTest.race = underTest.raceList[1]
-        underTest.clazz = underTest.classList[1]
-        underTest.gender = "Female"
-        underTest.alignment = "Neutral"
-        underTest.starterPackBoxViewModels =
-            listOf(StarterPackBoxViewModel(StarterPackBox().also { it.add(StarterPackBoxItemOption()) }))
+        val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)
         underTest.onRollDice()
 
         // act
         underTest.reset()
 
         // assert
-        assertThat(underTest.name).isEqualTo("")
-        assertThat(underTest.player).isEqualTo("")
-        assertThat(underTest.race.name).isEqualTo("anotherRace")
-        assertThat(underTest.clazz.name).isEqualTo("anotherClass")
-        assertThat(underTest.gender).isEqualTo("Male")
-        assertThat(underTest.alignment).isEqualTo("Lawful Good")
         assertThat(underTest.strength).isEqualTo(10)
         assertThat(underTest.strengthModifier).isEqualTo("0")
         assertThat(underTest.dexterity).isEqualTo(10)
@@ -552,24 +452,7 @@ class CharacterCreatorViewModelKoinTest : KoinTest {
         assertThat(underTest.wisdomModifier).isEqualTo("0")
         assertThat(underTest.charisma).isEqualTo(10)
         assertThat(underTest.charismaModifier).isEqualTo("0")
-        assertThat(underTest.starterPackBoxViewModels).hasSize(4)
-
     }
 
-    @Test
-    fun getBitmap_bitmapExists_returnBitmap() {
-        // arrange
-        val imageService: AndroidImageService = mock()
-        whenever(imageService.getBitmap(any())).thenReturn(mock())
-        whenever(gameSystemHolder.gameSystem?.imageService).thenReturn(imageService)
-
-        val underTest = CharacterCreatorViewModel()
-
-        // act
-        val bitmap = underTest.getBitmap(1)
-
-        // assert
-        assertThat(bitmap).isNotNull
-    }
 
 }

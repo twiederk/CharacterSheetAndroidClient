@@ -38,7 +38,10 @@ class CharacterCreatorRobotronicTest : KoinTest {
     }
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
-    private val characterCreatorViewModel: CharacterCreatorViewModel by inject()
+    private val raceScreenViewModel: RaceScreenViewModel by inject()
+    private val classScreenViewModel: ClassScreenViewModel by inject()
+    private val abilityScoresScreenViewModel: AbilityScoresScreenViewModel by inject()
+    private val equipmentScreenViewModel: EquipmentScreenViewModel by inject()
     private val gameSystemHolder: GameSystemHolder by inject()
 
     @Before
@@ -47,7 +50,10 @@ class CharacterCreatorRobotronicTest : KoinTest {
             modules(appModule)
         }
         declareMock<FirebaseAnalytics>()
-        declareMock<CharacterCreatorViewModel>()
+        declareMock<RaceScreenViewModel>()
+        declareMock<ClassScreenViewModel>()
+        declareMock<AbilityScoresScreenViewModel>()
+        declareMock<EquipmentScreenViewModel>()
     }
 
 
@@ -65,7 +71,7 @@ class CharacterCreatorRobotronicTest : KoinTest {
         gameSystemHolder.gameSystem = gameSystem
 
         val characterCreatorAppearance: CharacterCreatorAppearance = mock()
-        whenever(characterCreatorAppearance.fillAppearance(any(), any())).thenReturn(
+        whenever(characterCreatorAppearance.fillAppearance(any(), any(), any(), any())).thenReturn(
             Character().apply {
                 race = Race().apply { name = "myRace" }
                 classLevels = mutableListOf(ClassLevel(CharacterClass().apply { name = "myClass" }))
@@ -73,7 +79,16 @@ class CharacterCreatorRobotronicTest : KoinTest {
         )
 
         // act
-        CharacterCreator(characterCreatorAppearance).createCharacter(characterCreatorViewModel)
+        CharacterCreator(
+            characterCreatorAppearance = characterCreatorAppearance,
+            characterCreatorEquipment = mock(),
+            characterCreatorWeaponAttack = mock()
+        ).createCharacter(
+            raceScreenViewModel,
+            classScreenViewModel,
+            abilityScoresScreenViewModel,
+            equipmentScreenViewModel
+        )
 
         // Assert
         argumentCaptor<Bundle> {

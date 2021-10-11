@@ -1,5 +1,6 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
+import androidx.compose.runtime.MutableState
 import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -9,7 +10,7 @@ import org.mockito.kotlin.whenever
 
 class CharacterCreatorEquipmentTest {
 
-    private val characterCreatorViewModel: CharacterCreatorViewModel = mock()
+    private val equipmentScreenViewModel: EquipmentScreenViewModel = mock()
 
     private val weapon1 = Weapon().apply { id = 1 }
 
@@ -52,9 +53,11 @@ class CharacterCreatorEquipmentTest {
                         })
                 }),
         )
-        whenever(characterCreatorViewModel.starterPackBoxViewModels).thenReturn(
-            starterPackBoxViewModels
+        val starterPackBoxViewModelsMock: MutableState<List<StarterPackBoxViewModel>> = mock()
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
+            starterPackBoxViewModelsMock
         )
+        whenever(starterPackBoxViewModelsMock.value).thenReturn(starterPackBoxViewModels)
     }
 
     @Test
@@ -62,7 +65,7 @@ class CharacterCreatorEquipmentTest {
 
         // act
         val weapons: List<ItemGroup> =
-            CharacterCreatorEquipment().getWeapons(characterCreatorViewModel)
+            CharacterCreatorEquipment().getWeapons(equipmentScreenViewModel)
 
         // assert
         assertThat(weapons).hasSize(1)
@@ -75,7 +78,7 @@ class CharacterCreatorEquipmentTest {
 
         // act
         val armor: List<ItemGroup> =
-            CharacterCreatorEquipment().getArmor(characterCreatorViewModel)
+            CharacterCreatorEquipment().getArmor(equipmentScreenViewModel)
 
         // assert
         assertThat(armor).hasSize(1)
@@ -88,7 +91,7 @@ class CharacterCreatorEquipmentTest {
 
         // act
         val goods: List<ItemGroup> =
-            CharacterCreatorEquipment().getGoods(characterCreatorViewModel)
+            CharacterCreatorEquipment().getGoods(equipmentScreenViewModel)
 
         // assert
         assertThat(goods).hasSize(3)
@@ -102,7 +105,10 @@ class CharacterCreatorEquipmentTest {
         val character = Character()
 
         // act
-        CharacterCreatorEquipment().fillEquipment(character, characterCreatorViewModel)
+        CharacterCreatorEquipment().fillEquipment(
+            character,
+            equipmentScreenViewModel
+        )
 
         // assert
         assertThat(character.equipment.weapons).extracting("id").containsOnly(-1)

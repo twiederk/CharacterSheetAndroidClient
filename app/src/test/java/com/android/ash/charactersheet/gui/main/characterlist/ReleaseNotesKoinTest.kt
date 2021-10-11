@@ -42,7 +42,7 @@ class ReleaseNotesKoinTest : KoinTest {
         val activity: AppCompatActivity = mock()
         whenever(activity.resources).thenReturn(resources)
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(73)
+        whenever(dbHelper.oldVersion).doReturn(74)
         gameSystemHolder.dndDbHelper = dbHelper
 
         // Act

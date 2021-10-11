@@ -4,21 +4,24 @@ import com.d20charactersheet.framework.boc.model.*
 
 class CharacterCreatorEquipment {
 
-    fun fillEquipment(character: Character, characterCreatorViewModel: CharacterCreatorViewModel) {
-        character.equipment.weapons = getWeapons(characterCreatorViewModel)
-        character.equipment.armor = getArmor(characterCreatorViewModel)
-        character.equipment.goods = getGoods(characterCreatorViewModel)
+    fun fillEquipment(
+        character: Character,
+        equipmentScreenViewModel: EquipmentScreenViewModel
+    ) {
+        character.equipment.weapons = getWeapons(equipmentScreenViewModel)
+        character.equipment.armor = getArmor(equipmentScreenViewModel)
+        character.equipment.goods = getGoods(equipmentScreenViewModel)
     }
 
-    fun getWeapons(characterCreatorViewModel: CharacterCreatorViewModel) =
-        filterItemGroups(characterCreatorViewModel) { itemGroup -> itemGroup.item is Weapon }
+    fun getWeapons(equipmentScreenViewModel: EquipmentScreenViewModel) =
+        filterItemGroups(equipmentScreenViewModel) { itemGroup -> itemGroup.item is Weapon }
 
-    fun getArmor(characterCreatorViewModel: CharacterCreatorViewModel): List<ItemGroup> =
-        filterItemGroups(characterCreatorViewModel) { itemGroup -> itemGroup.item is Armor }
+    fun getArmor(equipmentScreenViewModel: EquipmentScreenViewModel): List<ItemGroup> =
+        filterItemGroups(equipmentScreenViewModel) { itemGroup -> itemGroup.item is Armor }
 
-    fun getGoods(characterCreatorViewModel: CharacterCreatorViewModel): List<ItemGroup> {
+    fun getGoods(equipmentScreenViewModel: EquipmentScreenViewModel): List<ItemGroup> {
         val equipmentPackItemGroups =
-            filterItemGroups(characterCreatorViewModel) { itemGroup -> itemGroup.item is Good }
+            filterItemGroups(equipmentScreenViewModel) { itemGroup -> itemGroup.item is Good }
         return equipmentPackItemGroups.map {
             ItemGroup().apply {
                 item = it.item; number = it.number
@@ -27,11 +30,11 @@ class CharacterCreatorEquipment {
     }
 
     private fun filterItemGroups(
-        characterCreatorViewModel: CharacterCreatorViewModel,
+        equipmentScreenViewModel: EquipmentScreenViewModel,
         filter: (ItemGroup) -> Boolean
     ): List<ItemGroup> {
         val itemGroups = mutableListOf<ItemGroup>()
-        for (starterPackBoxViewModel in characterCreatorViewModel.starterPackBoxViewModels) {
+        for (starterPackBoxViewModel in equipmentScreenViewModel.starterPackBoxViewModels.value) {
             val starterPackBoxOption =
                 checkNotNull(starterPackBoxViewModel.starterPackBoxOption.value)
             starterPackBoxOption.getItemGroups().filter { filter(it) }

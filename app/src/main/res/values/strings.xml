@@ -883,21 +883,17 @@
 
     <!-- RaceComposeFragment -->
     <string name="race_title">Race (step 1 of 4)</string>
-    <string name="race_nav_graph_label">RaceFragment</string>
 
     <!-- ClassComposeFragment -->
     <string name="class_title">"Class (step 2 of 4)"</string>
-    <string name="class_nav_graph_label">ClassFragment</string>
 
     <!-- AbilityScoresComposeFragment -->
     <string name="ability_scores_title">Ability Scores (step 3 of 4)</string>
     <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
-    <string name="ability_scores_compose_nav_graph_label">AbilityScoresComposeFragment</string>
 
     <!-- EquipmentComposeFragment -->
     <string name="equipment_title">"Equipment (step 4 of 4)"</string>
     <string name="equipment_missing_message">"The starting equipment for this class is missing. If you have suggestions for the starting equipment, please send them to torsten.wiederkehr@gmail.com."</string>
-    <string name="equipment_compose_nav_graph_label">EquipmentComposeFragment</string>
 
 
     <!-- GameSystemSelector -->
@@ -984,5 +980,6 @@
     <string name="release_notes_4_4_0">Release 4.4.0\n- Added screen for race selection to character creation.\n\n</string>
     <string name="release_notes_4_5_0">Release 4.5.0\n- Added screen for equipment selection to character creation.\n\n</string>
     <string name="release_notes_4_6_0">Release 4.6.0\n- Added attacks tab to Dungeons &amp; Dragons 5th edition.\n\n</string>
+    <string name="release_notes_4_7_0">Release 4.7.0\n- Added creation of weapon attacks to character creator.\n\n</string>
 
 </resources>

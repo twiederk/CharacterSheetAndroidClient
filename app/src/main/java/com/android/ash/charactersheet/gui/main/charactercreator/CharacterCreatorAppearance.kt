@@ -11,29 +11,31 @@ import java.util.*
 class CharacterCreatorAppearance {
 
     fun fillAppearance(
-        characterCreatorViewModel: CharacterCreatorViewModel,
+        raceScreenViewModel: RaceScreenViewModel,
+        classScreenViewModel: ClassScreenViewModel,
+        abilityScoresScreenViewModel: AbilityScoresScreenViewModel,
         gameSystem: GameSystem
     ): Character {
         return Character().apply {
-            name = characterCreatorViewModel.name
-            player = characterCreatorViewModel.player
-            race = characterCreatorViewModel.race
+            name = classScreenViewModel.name.value
+            player = classScreenViewModel.player.value
+            race = raceScreenViewModel.race.value
             val clazz = gameSystem.characterClassService.findClassByName(
-                characterCreatorViewModel.clazz.name,
+                classScreenViewModel.clazz.value.name,
                 gameSystem.allCharacterClasses
             )
             classLevels = listOf(ClassLevel(clazz, 1))
-            sex = Sex.valueOf(characterCreatorViewModel.gender.uppercase(Locale.ROOT))
+            sex = Sex.valueOf(classScreenViewModel.gender.value.uppercase(Locale.ROOT))
             alignment = Alignment.valueOf(
-                characterCreatorViewModel.alignment.uppercase(Locale.ROOT).replace(" ", "_")
+                classScreenViewModel.alignment.value.uppercase(Locale.ROOT).replace(" ", "_")
             )
             xpTable = gameSystem.allXpTables[0]
-            strength = characterCreatorViewModel.strength
-            dexterity = characterCreatorViewModel.dexterity
-            constitution = characterCreatorViewModel.constitution
-            intelligence = characterCreatorViewModel.intelligence
-            wisdom = characterCreatorViewModel.wisdom
-            charisma = characterCreatorViewModel.charisma
+            strength = abilityScoresScreenViewModel.strength
+            dexterity = abilityScoresScreenViewModel.dexterity
+            constitution = abilityScoresScreenViewModel.constitution
+            intelligence = abilityScoresScreenViewModel.intelligence
+            wisdom = abilityScoresScreenViewModel.wisdom
+            charisma = abilityScoresScreenViewModel.charisma
             imageId = ImageService.DEFAULT_CHARACTER_IMAGE_ID
             thumbImageId = ImageService.DEFAULT_THUMB_IMAGE_ID
         }
