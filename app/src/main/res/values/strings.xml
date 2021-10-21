@@ -981,5 +981,6 @@
     <string name="release_notes_4_5_0">Release 4.5.0\n- Added screen for equipment selection to character creation.\n\n</string>
     <string name="release_notes_4_6_0">Release 4.6.0\n- Added attacks tab to Dungeons &amp; Dragons 5th edition.\n\n</string>
     <string name="release_notes_4_7_0">Release 4.7.0\n- Added creation of weapon attacks to character creator.\n\n</string>
+    <string name="release_notes_4_7_1">Release 4.7.1\n- Bug fix: Fixed the crash on startup on Android 12.\n\n</string>
 
 </resources>

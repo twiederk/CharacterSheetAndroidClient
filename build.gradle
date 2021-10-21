@@ -1,12 +1,12 @@
 buildscript {
     ext {
         assertJVersion = '3.21.0'
-        composeVersion = '1.0.3'
+        composeVersion = '1.0.4'
         coreTestingVersion = '2.1.0'
         espressoVersion = '3.3.0'
         junitVersion = '4.13.1'
         koinVersion = '3.1.2'
-        kotlinVersion = '1.5.30'
+        kotlinVersion = '1.5.31'
         mockitoVersion = '3.2.0'
         navigationVersion = '2.3.5'
         testExtJunit = '1.1.2-rc02'
