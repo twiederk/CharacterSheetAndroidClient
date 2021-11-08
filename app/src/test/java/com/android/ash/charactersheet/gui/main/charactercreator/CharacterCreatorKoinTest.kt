@@ -1,11 +1,38 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import androidx.compose.runtime.mutableStateOf
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
-import com.d20charactersheet.framework.boc.model.*
-import com.d20charactersheet.framework.boc.service.*
+import com.android.ash.charactersheet.boc.model.GameSystemType
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.AbilityScoresScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.AppearanceScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.ClassScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.RaceScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.StarterPackBoxViewModel
+import com.d20charactersheet.framework.boc.model.Alignment
+import com.d20charactersheet.framework.boc.model.Armor
+import com.d20charactersheet.framework.boc.model.AttackWield
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.EquipmentPack
+import com.d20charactersheet.framework.boc.model.Good
+import com.d20charactersheet.framework.boc.model.Item
+import com.d20charactersheet.framework.boc.model.ItemGroup
+import com.d20charactersheet.framework.boc.model.Race
+import com.d20charactersheet.framework.boc.model.Sex
+import com.d20charactersheet.framework.boc.model.StarterPackBox
+import com.d20charactersheet.framework.boc.model.StarterPackBoxItemOption
+import com.d20charactersheet.framework.boc.model.StarterPackBoxPackOption
+import com.d20charactersheet.framework.boc.model.Weapon
+import com.d20charactersheet.framework.boc.model.WeaponAttack
+import com.d20charactersheet.framework.boc.model.WeaponEncumbrance
+import com.d20charactersheet.framework.boc.model.XpTable
+import com.d20charactersheet.framework.boc.service.CharacterClassService
+import com.d20charactersheet.framework.boc.service.CharacterService
+import com.d20charactersheet.framework.boc.service.DisplayService
+import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.boc.service.RaceService
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -17,7 +44,13 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class CharacterCreatorKoinTest : KoinTest {
 
@@ -79,9 +112,11 @@ class CharacterCreatorKoinTest : KoinTest {
         whenever(gameSystem.allXpTables).thenReturn(listOf(XpTable().apply { name = "myXpTable" }))
 
         gameSystemHolder.gameSystem = gameSystem
+        gameSystemHolder.gameSystemType = GameSystemType.DND5E
 
         val raceScreenViewModel = createRaceScreenViewModel()
         val classScreenViewModel = createClassScreenViewModel()
+        val appearanceScreenViewModel = createAppearanceViewModel()
         val characterCreatorViewModel = AbilityScoresScreenViewModel(
             gameSystemHolder,
             firebaseAnalytics
@@ -92,6 +127,7 @@ class CharacterCreatorKoinTest : KoinTest {
         val character = CharacterCreator().createCharacter(
             raceScreenViewModel,
             classScreenViewModel,
+            appearanceScreenViewModel,
             characterCreatorViewModel,
             equipmentScreenViewModel
         )
@@ -107,25 +143,31 @@ class CharacterCreatorKoinTest : KoinTest {
 
     private fun createClassScreenViewModel(): ClassScreenViewModel {
         val classScreenViewModel = ClassScreenViewModel(gameSystemHolder).apply {
-            name.value = "myName"
-            player.value = "myPlayer"
-            this.clazz.value = CharacterClass().apply { name = "myClass" }
-            gender.value = "Male"
-            alignment.value = "Lawful Good"
+            this.clazz = CharacterClass().apply { name = "myClass" }
         }
         return classScreenViewModel
     }
 
+    private fun createAppearanceViewModel(): AppearanceScreenViewModel {
+        val appearanceScreenViewModel = AppearanceScreenViewModel(gameSystemHolder).apply {
+            name = "myName"
+            player = "myPlayer"
+            gender = "Male"
+            alignment = "Lawful Good"
+        }
+        return appearanceScreenViewModel
+    }
+
     private fun createRaceScreenViewModel(): RaceScreenViewModel {
         val raceScreenViewModel = RaceScreenViewModel(gameSystemHolder).apply {
-            race = mutableStateOf(Race().apply { name = "myRace" })
+            race = Race().apply { name = "myRace" }
         }
         return raceScreenViewModel
     }
 
     private fun createEquipmentScreenViewModel(): EquipmentScreenViewModel {
         val equipmentScreenViewModel = EquipmentScreenViewModel(gameSystemHolder).apply {
-            starterPackBoxViewModels.value = listOf(
+            starterPackBoxViewModels = listOf(
                 StarterPackBoxViewModel(
                     createStarterBox(Weapon().apply {
                         id = 1; name = "myFirstWeapon"; weaponEncumbrance =

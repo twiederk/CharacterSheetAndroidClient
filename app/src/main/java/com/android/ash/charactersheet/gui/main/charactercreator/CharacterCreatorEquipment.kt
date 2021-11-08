@@ -1,6 +1,11 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import com.d20charactersheet.framework.boc.model.*
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
+import com.d20charactersheet.framework.boc.model.Armor
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.Good
+import com.d20charactersheet.framework.boc.model.ItemGroup
+import com.d20charactersheet.framework.boc.model.Weapon
 
 class CharacterCreatorEquipment {
 
@@ -34,7 +39,7 @@ class CharacterCreatorEquipment {
         filter: (ItemGroup) -> Boolean
     ): List<ItemGroup> {
         val itemGroups = mutableListOf<ItemGroup>()
-        for (starterPackBoxViewModel in equipmentScreenViewModel.starterPackBoxViewModels.value) {
+        for (starterPackBoxViewModel in equipmentScreenViewModel.starterPackBoxViewModels) {
             val starterPackBoxOption =
                 checkNotNull(starterPackBoxViewModel.starterPackBoxOption.value)
             starterPackBoxOption.getItemGroups().filter { filter(it) }

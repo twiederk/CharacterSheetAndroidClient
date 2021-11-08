@@ -66,7 +66,7 @@ class PurchaseListenerKoinTest : KoinTest {
         PurchaseListener(activity, purchaseDialog).onClick(view)
 
         // Assert
-        verifyZeroInteractions(activity)
+        verifyNoMoreInteractions(activity)
         verify(purchaseDialog).show(any())
     }
 

@@ -81,7 +81,7 @@ class BillingRobolectricTest : KoinTest {
         underTest.startConnection(billingClientBuilder)
 
         // Assert
-        verifyZeroInteractions(billingClientBuilder)
+        verifyNoMoreInteractions(billingClientBuilder)
     }
 
     @Test
@@ -133,7 +133,7 @@ class BillingRobolectricTest : KoinTest {
         underTest.onBillingSetupFinished(billingResult)
 
         // Assert
-        verifyZeroInteractions(billingClient)
+        verifyNoMoreInteractions(billingClient)
         verify(messageDisplay).display(R.string.billing_connection_error, BillingResponseCode.ERROR)
     }
 
@@ -218,7 +218,7 @@ class BillingRobolectricTest : KoinTest {
         // Assert
         assertThat(underTest.premiumVersion.purchaseState).isEqualTo(PurchaseState.PURCHASED)
         verify(underTest.billingClient)?.acknowledgePurchase(any(), any())
-        verifyZeroInteractions(messageDisplay)
+        verifyNoMoreInteractions(messageDisplay)
     }
 
     @Test
@@ -238,7 +238,7 @@ class BillingRobolectricTest : KoinTest {
 
         // Assert
         assertThat(underTest.premiumVersion.purchaseState).isEqualTo(PurchaseState.PENDING)
-        verifyZeroInteractions(billingClient)
+        verifyNoMoreInteractions(billingClient)
         verify(messageDisplay).display(R.string.billing_purchase_pending)
     }
 
@@ -259,8 +259,8 @@ class BillingRobolectricTest : KoinTest {
 
         // Assert
         assertThat(underTest.premiumVersion.purchaseState).isEqualTo(PurchaseState.UNSPECIFIED_STATE)
-        verifyZeroInteractions(billingClient)
-        verifyZeroInteractions(messageDisplay)
+        verifyNoMoreInteractions(billingClient)
+        verifyNoMoreInteractions(messageDisplay)
     }
 
     @Test
@@ -277,8 +277,8 @@ class BillingRobolectricTest : KoinTest {
         underTest.onPurchasesUpdated(billingResult, listOf())
 
         // Assert
-        verifyZeroInteractions(billingClient)
-        verifyZeroInteractions(messageDisplay)
+        verifyNoMoreInteractions(billingClient)
+        verifyNoMoreInteractions(messageDisplay)
     }
 
     @Test
@@ -295,8 +295,8 @@ class BillingRobolectricTest : KoinTest {
         underTest.onPurchasesUpdated(billingResult, listOf())
 
         // Assert
-        verifyZeroInteractions(billingClient)
-        verifyZeroInteractions(messageDisplay)
+        verifyNoMoreInteractions(billingClient)
+        verifyNoMoreInteractions(messageDisplay)
     }
 
     @Test
@@ -313,7 +313,7 @@ class BillingRobolectricTest : KoinTest {
         underTest.onPurchasesUpdated(billingResult, listOf())
 
         // Assert
-        verifyZeroInteractions(billingClient)
+        verifyNoMoreInteractions(billingClient)
         verify(messageDisplay).display(
             R.string.billing_purchasesUpdated_error,
             BillingResponseCode.ERROR
@@ -493,7 +493,7 @@ class BillingRobolectricTest : KoinTest {
         Billing().onAcknowledgePurchaseResponse(billingResult)
 
         // Assert
-        verifyZeroInteractions(messageDisplay)
+        verifyNoMoreInteractions(messageDisplay)
     }
 
     @Test

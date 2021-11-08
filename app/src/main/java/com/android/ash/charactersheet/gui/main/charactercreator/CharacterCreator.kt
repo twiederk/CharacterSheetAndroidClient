@@ -4,6 +4,11 @@ import android.os.Bundle
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.GameSystemHolder
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.AbilityScoresScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.AppearanceScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.ClassScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.RaceScreenViewModel
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.CharacterService
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -23,12 +28,14 @@ class CharacterCreator(
     fun createCharacter(
         raceScreenViewModel: RaceScreenViewModel,
         classScreenViewModel: ClassScreenViewModel,
+        appearanceScreenViewModel: AppearanceScreenViewModel,
         abilityScoresScreenViewModel: AbilityScoresScreenViewModel,
         equipmentScreenViewModel: EquipmentScreenViewModel
     ): Character {
         val character = createCharacterInternal(
             abilityScoresScreenViewModel,
             classScreenViewModel,
+            appearanceScreenViewModel,
             raceScreenViewModel,
             equipmentScreenViewModel
         )
@@ -40,6 +47,7 @@ class CharacterCreator(
     private fun createCharacterInternal(
         abilityScoresScreenViewModel: AbilityScoresScreenViewModel,
         classScreenViewModel: ClassScreenViewModel,
+        appearanceScreenViewModel: AppearanceScreenViewModel,
         raceScreenViewModel: RaceScreenViewModel,
         equipmentScreenViewModel: EquipmentScreenViewModel
     ): Character {
@@ -48,6 +56,7 @@ class CharacterCreator(
             characterCreatorAppearance.fillAppearance(
                 raceScreenViewModel,
                 classScreenViewModel,
+                appearanceScreenViewModel,
                 abilityScoresScreenViewModel,
                 gameSystem
             )

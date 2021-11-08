@@ -598,23 +598,23 @@ INSERT INTO ability_property VALUES (799, 'school_id', '-1' );
 INSERT INTO ability_property VALUES (660, 'spelllist_id', '44' );
 
 
-INSERT INTO class VALUES (22, 'Alchemist', 3, 511, 1, 4, 4 );
-INSERT INTO class VALUES (23, 'Cavalier', 1, 511, 2, 4, 5 );
-INSERT INTO class VALUES (24, 'Inquisitor', 5, 511, 1, 6, 4 );
-INSERT INTO class VALUES (25, 'Oracle', 4, 511, 1, 4, 4 );
-INSERT INTO class VALUES (26, 'Summoner', 4, 511, 1, 2, 4 );
-INSERT INTO class VALUES (27, 'Witch', 4, 511, 0, 2, 3 );
-INSERT INTO class VALUES (28, 'Battle Herald', 5, 511, 2, 4, 5 );
-INSERT INTO class VALUES (29, 'Holy Vindicator', 5, 511, 2, 2, 5 );
-INSERT INTO class VALUES (30, 'Horizon Walker', 1, 511, 2, 6, 5 );
-INSERT INTO class VALUES (31, 'Master Chymist', 3, 238, 2, 2, 5 );
-INSERT INTO class VALUES (32, 'Master Spy', 6, 511, 1, 6, 4 );
-INSERT INTO class VALUES (33, 'Nature Warden', 5, 511, 1, 4, 4 );
-INSERT INTO class VALUES (34, 'Rage Prophet', 5, 438, 1, 4, 5 );
-INSERT INTO class VALUES (35, 'Stalwart Defender', 5, 511, 2, 2, 6 );
-INSERT INTO class VALUES (40, 'Eidolon - Quadruped', 3, 511, 1, 6, 5 );
-INSERT INTO class VALUES (41, 'Eidolon - Biped', 5, 511, 1, 6, 5 );
-INSERT INTO class VALUES (42, 'Eidolon - Serpentine', 6, 511, 1, 6, 5 );
+INSERT INTO class VALUES (22, 'Alchemist', 3, 511, 1, 4, 4, 51 );
+INSERT INTO class VALUES (23, 'Cavalier', 1, 511, 2, 4, 5, 63 );
+INSERT INTO class VALUES (24, 'Inquisitor', 5, 511, 1, 6, 4, 75 );
+INSERT INTO class VALUES (25, 'Oracle', 4, 511, 1, 4, 4, 74 );
+INSERT INTO class VALUES (26, 'Summoner', 4, 511, 1, 2, 4, 56 );
+INSERT INTO class VALUES (27, 'Witch', 4, 511, 0, 2, 3, 64 );
+INSERT INTO class VALUES (28, 'Battle Herald', 5, 511, 2, 4, 5, 67 );
+INSERT INTO class VALUES (29, 'Holy Vindicator', 5, 511, 2, 2, 5, 52 );
+INSERT INTO class VALUES (30, 'Horizon Walker', 1, 511, 2, 6, 5, 49 );
+INSERT INTO class VALUES (31, 'Master Chymist', 3, 238, 2, 2, 5, 51 );
+INSERT INTO class VALUES (32, 'Master Spy', 6, 511, 1, 6, 4, 53 );
+INSERT INTO class VALUES (33, 'Nature Warden', 5, 511, 1, 4, 4, 66 );
+INSERT INTO class VALUES (34, 'Rage Prophet', 5, 438, 1, 4, 5, 73 );
+INSERT INTO class VALUES (35, 'Stalwart Defender', 5, 511, 2, 2, 6, 43 );
+INSERT INTO class VALUES (40, 'Eidolon - Quadruped', 3, 511, 1, 6, 5, 61 );
+INSERT INTO class VALUES (41, 'Eidolon - Biped', 5, 511, 1, 6, 5, 61 );
+INSERT INTO class VALUES (42, 'Eidolon - Serpentine', 6, 511, 1, 6, 5, 61 );
 
 
 INSERT INTO class_skill VALUES (23, 3);

@@ -21,7 +21,6 @@ import com.d20charactersheet.framework.boc.service.GameSystem
 import org.hamcrest.Matchers.not
 import org.hamcrest.core.Is
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
@@ -115,22 +114,6 @@ class CharacterListActivityEspressoTest : KoinTest {
         onView(withId(R.id.game_system_selector_dndv35_button)).check(matches(withText("DnD v.3.5")))
         onView(withId(R.id.game_system_selector_dnd5e_button)).check(matches(withText("DnD 5e")))
         onView(withId(R.id.game_system_selector_pathfinder_button)).check(matches(withText("Pathfinder")))
-    }
-
-    @Test
-    @Ignore("Character creator uses Jetpack Compose")
-    fun fab_onClick_callCharacterCreateActivity() {
-
-        // Arrange
-        gameSystemHolder.gameSystem = null
-        scenario = ActivityScenario.launch(CharacterListActivity::class.java)
-        scenario.moveToState(Lifecycle.State.RESUMED)
-
-        // Act
-        onView(withId(R.id.favorite_action_button)).perform(click())
-
-        // Assert
-        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Create Character"))))
     }
 
     @Test

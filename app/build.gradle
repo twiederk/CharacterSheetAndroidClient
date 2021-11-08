@@ -17,8 +17,8 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion rootProject.kotlinVersion
-        kotlinCompilerExtensionVersion rootProject.composeVersion
+        kotlinCompilerVersion rootProject.kotlin_version
+        kotlinCompilerExtensionVersion rootProject.compose_version
     }
     packagingOptions {
         excludes += "/META-INF/AL2.0"
@@ -39,8 +39,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 77
-        versionName "4.7.1"
+        versionCode 78
+        versionName "4.8.0-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,54 +54,51 @@ android {
 dependencies {
 
     // App
-    api 'com.d20charactersheet:framework:4.6.1'
-    implementation "androidx.core:core-ktx:1.6.0"
+    api 'com.d20charactersheet:framework:4.7.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.fragment:fragment-ktx:1.3.6'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
-    implementation "io.insert-koin:koin-core:$rootProject.koinVersion"
-    implementation "io.insert-koin:koin-android:$rootProject.koinVersion"
-    implementation 'com.google.firebase:firebase-analytics:19.0.2'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
+    implementation "io.insert-koin:koin-core:$rootProject.koin_version"
+    implementation "io.insert-koin:koin-android:$rootProject.koin_version"
+    implementation 'com.google.firebase:firebase-analytics:20.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.4'
     implementation 'com.android.billingclient:billing-ktx:4.0.0'
     implementation 'com.google.android.gms:play-services-ads:20.4.0'
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "androidx.compose.runtime:runtime:$rootProject.composeVersion"
-    implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
-    implementation "androidx.compose.ui:ui:$rootProject.composeVersion"
-    implementation "androidx.compose.foundation:foundation:$rootProject.composeVersion"
-    implementation "androidx.compose.foundation:foundation-layout:$rootProject.composeVersion"
-    implementation "androidx.compose.material:material:$rootProject.composeVersion"
-    implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
-    implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
-    implementation "com.google.android.material:compose-theme-adapter:$rootProject.composeVersion"
+    implementation "androidx.compose.runtime:runtime:$rootProject.compose_version"
+    implementation "androidx.navigation:navigation-compose:$rootProject.composeNavigation_version"
+    implementation "androidx.compose.ui:ui:$rootProject.compose_version"
+    implementation "androidx.compose.foundation:foundation:$rootProject.compose_version"
+    implementation "androidx.compose.foundation:foundation-layout:$rootProject.compose_version"
+    implementation "androidx.compose.material:material:$rootProject.compose_version"
+    implementation "androidx.compose.runtime:runtime-livedata:$rootProject.compose_version"
+    implementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
+    implementation "com.google.android.material:compose-theme-adapter:$rootProject.compose_version"
     implementation 'androidx.work:work-runtime:2.7.0'
 
     // Instrumented Testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.3'
+    androidTestImplementation "androidx.test.ext:junit-ktx:$rootProject.junitKtx_version"
     androidTestImplementation 'androidx.test:rules:1.4.0'
     debugImplementation('androidx.fragment:fragment-testing:1.3.6') { exclude group: 'androidx.test', module: 'core' }
-    debugImplementation "org.assertj:assertj-core:$rootProject.assertJVersion"
-    androidTestImplementation("io.insert-koin:koin-test:$rootProject.koinVersion") { exclude group: 'org.mockito' }
-    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockitoVersion"
+    debugImplementation "org.assertj:assertj-core:$rootProject.assertj_version"
+    androidTestImplementation("io.insert-koin:koin-test:$rootProject.koin_version") { exclude group: 'org.mockito' }
+    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockito_version"
     androidTestImplementation 'org.mockito:mockito-android:3.5.10'
-    androidTestImplementation 'com.d20charactersheet:framework:4.6.1:tests'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.composeVersion"
+    androidTestImplementation 'com.d20charactersheet:framework:4.7.0:tests'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.compose_version"
 
     // Unit Testing
     testImplementation 'com.android.support.test:runner:1.0.2'
-    testImplementation "org.assertj:assertj-core:$rootProject.assertJVersion"
-    testImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockitoVersion"
-    testImplementation 'org.mockito:mockito-core:3.9.0'
-    testImplementation "io.insert-koin:koin-test:$rootProject.koinVersion"
-    testImplementation "io.insert-koin:koin-test-junit4:$rootProject.koinVersion"
-    testImplementation "androidx.test.ext:junit-ktx:1.1.3"
-    testImplementation "androidx.test:core-ktx:1.4.0"
+    testImplementation "org.assertj:assertj-core:$rootProject.assertj_version"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockito_version"
+    testImplementation "io.insert-koin:koin-test:$rootProject.koin_version"
+    testImplementation "io.insert-koin:koin-test-junit4:$rootProject.koin_version"
+    testImplementation "androidx.test.ext:junit-ktx:$rootProject.junitKtx_version"
+    testImplementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'org.robolectric:robolectric:4.4'
 
 

@@ -397,18 +397,19 @@ INSERT INTO race_ability VALUES (9, 30);
 --INSERT INTO skill VALUES ( 1, 'Appraise', '<b>Check:</b> You can appraise common or well-known objects with a DC 12 Appraise check. Failure means that you estimate the value at 50% to 150% (2d6+3 times 10%,) of its actual value.<br/>Appraising a rare or exotic item requires a successful check against DC 15, 20, or higher. If the check is successful, you estimate the value correctly, failure means you cannot estimate the item''s value. <br/>A magnifying glass gives you a +2 circumstance bonus on Appraise checks involving any item that is small or highly detailed, such as a gem. A merchant''s scale gives you a +2 circumstance bonus on Appraise checks involving any items that are valued by weight, including anything made of precious metals. <br/>These bonuses stack. <br/><b>Action:</b> Appraising an item takes 1 minute (ten consecutive full-round actions). <br/><b>Try Again:</b> No. You cannot try again on the same object, regardless of success. <br/><b>Special:</b> A dwarf gets a +2 racial bonus on Appraise checks that are related to stone or metal items because dwarves are familiar with valuable items of all kinds (especially those made of stone or metal). <br/>The master of a raven familiar gains a +3 bonus on Appraise checks. <br/>A character with the Diligent feat gets a +2 bonus on Appraise checks. <br/><b>Synergy:</b> If you have 5 ranks in any Craft skill, you gain a +2 bonus on Appraise checks related to items made with that Craft skill. <br/><b>Untrained:</b> For common items, failure on an untrained check means no estimate. For rare items, success means an estimate of 50% to 150% (2d6+3 times 10%).', 3, 1 );
 
 
-INSERT INTO class VALUES (1, 'Barbarian', -1, -1, 0, -1, 6 );
-INSERT INTO class VALUES (2, 'Bard', -1, -1, 0, -1, 4 );
-INSERT INTO class VALUES (3, 'Cleric', -1, -1, 0, -1, 4 );
-INSERT INTO class VALUES (4, 'Druid', -1, -1, 0, -1, 4 );
-INSERT INTO class VALUES (5, 'Fighter', -1, -1, 0, -1, 5 );
-INSERT INTO class VALUES (6, 'Monk', -1, -1, 0, -1, 4 );
-INSERT INTO class VALUES (7, 'Paladin', -1, -1, 0, -1, 5 );
-INSERT INTO class VALUES (8, 'Ranger', -1, -1, 0, -1, 5 );
-INSERT INTO class VALUES (9, 'Rogue', -1, -1, 0, -1, 4 );
-INSERT INTO class VALUES (10, 'Sorcerer', -1, -1, 0, -1, 3 );
-INSERT INTO class VALUES (11, 'Warlock', -1, -1, 0, -1, 4 );
-INSERT INTO class VALUES (12, 'Wizard', -1, -1, 0, -1, 3 );
+INSERT INTO class VALUES (1, 'Barbarian', -1, -1, 0, -1, 6, 68 );
+INSERT INTO class VALUES (2, 'Bard', -1, -1, 0, -1, 4, 50 );
+INSERT INTO class VALUES (3, 'Cleric', -1, -1, 0, -1, 4, 55 );
+INSERT INTO class VALUES (4, 'Druid', -1, -1, 0, -1, 4, 45 );
+INSERT INTO class VALUES (5, 'Fighter', -1, -1, 0, -1, 5, 43 );
+INSERT INTO class VALUES (6, 'Monk', -1, -1, 0, -1, 4, 59 );
+INSERT INTO class VALUES (7, 'Paladin', -1, -1, 0, -1, 5, 63 );
+INSERT INTO class VALUES (8, 'Ranger', -1, -1, 0, -1, 5, 58 );
+INSERT INTO class VALUES (9, 'Rogue', -1, -1, 0, -1, 4, 47 );
+INSERT INTO class VALUES (10, 'Sorcerer', -1, -1, 0, -1, 3, 57 );
+INSERT INTO class VALUES (11, 'Warlock', -1, -1, 0, -1, 4, 51 );
+INSERT INTO class VALUES (12, 'Wizard', -1, -1, 0, -1, 3, 54 );
+
 
 
 --INSERT INTO class_skill VALUES (0, 4);

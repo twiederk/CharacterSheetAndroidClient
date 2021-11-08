@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.billing.Billing
-import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreateActivity
+import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreatorActivity
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -23,7 +23,7 @@ class PurchaseListener(
                 purchaseDialog.show(activity)
             }
         } else {
-            view?.context?.startActivity(Intent(view.context, CharacterCreateActivity::class.java))
+            view?.context?.startActivity(Intent(view.context, CharacterCreatorActivity::class.java))
         }
     }
 

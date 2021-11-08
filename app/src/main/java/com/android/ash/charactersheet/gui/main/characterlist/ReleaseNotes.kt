@@ -138,6 +138,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
         resources.getString(R.string.release_notes_4_6_0), //
         resources.getString(R.string.release_notes_4_7_0), //
         resources.getString(R.string.release_notes_4_7_1), //
+        resources.getString(R.string.release_notes_4_8_0), //
     )
 
 

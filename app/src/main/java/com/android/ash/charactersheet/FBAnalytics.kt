@@ -1,8 +1,5 @@
 package com.android.ash.charactersheet
 
-import android.os.Bundle
-import com.google.firebase.analytics.FirebaseAnalytics
-
 object FBAnalytics {
 
     object UserProperty {
@@ -56,17 +53,6 @@ object FBAnalytics {
         const val SPELL_SLOT = "spell_slot_fragment"
         const val RACE = "race_fragment"
         const val CLASS = "class_fragment"
-        const val ABILITY_SCORES = "ability_scores_fragment"
     }
 
-}
-
-fun FirebaseAnalytics.logScreenNameAndClass(
-    screenName: String,
-    screenClass: String
-) {
-    val bundle = Bundle()
-    bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-    bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
-    logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 }

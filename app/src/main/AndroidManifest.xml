@@ -18,6 +18,7 @@
     <application
         android:name=".CharacterSheetApplication"
         android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:backupAgent=".backuprestore.CloudBackupAgent"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -94,7 +95,7 @@
 
         <!-- CharacterCreateActivity -->
         <activity
-            android:name=".gui.main.charactercreator.CharacterCreateActivity"
+            android:name=".gui.main.charactercreator.CharacterCreatorActivity"
             android:excludeFromRecents="true"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 

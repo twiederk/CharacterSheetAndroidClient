@@ -50,7 +50,7 @@ class CharacterListGameSystemKoinTest : KoinTest {
         CharacterListGameSystem().onCreateGameSystem(mock())
 
         // Assert
-        verifyZeroInteractions(preferenceServiceHolder)
+        verifyNoMoreInteractions(preferenceServiceHolder)
     }
 
     @Test

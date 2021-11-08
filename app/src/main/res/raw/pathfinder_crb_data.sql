@@ -1070,27 +1070,27 @@ INSERT INTO skill VALUES ( 34, 'Swim', '<p>You know how to swim and can do so ev
 INSERT INTO skill VALUES ( 35, 'Use Magic Device', '<p>You are skilled at activating magic items, even if you are not otherwise trained in their use.</p><p><b>Check</b>: You can use this skill to read a spell or to activate a magic item. Use Magic Device lets you use a magic item as if you had the spell ability or class features of another class, as if you were a different race, or as if you were of a different alignment.</p><p>You make a Use Magic Device check each time you activate a device such as a wand. If you are using the check to emulate an alignment or some other quality in an ongoing manner, you need to make the relevant Use Magic Device check once per hour.</p><p>You must consciously choose which requirement to emulate. That is, you must know what you are trying to emulate when you make a Use Magic Device check for that purpose. The DCs for various tasks involving Use Magic Device checks are summarized on the table below.</p><table><thead><tr><th>Task</th><th>Use Magic Device DC</th></tr></thead><tbody><tr><td>Activate blindly</td><td>25</td></tr><tr><td>Decipher a written spell</td><td>25 + spell level</td></tr><tr><td>Use a scroll</td><td>20 + caster level</td></tr><tr><td>Use a wand</td><td>20</td></tr><tr><td>Emulate a class feature</td><td>20</td></tr><tr><td>Emulate an ability score</td><td>See text</td></tr><tr><td>Emulate a race</td><td>25</td></tr><tr><td>Emulate an alignment</td><td>30</td></tr></tbody></table><p><i>Activate Blindly</i>: Some magic items are activated by special words, thoughts, or actions. You can activate such an item as if you were using the activation word, thought, or action, even when you''re not and even if you don''t know it. You do have to perform some equivalent activity in order to make the check. That is, you must speak, wave the item around, or otherwise attempt to get it to activate. You get a +2 bonus on your Use Magic Device check if you''ve activated the item in question at least once before. If you fail by 9 or less, you can''t activate the device. If you fail by 10 or more, you suffer a mishap. A mishap means that magical energy gets released but doesn''t do what you wanted it to do. The default mishaps are that the item affects the wrong target or that uncontrolled magical energy is released, dealing 2d6 points of damage to you. This mishap is in addition to the chance for a mishap that you normally risk when you cast a spell from a scroll that you could not otherwise cast yourself.</p><p><i>Decipher a Written Spell</i>: This usage works just like deciphering a written spell with the Spellcraft skill, except that the DC is 5 points higher. Deciphering a written spell requires 1 minute of concentration.</p><p><i>Emulate an Ability Score</i>: To cast a spell from a scroll, you need a high score in the appropriate ability (Intelligence for wizard spells, Wisdom for divine spells, or Charisma for sorcerer or bard spells). Your effective ability score (appropriate to the class you''re emulating when you try to cast the spell from the scroll) is your Use Magic Device check result minus 15. If you already have a high enough score in the appropriate ability, you don''t need to make this check.</p><p><i>Emulate an Alignment</i>: Some magic items have positive or negative effects based on the user''s alignment. Use Magic Device lets you use these items as if you were of an alignment of your choice. You can emulate only one alignment at a time.</p><p><i>Emulate a Class Feature</i>: Sometimes you need to use a class feature to activate a magic item. In this case, your effective level in the emulated class equals your Use Magic Device check result minus 20. This skill does not let you actually use the class feature of another class. It just lets you activate items as if you had that class feature. If the class whose feature you are emulating has an alignment requirement, you must meet it, either honestly or by emulating an appropriate alignment with a separate Use Magic Device check (see above).</p><p><i>Emulate a Race</i>: Some magic items work only for members of certain races, or work better for members of those races. You can use such an item as if you were a member of a race of your choice. You can emulate only one race at a time.</p><p><i>Use a Scroll</i>: Normally, to cast a spell from a scroll, you must have the scroll''s spell on your class spell list. Use Magic Device allows you to use a scroll as if you had a particular spell on your class spell list. The DC is equal to 20 + the caster level of the spell you are trying to cast from the scroll. In addition, casting a spell from a scroll requires a minimum score (10 + spell level) in the appropriate ability. If you don''t have a sufficient score in that ability, you must emulate the ability score with a separate Use Magic Device check.</p><p>This use of the skill also applies to other spell completion magic items.</p><p><i>Use a Wand, Staff, or Other Spell Trigger Item</i>: Normally, to use a wand, you must have the wand''s spell on your class spell list. This use of the skill allows you to use a wand as if you had a particular spell on your class spell list. Failing the roll does not expend a charge.</p><p><b>Action</b>: None. The Use Magic Device check is made as part of the action (if any) required to activate the magic item.</p><p><b>Try Again</b>: Yes, but if you ever roll a natural 1 while attempting to activate an item and you fail, then you can''t try to activate that item again for 24 hours.</p><p><b>Special</b>: You cannot take 10 with this skill. You can''t aid another on Use Magic Device checks. Only the user of the item may attempt such a check.</p><p>If you have the Magical Aptitude feat, you gain a bonus on Use Magic Device checks (see Feats).</p>        ', 5, 0 );
 
 
-INSERT INTO class VALUES (1, 'Barbarian', 1, 438, 2, 4, 6 );
-INSERT INTO class VALUES (2, 'Bard', 6, 511, 1, 6, 4 );
-INSERT INTO class VALUES (3, 'Cleric', 5, 511, 1, 2, 4 );
-INSERT INTO class VALUES (4, 'Druid', 5, 186, 1, 4, 4 );
-INSERT INTO class VALUES (5, 'Fighter', 1, 511, 2, 2, 5 );
-INSERT INTO class VALUES (6, 'Monk', 7, 73, 1, 4, 4 );
-INSERT INTO class VALUES (7, 'Paladin', 5, 1, 2, 2, 5 );
-INSERT INTO class VALUES (8, 'Ranger', 3, 511, 2, 6, 5 );
-INSERT INTO class VALUES (9, 'Rogue', 2, 511, 1, 8, 4 );
-INSERT INTO class VALUES (10, 'Sorcerer', 4, 511, 0, 2, 3 );
-INSERT INTO class VALUES (11, 'Wizard', 4, 511, 0, 2, 3 );
-INSERT INTO class VALUES (12, 'Arcane Archer', 3, 511, 2, 4, 5 );
-INSERT INTO class VALUES (13, 'Arcane Trickster', 6, 438, 0, 4, 3 );
-INSERT INTO class VALUES (14, 'Assassin', 2, 448, 1, 4, 4 );
-INSERT INTO class VALUES (15, 'Dragon Disciple', 5, 511, 1, 2, 6 );
-INSERT INTO class VALUES (16, 'Duelist', 2, 511, 2, 4, 5 );
-INSERT INTO class VALUES (17, 'Eldritch Knight', 1, 511, 2, 2, 5 );
-INSERT INTO class VALUES (18, 'Loremaster', 4, 511, 0, 4, 3 );
-INSERT INTO class VALUES (19, 'Mystic Theurge', 4, 511, 0, 2, 3 );
-INSERT INTO class VALUES (20, 'Pathfinder Chronicler', 6, 511, 1, 8, 4 );
-INSERT INTO class VALUES (21, 'Shadowdancer', 2, 438, 1, 6, 4 );
+INSERT INTO class VALUES (1, 'Barbarian', 1, 438, 2, 4, 6, 68 );
+INSERT INTO class VALUES (2, 'Bard', 6, 511, 1, 6, 4, 50 );
+INSERT INTO class VALUES (3, 'Cleric', 5, 511, 1, 2, 4, 55 );
+INSERT INTO class VALUES (4, 'Druid', 5, 186, 1, 4, 4, 45 );
+INSERT INTO class VALUES (5, 'Fighter', 1, 511, 2, 2, 5, 43 );
+INSERT INTO class VALUES (6, 'Monk', 7, 73, 1, 4, 4, 59 );
+INSERT INTO class VALUES (7, 'Paladin', 5, 1, 2, 2, 5, 63 );
+INSERT INTO class VALUES (8, 'Ranger', 3, 511, 2, 6, 5, 58 );
+INSERT INTO class VALUES (9, 'Rogue', 2, 511, 1, 8, 4, 47 );
+INSERT INTO class VALUES (10, 'Sorcerer', 4, 511, 0, 2, 3, 57 );
+INSERT INTO class VALUES (11, 'Wizard', 4, 511, 0, 2, 3, 54 );
+INSERT INTO class VALUES (12, 'Arcane Archer', 3, 511, 2, 4, 5, 41 );
+INSERT INTO class VALUES (13, 'Arcane Trickster', 6, 438, 0, 4, 3, 48 );
+INSERT INTO class VALUES (14, 'Assassin', 2, 448, 1, 4, 4, 53 );
+INSERT INTO class VALUES (15, 'Dragon Disciple', 5, 511, 1, 2, 6, 61 );
+INSERT INTO class VALUES (16, 'Duelist', 2, 511, 2, 4, 5, 46 );
+INSERT INTO class VALUES (17, 'Eldritch Knight', 1, 511, 2, 2, 5, 62 );
+INSERT INTO class VALUES (18, 'Loremaster', 4, 511, 0, 4, 3, 60 );
+INSERT INTO class VALUES (19, 'Mystic Theurge', 4, 511, 0, 2, 3, 70 );
+INSERT INTO class VALUES (20, 'Pathfinder Chronicler', 6, 511, 1, 8, 4, 60 );
+INSERT INTO class VALUES (21, 'Shadowdancer', 2, 438, 1, 6, 4, 44 );
 
 
 INSERT INTO class_skill VALUES (1, 1);

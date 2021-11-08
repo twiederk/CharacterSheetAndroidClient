@@ -881,20 +881,26 @@
     <string name="character_creator_next_button">NEXT</string>
     <string name="character_creator_create_button">CREATE CHARACTER</string>
 
-    <!-- RaceComposeFragment -->
-    <string name="race_title">Race (step 1 of 4)</string>
+    <!-- RaceScreen -->
+    <string name="race_screen_title">Race (step 1 of 5)</string>
 
-    <!-- ClassComposeFragment -->
-    <string name="class_title">"Class (step 2 of 4)"</string>
+    <!-- ClassScreen -->
+    <string name="class_screen_title">"Class (step 2 of 5)"</string>
+    <string name="class_screen_hit_die">"Hit Die: %1$s"</string>
+    <string name="class_screen_saves">"Saves: %1$s"</string>
+    <string name="class_screen_base_attack_bonus">"Base Attack Bonus: %1$s"</string>
+    <string name="class_screen_skill_points_per_level">"Skill Points Per Level: %1$s"</string>
 
-    <!-- AbilityScoresComposeFragment -->
-    <string name="ability_scores_title">Ability Scores (step 3 of 4)</string>
-    <string name="ability_scores_roll_dice">Roll Dice (4d6)</string>
+    <!-- AppearanceScreen -->
+    <string name="appearance_screen_title">"Appearance (step 3 of 5)"</string>
+
+    <!-- AbilityScoresScreen -->
+    <string name="ability_scores_screen_title">Ability Scores (step 4 of 5)</string>
+    <string name="ability_scores_screen_roll_dice">Roll Dice (4d6)</string>
 
     <!-- EquipmentComposeFragment -->
-    <string name="equipment_title">"Equipment (step 4 of 4)"</string>
-    <string name="equipment_missing_message">"The starting equipment for this class is missing. If you have suggestions for the starting equipment, please send them to torsten.wiederkehr@gmail.com."</string>
-
+    <string name="equipment_screen_title">"Equipment (step 5 of 5)"</string>
+    <string name="equipment_screen_missing_message">"The starting equipment for this class is missing. If you have suggestions for the starting equipment, please send them to torsten.wiederkehr@gmail.com."</string>
 
     <!-- GameSystemSelector -->
     <string name="game_system_selector_heading">Select your game system</string>
@@ -982,5 +988,6 @@
     <string name="release_notes_4_6_0">Release 4.6.0\n- Added attacks tab to Dungeons &amp; Dragons 5th edition.\n\n</string>
     <string name="release_notes_4_7_0">Release 4.7.0\n- Added creation of weapon attacks to character creator.\n\n</string>
     <string name="release_notes_4_7_1">Release 4.7.1\n- Bug fix: Fixed the crash on startup on Android 12.\n\n</string>
+    <string name="release_notes_4_8_0">Release 4.8.0\n- Added screen for class selection to character creation.\n\n</string>
 
 </resources>

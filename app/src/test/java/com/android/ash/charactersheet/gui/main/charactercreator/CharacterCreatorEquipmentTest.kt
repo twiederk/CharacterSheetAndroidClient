@@ -1,7 +1,14 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import androidx.compose.runtime.MutableState
-import com.d20charactersheet.framework.boc.model.*
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.StarterPackBoxViewModel
+import com.d20charactersheet.framework.boc.model.Armor
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.Good
+import com.d20charactersheet.framework.boc.model.ItemGroup
+import com.d20charactersheet.framework.boc.model.StarterPackBox
+import com.d20charactersheet.framework.boc.model.StarterPackBoxItemOption
+import com.d20charactersheet.framework.boc.model.Weapon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -53,11 +60,9 @@ class CharacterCreatorEquipmentTest {
                         })
                 }),
         )
-        val starterPackBoxViewModelsMock: MutableState<List<StarterPackBoxViewModel>> = mock()
         whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
-            starterPackBoxViewModelsMock
+            starterPackBoxViewModels
         )
-        whenever(starterPackBoxViewModelsMock.value).thenReturn(starterPackBoxViewModels)
     }
 
     @Test

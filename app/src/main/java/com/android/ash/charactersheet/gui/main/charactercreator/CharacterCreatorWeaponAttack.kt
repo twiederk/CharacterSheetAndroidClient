@@ -1,6 +1,12 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import com.d20charactersheet.framework.boc.model.*
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
+import com.d20charactersheet.framework.boc.model.AttackWield
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.Weapon
+import com.d20charactersheet.framework.boc.model.WeaponAttack
+import com.d20charactersheet.framework.boc.model.WeaponCategory
+import com.d20charactersheet.framework.boc.model.WeaponEncumbrance
 
 class CharacterCreatorWeaponAttack {
     fun fillWeaponAttacks(
@@ -30,7 +36,7 @@ class CharacterCreatorWeaponAttack {
 
     private fun getWeapons(equipmentScreenViewModel: EquipmentScreenViewModel): List<Weapon> {
         val weapons = mutableListOf<Weapon>()
-        for (starterPackBoxViewModel in equipmentScreenViewModel.starterPackBoxViewModels.value) {
+        for (starterPackBoxViewModel in equipmentScreenViewModel.starterPackBoxViewModels) {
             val starterPackBoxOption =
                 checkNotNull(starterPackBoxViewModel.starterPackBoxOption.value)
             starterPackBoxOption.getItemGroups()

@@ -1,10 +1,16 @@
 package com.android.ash.charactersheet.gui.main.charactercreator
 
-import androidx.compose.runtime.MutableState
-import com.d20charactersheet.framework.boc.model.*
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
+import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.StarterPackBoxViewModel
+import com.d20charactersheet.framework.boc.model.AttackWield
+import com.d20charactersheet.framework.boc.model.ItemGroup
+import com.d20charactersheet.framework.boc.model.StarterPackBox
+import com.d20charactersheet.framework.boc.model.StarterPackBoxItemOption
+import com.d20charactersheet.framework.boc.model.Weapon
+import com.d20charactersheet.framework.boc.model.WeaponCategory
+import com.d20charactersheet.framework.boc.model.WeaponEncumbrance
 import com.d20charactersheet.framework.dsl.createCharacter
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
@@ -14,20 +20,12 @@ class CharacterCreatorWeaponAttackTest {
 
     private val character = createCharacter { }
     private val equipmentScreenViewModel: EquipmentScreenViewModel = mock()
-    private val starterPackBoxViewModelsMock: MutableState<List<StarterPackBoxViewModel>> = mock()
-
-    @Before
-    fun before() {
-        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
-            starterPackBoxViewModelsMock
-        )
-    }
 
     @Test
     fun fillWeaponAttacks_noWeapon_noWeaponAttacks() {
 
         // arrange
-        whenever(starterPackBoxViewModelsMock.value).thenReturn(emptyList())
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(emptyList())
 
         // act
         CharacterCreatorWeaponAttack().fillWeaponAttacks(
@@ -46,7 +44,7 @@ class CharacterCreatorWeaponAttackTest {
             name = "Longsword"
             weaponEncumbrance = WeaponEncumbrance.ONE_HANDED
         }
-        whenever(equipmentScreenViewModel.starterPackBoxViewModels.value).thenReturn(
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
             listOf(createStarterPackBoxViewModelWitWeapon(longsword))
         )
 
@@ -68,7 +66,7 @@ class CharacterCreatorWeaponAttackTest {
             name = "Dagger"
             weaponEncumbrance = WeaponEncumbrance.LIGHT_HANDED
         }
-        whenever(equipmentScreenViewModel.starterPackBoxViewModels.value).thenReturn(
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
             listOf(createStarterPackBoxViewModelWitWeapon(dagger))
         )
 
@@ -90,7 +88,7 @@ class CharacterCreatorWeaponAttackTest {
             name = "Pike"
             weaponEncumbrance = WeaponEncumbrance.TWO_HANDED
         }
-        whenever(equipmentScreenViewModel.starterPackBoxViewModels.value).thenReturn(
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
             listOf(createStarterPackBoxViewModelWitWeapon(pike))
         )
 
@@ -112,7 +110,7 @@ class CharacterCreatorWeaponAttackTest {
             name = "Short Bow"
             weaponEncumbrance = WeaponEncumbrance.TWO_HANDED
         }
-        whenever(equipmentScreenViewModel.starterPackBoxViewModels.value).thenReturn(
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
             listOf(createStarterPackBoxViewModelWitWeapon(shortBow))
         )
 
@@ -135,7 +133,7 @@ class CharacterCreatorWeaponAttackTest {
             weaponEncumbrance = WeaponEncumbrance.TWO_HANDED
             weaponCategory = WeaponCategory.AMMUNITION
         }
-        whenever(equipmentScreenViewModel.starterPackBoxViewModels.value).thenReturn(
+        whenever(equipmentScreenViewModel.starterPackBoxViewModels).thenReturn(
             listOf(createStarterPackBoxViewModelWitWeapon(arrows))
         )
 
