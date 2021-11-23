@@ -25,11 +25,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,6 +52,7 @@ fun ClassScreen(
     gameSystemType: GameSystemType,
 
     getBitmap: (Int) -> Bitmap,
+    getDisplaySaves: (EnumSet<Save>) -> String,
     onClassChange: (CharacterClass) -> Unit,
     onNavigateToPrevious: () -> Unit,
     onNavigateToNext: () -> Unit,
@@ -75,11 +76,12 @@ fun ClassScreen(
                     ) {
 
                         ClassList(
-                            clazz = clazz,
+                            classSelected = clazz,
                             classList = classList,
                             gameSystemType = gameSystemType,
                             onClassChange = onClassChange,
                             getBitmap = getBitmap,
+                            getDisplaySaves = getDisplaySaves,
                         )
 
                     }
@@ -103,20 +105,25 @@ fun ClassScreen(
 
 @Composable
 fun ClassList(
-    modifier: Modifier = Modifier,
-    clazz: CharacterClass,
+    classSelected: CharacterClass,
     classList: List<CharacterClass>,
     gameSystemType: GameSystemType,
     onClassChange: (CharacterClass) -> Unit,
-    getBitmap: (Int) -> Bitmap
+    getBitmap: (Int) -> Bitmap,
+    getDisplaySaves: (EnumSet<Save>) -> String
 ) {
-    Column(modifier = modifier) {
-        for (currentClass in classList) {
+    Column {
+        for (clazz in classList) {
+            val selected = classSelected == clazz
+            val imageBitmap = getBitmap(clazz.imageId).asImageBitmap()
+            val saves = getDisplaySaves(clazz.saves)
+
             ClassCard(
-                clazz = currentClass,
-                selected = (clazz == currentClass),
+                clazz = clazz,
+                selected = selected,
                 gameSystemTyp = gameSystemType,
-                getBitmap = getBitmap,
+                imageBitmap = imageBitmap,
+                saves = saves,
                 onClassChange = onClassChange
             )
             Divider(color = Color.Black)
@@ -128,18 +135,30 @@ fun ClassList(
 @Preview
 @Composable
 fun ClassScreenPreview() {
+    val classFighter = CharacterClass().apply {
+        id = 1
+        name = "Fighter"
+        hitDie = Die.D10
+        saves = EnumSet.of(Save.STRENGTH, Save.CONSTITUTION)
+    }
+    val classWizard = CharacterClass().apply {
+        id = 2
+        name = "Wizard"
+        hitDie = Die.D4
+        saves = EnumSet.of(Save.INTELLIGENCE, Save.WISDOM)
+    }
+
     D20CharacterSheetTheme {
         ClassScreen(
-            clazz = CharacterClass().apply { id = 1; name = "Fighter" },
-            classList = listOf(
-                CharacterClass().apply { id = 1; name = "Fighter"; hitDie = Die.D10 },
-                CharacterClass().apply { id = 2; name = "Wizard"; hitDie = Die.D4 }),
+            clazz = classFighter,
+            classList = listOf(classFighter, classWizard),
             gameSystemType = GameSystemType.DND5E,
             getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+            getDisplaySaves = { "" },
             onClassChange = {},
             onNavigateToPrevious = {},
             onNavigateToNext = {},
-        ) {}
+            onCreateCharacter = {})
     }
 }
 
@@ -149,7 +168,8 @@ fun ClassCard(
     clazz: CharacterClass,
     selected: Boolean,
     gameSystemTyp: GameSystemType,
-    getBitmap: (Int) -> Bitmap,
+    imageBitmap: ImageBitmap,
+    saves: String,
     onClassChange: (CharacterClass) -> Unit
 ) {
     val backgroundColor by animateColorAsState(
@@ -164,41 +184,25 @@ fun ClassCard(
             .clickable(onClick = { onClassChange(clazz) })
             .padding(16.dp)
     ) {
-        ClassImage(
+        Image(
             modifier = Modifier
-                .background(backgroundColor),
-            clazz = clazz,
-            getBitmap = getBitmap
+                .background(backgroundColor)
+                .size(100.dp)
+                .clip(RoundedCornerShape(10.dp)),
+            bitmap = imageBitmap,
+            contentDescription = null
         )
+
         ClassInfo(
             modifier = Modifier
                 .padding(start = 8.dp)
                 .align(Alignment.CenterVertically),
             clazz = clazz,
-            gameSystemType = gameSystemTyp
+            saves = saves,
+            gameSystemType = gameSystemTyp,
         )
     }
 
-}
-
-@Composable
-fun ClassImage(
-    modifier: Modifier = Modifier,
-    clazz: CharacterClass,
-    getBitmap: (Int) -> Bitmap
-) {
-    val imageBitmap = remember { getBitmap(clazz.imageId).asImageBitmap() }
-    Surface(
-        modifier = Modifier.size(100.dp),
-        shape = RoundedCornerShape(10.dp),
-        color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
-    ) {
-        Image(
-            bitmap = imageBitmap,
-            modifier = modifier,
-            contentDescription = null
-        )
-    }
 }
 
 
@@ -207,6 +211,7 @@ fun ClassInfo(
     modifier: Modifier,
     clazz: CharacterClass,
     gameSystemType: GameSystemType,
+    saves: String,
 ) {
     Column(
         modifier = modifier
@@ -217,11 +222,11 @@ fun ClassInfo(
                 stringResource(id = R.string.class_screen_hit_die, clazz.hitDie),
                 style = MaterialTheme.typography.body2
             )
+            Text(
+                stringResource(id = R.string.class_screen_saves, saves),
+                style = MaterialTheme.typography.body2
+            )
             if (gameSystemType != GameSystemType.DND5E) {
-                Text(
-                    stringResource(id = R.string.class_screen_saves, clazz.saves),
-                    style = MaterialTheme.typography.body2
-                )
                 Text(
                     stringResource(
                         id = R.string.class_screen_base_attack_bonus, clazz.baseAttackBonus
@@ -241,20 +246,50 @@ fun ClassInfo(
 }
 
 
-@Preview
+@Preview(
+    name = "DnDv35 class",
+    backgroundColor = 0xFFFFFF,
+    showBackground = true
+)
 @Composable
 fun ClassCardPreview() {
     D20CharacterSheetTheme {
         ClassCard(
             clazz = CharacterClass().apply {
-                name = "myClass"
+                name = "myDnDv35Class"
                 hitDie = Die.D10
-                saves = EnumSet.of(Save.FORTITUDE)
+                saves = EnumSet.of(Save.STRENGTH, Save.CONSTITUTION)
                 baseAttackBonus = BaseAttackBonus.GOOD
             },
             selected = false,
             gameSystemTyp = GameSystemType.DNDV35,
-            getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
-        ) { }
+            imageBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888).asImageBitmap(),
+            saves = "Fortitude, Will",
+            onClassChange = { }
+        )
+    }
+}
+
+@Preview(
+    name = "DnDv5e class",
+    backgroundColor = 0xFFFFFF,
+    showBackground = true
+)
+@Composable
+fun DnD5eClassCardPreview() {
+    D20CharacterSheetTheme {
+        ClassCard(
+            clazz = CharacterClass().apply {
+                name = "myDnD5eClass"
+                hitDie = Die.D10
+                saves = EnumSet.of(Save.STRENGTH, Save.CONSTITUTION)
+                baseAttackBonus = BaseAttackBonus.GOOD
+            },
+            selected = false,
+            gameSystemTyp = GameSystemType.DND5E,
+            imageBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888).asImageBitmap(),
+            saves = "Strength, Constitution",
+            onClassChange = { }
+        )
     }
 }

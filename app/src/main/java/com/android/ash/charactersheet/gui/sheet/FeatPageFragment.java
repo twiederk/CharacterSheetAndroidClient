@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,8 +32,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * List of feats. The feats are listed in three tabs. One tab for general feats, one for item creation and one for
@@ -119,6 +119,7 @@ public class FeatPageFragment extends PageFragment implements Observer {
         featListOnTabChangeListener.addListView(listView);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
 

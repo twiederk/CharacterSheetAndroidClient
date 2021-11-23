@@ -21,11 +21,6 @@ INSERT INTO attribute VALUES (4,'Wisdom');
 INSERT INTO attribute VALUES (5,'Charisma');
 
 
-INSERT INTO save VALUES (0,'Fortitude');
-INSERT INTO save VALUES (1,'Reflex');
-INSERT INTO save VALUES (2,'Will');
-
-
 INSERT INTO size VALUES (0,'Fine');
 INSERT INTO size VALUES (1,'Diminutive');
 INSERT INTO size VALUES (2,'Tiny');

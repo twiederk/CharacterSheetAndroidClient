@@ -1,6 +1,12 @@
 package com.android.ash.charactersheet.boc.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import android.content.Context;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -24,12 +30,6 @@ import org.junit.runner.RunWith;
 import java.util.LinkedList;
 import java.util.List;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 @RunWith(AndroidJUnit4.class)
 public class AndroidDisplayServiceInstrumentedTest {
 
@@ -40,7 +40,7 @@ public class AndroidDisplayServiceInstrumentedTest {
     @Before
     public void setUp() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        displayService = new AndroidDisplayServiceImpl(context.getResources());
+        displayService = new DnD5eAndroidDisplayService(context.getResources());
         bard = createCharacterClass(1, "Bard");
         wizard = createCharacterClass(10, "Wizard");
     }

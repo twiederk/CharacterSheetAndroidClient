@@ -25,11 +25,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -68,7 +68,7 @@ fun RaceScreen(
                             .padding(bottom = 80.dp)
                     ) {
                         RaceList(
-                            race = race,
+                            raceSelected = race,
                             raceList = raceList,
                             onRaceChange = onRaceChange,
                             getBitmap = getBitmap
@@ -135,18 +135,22 @@ fun RaceScreenPreview() {
 
 @Composable
 fun RaceList(
-    modifier: Modifier = Modifier,
-    race: Race,
+    raceSelected: Race,
     raceList: List<Race>,
     onRaceChange: (Race) -> Unit,
     getBitmap: (Int) -> Bitmap
 ) {
-    Column(modifier = modifier) {
-        for (currentRace in raceList) {
+    Column {
+        for (race in raceList) {
+            val selected = (raceSelected == race)
+            val imageBitmap = getBitmap(race.imageId).asImageBitmap()
+            val abilityScoreIncrease = getAbilityScoreIncrease(race.abilities)
+
             RaceCard(
-                race = currentRace,
-                selected = (race == currentRace),
-                getBitmap = getBitmap,
+                race = race,
+                selected = selected,
+                imageBitmap = imageBitmap,
+                abilityScoreIncrease = abilityScoreIncrease,
                 onRaceChange = onRaceChange
             )
             Divider(color = Color.Black)
@@ -160,14 +164,13 @@ fun RaceCard(
     modifier: Modifier = Modifier,
     race: Race,
     selected: Boolean,
-    getBitmap: (Int) -> Bitmap,
+    imageBitmap: ImageBitmap,
+    abilityScoreIncrease: String,
     onRaceChange: (Race) -> Unit
 ) {
     val backgroundColor by animateColorAsState(
         if (selected) MaterialTheme.colors.primary else Color.Transparent
     )
-    val abilityScoreIncrease = remember { getAbilityScoreIncrease(race.abilities) }
-    val imageBitmap = remember { getBitmap(race.imageId).asImageBitmap() }
     Row(
         modifier
             .fillMaxWidth()
@@ -177,17 +180,14 @@ fun RaceCard(
             .clickable(onClick = { onRaceChange(race) })
             .padding(16.dp)
     ) {
-        Surface(
-            modifier = Modifier.size(100.dp),
-            shape = RoundedCornerShape(10.dp),
-            color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
-        ) {
-            Image(
-                bitmap = imageBitmap,
-                modifier = modifier,
-                contentDescription = null
-            )
-        }
+        Image(
+            modifier = Modifier
+                .size(100.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .background(MaterialTheme.colors.onSurface.copy(alpha = 0.2f)),
+            bitmap = imageBitmap,
+            contentDescription = null
+        )
         Column(
             modifier = Modifier
                 .padding(start = 8.dp)
@@ -214,22 +214,24 @@ fun getAbilityScoreIncrease(abilities: List<Ability>): String {
 @Composable
 fun RaceCardPreview() {
     D20CharacterSheetTheme {
+        val abilities = listOf(
+            Ability().apply { name = "Resist Sleep" },
+            Ability().apply { name = "Ability Adjustment (+2 Dex, -2 Con)" },
+            Ability().apply { name = "Weapon Proficiency (Sword and Bow)" },
+            Ability().apply { name = "Skill Bonus (Listen, Search, Spot" },
+            Ability().apply { name = "Low-Light Vision" },
+        )
         RaceCard(
             race = Race().apply {
                 name = "myRace"
                 size = Size.MEDIUM
                 baseLandSpeed = 30
-                abilities = listOf(
-                    Ability().apply { name = "Resist Sleep" },
-                    Ability().apply { name = "Ability Adjustment (+2 Dex, -2 Con)" },
-                    Ability().apply { name = "Weapon Proficiency (Sword and Bow)" },
-                    Ability().apply { name = "Skill Bonus (Listen, Search, Spot" },
-                    Ability().apply { name = "Low-Light Vision" },
-                )
+                this.abilities = abilities
             },
             selected = false,
-            onRaceChange = { },
-            getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+            imageBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888).asImageBitmap(),
+            abilityScoreIncrease = getAbilityScoreIncrease(abilities),
+            onRaceChange = { }
         )
     }
 }

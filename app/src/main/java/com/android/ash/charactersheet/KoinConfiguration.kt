@@ -22,7 +22,7 @@ import org.koin.dsl.module
 class GameSystemHolder {
     var gameSystem: GameSystem? = null
     var gameSystemType: GameSystemType? = null
-    var dndDbHelper: DBHelper? = null
+    var dndv35DbHelper: DBHelper? = null
     var pathfinderDbHelper: DBHelper? = null
     var dnd5eDbHelper: DBHelper? = null
 }

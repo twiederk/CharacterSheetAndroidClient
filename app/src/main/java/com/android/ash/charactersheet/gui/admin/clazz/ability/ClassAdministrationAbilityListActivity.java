@@ -168,6 +168,7 @@ public class ClassAdministrationAbilityListActivity extends LogAppCompatActivity
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     private void searchAbility() {
         Logger.debug("searchAbility");
         final Intent intent = new Intent(this, AbilitySearchActivity.class);
@@ -227,6 +228,7 @@ public class ClassAdministrationAbilityListActivity extends LogAppCompatActivity
         editClassAbility(classAbility);
     }
 
+    @SuppressWarnings("deprecation")
     private void editClassAbility(final ClassAbility classAbility) {
         final Intent intent = new Intent(this, ClassAdministrationAbilityEditActivity.class);
         intent.putExtra(INTENT_EXTRA_DATA_OBJECT,

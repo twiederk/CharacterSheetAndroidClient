@@ -20,7 +20,7 @@ class DBHelperTest {
         DBHelper(mock(), 0, GameSystemType.DNDV35).executeSqlStatements(sqlLiteDatabase, scriptName)
 
         // assert
-        verify(sqlLiteDatabase, times(58)).execSQL(anyString())
+        verify(sqlLiteDatabase, times(57)).execSQL(anyString())
     }
 
 }

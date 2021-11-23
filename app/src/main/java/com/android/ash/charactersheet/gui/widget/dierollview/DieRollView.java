@@ -192,6 +192,7 @@ public class DieRollView extends RelativeLayout {
         return bitmap;
     }
 
+    @SuppressWarnings("SameParameterValue")
     int getX(final int index, final int dieBitmapWidth) {
         return index % MAX_NUMBER_OF_DICE_PER_ROW * dieBitmapWidth;
     }
@@ -218,6 +219,7 @@ public class DieRollView extends RelativeLayout {
                 controller.getDieRoll().getResult();
     }
 
+    @SuppressWarnings("SameParameterValue")
     void setScale(final float scale) {
         this.scale = scale;
     }

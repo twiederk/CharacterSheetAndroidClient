@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -37,8 +39,6 @@ import java.util.Objects;
 
 import kotlin.Lazy;
 
-import static org.koin.java.KoinJavaComponent.inject;
-
 /**
  * The character sheet of the character. Displays the stats, abilities and combat values of the character. The
  * background shows the image of the character.
@@ -60,6 +60,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private Character character;
     private boolean reloadedFromBackground;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

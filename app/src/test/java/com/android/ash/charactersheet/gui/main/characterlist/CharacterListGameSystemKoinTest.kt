@@ -18,7 +18,12 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoMoreInteractions
+import org.mockito.kotlin.whenever
 
 class CharacterListGameSystemKoinTest : KoinTest {
 
@@ -138,7 +143,7 @@ class CharacterListGameSystemKoinTest : KoinTest {
     fun onDestroy_destroyCalled_destroyResources() {
         // Arrange
         gameSystemHolder.gameSystem = mock()
-        gameSystemHolder.dndDbHelper = mock()
+        gameSystemHolder.dndv35DbHelper = mock()
         gameSystemHolder.pathfinderDbHelper = mock()
 
         // Act
@@ -146,7 +151,7 @@ class CharacterListGameSystemKoinTest : KoinTest {
 
         // Assert
         assertThat(gameSystemHolder.gameSystem).isNull()
-        verify(gameSystemHolder.dndDbHelper)?.close()
+        verify(gameSystemHolder.dndv35DbHelper)?.close()
         verify(gameSystemHolder.pathfinderDbHelper)?.close()
     }
 

@@ -52,13 +52,14 @@ fun SetupNavGraph(
                 classList = classScreenViewModel.classList,
                 gameSystemType = classScreenViewModel.gameSystemType,
                 getBitmap = { getBitmap(it) },
+                getDisplaySaves = { classScreenViewModel.getDisplaySaves(it) },
                 onClassChange = {
                     classScreenViewModel.onClassChange(it)
                     equipmentScreenViewModel.onClassChange(it)
                 },
                 onNavigateToPrevious = { navController.popBackStack() },
                 onNavigateToNext = { navController.navigate(route = ScreenRoute.AppearanceScreenRoute.route) },
-            ) { onCreateCharacter() }
+                onCreateCharacter = { onCreateCharacter() })
         }
         composable(
             route = ScreenRoute.AppearanceScreenRoute.route

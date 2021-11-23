@@ -1,5 +1,9 @@
 package com.android.ash.charactersheet.gui.admin.race;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,10 +32,6 @@ import java.util.List;
 import java.util.Objects;
 
 import kotlin.Lazy;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Fills and stores the form of a race. Derive from this class to use the form for create or update.
@@ -166,6 +166,7 @@ public abstract class RaceAdministrationActivity extends FormActivity<Race> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private List<Ability> getAbilitiesFromIntend(final Intent resultIntent) {
         final Bundle bundle = resultIntent.getExtras();
         final List<Integer> abilityIds = (List<Integer>) Objects.requireNonNull(bundle).get(INTENT_EXTRA_DATA_OBJECT);

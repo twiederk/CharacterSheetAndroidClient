@@ -106,4 +106,28 @@ class SheetPanelFactoryKoinTest : KoinTest {
         assertThat(combatPanel).isInstanceOf(DnDv35CombatEditPanel::class.java)
     }
 
+    @Test
+    fun createSaveEditPanel_DnD5e_createDnD5eSaveEditPanel() {
+        // arrange
+        gameSystemHolder.gameSystemType = GameSystemType.DND5E
+
+        // act
+        val saveEditPanel = SheetPanelFactory().createSaveEditPanel()
+
+        // assert
+        assertThat(saveEditPanel).isInstanceOf(DnD5eSaveEditPanel::class.java)
+    }
+
+    @Test
+    fun createSaveEditPanel_DnDv35_createDnDv35SaveEditPanel() {
+        // arrange
+        gameSystemHolder.gameSystemType = GameSystemType.DNDV35
+
+        // act
+        val saveEditPanel = SheetPanelFactory().createSaveEditPanel()
+
+        // assert
+        assertThat(saveEditPanel).isInstanceOf(DnDv35SaveEditPanel::class.java)
+    }
+
 }

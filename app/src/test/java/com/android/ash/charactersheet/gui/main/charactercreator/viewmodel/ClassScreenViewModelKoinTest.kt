@@ -4,6 +4,8 @@ import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.Save
+import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -16,8 +18,11 @@ import org.koin.test.KoinTestRule
 import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.mockito.Mockito
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import java.util.*
 
 class ClassScreenViewModelKoinTest : KoinTest {
 
@@ -85,5 +90,20 @@ class ClassScreenViewModelKoinTest : KoinTest {
         assertThat(underTest.gameSystemType).isEqualTo(GameSystemType.DNDV35)
     }
 
+    @Test
+    fun getDisplaySaves_savesStrengthAndDexterity_returnListOfSaves() {
+        // arrange
+        val saves = EnumSet.of(Save.STRENGTH, Save.DEXTERITY)
+        val displayService : DisplayService = mock()
+        whenever(displayService.getDisplaySaves(saves)).doReturn("Strength, Dexterity")
+        val gameSystem = checkNotNull(gameSystemHolder.gameSystem)
+        whenever(gameSystem.displayService).doReturn(displayService)
+
+        // act
+        ClassScreenViewModel(gameSystemHolder).getDisplaySaves(saves)
+
+        // assert
+        verify(displayService).getDisplaySaves(saves)
+    }
 
 }

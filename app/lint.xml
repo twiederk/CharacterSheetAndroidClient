@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="IconColors">
+        <ignore path="src/main/res/drawable-mdpi/icon_backpack.png" />
+        <ignore path="src/main/res/drawable-mdpi/icon_sword.png" />
+    </issue>
+    <issue id="IconDipSize">
+        <ignore path="src/main/res/drawable-hdpi/icon.png" />
+        <ignore path="src/main/res/drawable-mdpi/icon.png" />
+        <ignore path="src/main/res/drawable-xhdpi/icon.png" />
+        <ignore path="src/main/res/drawable-xxhdpi/icon.png" />
+    </issue>
     <issue id="IconDuplicates">
         <ignore path="src/main/res/drawable-mdpi/d2_blue_01.png" />
         <ignore path="src/main/res/drawable-mdpi/d2_blue_02.png" />
@@ -11,5 +21,79 @@
         <ignore path="src/main/res/drawable-mdpi/d6_blue_01.png" />
         <ignore path="src/main/res/drawable-mdpi/d6_blue_02.png" />
         <ignore path="src/main/res/drawable-mdpi/d6_blue_03.png" />
+    </issue>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/dwarf_female.png" />
+        <ignore path="src/main/res/drawable/dwarf_female_bg.png" />
+        <ignore path="src/main/res/drawable/dwarf_female_hunter.png" />
+        <ignore path="src/main/res/drawable/dwarf_female_hunter_bg.png" />
+        <ignore path="src/main/res/drawable/dwarf_male.png" />
+        <ignore path="src/main/res/drawable/dwarf_male_bg.png" />
+        <ignore path="src/main/res/drawable/dwarf_male_warrior.png" />
+        <ignore path="src/main/res/drawable/dwarf_male_warrior_bg.png" />
+        <ignore path="src/main/res/drawable/elf_female.png" />
+        <ignore path="src/main/res/drawable/elf_female_bg.png" />
+        <ignore path="src/main/res/drawable/elf_female_druid.png" />
+        <ignore path="src/main/res/drawable/elf_female_druid_bg.png" />
+        <ignore path="src/main/res/drawable/elf_male.png" />
+        <ignore path="src/main/res/drawable/elf_male_bg.png" />
+        <ignore path="src/main/res/drawable/elf_male_thief.png" />
+        <ignore path="src/main/res/drawable/elf_male_thief_bg.png" />
+        <ignore path="src/main/res/drawable/gnome_female.png" />
+        <ignore path="src/main/res/drawable/gnome_female_bg.png" />
+        <ignore path="src/main/res/drawable/gnome_female_engineer.png" />
+        <ignore path="src/main/res/drawable/gnome_female_engineer_bg.png" />
+        <ignore path="src/main/res/drawable/gnome_male.png" />
+        <ignore path="src/main/res/drawable/gnome_male_bg.png" />
+        <ignore path="src/main/res/drawable/gnome_male_wizard.png" />
+        <ignore path="src/main/res/drawable/gnome_male_wizard_bg.png" />
+        <ignore path="src/main/res/drawable/halfelf_female.png" />
+        <ignore path="src/main/res/drawable/halfelf_female_bg.png" />
+        <ignore path="src/main/res/drawable/halfelf_male.png" />
+        <ignore path="src/main/res/drawable/halfelf_male_bg.png" />
+        <ignore path="src/main/res/drawable/halfelf_male_warlock.png" />
+        <ignore path="src/main/res/drawable/halfelf_male_warlock_bg.png" />
+        <ignore path="src/main/res/drawable/halfelf_priest_female.png" />
+        <ignore path="src/main/res/drawable/halfelf_priest_female_bg.png" />
+        <ignore path="src/main/res/drawable/human_female.png" />
+        <ignore path="src/main/res/drawable/human_female_bg.png" />
+        <ignore path="src/main/res/drawable/human_female_wizard.png" />
+        <ignore path="src/main/res/drawable/human_female_wizard_bg.png" />
+        <ignore path="src/main/res/drawable/human_male.png" />
+        <ignore path="src/main/res/drawable/human_male_bg.png" />
+        <ignore path="src/main/res/drawable/human_male_paladin.png" />
+        <ignore path="src/main/res/drawable/human_male_paladin_bg.png" />
+        <ignore path="src/main/res/drawable/lizardmen_female.png" />
+        <ignore path="src/main/res/drawable/lizardmen_female_bg.png" />
+        <ignore path="src/main/res/drawable/lizardmen_male.png" />
+        <ignore path="src/main/res/drawable/lizardmen_male_bg.png" />
+        <ignore path="src/main/res/drawable/lizzardmen_warrior_male.png" />
+        <ignore path="src/main/res/drawable/lizzardmen_warrior_male1.png" />
+        <ignore path="src/main/res/drawable/lizzardmen_warrior_male1_bg.png" />
+        <ignore path="src/main/res/drawable/lizzardmen_warrior_male_bg.png" />
+        <ignore path="src/main/res/drawable/lizzardmen_witch_female.png" />
+        <ignore path="src/main/res/drawable/lizzardmen_witch_female_bg.png" />
+        <ignore path="src/main/res/drawable/orc_female.png" />
+        <ignore path="src/main/res/drawable/orc_female_bg.png" />
+        <ignore path="src/main/res/drawable/orc_female_shaman.png" />
+        <ignore path="src/main/res/drawable/orc_female_shaman_bg.png" />
+        <ignore path="src/main/res/drawable/orc_male.png" />
+        <ignore path="src/main/res/drawable/orc_male_barbarian.png" />
+        <ignore path="src/main/res/drawable/orc_male_barbarian_bg.png" />
+        <ignore path="src/main/res/drawable/orc_male_bg.png" />
+        <ignore path="src/main/res/drawable/ratmen_female.png" />
+        <ignore path="src/main/res/drawable/ratmen_female_bg.png" />
+        <ignore path="src/main/res/drawable/ratmen_female_necro.png" />
+        <ignore path="src/main/res/drawable/ratmen_female_necro_bg.png" />
+        <ignore path="src/main/res/drawable/ratmen_male.png" />
+        <ignore path="src/main/res/drawable/ratmen_male_assasin.png" />
+        <ignore path="src/main/res/drawable/ratmen_male_assasin_bg.png" />
+        <ignore path="src/main/res/drawable/ratmen_male_bg.png" />
+        <ignore path="src/main/res/drawable/undead_female_warrior.png" />
+        <ignore path="src/main/res/drawable/undead_female_warrior_bg.png" />
+        <ignore path="src/main/res/drawable/undead_male_dark_priest.png" />
+        <ignore path="src/main/res/drawable/undead_male_dark_priest_bg.png" />
+        <ignore path="src/main/res/drawable/undead_necromancer.png" />
+        <ignore path="src/main/res/drawable/undead_necromancer_bg.png" />
     </issue>
 </lint>

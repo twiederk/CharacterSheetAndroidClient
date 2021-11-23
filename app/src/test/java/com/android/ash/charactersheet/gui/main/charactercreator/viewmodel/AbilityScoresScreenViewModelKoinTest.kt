@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.gui.main.charactercreator.viewmodel
 import android.content.res.Resources
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.appModule
-import com.android.ash.charactersheet.boc.service.AndroidDisplayServiceImpl
+import com.android.ash.charactersheet.boc.service.DnD5eAndroidDisplayService
 import com.d20charactersheet.framework.boc.model.Die
 import com.d20charactersheet.framework.boc.service.CharacterCreatorServiceImpl
 import com.d20charactersheet.framework.boc.service.DnD5eRuleServiceImpl
@@ -404,7 +404,11 @@ class AbilityScoresScreenViewModelKoinTest : KoinTest {
         whenever(gameSystem.ruleService).thenReturn(DnD5eRuleServiceImpl())
         val resources: Resources = mock()
         whenever(resources.getString(any())).thenReturn("")
-        whenever(gameSystem.displayService).thenReturn(AndroidDisplayServiceImpl(resources))
+        whenever(gameSystem.displayService).thenReturn(
+            DnD5eAndroidDisplayService(
+                resources
+            )
+        )
         gameSystemHolder.gameSystem = gameSystem
 
         val underTest = AbilityScoresScreenViewModel(gameSystemHolder, firebaseAnalytics)

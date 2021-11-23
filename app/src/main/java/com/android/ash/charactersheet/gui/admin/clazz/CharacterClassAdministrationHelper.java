@@ -102,10 +102,13 @@ class CharacterClassAdministrationHelper {
     }
 
     private void createSaves() {
-        setCheckBox(characterClass.getSaves().contains(Save.WILL), R.id.character_class_administration_save_will);
-        setCheckBox(characterClass.getSaves().contains(Save.REFLEX), R.id.character_class_administration_save_reflex);
-        setCheckBox(characterClass.getSaves().contains(Save.FORTITUDE),
-                R.id.character_class_administration_save_fortitide);
+        setCheckBox(characterClass.getSaves().contains(Save.STRENGTH),
+                R.id.character_class_administration_save_strength);
+        setCheckBox(characterClass.getSaves().contains(Save.DEXTERITY), R.id.character_class_administration_save_dexterity);
+        setCheckBox(characterClass.getSaves().contains(Save.CONSTITUTION), R.id.character_class_administration_save_constitution);
+        setCheckBox(characterClass.getSaves().contains(Save.INTELLIGENCE), R.id.character_class_administration_save_intelligence);
+        setCheckBox(characterClass.getSaves().contains(Save.WISDOM), R.id.character_class_administration_save_wisdom);
+        setCheckBox(characterClass.getSaves().contains(Save.CHARISMA), R.id.character_class_administration_save_charisma);
 
     }
 

@@ -1,5 +1,6 @@
 package com.android.ash.charactersheet.gui.main.characterlist;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import com.d20charactersheet.framework.boc.service.GameSystem;
 /**
  * Create/Upgrade database and load game system in an asynchronous task, while displaying a wait animation.
  */
+@SuppressLint("StaticFieldLeak")
 abstract class AbstractAsyncTask extends AsyncTask<Object, String, TaskResult> {
 
     private final Activity activity;

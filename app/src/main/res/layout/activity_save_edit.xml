@@ -18,7 +18,6 @@
     <TableLayout style="@style/AppTheme.Centered">
 
         <!-- HEADING -->
-
         <TableRow>
 
             <TextView
@@ -26,8 +25,9 @@
                 android:text="@string/save_name" />
 
             <TextView
+                android:id="@+id/save_heading_proficiency"
                 style="@style/AppTheme.TableCellStringHeading"
-                android:text="@string/save_base_save" />
+                android:text="@string/save_heading_proficiency" />
 
             <TextView
                 style="@style/AppTheme.TableCellStringHeading"
@@ -38,68 +38,132 @@
                 android:text="@string/save_modifier" />
         </TableRow>
 
-        <!-- FORTITUDE -->
-
-        <TableRow>
+        <!-- STRENGTH -->
+        <TableRow android:id="@+id/save_strength_row_row">
 
             <TextView
+                android:id="@+id/save_strength_label"
                 style="@style/AppTheme.TableCellString"
-                android:text="@string/save_fortitude_label" />
+                android:text="@string/save_strength_label" />
 
             <TextView
-                android:id="@+id/save_fortitude_base"
+                android:id="@+id/save_strength_base"
                 style="@style/AppTheme.TableCellNumber" />
 
             <TextView
-                android:id="@+id/save_fortitude_attribute"
+                android:id="@+id/save_strength_attribute"
                 style="@style/AppTheme.TableCellNumber" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
-                android:id="@+id/save_fortitude_modifier"
+                android:id="@+id/save_strength_modifier"
                 style="@style/AppTheme.Edit" />
         </TableRow>
 
-        <!-- REFLEX -->
-
-        <TableRow>
+        <!-- DEXTERITY -->
+        <TableRow android:id="@+id/save_dexterity_row">
 
             <TextView
+                android:id="@+id/save_dexterity_label"
                 style="@style/AppTheme.TableCellString"
-                android:text="@string/save_reflex_label" />
+                android:text="@string/save_dexterity_label" />
 
             <TextView
-                android:id="@+id/save_reflex_base"
+                android:id="@+id/save_dexterity_base"
                 style="@style/AppTheme.TableCellNumber" />
 
             <TextView
-                android:id="@+id/save_reflex_attribute"
+                android:id="@+id/save_dexterity_attribute"
                 style="@style/AppTheme.TableCellNumber" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
-                android:id="@+id/save_reflex_modifier"
+                android:id="@+id/save_dexterity_modifier"
                 style="@style/AppTheme.Edit" />
         </TableRow>
 
-        <!-- WILL -->
-
-        <TableRow>
+        <!-- CONSTITUTION -->
+        <TableRow android:id="@+id/save_constitution_row">
 
             <TextView
+                android:id="@+id/save_constitution_label"
                 style="@style/AppTheme.TableCellString"
-                android:text="@string/save_will_label" />
+                android:text="@string/save_constitution_label" />
 
             <TextView
-                android:id="@+id/save_will_base"
+                android:id="@+id/save_constitution_base"
                 style="@style/AppTheme.TableCellNumber" />
 
             <TextView
-                android:id="@+id/save_will_attribute"
+                android:id="@+id/save_constitution_attribute"
                 style="@style/AppTheme.TableCellNumber" />
 
             <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
-                android:id="@+id/save_will_modifier"
+                android:id="@+id/save_constitution_modifier"
                 style="@style/AppTheme.Edit" />
         </TableRow>
+
+        <!-- INTELLIGENCE -->
+        <TableRow android:id="@+id/save_intelligence_row">
+
+            <TextView
+                android:id="@+id/save_intelligence_label"
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/save_intelligence_label" />
+
+            <TextView
+                android:id="@+id/save_intelligence_base"
+                style="@style/AppTheme.TableCellNumber" />
+
+            <TextView
+                android:id="@+id/save_intelligence_attribute"
+                style="@style/AppTheme.TableCellNumber" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/save_intelligence_modifier"
+                style="@style/AppTheme.Edit" />
+        </TableRow>
+
+        <!-- WISDOM -->
+        <TableRow android:id="@+id/save_wisdom_row">
+
+            <TextView
+                android:id="@+id/save_wisdom_label"
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/save_wisdom_label" />
+
+            <TextView
+                android:id="@+id/save_wisdom_base"
+                style="@style/AppTheme.TableCellNumber" />
+
+            <TextView
+                android:id="@+id/save_wisdom_attribute"
+                style="@style/AppTheme.TableCellNumber" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/save_wisdom_modifier"
+                style="@style/AppTheme.Edit" />
+        </TableRow>
+
+        <!-- CHARISMA -->
+        <TableRow android:id="@+id/save_charisma_row">
+
+            <TextView
+                android:id="@+id/save_charisma_label"
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/save_charisma_label" />
+
+            <TextView
+                android:id="@+id/save_charisma_base"
+                style="@style/AppTheme.TableCellNumber" />
+
+            <TextView
+                android:id="@+id/save_charisma_attribute"
+                style="@style/AppTheme.TableCellNumber" />
+
+            <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
+                android:id="@+id/save_charisma_modifier"
+                style="@style/AppTheme.Edit" />
+        </TableRow>
+
     </TableLayout>
 
 </LinearLayout>

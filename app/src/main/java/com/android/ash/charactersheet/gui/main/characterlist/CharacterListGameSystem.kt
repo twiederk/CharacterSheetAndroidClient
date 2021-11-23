@@ -59,7 +59,7 @@ class CharacterListGameSystem : KoinComponent {
     }
 
     fun onDestroy() {
-        gameSystemHolder.dndDbHelper?.close()
+        gameSystemHolder.dndv35DbHelper?.close()
         gameSystemHolder.pathfinderDbHelper?.close()
         gameSystemHolder.gameSystem = null
     }

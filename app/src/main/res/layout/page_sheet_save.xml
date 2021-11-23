@@ -10,44 +10,95 @@
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
-        <!-- FORTITUDE -->
-
-        <TableRow style="@style/AppTheme.TableRowOdd">
+        <!-- STRENGTH -->
+        <TableRow
+            android:id="@+id/save_strength_row"
+            style="@style/AppTheme.TableRowOdd">
 
             <TextView
+                android:id="@+id/save_strength_label"
                 style="@style/AppTheme.TableCellString"
-                android:text="@string/save_fortitude_label" />
+                android:text="@string/save_strength_label" />
 
             <Button
-                android:id="@+id/save_fortitude"
+                android:id="@+id/save_strength"
                 style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
-        <!-- REFLEX -->
-
-        <TableRow style="@style/AppTheme.TableRowEven">
+        <!-- DEXTERITY -->
+        <TableRow
+            android:id="@+id/save_dexterity_row"
+            style="@style/AppTheme.TableRowEven">
 
             <TextView
+                android:id="@+id/save_dexterity_label"
                 style="@style/AppTheme.TableCellString"
-                android:text="@string/save_reflex_label" />
+                android:text="@string/save_dexterity_label" />
 
             <Button
-                android:id="@+id/save_reflex"
+                android:id="@+id/save_dexterity"
                 style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
 
-        <!-- WILL -->
-
-        <TableRow style="@style/AppTheme.TableRowOdd">
+        <!-- CONSTITUTION -->
+        <TableRow
+            android:id="@+id/save_constitution_row"
+            style="@style/AppTheme.TableRowOdd">
 
             <TextView
+                android:id="@+id/save_constitution_label"
                 style="@style/AppTheme.TableCellString"
-                android:text="@string/save_will_label" />
+                android:text="@string/save_constitution_label" />
 
             <Button
-                android:id="@+id/save_will"
+                android:id="@+id/save_constitution"
+                style="@style/AppTheme.ButtonDieRoll" />
+        </TableRow>
+
+        <!-- INTELLIGENCE -->
+        <TableRow
+            android:id="@+id/save_intelligence_row"
+            style="@style/AppTheme.TableRowEven">
+
+            <TextView
+                android:id="@+id/save_intelligence_label"
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/save_intelligence_label" />
+
+            <Button
+                android:id="@+id/save_intelligence"
+                style="@style/AppTheme.ButtonDieRoll" />
+        </TableRow>
+
+        <!-- WISDOM -->
+        <TableRow
+            android:id="@+id/save_wisdom_row"
+            style="@style/AppTheme.TableRowOdd">
+
+            <TextView
+                android:id="@+id/save_wisdom_label"
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/save_wisdom_label" />
+
+            <Button
+                android:id="@+id/save_wisdom"
+                style="@style/AppTheme.ButtonDieRoll" />
+        </TableRow>
+
+        <!-- CHARISMA -->
+        <TableRow
+            android:id="@+id/save_charisma_row"
+            style="@style/AppTheme.TableRowEven">
+
+            <TextView
+                android:id="@+id/save_charisma_label"
+                style="@style/AppTheme.TableCellString"
+                android:text="@string/save_charisma_label" />
+
+            <Button
+                android:id="@+id/save_charisma"
                 style="@style/AppTheme.ButtonDieRoll" />
         </TableRow>
     </TableLayout>

@@ -45,6 +45,7 @@ public class ListModel<T> extends Observable {
      * @param listFilter
      *            The filter of the items.
      */
+    @SuppressWarnings("SameParameterValue")
     private ListModel(final List<T> items, final ListFilter<T> listFilter) {
         super();
         this.items = items;

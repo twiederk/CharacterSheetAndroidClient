@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.skill;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -13,8 +15,6 @@ import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.widget.NameDisplayArrayAdapter;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.util.SkillComparator;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * The skill administration. Display all skills in a list. The option menu offers the options to create a skill, export,
@@ -57,7 +57,7 @@ public class SkillAdministrationListActivity extends AdministrationListActivity<
         return (Skill) getListView().getAdapter().getItem(menuInfo.position);
     }
 
-    @SuppressWarnings("SameReturnValue")
+    @SuppressWarnings({"SameReturnValue", "unchecked"})
     private boolean deleteSkill(final Skill skill) {
         gameSystem.deleteSkill(skill);
         final ArrayAdapter<Skill> adapter = (ArrayAdapter<Skill>) getListView().getAdapter();

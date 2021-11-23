@@ -114,6 +114,7 @@ public class FeatContextMenu implements OnCreateContextMenuListener, OnMenuItemC
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     private void editFeat() {
         final Intent intent = new Intent(fragment.getActivity(), FeatEditActivity.class);
         final CharacterFeatItem characterFeatItem = (CharacterFeatItem) featListItem;

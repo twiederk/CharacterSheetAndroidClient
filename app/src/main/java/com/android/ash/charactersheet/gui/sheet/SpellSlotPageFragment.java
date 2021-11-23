@@ -204,6 +204,7 @@ public class SpellSlotPageFragment extends PageFragment {
         return contextMenuListener.onContextItemSelected(menuItem);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (REQUEST_CODE == requestCode && Activity.RESULT_OK == resultCode) {

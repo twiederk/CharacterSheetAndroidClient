@@ -39,7 +39,7 @@ public class SaveRollOnClickListener extends RollOnClickListener {
 
     @Override
     protected String getTitle(final Resources resources) {
-        return displayService.getDisplaySave(save);
+        return displayService.getDisplaySave(save) + " Save";
     }
 
     @Override

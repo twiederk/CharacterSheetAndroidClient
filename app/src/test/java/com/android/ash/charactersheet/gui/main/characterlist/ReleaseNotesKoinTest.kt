@@ -42,8 +42,8 @@ class ReleaseNotesKoinTest : KoinTest {
         val activity: AppCompatActivity = mock()
         whenever(activity.resources).thenReturn(resources)
         val dbHelper: DBHelper = mock()
-        whenever(dbHelper.oldVersion).doReturn(76)
-        gameSystemHolder.dndDbHelper = dbHelper
+        whenever(dbHelper.oldVersion).doReturn(77)
+        gameSystemHolder.dndv35DbHelper = dbHelper
 
         // Act
         val releaseNotes = ReleaseNotes(activity).getReleaseNotes()
@@ -57,7 +57,7 @@ class ReleaseNotesKoinTest : KoinTest {
         // Arrange
         val dbHelper: DBHelper = mock()
         whenever(dbHelper.isUpgrade).doReturn(true)
-        gameSystemHolder.dndDbHelper = dbHelper
+        gameSystemHolder.dndv35DbHelper = dbHelper
 
         // Act
         val showReleaseNotes = ReleaseNotes(mock()).isShowReleaseNotes()

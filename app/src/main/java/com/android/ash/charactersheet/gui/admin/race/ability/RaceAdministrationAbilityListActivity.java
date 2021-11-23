@@ -160,6 +160,7 @@ public class RaceAdministrationAbilityListActivity extends LogAppCompatActivity 
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     private void searchAbility() {
         Logger.debug("searchAbility");
         final Intent intent = new Intent(this, AbilitySearchActivity.class);

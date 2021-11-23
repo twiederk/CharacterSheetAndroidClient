@@ -1,5 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.clazz;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +11,8 @@ import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.GameSystemHolder;
@@ -23,11 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The activity displays a list view of all class levels. The level of the class can be decrease and increased. The
@@ -92,6 +93,7 @@ public class ClassLevelEditActivity extends LogAppCompatActivity {
         return adapterClassLevels;
     }
 
+    @SuppressWarnings("deprecation")
     private void setNewClassLevelButton() {
         final Context context = this;
         final Button newClassLevelButton = findViewById(R.id.class_level_new);

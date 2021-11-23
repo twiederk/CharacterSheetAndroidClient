@@ -21,11 +21,6 @@ INSERT INTO attribute VALUES (4,'Wisdom');
 INSERT INTO attribute VALUES (5,'Charisma');
 
 
-INSERT INTO save VALUES (0,'Fortitude');
-INSERT INTO save VALUES (1,'Reflex');
-INSERT INTO save VALUES (2,'Will');
-
-
 INSERT INTO size VALUES (0,'Fine');
 INSERT INTO size VALUES (1,'Diminutive');
 INSERT INTO size VALUES (2,'Tiny');
@@ -40,7 +35,9 @@ INSERT INTO size VALUES (10,'Gargantuan (long)');
 INSERT INTO size VALUES (11,'Colossal (tall)');
 INSERT INTO size VALUES (12,'Colossal (long)');
 
+
 INSERT INTO xp_table VALUES (1, 'Normal');
+
 
 INSERT INTO xp_level VALUES (1, 1, 1, 0);
 INSERT INTO xp_level VALUES (2, 1, 2, 1000);

@@ -7,7 +7,10 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.PreferenceServiceHolder
@@ -50,10 +53,10 @@ class CharacterListActivityEspressoTest : KoinTest {
         scenario.moveToState(Lifecycle.State.RESUMED)
 
         // Assert
-        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Character List - DnD v.3.5"))))
+        onView(isAssignableFrom(Toolbar::class.java)).check(matches(withToolbarTitle(Is.`is`("Character List - DnD 5e"))))
         onView(withId(R.id.favorite_action_button)).check(matches(isDisplayed()))
         onView(withId(R.id.character_name)).check(matches(withText("Belvador the Summoner")))
-        onView(withId(R.id.character_stats)).check(matches(withText("High Elf, Wizard (5)")))
+        onView(withId(R.id.character_stats)).check(matches(withText("Elf, Wizard (5)")))
         onView(withId(R.id.character_list_release_notes)).check(matches(not(isDisplayed())))
         onView(withId(R.id.character_list_game_system_selector)).check(matches(not(isDisplayed())))
 
@@ -75,7 +78,7 @@ class CharacterListActivityEspressoTest : KoinTest {
         val dndDbHolder: DBHelper = mock()
         whenever(dndDbHolder.isUpgrade).thenReturn(true)
         whenever(dndDbHolder.isCreate).thenReturn(false)
-        gameSystemHolder.dndDbHelper = dndDbHolder
+        gameSystemHolder.dnd5eDbHelper = dndDbHolder
         scenario = ActivityScenario.launch(CharacterListActivity::class.java)
 
         // Act
@@ -102,7 +105,7 @@ class CharacterListActivityEspressoTest : KoinTest {
         val dndDbHolder: DBHelper = mock()
         whenever(dndDbHolder.isUpgrade).thenReturn(false)
         whenever(dndDbHolder.isCreate).thenReturn(true)
-        gameSystemHolder.dndDbHelper = dndDbHolder
+        gameSystemHolder.dnd5eDbHelper = dndDbHolder
         scenario = ActivityScenario.launch(CharacterListActivity::class.java)
 
         // Act

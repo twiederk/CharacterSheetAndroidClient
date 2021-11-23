@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
@@ -17,7 +16,6 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion rootProject.kotlin_version
         kotlinCompilerExtensionVersion rootProject.compose_version
     }
     packagingOptions {
@@ -39,8 +37,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 78
-        versionName "4.8.0"
+        versionCode 79
+        versionName "4.9.0-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,12 +52,12 @@ android {
 dependencies {
 
     // App
-    api 'com.d20charactersheet:framework:4.7.0'
+    api 'com.d20charactersheet:framework:4.8.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.fragment:fragment-ktx:1.3.6'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'com.google.android.material:material:1.4.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
     implementation "io.insert-koin:koin-core:$rootProject.koin_version"
@@ -67,7 +65,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:20.0.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.2.4'
     implementation 'com.android.billingclient:billing-ktx:4.0.0'
-    implementation 'com.google.android.gms:play-services-ads:20.4.0'
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
     implementation "androidx.compose.runtime:runtime:$rootProject.compose_version"
     implementation "androidx.navigation:navigation-compose:$rootProject.composeNavigation_version"
     implementation "androidx.compose.ui:ui:$rootProject.compose_version"
@@ -77,18 +75,18 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.compose_version"
     implementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
     implementation "com.google.android.material:compose-theme-adapter:$rootProject.compose_version"
-    implementation 'androidx.work:work-runtime:2.7.0'
+    implementation 'androidx.work:work-runtime:2.7.1'
 
     // Instrumented Testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.test.ext:junit-ktx:$rootProject.junitKtx_version"
     androidTestImplementation 'androidx.test:rules:1.4.0'
-    debugImplementation('androidx.fragment:fragment-testing:1.3.6') { exclude group: 'androidx.test', module: 'core' }
+    debugImplementation('androidx.fragment:fragment-testing:1.4.0') { exclude group: 'androidx.test', module: 'core' }
     debugImplementation "org.assertj:assertj-core:$rootProject.assertj_version"
     androidTestImplementation("io.insert-koin:koin-test:$rootProject.koin_version") { exclude group: 'org.mockito' }
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockito_version"
     androidTestImplementation 'org.mockito:mockito-android:3.5.10'
-    androidTestImplementation 'com.d20charactersheet:framework:4.7.0:tests'
+    androidTestImplementation 'com.d20charactersheet:framework:4.8.0:tests'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.compose_version"
 
     // Unit Testing

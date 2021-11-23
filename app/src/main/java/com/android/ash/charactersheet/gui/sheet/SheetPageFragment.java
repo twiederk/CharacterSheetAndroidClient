@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -14,6 +16,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
@@ -38,11 +43,7 @@ import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays the characters appearance, abilities, saves, money and combat values.
@@ -250,12 +251,14 @@ public class SheetPageFragment extends PageFragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("deprecation")
     private void jumpToImageGallery(final int resultCode) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, resultCode);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent resultIntent) {
         switch (requestCode) {

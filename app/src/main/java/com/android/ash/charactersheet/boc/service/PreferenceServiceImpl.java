@@ -43,7 +43,7 @@ public class PreferenceServiceImpl implements PreferenceService {
         if (BACKGROUND_COLOR.equals(key)) {
             preference = preferenceDao.getInt(key, Color.BLACK);
         } else if (GAME_SYSTEM_TYPE.equals(key)) {
-            preference = preferenceDao.getInt(key, GameSystemType.DNDV35.ordinal());
+            preference = preferenceDao.getInt(key, GameSystemType.DND5E.ordinal());
         } else {
             throw new IllegalArgumentException("Can't get int preference with key: " + key);
         }

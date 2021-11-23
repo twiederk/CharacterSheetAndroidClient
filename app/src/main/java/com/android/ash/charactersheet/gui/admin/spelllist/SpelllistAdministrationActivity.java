@@ -88,6 +88,7 @@ public abstract class SpelllistAdministrationActivity extends FormActivity<Spell
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.menu_activity_spelllist_administration_add_spell) {

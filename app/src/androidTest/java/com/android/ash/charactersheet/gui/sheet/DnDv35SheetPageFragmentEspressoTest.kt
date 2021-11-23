@@ -3,12 +3,19 @@ package com.android.ash.charactersheet.gui.sheet
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.ClassLevel
+import com.d20charactersheet.framework.boc.model.Race
+import com.d20charactersheet.framework.boc.model.Sex
+import com.d20charactersheet.framework.boc.model.XpTable
 import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.boc.service.RuleService
@@ -81,7 +88,9 @@ class DnDv35SheetPageFragmentEspressoTest : KoinTest {
         onView(withId(R.id.appearance_sex)).check(matches(withText("mySex")))
         onView(withId(R.id.appearance_class_level)).check(matches(withText("myClass (1)")))
         onView(withId(R.id.appearance_experience)).check(matches(withText("100 / 1000")))
+
         onView(withId(R.id.money_gold)).check(matches(withText("12,34")))
+
         onView(withId(R.id.attribute_str_value)).check(matches(withText("10")))
         onView(withId(R.id.attribute_str_mod)).check(matches(withText("+1")))
         onView(withId(R.id.attribute_dex_value)).check(matches(withText("11")))
@@ -94,10 +103,21 @@ class DnDv35SheetPageFragmentEspressoTest : KoinTest {
         onView(withId(R.id.attribute_wis_mod)).check(matches(withText("+1")))
         onView(withId(R.id.attribute_cha_value)).check(matches(withText("15")))
         onView(withId(R.id.attribute_cha_mod)).check(matches(withText("+1")))
-        onView(withId(R.id.saving_throw_include)).check(matches(isDisplayed()))
-        onView(withId(R.id.save_fortitude)).check(matches(withText("+1")))
-        onView(withId(R.id.save_reflex)).check(matches(withText("+1")))
-        onView(withId(R.id.save_will)).check(matches(withText("+1")))
+
+        onView(withId(R.id.saves_include)).check(matches(isDisplayed()))
+        onView(withId(R.id.save_strength_label)).check(matches(withText("Fortitude:")))
+        onView(withId(R.id.save_strength)).check(matches(withText("+1")))
+        onView(withId(R.id.save_dexterity_label)).check(matches(withText("Reflex:")))
+        onView(withId(R.id.save_dexterity)).check(matches(withText("+1")))
+        onView(withId(R.id.save_constitution_label)).check(matches(withText("Will:")))
+        onView(withId(R.id.save_constitution)).check(matches(withText("+1")))
+        onView(withId(R.id.save_intelligence_label)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.save_intelligence)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.save_wisdom_label)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.save_wisdom)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.save_charisma_label)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.save_charisma)).check(matches(not(isDisplayed())))
+
         onView(withId(R.id.combat_hitpoints)).check(matches(withText("1 (2)")))
         onView(withId(R.id.combat_proficiency_bonus_row)).check(matches(not(isDisplayed())))
         onView(withId(R.id.combat_armorclass)).check(matches(withText("10")))

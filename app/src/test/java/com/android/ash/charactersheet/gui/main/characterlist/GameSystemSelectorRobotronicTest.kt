@@ -12,13 +12,16 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
+import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
+import org.mockito.Mockito
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -29,6 +32,11 @@ import org.robolectric.annotation.Config
 @Config(manifest = Config.NONE)
 @MediumTest
 class GameSystemSelectorRobotronicTest : KoinTest {
+
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
+    }
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val preferenceServiceHolder: PreferenceServiceHolder by inject()
@@ -48,11 +56,11 @@ class GameSystemSelectorRobotronicTest : KoinTest {
     }
 
     @Test
-    fun isShowGameSystemSelector_dndv35DatabaseIsCreated_showGameSystemSelector() {
+    fun isShowGameSystemSelector_dnd5eDatabaseIsCreated_showGameSystemSelector() {
         // arrange
-        val dndDbHelper: DBHelper = mock()
-        whenever(dndDbHelper.isCreate).thenReturn(true)
-        gameSystemHolder.dndDbHelper = dndDbHelper
+        val dnd5eDbHelper: DBHelper = mock()
+        whenever(dnd5eDbHelper.isCreate).thenReturn(true)
+        gameSystemHolder.dnd5eDbHelper = dnd5eDbHelper
 
         // act
         val showGameSystemSelector = GameSystemSelector(mock()).isShowGameSystemSelector()
@@ -62,11 +70,11 @@ class GameSystemSelectorRobotronicTest : KoinTest {
     }
 
     @Test
-    fun isShowGameSystemSelector_dndv35DatabaseIsCreatedAndGameSystemAlreadySelected_showGameSystemSelector() {
+    fun isShowGameSystemSelector_dnd5eDatabaseIsCreatedAndGameSystemAlreadySelected_showGameSystemSelector() {
         // arrange
-        val dndDbHelper: DBHelper = mock()
-        whenever(dndDbHelper.isCreate).thenReturn(true)
-        gameSystemHolder.dndDbHelper = dndDbHelper
+        val dnd5eDbHelper: DBHelper = mock()
+        whenever(dnd5eDbHelper.isCreate).thenReturn(true)
+        gameSystemHolder.dnd5eDbHelper = dnd5eDbHelper
         val underTest = GameSystemSelector(mock())
         underTest.gameSystemSelected = true
 
@@ -78,11 +86,11 @@ class GameSystemSelectorRobotronicTest : KoinTest {
     }
 
     @Test
-    fun isShowGameSystemSelector_dndv35DatabaseIsNotCreated_hideGameSystemSelector() {
+    fun isShowGameSystemSelector_dnd5eDatabaseIsNotCreated_hideGameSystemSelector() {
         // arrange
-        val dndDbHelper: DBHelper = mock()
-        whenever(dndDbHelper.isCreate).thenReturn(false)
-        gameSystemHolder.dndDbHelper = dndDbHelper
+        val dnd5eDbHelper: DBHelper = mock()
+        whenever(dnd5eDbHelper.isCreate).thenReturn(false)
+        gameSystemHolder.dnd5eDbHelper = dnd5eDbHelper
 
         // act
         val showGameSystemSelector = GameSystemSelector(mock()).isShowGameSystemSelector()
@@ -92,19 +100,22 @@ class GameSystemSelectorRobotronicTest : KoinTest {
     }
 
     @Test
-    fun switchGameSystem_switchFromDnDv35ToDnDv35_hideGameSystemSelectorSetPreferencesNoSwitchNecessary() {
+    fun switchGameSystem_switchFromDnD5eToDnD5e_hideGameSystemSelectorSetPreferencesNoSwitchNecessary() {
         // arrange
         val underTest = GameSystemSelector(mock())
-        gameSystemHolder.gameSystemType = GameSystemType.DNDV35
+        gameSystemHolder.gameSystemType = GameSystemType.DND5E
         preferenceServiceHolder.preferenceService = mock()
 
         // act
-        underTest.switchGameSystem(GameSystemType.DNDV35)
+        underTest.switchGameSystem(GameSystemType.DND5E)
 
         // assert
         assertThat(underTest.gameSystemSelected).isTrue
-        verify(preferenceServiceHolder.preferenceService)?.setInt(PreferenceService.GAME_SYSTEM_TYPE, GameSystemType.DNDV35.ordinal)
-        verify(firebaseAnalytics).logEvent("game_system_select_dndv35", null)
+        verify(preferenceServiceHolder.preferenceService)?.setInt(
+            PreferenceService.GAME_SYSTEM_TYPE,
+            GameSystemType.DND5E.ordinal
+        )
+        verify(firebaseAnalytics).logEvent("game_system_select_dnd5e", null)
     }
 
 }

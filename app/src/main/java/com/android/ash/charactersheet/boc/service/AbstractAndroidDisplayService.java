@@ -2,6 +2,8 @@ package com.android.ash.charactersheet.boc.service;
 
 import android.content.res.Resources;
 
+import androidx.annotation.NonNull;
+
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.AbilityType;
@@ -41,23 +43,25 @@ import com.d20charactersheet.framework.boc.service.AbstractDisplayService;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Converts data into a displayable string.
  */
-public class AndroidDisplayServiceImpl extends AbstractDisplayService {
+public abstract class AbstractAndroidDisplayService extends AbstractDisplayService {
 
-    private final Resources resources;
+    protected final Resources resources;
 
     /**
      * Creates a DisplayManager instance with the given context.
      *
      * @param resources The resources containing the display information.
      */
-    public AndroidDisplayServiceImpl(final Resources resources) {
+    public AbstractAndroidDisplayService(final Resources resources) {
         super();
         this.resources = resources;
     }
@@ -519,20 +523,6 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
     }
 
     @Override
-    public String getDisplaySave(final Save save) {
-        switch (save) {
-            case FORTITUDE:
-                return resources.getString(R.string.save_fortitude);
-            case REFLEX:
-                return resources.getString(R.string.save_reflex);
-            case WILL:
-                return resources.getString(R.string.save_will);
-            default:
-                throw new IllegalArgumentException("Can't determine save: " + save);
-        }
-    }
-
-    @Override
     public String getDisplayCastingTime(final CastingTime castingTime) {
         switch (castingTime) {
             case NONE:
@@ -812,4 +802,10 @@ public class AndroidDisplayServiceImpl extends AbstractDisplayService {
         }
     }
 
+    @NonNull
+    @Override
+    public String getDisplaySaves(@NonNull EnumSet<Save> saves) {
+        List<String> joinedString = saves.stream().map(this::getDisplaySave).collect(Collectors.toList());
+        return String.join(", ", joinedString);
+    }
 }

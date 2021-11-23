@@ -25,7 +25,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
     }
 
     fun isShowReleaseNotes(): Boolean {
-        if (gameSystemHolder.dndDbHelper?.isUpgrade == true
+        if (gameSystemHolder.dndv35DbHelper?.isUpgrade == true
             || gameSystemHolder.dnd5eDbHelper?.isUpgrade == true
             || gameSystemHolder.pathfinderDbHelper?.isUpgrade == true
             && !showedReleaseNotes
@@ -53,7 +53,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
 
 
     internal fun getReleaseNotes(): String {
-        val dbHelper: DBHelper? = gameSystemHolder.dndDbHelper
+        val dbHelper: DBHelper? = gameSystemHolder.dndv35DbHelper
         val releaseNotes = createReleaseNotesArray(activity.resources)
         return releaseNotes
             .filterIndexed { index, _ -> index >= dbHelper?.oldVersion?.minus(1) ?: index }
@@ -139,6 +139,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
         resources.getString(R.string.release_notes_4_7_0), //
         resources.getString(R.string.release_notes_4_7_1), //
         resources.getString(R.string.release_notes_4_8_0), //
+        resources.getString(R.string.release_notes_4_9_0), //
     )
 
 

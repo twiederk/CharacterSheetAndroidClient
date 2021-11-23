@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.view.Menu;
@@ -26,8 +28,6 @@ import com.d20charactersheet.framework.boc.service.ExportImportService;
 
 import java.io.File;
 import java.util.List;
-
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
 
 /**
  * Displays equipment to export. The weapons, armor and goods are displayed in different tabs. Each equipment item is
@@ -163,6 +163,7 @@ public class ExportEquipmentActivity extends AbstractExportActivity {
     }
 
 
+    @SuppressWarnings("unchecked")
     private <T extends Item> List<T> getSelectedItems(final int listViewId) {
         final ListView listView = findViewById(listViewId);
         final ExportItemListAdapter<T> adapter = (ExportItemListAdapter<T>) listView.getAdapter();

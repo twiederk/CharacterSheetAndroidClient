@@ -108,25 +108,46 @@
                 android:orientation="vertical" >
 
                 <CheckBox
-                    android:id="@+id/character_class_administration_save_fortitide"
+                    android:id="@+id/character_class_administration_save_strength"
                     style="@style/AppTheme"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_fortitude" />
+                    android:text="@string/save_strength" />
 
                 <CheckBox
-                    android:id="@+id/character_class_administration_save_reflex"
+                    android:id="@+id/character_class_administration_save_dexterity"
                     style="@style/AppTheme"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_reflex" />
+                    android:text="@string/save_dexterity" />
 
                 <CheckBox
-                    android:id="@+id/character_class_administration_save_will"
+                    android:id="@+id/character_class_administration_save_constitution"
                     style="@style/AppTheme"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_will" />
+                    android:text="@string/save_constitution" />
+
+                <CheckBox
+                    android:id="@+id/character_class_administration_save_intelligence"
+                    style="@style/AppTheme"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_intelligence" />
+
+                <CheckBox
+                    android:id="@+id/character_class_administration_save_wisdom"
+                    style="@style/AppTheme"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_wisdom" />
+
+                <CheckBox
+                    android:id="@+id/character_class_administration_save_charisma"
+                    style="@style/AppTheme"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_charisma" />
             </LinearLayout>
         </TableRow>
 

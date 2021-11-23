@@ -1,5 +1,8 @@
 package com.android.ash.charactersheet.gui.admin.clazz;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,9 +35,6 @@ import java.util.List;
 import java.util.Objects;
 
 import kotlin.Lazy;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The form to create or edit an character class. It contains the name, alignments, hit die, base attack bonus, high
@@ -180,8 +180,14 @@ public abstract class CharacterClassAdministrationActivity extends FormActivity<
 
     private EnumSet<Save> getSaves() {
         final EnumSet<Save> saves = EnumSet.noneOf(Save.class);
-        final int[] resourceIds = {R.id.character_class_administration_save_fortitide,
-                R.id.character_class_administration_save_reflex, R.id.character_class_administration_save_will};
+        final int[] resourceIds = {
+                R.id.character_class_administration_save_strength,
+                R.id.character_class_administration_save_dexterity,
+                R.id.character_class_administration_save_constitution,
+                R.id.character_class_administration_save_intelligence,
+                R.id.character_class_administration_save_wisdom,
+                R.id.character_class_administration_save_charisma,
+        };
         for (final Save save : Save.values()) {
             if (isChecked(resourceIds[save.ordinal()])) {
                 saves.add(save);

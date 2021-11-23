@@ -26,12 +26,19 @@
     <string name="appearance_xptable_label">XP Table:</string>
     <string name="appearance_experience_label">Exp:</string>
     <string name="save_title">Saves</string>
+    <string name="save_strength_label">Strength:</string>
+    <string name="save_dexterity_label">Dexterity:</string>
+    <string name="save_constitution_label">Constitution:</string>
+    <string name="save_intelligence_label">Intelligence:</string>
+    <string name="save_wisdom_label">Wisdom:</string>
+    <string name="save_charisma_label">Charisma:</string>
     <string name="save_fortitude_label">Fortitude:</string>
     <string name="save_reflex_label">Reflex:</string>
     <string name="save_will_label">Will:</string>
     <string name="save_name">Name</string>
-    <string name="save_base_save">Base</string>
-    <string name="save_attribute_modifier">Attribute</string>
+    <string name="save_heading_base">Base</string>
+    <string name="save_heading_proficiency">Prof.</string>
+    <string name="save_attribute_modifier">Attr.</string>
     <string name="save_modifier">Misc</string>
     <string name="class_level_edit_new">New Class</string>
     <string name="class_level_edit_title">Edit Class Level</string>
@@ -83,7 +90,7 @@
     <string name="combat_hitpoints_label">HP:</string>
     <string name="combat_max_hitpoints_label">max. HP:</string>
     <string name="combat_armorclass_label">AC:</string>
-    <string name="combat_proficiency_bonus_label">Proficiency bonus:</string>
+    <string name="combat_proficiency_bonus_label">Proficiency:</string>
     <string name="combat_flatfooted_armorclass_label">Flat-Footed:</string>
     <string name="combat_touch_armorclass_label">Touch:</string>
     <string name="combat_speed_label">Speed:</string>
@@ -96,7 +103,6 @@
     <string name="create_player_label">Player</string>
     <string name="create_gender_label">Gender</string>
     <string name="create_alignment_label">Align</string>
-    <string name="create_class_label">Class</string>
     <string name="create_button_label">Create</string>
 
     <!-- SkillPageFragment -->
@@ -414,7 +420,7 @@
     <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
     <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5\nThanks to Michel Chartrand for entering the races of the Advanced Races Guide</string>
     <string name="about_ogl">Open Gaming Licence</string>
-    <string name="about_copyright">Copyright &#169; 2009&#8211;2021 Torsten Wiederkehr\nAll rights reserved</string>
+    <string name="about_copyright">Copyright &#169; 2009&#8211;2022 Torsten Wiederkehr\nAll rights reserved</string>
     <string name="about_image_hint">Icon of application</string>
 
     <!-- OpenGamingLicenceActivity -->
@@ -674,6 +680,12 @@
     <string name="save_fortitude">Fortitude</string>
     <string name="save_reflex">Reflex</string>
     <string name="save_will">Will</string>
+    <string name="save_strength">Strength</string>
+    <string name="save_dexterity">Dexterity</string>
+    <string name="save_constitution">Constitution</string>
+    <string name="save_intelligence">Intelligence</string>
+    <string name="save_wisdom">Wisdom</string>
+    <string name="save_charisma">Charisma</string>
 
     <!-- RULE ERRORS -->
     <string name="attribute_value_not_in_range">Attribute value must be between 1 and 99.</string>
@@ -989,5 +1001,6 @@
     <string name="release_notes_4_7_0">Release 4.7.0\n- Added creation of weapon attacks to character creator.\n\n</string>
     <string name="release_notes_4_7_1">Release 4.7.1\n- Bug fix: Fixed the crash on startup on Android 12.\n\n</string>
     <string name="release_notes_4_8_0">Release 4.8.0\n- Added screen for class selection to character creation.\n\n</string>
+    <string name="release_notes_4_9_0">Release 4.9.0\n- Added saves to Dungeons &amp; Dragons 5th edition.\n- Bug fix: Fixed display of weapons with weight of zero in starter packs.\n\n</string>
 
 </resources>

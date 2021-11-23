@@ -28,14 +28,17 @@ class GameSystemSelector(val activity: AppCompatActivity) : KoinComponent {
         }
     }
 
-    internal fun isShowGameSystemSelector(): Boolean = gameSystemHolder.dndDbHelper?.isCreate == true && !gameSystemSelected
+    internal fun isShowGameSystemSelector(): Boolean =
+        gameSystemHolder.dnd5eDbHelper?.isCreate == true && !gameSystemSelected
 
     private fun show() {
-        activity.findViewById<View>(R.id.character_list_game_system_selector)?.visibility = View.VISIBLE
+        activity.findViewById<View>(R.id.character_list_game_system_selector)?.visibility =
+            View.VISIBLE
     }
 
     private fun hide() {
-        activity.findViewById<View>(R.id.character_list_game_system_selector)?.visibility = View.INVISIBLE
+        activity.findViewById<View>(R.id.character_list_game_system_selector)?.visibility =
+            View.INVISIBLE
     }
 
     private fun setButtons(view: View) {

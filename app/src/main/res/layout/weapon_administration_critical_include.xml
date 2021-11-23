@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     tools:keep="@layout/weapon_administration_critical_include">
 
-    <TableRow android:importantForAutofill="noExcludeDescendants">
+    <TableRow
+        android:importantForAutofill="noExcludeDescendants"
+        tools:ignore="UselessParent">
 
         <EditText
             android:id="@+id/weapon_administration_critical_hit"

@@ -2,7 +2,12 @@ package com.android.ash.charactersheet.gui.sheet
 
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.boc.model.GameSystemType
-import com.android.ash.charactersheet.gui.sheet.combat.*
+import com.android.ash.charactersheet.gui.sheet.combat.CombatEditPanel
+import com.android.ash.charactersheet.gui.sheet.combat.CombatPanel
+import com.android.ash.charactersheet.gui.sheet.combat.DnD5eCombatEditPanel
+import com.android.ash.charactersheet.gui.sheet.combat.DnD5eCombatPanel
+import com.android.ash.charactersheet.gui.sheet.combat.DnDv35CombatEditPanel
+import com.android.ash.charactersheet.gui.sheet.combat.DnDv35CombatPanel
 import com.android.ash.charactersheet.gui.sheet.save.DnD5eSavePanel
 import com.android.ash.charactersheet.gui.sheet.save.DnDv35SavePanel
 import com.android.ash.charactersheet.gui.sheet.save.SavePanel
@@ -23,6 +28,12 @@ class SheetPanelFactory : KoinComponent {
         when (gameSystemHolder.gameSystemType) {
             GameSystemType.DND5E -> DnD5eSavePanel()
             else -> DnDv35SavePanel()
+        }
+
+    fun createSaveEditPanel(): SaveEditPanel =
+        when (gameSystemHolder.gameSystemType) {
+            GameSystemType.DND5E -> DnD5eSaveEditPanel()
+            else -> DnDv35SaveEditPanel()
         }
 
     fun createCombatEditPanel(): CombatEditPanel =

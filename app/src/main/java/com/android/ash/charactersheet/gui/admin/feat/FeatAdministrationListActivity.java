@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.feat;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -15,8 +17,6 @@ import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.util.FeatComparator;
 
 import java.util.List;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Displays all feats. The option menu allows to call the create feat activity. The context menu of each feat allows to
@@ -59,7 +59,7 @@ public class FeatAdministrationListActivity extends AdministrationListActivity<F
         return (Feat) getListView().getAdapter().getItem(menuInfo.position);
     }
 
-    @SuppressWarnings("SameReturnValue")
+    @SuppressWarnings({"SameReturnValue", "unchecked"})
     private boolean deleteFeat(final Feat feat) {
         gameSystem.deleteFeat(feat);
         final ArrayAdapter<Feat> adapter = (ArrayAdapter<Feat>) getListView().getAdapter();

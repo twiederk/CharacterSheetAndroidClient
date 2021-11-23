@@ -1,18 +1,18 @@
 package com.android.ash.charactersheet.gui.sheet.spellslot;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 
+import androidx.fragment.app.Fragment;
+
 import com.android.ash.charactersheet.gui.sheet.SpellSlotPageFragment;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.service.CharacterService;
-
-import androidx.fragment.app.Fragment;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * Listens for clicks on spell slot list. Click on spell level expands or collapse spell level. Click on uncast spell
@@ -64,6 +64,7 @@ public class SpellSlotOnItemClickListener implements OnItemClickListener {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private void startSpellSlotActivity(final int spellSlotId) {
         final Intent intent = new Intent(fragment.getActivity(), SpellSlotActivity.class);
         intent.putExtra(INTENT_EXTRA_DATA_OBJECT, spellSlotId);

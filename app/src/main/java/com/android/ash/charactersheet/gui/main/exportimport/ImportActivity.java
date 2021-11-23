@@ -1,5 +1,10 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -54,11 +59,6 @@ import java.util.List;
 import java.util.Objects;
 
 import kotlin.Lazy;
-
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Allows to select a file to import characters. Displays the import directory and all files starting with
@@ -193,6 +193,7 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
         return getResources().getString(R.string.import_message_import_failure) + COLON + text;
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private void displayImportReports(final List importReports) {
         setContentView(R.layout.activity_import_reports);
         importReports.sort(new ImportReportComparator());

@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.android.ash.charactersheet.GameSystemHolder
 import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.Save
+import java.util.*
 
 class ClassScreenViewModel(private val gameSystemHolder: GameSystemHolder) : ViewModel() {
 
@@ -25,5 +27,7 @@ class ClassScreenViewModel(private val gameSystemHolder: GameSystemHolder) : Vie
         classList = gameSystem.allCharacterClasses.sortedBy { it.name }
         clazz = classList[0]
     }
+
+    fun getDisplaySaves(saves: EnumSet<Save>) = gameSystem.displayService.getDisplaySaves(saves)
 
 }

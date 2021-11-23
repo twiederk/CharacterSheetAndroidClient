@@ -23,12 +23,11 @@ class ClassScreenComposeTest {
     @JvmField
     val composeTestRule = createComposeRule()
 
-
     private val clazzDnD5e = CharacterClass().apply {
         id = 1
         name = "myDnD5eClass"
         hitDie = Die.D8
-        saves = EnumSet.allOf(Save::class.java)
+        saves = EnumSet.of(Save.STRENGTH, Save.CONSTITUTION)
         baseAttackBonus = BaseAttackBonus.POOR
         skillPointsPerLevel = -1
     }
@@ -37,7 +36,7 @@ class ClassScreenComposeTest {
         id = 1
         name = "myDnDv35Class"
         hitDie = Die.D10
-        saves = EnumSet.of(Save.FORTITUDE)
+        saves = EnumSet.of(Save.STRENGTH, Save.CONSTITUTION)
         baseAttackBonus = BaseAttackBonus.GOOD
         skillPointsPerLevel = 4
     }
@@ -45,7 +44,7 @@ class ClassScreenComposeTest {
     @Test
     fun display_classScreenDnD5e() {
 
-        // Act
+        // act
         composeTestRule.setContent {
             D20CharacterSheetTheme {
                 ClassScreen(
@@ -53,17 +52,20 @@ class ClassScreenComposeTest {
                     classList = listOf(clazzDnD5e),
                     gameSystemType = GameSystemType.DND5E,
                     getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+                    getDisplaySaves = { "Strength, Constitution" },
                     onClassChange = { },
                     onNavigateToPrevious = { },
                     onNavigateToNext = { },
-                ) { }
+                    onCreateCharacter = { })
             }
         }
+
+        Thread.sleep(5000)
 
         // assert
         composeTestRule.onNodeWithText("myDnD5eClass").assertIsDisplayed()
         composeTestRule.onNodeWithText("Hit Die: D8").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Saves: [FORTITUDE, REFLEX, WILL]").assertDoesNotExist()
+        composeTestRule.onNodeWithText("Saves: Strength, Constitution").assertIsDisplayed()
         composeTestRule.onNodeWithText("Base Attack Bonus: POOR").assertDoesNotExist()
         composeTestRule.onNodeWithText("Skill Points Per Level: -1").assertDoesNotExist()
 
@@ -75,7 +77,7 @@ class ClassScreenComposeTest {
     @Test
     fun display_classScreenDnDv35() {
 
-        // Act
+        // act
         composeTestRule.setContent {
             D20CharacterSheetTheme {
                 ClassScreen(
@@ -83,17 +85,18 @@ class ClassScreenComposeTest {
                     classList = listOf(clazzDnDv35),
                     gameSystemType = GameSystemType.DNDV35,
                     getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+                    getDisplaySaves = { "Fortitude, Will" },
                     onClassChange = { },
                     onNavigateToPrevious = { },
                     onNavigateToNext = { },
-                ) { }
+                    onCreateCharacter = { })
             }
         }
 
         // assert
         composeTestRule.onNodeWithText("myDnDv35Class").assertIsDisplayed()
         composeTestRule.onNodeWithText("Hit Die: D10").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Saves: [FORTITUDE]").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Saves: Fortitude, Will").assertIsDisplayed()
         composeTestRule.onNodeWithText("Base Attack Bonus: GOOD").assertIsDisplayed()
         composeTestRule.onNodeWithText("Skill Points Per Level: 4").assertIsDisplayed()
 
@@ -105,7 +108,7 @@ class ClassScreenComposeTest {
     @Test
     fun navigate_toNextScreen() {
 
-        // Arrange
+        // arrange
         val onNavigateToNext = mock<() -> Unit>()
 
         composeTestRule.setContent {
@@ -115,11 +118,11 @@ class ClassScreenComposeTest {
                     classList = listOf(clazzDnDv35),
                     gameSystemType = GameSystemType.DNDV35,
                     getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+                    getDisplaySaves = { "" },
                     onClassChange = { },
                     onNavigateToPrevious = { },
                     onNavigateToNext = onNavigateToNext,
-                    onCreateCharacter = { },
-                )
+                    onCreateCharacter = { })
             }
         }
 
@@ -133,7 +136,7 @@ class ClassScreenComposeTest {
     @Test
     fun navigate_toPreviousScreen() {
 
-        // Arrange
+        // arrange
         val onNavigateToPrevious = mock<() -> Unit>()
 
         composeTestRule.setContent {
@@ -143,11 +146,11 @@ class ClassScreenComposeTest {
                     classList = listOf(clazzDnDv35),
                     gameSystemType = GameSystemType.DNDV35,
                     getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+                    getDisplaySaves = { "" },
                     onClassChange = { },
                     onNavigateToPrevious = onNavigateToPrevious,
                     onNavigateToNext = { },
-                    onCreateCharacter = { },
-                )
+                    onCreateCharacter = { })
             }
         }
 
@@ -161,7 +164,7 @@ class ClassScreenComposeTest {
     @Test
     fun createCharacter() {
 
-        // Arrange
+        // arrange
         val onCreateCharacter = mock<() -> Unit>()
 
         composeTestRule.setContent {
@@ -171,10 +174,11 @@ class ClassScreenComposeTest {
                     classList = listOf(clazzDnDv35),
                     gameSystemType = GameSystemType.DNDV35,
                     getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+                    getDisplaySaves = { "" },
                     onClassChange = { },
                     onNavigateToPrevious = { },
                     onNavigateToNext = { },
-                    onCreateCharacter = onCreateCharacter,
+                    onCreateCharacter = onCreateCharacter
                 )
             }
         }
