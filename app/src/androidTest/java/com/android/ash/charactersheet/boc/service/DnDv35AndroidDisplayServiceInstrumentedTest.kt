@@ -44,4 +44,17 @@ class DnDv35AndroidDisplayServiceInstrumentedTest {
         assertThat(save).isEqualTo("Fortitude, Will")
     }
 
+    @Test
+    fun getDisplaySave_intelligenceAndWisdomAndCharismaSave_returnListOfSaves() {
+
+        // arrange
+        val saves = EnumSet.of(Save.INTELLIGENCE, Save.WISDOM, Save.CHARISMA)
+
+        // act
+        val save = displayService.getDisplaySaves(saves)
+
+        // assert
+        assertThat(save).isEqualTo("Intelligence, Wisdom, Charisma")
+    }
+
 }

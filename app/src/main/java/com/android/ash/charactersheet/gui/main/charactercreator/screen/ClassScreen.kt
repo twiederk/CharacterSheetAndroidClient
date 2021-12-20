@@ -25,11 +25,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -114,16 +114,12 @@ fun ClassList(
 ) {
     Column {
         for (clazz in classList) {
-            val selected = classSelected == clazz
-            val imageBitmap = getBitmap(clazz.imageId).asImageBitmap()
-            val saves = getDisplaySaves(clazz.saves)
-
             ClassCard(
                 clazz = clazz,
-                selected = selected,
+                selected = (classSelected == clazz),
                 gameSystemTyp = gameSystemType,
-                imageBitmap = imageBitmap,
-                saves = saves,
+                getBitmap = getBitmap,
+                getDisplaySaves = getDisplaySaves,
                 onClassChange = onClassChange
             )
             Divider(color = Color.Black)
@@ -168,13 +164,15 @@ fun ClassCard(
     clazz: CharacterClass,
     selected: Boolean,
     gameSystemTyp: GameSystemType,
-    imageBitmap: ImageBitmap,
-    saves: String,
+    getBitmap: (Int) -> Bitmap,
+    getDisplaySaves: (EnumSet<Save>) -> String,
     onClassChange: (CharacterClass) -> Unit
 ) {
     val backgroundColor by animateColorAsState(
         if (selected) MaterialTheme.colors.primary else Color.Transparent
     )
+    val imageBitmap = remember { getBitmap(clazz.imageId).asImageBitmap() }
+    val displaySaves = remember { getDisplaySaves(clazz.saves) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -198,7 +196,7 @@ fun ClassCard(
                 .padding(start = 8.dp)
                 .align(Alignment.CenterVertically),
             clazz = clazz,
-            saves = saves,
+            saves = displaySaves,
             gameSystemType = gameSystemTyp,
         )
     }
@@ -263,8 +261,8 @@ fun ClassCardPreview() {
             },
             selected = false,
             gameSystemTyp = GameSystemType.DNDV35,
-            imageBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888).asImageBitmap(),
-            saves = "Fortitude, Will",
+            getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+            getDisplaySaves = { "Strength, Constitution" },
             onClassChange = { }
         )
     }
@@ -287,8 +285,8 @@ fun DnD5eClassCardPreview() {
             },
             selected = false,
             gameSystemTyp = GameSystemType.DND5E,
-            imageBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888).asImageBitmap(),
-            saves = "Strength, Constitution",
+            getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
+            getDisplaySaves = { "Strength, Constitution" },
             onClassChange = { }
         )
     }

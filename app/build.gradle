@@ -37,8 +37,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 79
-        versionName "4.9.0"
+        versionCode 80
+        versionName "4.9.1-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -52,7 +52,7 @@ android {
 dependencies {
 
     // App
-    api 'com.d20charactersheet:framework:4.8.0'
+    api 'com.d20charactersheet:framework:4.8.1'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -86,7 +86,7 @@ dependencies {
     androidTestImplementation("io.insert-koin:koin-test:$rootProject.koin_version") { exclude group: 'org.mockito' }
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockito_version"
     androidTestImplementation 'org.mockito:mockito-android:3.5.10'
-    androidTestImplementation 'com.d20charactersheet:framework:4.8.0:tests'
+    androidTestImplementation 'com.d20charactersheet:framework:4.8.1:tests'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.compose_version"
 
     // Unit Testing

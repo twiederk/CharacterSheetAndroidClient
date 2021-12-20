@@ -25,11 +25,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -68,7 +68,7 @@ fun RaceScreen(
                             .padding(bottom = 80.dp)
                     ) {
                         RaceList(
-                            raceSelected = race,
+                            selectedRace = race,
                             raceList = raceList,
                             onRaceChange = onRaceChange,
                             getBitmap = getBitmap
@@ -135,22 +135,17 @@ fun RaceScreenPreview() {
 
 @Composable
 fun RaceList(
-    raceSelected: Race,
+    selectedRace: Race,
     raceList: List<Race>,
     onRaceChange: (Race) -> Unit,
     getBitmap: (Int) -> Bitmap
 ) {
     Column {
         for (race in raceList) {
-            val selected = (raceSelected == race)
-            val imageBitmap = getBitmap(race.imageId).asImageBitmap()
-            val abilityScoreIncrease = getAbilityScoreIncrease(race.abilities)
-
             RaceCard(
                 race = race,
-                selected = selected,
-                imageBitmap = imageBitmap,
-                abilityScoreIncrease = abilityScoreIncrease,
+                selected = (selectedRace == race),
+                getBitmap = getBitmap,
                 onRaceChange = onRaceChange
             )
             Divider(color = Color.Black)
@@ -164,13 +159,14 @@ fun RaceCard(
     modifier: Modifier = Modifier,
     race: Race,
     selected: Boolean,
-    imageBitmap: ImageBitmap,
-    abilityScoreIncrease: String,
+    getBitmap: (Int) -> Bitmap,
     onRaceChange: (Race) -> Unit
 ) {
     val backgroundColor by animateColorAsState(
         if (selected) MaterialTheme.colors.primary else Color.Transparent
     )
+    val abilityScoreIncrease = remember { getAbilityScoreIncrease(race.abilities) }
+    val imageBitmap = remember { getBitmap(race.imageId).asImageBitmap() }
     Row(
         modifier
             .fillMaxWidth()
@@ -229,8 +225,7 @@ fun RaceCardPreview() {
                 this.abilities = abilities
             },
             selected = false,
-            imageBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888).asImageBitmap(),
-            abilityScoreIncrease = getAbilityScoreIncrease(abilities),
+            getBitmap = { Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888) },
             onRaceChange = { }
         )
     }

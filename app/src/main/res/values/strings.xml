@@ -1002,5 +1002,6 @@
     <string name="release_notes_4_7_1">Release 4.7.1\n- Bug fix: Fixed the crash on startup on Android 12.\n\n</string>
     <string name="release_notes_4_8_0">Release 4.8.0\n- Added screen for class selection to character creation.\n\n</string>
     <string name="release_notes_4_9_0">Release 4.9.0\n- Added saves to Dungeons &amp; Dragons 5th edition.\n- Bug fix: Fixed display of weapons with weight of zero in starter packs.\n\n</string>
+    <string name="release_notes_4_9_1">Release 4.9.1\n- Bug fix: Fixed character creation of Dungeons &amp; Dragons v.3.5 and Pathfinder</string>
 
 </resources>

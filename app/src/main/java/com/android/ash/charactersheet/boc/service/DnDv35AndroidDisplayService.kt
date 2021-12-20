@@ -11,7 +11,9 @@ class DnDv35AndroidDisplayService(resources: Resources) : AbstractAndroidDisplay
             Save.STRENGTH -> resources.getString(R.string.save_fortitude)
             Save.DEXTERITY -> resources.getString(R.string.save_reflex)
             Save.CONSTITUTION -> resources.getString(R.string.save_will)
-            else -> throw IllegalArgumentException("Can't determine save: $save")
+            Save.INTELLIGENCE -> resources.getString(R.string.save_intelligence)
+            Save.WISDOM -> resources.getString(R.string.save_wisdom)
+            Save.CHARISMA -> resources.getString(R.string.save_charisma)
         }
     }
 

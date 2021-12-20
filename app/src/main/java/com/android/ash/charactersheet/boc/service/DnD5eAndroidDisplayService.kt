@@ -14,7 +14,6 @@ class DnD5eAndroidDisplayService(resources: Resources) : AbstractAndroidDisplayS
             Save.INTELLIGENCE -> resources.getString(R.string.save_intelligence)
             Save.WISDOM -> resources.getString(R.string.save_wisdom)
             Save.CHARISMA -> resources.getString(R.string.save_charisma)
-            else -> throw IllegalArgumentException("Can't determine save: $save")
         }
     }
 
