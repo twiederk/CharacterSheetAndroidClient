@@ -18,8 +18,8 @@ class DnD5eFragmentPager(fragmentManager: FragmentManager?, resources: Resources
                 FeatPageFragment(), //
                 EquipmentPageFragment(), //
                 NotePageFragment(), //
-                ComingSoonPageFragment(), //
-                ComingSoonPageFragment(), //
+                KnownSpellPageFragment(),  //
+                SpellSlotPageFragment(), //
                 ComingSoonPageFragment()
         ),
 
@@ -31,9 +31,9 @@ class DnD5eFragmentPager(fragmentManager: FragmentManager?, resources: Resources
                 resources.getString(R.string.page_feat_title),  //
                 resources.getString(R.string.page_equip_title),  //
                 resources.getString(R.string.page_note_title),  //
-                resources.getString(R.string.page_skill_title),  //
                 resources.getString(R.string.page_known_spell_title),  //
-                resources.getString(R.string.page_spell_slot_title)
+                resources.getString(R.string.page_spell_slot_title),
+                resources.getString(R.string.page_skill_title)  //
         ),
 
         fragmentManager

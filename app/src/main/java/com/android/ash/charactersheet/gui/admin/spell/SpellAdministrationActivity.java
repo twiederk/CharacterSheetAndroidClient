@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.admin.spell;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.widget.SpinnerAdapter;
 
 import com.android.ash.charactersheet.GameSystemHolder;
@@ -8,7 +10,6 @@ import com.android.ash.charactersheet.gui.util.FormActivity;
 import com.android.ash.charactersheet.gui.widget.EnumSpinnerAdapter;
 import com.d20charactersheet.framework.boc.model.CastingTime;
 import com.d20charactersheet.framework.boc.model.Descriptor;
-import com.d20charactersheet.framework.boc.model.Range;
 import com.d20charactersheet.framework.boc.model.School;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellResistance;
@@ -22,8 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Mask to administer spells.
@@ -51,7 +50,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
         setDescriptorCheckBoxes();
         setComponentCheckBoxes();
         setCastingTimeSpinner();
-        setRangeSpinner();
+        setText(form.getRange(), R.id.spell_administration_range);
         setText(form.getEffect(), R.id.spell_administration_effect);
         setText(form.getDuration(), R.id.spell_administration_duration);
         setText(form.getSavingThrow(), R.id.spell_administration_savingthrow);
@@ -206,22 +205,6 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
         setSpinner(R.id.spell_administration_castingtime, castingTimeAdapter, position);
     }
 
-    private void setRangeSpinner() {
-        final List<Range> range = Arrays.asList(Range.values());
-        Collections.sort(range);
-        final List<Enum<?>> sortedRanges = new ArrayList<>(range);
-        final SpinnerAdapter rangeAdapter = new EnumSpinnerAdapter(this, displayService, sortedRanges) {
-
-            @Override
-            protected String getText(final Enum<?> enumeration) {
-                return displayService.getDisplayRange((Range) enumeration);
-            }
-
-        };
-        final int position = getEnumPosition(sortedRanges, form.getRange());
-        setSpinner(R.id.spell_administration_range, rangeAdapter, position);
-    }
-
     private void setSpellResistanceSpinner() {
         final List<SpellResistance> spellResistance = Arrays.asList(SpellResistance.values());
         Collections.sort(spellResistance);
@@ -235,7 +218,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
             }
 
         };
-        final int position = getEnumPosition(sortedSpellResistance, form.getRange());
+        final int position = getEnumPosition(sortedSpellResistance, form.getSpellResistance());
         setSpinner(R.id.spell_administration_spellresistance, spellResistanceAdapter, position);
     }
 
@@ -252,7 +235,7 @@ public abstract class SpellAdministrationActivity extends FormActivity<Spell> {
         form.setDivineFocus(isChecked(R.id.spell_administration_component_divinefocus));
         form.setXpCost(isChecked(R.id.spell_administration_component_xpcost));
         form.setCastingTime((CastingTime) getSelectedItemOfSpinner(R.id.spell_administration_castingtime));
-        form.setRange((Range) getSelectedItemOfSpinner(R.id.spell_administration_range));
+        form.setRange(getTextOfTextView(R.id.spell_administration_range));
         form.setEffect(getTextOfTextView(R.id.spell_administration_effect));
         form.setDuration(getTextOfTextView(R.id.spell_administration_duration));
         form.setSavingThrow(getTextOfTextView(R.id.spell_administration_savingthrow));

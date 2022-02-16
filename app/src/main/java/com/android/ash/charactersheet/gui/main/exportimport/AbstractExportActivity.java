@@ -1,10 +1,16 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
@@ -18,11 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class for export activities. Displays export directory. Provides template pattern to allow export of different
@@ -91,7 +93,7 @@ public abstract class AbstractExportActivity extends LogAppCompatActivity {
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_abstract_export, menu);
         return true;
     }

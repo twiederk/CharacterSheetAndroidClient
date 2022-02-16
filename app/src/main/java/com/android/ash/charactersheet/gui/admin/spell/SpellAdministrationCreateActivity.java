@@ -3,7 +3,6 @@ package com.android.ash.charactersheet.gui.admin.spell;
 import com.android.ash.charactersheet.R;
 import com.d20charactersheet.framework.boc.model.CastingTime;
 import com.d20charactersheet.framework.boc.model.Descriptor;
-import com.d20charactersheet.framework.boc.model.Range;
 import com.d20charactersheet.framework.boc.model.School;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellResistance;
@@ -29,7 +28,7 @@ public class SpellAdministrationCreateActivity extends SpellAdministrationActivi
         spell.setSubSchool(SubSchool.NONE);
         spell.setDescriptors(new Descriptor[] { Descriptor.NONE });
         spell.setCastingTime(CastingTime.ONE_STANDARD_ACTION);
-        spell.setRange(Range.CLOSE);
+        spell.setRange("Close (25 ft. + 5 ft./2 levels)");
         spell.setEffect(EMPTY_STRING);
         spell.setDuration(EMPTY_STRING);
         spell.setSavingThrow(EMPTY_STRING);

@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet.item;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -7,6 +9,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.BaseCharacterSheetActivity;
@@ -24,8 +28,6 @@ import java.util.List;
 import java.util.Objects;
 
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class to expand activities to edit items from. Displays items in a list view. The number of each item can be
@@ -97,7 +99,7 @@ public abstract class ItemEditActivity extends BaseCharacterSheetActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_item_edit, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_activity_item_edit_magic_item);
         final CheckBox magicItemCheckBox = (CheckBox) menuItem.getActionView();

@@ -19,15 +19,10 @@ android {
         kotlinCompilerExtensionVersion rootProject.compose_version
     }
     packagingOptions {
-        excludes += "/META-INF/AL2.0"
-        excludes += "/META-INF/LGPL2.1"
-        // for byte-buddy
-        exclude "META-INF/licenses/ASM"
-        pickFirst "win32-x86-64/attach_hotspot_windows.dll"
-        pickFirst "win32-x86/attach_hotspot_windows.dll"
-    }
-    lintOptions {
-        abortOnError false
+        resources {
+            excludes += ['/META-INF/AL2.0', '/META-INF/LGPL2.1', 'META-INF/licenses/ASM']
+            pickFirsts += ['win32-x86-64/attach_hotspot_windows.dll', 'win32-x86/attach_hotspot_windows.dll']
+        }
     }
     testOptions {
         unitTests.returnDefaultValues true
@@ -37,8 +32,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 80
-        versionName "4.9.1"
+        versionCode 81
+        versionName "4.10.0-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -47,46 +42,49 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    lint {
+        abortOnError false
+    }
 }
 
 dependencies {
 
     // App
-    api 'com.d20charactersheet:framework:4.8.1'
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'com.google.android.material:material:1.4.0'
+    api 'com.d20charactersheet:framework:4.9.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
     implementation "io.insert-koin:koin-core:$rootProject.koin_version"
     implementation "io.insert-koin:koin-android:$rootProject.koin_version"
-    implementation 'com.google.firebase:firebase-analytics:20.0.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.4'
-    implementation 'com.android.billingclient:billing-ktx:4.0.0'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation "com.google.android.material:compose-theme-adapter:1.1.4"
+    implementation 'com.google.firebase:firebase-analytics:20.1.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.8'
     implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation 'com.android.billingclient:billing-ktx:4.0.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation "androidx.compose.runtime:runtime:$rootProject.compose_version"
-    implementation "androidx.navigation:navigation-compose:$rootProject.composeNavigation_version"
     implementation "androidx.compose.ui:ui:$rootProject.compose_version"
     implementation "androidx.compose.foundation:foundation:$rootProject.compose_version"
     implementation "androidx.compose.foundation:foundation-layout:$rootProject.compose_version"
     implementation "androidx.compose.material:material:$rootProject.compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.compose_version"
     implementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
-    implementation "com.google.android.material:compose-theme-adapter:$rootProject.compose_version"
+    implementation "androidx.navigation:navigation-compose:2.5.0-alpha02"
     implementation 'androidx.work:work-runtime:2.7.1'
 
     // Instrumented Testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.test.ext:junit-ktx:$rootProject.junitKtx_version"
     androidTestImplementation 'androidx.test:rules:1.4.0'
-    debugImplementation('androidx.fragment:fragment-testing:1.4.0') { exclude group: 'androidx.test', module: 'core' }
+    debugImplementation('androidx.fragment:fragment-testing:1.4.1') { exclude group: 'androidx.test', module: 'core' }
     debugImplementation "org.assertj:assertj-core:$rootProject.assertj_version"
     androidTestImplementation("io.insert-koin:koin-test:$rootProject.koin_version") { exclude group: 'org.mockito' }
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockito_version"
     androidTestImplementation 'org.mockito:mockito-android:3.5.10'
-    androidTestImplementation 'com.d20charactersheet:framework:4.8.1:tests'
+    androidTestImplementation 'com.d20charactersheet:framework:4.9.0:tests'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.compose_version"
 
     // Unit Testing

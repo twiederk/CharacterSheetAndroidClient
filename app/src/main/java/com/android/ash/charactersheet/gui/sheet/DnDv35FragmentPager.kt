@@ -20,7 +20,8 @@ internal class DnDv35FragmentPager(fragmentManager: FragmentManager?, resources:
                 EquipmentPageFragment(),  //
                 NotePageFragment(),  //
                 KnownSpellPageFragment(),  //
-                SpellSlotPageFragment()),
+                SpellSlotPageFragment()
+        ),
 
         arrayOf( //
                 resources.getString(R.string.page_sheet_title),  //
@@ -32,6 +33,8 @@ internal class DnDv35FragmentPager(fragmentManager: FragmentManager?, resources:
                 resources.getString(R.string.page_equip_title),  //
                 resources.getString(R.string.page_note_title),  //
                 resources.getString(R.string.page_known_spell_title),  //
-                resources.getString(R.string.page_spell_slot_title)),
+                resources.getString(R.string.page_spell_slot_title)
+        ),
 
-        fragmentManager = fragmentManager)
+        fragmentManager = fragmentManager
+)

@@ -2,7 +2,12 @@ package com.android.ash.charactersheet.gui.admin.spell
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.boc.model.CastingTime
+import com.d20charactersheet.framework.boc.model.Descriptor
+import com.d20charactersheet.framework.boc.model.School
+import com.d20charactersheet.framework.boc.model.Spell
+import com.d20charactersheet.framework.boc.model.SpellResistance
+import com.d20charactersheet.framework.boc.model.SubSchool
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +29,7 @@ class SpellAdministrationCreateActivityRobotronicTest {
         assertThat(spell.subSchool).isEqualTo(SubSchool.NONE)
         assertThat(spell.descriptors).containsExactly(Descriptor.NONE)
         assertThat(spell.castingTime).isEqualTo(CastingTime.ONE_STANDARD_ACTION)
-        assertThat(spell.range).isEqualTo(Range.CLOSE)
+        assertThat(spell.range).isEqualTo("Close (25 ft. + 5 ft./2 levels)")
         assertThat(spell.effect).isEmpty()
         assertThat(spell.duration).isEmpty()
         assertThat(spell.savingThrow).isEmpty()

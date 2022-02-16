@@ -839,14 +839,6 @@
     <string name="spell_castingtime_one_swift_action">1 swift action</string>
     <string name="spell_castingtime_specific">specific</string>
 
-    <!-- SPELL RANGE -->
-    <string name="spell_range_personal">Personal</string>
-    <string name="spell_range_touch">Touch</string>
-    <string name="spell_range_close">Close (25 ft. + 5 ft./2 levels)</string>
-    <string name="spell_range_medium">Medium (100 ft. + 10 ft./level)</string>
-    <string name="spell_range_long">Long (400 ft. + 40 ft./level)</string>
-    <string name="spell_range_specific">Specific</string>
-
     <!-- SPELL RESISTANCE -->
     <string name="spell_spellresistance_no">No</string>
     <string name="spell_spellresistance_yes">Yes</string>
@@ -1002,6 +994,7 @@
     <string name="release_notes_4_7_1">Release 4.7.1\n- Bug fix: Fixed the crash on startup on Android 12.\n\n</string>
     <string name="release_notes_4_8_0">Release 4.8.0\n- Added screen for class selection to character creation.\n\n</string>
     <string name="release_notes_4_9_0">Release 4.9.0\n- Added saves to Dungeons &amp; Dragons 5th edition.\n- Bug fix: Fixed display of weapons with weight of zero in starter packs.\n\n</string>
-    <string name="release_notes_4_9_1">Release 4.9.1\n- Bug fix: Fixed character creation of Dungeons &amp; Dragons v.3.5 and Pathfinder</string>
+    <string name="release_notes_4_9_1">Release 4.9.1\n- Bug fix: Fixed character creation of Dungeons &amp; Dragons v.3.5 and Pathfinder.\n\n</string>
+    <string name="release_notes_4_10_0">Release 4.10.0\n- Added spells of Dungeons &amp; Dragons 5th edition.\n- Bug fix: Fixed calculation of proficiency bonus for level 4, 8, 12, 16 and 20.\n\n</string>
 
 </resources>

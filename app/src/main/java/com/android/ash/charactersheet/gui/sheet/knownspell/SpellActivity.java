@@ -1,5 +1,8 @@
 package com.android.ash.charactersheet.gui.sheet.knownspell;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -22,9 +25,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.Objects;
 
 import kotlin.Lazy;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Displays detail information of a spell.
@@ -75,7 +75,7 @@ public class SpellActivity extends SlideActivity {
                 getText(R.string.spell_component, displayService.getDisplaySpellComponents(spell)));
         setText(R.id.spell_casting_time,
                 getText(R.string.spell_casting_time, displayService.getDisplayCastingTime(spell.getCastingTime())));
-        setText(R.id.spell_range, getText(R.string.spell_range, displayService.getDisplayRange(spell.getRange())));
+        setText(R.id.spell_range, getText(R.string.spell_range, spell.getRange()));
         setText(R.id.spell_effect, getText(R.string.spell_effect, spell.getEffect()));
         setText(R.id.spell_duration, getText(R.string.spell_duration, spell.getDuration()));
         setText(R.id.spell_saving_throw, getText(R.string.spell_saving_throw, spell.getSavingThrow()));

@@ -33,7 +33,8 @@ class GameSystemTypeTest {
 
         assertThat((dnd5e.createScriptResources[0] as RawScriptResource).resourceId).isEqualTo(R.raw.create_database)
         assertThat((dnd5e.createScriptResources[1] as RawScriptResource).resourceId).isEqualTo(R.raw.dnd5e_phb_data)
-        assertThat((dnd5e.createScriptResources[2] as RawScriptResource).resourceId).isEqualTo(R.raw.dnd5e_phb_character)
+        assertThat((dnd5e.createScriptResources[2] as RawScriptResource).resourceId).isEqualTo(R.raw.dnd5e_phb_spell)
+        assertThat((dnd5e.createScriptResources[3] as RawScriptResource).resourceId).isEqualTo(R.raw.dnd5e_phb_character)
     }
 
 }

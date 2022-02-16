@@ -235,10 +235,11 @@ public enum GameSystemType {
             Arrays.asList( //
                     new RawScriptResource(R.raw.create_database), //
                     new RawScriptResource(R.raw.dnd5e_phb_data), //
+                    new RawScriptResource(R.raw.dnd5e_phb_spell), //
                     new RawScriptResource(R.raw.dnd5e_phb_character) //
             ), //
             createUpdateScriptMap(
-                    new int[]{69, 70, 71, 72, 73, 75, 77, 78},
+                    new int[]{69, 70, 71, 72, 73, 75, 77, 78, 80},
                     new ScriptResource[]{
                             new RawScriptResource(R.raw.dnd5e_upgrade_69_to_70), //
                             new RawScriptResource(R.raw.dnd5e_upgrade_70_to_71), //
@@ -248,6 +249,7 @@ public enum GameSystemType {
                             new RawScriptResource(R.raw.dnd5e_upgrade_75_to_76), //
                             new RawScriptResource(R.raw.dnd5e_upgrade_77_to_78), //
                             new RawScriptResource(R.raw.dnd5e_upgrade_78_to_79), //
+                            new RawScriptResource(R.raw.dnd5e_upgrade_80_to_81), //
                     }),
             createUpdateImageMap(new int[]{72, 77},
                     new ImageResources[]{

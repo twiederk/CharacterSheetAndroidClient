@@ -1,11 +1,15 @@
 package com.android.ash.charactersheet.gui.main.characterlist;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.android.ash.charactersheet.billing.Billing;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
@@ -15,8 +19,6 @@ import com.google.android.gms.ads.MobileAds;
 import org.jetbrains.annotations.NotNull;
 
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * The list of characters available. Each character is listed with an image, its name, race, class and level.
@@ -49,7 +51,7 @@ public class CharacterListActivity extends LogAppCompatActivity implements Abstr
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         return optionsMenu.onCreateOptionsMenu(menu);
     }
 

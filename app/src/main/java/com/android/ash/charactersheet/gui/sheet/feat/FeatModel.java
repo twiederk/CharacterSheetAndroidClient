@@ -256,9 +256,8 @@ public class FeatModel extends Observable {
      */
     public List<CharacterFeat> getCharacterFeats() {
         final List<CharacterFeat> characterFeats = new ArrayList<>();
-        for (final FeatListItem featListItem : characterFeatItems) {
-            final CharacterFeatItem characterFeatItem = (CharacterFeatItem) featListItem;
-            characterFeats.add(characterFeatItem.getCharacterFeat());
+        for (final CharacterFeatItem featListItem : characterFeatItems) {
+            characterFeats.add(featListItem.getCharacterFeat());
         }
         return characterFeats;
     }

@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+
 import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.gui.util.AdministrationListActivity;
 import com.android.ash.charactersheet.gui.util.ItemFilter;
@@ -59,7 +61,7 @@ public abstract class ItemAdministrationListActivity extends AdministrationListA
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_item_administration, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_activity_item_administration_magic_item);
         CheckBox magicItemCheckBox = (CheckBox) menuItem.getActionView();

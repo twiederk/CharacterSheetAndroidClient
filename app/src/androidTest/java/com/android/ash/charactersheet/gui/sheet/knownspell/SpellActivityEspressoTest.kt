@@ -7,14 +7,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import com.android.ash.charactersheet.Constants
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
 import com.d20charactersheet.framework.boc.model.CastingTime
-import com.d20charactersheet.framework.boc.model.Range
 import com.d20charactersheet.framework.boc.model.Spell
 import com.d20charactersheet.framework.boc.model.SpellResistance
 import com.d20charactersheet.framework.boc.service.DisplayService
@@ -48,7 +49,7 @@ class SpellActivityEspressoTest : KoinTest {
         val spell = Spell().apply {
             name = "mySpell"
             castingTime = CastingTime.NONE
-            range = Range.CLOSE
+            range = "myRange"
             effect = "myEffect"
             duration = "myDuration"
             savingThrow = "mySavingThrow"
@@ -66,7 +67,6 @@ class SpellActivityEspressoTest : KoinTest {
         whenever(displayService.getDisplaySpellSchool(spell)).doReturn("mySchool")
         whenever(displayService.getDisplaySpellComponents(spell)).doReturn("myComponents")
         whenever(displayService.getDisplayCastingTime(spell.castingTime)).doReturn("myCastingTime")
-        whenever(displayService.getDisplayRange(spell.range)).doReturn("myRange")
         whenever(displayService.getDisplaySpellResistance(spell.spellResistance)).doReturn("mySpellResistance")
 
 

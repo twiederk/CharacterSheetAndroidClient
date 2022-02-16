@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.GameSystemHolder;
@@ -83,7 +84,7 @@ public abstract class SpelllistAdministrationActivity extends FormActivity<Spell
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_spelllist_administration, menu);
         return true;
     }

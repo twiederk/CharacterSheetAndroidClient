@@ -24,7 +24,6 @@ import com.d20charactersheet.framework.boc.model.FeatType;
 import com.d20charactersheet.framework.boc.model.GoodType;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.QualityType;
-import com.d20charactersheet.framework.boc.model.Range;
 import com.d20charactersheet.framework.boc.model.RuleError;
 import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.model.School;
@@ -685,26 +684,6 @@ public abstract class AbstractAndroidDisplayService extends AbstractDisplayServi
                 return resources.getString(R.string.spell_descriptor_water);
             default:
                 throw new IllegalArgumentException("Can't determine descriptor: " + descriptor);
-        }
-    }
-
-    @Override
-    public String getDisplayRange(final Range range) {
-        switch (range) {
-            case PERSONAL:
-                return resources.getString(R.string.spell_range_personal);
-            case TOUCH:
-                return resources.getString(R.string.spell_range_touch);
-            case CLOSE:
-                return resources.getString(R.string.spell_range_close);
-            case MEDIUM:
-                return resources.getString(R.string.spell_range_medium);
-            case LONG:
-                return resources.getString(R.string.spell_range_long);
-            case SPECIFIC:
-                return resources.getString(R.string.spell_range_specific);
-            default:
-                throw new IllegalArgumentException("Can't determine range: " + range);
         }
     }
 

@@ -5,7 +5,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.isNotChecked
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withSpinnerText
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.withToolbarTitle
@@ -75,7 +79,7 @@ class SpellAdministrationCreateActivityEspressoTest : KoinTest {
         onView(withId(R.id.spell_administration_component_divinefocus)).check(matches(isNotChecked()))
         onView(withId(R.id.spell_administration_component_xpcost)).check(matches(isNotChecked()))
         onView(withId(R.id.spell_administration_castingtime)).check(matches(withSpinnerText("ONE_STANDARD_ACTION")))
-        onView(withId(R.id.spell_administration_range)).check(matches(withSpinnerText("CLOSE")))
+        onView(withId(R.id.spell_administration_range)).check(matches(withText("Close (25 ft. + 5 ft./2 levels)")))
         onView(withId(R.id.spell_administration_spellresistance)).check(matches(withSpinnerText("NONE")))
         onView(withId(R.id.spell_administration_effect)).check(matches(withText(isEmptyString())))
         onView(withId(R.id.spell_administration_duration)).check(matches(withText(isEmptyString())))

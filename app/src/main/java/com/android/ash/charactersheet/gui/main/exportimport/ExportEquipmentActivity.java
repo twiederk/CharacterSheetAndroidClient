@@ -57,7 +57,7 @@ public class ExportEquipmentActivity extends AbstractExportActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_export_equipment, menu);
         final MenuItem menuItem = menu.findItem(R.id.menu_activity_export_equipment_magic_item);
         final CheckBox magicItemCheckBox = (CheckBox) menuItem.getActionView();
