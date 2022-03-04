@@ -15,13 +15,17 @@ import com.android.ash.charactersheet.gui.main.AboutActivity
 import com.android.ash.charactersheet.gui.main.BackupRestoreActivity
 import com.android.ash.charactersheet.gui.main.PreferencesActivity
 import com.android.ash.charactersheet.gui.main.characterlist.AbstractAsyncTask.GameSystemLoadable
+import com.android.ash.charactersheet.gui.main.characterlist.feedback.DoorbellFeedbackDialog
 import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseDialog
 import com.android.ash.charactersheet.gui.main.exportimport.ExportMenuActivity
 import com.android.ash.charactersheet.gui.main.exportimport.ImportActivity
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinComponent {
+class CharacterListOptionsMenu(
+    private val activity: AppCompatActivity,
+    private val characterListViewModel: CharacterListViewModel
+) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val billing: Billing by inject()
@@ -41,6 +45,7 @@ class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinCo
         R.id.menu_activity_character_list_backup_restore -> callActivity(BackupRestoreActivity::class.java)
         R.id.menu_activity_character_list_export -> callActivity(ExportMenuActivity::class.java)
         R.id.menu_activity_character_list_import -> openImport()
+        R.id.menu_activity_character_list_feedback -> openFeedbackDialog()
         R.id.menu_activity_character_list_purchase_premium_version -> openPurchaseDialog()
         else -> false
     }
@@ -67,8 +72,18 @@ class CharacterListOptionsMenu(private val activity: AppCompatActivity) : KoinCo
 
     private fun switchGameSystem(gameSystemType: GameSystemType): Boolean {
         if (gameSystemHolder.gameSystemType != gameSystemType) {
-            SwitchGameSystemAsyncTask(activity, activity as GameSystemLoadable, gameSystemType).execute()
+            SwitchGameSystemAsyncTask(
+                activity,
+                activity as GameSystemLoadable,
+                gameSystemType
+            ).execute()
         }
+        return true
+    }
+
+    private fun openFeedbackDialog(): Boolean {
+        characterListViewModel.onFeedbackGive()
+        DoorbellFeedbackDialog().show(activity)
         return true
     }
 

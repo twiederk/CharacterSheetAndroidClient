@@ -26,11 +26,12 @@ import kotlin.Lazy;
 public class CharacterListActivity extends LogAppCompatActivity implements AbstractAsyncTask.GameSystemLoadable {
 
     private final Lazy<Billing> billing = inject(Billing.class);
+    private final Lazy<CharacterListViewModel> characterListViewModel = inject(CharacterListViewModel.class);
 
     private final CharacterListGameSystem characterListGameSystem = new CharacterListGameSystem();
-    private final CharacterListOptionsMenu optionsMenu = new CharacterListOptionsMenu(this);
+    private final CharacterListOptionsMenu optionsMenu = new CharacterListOptionsMenu(this, characterListViewModel.getValue());
     private final CharacterListContextMenu contextMenu = new CharacterListContextMenu();
-    private final CharacterListLayout characterListLayout = new CharacterListLayout(this);
+    private final CharacterListLayout characterListLayout = new CharacterListLayout(this, characterListViewModel.getValue());
 
     /**
      * Creates list of all available character. The characters are retrieved from the CharacterDao implementation.

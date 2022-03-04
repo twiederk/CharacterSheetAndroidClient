@@ -12,6 +12,7 @@ import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.Appear
 import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.ClassScreenViewModel
 import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
 import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.RaceScreenViewModel
+import com.android.ash.charactersheet.gui.main.characterlist.CharacterListViewModel
 import com.android.ash.charactersheet.gui.sheet.FragmentPagerFactory
 import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
 import com.d20charactersheet.framework.boc.model.Armor
@@ -53,6 +54,7 @@ class KoinConfigurationInstrumentedTest : KoinTest {
     private val appearanceScreenViewModel: AppearanceScreenViewModel by inject()
     private val abilityScoresScreenViewModel: AbilityScoresScreenViewModel by inject()
     private val equipmentScreenViewModel: EquipmentScreenViewModel by inject()
+    private val characterListViewModel: CharacterListViewModel by inject()
 
     @Before
     fun before() {
@@ -121,6 +123,7 @@ class KoinConfigurationInstrumentedTest : KoinTest {
         assertThat(appearanceScreenViewModel).isNotNull
         assertThat(abilityScoresScreenViewModel).isNotNull
         assertThat(equipmentScreenViewModel).isNotNull
+        assertThat(characterListViewModel).isNotNull
     }
 
 }

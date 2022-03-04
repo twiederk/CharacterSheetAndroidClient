@@ -11,6 +11,7 @@ import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.Appear
 import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.ClassScreenViewModel
 import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.EquipmentScreenViewModel
 import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.RaceScreenViewModel
+import com.android.ash.charactersheet.gui.main.characterlist.CharacterListViewModel
 import com.android.ash.charactersheet.gui.sheet.FragmentPagerFactory
 import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
 import com.d20charactersheet.framework.boc.model.Character
@@ -51,5 +52,6 @@ val appModule = module {
     single { AppearanceScreenViewModel(get()) }
     single { AbilityScoresScreenViewModel(get(), get()) }
     single { EquipmentScreenViewModel(get()) }
+    single { CharacterListViewModel() }
 }
 // end::koinConfiguration[]

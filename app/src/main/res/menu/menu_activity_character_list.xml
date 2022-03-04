@@ -47,6 +47,10 @@
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="@string/character_list_menu_about" />
     <item
+        android:id="@+id/menu_activity_character_list_feedback"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/character_list_menu_feedback" />
+    <item
         android:id="@+id/menu_activity_character_list_purchase_premium_version"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="@string/character_list_menu_purchase" />

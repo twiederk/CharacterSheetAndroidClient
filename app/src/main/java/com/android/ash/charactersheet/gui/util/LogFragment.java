@@ -25,13 +25,6 @@ public class LogFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onActivityCreated(final Bundle savedInstanceState) {
-        Logger.info(getClass().getSimpleName() + ".onActivityCreated");
-        super.onActivityCreated(savedInstanceState);
-    }
-
     @Override
     public void onStart() {
         Logger.info(getClass().getSimpleName() + ".onStart");

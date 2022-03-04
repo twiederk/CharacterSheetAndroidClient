@@ -17,7 +17,11 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class CharacterListOptionsMenuKoinTest : KoinTest {
 
@@ -46,7 +50,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_about)
 
         // Act
-        val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
+        val result = CharacterListOptionsMenu(activity, mock()).onOptionsItemSelected(menuItem)
 
         // Assert
         assertThat(result).isTrue
@@ -61,7 +65,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_pathfinder)
 
         // Act
-        val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
+        val result = CharacterListOptionsMenu(activity, mock()).onOptionsItemSelected(menuItem)
 
         // Assert
         assertThat(result).isTrue
@@ -75,7 +79,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_dndv35)
 
         // Act
-        val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
+        val result = CharacterListOptionsMenu(activity, mock()).onOptionsItemSelected(menuItem)
 
         // Assert
         assertThat(result).isTrue
@@ -89,7 +93,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         whenever(menuItem.itemId).doReturn(R.id.menu_activity_character_list_switch_dnd5e)
 
         // Act
-        val result = CharacterListOptionsMenu(activity).onOptionsItemSelected(menuItem)
+        val result = CharacterListOptionsMenu(activity, mock()).onOptionsItemSelected(menuItem)
 
         // Assert
         assertThat(result).isTrue
@@ -102,7 +106,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         val purchaseDialog: PurchaseDialog = mock()
 
         // Act
-        val result = CharacterListOptionsMenu(activity).openPurchaseDialog(purchaseDialog)
+        val result = CharacterListOptionsMenu(activity, mock()).openPurchaseDialog(purchaseDialog)
 
         // Assert
         assertThat(result).isTrue
@@ -120,7 +124,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         gameSystemHolder.gameSystem = gameSystem
 
         // Act
-        val result = CharacterListOptionsMenu(activity).openImport(purchaseDialog)
+        val result = CharacterListOptionsMenu(activity, mock()).openImport(purchaseDialog)
 
         // Assert
         assertThat(result).isTrue
@@ -138,7 +142,7 @@ class CharacterListOptionsMenuKoinTest : KoinTest {
         gameSystemHolder.gameSystem = gameSystem
 
         // Act
-        val result = CharacterListOptionsMenu(activity).openImport(purchaseDialog)
+        val result = CharacterListOptionsMenu(activity, mock()).openImport(purchaseDialog)
 
         // Assert
         assertThat(result).isTrue

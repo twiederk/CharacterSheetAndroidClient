@@ -32,8 +32,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 26
         targetSdkVersion 31
-        versionCode 81
-        versionName "4.10.0"
+        versionCode 82
+        versionName "4.11.0-SNAPSHOT"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -55,11 +55,11 @@ dependencies {
     implementation "io.insert-koin:koin-core:$rootProject.koin_version"
     implementation "io.insert-koin:koin-android:$rootProject.koin_version"
     implementation 'com.google.android.material:material:1.5.0'
-    implementation "com.google.android.material:compose-theme-adapter:1.1.4"
+    implementation "com.google.android.material:compose-theme-adapter:1.1.5"
     implementation 'com.google.firebase:firebase-analytics:20.1.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.2.8'
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
-    implementation 'com.android.billingclient:billing-ktx:4.0.0'
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.android.billingclient:billing-ktx:4.1.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -72,8 +72,9 @@ dependencies {
     implementation "androidx.compose.material:material:$rootProject.compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.compose_version"
     implementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
-    implementation "androidx.navigation:navigation-compose:2.5.0-alpha02"
+    implementation "androidx.navigation:navigation-compose:2.5.0-alpha03"
     implementation 'androidx.work:work-runtime:2.7.1'
+    implementation 'io.doorbell:android-sdk:0.4.7@aar'
 
     // Instrumented Testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
