@@ -127,6 +127,7 @@ public class EquipmentPageFragment extends PageFragment {
         listView.setOnItemClickListener(new ExpandOnClickListener());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater menuInflater) {
         super.onCreateOptionsMenu(menu, menuInflater);
@@ -141,6 +142,7 @@ public class EquipmentPageFragment extends PageFragment {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 

@@ -13,6 +13,14 @@ INSERT INTO charakter_ability VALUES ( 6, 1, 12, 266, 1 );
 INSERT INTO charakter_ability VALUES ( 7, 1, 12, 267, 1 );
 
 
+INSERT INTO charakter_skill VALUES ( 5, 1, 1, 0, 1 );
+INSERT INTO charakter_skill VALUES ( 6, 1, 0, 2, 1 );
+INSERT INTO charakter_skill VALUES ( 11, 1, 1, 0, 1 );
+INSERT INTO charakter_skill VALUES ( 7, 1, 0, 0, 0 );
+INSERT INTO charakter_skill VALUES ( 12, 1, 0, 2, 1 );
+INSERT INTO charakter_skill VALUES ( 9, 1, 0, 0, 0 );
+
+
 INSERT INTO charakter_weapon VALUES ( 1, 1, 8, 1 );
 INSERT INTO charakter_weapon VALUES ( 2, 1, 13, 1 );
 INSERT INTO charakter_weapon VALUES ( 3, 1, 46, 1 );

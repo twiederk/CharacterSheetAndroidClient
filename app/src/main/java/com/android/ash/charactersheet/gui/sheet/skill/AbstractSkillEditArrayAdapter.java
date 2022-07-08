@@ -10,7 +10,6 @@ import com.android.ash.charactersheet.gui.widget.DisplayArrayAdapter;
 import com.android.ash.charactersheet.gui.widget.numberview.StepNumberView;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
-import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.service.CharacterService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 import com.d20charactersheet.framework.boc.service.RuleService;
@@ -18,39 +17,29 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 /**
  * Adapter of skill edit list.
  */
-public class SkillEditArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
+public abstract class AbstractSkillEditArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
 
-    private final RuleService ruleService;
-    private final CharacterService characterService;
-    private final Character character;
+    protected final RuleService ruleService;
+    protected final CharacterService characterService;
+    protected final Character character;
 
-    private final int maxClassSkillRank;
-    private final float maxCrossClassSkillRank;
-
-    private final MessageManager messageManager;
+    protected final MessageManager messageManager;
 
     /**
      * Creates adapter of skill edit list.
-     * 
-     * @param context
-     *            The context activity.
-     * @param character
-     *            The character of the skills. Necessary to determine class and cross class skills.
-     * @param gameSystem
-     *            The game system provides access to other services.
-     * @param itemViewResourceId
-     *            The resource id of the item view.
+     *
+     * @param context            The context activity.
+     * @param character          The character of the skills. Necessary to determine class and cross class skills.
+     * @param gameSystem         The game system provides access to other services.
+     * @param itemViewResourceId The resource id of the item view.
      */
-    SkillEditArrayAdapter(final Context context, final Character character, final GameSystem gameSystem,
-                          final int itemViewResourceId) {
+    AbstractSkillEditArrayAdapter(final Context context, final Character character, final GameSystem gameSystem,
+                                  final int itemViewResourceId) {
         super(context, gameSystem.getDisplayService(), itemViewResourceId, character.getCharacterSkills());
         this.character = character;
         this.ruleService = gameSystem.getRuleService();
         this.characterService = gameSystem.getCharacterService();
-        this.maxClassSkillRank = ruleService.getMaxClassSkillRank(character);
-        this.maxCrossClassSkillRank = ruleService.getMaxCrossClassSkillRank(character);
         messageManager = new MessageManager(context, displayService);
-
     }
 
     /**
@@ -58,27 +47,25 @@ public class SkillEditArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
      */
     @Override
     protected void fillView(final View view, final CharacterSkill characterSkill) {
+        setSkillName(view, characterSkill);
+        setSkillRank(view, characterSkill);
+        setSkillProficiency(view, characterSkill);
+        setSkillMiscModifier(view, characterSkill);
+    }
+
+    private void setSkillName(View view, CharacterSkill characterSkill) {
         final TextView skillNameTextView = view.findViewById(R.id.skill_name);
         skillNameTextView.setText(characterSkill.getSkill().getName());
+    }
 
-        final StepNumberView skillRankNumberView = view.findViewById(R.id.skill_rank);
+    protected abstract void setSkillRank(View view, CharacterSkill characterSkill);
 
-        final float maxRank = getMaxRank(characterSkill.getSkill());
-        final float step = ruleService.getRankPerSkillPoint(character, characterSkill.getSkill());
+    protected abstract void setSkillProficiency(View view, CharacterSkill characterSkill);
 
-        skillRankNumberView.setController(new SkillRankNumberViewController(characterService, character,
-                characterSkill, maxRank, step, messageManager));
-
+    private void setSkillMiscModifier(View view, CharacterSkill characterSkill) {
         final StepNumberView skillModifierNumberView = view.findViewById(R.id.skill_modifier);
         skillModifierNumberView.setController(new SkillModifierNumberViewController(characterService, character,
                 characterSkill));
-
     }
 
-    private float getMaxRank(final Skill skill) {
-        if (ruleService.isClassSkill(character, skill)) {
-            return maxClassSkillRank;
-        }
-        return maxCrossClassSkillRank;
-    }
 }

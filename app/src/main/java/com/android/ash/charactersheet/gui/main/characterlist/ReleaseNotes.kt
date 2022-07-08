@@ -56,7 +56,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
         val dbHelper: DBHelper? = gameSystemHolder.dndv35DbHelper
         val releaseNotes = createReleaseNotesArray(activity.resources)
         return releaseNotes
-            .filterIndexed { index, _ -> index >= dbHelper?.oldVersion?.minus(1) ?: index }
+            .filterIndexed { index, _ -> index >= (dbHelper?.oldVersion?.minus(1) ?: index) }
             .joinToString(separator = "") { it }
     }
 
@@ -143,6 +143,7 @@ class ReleaseNotes(private val activity: AppCompatActivity) : KoinComponent {
         resources.getString(R.string.release_notes_4_9_1), //
         resources.getString(R.string.release_notes_4_10_0), //
         resources.getString(R.string.release_notes_4_11_0), //
+        resources.getString(R.string.release_notes_4_12_0), //
     )
 
 

@@ -39,6 +39,7 @@ public class ZeroAndPositiveDecimalNumberViewController implements NumberViewCon
         value = number.floatValue();
     }
 
+    @SuppressWarnings("UnusedAssignment")
     @Override
     public void decrease(final Number number) {
         if (value - number.floatValue() >= 0) {

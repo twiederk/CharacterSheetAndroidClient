@@ -13,7 +13,7 @@ internal class DnDv35FragmentPager(fragmentManager: FragmentManager?, resources:
         arrayOf( //
                 SheetPageFragment(),  //
                 WeaponAttackPageFragment(),  //
-                SkillPageFragment(),  //
+                DnDv35SkillPageFragment(),  //
                 RaceAbilityPageFragment(),  //
                 ClassAbilityPageFragment(),  //
                 FeatPageFragment(),  //

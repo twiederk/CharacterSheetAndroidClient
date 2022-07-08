@@ -230,6 +230,7 @@ public class SheetPageFragment extends PageFragment {
     /**
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.menu_page_sheet, menu);
@@ -238,6 +239,7 @@ public class SheetPageFragment extends PageFragment {
     /**
      * @see android.app.Activity#onMenuItemSelected(int, android.view.MenuItem)
      */
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         int itemId = item.getItemId();

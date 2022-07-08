@@ -8,7 +8,12 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.boc.model.Attribute
+import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.ClassLevel
+import com.d20charactersheet.framework.boc.model.FavoriteCharacterSkill
+import com.d20charactersheet.framework.boc.model.Skill
 import com.d20charactersheet.framework.boc.service.DisplayService
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.boc.service.RuleService
@@ -20,7 +25,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class SkillPageFragmentEspressoTest : KoinTest {
+class DnD5eSkillPageFragmentEspressoTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
     private val characterHolder: CharacterHolder by inject()
@@ -33,10 +38,6 @@ class SkillPageFragmentEspressoTest : KoinTest {
         whenever(displayService.getDisplayAttributeShort(Attribute.WISDOM)).doReturn("WIS")
 
         val ruleService: RuleService = mock()
-        whenever(ruleService.getMaxClassSkillRank(any())).doReturn(8)
-        whenever(ruleService.getMaxCrossClassSkillRank(any())).doReturn(4.0F)
-        whenever(ruleService.getSpentSkillPoints(any())).doReturn(24)
-        whenever(ruleService.getSkillPoints(any(), any())).doReturn(48)
 
         val gameSystem: GameSystem = mock()
         whenever(gameSystem.displayService).doReturn(displayService)
@@ -44,22 +45,20 @@ class SkillPageFragmentEspressoTest : KoinTest {
 
         gameSystemHolder.gameSystem = gameSystem
         characterHolder.character = Character().apply {
-            classLevels = listOf(ClassLevel(CharacterClass().apply { classAbilities = listOf() }, 1))
+            classLevels =
+                listOf(ClassLevel(CharacterClass().apply { classAbilities = listOf() }, 1))
             characterSkills = listOf(
-                    FavoriteCharacterSkill(
-                            Skill().apply { name = "mySkill"; attribute = Attribute.WISDOM }
-                    ).apply { isFavorite = true; rank = 4.0F })
+                FavoriteCharacterSkill(
+                    Skill().apply { name = "mySkill"; attribute = Attribute.WISDOM }
+                ).apply { isFavorite = true; rank = 4.0F })
         }
 
         // Act
-        launchFragmentInContainer<SkillPageFragment>()
+        launchFragmentInContainer<DnD5eSkillPageFragment>()
 
         // Assert
-        onView(withId(R.id.max_ranks)).check(matches(withText("Max Ranks: 8 / 4.0")))
-        onView(withId(R.id.skill_points)).check(matches(withText("Skill points: 24 of 48")))
         onView(withId(R.id.skill_roll_button)).check(matches(withText("+2")))
         onView(withId(R.id.skill_attribute_modifier)).check(matches(withText("WIS: +2")))
-        onView(withId(R.id.skill_rank)).check(matches(withText("Rank: 4.0")))
         onView(withId(R.id.skill_modifier)).check(matches(withText("Misc Mod: +2")))
     }
 

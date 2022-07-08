@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -14,20 +16,17 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.sheet.skill.CharacterSkillArrayAdapter;
 import com.android.ash.charactersheet.gui.sheet.skill.HideOnTabChangeListener;
 import com.android.ash.charactersheet.gui.sheet.skill.SkillDescriptionActivity;
 import com.android.ash.charactersheet.gui.sheet.skill.SkillEditActivity;
 import com.android.ash.charactersheet.gui.util.HideOnClickListener;
-import com.android.ash.charactersheet.gui.util.Logger;
+import com.android.ash.charactersheet.gui.widget.DisplayArrayAdapter;
 import com.android.ash.charactersheet.gui.widget.dierollview.DieRollView;
-import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.model.FavoriteCharacterSkill;
 import com.d20charactersheet.framework.boc.util.CharacterSkillComparator;
@@ -36,18 +35,16 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
-
 /**
  * The SkillListActivity displays the max class rank and max cross class rank of the character. It displays the skill
  * points of the character. The skills are displayed in three different skill lists. Each skill list is contained in a
  * separate tab. The option menu allows to call EditSkillActivity. The context menu of the skill lists allow to add or
  * remove them from favorite skill list.
  */
-public class SkillPageFragment extends PageFragment implements OnItemClickListener {
+public abstract class AbstractSkillPageFragment extends PageFragment implements OnItemClickListener {
 
-    private static final int CONTEXT_MENU_ADD_TO_FAVORITES = 10;
-    private static final int CONTEXT_MENU_REMOVE_FROM_FAVORITES = 20;
+    protected static final int CONTEXT_MENU_ADD_TO_FAVORITES = 10;
+    protected static final int CONTEXT_MENU_REMOVE_FROM_FAVORITES = 20;
 
     private FavoriteCharacterSkill selectedSkill;
 
@@ -64,26 +61,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
         setSkillRoll();
     }
 
-    private void setHeader() {
-        final TextView maxRanksTextView = view.findViewById(R.id.max_ranks);
-        maxRanksTextView.setText(getMaxRank());
-
-        final TextView skillPointsTextView = view.findViewById(R.id.skill_points);
-        skillPointsTextView.setText(getSkillPoints());
-    }
-
-    private String getMaxRank() {
-        final int maxClassSkillRank = ruleService.getMaxClassSkillRank(character);
-        final float maxCrossClassSkillRank = ruleService.getMaxCrossClassSkillRank(character);
-        return getResources().getString(R.string.skill_list_max_ranks) + ": " + maxClassSkillRank + " / " + maxCrossClassSkillRank;
-    }
-
-    private String getSkillPoints() {
-        final CharacterClass startClass = character.getClassLevels().get(0).getCharacterClass();
-        final int skillPoints = ruleService.getSkillPoints(character, startClass);
-        final int spentSkillPoints = ruleService.getSpentSkillPoints(character);
-        return getResources().getString(R.string.skill_list_skill_points) + ": " + spentSkillPoints + " " + getResources().getString(R.string.skill_list_skill_points_of) + " " + skillPoints;
-    }
+    protected abstract void setHeader();
 
     private void setTabs() {
         final TabHost tabHost = view.findViewById(android.R.id.tabhost);
@@ -113,8 +91,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     private ArrayAdapter<CharacterSkill> createAdapterAndListView(final List<CharacterSkill> characterSkills,
                                                                   final int listViewResourceId) {
         final DieRollView dieRollView = view.findViewById(R.id.die_roll_view);
-        final CharacterSkillArrayAdapter characterSkillsArrayAdapter = new CharacterSkillArrayAdapter(getActivity(),
-                character, ruleService, displayService, R.layout.listitem_skill, dieRollView, characterSkills);
+        final DisplayArrayAdapter<CharacterSkill> characterSkillsArrayAdapter = createCharacterSkillArrayAdapter(dieRollView, characterSkills);
         characterSkillsArrayAdapter.sort(new CharacterSkillComparator());
 
         final ListView listView = view.findViewById(listViewResourceId);
@@ -125,6 +102,8 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
 
         return characterSkillsArrayAdapter;
     }
+
+    protected abstract DisplayArrayAdapter<CharacterSkill> createCharacterSkillArrayAdapter(DieRollView dieRollView, List<CharacterSkill> characterSkills);
 
     private List<CharacterSkill> getTrainedSkills() {
         final List<CharacterSkill> allSkills = character.getCharacterSkills();
@@ -176,16 +155,13 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
      */
     @Override
     public boolean onContextItemSelected(final MenuItem menuItem) {
-        Logger.debug("onContextItemSelected");
         menuItem.getMenuInfo();
         switch (menuItem.getItemId()) {
             case CONTEXT_MENU_ADD_TO_FAVORITES:
-                Logger.debug("add to favorites");
-                addSkillToFavorties();
+                addSkillToFavorites();
                 return true;
 
             case CONTEXT_MENU_REMOVE_FROM_FAVORITES:
-                Logger.debug("remove from favorites");
                 removeSkillFromFavorites();
                 return true;
 
@@ -194,7 +170,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
         }
     }
 
-    private void addSkillToFavorties() {
+    private void addSkillToFavorites() {
         if (!selectedSkill.isFavorite()) {
             selectedSkill.setFavorite(true);
             favoriteSkillsAdapter.add(selectedSkill);
@@ -218,6 +194,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     /**
      * The option menu offers the menu item to edit the skills in the EditSkillActivity.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, final MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.menu_page_skill, menu);
@@ -226,6 +203,7 @@ public class SkillPageFragment extends PageFragment implements OnItemClickListen
     /**
      * Option menu leads to skill edit if selected.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == R.id.menu_page_skill_edit_skills) {

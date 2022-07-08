@@ -212,6 +212,7 @@ public class SpellSlotPageFragment extends PageFragment {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         if (!character.getSpelllists().isEmpty()) {
@@ -219,6 +220,7 @@ public class SpellSlotPageFragment extends PageFragment {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 

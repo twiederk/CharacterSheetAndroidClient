@@ -148,6 +148,7 @@ public class FeatPageFragment extends PageFragment implements Observer {
         characterService.updateFeats(character);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);

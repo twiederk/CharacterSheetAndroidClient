@@ -122,6 +122,7 @@
 
     <!-- SkillEditActivity -->
     <string name="skill_edit_rank">Rank</string>
+    <string name="skill_edit_proficiency">Proficiency</string>
     <string name="skill_edit_modifier">Misc Modifier</string>
 
     <!-- FeatPageFragment -->
@@ -998,5 +999,6 @@
     <string name="release_notes_4_9_1">Release 4.9.1\n- Bug fix: Fixed character creation of Dungeons &amp; Dragons v.3.5 and Pathfinder.\n\n</string>
     <string name="release_notes_4_10_0">Release 4.10.0\n- Added spells of Dungeons &amp; Dragons 5th edition.\n- Bug fix: Fixed calculation of proficiency bonus for level 4, 8, 12, 16 and 20.\n\n</string>
     <string name="release_notes_4_11_0">Release 4.11.0\n- Added option to sent feedback about the app directly to the developer.\n\n</string>
+    <string name="release_notes_4_12_0">Release 4.12.0\n- Added skills of Dungeons &amp; Dragons 5th edition.\n\n</string>
 
 </resources>

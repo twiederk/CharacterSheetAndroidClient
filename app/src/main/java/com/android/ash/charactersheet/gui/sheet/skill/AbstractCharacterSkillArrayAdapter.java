@@ -15,38 +15,28 @@ import com.d20charactersheet.framework.boc.service.RuleService;
 
 import java.util.List;
 
-/**
- * Adapter of skill list.
- */
-public class CharacterSkillArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
+public abstract class AbstractCharacterSkillArrayAdapter extends DisplayArrayAdapter<CharacterSkill> {
 
-    private static final String COLON = ": ";
+    protected static final String COLON = ": ";
 
-    private final RuleService ruleService;
-    private final Character character;
-    private final DieRollView dieRollView;
+    protected final RuleService ruleService;
+    protected final Character character;
+    protected final DieRollView dieRollView;
 
     /**
      * Creates adapter of skill list.
-     * 
-     * @param context
-     *            The context.
-     * @param character
-     *            The character owning the skills.
-     * @param ruleService
-     *            The rule service.
-     * @param displayService
-     *            The display service.
-     * @param itemViewResourceId
-     *            The resource id to display a item of the skill list.
-     * @param dieRollView
-     *            The DieRollView to display the result of a skill roll.
-     * @param characterSkills
-     *            The character skills.
+     *
+     * @param context            The context.
+     * @param character          The character owning the skills.
+     * @param ruleService        The rule service.
+     * @param displayService     The display service.
+     * @param itemViewResourceId The resource id to display a item of the skill list.
+     * @param dieRollView        The DieRollView to display the result of a skill roll.
+     * @param characterSkills    The character skills.
      */
-    public CharacterSkillArrayAdapter(final Context context, final Character character, final RuleService ruleService,
-            final DisplayService displayService, final int itemViewResourceId, final DieRollView dieRollView,
-            final List<CharacterSkill> characterSkills) {
+    public AbstractCharacterSkillArrayAdapter(final Context context, final Character character, final RuleService ruleService,
+                                              final DisplayService displayService, final int itemViewResourceId, final DieRollView dieRollView,
+                                              final List<CharacterSkill> characterSkills) {
         super(context, displayService, itemViewResourceId, characterSkills);
         this.character = character;
         this.dieRollView = dieRollView;
@@ -74,30 +64,23 @@ public class CharacterSkillArrayAdapter extends DisplayArrayAdapter<CharacterSki
         final TextView attributeModifierTextView = view.findViewById(R.id.skill_attribute_modifier);
         attributeModifierTextView.setText(getAttributeModifier(characterSkill));
 
-        final TextView rankTextView = view.findViewById(R.id.skill_rank);
-        rankTextView.setText(getRankModifier(characterSkill));
+        fillRank(view, characterSkill);
 
         final TextView modifierTextView = view.findViewById(R.id.skill_modifier);
         modifierTextView.setText(getModifier(characterSkill));
     }
 
+    protected abstract void fillRank(View view, CharacterSkill characterSkill);
+
     private String getAttributeModifier(final CharacterSkill characterSkill) {
         final int attributeModifier = ruleService.getAttributeModifier(character, characterSkill.getSkill()
                 .getAttribute());
-        return displayService.getDisplayAttributeShort(characterSkill.getSkill().getAttribute()) +
-                COLON +
-                displayService.getDisplayModifier(attributeModifier);
+        return displayService.getDisplayAttributeShort(characterSkill.getSkill().getAttribute()) + COLON + displayService.getDisplayModifier(attributeModifier);
     }
 
-    private String getRankModifier(final CharacterSkill characterSkill) {
-        return getContext().getResources().getString(R.string.skill_list_rank) +
-                COLON +
-                characterSkill.getRank();
-    }
 
     private CharSequence getModifier(final CharacterSkill characterSkill) {
-        return getContext().getResources().getString(R.string.skill_list_mod) +
-                COLON +
-                displayService.getDisplayModifier(characterSkill.getModifier());
+        return getContext().getResources().getString(R.string.skill_list_mod) + COLON + displayService.getDisplayModifier(characterSkill.getModifier());
     }
+
 }

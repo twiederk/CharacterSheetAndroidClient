@@ -2,14 +2,14 @@ package com.android.ash.charactersheet.boc.service;
 
 import android.content.Context;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.android.ash.charactersheet.AndroidObjectMother;
 import com.d20charactersheet.framework.boc.service.BaseCharacterServiceTest;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 @RunWith(AndroidJUnit4.class)
 public class AndroidCharacterServiceInstrumentedTest extends BaseCharacterServiceTest {
@@ -27,6 +27,7 @@ public class AndroidCharacterServiceInstrumentedTest extends BaseCharacterServic
         human = objectMother.getRace("Human");
     }
 
+    @SuppressWarnings("SameReturnValue")
     @Override
     protected int getNumberOfCharacters() {
         return 1;

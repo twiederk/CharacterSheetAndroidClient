@@ -17,11 +17,20 @@
     <TableRow>
 
         <TextView
+            android:id="@+id/skill_rank_label"
             style="@style/AppTheme"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:padding="4dp"
             android:text="@string/skill_edit_rank" />
+
+        <TextView
+            android:id="@+id/skill_proficiency_label"
+            style="@style/AppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:padding="4dp"
+            android:text="@string/skill_edit_proficiency" />
 
         <TextView
             style="@style/AppTheme"
@@ -37,6 +46,13 @@
             android:id="@+id/skill_rank"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent" />
+
+        <CheckBox
+            android:id="@+id/skill_proficiency"
+            style="@style/AppTheme.ListItemHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false" />
 
         <com.android.ash.charactersheet.gui.widget.numberview.StepNumberView
             android:id="@+id/skill_modifier"

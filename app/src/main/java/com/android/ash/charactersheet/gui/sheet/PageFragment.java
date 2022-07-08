@@ -1,11 +1,16 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.android.ash.charactersheet.CharacterHolder;
 import com.android.ash.charactersheet.GameSystemHolder;
@@ -24,11 +29,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 /**
  * Base class for fragments which are part of the character sheet.
@@ -52,6 +53,7 @@ public abstract class PageFragment extends LogFragment {
 
     View view;
 
+    @SuppressWarnings("deprecation")
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);

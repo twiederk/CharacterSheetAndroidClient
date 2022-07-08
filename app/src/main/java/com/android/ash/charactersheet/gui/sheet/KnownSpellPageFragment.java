@@ -1,5 +1,7 @@
 package com.android.ash.charactersheet.gui.sheet;
 
+import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,8 +36,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.HashMap;
 import java.util.List;
-
-import static com.android.ash.charactersheet.Constants.INTENT_EXTRA_DATA_OBJECT;
 
 /**
  * The KnownSpellPageFragment displays a tab for each spell list the character can access. The checkbox show all,
@@ -127,6 +127,7 @@ public class KnownSpellPageFragment extends PageFragment implements OnItemClickL
 
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);

@@ -14,6 +14,7 @@ import com.android.ash.charactersheet.gui.main.charactercreator.viewmodel.RaceSc
 import com.android.ash.charactersheet.gui.main.characterlist.CharacterListViewModel
 import com.android.ash.charactersheet.gui.sheet.FragmentPagerFactory
 import com.android.ash.charactersheet.gui.sheet.SheetPanelFactory
+import com.android.ash.charactersheet.gui.sheet.skill.SkillEditArrayAdapterFactory
 import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -53,5 +54,6 @@ val appModule = module {
     single { AbilityScoresScreenViewModel(get(), get()) }
     single { EquipmentScreenViewModel(get()) }
     single { CharacterListViewModel() }
+    single { SkillEditArrayAdapterFactory() }
 }
 // end::koinConfiguration[]
