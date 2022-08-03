@@ -59,11 +59,10 @@ class CharacterSheetActivityKoinTest : KoinTest {
         CharacterSheetActivity().logEventCharacter(character)
 
         // Assert
-        argumentCaptor<Bundle> {
-            verify(firebaseAnalytics).logEvent(eq("character_open"), capture())
-            assertThat(firstValue.getString("race_name")).isEqualTo("myRace")
-            assertThat(firstValue.getString("class_levels")).isEqualTo("myFirstClass (1);mySecondClass (2);")
-        }
+        val captor = argumentCaptor<Bundle>()
+        verify(firebaseAnalytics).logEvent(eq("character_open"), captor.capture())
+        assertThat(captor.firstValue.getString("race_name")).isEqualTo("myRace")
+        assertThat(captor.firstValue.getString("class_levels")).isEqualTo("myFirstClass (1);mySecondClass (2);")
     }
 
 }

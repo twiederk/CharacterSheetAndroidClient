@@ -1,19 +1,24 @@
 package com.android.ash.charactersheet.gui.main;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.backup.BackupManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.provider.OpenableColumns;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
@@ -22,15 +27,13 @@ import com.android.ash.charactersheet.R;
 import com.android.ash.charactersheet.backuprestore.FileBackupAgent;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.dac.dao.sql.sqlite.DBHelper;
-import com.android.ash.charactersheet.gui.util.FileComparator;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
-import com.android.ash.charactersheet.gui.widget.FileListAdapter;
-import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,15 +41,13 @@ import java.util.Objects;
 
 import kotlin.Lazy;
 
-import static org.koin.java.KoinJavaComponent.inject;
-
 /**
  * Allows to backup databases to cloud and file and restore from file. The Backup to Cloud button uses the Android
  * backup mechanism to store the database to the cloud. The button Backup to File stores the select database with
  * version and date to the download directory. The list displays databases located in the download directory. Touching a
  * file restores it.
  */
-public class BackupRestoreActivity extends LogAppCompatActivity implements OnItemClickListener {
+public class BackupRestoreActivity extends LogAppCompatActivity {
 
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
@@ -60,6 +61,44 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
 
     private BackupManager backupManager;
     private FileBackupAgent fileBackupAgent;
+
+    private final ActivityResultLauncher<Intent> openDocumentActivityResultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        String fileName = null;
+                        GameSystemType gameSystemType = null;
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            try {
+                                Intent intent = result.getData();
+                                if (intent == null) {
+                                    throw new IllegalStateException("data of intent is null");
+                                }
+                                Uri uri = intent.getData();
+
+                                fileName = getFileName(uri);
+                                gameSystemType = getGameSystemType(fileName);
+
+                                InputStream inputStream = getContentResolver().openInputStream(uri);
+
+                                confirmRestore(gameSystemType, fileName, inputStream);
+                            } catch (Exception exception) {
+                                Logger.error("Can't restore from file: " + fileName, exception);
+                                String gameSystemName = gameSystemType != null ? gameSystemType.getName() : "unknown";
+                                final String message = getMessage(gameSystemName, R.string.backup_restore_message_restore_failure,
+                                        exception.getMessage());
+                                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+    private String getFileName(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int displayNameColumnIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        String fileName = cursor.getString(displayNameColumnIndex);
+        cursor.close();
+        return fileName;
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -139,18 +178,18 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
         if (checkbox.isChecked()) {
             try {
                 final File backupFile = fileBackupAgent.backup(gameSystemType);
-                messages.add(getMessage(gameSystemType, R.string.backup_restore_message_backup_succeed,
+                messages.add(getMessage(gameSystemType.getName(), R.string.backup_restore_message_backup_succeed,
                         backupFile.toString()));
             } catch (final IOException ioException) {
                 Logger.error("Can't backup to file", ioException);
-                messages.add(getMessage(gameSystemType, R.string.backup_restore_message_backup_failure,
+                messages.add(getMessage(gameSystemType.getName(), R.string.backup_restore_message_backup_failure,
                         ioException.getMessage()));
             }
         }
     }
 
-    private String getMessage(final GameSystemType gameSystemType, final int resourceId, final String text) {
-        return gameSystemType.getName() + COLON + getResources().getString(resourceId) + COLON + text;
+    private String getMessage(final String gameSystemName, final int resourceId, final String text) {
+        return gameSystemName + COLON + getResources().getString(resourceId) + COLON + text;
     }
 
     private String getMessage(final List<String> messages) {
@@ -171,25 +210,21 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
 
     private void createRestoreFromFileLayout() {
         createDirectoryTextView(R.id.backup_restore_restore_directory, R.string.backup_restore_restore_directory);
-        createFilesListView();
-
+        createRestoreFromFileButton();
     }
 
     private void createDirectoryTextView(final int textViewId, final int textId) {
-
         final TextView textView = findViewById(textViewId);
-        String text = getResources().getString(textId) +
-                " " +
-                DirectoryAndFileHelper.getBackupDirectory().getPath();
+        String text = getResources().getString(textId) + " " + DirectoryAndFileHelper.getBackupDirectory().getPath();
         textView.setText(text);
     }
 
-    private void createFilesListView() {
+    private void createRestoreFromFileButton() {
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
         } else {
-            readBackupFilesAndShowInListView();
+            configureRestoreFromFileButton();
         }
 
     }
@@ -199,50 +234,40 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                readBackupFilesAndShowInListView();
+                configureRestoreFromFileButton();
             }
         }
     }
 
-    private void readBackupFilesAndShowInListView() {
-        final List<File> files = fileBackupAgent.getBackupFiles();
-        files.sort(new FileComparator());
-        final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<>(files));
+    private void configureRestoreFromFileButton() {
+        final Button restoreFromFileButton = findViewById(R.id.backup_restore_restore_from_file_button);
+        restoreFromFileButton.setOnClickListener(v -> launchIntentForOpenDocumentActivity());
+    }
 
-        final ListView listView = getListView();
-        listView.setAdapter(adapter);
-        listView.setTextFilterEnabled(true);
-        listView.setOnItemClickListener(this);
+    private void launchIntentForOpenDocumentActivity() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        openDocumentActivityResultLauncher.launch(intent);
     }
 
 
-    private ListView getListView() {
-        return findViewById(android.R.id.list);
-    }
-
-    @Override
-    public void onItemClick(final AdapterView<?> adapterView, final View view, final int position, final long id) {
-        final File restoreFile = (File) adapterView.getItemAtPosition(position);
-        final GameSystemType gameSystemType = getGameSystemType(restoreFile);
-        confirmRestore(gameSystemType, restoreFile);
-    }
-
-    private GameSystemType getGameSystemType(final File backupFile) {
+    private GameSystemType getGameSystemType(final String fileName) {
         for (final GameSystemType gameSystemType : GameSystemType.values()) {
-            if (backupFile.getName().startsWith(gameSystemType.getDatabaseName())) {
+            if (fileName.startsWith(gameSystemType.getDatabaseName())) {
                 return gameSystemType;
             }
 
         }
-        throw new IllegalArgumentException("Can't get game system of backup file: " + backupFile);
+        throw new IllegalArgumentException("Can't get game system of backup file: " + fileName);
     }
 
-    private void confirmRestore(final GameSystemType gameSystemType, final File restoreFile) {
+    private void confirmRestore(final GameSystemType gameSystemType, final String fileName, final InputStream inputStream) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(R.string.backup_restore_dialog_title);
-        builder.setMessage(getMessage(gameSystemType, restoreFile));
-        builder.setPositiveButton(R.string.backup_restore_dialog_restore_button, (dialog, id) -> restoreFromFile(gameSystemType, restoreFile));
+        builder.setMessage(getMessage(gameSystemType, fileName));
+        builder.setPositiveButton(R.string.backup_restore_dialog_restore_button, (dialog, id) -> restoreFromFile(gameSystemType, inputStream));
         builder.setNegativeButton(R.string.backup_restore_dialog_cancel_button, (dialog, id) -> {
             // user cancelled the dialog
         });
@@ -250,20 +275,20 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
         dialog.show();
     }
 
-    private String getMessage(final GameSystemType gameSystemType, final File restoreFile) {
-        return "Restore " + gameSystemType.getName() + " from file " + restoreFile.getName();
+    private String getMessage(final GameSystemType gameSystemType, final String fileName) {
+        return "Restore " + gameSystemType.getName() + " from file " + fileName;
     }
 
-    private void restoreFromFile(final GameSystemType gameSystemType, final File restoreFile) {
+    private void restoreFromFile(final GameSystemType gameSystemType, final InputStream inputStream) {
         Logger.debug("restoreFromFile");
-        Logger.debug("backupFile: " + restoreFile);
+        Logger.debug("inputStream: " + inputStream);
         try {
             // close database
             final DBHelper dbHelper = getDBHelper(gameSystemType);
             dbHelper.close();
 
             // restore file
-            fileBackupAgent.restore(gameSystemType, restoreFile);
+            fileBackupAgent.restore(gameSystemType, inputStream);
 
             // drop game system to reload it in CharacterListActivity
             gameSystemHolder.getValue().setGameSystem(null);
@@ -271,8 +296,8 @@ public class BackupRestoreActivity extends LogAppCompatActivity implements OnIte
             // return to CharacterListActivity
             finish();
         } catch (final Exception exception) {
-            Logger.error("Can't restore from file: " + restoreFile, exception);
-            final String message = getMessage(gameSystemType, R.string.backup_restore_message_restore_failure,
+            Logger.error("Can't restore from file: " + inputStream, exception);
+            final String message = getMessage(gameSystemType.getName(), R.string.backup_restore_message_restore_failure,
                     exception.getMessage());
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }

@@ -6,7 +6,9 @@ import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.appModule
 import com.android.ash.charactersheet.gui.util.Logger
 import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.BillingClient.*
+import com.android.billingclient.api.BillingClient.BillingResponseCode
+import com.android.billingclient.api.BillingClient.Builder
+import com.android.billingclient.api.BillingClient.SkuType
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.Purchase.PurchaseState
@@ -23,7 +25,13 @@ import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoMoreInteractions
+import org.mockito.kotlin.whenever
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -176,10 +184,9 @@ class BillingRobolectricTest : KoinTest {
         underTest.startBillingFlow(mock())
 
         // Assert
-        argumentCaptor<Int> {
-            verify(messageDisplay).display(capture())
-            assertThat(firstValue).isEqualTo(R.string.billing_no_connection)
-        }
+        val captor = argumentCaptor<Int>()
+        verify(messageDisplay).display(captor.capture())
+        assertThat(captor.firstValue).isEqualTo(R.string.billing_no_connection)
     }
 
     @Test
@@ -194,10 +201,9 @@ class BillingRobolectricTest : KoinTest {
         underTest.startBillingFlow(mock())
 
         // Assert
-        argumentCaptor<Int> {
-            verify(messageDisplay).display(capture())
-            assertThat(firstValue).isEqualTo(R.string.billing_no_connection)
-        }
+        val captor = argumentCaptor<Int>()
+        verify(messageDisplay).display(captor.capture())
+        assertThat(captor.firstValue).isEqualTo(R.string.billing_no_connection)
     }
 
     @Test

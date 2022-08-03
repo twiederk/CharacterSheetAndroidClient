@@ -13,14 +13,11 @@ import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -30,6 +27,8 @@ import java.util.Locale;
 public class FileBackupAgent {
 
     static final String SEPARATOR = "_";
+
+    static final int DEFAULT_BUFFER_SIZE = 8192;
 
     private final Context context;
 
@@ -115,45 +114,27 @@ public class FileBackupAgent {
         return databaseName + SEPARATOR + versionName + SEPARATOR + date;
     }
 
-    /**
-     * Returns all files in the download directory belonging to a game system.
-     *
-     * @return All files in the download directory belonging to a game system.
-     */
-    public List<File> getBackupFiles() {
-        File[] files = DirectoryAndFileHelper.getBackupDirectory().listFiles(new BackupFilenameFilter());
-        if (files == null) {
-            return Collections.emptyList();
-        }
-        return Arrays.asList(files);
-    }
-
-    /**
-     * Filters backup files. The name of the backup file must start with the database name of a game system.
-     */
-    static class BackupFilenameFilter implements FilenameFilter {
-
-        @Override
-        public boolean accept(final File dir, final String name) {
-            for (final String databaseName : DBHelper.getDatabaseNames()) {
-                if (name.startsWith(databaseName)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
 
     /**
      * Restores a backup file.
      *
      * @param gameSystemType The game system to restore the file of.
-     * @param restoreFile    The file to restore.
+     * @param inputStream    The input stream to restore.
      * @throws IOException Thrown if the restore failed by an I/O operation.
      */
-    public void restore(final GameSystemType gameSystemType, final File restoreFile) throws IOException {
+    public void restore(final GameSystemType gameSystemType, final InputStream inputStream) throws IOException {
         final File destFile = context.getDatabasePath(gameSystemType.getDatabaseName());
-        copyFile(restoreFile, destFile);
+        copyFile(inputStream, destFile);
+    }
+
+    private void copyFile(InputStream srcInputStream, File destFile) throws IOException {
+        try (FileOutputStream outputStream = new FileOutputStream(destFile, false)) {
+            int read;
+            byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+            while ((read = srcInputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        }
     }
 
 }

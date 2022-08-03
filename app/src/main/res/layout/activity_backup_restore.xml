@@ -76,17 +76,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
-    <TextView
+    <Button
+        android:id="@+id/backup_restore_restore_from_file_button"
         style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/backup_restore_restore_from_file" />
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
 
 </LinearLayout>

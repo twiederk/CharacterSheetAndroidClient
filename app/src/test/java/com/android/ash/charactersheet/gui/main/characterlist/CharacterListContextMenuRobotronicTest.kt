@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.model.Character
 import com.d20charactersheet.framework.boc.service.GameSystem
 import com.d20charactersheet.framework.dsl.createCharacter
 import com.google.firebase.analytics.FirebaseAnalytics
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +24,12 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -81,11 +86,10 @@ class CharacterListContextMenuRobotronicTest : KoinTest {
         // Assert
         verify(gameSystemHolder.gameSystem)?.deleteCharacter(character)
         verify(adapter).remove(character)
-        argumentCaptor<Bundle> {
-            verify(firebaseAnalytics).logEvent(any(), capture())
-            Assertions.assertThat(firstValue.getString("race_name")).isEqualTo("myRace")
-            Assertions.assertThat(firstValue.getString("class_name")).isEqualTo("myClass")
-        }
+        val captor = argumentCaptor<Bundle>()
+        verify(firebaseAnalytics).logEvent(any(), captor.capture())
+        assertThat(captor.firstValue.getString("race_name")).isEqualTo("myRace")
+        assertThat(captor.firstValue.getString("class_name")).isEqualTo("myClass")
     }
 
     @Test

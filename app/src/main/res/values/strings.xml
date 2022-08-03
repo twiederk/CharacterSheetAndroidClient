@@ -450,7 +450,7 @@
     <string name="backup_restore_message_select_checkbox">Please select a game system to backup.</string>
     <string name="backup_restore_message_backup_failure">Backup failed</string>
     <string name="backup_restore_message_backup_succeed">Backup succeeded</string>
-    <string name="backup_restore_restore_from_file">Touch file to restore</string>
+    <string name="backup_restore_restore_from_file">Select file to restore</string>
     <string name="backup_restore_message_restore_failure">Restore failed</string>
     <string name="backup_restore_message_backup_to_cloud">Performing Backup to Cloud</string>
     <string name="backup_restore_dialog_restore_button">Restore</string>
@@ -529,7 +529,7 @@
     <!-- ImportActivity -->
     <string name="import_title">Import Characters</string>
     <string name="import_import_directory">Import Directory:</string>
-    <string name="import_import_from_file">Touch file to import</string>
+    <string name="import_import_from_file">Select file to import</string>
     <string name="import_dialog_title">Import from file</string>
     <string name="import_dialog_import_button">Import</string>
     <string name="import_dialog_cancel_button">Cancel</string>
@@ -1000,5 +1000,6 @@
     <string name="release_notes_4_10_0">Release 4.10.0\n- Added spells of Dungeons &amp; Dragons 5th edition.\n- Bug fix: Fixed calculation of proficiency bonus for level 4, 8, 12, 16 and 20.\n\n</string>
     <string name="release_notes_4_11_0">Release 4.11.0\n- Added option to sent feedback about the app directly to the developer.\n\n</string>
     <string name="release_notes_4_12_0">Release 4.12.0\n- Added skills of Dungeons &amp; Dragons 5th edition.\n\n</string>
+    <string name="release_notes_4_13_0">Release 4.13.0\n- Bug fix: Fixed restore and import with Scoped Storage in Android 11 and higher.\n\n</string>
 
 </resources>

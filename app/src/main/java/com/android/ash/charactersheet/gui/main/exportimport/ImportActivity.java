@@ -2,30 +2,32 @@ package com.android.ash.charactersheet.gui.main.exportimport;
 
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
 import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_EQUIPMENT_FILE_PREFIX;
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_FILE_SUFFIX;
 import static org.koin.java.KoinJavaComponent.inject;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.provider.OpenableColumns;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.gui.util.FileComparator;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.ash.charactersheet.gui.util.Logger;
-import com.android.ash.charactersheet.gui.widget.FileListAdapter;
 import com.android.ash.charactersheet.gui.widget.ListModel;
 import com.android.ash.charactersheet.util.DirectoryAndFileHelper;
 import com.d20charactersheet.framework.boc.model.Armor;
@@ -50,10 +52,8 @@ import com.d20charactersheet.framework.boc.service.exportimport.ImportMessage.Ty
 import com.d20charactersheet.framework.boc.service.exportimport.ImportReport;
 import com.d20charactersheet.framework.boc.util.ImportReportComparator;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -65,7 +65,7 @@ import kotlin.Lazy;
  * d20_characters located in it. By touching an file the user has to confirm to import this file. The file is imported
  * if the user confirms.
  */
-public class ImportActivity extends LogAppCompatActivity implements OnItemClickListener {
+public class ImportActivity extends LogAppCompatActivity {
 
     private final Lazy<GameSystemHolder> gameSystemHolder = inject(GameSystemHolder.class);
 
@@ -92,8 +92,7 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
         } else {
-            createImportDirectoryTextView();
-            createFilesListView();
+            createImportLayout();
         }
     }
 
@@ -109,65 +108,63 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                createImportDirectoryTextView();
-                createFilesListView();
+                createImportLayout();
             }
         }
     }
 
-    private void createImportDirectoryTextView() {
-
+    private void createImportLayout() {
         final TextView textView = findViewById(R.id.import_import_directory);
-        String text = getResources().getString(R.string.import_import_directory) +
-                " " +
-                DirectoryAndFileHelper.getExportDirectory().getPath();
+        String text = getResources().getString(R.string.import_import_directory) + EMPTY_SPACE + DirectoryAndFileHelper.getExportDirectory().getPath();
         textView.setText(text);
+
+        final Button restoreFromFileButton = findViewById(R.id.import_import_from_file_button);
+        restoreFromFileButton.setOnClickListener(v -> launchIntentForOpenDocumentActivity());
     }
 
-    private void createFilesListView() {
-        final List<File> files = getImportFiles();
-        files.sort(new FileComparator());
-        final FileListAdapter adapter = new FileListAdapter(this, R.layout.listitem_name, new ListModel<>(files));
-
-        final ListView listView = getListView();
-        listView.setAdapter(adapter);
-        listView.setTextFilterEnabled(true);
-        listView.setOnItemClickListener(this);
-
+    private void launchIntentForOpenDocumentActivity() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        openDocumentActivityResultLauncher.launch(intent);
     }
 
-    private List<File> getImportFiles() {
-        return Arrays.asList(Objects.requireNonNull(DirectoryAndFileHelper.getBackupDirectory().listFiles(new ImportFilenameFilter())));
+    private final ActivityResultLauncher<Intent> openDocumentActivityResultLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        String fileName = null;
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            try {
+                                Intent intent = result.getData();
+                                if (intent == null) {
+                                    throw new IllegalStateException("data of intent is null");
+                                }
+                                Uri uri = intent.getData();
+                                fileName = getFileName(uri);
+                                InputStream importStream = getContentResolver().openInputStream(uri);
+                                confirmRestore(fileName, importStream);
+                            } catch (Exception exception) {
+                                Logger.error("Can't import from file: " + fileName, exception);
+                                Toast.makeText(this, "Can't import from file: " + fileName, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+    private String getFileName(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int displayNameColumnIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        String fileName = cursor.getString(displayNameColumnIndex);
+        cursor.close();
+        return fileName;
     }
 
-    private ListView getListView() {
-        return findViewById(android.R.id.list);
-    }
-
-    @Override
-    public void onItemClick(final AdapterView<?> adapterView, final View view, final int position, final long id) {
-        final File importFile = (File) adapterView.getItemAtPosition(position);
-        confirmRestore(importFile);
-    }
-
-    /**
-     * Filters files which name starts with d20cs_characters and end with xml.
-     */
-    static class ImportFilenameFilter implements FilenameFilter {
-
-        @Override
-        public boolean accept(final File dir, final String name) {
-            return name.endsWith(EXPORT_FILE_SUFFIX)
-                    && (name.startsWith(EXPORT_CHARACTER_FILE_PREFIX) || name.startsWith(EXPORT_EQUIPMENT_FILE_PREFIX));
-        }
-    }
-
-    private void confirmRestore(final File importFile) {
+    private void confirmRestore(String fileName, final InputStream importStream) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(R.string.import_dialog_title);
-        builder.setMessage(getMessage(importFile));
-        builder.setPositiveButton(R.string.import_dialog_import_button, (dialog, id) -> importFile(importFile));
+        builder.setMessage(getResources().getString(R.string.import_dialog_message) + EMPTY_SPACE + fileName);
+        builder.setPositiveButton(R.string.import_dialog_import_button, (dialog, id) -> importStream(fileName, importStream));
         builder.setNegativeButton(R.string.import_dialog_cancel_button, (dialog, id) -> {
             // user cancelled the dialog
         });
@@ -175,17 +172,11 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
         dialog.show();
     }
 
-    private String getMessage(final File importFile) {
-        return getResources().getString(R.string.import_dialog_message) +
-                EMPTY_SPACE +
-                importFile.getName();
-    }
-
-    private void importFile(final File importFile) {
-        if (importFile.getName().startsWith(EXPORT_CHARACTER_FILE_PREFIX)) {
-            new ImportCharacter(this).importCharacters(importFile);
-        } else if (importFile.getName().startsWith(EXPORT_EQUIPMENT_FILE_PREFIX)) {
-            new ImportEquipment(this, gameSystem.getDisplayService()).importEquipment(importFile);
+    private void importStream(String fileName, final InputStream importStream) {
+        if (fileName.startsWith(EXPORT_CHARACTER_FILE_PREFIX)) {
+            new ImportCharacter(this).importCharacters(fileName, importStream);
+        } else if (fileName.startsWith(EXPORT_EQUIPMENT_FILE_PREFIX)) {
+            new ImportEquipment(this, gameSystem.getDisplayService()).importEquipment(fileName, importStream);
         }
     }
 
@@ -202,7 +193,7 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
         final ImportMessageAdapter adapter = new ImportMessageAdapter(this, R.layout.listitem_importmessage,
                 new ListModel<>(importMessages));
 
-        final ListView listView = getListView();
+        final ListView listView = findViewById(android.R.id.list);
         listView.setAdapter(adapter);
     }
 
@@ -230,9 +221,7 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
 
     private ImportMessage getResultMessage(final ImportReport<?> importReport, final int resourceId,
                                            final Type type) {
-        String message = importReport.getImportObject().toString() +
-                EMPTY_SPACE +
-                getString(resourceId);
+        String message = importReport.getImportObject().toString() + EMPTY_SPACE + getString(resourceId);
         return new ImportMessage(message, type);
     }
 
@@ -253,19 +242,20 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
         }
 
         /**
-         * Imports characters from the given file and creates them in the game system.
+         * Imports characters from the given input stream and creates them in the game system.
          *
-         * @param importFile The file to import.
+         * @param fileName     The name of the file to import.
+         * @param importStream The stream to import.
          */
-        void importCharacters(final File importFile) {
+        void importCharacters(String fileName, final InputStream importStream) {
             Logger.debug("importCharacters");
             final ExportImportService exportImportService = gameSystem.getExportImportService();
             try {
                 final List<ImportReport<Character>> importReports = exportImportService.importCharacters(gameSystem,
-                        importFile);
+                        importStream);
                 createCharacters(importReports);
             } catch (final Exception exception) {
-                Logger.error("Can't import characters: " + importFile, exception);
+                Logger.error("Can't import characters: " + fileName, exception);
                 final String message = getMessage(exception.getMessage());
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
@@ -408,22 +398,23 @@ public class ImportActivity extends LogAppCompatActivity implements OnItemClickL
         }
 
         /**
-         * Imports equipment form the given file and creates it in the game system.
+         * Imports equipment form the given input stream and creates it in the game system.
          *
-         * @param importFile The file to import.
+         * @param fileName     The name of the file to import
+         * @param importStream The stream to import.
          */
-        void importEquipment(final File importFile) {
+        void importEquipment(String fileName, final InputStream importStream) {
             Logger.debug("importEquipment");
             final ExportImportService exportImportService = gameSystem.getExportImportService();
             try {
                 final List<ImportReport<? extends Item>> importReports = exportImportService.importEquipment(
-                        gameSystem, importFile);
+                        gameSystem, importStream);
                 final boolean isNewItemCreated = createItems(importReports);
                 if (isNewItemCreated) {
                     gameSystem.clear();
                 }
             } catch (final Exception exception) {
-                Logger.error("Can't import equipment: " + importFile, exception);
+                Logger.error("Can't import equipment: " + fileName, exception);
                 final String message = getMessage(exception.getMessage());
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
