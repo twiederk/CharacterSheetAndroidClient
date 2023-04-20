@@ -416,13 +416,13 @@
 
     <!-- AboutActivity -->
     <string name="about_title">Manual</string>
-    <string name="about_manual">Manual: http://www.d20CharacterSheet.com/manual.html</string>
-    <string name="about_homepage">Homepage: http://www.d20CharacterSheet.com</string>
+    <string name="about_manual">Manual: http://d20cs.bplaced.net/manual.html</string>
+    <string name="about_homepage">Homepage: http://d20cs.bplaced.net/</string>
     <string name="about_join">You\'re welcome to join the open source project on GitHub: https://github.com/twiederk/d20Framework/</string>
     <string name="about_contact">Please report suggestions and problems to torsten.wiederkehr@gmail.com</string>
     <string name="about_thanks">Thanks to Holger Trapp for supplying spells of DnD v.3.5\nThanks to Zhacrie White for entering description of goods of DnD v.3.5\nThanks to Michel Chartrand for entering the races of the Advanced Races Guide</string>
     <string name="about_ogl">Open Gaming Licence</string>
-    <string name="about_copyright">Copyright &#169; 2009&#8211;2022 Torsten Wiederkehr\nAll rights reserved</string>
+    <string name="about_copyright">Copyright &#169; 2009&#8211;2023 Torsten Wiederkehr\nAll rights reserved</string>
     <string name="about_image_hint">Icon of application</string>
 
     <!-- OpenGamingLicenceActivity -->
@@ -928,7 +928,7 @@
     <string name="release_notes_1_8_0">Release 1.8.0\n- Character class administration added\n- Capitalize of first letters added\n- Performance of skill saving improved\n\n</string>
     <string name="release_notes_1_9_0">Release 1.9.0\n- Equipment list with weapons, armor and goods added\n- Calculation of load added\n\n</string>
     <string name="release_notes_1_10_0">Release 1.10.0\n- Magic weapons and armor added\n- Data on orientation change retained\n\n</string>
-    <string name="release_notes_1_11_0">Release 1.11.0\n- Weapon creation and edition added\n- FAQs and history added to homepage (see http://www.d20CharacterSheet.com)\n\n</string>
+    <string name="release_notes_1_11_0">Release 1.11.0\n- Weapon creation and edition added\n- FAQs and history added to homepage (see http://d20cs.bplaced.net/)\n\n</string>
     <string name="release_notes_1_11_1">Release 1.11.1\n- Bug Fix. Fixed bug occurred by expanding detail data of armor and goods\n\n</string>
     <string name="release_notes_1_12_0">Release 1.12.0\n- Armor creation and edition added\n\n</string>
     <string name="release_notes_1_12_1">Release 1.12.1\n- Bug Fix. Fixed bug occurred by adding images with Android 2.x\n\n</string>
@@ -954,7 +954,7 @@
     <string name="release_notes_2_6_1">Release 2.6.1\n- Bug Fix. Fixed bug displaying notes in one line only\n\n</string>
     <string name="release_notes_2_7_0">Release 2.7.0\n- Added Backup &amp; Restore to/from File (SD Card)\n- Bug Fix: Fixed display of misc modifier buttons in edit skill mask on phones\n- Bug Fix: Fixed removing an item while adding a new one to the equipment list\n- Bug Fix: Allow negative values for misc attack and damage modifier\n- Pathfinder: Bug Fix: Fixed base attack bonus of Rogue from good to average\n\n</string>
     <string name="release_notes_2_8_0">Release 2.8.0\n- Added export and import of characters\n- Display skills in one line on 7 inch devices\n- Bug Fix: App crashed by assigning spell ability to a class or race in administration\n- Bug Fix: Display bonuses with two digits on buttons correctly\n\n</string>
-    <string name="release_notes_2_9_0">Release 2.9.0\n- Added export and import of weapons, armor and goods. I would like to offer new equipment to import via download from the homepage (www.d20charactersheet.com). If you have items you want to share with other users of the app. It would be great if you send me your exported items and I will place them on the homepage for download. Please contact me via torsten.wiederkehr@gmail.com\n- Reduced memory requirements to improve stability, while app is running in background\n\n</string>
+    <string name="release_notes_2_9_0">Release 2.9.0\n- Added export and import of weapons, armor and goods. I would like to offer new equipment to import via download from the homepage (d20cs.bplaced.net). If you have items you want to share with other users of the app. It would be great if you send me your exported items and I will place them on the homepage for download. Please contact me via torsten.wiederkehr@gmail.com\n- Reduced memory requirements to improve stability, while app is running in background\n\n</string>
     <string name="release_notes_2_10_0">Release 2.10.0\n- Added creation of spells.\n- Added creation of spell lists and assign spells to them.\n- Added creation of spell abilities to assign spell lists to them. By assigning spell abilities to a race or class you can assign your own spell lists with your own spells to your character.\n- Added search to all administration menus.\n- Bug fix: Fixed calculation of CMD.\n- Bug fix: Fixed import of masterwork items.\n- Bug fix: Fixed adding skills to classes in skill administration.\n\n</string>
     <string name="release_notes_2_11_0">Release 2.11.0\n- Added spell preparation. The tab Spells is replaced by two new tabs. The tab Known Spells allows to select the spells the character knows from a spell list and displays how many spells the character is allowed to known per spell level. The tab Spell Slots shows the spell slots of the character. Each spell slot can be touched to select a spell. A spell slot displays the name, DC, ability and school of the spell. Spell slots are in the color of the school to easily identify counter spells. After a spell is cast, the color changes to grey and the spell name is stroked through. Metamagic feats are supported.\n- Added search field to add/remove equipment mask.\n- Added Immediate and Swift action" to casting time.\n- Bug Fix. Fixed bug when adding extra points received by an extra feat ability of a class.\n\n</string>
     <string name="release_notes_2_11_1">Release 2.11.1\nBug fix: Fixed missing spells slots of max spell level of spell list\nBug fix: Fixed spell slots lower then min level of spell list\nBug fix: Fixed modifying spell list abilities created before version 2.11.0\nBug fix: Fixed saving of skills, including negative modifiers\n\n</string>
@@ -1001,5 +1001,6 @@
     <string name="release_notes_4_11_0">Release 4.11.0\n- Added option to sent feedback about the app directly to the developer.\n\n</string>
     <string name="release_notes_4_12_0">Release 4.12.0\n- Added skills of Dungeons &amp; Dragons 5th edition.\n\n</string>
     <string name="release_notes_4_13_0">Release 4.13.0\n- Bug fix: Fixed restore and import with Scoped Storage in Android 11 and higher.\n\n</string>
+    <string name="release_notes_4_14_0">Release 4.14.0\n- Added support for Android 14.\n\n</string>
 
 </resources>

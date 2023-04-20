@@ -1,7 +1,10 @@
 package com.android.ash.charactersheet.gui.main.exportimport;
 
+import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -15,8 +18,6 @@ import com.d20charactersheet.framework.boc.service.ExportImportService;
 
 import java.io.File;
 import java.util.List;
-
-import static com.d20charactersheet.framework.boc.service.ExportImportService.EXPORT_CHARACTER_FILE_PREFIX;
 
 /**
  * Allows to export characters to xml. Displays the export directory. The the list of all characters with checkboxes to
@@ -66,9 +67,14 @@ public class ExportCharacterActivity extends AbstractExportActivity {
         }
 
         // export
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        String readPermission = Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            readPermission = Manifest.permission.READ_MEDIA_IMAGES;
+        }
+
+        if (checkSelfPermission(readPermission) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
+            requestPermissions(new String[]{readPermission, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_EXTERNAL_STORAGE);
         } else {
             exportCharacters();
         }
