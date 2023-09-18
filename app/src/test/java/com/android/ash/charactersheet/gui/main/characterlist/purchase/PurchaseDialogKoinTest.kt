@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.FBAnalytics
 import com.android.ash.charactersheet.appModule
-import com.android.ash.charactersheet.billing.Billing
+import com.android.ash.charactersheet.billing.Billing6
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.junit.After
 import org.junit.Before
@@ -16,20 +16,25 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.only
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 
 class PurchaseDialogKoinTest : KoinTest {
 
     private val firebaseAnalytics: FirebaseAnalytics by inject()
-    private val billing: Billing by inject()
+    private val billing: Billing6 by inject()
 
     @Before
     fun before() {
         startKoin {
             modules(appModule)
         }
-        declareMock<Billing>()
+        declareMock<Billing6>()
         declareMock<FirebaseAnalytics>()
     }
 

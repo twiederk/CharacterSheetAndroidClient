@@ -3,7 +3,7 @@ package com.android.ash.charactersheet.gui
 import com.android.ash.charactersheet.CharacterHolder
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.PreferenceServiceHolder
-import com.android.ash.charactersheet.billing.Billing
+import com.android.ash.charactersheet.billing.Billing6
 import com.android.ash.charactersheet.billing.MessageDisplay
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.gui.main.charactercreator.CharacterCreator
@@ -45,7 +45,7 @@ class KoinConfigurationInstrumentedTest : KoinTest {
     private val preferenceServiceHolder: PreferenceServiceHolder by inject()
     private val characterHolder: CharacterHolder by inject()
     private val firebaseAnalytics: FirebaseAnalytics by inject()
-    private val billing: Billing by inject()
+    private val billing: Billing6 by inject()
     private val messageDisplay: MessageDisplay by inject()
     private val characterCreator: CharacterCreator by inject()
     private val sheetPanelFactory: SheetPanelFactory by inject()

@@ -1,12 +1,16 @@
 package com.android.ash.charactersheet.gui.admin;
 
+import static org.koin.java.KoinJavaComponent.inject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.billing.Billing;
+import com.android.ash.charactersheet.billing.Billing6;
 import com.android.ash.charactersheet.gui.admin.ability.AbilityAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.clazz.CharacterClassAdministrationListActivity;
 import com.android.ash.charactersheet.gui.admin.feat.FeatAdministrationListActivity;
@@ -24,10 +28,7 @@ import com.android.billingclient.api.BillingClient;
 
 import java.util.Objects;
 
-import androidx.appcompat.widget.Toolbar;
 import kotlin.Lazy;
-
-import static org.koin.java.KoinJavaComponent.inject;
 
 
 /**
@@ -35,7 +36,7 @@ import static org.koin.java.KoinJavaComponent.inject;
  */
 public class AdministrationMenuActivity extends LogAppCompatActivity {
 
-    private final Lazy<Billing> billing = inject(Billing.class);
+    private final Lazy<Billing6> billing = inject(Billing6.class);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

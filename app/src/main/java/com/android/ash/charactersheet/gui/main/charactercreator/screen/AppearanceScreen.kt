@@ -50,7 +50,7 @@ fun AppearanceScreen(
                     Column(
                         modifier = Modifier
                             .verticalScroll(rememberScrollState())
-                            .padding(bottom = 50.dp)
+                            .padding(bottom = it.calculateBottomPadding())
                     ) {
                         OutlinedTextField(
                             value = name,

@@ -60,7 +60,7 @@ fun EquipmentScreen(
                     Column(
                         modifier = Modifier
                             .verticalScroll(rememberScrollState())
-                            .padding(bottom = 80.dp)
+                            .padding(bottom = it.calculateBottomPadding())
                     ) {
                         if (starterPackBoxViewModels.isEmpty()) {
                             EmptyEquipmentMessage()

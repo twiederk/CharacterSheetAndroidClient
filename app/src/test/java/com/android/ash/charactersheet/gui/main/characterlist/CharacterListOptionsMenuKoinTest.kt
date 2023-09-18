@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
 import com.android.ash.charactersheet.appModule
-import com.android.ash.charactersheet.billing.Billing
+import com.android.ash.charactersheet.billing.Billing6
 import com.android.ash.charactersheet.gui.main.characterlist.purchase.PurchaseDialog
 import com.d20charactersheet.framework.boc.service.GameSystem
 import org.assertj.core.api.Assertions.assertThat
@@ -26,14 +26,14 @@ import org.mockito.kotlin.whenever
 class CharacterListOptionsMenuKoinTest : KoinTest {
 
     private val gameSystemHolder: GameSystemHolder by inject()
-    private val billing: Billing by inject()
+    private val billing: Billing6 by inject()
 
     @Before
     fun before() {
         startKoin {
             modules(appModule)
         }
-        declareMock<Billing>()
+        declareMock<Billing6>()
     }
 
 

@@ -11,7 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.android.ash.charactersheet.billing.Billing;
+import com.android.ash.charactersheet.billing.Billing6;
 import com.android.ash.charactersheet.gui.util.LogAppCompatActivity;
 import com.android.billingclient.api.BillingClient;
 import com.google.android.gms.ads.MobileAds;
@@ -25,7 +25,7 @@ import kotlin.Lazy;
  */
 public class CharacterListActivity extends LogAppCompatActivity implements AbstractAsyncTask.GameSystemLoadable {
 
-    private final Lazy<Billing> billing = inject(Billing.class);
+    private final Lazy<Billing6> billing = inject(Billing6.class);
     private final Lazy<CharacterListViewModel> characterListViewModel = inject(CharacterListViewModel.class);
 
     private final CharacterListGameSystem characterListGameSystem = new CharacterListGameSystem();

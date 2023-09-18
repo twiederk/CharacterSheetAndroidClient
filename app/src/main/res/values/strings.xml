@@ -624,7 +624,7 @@
     <!-- Billing -->
     <string name="billing_no_connection">No connection established to Google Play. Please restart the app.</string>
     <string name="billing_no_connection_queryPurchases">Connection to Google Play is not ready (queryPurchases). Please restart the app.</string>
-    <string name="billing_no_connection_querySkuDetailsList">Connection to Google Play is not ready (querySkuDetailsList). Please restart the app.</string>
+    <string name="billing_no_connection_queryProductDetailsList">Connection to Google Play is not ready (queryProductDetailsList). Please restart the app.</string>
     <string name="billing_connection_error">Can\'t connect to Google Play. Response code is %1$d</string>
     <string name="billing_purchasesUpdated_error">Can\'t handle purchases. Response code is %1$d</string>
     <string name="billing_onAcknowledgePurchaseResponse_error">Can\'t acknowledge purchase. Response code is %1$d</string>
@@ -1001,6 +1001,7 @@
     <string name="release_notes_4_11_0">Release 4.11.0\n- Added option to sent feedback about the app directly to the developer.\n\n</string>
     <string name="release_notes_4_12_0">Release 4.12.0\n- Added skills of Dungeons &amp; Dragons 5th edition.\n\n</string>
     <string name="release_notes_4_13_0">Release 4.13.0\n- Bug fix: Fixed restore and import with Scoped Storage in Android 11 and higher.\n\n</string>
-    <string name="release_notes_4_14_0">Release 4.14.0\n- Added support for Android 14.\n\n</string>
+    <string name="release_notes_4_14_0">Release 4.14.0\n- Added support for Android 13.\n\n</string>
+    <string name="release_notes_4_15_0">Release 4.15.0\n- Added support for Android 14.\n\n</string>
 
 </resources>

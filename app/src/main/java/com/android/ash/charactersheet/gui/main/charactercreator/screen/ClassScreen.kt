@@ -42,7 +42,7 @@ import com.d20charactersheet.framework.boc.model.BaseAttackBonus
 import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.Die
 import com.d20charactersheet.framework.boc.model.Save
-import java.util.*
+import java.util.EnumSet
 
 
 @Composable
@@ -72,7 +72,7 @@ fun ClassScreen(
                     Column(
                         modifier = Modifier
                             .verticalScroll(rememberScrollState())
-                            .padding(bottom = 80.dp)
+                            .padding(bottom = it.calculateBottomPadding())
                     ) {
 
                         ClassList(

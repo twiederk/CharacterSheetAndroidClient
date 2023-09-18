@@ -21,7 +21,7 @@ import com.android.ash.charactersheet.FBAnalytics;
 import com.android.ash.charactersheet.GameSystemHolder;
 import com.android.ash.charactersheet.PreferenceServiceHolder;
 import com.android.ash.charactersheet.R;
-import com.android.ash.charactersheet.billing.Billing;
+import com.android.ash.charactersheet.billing.Billing6;
 import com.android.ash.charactersheet.boc.model.GameSystemType;
 import com.android.ash.charactersheet.boc.service.AndroidImageService;
 import com.android.ash.charactersheet.boc.service.PreferenceService;
@@ -52,7 +52,7 @@ public class CharacterSheetActivity extends LogAppCompatActivity {
     private final Lazy<PreferenceServiceHolder> preferencesServiceHolder = inject(PreferenceServiceHolder.class);
     private final Lazy<CharacterHolder> characterHolder = inject(CharacterHolder.class);
     private final Lazy<FirebaseAnalytics> firebaseAnalytics = inject(FirebaseAnalytics.class);
-    private final Lazy<Billing> billing = inject(Billing.class);
+    private final Lazy<Billing6> billing = inject(Billing6.class);
     private final Lazy<FragmentPagerFactory> fragmentPagerFactory = inject(FragmentPagerFactory.class);
 
     private GameSystem gameSystem;

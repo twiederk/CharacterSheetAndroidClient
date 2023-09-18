@@ -1,13 +1,14 @@
 buildscript {
     ext {
         kotlin_version = '1.9.0'
-        compose_version = '1.5.0'
+        compose_version = '1.5.4'
         compose_compiler_version = '1.5.0'
         koin_version = '3.1.5'
         espresso_version = '3.3.0'
         junitKtx_version = '1.1.5'
-        mockito_version = '4.0.0'
-        assertj_version = '3.22.0'
+        mockito_version = '5.6.0'
+        mockito_kotlin_version = '5.1.0'
+        assertj_version = '3.24.2'
     }
     repositories {
         mavenLocal()
@@ -15,9 +16,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'com.google.gms:google-services:4.4.0'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
     }
 }

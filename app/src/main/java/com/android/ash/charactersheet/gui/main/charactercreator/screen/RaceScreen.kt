@@ -65,7 +65,7 @@ fun RaceScreen(
                     Column(
                         modifier = Modifier
                             .verticalScroll(rememberScrollState())
-                            .padding(bottom = 80.dp)
+                            .padding(bottom = it.calculateBottomPadding())
                     ) {
                         RaceList(
                             selectedRace = race,

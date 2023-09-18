@@ -1,6 +1,6 @@
 package com.android.ash.charactersheet
 
-import com.android.ash.charactersheet.billing.Billing
+import com.android.ash.charactersheet.billing.Billing6
 import com.android.ash.charactersheet.billing.MessageDisplay
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.boc.service.PreferenceService
@@ -43,7 +43,7 @@ val appModule = module {
     single { PreferenceServiceHolder() }
     single { CharacterHolder() }
     single { FirebaseAnalytics.getInstance(androidContext()) }
-    single { Billing() }
+    single { Billing6() }
     single { MessageDisplay(androidContext()) }
     single { CharacterCreator() }
     single { SheetPanelFactory() }

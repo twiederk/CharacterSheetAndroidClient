@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.android.ash.charactersheet.GameSystemHolder
 import com.android.ash.charactersheet.R
-import com.android.ash.charactersheet.billing.Billing
+import com.android.ash.charactersheet.billing.Billing6
 import com.android.ash.charactersheet.boc.model.GameSystemType
 import com.android.ash.charactersheet.gui.admin.AdministrationMenuActivity
 import com.android.ash.charactersheet.gui.main.AboutActivity
@@ -28,7 +28,7 @@ class CharacterListOptionsMenu(
 ) : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()
-    private val billing: Billing by inject()
+    private val billing: Billing6 by inject()
 
     fun onCreateOptionsMenu(menu: Menu): Boolean {
         activity.menuInflater.inflate(R.menu.menu_activity_character_list, menu)
