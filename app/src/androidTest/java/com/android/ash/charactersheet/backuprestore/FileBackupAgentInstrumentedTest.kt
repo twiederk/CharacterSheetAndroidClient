@@ -32,7 +32,7 @@ class FileBackupAgentInstrumentedTest {
     @Throws(IOException::class)
     fun testBackup() {
         // Act
-        val backupFile = fileBackupAgent.backup(GameSystemType.DNDV35)
+        val backupFile = fileBackupAgent.backup(GameSystemType.DND5E)
 
         // Assert
         assertThat(backupFile).exists()
