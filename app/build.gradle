@@ -32,7 +32,7 @@ android {
         minSdkVersion 28
         targetSdkVersion 34
         versionCode 87
-        versionName "4.15.1-SNAPSHOT"
+        versionName "4.15.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
