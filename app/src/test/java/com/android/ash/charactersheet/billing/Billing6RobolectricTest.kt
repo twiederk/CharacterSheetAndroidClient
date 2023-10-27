@@ -207,7 +207,7 @@ class Billing6RobolectricTest : KoinTest {
     }
 
     @Test
-    fun onPurchasesUpdated_premiumVersionPurchased_setPremiumVersionAsPurchasedAndAknowledgePurchase() {
+    fun onPurchasesUpdated_premiumVersionPurchased_setPremiumVersionAsPurchasedAndAcknowledgePurchase() {
         // Arrange
         val billingResult: BillingResult = mock()
         whenever(billingResult.responseCode).doReturn(BillingResponseCode.OK)

@@ -11,7 +11,7 @@ class GameSystemTypeTest {
     fun values_checkNumbersOfGameSystems_returnsAllSupportedGameSystems() {
 
         // act
-        val gameSystemTypes = GameSystemType.values()
+        val gameSystemTypes = GameSystemType.entries.toTypedArray()
 
         // assert
         assertThat(gameSystemTypes).hasSize(3)

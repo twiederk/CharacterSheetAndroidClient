@@ -31,8 +31,8 @@ android {
         applicationId "com.android.ash.charactersheet"
         minSdkVersion 28
         targetSdkVersion 34
-        versionCode 87
-        versionName "4.15.1"
+        versionCode 88
+        versionName "4.15.2-snapshot"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,16 +54,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
     implementation "io.insert-koin:koin-core:$rootProject.koin_version"
     implementation "io.insert-koin:koin-android:$rootProject.koin_version"
-    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation "com.google.android.material:compose-theme-adapter:1.2.1"
-    implementation 'com.google.firebase:firebase-analytics:21.4.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.5.0'
-    implementation 'com.google.android.gms:play-services-ads:22.4.0'
-    implementation 'com.android.billingclient:billing-ktx:6.0.1'
+    implementation 'com.google.firebase:firebase-analytics:21.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.6.0'
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    implementation 'com.android.billingclient:billing-ktx:6.1.0'
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.fragment:fragment-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.compose.runtime:runtime:$rootProject.compose_version"
     implementation "androidx.compose.ui:ui:$rootProject.compose_version"
@@ -72,15 +72,15 @@ dependencies {
     implementation "androidx.compose.material:material:$rootProject.compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$rootProject.compose_version"
     implementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
-    implementation "androidx.navigation:navigation-compose:2.7.4"
-    implementation 'androidx.work:work-runtime:2.8.1'
+    implementation "androidx.navigation:navigation-compose:2.7.6"
+    implementation 'androidx.work:work-runtime:2.9.0'
     implementation 'io.doorbell:android-sdk:0.4.7@aar'
 
     // Instrumented Testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation "androidx.test.ext:junit-ktx:$rootProject.junitKtx_version"
     androidTestImplementation 'androidx.test:rules:1.5.0'
-    debugImplementation('androidx.fragment:fragment-testing:1.6.1') { exclude group: 'androidx.test', module: 'core' }
+    debugImplementation('androidx.fragment:fragment-testing:1.6.2') { exclude group: 'androidx.test', module: 'core' }
     debugImplementation "org.assertj:assertj-core:$rootProject.assertj_version"
     androidTestImplementation("io.insert-koin:koin-test:$rootProject.koin_version") { exclude group: 'org.mockito' }
     androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockito_kotlin_version"

@@ -1,11 +1,11 @@
 package com.android.ash.charactersheet.gui.main.charactercreator.navigation
 
 sealed class ScreenRoute(val route: String) {
-    object RaceScreenRoute : ScreenRoute("race_screen_route")
-    object ClassScreenRoute : ScreenRoute("class_screen_route")
-    object AppearanceScreenRoute : ScreenRoute("appearance_screen_route")
-    object AbilityScoresScreenRoute : ScreenRoute("ability_scores_screen_route")
-    object EquipmentScreenRoute : ScreenRoute("equipment_screen_route")
+    data object RaceScreenRoute : ScreenRoute("race_screen_route")
+    data object ClassScreenRoute : ScreenRoute("class_screen_route")
+    data object AppearanceScreenRoute : ScreenRoute("appearance_screen_route")
+    data object AbilityScoresScreenRoute : ScreenRoute("ability_scores_screen_route")
+    data object EquipmentScreenRoute : ScreenRoute("equipment_screen_route")
 }
 
 

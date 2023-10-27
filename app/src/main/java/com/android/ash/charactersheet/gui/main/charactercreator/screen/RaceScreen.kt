@@ -163,7 +163,8 @@ fun RaceCard(
     onRaceChange: (Race) -> Unit
 ) {
     val backgroundColor by animateColorAsState(
-        if (selected) MaterialTheme.colors.primary else Color.Transparent
+        if (selected) MaterialTheme.colors.primary else Color.Transparent,
+        label = "SelectedRaceAnimation"
     )
     val abilityScoreIncrease = remember { getAbilityScoreIncrease(race.abilities) }
     val imageBitmap = remember { getBitmap(race.imageId).asImageBitmap() }

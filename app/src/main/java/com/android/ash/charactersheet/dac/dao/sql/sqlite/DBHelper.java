@@ -129,7 +129,6 @@ public class DBHelper extends SQLiteOpenHelper {
         executeSqlStatements(database, sqlStatements);
     }
 
-    @SuppressWarnings("ConstantConditions")
     @NotNull
     private String[] getSqlScriptsFromClasspath(String scriptName) throws IOException {
         final InputStream inputStream = this.getClass().getResourceAsStream(scriptName);

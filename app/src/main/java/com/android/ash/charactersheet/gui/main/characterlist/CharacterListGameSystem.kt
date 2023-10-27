@@ -40,7 +40,7 @@ class CharacterListGameSystem : KoinComponent {
 
     private fun getGameSystemTypeFromPreferences(): GameSystemType {
         val gameSystemTypeId: Int? = preferenceServiceHolder.preferenceService?.getInt(PreferenceService.GAME_SYSTEM_TYPE)
-        for (gameSystemType in GameSystemType.values()) {
+        for (gameSystemType in GameSystemType.entries) {
             if (gameSystemType.ordinal == gameSystemTypeId) {
                 return gameSystemType
             }

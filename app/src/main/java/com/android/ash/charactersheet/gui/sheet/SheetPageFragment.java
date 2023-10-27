@@ -2,6 +2,7 @@ package com.android.ash.charactersheet.gui.sheet;
 
 import static org.koin.java.KoinJavaComponent.inject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -157,6 +158,7 @@ public class SheetPageFragment extends PageFragment {
         return classLevelText.toString();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void checkExperiencePoints() {
         int color = android.R.color.transparent;
         final XpService xpService = gameSystem.getXpService();

@@ -42,7 +42,6 @@ public class SpellSlotModel extends ListModel<Object> {
         setItems(spellSlotItems);
     }
 
-    @SuppressWarnings("ConstantConditions")
     private List<Object> createSpellSlotItems() {
         final List<Object> spellSlotItems = new ArrayList<>();
         final Map<Integer, List<SpellSlot>> spellSlotsByLevel = createSpellSlotsByLevel();

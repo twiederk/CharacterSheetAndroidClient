@@ -14,10 +14,10 @@ class AppearanceScreenViewModel(private val gameSystemHolder: GameSystemHolder) 
     private var displayService = gameSystem.displayService
 
     val genderList by mutableStateOf(
-        (Sex.values().map { checkNotNull(displayService.getDisplaySex(it)) }.toList())
+        (Sex.entries.map { checkNotNull(displayService.getDisplaySex(it)) }.toList())
     )
     val alignmentList by mutableStateOf(
-        (Alignment.values().map { checkNotNull(displayService.getDisplayAlignment(it)) }.toList())
+        (Alignment.entries.map { checkNotNull(displayService.getDisplayAlignment(it)) }.toList())
     )
 
     var name by mutableStateOf("")

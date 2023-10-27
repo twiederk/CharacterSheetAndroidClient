@@ -52,8 +52,6 @@ object FBAnalytics {
         const val NOTE = "note_fragment"
         const val KNOWN_SPELL = "known_spell_fragment"
         const val SPELL_SLOT = "spell_slot_fragment"
-        const val RACE = "race_fragment"
-        const val CLASS = "class_fragment"
     }
 
 }

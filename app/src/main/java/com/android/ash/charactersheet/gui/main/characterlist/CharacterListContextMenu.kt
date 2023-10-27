@@ -15,6 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+@Suppress("SameReturnValue")
 class CharacterListContextMenu : KoinComponent {
 
     private val gameSystemHolder: GameSystemHolder by inject()

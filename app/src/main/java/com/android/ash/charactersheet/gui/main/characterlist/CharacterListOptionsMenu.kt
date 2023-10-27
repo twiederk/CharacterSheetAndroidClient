@@ -22,6 +22,7 @@ import com.android.ash.charactersheet.gui.main.exportimport.ImportActivity
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+@Suppress("SameReturnValue")
 class CharacterListOptionsMenu(
     private val activity: AppCompatActivity,
     private val characterListViewModel: CharacterListViewModel

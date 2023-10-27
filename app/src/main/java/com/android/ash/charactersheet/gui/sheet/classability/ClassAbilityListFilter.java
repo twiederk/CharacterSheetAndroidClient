@@ -32,7 +32,6 @@ public class ClassAbilityListFilter extends StringListFilter<ExpandableListItem>
         return filteredItems;
     }
 
-    @SuppressWarnings("ConstantConditions")
     private List<ExpandableListItem> filterByLevel(final List<ExpandableListItem> items) {
         final CharacterAbilityModel characterAbilityModel = (CharacterAbilityModel) model;
         final Map<String, Integer> characterClassLevels = characterAbilityModel.getCharacterClassLevels();

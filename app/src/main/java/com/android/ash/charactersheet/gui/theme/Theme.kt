@@ -8,12 +8,12 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun D20CharacterSheetTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = LightColors,
+        colors = lightColors,
         content = content
     )
 }
 
-private val LightColors = lightColors(
+private val lightColors = lightColors(
     primary = PrimaryColor,
     primaryVariant = PrimaryDarkColor,
     onPrimary = PrimaryTextColor,

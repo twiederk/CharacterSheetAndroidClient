@@ -1004,5 +1004,6 @@
     <string name="release_notes_4_14_0">Release 4.14.0\n- Added support for Android 13.\n\n</string>
     <string name="release_notes_4_15_0">Release 4.15.0\n- Added support for Android 14.\n\n</string>
     <string name="release_notes_4_15_1">Release 4.15.1\n- Bug fix: Fixed crash on devices with xxxhdpi and ldpi.\n\n</string>
+    <string name="release_notes_4_15_2">Release 4.15.2\n- Updated technical dependencies.\n\n</string>
 
 </resources>

@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package com.android.ash.charactersheet
 
 import android.app.Application

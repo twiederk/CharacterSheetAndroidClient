@@ -1,6 +1,7 @@
 package com.android.ash.charactersheet.gui.main.charactercreator.viewmodel
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -21,12 +22,12 @@ class AbilityScoresScreenViewModel(
     private var ruleService = gameSystem.ruleService
     private var displayService = gameSystem.displayService
 
-    var strength by mutableStateOf(10)
-    var dexterity by mutableStateOf(10)
-    var constitution by mutableStateOf(10)
-    var intelligence by mutableStateOf(10)
-    var wisdom by mutableStateOf(10)
-    var charisma by mutableStateOf(10)
+    var strength by mutableIntStateOf(10)
+    var dexterity by mutableIntStateOf(10)
+    var constitution by mutableIntStateOf(10)
+    var intelligence by mutableIntStateOf(10)
+    var wisdom by mutableIntStateOf(10)
+    var charisma by mutableIntStateOf(10)
 
     var strengthModifier by mutableStateOf("0")
     var dexterityModifier by mutableStateOf("0")

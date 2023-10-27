@@ -15,17 +15,14 @@ public class BaseAttackBonusArrayAdapter extends SpinnerArrayAdapter<BaseAttackB
 
     /**
      * Creates adapter for base attack bonus spinner.
-     * 
-     * @param context
-     *            The context of the array.
-     * @param displayService
-     *            The display service to display data.
-     * @param baseAttackBoni
-     *            The base attack boni to display.
+     *
+     * @param context         The context of the array.
+     * @param displayService  The display service to display data.
+     * @param baseAttackBonus The base attack bonus to display.
      */
     BaseAttackBonusArrayAdapter(final Context context, final DisplayService displayService,
-                                final List<BaseAttackBonus> baseAttackBoni) {
-        super(context, displayService, baseAttackBoni);
+                                final List<BaseAttackBonus> baseAttackBonus) {
+        super(context, displayService, baseAttackBonus);
     }
 
     @Override

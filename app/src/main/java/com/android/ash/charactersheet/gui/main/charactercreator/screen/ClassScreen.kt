@@ -169,7 +169,8 @@ fun ClassCard(
     onClassChange: (CharacterClass) -> Unit
 ) {
     val backgroundColor by animateColorAsState(
-        if (selected) MaterialTheme.colors.primary else Color.Transparent
+        if (selected) MaterialTheme.colors.primary else Color.Transparent,
+        label = "SelectedClassAnimation"
     )
     val imageBitmap = remember { getBitmap(clazz.imageId).asImageBitmap() }
     val displaySaves = remember { getDisplaySaves(clazz.saves) }
